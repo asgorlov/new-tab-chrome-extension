@@ -1,17 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
+import ToggleDarkModeComponent from "./components/toggle-dark-mode.component";
+import SearchEngineComponent from "./components/search-engine.component";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+const main = ReactDOM.createRoot(
+    document.getElementById('main') as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+main.render(
+    <React.StrictMode>
+        <SearchEngineComponent
+            searchEngine="yandex"
+            localization={getLanguage()}
+        />
+        <ToggleDarkModeComponent/>
+    </React.StrictMode>
 );
+
+function getLanguage() {
+    const nvg = window.navigator;
+    return nvg ? nvg.language.substring(0, 2).toLowerCase() : "ru";
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

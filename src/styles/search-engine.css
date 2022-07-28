@@ -1,0 +1,90 @@
+.search_engine {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+.search_form {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    position: relative;
+    display: flex;
+    background: #fc0;
+    border-radius: 0.625rem;
+}
+
+.search_input {
+    vertical-align: top;
+    width: 100%;
+    border-width: 3px;
+    border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
+    border-style: solid;
+    border-color: transparent;
+    background: #fff;
+    background-clip: content-box;
+    color: #000;
+}
+
+.search_input_control {
+    z-index: 3;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    color: #000;
+    border: 0 solid transparent;
+    outline: 0;
+    background: 0 0;
+    margin-top: -1px;
+    margin-bottom: 1px;
+    height: 42px;
+    border-right-width: 40px;
+    border-left-width: 11px;
+    font: 19px Arial, Helvetica, sans-serif;
+}
+
+.search_button {
+    margin-left: -2px;
+}
+
+.search_button_theme {
+    font-size: 19px;
+    border-radius: 0 10px 10px 0;
+    height: 100%;
+    background: #fc0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.search_button_theme:focus {
+    background: #f0bf00;
+}
+
+.search_button_text {
+    padding: 0 25px;
+    vertical-align: 2px;
+}
+
+.ya_logo {
+    background-image: url("../svgs/ya-logo-black.svg");
+    width: 180px;
+    height: 70px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.ya_logo.dark {
+    background-image: url("../svgs/ya-logo-white.svg");
+}
+
+.ya_logo.en_local {
+    background-image: url("../svgs/ya-logo-black-en.svg");
+}
+
+.ya_logo.en_local.dark {
+    background-image: url("../svgs/ya-logo-white-en.svg");
+}
