@@ -1,10 +1,10 @@
-.search_engine {
+.yandex_search_engine {
     width: 100%;
     height: 100%;
     border-collapse: collapse;
 }
 
-.search_form {
+.yandex_search_form {
     width: 80%;
     max-width: 600px;
     margin: 0 auto;
@@ -15,7 +15,7 @@
     border-radius: 0.625rem;
 }
 
-.search_input {
+.yandex_search_input {
     vertical-align: top;
     width: 100%;
     border-width: 3px;
@@ -27,7 +27,7 @@
     color: #000;
 }
 
-.search_input_control {
+.yandex_search_input_control {
     z-index: 3;
     width: 100%;
     margin: 0;
@@ -45,11 +45,11 @@
     font: 19px Arial, Helvetica, sans-serif;
 }
 
-.search_button {
+.yandex_search_button {
     margin-left: -2px;
 }
 
-.search_button_theme {
+.yandex_search_button_theme {
     font-size: 19px;
     border-radius: 0 10px 10px 0;
     height: 100%;
@@ -60,16 +60,16 @@
     border: 0;
 }
 
-.search_button_theme:focus {
+.yandex_search_button_theme:focus {
     background: #f0bf00;
 }
 
-.search_button_text {
+.yandex_search_button_text {
     padding: 0 25px;
     vertical-align: 2px;
 }
 
-.ya_logo {
+.yandex_logo {
     background-image: url("../svgs/ya-logo-black.svg");
     width: 180px;
     height: 70px;
@@ -77,14 +77,14 @@
     margin: 0 auto;
 }
 
-.ya_logo.dark {
+.yandex_logo.dark {
     background-image: url("../svgs/ya-logo-white.svg");
 }
 
-.ya_logo.en_local {
+.yandex_logo.en_local {
     background-image: url("../svgs/ya-logo-black-en.svg");
 }
 
-.ya_logo.en_local.dark {
+.yandex_logo.en_local.dark {
     background-image: url("../svgs/ya-logo-white-en.svg");
 }
