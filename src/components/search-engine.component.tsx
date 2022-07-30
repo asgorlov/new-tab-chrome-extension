@@ -1,25 +1,27 @@
 import React, {FC} from "react";
 import "../styles/yandex-search-engine.css"
-import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/links-constants";
-import {LOCALIZED_SEARCH_BUTTON, LOCALIZED_SEARCH_QUERY} from "../constants/localization-constants";
+import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/link.constants";
+import {LOCALIZED_SEARCH_BUTTON, LOCALIZED_SEARCH_QUERY} from "../constants/localization.constants";
 
 interface SearchEngineProps {
     searchEngine: string
     localization: string
+    logo: string
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
                                                           searchEngine,
-                                                          localization
+                                                          localization,
+                                                          logo
 }) => {
-    let searchEngineLink = SEARCH_ENGINE_LINKS.get(searchEngine);
-    let searchQueryLink = SEARCH_QUERY_LINKS.get(searchEngine);
-    let searchQueryPlaceholder = LOCALIZED_SEARCH_QUERY.get(localization);
-    let searchButtonInnerText = LOCALIZED_SEARCH_BUTTON.get(localization);
+    const searchEngineLink = SEARCH_ENGINE_LINKS[searchEngine];
+    const searchQueryLink = SEARCH_QUERY_LINKS[searchEngine];
+    const searchQueryPlaceholder = LOCALIZED_SEARCH_QUERY[localization];
+    const searchButtonInnerText = LOCALIZED_SEARCH_BUTTON[localization];
 
     return (<div className={`${searchEngine}_search_engine`}>
             <a href={searchEngineLink}>
-                <div className={`${searchEngine}_logo`} id="ya-logo"></div>
+                <div className={`${searchEngine}_${logo}`}></div>
             </a>
             <form className={`${searchEngine}_search_form`} action={searchQueryLink}>
                 <div className={`${searchEngine}_search_input`}>
