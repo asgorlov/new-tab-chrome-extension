@@ -1,20 +1,20 @@
 import React, {FC} from "react";
 import SearchEngineComponent from "./search-engine.component";
-import {selectLocalization} from "../store/localization.reducer";
 import {useSelector} from "react-redux";
 import {selectDarkMode} from "../store/dark-mode.reducer";
-import {LOCALIZED_TITLE} from "../constants/localization.constants";
+import i18next from "i18next";
 
 const SearchEngineContainer: FC = () => {
-    const lang = useSelector(selectLocalization);
+    const lang = i18next.language;
     const isDarkMode = useSelector(selectDarkMode);
-    const logotype = isDarkMode ? "logo dark" : "logo";
 
-    document.title = LOCALIZED_TITLE[lang];
+    let logotype = isDarkMode ? "logo dark" : "logo";
+    if (lang !== "ru-RU") {
+        logotype = logotype + " en_local"
+    }
 
     return <SearchEngineComponent
         searchEngine={"yandex"}
-        localization={lang}
         logo={logotype}
     />
 };
