@@ -13,7 +13,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
     logo
 }) => {
     const {t} = useTranslation();
-    document.title = t("newTab");
+    document.title = t("tabTitle");
 
     return (<div className={`${searchEngine}_search_engine`}>
             <a href={SEARCH_ENGINE_LINKS[searchEngine]}>
