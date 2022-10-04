@@ -5,21 +5,18 @@ interface DarkModeState {
     checked?: boolean;
 }
 
-const initialState: DarkModeState = {};
-
 export const loadDataFromStorage = createAsyncThunk(
     "chrome/storage/get",
     async () => {
-        return chrome?.storage?.sync?.get({isDarkMode: false});
+        if (chrome?.storage) {
+            return chrome.storage.sync.get({isDarkMode: false});
+        } else {
+            return {isDarkMode: false};
+        }
     }
 );
 
-export const setDataToStorage = createAsyncThunk(
-    "chrome/storage/set",
-    async (items: { [key: string]: any }) => {
-        return chrome?.storage?.sync?.set(items);
-    }
-);
+const initialState: DarkModeState = {};
 
 export const darkModeSlice = createSlice({
     name: "darkMode",
@@ -29,13 +26,12 @@ export const darkModeSlice = createSlice({
             state.checked = true;
         },
         offCheckbox(state) {
-            console.log(state);
             state.checked = false;
         }
     },
     extraReducers: builder => {
         builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
-            state.checked = !!action.payload?.isDarkMode;
+            state.checked = action.payload.isDarkMode;
         });
 
         builder.addCase(loadDataFromStorage.rejected, state => {
