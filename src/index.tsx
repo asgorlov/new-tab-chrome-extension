@@ -1,12 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import SearchEngineContainer from "./components/search-engine.container";
-import DarkModeToggleContainer from "./components/dark-mode-toggle.container";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
-import "./styles/index.css";
 import "./localizations/i18n";
+import NewTabContainer from "./components/new-tab.container";
 
 const main = ReactDOM.createRoot(
     document.getElementById('main') as HTMLElement
@@ -14,8 +12,7 @@ const main = ReactDOM.createRoot(
 main.render(
     <React.StrictMode>
         <Provider store={store}>
-            <SearchEngineContainer/>
-            <DarkModeToggleContainer/>
+            <NewTabContainer/>
         </Provider>
     </React.StrictMode>
 );

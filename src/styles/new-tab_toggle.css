@@ -1,6 +1,6 @@
 @import "constants.css";
 
-.toggle_btn {
+.new-tab_toggle-btn {
     position: fixed;
     width: var(--width);
     height: var(--height);
@@ -9,7 +9,7 @@
     border-radius: 40px;
 }
 
-.toggle_checkbox {
+.new-tab_toggle-checkbox {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -18,7 +18,7 @@
     z-index: 2;
 }
 
-.toggle {
+.new-tab_toggle {
     position: absolute;
     top: 0;
     right: 0;
@@ -32,8 +32,8 @@
     transition: 0.2s ease background-color, 0.2s ease opacity;
 }
 
-.toggle:before,
-.toggle:after {
+.new-tab_toggle:before,
+.new-tab_toggle:after {
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -44,32 +44,32 @@
     transition: 0.5s ease transform, 0.2s ease background-color;
 }
 
-.toggle:before {
+.new-tab_toggle:before {
     background-color: var(--light-color);
     transform: translate(-58px, 0px);
     z-index: 1;
 }
 
-.toggle:after {
+.new-tab_toggle:after {
     background-color: var(--ya-color);
     transform: translate(8px, 0px);
     z-index: 0;
 }
 
-.toggle_checkbox:checked + .toggle {
+.new-tab_toggle-checkbox:checked + .new-tab_toggle {
     background-color: var(--dark-color);
 }
 
-.toggle_checkbox:active + .toggle {
+.new-tab_toggle-checkbox:active + .new-tab_toggle {
     opacity: 0.5;
 }
 
-.toggle_checkbox:checked + .toggle:before {
+.new-tab_toggle-checkbox:checked + .new-tab_toggle:before {
     background-color: var(--dark-color);
     transform: translate(33px, -3px);
 }
 
-.toggle_checkbox:checked + .toggle:after {
+.new-tab_toggle-checkbox:checked + .new-tab_toggle:after {
     background-color: var(--light-color);
     transform: translate(calc(var(--width) * 0.76), 0px);
 }

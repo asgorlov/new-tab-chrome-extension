@@ -1,17 +1,24 @@
-import React, {FC, SyntheticEvent} from "react";
-import "../styles/dark-mode-toggle.css"
+import React, {ChangeEvent, FC} from "react";
+import "../styles/new-tab_toggle.css"
 
 interface CheckboxProps {
-    onChange: (e: SyntheticEvent<HTMLInputElement>) => void
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    checked: boolean;
 }
-const DarkModeToggleComponent: FC<CheckboxProps> = ({onChange}) => {
+
+const DarkModeToggleComponent: FC<CheckboxProps> = ({
+    onChange,
+    checked
+}) => {
     return (
-        <div className="toggle_btn" id="toggle-btn">
-            <input className="toggle_checkbox"
+        <div className="new-tab_toggle-btn">
+            <input className="new-tab_toggle-checkbox"
                    type="checkbox"
                    autoComplete="off"
-                   onChange={onChange}/>
-            <span className="toggle"></span>
+                   onChange={onChange}
+                   checked={checked}
+            />
+            <span className="new-tab_toggle"></span>
         </div>
     );
 }

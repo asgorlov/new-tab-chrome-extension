@@ -1,38 +1,44 @@
 import React, {FC} from "react";
 import {useTranslation} from 'react-i18next';
-import "../styles/yandex-search-engine.css";
+import "../styles/new-tab_yandex.css";
 import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/link.constants";
+import clsx from "clsx";
+import i18n from "../localizations/i18n";
 
 interface SearchEngineProps {
-    searchEngine: string
-    logo: string
+    searchEngine: string;
+    isDarkMode: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
     searchEngine,
-    logo
+    isDarkMode
 }) => {
     const {t} = useTranslation();
-    document.title = t("tabTitle");
 
-    return (<div className={`${searchEngine}_search_engine`}>
+    return (<div className={`new-tab_${searchEngine}-search-engine`}>
             <a href={SEARCH_ENGINE_LINKS[searchEngine]}>
-                <div className={`${searchEngine}_${logo}`}></div>
+                <div className={clsx(
+                    `new-tab_${searchEngine}-logo`,
+                    {dark: isDarkMode},
+                    {en_local: i18n.language !== "ru-RU"})}
+                />
             </a>
-            <form className={`${searchEngine}_search_form`}
+            <form className={`new-tab_${searchEngine}-search-form`}
                   action={SEARCH_QUERY_LINKS[searchEngine]}>
-                <div className={`${searchEngine}_search_input`}>
-                    <input className={`${searchEngine}_search_input_control`}
+                <div className={`new-tab_${searchEngine}-search-input`}>
+                    <input className={`new-tab_${searchEngine}-search-input-control`}
                            placeholder={t("searchQuery")}
                            tabIndex={2}
                            autoComplete="off"
                            maxLength={400}
-                           name="text"/>
+                           name="text"
+                    />
                 </div>
-                <div className={`${searchEngine}_search_button`}>
-                    <button className={`${searchEngine}_search_button_theme`}
+                <div className={`new-tab_${searchEngine}-search-button`}>
+                    <button className={`new-tab_${searchEngine}-search-button-theme`}
                             tabIndex={1} type="submit">
-                        <span className={`${searchEngine}_search_button_text`}>
+                        <span className={`new-tab_${searchEngine}-search-button-text`}>
                             {t("searchButton")}
                         </span>
                     </button>

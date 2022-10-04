@@ -7,21 +7,21 @@ i18n
         resources: {
             ru: {
                 translation: {
-                    "tabTitle" : "Новая вкладка",
-                    "searchQuery" : "Введите поисковой запрос...",
-                    "searchButton" : "Найти"
+                    "tabTitle": "Новая вкладка",
+                    "searchQuery": "Введите поисковой запрос...",
+                    "searchButton": "Найти"
                 }
             },
             en: {
                 translation: {
-                    "tabTitle" : "New tab",
-                    "searchQuery" : "Enter search query...",
-                    "searchButton" : "Search"
+                    "tabTitle": "New tab",
+                    "searchQuery": "Enter search query...",
+                    "searchButton": "Search"
                 }
             }
         },
         lng: window.navigator.language ? window.navigator.language : "ru-RU",
         fallbackLng: "en-EN",
-    })
+    });
 
 export default i18n;

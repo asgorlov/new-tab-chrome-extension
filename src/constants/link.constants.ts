@@ -1,5 +1,5 @@
 export const SEARCH_ENGINE_LINKS: Record<string,string> = {
-    "yandex": "https://yandex.ru/",
+    "yandex": "https://ya.ru/",
     "google": "https://google.com/",
     "duckduckgo": "https://duckduckgo.com/",
 };
