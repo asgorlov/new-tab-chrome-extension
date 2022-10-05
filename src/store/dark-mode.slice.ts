@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "./store";
-import {SearchEngineEnum} from "../constants/searchEngine.constants";
+import {SearchEngineEnum} from "../constants/search-engine.constants";
 
 interface DarkModeState {
     checked?: boolean;
