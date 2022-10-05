@@ -7,6 +7,7 @@
 }
 
 .new-tab_google-search-form {
+    transition: 0.5s;
     max-width: 600px;
     margin: 0 auto;
     display: flex;
@@ -63,7 +64,9 @@
     background-image: url("../svgs/search.svg");
 }
 
+.new-tab_google-logo.en-local,
 .new-tab_google-logo {
+    transition: 1s;
     background-image: url("../svgs/google-logo.svg");
     width: 292px;
     height: 92px;
@@ -72,7 +75,7 @@
 }
 
 .new-tab_google-logo.dark,
-.new-tab_google-logo.en-local,
 .new-tab_google-logo.en-local.dark {
+    transition: 1s;
     background-image: url("../svgs/google-logo.svg");
 }

@@ -7,6 +7,7 @@
 }
 
 .new-tab_yandex-search-form {
+    transition: 0.5s;
     max-width: 600px;
     margin: 0 auto;
     border-collapse: collapse;
@@ -49,6 +50,7 @@
 }
 
 .new-tab_yandex-search-button-theme {
+    transition: 0.5s;
     font-size: 19px;
     border-radius: 0 10px 10px 0;
     height: 100%;
@@ -60,6 +62,7 @@
 }
 
 .new-tab_yandex-search-button-theme:focus {
+    transition: 0.5s;
     background: #f0bf00;
 }
 
@@ -69,6 +72,7 @@
 }
 
 .new-tab_yandex-logo {
+    transition: 1s;
     background-image: url("../svgs/ya-logo-black.svg");
     width: 180px;
     height: 70px;
@@ -77,13 +81,16 @@
 }
 
 .new-tab_yandex-logo.dark {
+    transition: 1s;
     background-image: url("../svgs/ya-logo-white.svg");
 }
 
 .new-tab_yandex-logo.en-local {
+    transition: 1s;
     background-image: url("../svgs/ya-logo-black-en.svg");
 }
 
 .new-tab_yandex-logo.en-local.dark {
+    transition: 1s;
     background-image: url("../svgs/ya-logo-white-en.svg");
 }

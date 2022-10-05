@@ -36,7 +36,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
                            tabIndex={2}
                            autoComplete="off"
                            maxLength={400}
-                           name="text"
+                           name={searchEngine === SearchEngineEnum.GOOGLE ? "q" : "text"}
                     />
                 </div>
                 <div className={`new-tab_${searchEngine}-search-button`}>

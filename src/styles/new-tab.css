@@ -1,6 +1,7 @@
 @import "constants.css";
 
 .new-tab {
+    transition: 1s;
     position: fixed;
     top: 0;
     left: 0;
@@ -13,5 +14,6 @@
 }
 
 .new-tab.dark {
+    transition: 1s;
     background: var(--dark-color);
 }
