@@ -1,17 +1,22 @@
-import React, {ChangeEvent, FC} from "react";
+import React, {ChangeEvent, FC, MouseEvent} from "react";
 import "../styles/new-tab.css";
 import SearchEngineComponent from "./search-engine.component";
 import DarkModeToggleComponent from "./dark-mode-toggle.component";
 import clsx from "clsx";
+import SearchEngineSelectorComponent from "./search-engine-selector.component";
 
 interface NewTabComponentProps {
     isDarkMode: boolean;
+    searchEngine: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const NewTabComponent: FC<NewTabComponentProps> = ({
     isDarkMode,
-    onChange
+    searchEngine,
+    onChange,
+    onClick
 }) => {
     return (
         <div className={clsx("new-tab", {dark: isDarkMode})}>
@@ -19,9 +24,13 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
                 onChange={onChange}
                 checked={isDarkMode}
             />
+            <SearchEngineSelectorComponent
+                onClick={onClick}
+                searchEngine={searchEngine}
+            />
             <SearchEngineComponent
-                searchEngine={"yandex"}
                 isDarkMode={isDarkMode}
+                searchEngine={searchEngine}
             />
         </div>
     );

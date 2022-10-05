@@ -1,9 +1,11 @@
 import React, {FC} from "react";
 import {useTranslation} from 'react-i18next';
 import "../styles/new-tab_yandex.css";
+import "../styles/new-tab_google.css";
 import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/link.constants";
 import clsx from "clsx";
 import i18n from "../localizations/i18n";
+import {SearchEngineEnum} from "../constants/searchEngine.constants";
 
 interface SearchEngineProps {
     searchEngine: string;
@@ -38,9 +40,9 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
                 <div className={`new-tab_${searchEngine}-search-button`}>
                     <button className={`new-tab_${searchEngine}-search-button-theme`}
                             tabIndex={1} type="submit">
-                        <span className={`new-tab_${searchEngine}-search-button-text`}>
-                            {t("searchButton")}
-                        </span>
+                        <div className={`new-tab_${searchEngine}-search-button-text`}>
+                            {searchEngine === SearchEngineEnum.YANDEX && t("searchButton")}
+                        </div>
                     </button>
                 </div>
             </form>

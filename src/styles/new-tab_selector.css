@@ -1,0 +1,38 @@
+.new-tab_search-engine-selector {
+    display: flex;
+    position: inherit;
+    bottom: 10px;
+}
+
+.new-tab_search-engine-selector-yandex {
+    background-image: url("../svgs/ya-icon.svg");
+    background-color: inherit;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+    border: none;
+}
+
+.new-tab_search-engine-selector-google {
+    background-image: url("../svgs/google-icon.svg");
+    background-color: inherit;
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    cursor:pointer;
+    border: none;
+}
+
+.new-tab_search-engine-selector-duck {
+    background-image: url("../svgs/duck-icon.svg");
+    background-color: inherit;
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    cursor:pointer;
+    border: none;
+}
+
+.grey {
+    filter: grayscale(100%);
+}

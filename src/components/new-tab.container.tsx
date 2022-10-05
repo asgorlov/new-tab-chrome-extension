@@ -1,6 +1,13 @@
-import React, {ChangeEvent, FC, useCallback, useEffect} from "react";
+import React, {ChangeEvent, FC, MouseEvent, useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loadDataFromStorage, offCheckbox, onCheckbox, selectDarkMode} from "../store/dark-mode.slice";
+import {
+    loadDataFromStorage,
+    offCheckbox,
+    onCheckbox,
+    selectDarkMode,
+    selectSearchEngine,
+    setSearchEngine
+} from "../store/dark-mode.slice";
 import {useTranslation} from "react-i18next";
 import {AppDispatch} from "../store/store";
 import NewTabComponent from "./new-tab.component";
@@ -9,6 +16,7 @@ const NewTabContainer: FC = () => {
     const {t} = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
     const isDarkMode = useSelector(selectDarkMode);
+    const searchEngine = useSelector(selectSearchEngine);
 
     useEffect(() => {
         document.title = t("tabTitle");
@@ -18,15 +26,28 @@ const NewTabContainer: FC = () => {
     const checkboxChangeHandler = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             dispatch(e.target.checked ? onCheckbox() : offCheckbox());
+
             if (chrome?.storage) {
                 chrome.storage.sync.set({isDarkMode: e.target.checked});
             }
         }, [dispatch]
     );
 
+    const buttonClickHandler = useCallback(
+        (e: MouseEvent<HTMLButtonElement>) => {
+            const target = e.target as HTMLButtonElement;
+            dispatch(setSearchEngine(target.value));
+        }, [dispatch]);
+
     return (
-        isDarkMode !== undefined
-            ? <NewTabComponent isDarkMode={isDarkMode} onChange={checkboxChangeHandler}/>
+        //toDo: Нужно убрать мерцание при создани новой вкладки в темном режиме
+        (isDarkMode !== undefined && searchEngine !== undefined)
+            ? <NewTabComponent
+                isDarkMode={isDarkMode}
+                searchEngine={searchEngine}
+                onChange={checkboxChangeHandler}
+                onClick={buttonClickHandler}
+            />
             : <></>
     );
 };
