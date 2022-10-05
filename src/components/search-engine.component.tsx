@@ -23,8 +23,8 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
             <a href={SEARCH_ENGINE_LINKS[searchEngine]}>
                 <div className={clsx(
                     `new-tab_${searchEngine}-logo`,
-                    {dark: isDarkMode},
-                    {en_local: i18n.language !== "ru-RU"})}
+                    {en_local: i18n.language !== "ru-RU"},
+                    {dark: isDarkMode})}
                 />
             </a>
             <form

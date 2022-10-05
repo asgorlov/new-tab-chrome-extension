@@ -74,7 +74,7 @@
 .new-tab_yandex-logo {
     transition: 1s;
     background-image: url("../svgs/ya-logo-black.svg");
-    width: 180px;
+    width: 172px;
     height: 70px;
     position: relative;
     display: inline-block;
@@ -85,12 +85,12 @@
     background-image: url("../svgs/ya-logo-white.svg");
 }
 
-.new-tab_yandex-logo.en-local {
+.new-tab_yandex-logo.en_local {
     transition: 1s;
     background-image: url("../svgs/ya-logo-black-en.svg");
 }
 
-.new-tab_yandex-logo.en-local.dark {
+.new-tab_yandex-logo.en_local.dark {
     transition: 1s;
     background-image: url("../svgs/ya-logo-white-en.svg");
 }
