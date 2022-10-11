@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "./store";
 import {SearchEngineEnum} from "../constants/search-engine.constants";
 
-interface DarkModeState {
+interface NewTabState {
     checked?: boolean;
     searchEngine?: string;
 }
@@ -23,7 +23,7 @@ export const loadDataFromStorage = createAsyncThunk(
     }
 );
 
-const initialState: DarkModeState = {};
+const initialState: NewTabState = {};
 
 export const newTabSlice = createSlice({
     name: "newTab",
