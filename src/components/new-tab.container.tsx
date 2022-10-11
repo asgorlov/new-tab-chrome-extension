@@ -7,7 +7,7 @@ import {
     selectDarkMode,
     selectSearchEngine,
     setSearchEngine
-} from "../store/dark-mode.slice";
+} from "../store/new-tab.slice";
 import {useTranslation} from "react-i18next";
 import {AppDispatch} from "../store/store";
 import NewTabComponent from "./new-tab.component";

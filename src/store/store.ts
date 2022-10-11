@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import DarkModeReducer from "./dark-mode.slice";
+import NewTabReducer from "./new-tab.slice";
 
 export const store = configureStore({
     reducer: {
-        darkMode: DarkModeReducer
+        newTab: NewTabReducer
     }
 });
 

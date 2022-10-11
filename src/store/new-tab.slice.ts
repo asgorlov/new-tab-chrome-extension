@@ -25,8 +25,8 @@ export const loadDataFromStorage = createAsyncThunk(
 
 const initialState: DarkModeState = {};
 
-export const darkModeSlice = createSlice({
-    name: "darkMode",
+export const newTabSlice = createSlice({
+    name: "newTab",
     initialState,
     reducers: {
         onCheckbox(state) {
@@ -52,9 +52,9 @@ export const darkModeSlice = createSlice({
     }
 });
 
-export const selectDarkMode = (state: RootState) => state.darkMode.checked;
-export const selectSearchEngine = (state: RootState) => state.darkMode.searchEngine;
+export const selectDarkMode = (state: RootState) => state.newTab.checked;
+export const selectSearchEngine = (state: RootState) => state.newTab.searchEngine;
 
-export const {onCheckbox, offCheckbox, setSearchEngine} = darkModeSlice.actions;
+export const {onCheckbox, offCheckbox, setSearchEngine} = newTabSlice.actions;
 
-export default darkModeSlice.reducer;
+export default newTabSlice.reducer;
