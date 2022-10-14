@@ -7,7 +7,7 @@ import "./localizations/i18n";
 import NewTabContainer from "./components/new-tab.container";
 
 const main = ReactDOM.createRoot(
-    document.getElementById('main') as HTMLElement
+    document.getElementById("main") as HTMLElement
 );
 main.render(
     <React.StrictMode>

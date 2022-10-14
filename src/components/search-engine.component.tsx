@@ -36,6 +36,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
                            placeholder={t("searchQuery")}
                            tabIndex={2}
                            autoComplete="off"
+                           autoFocus={true}
                            maxLength={400}
                            name={searchEngine === SearchEngineEnum.YANDEX ? "text" : "q"}
                     />
