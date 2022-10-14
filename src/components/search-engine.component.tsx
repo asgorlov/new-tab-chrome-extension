@@ -14,19 +14,20 @@ interface SearchEngineProps {
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
-                                                          searchEngine,
-                                                          isDarkMode
-                                                      }) => {
+    searchEngine,
+    isDarkMode
+}) => {
     const {t} = useTranslation();
 
     return (<div className={`new-tab_${searchEngine}-search-engine`}>
-            <a href={SEARCH_ENGINE_LINKS[searchEngine]}>
-                <div className={clsx(
-                    `new-tab_${searchEngine}-logo`,
-                    {en_local: i18n.language !== "ru-RU"},
-                    {dark: isDarkMode})}
-                />
-            </a>
+            <div className={clsx(
+                `new-tab_${searchEngine}-logo`,
+                {en_local: i18n.language !== "ru-RU"},
+                {dark: isDarkMode})}
+            >
+                <a className={`new-tab_${searchEngine}-search-link`} href={SEARCH_ENGINE_LINKS[searchEngine]}>
+                </a>
+            </div>
             <form
                 className={clsx(`new-tab_${searchEngine}-search-form`, {shadow_dark: isDarkMode})}
                 action={SEARCH_QUERY_LINKS[searchEngine]}>
