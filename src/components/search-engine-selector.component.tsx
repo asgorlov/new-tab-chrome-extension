@@ -1,5 +1,4 @@
 import React, {FC, MouseEvent} from "react";
-import "../styles/new-tab_selector.css";
 import clsx from "clsx";
 import {SearchEngineEnum} from "../constants/search-engine.constants";
 import i18n from "../localizations/i18n";

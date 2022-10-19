@@ -1,5 +1,4 @@
 import React, {ChangeEvent, FC, MouseEvent} from "react";
-import "../styles/new-tab.css";
 import SearchEngineComponent from "./search-engine.component";
 import DarkModeToggleComponent from "./dark-mode-toggle.component";
 import clsx from "clsx";

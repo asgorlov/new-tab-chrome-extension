@@ -1,8 +1,5 @@
 import React, {FC} from "react";
 import {useTranslation} from 'react-i18next';
-import "../styles/new-tab_yandex.css";
-import "../styles/new-tab_google.css";
-import "../styles/new-tab_duckduck.css";
 import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/link.constants";
 import clsx from "clsx";
 import i18n from "../localizations/i18n";
@@ -36,7 +33,6 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
                            placeholder={t("searchQuery")}
                            tabIndex={2}
                            autoComplete="off"
-                           autoFocus={true}
                            maxLength={400}
                            name={searchEngine === SearchEngineEnum.YANDEX ? "text" : "q"}
                     />

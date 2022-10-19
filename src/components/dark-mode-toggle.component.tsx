@@ -1,5 +1,4 @@
 import React, {ChangeEvent, FC} from "react";
-import "../styles/new-tab_toggle.css"
 
 interface CheckboxProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;

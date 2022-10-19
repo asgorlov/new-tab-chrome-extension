@@ -84,7 +84,7 @@
 
 .new-tab_yandex-logo {
     transition: 1s;
-    background-image: url("../svgs/ya-logo-black.svg");
+    background-image: url("src/svgs/ya-logo-black.svg");
     width: 300px;
     height: 200px;
     margin-bottom: 16px;
@@ -94,15 +94,15 @@
 
 .new-tab_yandex-logo.dark {
     transition: 1s;
-    background-image: url("../svgs/ya-logo-white.svg");
+    background-image: url("src/svgs/ya-logo-white.svg");
 }
 
 .new-tab_yandex-logo.en_local {
     transition: 1s;
-    background-image: url("../svgs/ya-logo-black-en.svg");
+    background-image: url("src/svgs/ya-logo-black-en.svg");
 }
 
 .new-tab_yandex-logo.en_local.dark {
     transition: 1s;
-    background-image: url("../svgs/ya-logo-white-en.svg");
+    background-image: url("src/svgs/ya-logo-white-en.svg");
 }

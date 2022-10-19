@@ -72,13 +72,13 @@
 .new-tab_google-search-button-text {
     width: 20px;
     height: 20px;
-    background-image: url("../svgs/search.svg");
+    background-image: url("src/svgs/search.svg");
 }
 
 .new-tab_google-logo.en_local,
 .new-tab_google-logo {
     transition: 1s;
-    background-image: url("../svgs/google-logo.svg");
+    background-image: url("src/svgs/google-logo.svg");
     width: 300px;
     height: 200px;
     margin-bottom: 16px;
@@ -89,5 +89,5 @@
 .new-tab_google-logo.dark,
 .new-tab_google-logo.en_local.dark {
     transition: 1s;
-    background-image: url("../svgs/google-logo.svg");
+    background-image: url("src/svgs/google-logo.svg");
 }

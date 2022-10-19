@@ -1,4 +1,4 @@
-@import "constants.css";
+@import "src/styles/constatnts/constants.css";
 
 .new-tab {
     transition: 1s;
