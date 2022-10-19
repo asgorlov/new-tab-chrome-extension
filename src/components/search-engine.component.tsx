@@ -1,9 +1,8 @@
 import React, {FC} from "react";
 import {useTranslation} from 'react-i18next';
-import {SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS} from "../constants/link.constants";
+import {DUCK, SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS, YANDEX} from "../constants/search-engine.constants";
 import clsx from "clsx";
 import i18n from "../localizations/i18n";
-import {SearchEngineEnum} from "../constants/search-engine.constants";
 
 interface SearchEngineProps {
     searchEngine: string;
@@ -34,15 +33,15 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
                            tabIndex={2}
                            autoComplete="off"
                            maxLength={400}
-                           name={searchEngine === SearchEngineEnum.YANDEX ? "text" : "q"}
+                           name={searchEngine === YANDEX ? "text" : "q"}
                     />
                 </div>
                 <div className={`new-tab_${searchEngine}-search-button`}>
                     <button className={`new-tab_${searchEngine}-search-button-theme`}
                             tabIndex={1} type="submit">
                         <div className={`new-tab_${searchEngine}-search-button-text`}>
-                            {searchEngine === SearchEngineEnum.YANDEX && t("searchButton")}
-                            {searchEngine === SearchEngineEnum.DUCK && "S"}
+                            {searchEngine === YANDEX && t("searchButton")}
+                            {searchEngine === DUCK && "S"}
                         </div>
                     </button>
                 </div>

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "./store";
-import {SearchEngineEnum} from "../constants/search-engine.constants";
+import {YANDEX} from "../constants/search-engine.constants";
 
 interface NewTabState {
     checked?: boolean;
@@ -12,7 +12,7 @@ export const loadDataFromStorage = createAsyncThunk(
     async () => {
         const defaultParameters = {
             isDarkMode: false,
-            searchEngine: SearchEngineEnum.YANDEX
+            searchEngine: YANDEX
         };
 
         if (chrome?.storage) {
@@ -47,7 +47,7 @@ export const newTabSlice = createSlice({
 
         builder.addCase(loadDataFromStorage.rejected, state => {
             state.checked = false;
-            state.searchEngine = SearchEngineEnum.YANDEX;
+            state.searchEngine = YANDEX;
         });
     }
 });

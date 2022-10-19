@@ -1,6 +1,6 @@
 import React, {FC, MouseEvent} from "react";
 import clsx from "clsx";
-import {SearchEngineEnum} from "../constants/search-engine.constants";
+import {DUCK, GOOGLE, YANDEX} from "../constants/search-engine.constants";
 import i18n from "../localizations/i18n";
 
 interface SearchSelectedComponentProps {
@@ -17,27 +17,27 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
             <button
                 className={clsx(
                     "new-tab_search-engine-selector-duck",
-                    {grey: searchEngine !== SearchEngineEnum.DUCK}
+                    {grey: searchEngine !== DUCK}
                 )}
                 onClick={onClick}
-                value={SearchEngineEnum.DUCK}
+                value={DUCK}
             />
             <button
                 className={clsx(
                     "new-tab_search-engine-selector-google",
-                    {grey: searchEngine !== SearchEngineEnum.GOOGLE}
+                    {grey: searchEngine !== GOOGLE}
                 )}
                 onClick={onClick}
-                value={SearchEngineEnum.GOOGLE}
+                value={GOOGLE}
             />
             <button
                 className={clsx(
                     "new-tab_search-engine-selector-yandex",
-                    {grey: searchEngine !== SearchEngineEnum.YANDEX},
+                    {grey: searchEngine !== YANDEX},
                     {en_local: i18n.language !== "ru-RU"}
                 )}
                 onClick={onClick}
-                value={SearchEngineEnum.YANDEX}
+                value={YANDEX}
             />
         </div>
     );
