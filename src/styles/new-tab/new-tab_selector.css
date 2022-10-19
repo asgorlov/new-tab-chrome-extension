@@ -7,7 +7,7 @@
 
 .new-tab_search-engine-selector-yandex {
     transition: 1s;
-    background-image: url("src/svgs/ya-icon.svg");
+    background-image: url("../../svgs/ya-icon.svg");
     background-color: inherit;
     height: 24px;
     width: 24px;
@@ -16,12 +16,12 @@
 }
 
 .new-tab_search-engine-selector-yandex.en_local {
-    background-image: url("src/svgs/ya-icon-en.svg");
+    background-image: url("../../svgs/ya-icon-en.svg");
 }
 
 .new-tab_search-engine-selector-google {
     transition: 1s;
-    background-image: url("src/svgs/google-icon.svg");
+    background-image: url("../../svgs/google-icon.svg");
     background-color: inherit;
     height: 24px;
     width: 24px;
@@ -32,7 +32,7 @@
 
 .new-tab_search-engine-selector-duck {
     transition: 1s;
-    background-image: url("src/svgs/duck-icon.svg");
+    background-image: url("../../svgs/duck-icon.svg");
     background-color: inherit;
     height: 24px;
     width: 24px;
