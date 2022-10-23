@@ -43,6 +43,7 @@
 }
 
 .new-tab_google-search-input-control {
+    transition: 0.5s;
     z-index: 3;
     width: 100%;
     padding: 0;

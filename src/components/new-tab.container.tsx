@@ -44,7 +44,6 @@ const NewTabContainer: FC = () => {
         }, [dispatch]);
 
     return (
-        //toDo: Нужно убрать мерцание при создани новой вкладки в темном режиме
         (isDarkMode !== undefined && searchEngine !== undefined)
             ? <NewTabComponent
                 isDarkMode={isDarkMode}

@@ -22,6 +22,7 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
             <DarkModeToggleComponent
                 onChange={onChange}
                 checked={isDarkMode}
+                searchEngine={searchEngine}
             />
             <SearchEngineSelectorComponent
                 onClick={onClick}
