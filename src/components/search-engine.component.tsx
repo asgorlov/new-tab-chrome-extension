@@ -18,7 +18,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
     return (<div className={`new-tab_${searchEngine}-search-engine`}>
             <div className={clsx(
                 `new-tab_${searchEngine}-logo`,
-                {en_local: i18n.language !== "ru-RU"},
+                {en_local: !i18n.language.includes("ru")},
                 {dark: isDarkMode})}
             >
                 <a className={`new-tab_${searchEngine}-search-link`} href={SEARCH_ENGINE_LINKS[searchEngine]}>
