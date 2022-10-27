@@ -34,7 +34,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
                 className={clsx(
                     "new-tab_search-engine-selector-yandex",
                     {grey: searchEngine !== YANDEX},
-                    {en_local: i18n.language !== "ru-RU"}
+                    {en_local: !i18n.language.includes("ru")}
                 )}
                 onClick={onClick}
                 value={YANDEX}
