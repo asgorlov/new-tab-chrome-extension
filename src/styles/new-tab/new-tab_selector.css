@@ -6,12 +6,12 @@
 }
 
 .new-tab_search-engine-selector-yandex {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/ya-icon.svg");
     background-color: inherit;
-    height: 24px;
-    width: 24px;
-    cursor:pointer;
+    height: var(--search-engine-selector-size);
+    width: var(--search-engine-selector-size);
+    cursor: pointer;
     border: none;
 }
 
@@ -20,28 +20,27 @@
 }
 
 .new-tab_search-engine-selector-google {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/google-icon.svg");
     background-color: inherit;
-    height: 24px;
-    width: 24px;
+    height: var(--search-engine-selector-size);
+    width: var(--search-engine-selector-size);
     margin-right: 5px;
-    cursor:pointer;
+    cursor: pointer;
     border: none;
 }
 
 .new-tab_search-engine-selector-duck {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/duck-icon.svg");
     background-color: inherit;
-    height: 24px;
-    width: 24px;
+    height: var(--search-engine-selector-size);
+    width: var(--search-engine-selector-size);
     margin-right: 5px;
-    cursor:pointer;
+    cursor: pointer;
     border: none;
 }
 
 .grey {
-    transition: 2s;
     filter: grayscale(100%);
 }

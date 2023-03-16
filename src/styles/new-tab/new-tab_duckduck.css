@@ -14,7 +14,7 @@
 }
 
 .new-tab_duckduckgo-search-form {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     max-width: 600px;
     margin: 0 auto;
     border: 1px solid rgba(0,0,0,0.15);
@@ -46,7 +46,7 @@
 }
 
 .new-tab_duckduckgo-search-input-control {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     width: 100%;
     z-index: 3;
     padding: 0;
@@ -65,7 +65,7 @@
 }
 
 .new-tab_duckduckgo-search-button-theme {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     font-size: 19px;
     border-radius: 4px;
     height: 100%;
@@ -77,12 +77,12 @@
 }
 .new-tab_duckduckgo-search-button-theme:hover,
 .new-tab_duckduckgo-search-button-theme:focus {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     background: #2950BF;
 }
 
 .new-tab_duckduckgo-search-button-text {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     padding: 0 15px;
     vertical-align: 2px;
     font: 20px Duckduck, emoji;
@@ -91,7 +91,7 @@
 
 .new-tab_duckduckgo-logo.en_local,
 .new-tab_duckduckgo-logo {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/duckduckgo-logo-black.svg");
     width: 300px;
     height: 200px;
@@ -102,7 +102,7 @@
 
 .new-tab_duckduckgo-logo.en_local.dark,
 .new-tab_duckduckgo-logo.dark {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/duckduckgo-logo-white.svg");
 }
 

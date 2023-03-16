@@ -15,7 +15,7 @@
 }
 
 .new-tab_google-search-form {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     max-width: 600px;
     margin: 0 auto;
     display: flex;
@@ -41,7 +41,7 @@
 }
 
 .new-tab_google-search-input-control {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     z-index: 3;
     width: 100%;
     padding: 0;
@@ -58,7 +58,7 @@
 }
 
 .new-tab_google-search-button-theme {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     font-size: 19px;
     margin-right: 5px;
     border-radius: 24px;
@@ -76,7 +76,7 @@
 
 .new-tab_google-logo.en_local,
 .new-tab_google-logo {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/google-logo.svg");
     width: 300px;
     height: 200px;
@@ -87,6 +87,6 @@
 
 .new-tab_google-logo.dark,
 .new-tab_google-logo.en_local.dark {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/google-logo.svg");
 }

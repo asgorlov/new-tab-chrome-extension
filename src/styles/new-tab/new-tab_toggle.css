@@ -58,21 +58,21 @@
 }
 
 .new-tab_toggle-yandex:after {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     background-color: var(--ya-color);
     transform: translate(8px, 0px);
     z-index: 0;
 }
 
 .new-tab_toggle-google:after {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     background-color: var(--goo-color);
     transform: translate(8px, 0px);
     z-index: 0;
 }
 
 .new-tab_toggle-duckduckgo:after {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     background-color: var(--guck-color);
     transform: translate(8px, 0px);
     z-index: 0;

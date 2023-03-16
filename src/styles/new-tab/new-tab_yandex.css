@@ -15,7 +15,7 @@
 }
 
 .new-tab_yandex-search-form {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     max-width: 600px;
     margin: 0 auto;
     border-collapse: collapse;
@@ -38,7 +38,7 @@
 }
 
 .new-tab_yandex-search-input-control {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     z-index: 3;
     width: 100%;
     padding: 0;
@@ -59,7 +59,7 @@
 }
 
 .new-tab_yandex-search-button-theme {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     font-size: 19px;
     border-radius: 0 10px 10px 0;
     height: 100%;
@@ -71,18 +71,18 @@
 }
 
 .new-tab_yandex-search-button-theme:focus {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     background: #f0bf00;
 }
 
 .new-tab_yandex-search-button-text {
-    transition: 0.5s;
+    transition: var(--fast-transition);
     padding: 0 25px;
     vertical-align: 2px;
 }
 
 .new-tab_yandex-logo {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/ya-logo-black.svg");
     width: 300px;
     height: 200px;
@@ -92,16 +92,16 @@
 }
 
 .new-tab_yandex-logo.dark {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/ya-logo-white.svg");
 }
 
 .new-tab_yandex-logo.en_local {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/ya-logo-black-en.svg");
 }
 
 .new-tab_yandex-logo.en_local.dark {
-    transition: 1s;
+    transition: var(--slow-transition);
     background-image: url("../../svgs/ya-logo-white-en.svg");
 }
