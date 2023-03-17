@@ -6,12 +6,12 @@ import i18n from "../localizations/i18n";
 
 interface SearchEngineProps {
     searchEngine: string;
-    isDarkMode: boolean;
+    isDark: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
     searchEngine,
-    isDarkMode
+    isDark
 }) => {
     const {t} = useTranslation();
 
@@ -19,13 +19,13 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
             <div className={clsx(
                 `new-tab_${searchEngine}-logo`,
                 {en_local: !i18n.language.includes("ru")},
-                {dark: isDarkMode})}
+                {dark: isDark})}
             >
                 <a className={`new-tab_${searchEngine}-search-link`} href={SEARCH_ENGINE_LINKS[searchEngine]}>
                 </a>
             </div>
             <form
-                className={clsx(`new-tab_${searchEngine}-search-form`, {shadow_dark: isDarkMode})}
+                className={clsx(`new-tab_${searchEngine}-search-form`, {shadow_dark: isDark})}
                 action={SEARCH_QUERY_LINKS[searchEngine]}>
                 <div className={`new-tab_${searchEngine}-search-input`}>
                     <input className={`new-tab_${searchEngine}-search-input-control`}

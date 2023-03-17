@@ -5,14 +5,20 @@
     z-index: 1;
 }
 
-.new-tab_search-engine-selector-yandex {
+.new-tab_search-engine-selector-yandex,
+.new-tab_search-engine-selector-google,
+.new-tab_search-engine-selector-duck {
     transition: var(--slow-transition);
-    background-image: url("../../svgs/ya-icon.svg");
     background-color: inherit;
     height: var(--search-engine-selector-size);
     width: var(--search-engine-selector-size);
+    margin-right: 6px;
     cursor: pointer;
     border: none;
+}
+
+.new-tab_search-engine-selector-yandex {
+    background-image: url("../../svgs/ya-icon.svg");
 }
 
 .new-tab_search-engine-selector-yandex.en_local {
@@ -20,25 +26,11 @@
 }
 
 .new-tab_search-engine-selector-google {
-    transition: var(--slow-transition);
     background-image: url("../../svgs/google-icon.svg");
-    background-color: inherit;
-    height: var(--search-engine-selector-size);
-    width: var(--search-engine-selector-size);
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
 }
 
 .new-tab_search-engine-selector-duck {
-    transition: var(--slow-transition);
     background-image: url("../../svgs/duck-icon.svg");
-    background-color: inherit;
-    height: var(--search-engine-selector-size);
-    width: var(--search-engine-selector-size);
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
 }
 
 .grey {

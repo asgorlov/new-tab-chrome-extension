@@ -1,6 +1,8 @@
 export const YANDEX = "yandex";
 export const GOOGLE = "google";
 export const DUCK = "duckduckgo";
+export const AUTO = "auto";
+export const MANUAL = "manual";
 
 export const SEARCH_ENGINE_LINKS: Record<string,string> = {
     "yandex": "https://ya.ru/",

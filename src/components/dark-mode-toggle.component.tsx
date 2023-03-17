@@ -1,23 +1,26 @@
 import React, {ChangeEvent, FC} from "react";
 
-interface CheckboxProps {
+interface DarkModeToggleComponentProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    checked: boolean;
+    isDark: boolean;
+    darkMode: string;
     searchEngine: string;
 }
 
-const DarkModeToggleComponent: FC<CheckboxProps> = ({
+const DarkModeToggleComponent: FC<DarkModeToggleComponentProps> = ({
     onChange,
-    checked,
+    isDark,
+    darkMode,
     searchEngine
 }) => {
+    // toDO: добавить селектор выбора темной темы, если браузер не может определять геолокацию, то кнопка авто неактивна, только ручная
     return (
         <div className="new-tab_toggle-btn">
             <input className="new-tab_toggle-checkbox"
                    type="checkbox"
                    autoComplete="off"
                    onChange={onChange}
-                   checked={checked}
+                   checked={isDark}
             />
             <span className={`new-tab_toggle-${searchEngine}`}></span>
         </div>
