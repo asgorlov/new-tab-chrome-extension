@@ -31,38 +31,16 @@ export const loadDataFromStorage = createAsyncThunk(
 
 export const getDarkByLocationTime = createAsyncThunk(
     "api/sunsetAndSunriseTimes/get",
-    async (coordinate: Coordinate, thunkAPI) => {
-        const state = thunkAPI.getState() as RootState;
-
-        if (state.newTab.sunset) {
-            const sunset = new Date(state.newTab.sunset);
-            const now = new Date();
-            if (sunset.getFullYear() === now.getFullYear() &&
-                sunset.getMonth() === now.getMonth() &&
-                sunset.getDate() === now.getDate()) {
-                return {
-                    sunset: sunset.toString(),
-                    isDark: sunset.getTime() <= now.getTime()
-                };
-            }
-        }
-
+    async (coordinate: Coordinate) => {
         const {data} = await axios.get(
             `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
         );
-
-        if (data.results?.sunset) {
-            const sunset = new Date(data.results.sunset);
-            const now = new Date();
-            return {
-                sunset: sunset.toString(),
-                isDark: sunset.getTime() <= now.getTime()
-            };
-        }
+        const sunset = new Date(data.results.sunset);
+        const now = new Date();
 
         return {
-            sunset: null,
-            isDark: false
+            sunset: sunset.toString(),
+            isDark: sunset.getTime() <= now.getTime()
         };
     }
 );
@@ -109,6 +87,7 @@ export const newTabSlice = createSlice({
     }
 });
 
+export const selectSunset = (state: RootState) => state.newTab.sunset;
 export const selectIsDark = (state: RootState) => state.newTab.isDark;
 export const selectDarkMode = (state: RootState) => state.newTab.darkMode;
 export const selectSearchEngine = (state: RootState) => state.newTab.searchEngine;

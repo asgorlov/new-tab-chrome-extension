@@ -1,10 +1,10 @@
 import React, {ChangeEvent, FC, RefObject} from "react";
-import {ReactComponent as GearIcon} from "../svgs/gear.svg";
+import {ReactComponent as GearIcon} from "../../svgs/gear.svg";
 import clsx from "clsx";
 import {useTranslation} from "react-i18next";
-import {AUTO, MANUAL} from "../constants/search-engine.constants";
+import {AUTO, MANUAL} from "../../constants/search-engine.constants";
 
-interface DarkModeToggleComponentProps {
+interface DarkModeComponentProps {
     onClickSwitcher: () => void;
     onClickSettings: () => void;
     onChangeDarkMode: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -16,7 +16,7 @@ interface DarkModeToggleComponentProps {
     contentRef: RefObject<HTMLDivElement>;
 }
 
-const DarkModeToggleComponent: FC<DarkModeToggleComponentProps> = ({
+const DarkModeComponent: FC<DarkModeComponentProps> = ({
     onClickSwitcher,
     onClickSettings,
     onChangeDarkMode,
@@ -58,17 +58,8 @@ const DarkModeToggleComponent: FC<DarkModeToggleComponentProps> = ({
                     </div>
                 </div>
             </div>
-            {/*<div className="new-tab_toggle-btn">*/}
-            {/*    <input className="new-tab_toggle-checkbox"*/}
-            {/*           type="checkbox"*/}
-            {/*           autoComplete="off"*/}
-            {/*           onChange={onChange}*/}
-            {/*           checked={isDark}*/}
-            {/*    />*/}
-            {/*    <span className={`new-tab_toggle-${searchEngine}`}></span>*/}
-            {/*</div>*/}
         </>
     );
 }
 
-export default DarkModeToggleComponent;
+export default DarkModeComponent;

@@ -1,17 +1,17 @@
 import React, {ChangeEvent, FC, useCallback, useEffect, useRef, useState} from "react";
-import DarkModeToggleComponent from "./dark-mode-toggle.component";
-import {getDarkByLocationTime, setDarkMode, setIsDark} from "../store/new-tab.slice";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "../store/store";
-import {AUTO, MANUAL} from "../constants/search-engine.constants";
+import DarkModeComponent from "./dark-mode.component";
+import {getDarkByLocationTime, selectSunset, setDarkMode, setIsDark} from "../../store/new-tab.slice";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "../../store/store";
+import {AUTO, MANUAL} from "../../constants/search-engine.constants";
 
-interface DarkModeToggleContainerProps {
+interface DarkModeContainerProps {
     isDark: boolean;
     darkMode: string;
     searchEngine: string;
 }
 
-const DarkModeToggleContainer: FC<DarkModeToggleContainerProps> = ({
+const DarkModeContainer: FC<DarkModeContainerProps> = ({
     isDark,
     darkMode,
     searchEngine
@@ -20,6 +20,7 @@ const DarkModeToggleContainer: FC<DarkModeToggleContainerProps> = ({
     const [isOpen, setIsOpen] = useState(false);
     const imageRef = useRef<SVGSVGElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const sunset = useSelector(selectSunset);
 
     useEffect(() => {
         const settingsCloseHandler = (event: any) => {
@@ -34,20 +35,29 @@ const DarkModeToggleContainer: FC<DarkModeToggleContainerProps> = ({
 
     useEffect(() => {
         if (darkMode === AUTO) {
-            navigator.geolocation.getCurrentPosition(location => {
-                const coords = location?.coords;
-                if (coords && coords.latitude && coords.longitude) {
-                    const coordinate = {
-                        lat: coords.latitude,
-                        lng: coords.longitude
-                    };
-                    dispatch(getDarkByLocationTime(coordinate));
-                } else {
-                    dispatch(setDarkMode(MANUAL));
-                }
-            }, () => dispatch(setDarkMode(MANUAL)));
+            const sunsetDate = sunset ? new Date(sunset) : null;
+            const now = new Date();
+            if (sunsetDate &&
+                sunsetDate.getFullYear() === now.getFullYear() &&
+                sunsetDate.getMonth() === now.getMonth() &&
+                sunsetDate.getDate() === now.getDate()) {
+                dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
+            } else {
+                navigator.geolocation.getCurrentPosition(location => {
+                    const coords = location?.coords;
+                    if (coords && coords.latitude && coords.longitude) {
+                        const coordinate = {
+                            lat: coords.latitude,
+                            lng: coords.longitude
+                        };
+                        dispatch(getDarkByLocationTime(coordinate));
+                    } else {
+                        dispatch(setDarkMode(MANUAL));
+                    }
+                }, () => dispatch(setDarkMode(MANUAL)));
+            }
         }
-    }, [darkMode, dispatch]);
+    }, [darkMode, sunset, dispatch]);
 
     const toggleDarkHandler = useCallback(() => {
         if (chrome?.storage) {
@@ -66,7 +76,7 @@ const DarkModeToggleContainer: FC<DarkModeToggleContainerProps> = ({
     }, [dispatch]);
 
     return (
-        <DarkModeToggleComponent
+        <DarkModeComponent
          darkMode={darkMode}
          isDark={isDark}
          isOpen={isOpen}
@@ -80,4 +90,4 @@ const DarkModeToggleContainer: FC<DarkModeToggleContainerProps> = ({
     );
 };
 
-export default DarkModeToggleContainer;
+export default DarkModeContainer;

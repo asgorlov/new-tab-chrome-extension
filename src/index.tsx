@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import {store} from "./store/store";
 import "./localizations/i18n";
 import "./styles/styles.css";
-import NewTabContainer from "./components/new-tab.container";
+import NewTabContainer from "./components/new-tab/new-tab.container";
 
 const main = ReactDOM.createRoot(
     document.getElementById("main") as HTMLElement

@@ -5,9 +5,9 @@ import {
     selectIsDark,
     selectSearchEngine,
     setSearchEngine
-} from "../store/new-tab.slice";
+} from "../../store/new-tab.slice";
 import {useTranslation} from "react-i18next";
-import {AppDispatch} from "../store/store";
+import {AppDispatch} from "../../store/store";
 import NewTabComponent from "./new-tab.component";
 
 const NewTabContainer: FC = () => {

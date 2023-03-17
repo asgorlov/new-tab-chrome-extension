@@ -2,7 +2,7 @@ import React, {FC, MouseEvent} from "react";
 import SearchEngineComponent from "./search-engine.component";
 import clsx from "clsx";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
-import DarkModeToggleContainer from "./dark-mode-toggle.container";
+import DarkModeContainer from "../dark-mode/dark-mode.container";
 
 interface NewTabComponentProps {
     isDark: boolean;
@@ -19,7 +19,7 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
 }) => {
     return (
         <div className={clsx("new-tab", {dark: isDark})}>
-            <DarkModeToggleContainer
+            <DarkModeContainer
                 isDark={isDark}
                 darkMode={darkMode}
                 searchEngine={searchEngine}

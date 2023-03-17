@@ -1,8 +1,8 @@
 import React, {FC} from "react";
 import {useTranslation} from 'react-i18next';
-import {DUCK, SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS, YANDEX} from "../constants/search-engine.constants";
+import {DUCK, SEARCH_ENGINE_LINKS, SEARCH_QUERY_LINKS, YANDEX} from "../../constants/search-engine.constants";
 import clsx from "clsx";
-import i18n from "../localizations/i18n";
+import i18n from "../../localizations/i18n";
 
 interface SearchEngineProps {
     searchEngine: string;
