@@ -8,12 +8,14 @@ interface NewTabState {
     isDark?: boolean;
     darkMode?: string;
     searchEngine?: string;
+    sunset?: string | null;
 }
 
 const defaultStorageParameters = {
     isDark: false,
     darkMode: MANUAL,
-    searchEngine: YANDEX
+    searchEngine: YANDEX,
+    sunset: null
 };
 
 const initialState: NewTabState = {};
@@ -29,18 +31,39 @@ export const loadDataFromStorage = createAsyncThunk(
 
 export const getDarkByLocationTime = createAsyncThunk(
     "api/sunsetAndSunriseTimes/get",
-    async (coordinate: Coordinate) => {
+    async (coordinate: Coordinate, thunkAPI) => {
+        const state = thunkAPI.getState() as RootState;
+
+        if (state.newTab.sunset) {
+            const sunset = new Date(state.newTab.sunset);
+            const now = new Date();
+            if (sunset.getFullYear() === now.getFullYear() &&
+                sunset.getMonth() === now.getMonth() &&
+                sunset.getDate() === now.getDate()) {
+                return {
+                    sunset: sunset.toString(),
+                    isDark: sunset.getTime() <= now.getTime()
+                };
+            }
+        }
+
         const {data} = await axios.get(
             `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
         );
 
         if (data.results?.sunset) {
-            const sunset = new Date(data.results.sunset).getTime();
-            const now = new Date().getTime();
-            return now >= sunset;
+            const sunset = new Date(data.results.sunset);
+            const now = new Date();
+            return {
+                sunset: sunset.toString(),
+                isDark: sunset.getTime() <= now.getTime()
+            };
         }
 
-        return false;
+        return {
+            sunset: null,
+            isDark: false
+        };
     }
 );
 
@@ -60,10 +83,11 @@ export const newTabSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
-            const {isDark, darkMode, searchEngine} = action.payload;
+            const {isDark, darkMode, searchEngine, sunset} = action.payload;
             state.isDark = isDark;
             state.darkMode = darkMode;
             state.searchEngine = searchEngine;
+            state.sunset = sunset;
         });
 
         builder.addCase(loadDataFromStorage.rejected, state => {
@@ -73,7 +97,9 @@ export const newTabSlice = createSlice({
         });
 
         builder.addCase(getDarkByLocationTime.fulfilled, (state, action) => {
-            state.isDark = action.payload;
+            const {sunset, isDark} = action.payload;
+            state.sunset = sunset;
+            state.isDark = isDark;
         });
 
         builder.addCase(getDarkByLocationTime.rejected, state => {
