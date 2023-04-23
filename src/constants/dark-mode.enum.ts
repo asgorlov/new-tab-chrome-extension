@@ -1,5 +1,5 @@
 export enum DarkMode {
-    SYSTEM,
-    MANUAL,
-    AUTO
+  SYSTEM,
+  MANUAL,
+  AUTO
 }
