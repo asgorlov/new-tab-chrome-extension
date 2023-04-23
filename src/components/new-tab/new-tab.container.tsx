@@ -9,6 +9,8 @@ import {
 import {useTranslation} from "react-i18next";
 import {AppDispatch} from "../../store/store";
 import NewTabComponent from "./new-tab.component";
+import { ConfigProvider } from "antd";
+import {SEARCH_THEMES} from "../../constants/search-engine.constants";
 
 const NewTabContainer: FC = () => {
     const {t} = useTranslation();
@@ -37,12 +39,18 @@ const NewTabContainer: FC = () => {
     }
 
     return (
-        <NewTabComponent
-            isDark={isDark}
-            darkMode={darkMode}
-            searchEngine={searchEngine}
-            onClick={buttonClickHandler}
-        />
+        <ConfigProvider theme={{
+            token: {
+                colorPrimary: SEARCH_THEMES[searchEngine]
+            }
+        }}>
+            <NewTabComponent
+                isDark={isDark}
+                darkMode={darkMode}
+                searchEngine={searchEngine}
+                onClick={buttonClickHandler}
+            />
+        </ConfigProvider>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useCallback, useEffect, useRef, useState} from "react";
+import React, {FC, useCallback, useEffect} from "react";
 import DarkModeComponent from "./dark-mode.component";
 import {getDarkByLocationTime, selectSunset, setDarkMode, setIsDark} from "../../store/new-tab.slice";
 import {useDispatch, useSelector} from "react-redux";
@@ -17,30 +17,18 @@ const DarkModeContainer: FC<DarkModeContainerProps> = ({
     searchEngine
 }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const [isOpen, setIsOpen] = useState(false);
-    const imageRef = useRef<SVGSVGElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
     const sunset = useSelector(selectSunset);
 
     useEffect(() => {
-        const settingsCloseHandler = (event: any) => {
-            if(!(imageRef.current?.contains(event?.target) || contentRef.current?.contains(event?.target))) {
-                setIsOpen(false);
-            }
-        };
-        window.addEventListener("click", settingsCloseHandler);
-
-        return () => window.removeEventListener("click", settingsCloseHandler);
-    }, []);
-
-    useEffect(() => {
         if (darkMode === AUTO) {
-            const sunsetDate = sunset ? new Date(sunset) : null;
             const now = new Date();
-            if (sunsetDate &&
+            const sunsetDate = sunset ? new Date(sunset) : null;
+            const sunsetDateCached = sunsetDate &&
                 sunsetDate.getFullYear() === now.getFullYear() &&
                 sunsetDate.getMonth() === now.getMonth() &&
-                sunsetDate.getDate() === now.getDate()) {
+                sunsetDate.getDate() === now.getDate();
+
+            if (sunsetDateCached) {
                 dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
             } else {
                 navigator.geolocation.getCurrentPosition(location => {
@@ -67,24 +55,23 @@ const DarkModeContainer: FC<DarkModeContainerProps> = ({
         dispatch(setIsDark(!isDark));
     }, [isDark, dispatch]);
 
-    const changeDarkModeHandler = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    const changeDarkModeHandler = useCallback((v: string) => {
         if (chrome?.storage) {
-            chrome.storage.sync.set({darkMode: e.target.value});
+            chrome.storage.sync.set({darkMode: v});
         }
 
-        dispatch(setDarkMode(e.target.value));
+        dispatch(setDarkMode(v));
     }, [dispatch]);
+
+    const getPopupContainer = useCallback((node: HTMLElement) => node.parentElement ?? document.body, []);
 
     return (
         <DarkModeComponent
          darkMode={darkMode}
          isDark={isDark}
-         isOpen={isOpen}
-         imageRef={imageRef}
-         contentRef={contentRef}
          onClickSwitcher={toggleDarkHandler}
-         onClickSettings={() => setIsOpen(!isOpen)}
          onChangeDarkMode={changeDarkModeHandler}
+         getPopupContainer={getPopupContainer}
          searchEngine={searchEngine}
         />
     );
