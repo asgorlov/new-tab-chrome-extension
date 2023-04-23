@@ -9,14 +9,24 @@ i18n
                 translation: {
                     "tabTitle": "Новая вкладка",
                     "searchQuery": "Введите поисковой запрос...",
-                    "searchButton": "Найти"
+                    "searchButton": "Найти",
+                    "darkModeTitle": "Темный режим",
+                    "turnOn": "Вкл.",
+                    "turnOff": "Выкл.",
+                    "auto": "Авто",
+                    "manual": "Вручную"
                 }
             },
             en: {
                 translation: {
                     "tabTitle": "New tab",
                     "searchQuery": "Enter search query...",
-                    "searchButton": "Search"
+                    "searchButton": "Search",
+                    "darkModeTitle": "Dark mode",
+                    "turnOn": "On",
+                    "turnOff": "Off",
+                    "auto": "Auto",
+                    "manual": "Manual"
                 }
             }
         },

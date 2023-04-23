@@ -1,39 +1,59 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "./store";
-import {YANDEX} from "../constants/search-engine.constants";
+import {MANUAL, YANDEX} from "../constants/search-engine.constants";
+import axios from "axios";
+import {Coordinate} from "../models/coordinate.model";
 
 interface NewTabState {
-    checked?: boolean;
+    isDark?: boolean;
+    darkMode?: string;
     searchEngine?: string;
+    sunset?: string | null;
 }
+
+const defaultStorageParameters = {
+    isDark: false,
+    darkMode: MANUAL,
+    searchEngine: YANDEX,
+    sunset: null
+};
+
+const initialState: NewTabState = {};
 
 export const loadDataFromStorage = createAsyncThunk(
     "chrome/storage/get",
     async () => {
-        const defaultParameters = {
-            isDarkMode: false,
-            searchEngine: YANDEX
-        };
-
-        if (chrome?.storage) {
-            return chrome.storage.sync.get(defaultParameters);
-        } else {
-            return defaultParameters;
-        }
+        return chrome?.storage
+            ? chrome.storage.sync.get(defaultStorageParameters)
+            : defaultStorageParameters;
     }
 );
 
-const initialState: NewTabState = {};
+export const getDarkByLocationTime = createAsyncThunk(
+    "api/sunsetAndSunriseTimes/get",
+    async (coordinate: Coordinate) => {
+        const {data} = await axios.get(
+            `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
+        );
+        const sunset = new Date(data.results.sunset);
+        const now = new Date();
+
+        return {
+            sunset: sunset.toString(),
+            isDark: sunset.getTime() <= now.getTime()
+        };
+    }
+);
 
 export const newTabSlice = createSlice({
     name: "newTab",
     initialState,
     reducers: {
-        onCheckbox(state) {
-            state.checked = true;
+        setIsDark(state, action) {
+            state.isDark = action.payload;
         },
-        offCheckbox(state) {
-            state.checked = false;
+        setDarkMode(state, action) {
+            state.darkMode = action.payload;
         },
         setSearchEngine(state, action) {
             state.searchEngine = action.payload;
@@ -41,20 +61,37 @@ export const newTabSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
-            state.checked = action.payload.isDarkMode;
-            state.searchEngine = action.payload.searchEngine;
+            const {isDark, darkMode, searchEngine, sunset} = action.payload;
+            state.isDark = isDark;
+            state.darkMode = darkMode;
+            state.searchEngine = searchEngine;
+            state.sunset = sunset;
         });
 
         builder.addCase(loadDataFromStorage.rejected, state => {
-            state.checked = false;
-            state.searchEngine = YANDEX;
+            state.isDark = defaultStorageParameters.isDark;
+            state.darkMode = defaultStorageParameters.darkMode;
+            state.searchEngine = defaultStorageParameters.searchEngine;
+        });
+
+        builder.addCase(getDarkByLocationTime.fulfilled, (state, action) => {
+            const {sunset, isDark} = action.payload;
+            state.sunset = sunset;
+            state.isDark = isDark;
+        });
+
+        builder.addCase(getDarkByLocationTime.rejected, state => {
+            state.isDark = defaultStorageParameters.isDark;
+            state.darkMode = defaultStorageParameters.darkMode;
         });
     }
 });
 
-export const selectDarkMode = (state: RootState) => state.newTab.checked;
+export const selectSunset = (state: RootState) => state.newTab.sunset;
+export const selectIsDark = (state: RootState) => state.newTab.isDark;
+export const selectDarkMode = (state: RootState) => state.newTab.darkMode;
 export const selectSearchEngine = (state: RootState) => state.newTab.searchEngine;
 
-export const {onCheckbox, offCheckbox, setSearchEngine} = newTabSlice.actions;
+export const {setIsDark, setDarkMode, setSearchEngine} = newTabSlice.actions;
 
 export default newTabSlice.reducer;

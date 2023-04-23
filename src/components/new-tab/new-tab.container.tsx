@@ -1,37 +1,28 @@
-import React, {ChangeEvent, FC, MouseEvent, useCallback, useEffect} from "react";
+import React, {FC, MouseEvent, useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    loadDataFromStorage,
-    offCheckbox,
-    onCheckbox,
-    selectDarkMode,
+    loadDataFromStorage, selectDarkMode,
+    selectIsDark,
     selectSearchEngine,
     setSearchEngine
-} from "../store/new-tab.slice";
+} from "../../store/new-tab.slice";
 import {useTranslation} from "react-i18next";
-import {AppDispatch} from "../store/store";
+import {AppDispatch} from "../../store/store";
 import NewTabComponent from "./new-tab.component";
+import { ConfigProvider } from "antd";
+import {SEARCH_THEMES} from "../../constants/search-engine.constants";
 
 const NewTabContainer: FC = () => {
     const {t} = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
-    const isDarkMode = useSelector(selectDarkMode);
+    const isDark = useSelector(selectIsDark);
+    const darkMode = useSelector(selectDarkMode);
     const searchEngine = useSelector(selectSearchEngine);
 
     useEffect(() => {
         document.title = t("tabTitle");
         dispatch(loadDataFromStorage());
     }, [dispatch, t]);
-
-    const checkboxChangeHandler = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(e.target.checked ? onCheckbox() : offCheckbox());
-
-            if (chrome?.storage) {
-                chrome.storage.sync.set({isDarkMode: e.target.checked});
-            }
-        }, [dispatch]
-    );
 
     const buttonClickHandler = useCallback(
         (e: MouseEvent<HTMLButtonElement>) => {
@@ -43,15 +34,23 @@ const NewTabContainer: FC = () => {
             }
         }, [dispatch]);
 
+    if (isDark === undefined || searchEngine === undefined || darkMode === undefined) {
+        return null;
+    }
+
     return (
-        (isDarkMode !== undefined && searchEngine !== undefined)
-            ? <NewTabComponent
-                isDarkMode={isDarkMode}
+        <ConfigProvider theme={{
+            token: {
+                colorPrimary: SEARCH_THEMES[searchEngine]
+            }
+        }}>
+            <NewTabComponent
+                isDark={isDark}
+                darkMode={darkMode}
                 searchEngine={searchEngine}
-                onChange={checkboxChangeHandler}
                 onClick={buttonClickHandler}
             />
-            : <></>
+        </ConfigProvider>
     );
 };
 

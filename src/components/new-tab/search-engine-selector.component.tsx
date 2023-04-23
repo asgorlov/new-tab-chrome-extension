@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent} from "react";
 import clsx from "clsx";
-import {DUCK, GOOGLE, YANDEX} from "../constants/search-engine.constants";
-import i18n from "../localizations/i18n";
+import {DUCK, GOOGLE, YANDEX} from "../../constants/search-engine.constants";
+import i18n from "../../localizations/i18n";
 
 interface SearchSelectedComponentProps {
     searchEngine: string;
