@@ -8,7 +8,7 @@ interface NewTabComponentProps {
   isDark: boolean;
   darkMode: string;
   searchEngine: string;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: MouseEvent) => void;
 }
 
 const NewTabComponent: FC<NewTabComponentProps> = ({

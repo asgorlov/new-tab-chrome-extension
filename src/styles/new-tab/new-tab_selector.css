@@ -1,5 +1,4 @@
 .new-tab_search-engine-selector {
-    display: flex;
     position: inherit;
     bottom: 10px;
     z-index: 1;
@@ -10,27 +9,10 @@
 .new-tab_search-engine-selector-duck {
     transition: var(--slow-transition);
     background-color: inherit;
-    height: var(--search-engine-selector-size);
-    width: var(--search-engine-selector-size);
+    width: 100%;
     margin-right: 6px;
-    cursor: pointer;
     border: none;
-}
-
-.new-tab_search-engine-selector-yandex {
-    background-image: url("../../svgs/ya-icon.svg");
-}
-
-.new-tab_search-engine-selector-yandex.en_local {
-    background-image: url("../../svgs/ya-icon-en.svg");
-}
-
-.new-tab_search-engine-selector-google {
-    background-image: url("../../svgs/google-icon.svg");
-}
-
-.new-tab_search-engine-selector-duck {
-    background-image: url("../../svgs/duck-icon.svg");
+    padding: 0;
 }
 
 .grey {

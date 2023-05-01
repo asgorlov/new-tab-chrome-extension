@@ -1,92 +1,60 @@
 .new-tab_google-search-engine {
-    width: 100%;
-    text-align: center;
-    position: relative;
-    bottom: 152px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.new-tab_google-search-link {
-    display: inline-flex;
-    position: relative;
-    top: 120px;
-    right: 5px;
-    height: 80px;
-    width: 215px;
+.new-tab_google-search-logo {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.new-tab_google-search-logo svg {
+    width: 100%;
 }
 
 .new-tab_google-search-form {
-    transition: var(--fast-transition);
-    max-width: 600px;
+    min-width: 50vw;
+    height: 42px;
     margin: 0 auto;
     display: flex;
+    align-items: center;
     border: 1px solid #dfe1e5;
     border-radius: 24px;
-    box-shadow: 0 1px 6px rgba(32,33,36,0.06);
-    width: auto;
-    background-color: #f8f8f8;
-}
-
-.new-tab_google-search-form.shadow_dark {
-    box-shadow: 0 1px 10px rgba(255,255,255,0.2);
+    background-color: var(--light-color);
 }
 
 .new-tab_google-search-input {
-    display: flex;
-    vertical-align: top;
     width: 100%;
-    border-radius: 24px;
-    background-color: #f8f8f8;
-    background-clip: content-box;
-    color: #000;
-}
-
-.new-tab_google-search-input-control {
-    transition: var(--fast-transition);
-    z-index: 3;
-    width: 100%;
-    padding: 0;
+    height: 100%;
+    border-radius: 24px 0 0 24px;
+    padding: 0 0 0 12px;
     border: 0 solid transparent;
-    outline: 0;
-    background: 0 0;
-    height: 42px;
-    border-left-width: 11px;
     font: 17px Arial, Helvetica, sans-serif;
 }
 
-.new-tab_google-search-input-control::placeholder {
-    color: #9aa0a6;
+.new-tab_google-search-input::placeholder {
+    color: var(--input-placeholder-color);
 }
 
-.new-tab_google-search-button-theme {
-    transition: var(--fast-transition);
-    font-size: 19px;
-    margin-right: 5px;
-    border-radius: 24px;
+.new-tab_google-search-input.ant-input:focus,
+.new-tab_google-search-input.ant-input:hover {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.new-tab_google-search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
     height: 100%;
-    cursor: pointer;
-    border: 0;
-    background-color: #f8f8f8;
+    padding: 0;
+    border-radius: 0 24px 24px 0;
+    background-color: var(--light-color);
 }
 
-.new-tab_google-search-button-text {
-    width: 20px;
-    height: 20px;
-    background-image: url("../../svgs/search.svg");
-}
-
-.new-tab_google-logo.en_local,
-.new-tab_google-logo {
-    transition: var(--slow-transition);
-    background-image: url("../../svgs/google-logo.svg");
-    width: 300px;
-    height: 200px;
-    margin-bottom: 16px;
-    position: relative;
-    display: inline-block;
-}
-
-.new-tab_google-logo.dark,
-.new-tab_google-logo.en_local.dark {
-    transition: var(--slow-transition);
-    background-image: url("../../svgs/google-logo.svg");
+.new-tab_google-search-button.ant-btn-text:not(:disabled):hover {
+    background-color: rgba(0, 0, 0, 0.04);
 }

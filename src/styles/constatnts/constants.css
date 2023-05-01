@@ -1,12 +1,10 @@
 :root {
     --dark-color: #292c35;
     --light-color: #fff;
+    --input-placeholder-color: #9aa0a6;
     --ya-color: #fc0;
     --goo-color: #4285f4;
     --guck-color: #DE5833;
-    --width: 50px;
-    --height: 20px;
     --slow-transition: 1s;
     --fast-transition: 0.5s;
-    --search-engine-selector-size: 32px;
 }

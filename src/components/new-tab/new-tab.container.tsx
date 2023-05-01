@@ -26,12 +26,12 @@ const NewTabContainer: FC = () => {
   }, [dispatch, t]);
 
   const buttonClickHandler = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      const target = e.target as HTMLButtonElement;
-      dispatch(setSearchEngine(target.value));
+    (e: MouseEvent) => {
+      const element = e.currentTarget as HTMLButtonElement;
+      dispatch(setSearchEngine(element.value));
 
       if (chrome?.storage) {
-        chrome.storage.sync.set({ searchEngine: target.value });
+        chrome.storage.sync.set({ searchEngine: element.value });
       }
     },
     [dispatch]
