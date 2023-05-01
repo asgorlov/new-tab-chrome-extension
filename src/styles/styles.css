@@ -1,7 +1,5 @@
 @import "./constatnts/constants.css";
 @import "./dark-mode/dark-mode.css";
 @import "./new-tab/new-tab.css";
-@import "./new-tab/new-tab_duckduck.css";
-@import "./new-tab/new-tab_google.css";
-@import "./new-tab/new-tab_selector.css";
-@import "./new-tab/new-tab_yandex.css";
+@import "./new-tab/search-engine-selector.css";
+@import "./new-tab/search-engine.css";

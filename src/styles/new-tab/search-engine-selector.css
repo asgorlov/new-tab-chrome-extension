@@ -1,12 +1,12 @@
-.new-tab_search-engine-selector {
+.new-tab__search-engine-selector {
     position: inherit;
     bottom: 10px;
     z-index: 1;
 }
 
-.new-tab_search-engine-selector-yandex,
-.new-tab_search-engine-selector-google,
-.new-tab_search-engine-selector-duck {
+.new-tab__search-engine-selector_yandex,
+.new-tab__search-engine-selector_google,
+.new-tab__search-engine-selector_duck {
     transition: var(--slow-transition);
     background-color: inherit;
     width: 100%;

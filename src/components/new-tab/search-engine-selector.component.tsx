@@ -21,9 +21,9 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   onClick
 }) => {
   return (
-    <div className="new-tab_search-engine-selector">
+    <div className="new-tab__search-engine-selector">
       <Button
-        className={clsx("new-tab_search-engine-selector-duck", {
+        className={clsx("new-tab__search-engine-selector_duck", {
           grey: searchEngine !== DUCK
         })}
         onClick={onClick}
@@ -31,7 +31,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
         icon={<DuckIcon height={ICON_HEIGHT} width={ICON_WIDTH} />}
       />
       <Button
-        className={clsx("new-tab_search-engine-selector-google", {
+        className={clsx("new-tab__search-engine-selector_google", {
           grey: searchEngine !== GOOGLE
         })}
         onClick={onClick}
@@ -39,7 +39,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
         icon={<GoogleIcon height={ICON_HEIGHT} width={ICON_WIDTH} />}
       />
       <Button
-        className={clsx("new-tab_search-engine-selector-yandex", {
+        className={clsx("new-tab__search-engine-selector_yandex", {
           grey: searchEngine !== YANDEX
         })}
         onClick={onClick}

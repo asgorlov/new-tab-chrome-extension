@@ -59,20 +59,20 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
   }, [searchEngine, t]);
 
   return (
-    <div className={`new-tab_${searchEngine}-search-engine`}>
+    <div className={clsx("new-tab__search-engine", searchEngine)}>
       <Link
-        className={clsx(`new-tab_${searchEngine}-search-logo`, {
+        className={clsx("new-tab__search-engine_logo", searchEngine, {
           dark: isDark
         })}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
         children={logo}
       />
       <form
-        className={`new-tab_${searchEngine}-search-form`}
+        className={clsx("new-tab__search-engine_form", searchEngine)}
         action={SEARCH_QUERY_LINKS[searchEngine]}
       >
         <Input
-          className={`new-tab_${searchEngine}-search-input`}
+          className={clsx("new-tab__search-engine_input", searchEngine)}
           placeholder={t("searchQuery")}
           tabIndex={1}
           autoComplete="off"
@@ -80,7 +80,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           name={searchEngine === YANDEX ? "text" : "q"}
         />
         <Button
-          className={`new-tab_${searchEngine}-search-button`}
+          className={clsx("new-tab__search-engine_button", searchEngine)}
           htmlType="submit"
           type="text"
           tabIndex={2}
