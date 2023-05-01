@@ -1,0 +1,52 @@
+@import "../constatnts/constants.less";
+
+.new-tab__menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+
+    &-container {
+        height: 29px;
+        margin: 6px 8px 0 0;
+    }
+
+    &-popover {
+        width: 130px;
+    }
+
+    &-content_dark-mode {
+        margin-bottom: 6px;
+        width: 100%;
+    }
+
+    &-content_dark-switcher {}
+
+    &-icon {
+        &-yandex,
+        &-google,
+        &-duckduckgo {
+            width: 34px;
+            height: 34px;
+            transform: rotate(90deg);
+            transition: @fast-transition;
+            cursor: pointer;
+
+            &.rotate {
+                transform: rotate(215deg);
+            }
+        }
+
+        &-yandex {
+            fill: @ya-color;
+        }
+
+        &-google {
+            fill: @goo-color;
+        }
+
+        &-duckduckgo {
+            fill: @duck-color;
+        }
+    }
+}

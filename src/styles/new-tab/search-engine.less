@@ -1,0 +1,167 @@
+@import "../constatnts/constants.less";
+
+.new-tab__search-engine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &.yandex {}
+
+    &.google {}
+
+    &.duckduckgo {
+        position: relative;
+        bottom: 36px;
+    }
+
+    &_logo {
+        display: flex;
+        margin-bottom: 24px;
+
+        & svg {
+            width: 100%;
+        }
+
+        &.yandex {
+            & svg path:first-child {
+                transition: @slow-transition;
+                fill: #000;
+            }
+
+            &.dark svg path:first-child {
+                transition: @slow-transition;
+                fill: @light-color;
+            }
+        }
+
+        &.google {}
+
+        &.duckduckgo {
+            margin-bottom: 64px;
+
+            & svg {
+                transition: @slow-transition;
+            }
+        }
+
+        &.dark svg g {
+            transition: @slow-transition;
+            fill: @light-color;
+        }
+    }
+
+    &_form {
+        min-width: 50vw;
+        height: 42px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+
+        &.yandex {
+            border-radius: 0.625rem;
+            background: @ya-color;
+        }
+
+        &.google {
+            border-radius: 24px;
+            border: 1px solid #dfe1e5;
+            background-color: @light-color;
+        }
+
+        &.duckduckgo {
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.15);
+            background-color: @light-color;
+        }
+    }
+
+    &_input {
+        width: 100%;
+        height: 100%;
+        font: 17px Arial, Helvetica, sans-serif;
+
+        &::placeholder {
+            color: @input-placeholder-color;
+        }
+
+        &.ant-input:focus,
+        &.ant-input:hover {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        &.yandex {
+            background-color: @light-color;
+            background-clip: padding-box;
+            border: 3px solid transparent;
+            border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
+            border-inline-end-width: 1px;
+        }
+
+        &.google {
+            padding: 0 0 0 12px;
+            background-color: transparent;
+            border: none;
+            border-radius: 24px 0 0 24px;
+        }
+
+        &.duckduckgo {
+            padding: 0 10px;
+            background-color: transparent;
+            border: none;
+        }
+    }
+
+    &_button {
+        height: 100%;
+        padding: 0;
+
+        &.yandex {
+            border-radius: 0 10px 10px 0;
+
+            & span {
+                font: 18px Arial, Helvetica, sans-serif;
+                padding: 0 25px;
+                vertical-align: 2px;
+            }
+
+            &:focus {
+                background: #f0bf00;
+            }
+        }
+
+        &.google {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            border-radius: 0 24px 24px 0;
+            background-color: @light-color;
+
+            & span {}
+
+            &.ant-btn-text:not(:disabled):hover {
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+        }
+
+        &.duckduckgo {
+            display: flex;
+            align-items: center;
+            border-radius: 0 4px 4px 0;
+
+            & span {
+                padding: 0 15px;
+                font: 18px Duckduck, emoji;
+                color: #999;
+            }
+
+            &.ant-btn-text:not(:disabled):hover {
+                background-color: #2950BF;
+                color: @light-color;
+            }
+        }
+    }
+
+}
