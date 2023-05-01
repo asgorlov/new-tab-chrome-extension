@@ -10,11 +10,11 @@ import {
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
 import i18n from "../../localizations/i18n";
-import { ReactComponent as SearchIcon } from "../../svgs/search.svg";
-import { ReactComponent as YaRuLogo } from "../../svgs/ya-logo.svg";
-import { ReactComponent as YaEnLogo } from "../../svgs/ya-logo-en.svg";
-import { ReactComponent as GoogleLogo } from "../../svgs/google-logo.svg";
-import { ReactComponent as DuckBlackLogo } from "../../svgs/duckduckgo-logo.svg";
+import { ReactComponent as SearchIcon } from "../../static/svgs/search.svg";
+import { ReactComponent as YaRuLogo } from "../../static/svgs/ya-logo.svg";
+import { ReactComponent as YaEnLogo } from "../../static/svgs/ya-logo-en.svg";
+import { ReactComponent as GoogleLogo } from "../../static/svgs/google-logo.svg";
+import { ReactComponent as DuckBlackLogo } from "../../static/svgs/duckduckgo-logo.svg";
 import { Button, Input } from "antd";
 
 interface SearchEngineProps {

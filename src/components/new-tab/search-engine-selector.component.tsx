@@ -3,10 +3,10 @@ import clsx from "clsx";
 import { DUCK, GOOGLE, YANDEX } from "../../constants/search-engine.constants";
 import i18n from "../../localizations/i18n";
 import { Button } from "antd";
-import { ReactComponent as DuckIcon } from "../../svgs/duck-icon.svg";
-import { ReactComponent as GoogleIcon } from "../../svgs/google-icon.svg";
-import { ReactComponent as YaRuIcon } from "../../svgs/ya-icon.svg";
-import { ReactComponent as YaEnIcon } from "../../svgs/ya-icon-en.svg";
+import { ReactComponent as DuckIcon } from "../../static/svgs/duck-icon.svg";
+import { ReactComponent as GoogleIcon } from "../../static/svgs/google-icon.svg";
+import { ReactComponent as YaRuIcon } from "../../static/svgs/ya-icon.svg";
+import { ReactComponent as YaEnIcon } from "../../static/svgs/ya-icon-en.svg";
 
 const ICON_HEIGHT = 32;
 const ICON_WIDTH = 32;
