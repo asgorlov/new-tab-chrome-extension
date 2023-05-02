@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
   DUCK,
@@ -11,10 +11,6 @@ import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
 import i18n from "../../localizations/i18n";
 import { ReactComponent as SearchIcon } from "../../static/svgs/search.svg";
-import { ReactComponent as YaRuLogo } from "../../static/svgs/ya-logo.svg";
-import { ReactComponent as YaEnLogo } from "../../static/svgs/ya-logo-en.svg";
-import { ReactComponent as GoogleLogo } from "../../static/svgs/google-logo.svg";
-import { ReactComponent as DuckBlackLogo } from "../../static/svgs/duckduckgo-logo.svg";
 import { Button, Input } from "antd";
 
 interface SearchEngineProps {
@@ -28,44 +24,16 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const logo = useMemo(() => {
-    switch (searchEngine) {
-      case YANDEX:
-        return i18n.language.includes("ru") ? (
-          <YaRuLogo style={{ transform: "scale(1.8)" }} />
-        ) : (
-          <YaEnLogo style={{ transform: "scale(1.4)" }} />
-        );
-      case GOOGLE:
-        return <GoogleLogo style={{ transform: "scale(2)" }} />;
-      case DUCK:
-        return <DuckBlackLogo style={{ transform: "scale(2.8)" }} />;
-      default:
-        return <></>;
-    }
-  }, [searchEngine]);
-
-  const buttonText = useMemo(() => {
-    switch (searchEngine) {
-      case YANDEX:
-        return t("searchButton");
-      case GOOGLE:
-        return <SearchIcon />;
-      case DUCK:
-        return "S";
-      default:
-        return <></>;
-    }
-  }, [searchEngine, t]);
-
   return (
-    <div className={clsx("new-tab__search-engine", searchEngine)}>
+    <div className="new-tab__search-engine">
       <Link
-        className={clsx("new-tab__search-engine_logo", searchEngine, {
-          dark: isDark
-        })}
+        className={clsx(
+          "new-tab__search-engine_logo",
+          searchEngine,
+          { en: searchEngine === YANDEX && !i18n.language.includes("ru") },
+          { dark: searchEngine !== GOOGLE && isDark }
+        )}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
-        children={logo}
       />
       <form
         className={clsx("new-tab__search-engine_form", searchEngine)}
@@ -84,7 +52,11 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           htmlType="submit"
           type="text"
           tabIndex={2}
-          children={buttonText}
+          children={
+            (searchEngine === YANDEX && <span>{t("searchButton")}</span>) ||
+            (searchEngine === GOOGLE && <SearchIcon />) ||
+            (searchEngine === DUCK && <span>{"S"}</span>)
+          }
         />
       </form>
     </div>

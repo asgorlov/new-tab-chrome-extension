@@ -4,50 +4,57 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: relative;
-    bottom: 10vh;
-
-    &.yandex {}
-
-    &.google {}
-
-    &.duckduckgo {
-        bottom: 16vh;
-    }
+    bottom: 50vh;
 
     &_logo {
         display: flex;
-        margin-bottom: 24px;
-
-        & svg {
-            width: 100%;
-        }
+        background-repeat: no-repeat;
 
         &.yandex {
-            & svg path:first-child {
-                transition: @slow-transition;
-                fill: #000;
+            transition: @fast-transition;
+            height: 49px;
+            width: 162px;
+            margin-bottom: 8px;
+            background-image: url("../../static/svgs/ya-logo.svg");
+
+            &.dark {
+                transition: @fast-transition;
+                background-image: url("../../static/svgs/ya-logo-dark.svg");
             }
 
-            &.dark svg path:first-child {
-                transition: @slow-transition;
-                fill: @light-color;
+            &.en {
+                transition: @fast-transition;
+                height: 41px;
+                width: 162px;
+                background-image: url("../../static/svgs/ya-logo-en.svg");
+
+                &.dark {
+                    transition: @fast-transition;
+                    background-image: url("../../static/svgs/ya-logo-en-dark.svg");
+                }
             }
         }
 
-        &.google {}
+        &.google {
+            transition: @fast-transition;
+            height: 68px;
+            width: 205px;
+            margin-bottom: 6px;
+            background-image: url("../../static/svgs/google-logo.svg");
+        }
 
         &.duckduckgo {
-            margin-bottom: 64px;
+            transition: @fast-transition;
+            height: 163px;
+            width: 205px;
+            margin-bottom: 12px;
+            background-image: url("../../static/svgs/duck-logo.svg");
 
-            & svg {
-                transition: @slow-transition;
-            }
-
-            &.dark svg g {
-                transition: @slow-transition;
-                fill: @light-color;
+            &.dark {
+                transition: @fast-transition;
+                background-image: url("../../static/svgs/duck-logo-dark.svg");
             }
         }
     }
@@ -61,7 +68,7 @@
 
         &.yandex {
             transition: @fast-transition;
-            border: none;
+            border: none transparent;
             border-radius: 0.625rem;
             background-color: @ya-color;
         }
@@ -108,7 +115,7 @@
             transition: @fast-transition;
             padding: 0 0 0 12px;
             background-color: transparent;
-            border: none;
+            border: none transparent;
             border-radius: 24px 0 0 24px;
         }
 
@@ -116,23 +123,26 @@
             transition: @fast-transition;
             padding: 0 10px;
             background-color: transparent;
-            border: none;
+            border: none transparent;
         }
     }
 
     &_button {
         height: 100%;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &.yandex {
             transition: @fast-transition;
             border-radius: 0 10px 10px 0;
+            width: 100px;
 
             & span {
                 transition: @fast-transition;
                 font: 18px Arial, Helvetica, sans-serif;
-                padding: 0 25px;
-                vertical-align: 2px;
+                padding: 0 18px;
             }
 
             &:focus {
@@ -142,15 +152,11 @@
 
         &.google {
             transition: @fast-transition;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 48px;
             border-radius: 0 24px 24px 0;
-            background-color: @light-color;
+            width: 48px;
 
-            & span {
-                transition: @fast-transition;
+            & svg {
+                padding: 0 8px;
             }
 
             &.ant-btn-text:not(:disabled):hover {
@@ -160,9 +166,8 @@
 
         &.duckduckgo {
             transition: @fast-transition;
-            display: flex;
-            align-items: center;
             border-radius: 0 4px 4px 0;
+            width: 50px;
 
             & span {
                 transition: @fast-transition;
@@ -177,5 +182,4 @@
             }
         }
     }
-
 }
