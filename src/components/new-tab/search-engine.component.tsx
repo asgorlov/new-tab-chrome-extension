@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  BING,
   DUCK,
   GOOGLE,
   SEARCH_ENGINE_LINKS,
@@ -10,7 +11,8 @@ import {
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
 import i18n from "../../localizations/i18n";
-import { ReactComponent as SearchIcon } from "../../static/svgs/search.svg";
+import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google-search-icon.svg";
+import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing-search-icon.svg";
 import { Button, Input } from "antd";
 
 interface SearchEngineProps {
@@ -36,7 +38,9 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
         href={SEARCH_ENGINE_LINKS[searchEngine]}
       />
       <form
-        className={clsx("new-tab__search-engine_form", searchEngine)}
+        className={clsx("new-tab__search-engine_form", searchEngine, {
+          dark: isDark
+        })}
         action={SEARCH_QUERY_LINKS[searchEngine]}
       >
         <Input
@@ -54,8 +58,16 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           tabIndex={2}
           children={
             (searchEngine === YANDEX && <span>{t("searchButton")}</span>) ||
-            (searchEngine === GOOGLE && <SearchIcon />) ||
-            (searchEngine === DUCK && <span>{"S"}</span>)
+            (searchEngine === GOOGLE && <GoogleSearchIcon />) ||
+            (searchEngine === DUCK && <span>{"S"}</span>) ||
+            (searchEngine === BING && (
+              <label
+                className={clsx({ dark: isDark })}
+                aria-label={t("webSearch")}
+              >
+                <BingSearchIcon />
+              </label>
+            ))
           }
         />
       </form>
