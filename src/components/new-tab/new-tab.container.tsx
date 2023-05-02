@@ -29,10 +29,6 @@ const NewTabContainer: FC = () => {
     (e: MouseEvent) => {
       const element = e.currentTarget as HTMLButtonElement;
       dispatch(setSearchEngine(element.value));
-
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ searchEngine: element.value });
-      }
     },
     [dispatch]
   );
