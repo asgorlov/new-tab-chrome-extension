@@ -4,7 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import "./localizations/i18n";
-import "./styles/styles.css";
+import "./static/styles/styles.less";
 import NewTabContainer from "./components/new-tab/new-tab.container";
 
 const main = ReactDOM.createRoot(

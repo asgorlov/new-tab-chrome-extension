@@ -6,7 +6,7 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         tabTitle: "Новая вкладка",
-        searchQuery: "Введите поисковой запрос...",
+        searchQuery: "Введите поисковый запрос...",
         searchButton: "Найти",
         darkModeTitle: "Темный режим",
         turnOn: "Вкл.",

@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { ReactComponent as GearIcon } from "../../svgs/gear.svg";
+import { ReactComponent as GearIcon } from "../../static/svgs/gear.svg";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { AUTO, MANUAL } from "../../constants/search-engine.constants";
