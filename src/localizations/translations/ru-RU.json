@@ -1,0 +1,15 @@
+{
+  "ru": {
+    "translation": {
+      "webSearch": "Поиск в Интернете",
+      "tabTitle": "Новая вкладка",
+      "searchQuery": "Введите поисковый запрос...",
+      "searchButton": "Найти",
+      "darkModeTitle": "Темный режим",
+      "turnOn": "Вкл.",
+      "turnOff": "Выкл.",
+      "auto": "Авто",
+      "manual": "Вручную"
+    }
+  }
+}
