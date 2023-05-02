@@ -56,22 +56,13 @@ const DarkModeContainer: FC<DarkModeContainerProps> = ({
     }
   }, [darkMode, sunset, dispatch]);
 
-  const toggleDarkHandler = useCallback(() => {
-    if (chrome?.storage) {
-      chrome.storage.sync.set({ isDark: !isDark });
-    }
-
-    dispatch(setIsDark(!isDark));
-  }, [isDark, dispatch]);
+  const toggleDarkHandler = useCallback(
+    () => dispatch(setIsDark(!isDark)),
+    [isDark, dispatch]
+  );
 
   const changeDarkModeHandler = useCallback(
-    (v: string) => {
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ darkMode: v });
-      }
-
-      dispatch(setDarkMode(v));
-    },
+    (v: string) => dispatch(setDarkMode(v)),
     [dispatch]
   );
 

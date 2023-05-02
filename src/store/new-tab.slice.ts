@@ -50,12 +50,24 @@ export const newTabSlice = createSlice({
   initialState,
   reducers: {
     setIsDark(state, action) {
+      if (chrome?.storage) {
+        chrome.storage.sync.set({ isDark: action.payload });
+      }
+
       state.isDark = action.payload;
     },
     setDarkMode(state, action) {
+      if (chrome?.storage) {
+        chrome.storage.sync.set({ darkMode: action.payload });
+      }
+
       state.darkMode = action.payload;
     },
     setSearchEngine(state, action) {
+      if (chrome?.storage) {
+        chrome.storage.sync.set({ searchEngine: action.payload });
+      }
+
       state.searchEngine = action.payload;
     }
   },
