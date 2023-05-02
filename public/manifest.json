@@ -2,8 +2,11 @@
   "manifest_version": 3,
   "name": "Simple New Tab Page",
   "description": "Simple New Tab Page",
-  "version": "2.2",
-  "permissions": [ "storage" ],
+  "version": "2.2.0",
+  "permissions": [
+    "storage",
+    "geolocation"
+  ],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
