@@ -81,6 +81,7 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(loadDataFromStorage.rejected, state => {
+      state.sunset = defaultStorageParameters.sunset;
       state.isDark = defaultStorageParameters.isDark;
       state.darkMode = defaultStorageParameters.darkMode;
       state.searchEngine = defaultStorageParameters.searchEngine;
@@ -88,6 +89,9 @@ export const newTabSlice = createSlice({
 
     builder.addCase(getDarkByLocationTime.fulfilled, (state, action) => {
       const { sunset, isDark } = action.payload;
+      if (chrome?.storage) {
+        chrome.storage.sync.set({ sunset: sunset });
+      }
       state.sunset = sunset;
       state.isDark = isDark;
     });
