@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Simple New Tab Page",
   "description": "Simple New Tab Page",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "permissions": [
     "storage",
     "geolocation"

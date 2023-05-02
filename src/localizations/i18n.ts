@@ -5,6 +5,7 @@ i18n.use(initReactI18next).init({
   resources: {
     ru: {
       translation: {
+        webSearch: "Поиск в Интернете",
         tabTitle: "Новая вкладка",
         searchQuery: "Введите поисковый запрос...",
         searchButton: "Найти",
@@ -17,6 +18,7 @@ i18n.use(initReactI18next).init({
     },
     en: {
       translation: {
+        webSearch: "Web search",
         tabTitle: "New tab",
         searchQuery: "Enter search query...",
         searchButton: "Search",
