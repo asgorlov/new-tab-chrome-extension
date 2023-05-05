@@ -5,6 +5,6 @@ This is a simple search page on a new Chrome browser tab
 
 - Auto and manual switching to a dark theme
 - Russian and English localizations
-- Search engine Yandex, Google, Duckduckgo, Bing
+- Search engine Yandex, Google, Duckduckgo, Bing, Yahoo
 
-<img src="https://user-images.githubusercontent.com/48188924/235695502-a89cd299-e5e5-4ec2-aa73-bb3b7b2a2f74.jpg" heigt="50%" width="50%"></img>
+<img src="https://user-images.githubusercontent.com/48188924/236399313-a16da66e-7555-40e5-9b67-dbf5a8305de3.jpg" heigt="50%" width="50%"></img>
