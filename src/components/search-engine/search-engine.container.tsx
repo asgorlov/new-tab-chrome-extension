@@ -9,9 +9,9 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google-search-icon.svg";
-import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo-search-icon.svg";
-import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing-search-icon.svg";
+import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
+import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo-search-icon.svg";
+import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 
 interface SearchEngineContainerProps {
   searchEngine: string;

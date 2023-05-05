@@ -10,12 +10,12 @@ import {
   YANDEX
 } from "../../constants/search-engine.constants";
 import i18n from "../../localizations/i18n";
-import { ReactComponent as BingIcon } from "../../static/svgs/bing-icon.svg";
-import { ReactComponent as DuckIcon } from "../../static/svgs/duck-icon.svg";
-import { ReactComponent as GoogleIcon } from "../../static/svgs/google-icon.svg";
-import { ReactComponent as YaRuIcon } from "../../static/svgs/ya-icon.svg";
-import { ReactComponent as YaEnIcon } from "../../static/svgs/ya-icon-en.svg";
-import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo-icon.svg";
+import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
+import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
+import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
+import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
+import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
+import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
 
 interface SearchSelectedContainerProps {
   searchEngine: string;
