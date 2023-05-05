@@ -1,11 +1,10 @@
-import React, { FC, MouseEvent, useCallback, useEffect } from "react";
+import React, { FC, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadDataFromStorage,
   selectDarkMode,
   selectIsDark,
-  selectSearchEngine,
-  setSearchEngine
+  selectSearchEngine
 } from "../../store/new-tab.slice";
 import { useTranslation } from "react-i18next";
 import { AppDispatch } from "../../store/store";
@@ -20,18 +19,10 @@ const NewTabContainer: FC = () => {
   const darkMode = useSelector(selectDarkMode);
   const searchEngine = useSelector(selectSearchEngine);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = t("tabTitle");
     dispatch(loadDataFromStorage());
   }, [dispatch, t]);
-
-  const buttonClickHandler = useCallback(
-    (e: MouseEvent) => {
-      const element = e.currentTarget as HTMLButtonElement;
-      dispatch(setSearchEngine(element.value));
-    },
-    [dispatch]
-  );
 
   if (
     isDark === undefined ||
@@ -53,7 +44,6 @@ const NewTabContainer: FC = () => {
         isDark={isDark}
         darkMode={darkMode}
         searchEngine={searchEngine}
-        onClick={buttonClickHandler}
       />
     </ConfigProvider>
   );

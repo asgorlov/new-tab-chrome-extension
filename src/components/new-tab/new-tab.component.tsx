@@ -1,21 +1,19 @@
-import React, { FC, MouseEvent } from "react";
-import SearchEngineComponent from "./search-engine.component";
+import React, { FC } from "react";
 import clsx from "clsx";
-import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import DarkModeContainer from "../dark-mode/dark-mode.container";
+import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
+import SearchEngineContainer from "../search-engine/search-engine.container";
 
 interface NewTabComponentProps {
   isDark: boolean;
   darkMode: string;
   searchEngine: string;
-  onClick: (event: MouseEvent) => void;
 }
 
 const NewTabComponent: FC<NewTabComponentProps> = ({
   isDark,
   darkMode,
-  searchEngine,
-  onClick
+  searchEngine
 }) => {
   return (
     <div className={clsx("new-tab", { dark: isDark })}>
@@ -24,11 +22,8 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
         darkMode={darkMode}
         searchEngine={searchEngine}
       />
-      <SearchEngineSelectorComponent
-        onClick={onClick}
-        searchEngine={searchEngine}
-      />
-      <SearchEngineComponent isDark={isDark} searchEngine={searchEngine} />
+      <SearchEngineSelectorContainer searchEngine={searchEngine} />
+      <SearchEngineContainer isDark={isDark} searchEngine={searchEngine} />
     </div>
   );
 };

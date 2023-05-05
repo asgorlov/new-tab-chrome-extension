@@ -1,27 +1,25 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  BING,
-  DUCK,
-  GOOGLE,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
+  YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
 import i18n from "../../localizations/i18n";
-import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google-search-icon.svg";
-import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing-search-icon.svg";
 import { Button, Input } from "antd";
 
 interface SearchEngineProps {
   searchEngine: string;
+  buttonLabel: ReactNode;
   isDark: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
   searchEngine,
+  buttonLabel,
   isDark
 }) => {
   const { t } = useTranslation();
@@ -33,7 +31,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           "new-tab__search-engine_logo",
           searchEngine,
           { en: searchEngine === YANDEX && !i18n.language.includes("ru") },
-          { dark: searchEngine !== GOOGLE && isDark }
+          { dark: isDark }
         )}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
       />
@@ -44,7 +42,9 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
         action={SEARCH_QUERY_LINKS[searchEngine]}
       >
         <Input
-          className={clsx("new-tab__search-engine_input", searchEngine)}
+          className={clsx("new-tab__search-engine_input", searchEngine, {
+            dark: isDark && searchEngine === YAHOO
+          })}
           placeholder={t("searchQuery")}
           tabIndex={1}
           autoComplete="off"
@@ -56,19 +56,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           htmlType="submit"
           type="text"
           tabIndex={2}
-          children={
-            (searchEngine === YANDEX && <span>{t("searchButton")}</span>) ||
-            (searchEngine === GOOGLE && <GoogleSearchIcon />) ||
-            (searchEngine === DUCK && <span>{"S"}</span>) ||
-            (searchEngine === BING && (
-              <label
-                className={clsx({ dark: isDark })}
-                aria-label={t("webSearch")}
-              >
-                <BingSearchIcon />
-              </label>
-            ))
-          }
+          children={buttonLabel}
         />
       </form>
     </div>
