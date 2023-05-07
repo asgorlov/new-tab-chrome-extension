@@ -14,7 +14,7 @@ interface DarkModeComponentProps {
   searchEngine: string;
 }
 
-const DarkModeComponent: FC<DarkModeComponentProps> = ({
+const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   onClickSwitcher,
   onChangeDarkMode,
   getPopupContainer,
@@ -26,9 +26,9 @@ const DarkModeComponent: FC<DarkModeComponentProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="new-tab__menu">
+    <div className="new-tab__settings-menu">
       <Popover
-        overlayClassName="new-tab__menu-popover"
+        overlayClassName="new-tab__settings-menu-popover"
         placement="bottomRight"
         trigger="click"
         onOpenChange={() => setIsOpen(!isOpen)}
@@ -38,7 +38,7 @@ const DarkModeComponent: FC<DarkModeComponentProps> = ({
           <>
             <hr />
             <Select
-              className="new-tab__menu-content_dark-mode"
+              className="new-tab__settings-menu-content_dark-mode"
               size="small"
               disabled={darkMode === MANUAL && !navigator.geolocation}
               defaultValue={darkMode}
@@ -49,7 +49,7 @@ const DarkModeComponent: FC<DarkModeComponentProps> = ({
               ]}
             />
             <Switch
-              className="new-tab__menu-content_dark-switcher"
+              className="new-tab__settings-menu-content_dark-switcher"
               checkedChildren={t("turnOn")}
               unCheckedChildren={t("turnOff")}
               checked={isDark}
@@ -59,9 +59,9 @@ const DarkModeComponent: FC<DarkModeComponentProps> = ({
           </>
         }
       >
-        <div className={"new-tab__menu-container"}>
+        <div className={"new-tab__settings-menu-container"}>
           <GearIcon
-            className={clsx(`new-tab__menu-icon-${searchEngine}`, {
+            className={clsx(`new-tab__settings-menu-icon-${searchEngine}`, {
               rotate: isOpen
             })}
           />
@@ -71,4 +71,4 @@ const DarkModeComponent: FC<DarkModeComponentProps> = ({
   );
 };
 
-export default DarkModeComponent;
+export default SettingsMenuComponent;

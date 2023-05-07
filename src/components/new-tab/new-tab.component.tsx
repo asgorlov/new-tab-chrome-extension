@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import clsx from "clsx";
-import DarkModeContainer from "../dark-mode/dark-mode.container";
+import SettingsMenuContainer from "../settings-menu/settings-menu.container";
 import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
 import SearchEngineContainer from "../search-engine/search-engine.container";
 
@@ -17,13 +17,13 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
 }) => {
   return (
     <div className={clsx("new-tab", { dark: isDark })}>
-      <DarkModeContainer
+      <SettingsMenuContainer
         isDark={isDark}
         darkMode={darkMode}
         searchEngine={searchEngine}
       />
-      <SearchEngineSelectorContainer searchEngine={searchEngine} />
       <SearchEngineContainer isDark={isDark} searchEngine={searchEngine} />
+      <SearchEngineSelectorContainer searchEngine={searchEngine} />
     </div>
   );
 };
