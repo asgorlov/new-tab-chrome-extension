@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect } from "react";
-import DarkModeComponent from "./dark-mode.component";
+import SettingsMenuComponent from "./settings-menu.component";
 import {
   getDarkByLocationTime,
   selectSunset,
@@ -16,7 +16,7 @@ interface DarkModeContainerProps {
   searchEngine: string;
 }
 
-const DarkModeContainer: FC<DarkModeContainerProps> = ({
+const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
   isDark,
   darkMode,
   searchEngine
@@ -66,21 +66,15 @@ const DarkModeContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
-  const getPopupContainer = useCallback(
-    (node: HTMLElement) => node.parentElement ?? document.body,
-    []
-  );
-
   return (
-    <DarkModeComponent
+    <SettingsMenuComponent
+      searchEngine={searchEngine}
       darkMode={darkMode}
       isDark={isDark}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
-      getPopupContainer={getPopupContainer}
-      searchEngine={searchEngine}
     />
   );
 };
 
-export default DarkModeContainer;
+export default SettingsMenuContainer;

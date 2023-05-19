@@ -5,7 +5,7 @@ import en_US from "./translations/en-US.json";
 
 i18n.use(initReactI18next).init({
   resources: { ...ru_RU, ...en_US },
-  lng: window.navigator.language ? window.navigator.language : "en",
+  lng: window.navigator.language ?? "en",
   fallbackLng: "en"
 });
 
