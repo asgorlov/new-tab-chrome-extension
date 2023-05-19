@@ -66,19 +66,13 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
-  const getPopupContainer = useCallback(
-    (node: HTMLElement) => node.parentElement ?? document.body,
-    []
-  );
-
   return (
     <SettingsMenuComponent
+      searchEngine={searchEngine}
       darkMode={darkMode}
       isDark={isDark}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
-      getPopupContainer={getPopupContainer}
-      searchEngine={searchEngine}
     />
   );
 };

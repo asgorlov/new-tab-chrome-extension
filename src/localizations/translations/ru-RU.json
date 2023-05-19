@@ -9,7 +9,8 @@
       "turnOn": "Вкл.",
       "turnOff": "Выкл.",
       "auto": "Авто",
-      "manual": "Вручную"
+      "manual": "Вручную",
+      "settingsTitle": "Настройки"
     }
   }
 }

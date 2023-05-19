@@ -9,7 +9,8 @@
       "turnOn": "On",
       "turnOff": "Off",
       "auto": "Auto",
-      "manual": "Manual"
+      "manual": "Manual",
+      "settingsTitle": "Settings"
     }
   }
 }
