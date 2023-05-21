@@ -1,0 +1,16 @@
+{
+  "webSearch": "Web search",
+  "tabTitle": "New tab",
+  "searchQuery": "Enter search query...",
+  "searchButton": "Search",
+  "darkModeTitle": "Dark mode",
+  "turnOn": "On",
+  "turnOff": "Off",
+  "auto": "Auto",
+  "manual": "Manual",
+  "settingsTitle": "Settings",
+  "language": {
+    "ru": "Russian",
+    "en": "English"
+  }
+}
