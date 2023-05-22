@@ -69,7 +69,7 @@ export const changeLanguage = createAsyncThunk(
 
     await i18n.changeLanguage(language);
 
-    return i18n.language;
+    return language;
   }
 );
 
@@ -100,6 +100,10 @@ export const newTabSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    builder.addCase(changeLanguage.fulfilled, (state, action) => {
+      state.currentLanguage = action.payload;
+    });
+
     builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
       const { sunset, isDark, darkMode, searchEngine, currentLanguage } =
         action.payload;

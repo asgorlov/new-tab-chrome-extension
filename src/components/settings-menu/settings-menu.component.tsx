@@ -1,9 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AUTO, MANUAL } from "../../constants/search-engine.constants";
 import { Button, Collapse, Drawer, Select, Switch } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-icon.svg";
 import { ReactComponent as DarkModeIcon } from "../../static/svgs/dark-mode-icon.svg";
+import { ReactComponent as LanguageIcon } from "../../static/svgs/language.svg";
 import clsx from "clsx";
 import i18n from "../../localizations/i18n";
 import { useSelector } from "react-redux";
@@ -29,6 +30,18 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const currentLanguage = useSelector(selectCurrentLanguage);
+  const languageOptions = useMemo(() => {
+    return i18n.languages.map(lng => {
+      return {
+        className: clsx("new-tab__settings-menu_language_dropdown-item", {
+          dark: isDark
+        }),
+        value: lng,
+        label: t(`language.${lng}`),
+        key: lng
+      };
+    });
+  }, [isDark, t]);
 
   const { Panel } = Collapse;
 
@@ -118,22 +131,19 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
           </Panel>
         </Collapse>
         <div className="new-tab__settings-menu_language">
-          <div className="new-tab__settings-menu_language-header"></div>
+          <div className="new-tab__settings-menu_language-header">
+            <LanguageIcon />
+            <span>{t("language.title")}</span>
+          </div>
           <Select
             className="new-tab__settings-menu_language_selector"
-            defaultValue={currentLanguage}
+            size="small"
+            bordered={false}
+            showArrow={false}
+            value={currentLanguage}
             onChange={onChangeLanguage}
-            options={i18n.languages.map(lng => {
-              return {
-                className: clsx(
-                  "new-tab__settings-menu_language_dropdown-item",
-                  { dark: isDark }
-                ),
-                value: lng,
-                label: t(`language.${lng}`),
-                key: lng
-              };
-            })}
+            optionLabelProp="label"
+            options={languageOptions}
           />
         </div>
       </Drawer>

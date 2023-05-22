@@ -68,7 +68,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
   );
 
   const changeLanguageHandler = useCallback(
-    async (v: string) => dispatch(changeLanguage(v)),
+    (v: string) => dispatch(changeLanguage(v)),
     [dispatch]
   );
 
