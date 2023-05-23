@@ -33,7 +33,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   const languageOptions = useMemo(() => {
     return i18n.languages.map(lng => {
       return {
-        className: clsx("new-tab__settings-menu_language_dropdown-item", {
+        className: clsx("new-tab__settings-menu_language-dropdown-item", {
           dark: isDark
         }),
         value: lng,
@@ -42,6 +42,26 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
       };
     });
   }, [isDark, t]);
+  const darkModeOptions = [
+    {
+      className: clsx(
+        "new-tab__settings-menu_dark-mode-content_dropdown-item",
+        { dark: isDark }
+      ),
+      value: AUTO,
+      label: t(AUTO),
+      key: AUTO
+    },
+    {
+      className: clsx(
+        "new-tab__settings-menu_dark-mode-content_dropdown-item",
+        { dark: isDark }
+      ),
+      value: MANUAL,
+      label: t(MANUAL),
+      key: MANUAL
+    }
+  ];
 
   const { Panel } = Collapse;
 
@@ -94,30 +114,10 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
                   "new-tab__settings-menu_dark-mode-content_dropdown",
                   { dark: isDark }
                 )}
-                dropdownStyle={{ backgroundColor: isDark ? "#292c35" : "#fff" }}
                 disabled={darkMode === MANUAL && !navigator.geolocation}
                 defaultValue={darkMode}
                 onChange={onChangeDarkMode}
-                options={[
-                  {
-                    className: clsx(
-                      "new-tab__settings-menu_dark-mode-content_dropdown-item",
-                      { dark: isDark }
-                    ),
-                    value: AUTO,
-                    label: t(AUTO),
-                    key: AUTO
-                  },
-                  {
-                    className: clsx(
-                      "new-tab__settings-menu_dark-mode-content_dropdown-item",
-                      { dark: isDark }
-                    ),
-                    value: MANUAL,
-                    label: t(MANUAL),
-                    key: MANUAL
-                  }
-                ]}
+                options={darkModeOptions}
               />
               <Switch
                 className="new-tab__settings-menu_dark-mode-content_switcher"
@@ -130,18 +130,25 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
             </div>
           </Panel>
         </Collapse>
-        <div className="new-tab__settings-menu_language">
+        <div
+          className={clsx("new-tab__settings-menu_language", { dark: isDark })}
+        >
           <div className="new-tab__settings-menu_language-header">
             <LanguageIcon />
             <span>{t("language.title")}</span>
           </div>
           <Select
-            className="new-tab__settings-menu_language_selector"
+            className="new-tab__settings-menu_language-selector"
+            popupClassName={clsx("new-tab__settings-menu_language-dropdown", {
+              dark: isDark
+            })}
+            dropdownStyle={{ minWidth: "max-content" }}
             size="small"
             bordered={false}
             showArrow={false}
             value={currentLanguage}
             onChange={onChangeLanguage}
+            placement="bottomRight"
             optionLabelProp="label"
             options={languageOptions}
           />
