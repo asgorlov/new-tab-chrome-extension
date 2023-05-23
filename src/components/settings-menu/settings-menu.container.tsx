@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useEffect } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
+  changeLanguage,
   getDarkByLocationTime,
   selectSunset,
   setDarkMode,
@@ -66,6 +67,11 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
+  const changeLanguageHandler = useCallback(
+    (v: string) => dispatch(changeLanguage(v)),
+    [dispatch]
+  );
+
   return (
     <SettingsMenuComponent
       searchEngine={searchEngine}
@@ -73,6 +79,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
       isDark={isDark}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
+      onChangeLanguage={changeLanguageHandler}
     />
   );
 };

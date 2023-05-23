@@ -18,21 +18,19 @@ const NewTabContainer: FC = () => {
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const searchEngine = useSelector(selectSearchEngine);
+  const isDataLoaded =
+    isDark !== undefined &&
+    searchEngine !== undefined &&
+    darkMode !== undefined;
 
   useLayoutEffect(() => {
-    document.title = t("tabTitle");
-    dispatch(loadDataFromStorage());
-  }, [dispatch, t]);
+    if (!isDataLoaded) {
+      document.title = t("tabTitle");
+      dispatch(loadDataFromStorage());
+    }
+  }, [isDataLoaded, dispatch, t]);
 
-  if (
-    isDark === undefined ||
-    searchEngine === undefined ||
-    darkMode === undefined
-  ) {
-    return null;
-  }
-
-  return (
+  return isDataLoaded ? (
     <ConfigProvider
       theme={{
         token: {
@@ -46,7 +44,7 @@ const NewTabContainer: FC = () => {
         searchEngine={searchEngine}
       />
     </ConfigProvider>
-  );
+  ) : null;
 };
 
 export default NewTabContainer;

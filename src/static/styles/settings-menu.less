@@ -1,4 +1,5 @@
-@import "constants.less";
+@import "constants";
+@import "mixins";
 
 .new-tab__settings-menu {
     position: absolute;
@@ -44,7 +45,7 @@
                 &>.ant-collapse {
                     transition: @slow-transition;
                     background-color: transparent;
-                    border: 1px solid #f0f0f0;
+                    border: 1px solid @light-border-color;
                     border-radius: 0;
 
                     &>.ant-collapse-item {
@@ -88,7 +89,7 @@
             &>.ant-drawer-wrapper-body {
                 &>.ant-drawer-body {
                     &>.ant-collapse {
-                        border-color: #242424;
+                        border-color: @dark-border-color;
                     }
                 }
             }
@@ -140,7 +141,7 @@
             &.dark {
                 &>.new-tab__settings-menu_dark-mode-content_selector {
                     &>.ant-select-selector {
-                        border-color: #242424;
+                        border-color: @dark-border-color;
                         transition: @slow-transition;
                         background-color: @dark-color;
 
@@ -179,17 +180,99 @@
                 }
 
                 &.dark {
-                    box-shadow: 0 6px 16px 0 #FFFFFF14, 0 3px 6px -4px #FFFFFF1E, 0 9px 28px 8px #FFFFFF0C;
+                    .dark-select-dropdown();
                 }
 
                 &.ant-select-dropdown {
                     & .dark.ant-select-item-option-active:not(.ant-select-item-option-selected) {
-                        background-color: #ffffff24;
+                        background-color: @dark-background-backlight;
                     }
                 }
             }
 
             &_switcher {}
+        }
+    }
+
+    &_language {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border: 1px solid @light-border-color;
+        border-top: none;
+        transition: border-color @slow-transition, color @fast-transition;
+
+        &.dark {
+            transition: border-color @slow-transition, color @fast-transition;
+            border-color: @dark-border-color;
+            color: @light-color;
+
+            &>.new-tab__settings-menu_language-selector {
+                &>.ant-select-selector {
+                    &>.ant-select-selection-item {
+                        transition: @fast-transition;
+                        color: @light-color;
+                    }
+                }
+            }
+
+            svg {
+                transition: @fast-transition;
+                stroke: @light-color;
+            }
+        }
+
+        &-header {
+            display: flex;
+            font-weight: 500;
+
+            svg {
+                transition: @fast-transition;
+                margin: 0 6px 0 4px;
+            }
+        }
+
+        &-selector {
+            text-align: end;
+            width: max-content;
+            padding: 0 12px;
+        }
+
+        &-dropdown {
+            transition: background-color @slow-transition;
+
+            &-item {
+                text-align: end;
+
+                .ant-select-item-option-content {
+                    transition: color @fast-transition;
+                }
+
+                &.dark {
+                    .ant-select-item-option-content {
+                        color: @light-color;
+                        transition: color @fast-transition;
+                    }
+
+                    &.ant-select-item-option-selected {
+                        .ant-select-item-option-content {
+                            color: #000000E0;
+                            transition: color @fast-transition;
+                        }
+                    }
+                }
+            }
+
+            &.dark {
+                .dark-select-dropdown();
+            }
+
+            &.ant-select-dropdown {
+                & .dark.ant-select-item-option-active:not(.ant-select-item-option-selected) {
+                    background-color: @dark-background-backlight;
+                }
+            }
         }
     }
 }

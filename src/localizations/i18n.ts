@@ -1,12 +1,23 @@
 import i18n from "i18next";
+import resourcesToBackend from "i18next-resources-to-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import ru_RU from "./translations/ru-RU.json";
-import en_US from "./translations/en-US.json";
 
-i18n.use(initReactI18next).init({
-  resources: { ...ru_RU, ...en_US },
-  lng: window.navigator.language ?? "en",
-  fallbackLng: "en"
-});
+const resourceGetter = resourcesToBackend(
+  (language: string) => import(`./translations/${language}.json`)
+);
+const i18nextOptions = {
+  // debug: true,
+  detection: {
+    order: ["localStorage", "navigator"]
+  },
+  fallbackLng: ["en", "ru"]
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(resourceGetter)
+  .use(initReactI18next)
+  .init(i18nextOptions);
 
 export default i18n;
