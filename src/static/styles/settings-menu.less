@@ -96,6 +96,35 @@
         }
     }
 
+    &_search-engine {
+        &-header {
+            .settings-menu-header-item();
+            transition: @fast-transition;
+
+            svg {
+                transition: @fast-transition;
+                margin: 0 4px;
+            }
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+
+            &-checkbox-group {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 12px;
+            }
+
+            &-selector {}
+
+            &-dropdown {
+                &-item {}
+            }
+        }
+    }
+
     &_dark-mode {
         border-radius: 0;
 
@@ -105,10 +134,8 @@
             }
         }
 
-        &_header {
-            display: flex;
-            align-items: center;
-            font-weight: 500;
+        &-header {
+            .settings-menu-header-item();
             transition: @fast-transition;
 
             svg {
@@ -130,16 +157,20 @@
             align-items: flex-start;
             justify-content: space-between;
 
-            &_selector {
+            &-selector {
                 min-width: 100px;
 
                 &>.ant-select-arrow {
                     transition: @fast-transition;
                 }
+
+                &.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+                    transition: @slow-transition;
+                }
             }
 
             &.dark {
-                &>.new-tab__settings-menu_dark-mode-content_selector {
+                &>.new-tab__settings-menu_dark-mode-content-selector {
                     &>.ant-select-selector {
                         border-color: @dark-border-color;
                         transition: @slow-transition;
@@ -158,7 +189,7 @@
                 }
             }
 
-            &_dropdown {
+            &-dropdown {
                 &-item {
                     .ant-select-item-option-content {
                         transition: color @fast-transition;
@@ -224,8 +255,7 @@
         }
 
         &-header {
-            display: flex;
-            font-weight: 500;
+            .settings-menu-header-item();
 
             svg {
                 transition: @fast-transition;

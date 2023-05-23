@@ -13,5 +13,15 @@
     "title": "Language",
     "ru": "Russian",
     "en": "English"
+  },
+  "searchEngine": {
+    "title": "Search system",
+    "yahoo": "Yahoo",
+    "bing": "Bing",
+    "duckduckgo": "DuckDuckGo",
+    "google": "Google",
+    "yandex": "Yandex",
+    "selectAll": "Select all",
+    "removeAll": "Remove all"
   }
 }

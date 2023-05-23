@@ -1,10 +1,18 @@
-export const YANDEX = "yandex";
-export const GOOGLE = "google";
-export const YAHOO = "yahoo";
-export const DUCK = "duckduckgo";
-export const BING = "bing";
 export const AUTO = "auto";
 export const MANUAL = "manual";
+
+export const SEARCH_ENGINE_NAMES = [
+  "yandex",
+  "google",
+  "duckduckgo",
+  "bing",
+  "yahoo"
+];
+export const YAHOO = SEARCH_ENGINE_NAMES[4];
+export const BING = SEARCH_ENGINE_NAMES[3];
+export const DUCK = SEARCH_ENGINE_NAMES[2];
+export const GOOGLE = SEARCH_ENGINE_NAMES[1];
+export const YANDEX = SEARCH_ENGINE_NAMES[0];
 
 export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   bing: "https://www.bing.com/",
