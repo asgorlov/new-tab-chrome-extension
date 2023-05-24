@@ -28,41 +28,14 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
   const sunset = useSelector(selectSunset);
   const searchEngineNames = useSelector(selectSearchEngines);
 
-  useEffect(() => {
-    if (darkMode === AUTO) {
-      const now = new Date();
-      const sunsetDate = sunset ? new Date(sunset) : null;
-      const sunsetDateCached =
-        sunsetDate &&
-        sunsetDate.getFullYear() === now.getFullYear() &&
-        sunsetDate.getMonth() === now.getMonth() &&
-        sunsetDate.getDate() === now.getDate();
-
-      if (sunsetDateCached) {
-        dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
-      } else {
-        navigator.geolocation.getCurrentPosition(
-          location => {
-            const coords = location?.coords;
-            if (coords && coords.latitude && coords.longitude) {
-              const coordinate = {
-                lat: coords.latitude,
-                lng: coords.longitude
-              };
-              dispatch(getDarkByLocationTime(coordinate));
-            } else {
-              dispatch(setDarkMode(MANUAL));
-            }
-          },
-          () => dispatch(setDarkMode(MANUAL))
-        );
-      }
-    }
-  }, [darkMode, sunset, dispatch]);
-
   const toggleDarkHandler = useCallback(
     () => dispatch(setIsDark(!isDark)),
     [isDark, dispatch]
+  );
+
+  const changeSearchEngines = useCallback(
+    (v: string[]) => dispatch(setSearchEngines(v)),
+    [dispatch]
   );
 
   const changeDarkModeHandler = useCallback(
@@ -75,10 +48,41 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
-  const changeSearchEngines = useCallback(
-    (v: string[]) => dispatch(setSearchEngines(v)),
-    [dispatch]
-  );
+  const changeDarkModeBySunsetTime = useCallback(() => {
+    const now = new Date();
+    const sunsetDate = sunset ? new Date(sunset) : null;
+    const sunsetDateCached =
+      sunsetDate &&
+      sunsetDate.getFullYear() === now.getFullYear() &&
+      sunsetDate.getMonth() === now.getMonth() &&
+      sunsetDate.getDate() === now.getDate();
+
+    if (sunsetDateCached) {
+      dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        location => {
+          const coords = location?.coords;
+          if (coords && coords.latitude && coords.longitude) {
+            const coordinate = {
+              lat: coords.latitude,
+              lng: coords.longitude
+            };
+            dispatch(getDarkByLocationTime(coordinate));
+          } else {
+            dispatch(setDarkMode(MANUAL));
+          }
+        },
+        () => dispatch(setDarkMode(MANUAL))
+      );
+    }
+  }, [dispatch, sunset]);
+
+  useEffect(() => {
+    if (darkMode === AUTO) {
+      changeDarkModeBySunsetTime();
+    }
+  }, [darkMode, changeDarkModeBySunsetTime]);
 
   return (
     <SettingsMenuComponent
@@ -90,6 +94,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
       onChangeSearchEngines={changeSearchEngines}
+      changeDarkModeBySunsetTime={changeDarkModeBySunsetTime}
     />
   );
 };
