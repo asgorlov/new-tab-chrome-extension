@@ -16,6 +16,7 @@
   },
   "searchEngine": {
     "title": "Поисковая система",
+    "brave": "Brave",
     "yahoo": "Yahoo",
     "bing": "Bing",
     "duckduckgo": "DuckDuckGo",

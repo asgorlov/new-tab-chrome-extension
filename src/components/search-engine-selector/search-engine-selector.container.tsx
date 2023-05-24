@@ -4,6 +4,7 @@ import { setSearchEngine } from "../../store/new-tab.slice";
 import { useDispatch } from "react-redux";
 import {
   BING,
+  BRAVE,
   DUCK,
   GOOGLE,
   YAHOO,
@@ -16,6 +17,7 @@ import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-ic
 import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
 import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
+import { ReactComponent as BraveIcon } from "../../static/svgs/brave/brave-icon.svg";
 
 interface SearchSelectedContainerProps {
   searchEngine: string;
@@ -44,6 +46,8 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <BingIcon height={iconSize} width={iconSize} />;
       case YAHOO:
         return <YahooIcon height={iconSize} width={iconSize} />;
+      case BRAVE:
+        return <BraveIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }
