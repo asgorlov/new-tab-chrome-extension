@@ -54,9 +54,12 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   const searchEngineOptions = useMemo(() => {
     return SEARCH_ENGINE_NAMES.map(name => {
       return {
-        className: clsx("new-tab__settings-menu_search-engine-dropdown-item", {
-          dark: isDark
-        }),
+        className: clsx(
+          "new-tab__settings-menu_search-engine-content-dropdown-item",
+          {
+            dark: isDark
+          }
+        ),
         value: name,
         label: t(`searchEngine.${name}`),
         key: name
