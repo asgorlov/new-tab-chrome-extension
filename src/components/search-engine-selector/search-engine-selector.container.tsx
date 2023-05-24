@@ -26,10 +26,9 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const iconSize = 32;
-  const searchEngineNames = [YAHOO, BING, DUCK, GOOGLE, YANDEX];
-
   const getIcon = useCallback((name: string) => {
+    const iconSize = 32;
+
     switch (name) {
       case YANDEX:
         return i18n.language.includes("ru") ? (
@@ -60,7 +59,6 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
 
   return (
     <SearchEngineSelectorComponent
-      searchEngineNames={searchEngineNames}
       searchEngine={searchEngine}
       onClick={handleClick}
       getIcon={getIcon}

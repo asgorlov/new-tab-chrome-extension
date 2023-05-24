@@ -4,3 +4,29 @@
   background-color: @dark-color;
   box-shadow: 0 6px 16px 0 #FFFFFF14, 0 3px 6px -4px #FFFFFF1E, 0 9px 28px 8px #FFFFFF0C;
 }
+
+.settings-menu-header-item() {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.dark-select-dropdown-item() {
+  .ant-select-item-option-content {
+    transition: color @fast-transition;
+  }
+
+  &.dark {
+    .ant-select-item-option-content {
+      color: @light-color;
+      transition: color @fast-transition;
+    }
+
+    &.ant-select-item-option-selected {
+      .ant-select-item-option-content {
+        color: #000000E0;
+        transition: color @fast-transition;
+      }
+    }
+  }
+}

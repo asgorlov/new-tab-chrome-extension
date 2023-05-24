@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { MANUAL, YANDEX } from "../constants/search-engine.constants";
+import {
+  MANUAL,
+  SEARCH_ENGINE_NAMES,
+  YANDEX
+} from "../constants/search-engine.constants";
 import axios from "axios";
 import { Coordinate } from "../models/coordinate.model";
 import i18n from "../localizations/i18n";
@@ -10,6 +14,7 @@ interface NewTabState {
   isDark?: boolean;
   darkMode?: string;
   searchEngine?: string;
+  searchEngines: string[];
   currentLanguage: string;
 }
 
@@ -18,10 +23,12 @@ const defaultStorageParameters: NewTabState = {
   isDark: false,
   darkMode: MANUAL,
   searchEngine: YANDEX,
+  searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language
 };
 
 const initialState: NewTabState = {
+  searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language
 };
 
@@ -97,6 +104,13 @@ export const newTabSlice = createSlice({
       }
 
       state.searchEngine = action.payload;
+    },
+    setSearchEngines(state, action) {
+      if (chrome?.storage) {
+        chrome.storage.sync.set({ searchEngines: action.payload });
+      }
+
+      state.searchEngines = action.payload;
     }
   },
   extraReducers: builder => {
@@ -105,13 +119,20 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
-      const { sunset, isDark, darkMode, searchEngine, currentLanguage } =
-        action.payload;
+      const {
+        sunset,
+        isDark,
+        darkMode,
+        searchEngine,
+        searchEngines,
+        currentLanguage
+      } = action.payload;
 
       state.sunset = sunset;
       state.isDark = isDark;
       state.darkMode = darkMode;
       state.searchEngine = searchEngine;
+      state.searchEngines = searchEngines;
       state.currentLanguage = currentLanguage;
     });
 
@@ -120,6 +141,7 @@ export const newTabSlice = createSlice({
       state.isDark = defaultStorageParameters.isDark;
       state.darkMode = defaultStorageParameters.darkMode;
       state.searchEngine = defaultStorageParameters.searchEngine;
+      state.searchEngines = defaultStorageParameters.searchEngines;
       state.currentLanguage = defaultStorageParameters.currentLanguage;
     });
 
@@ -145,9 +167,12 @@ export const selectIsDark = (state: RootState) => state.newTab.isDark;
 export const selectDarkMode = (state: RootState) => state.newTab.darkMode;
 export const selectSearchEngine = (state: RootState) =>
   state.newTab.searchEngine;
+export const selectSearchEngines = (state: RootState) =>
+  state.newTab.searchEngines;
 export const selectCurrentLanguage = (state: RootState) =>
   state.newTab.currentLanguage;
 
-export const { setIsDark, setDarkMode, setSearchEngine } = newTabSlice.actions;
+export const { setIsDark, setDarkMode, setSearchEngine, setSearchEngines } =
+  newTabSlice.actions;
 
 export default newTabSlice.reducer;

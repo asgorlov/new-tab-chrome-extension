@@ -3,9 +3,11 @@ import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
   getDarkByLocationTime,
+  selectSearchEngines,
   selectSunset,
   setDarkMode,
-  setIsDark
+  setIsDark,
+  setSearchEngines
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -24,6 +26,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const sunset = useSelector(selectSunset);
+  const searchEngineNames = useSelector(selectSearchEngines);
 
   useEffect(() => {
     if (darkMode === AUTO) {
@@ -72,14 +75,21 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
+  const changeSearchEngines = useCallback(
+    (v: string[]) => dispatch(setSearchEngines(v)),
+    [dispatch]
+  );
+
   return (
     <SettingsMenuComponent
+      searchEngineNames={searchEngineNames}
       searchEngine={searchEngine}
       darkMode={darkMode}
       isDark={isDark}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
+      onChangeSearchEngines={changeSearchEngines}
     />
   );
 };

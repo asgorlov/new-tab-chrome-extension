@@ -1,10 +1,15 @@
 import React, { FC, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AUTO, MANUAL } from "../../constants/search-engine.constants";
-import { Button, Collapse, Drawer, Select, Switch } from "antd";
+import {
+  AUTO,
+  MANUAL,
+  SEARCH_ENGINE_NAMES
+} from "../../constants/search-engine.constants";
+import { Button, Checkbox, Collapse, Drawer, Select, Switch } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-icon.svg";
 import { ReactComponent as DarkModeIcon } from "../../static/svgs/dark-mode-icon.svg";
-import { ReactComponent as LanguageIcon } from "../../static/svgs/language.svg";
+import { ReactComponent as LanguageIcon } from "../../static/svgs/language-icon.svg";
+import { ReactComponent as SearchEngineIcon } from "../../static/svgs/search-engine-icon.svg";
 import clsx from "clsx";
 import i18n from "../../localizations/i18n";
 import { useSelector } from "react-redux";
@@ -14,9 +19,11 @@ interface DarkModeComponentProps {
   onClickSwitcher: () => void;
   onChangeDarkMode: (value: string) => void;
   onChangeLanguage: (value: string) => void;
+  onChangeSearchEngines: (values: string[]) => void;
   isDark: boolean;
   darkMode: string;
   searchEngine: string;
+  searchEngineNames: string[];
 }
 
 const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
@@ -25,7 +32,9 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   onChangeLanguage,
   isDark,
   darkMode,
-  searchEngine
+  searchEngine,
+  searchEngineNames,
+  onChangeSearchEngines
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -42,10 +51,25 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
       };
     });
   }, [isDark, t]);
+  const searchEngineOptions = useMemo(() => {
+    return SEARCH_ENGINE_NAMES.map(name => {
+      return {
+        className: clsx(
+          "new-tab__settings-menu_search-engine-content-dropdown-item",
+          {
+            dark: isDark
+          }
+        ),
+        value: name,
+        label: t(`searchEngine.${name}`),
+        key: name
+      };
+    });
+  }, [isDark, t]);
   const darkModeOptions = [
     {
       className: clsx(
-        "new-tab__settings-menu_dark-mode-content_dropdown-item",
+        "new-tab__settings-menu_dark-mode-content-dropdown-item",
         { dark: isDark }
       ),
       value: AUTO,
@@ -54,7 +78,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
     },
     {
       className: clsx(
-        "new-tab__settings-menu_dark-mode-content_dropdown-item",
+        "new-tab__settings-menu_dark-mode-content-dropdown-item",
         { dark: isDark }
       ),
       value: MANUAL,
@@ -87,12 +111,78 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
       >
         <Collapse accordion={true} bordered={false} expandIconPosition="end">
           <Panel
+            className={clsx("new-tab__settings-menu_search-engine", {
+              dark: isDark
+            })}
+            header={
+              <div
+                className={clsx("new-tab__settings-menu_search-engine-header", {
+                  dark: isDark
+                })}
+              >
+                <SearchEngineIcon />
+                <span>{t("searchEngine.title")}</span>
+              </div>
+            }
+            key={t("searchEngine.title")}
+          >
+            <div
+              className={clsx("new-tab__settings-menu_search-engine-content", {
+                dark: isDark
+              })}
+            >
+              <div className="new-tab__settings-menu_search-engine-content-checkbox-group">
+                <Checkbox
+                  checked={
+                    searchEngineNames.length === SEARCH_ENGINE_NAMES.length
+                  }
+                  onChange={e => {
+                    if (e.target.checked) {
+                      const allSearchEngines = searchEngineNames.concat(
+                        SEARCH_ENGINE_NAMES.filter(
+                          name => !searchEngineNames.includes(name)
+                        )
+                      );
+                      onChangeSearchEngines(allSearchEngines);
+                    }
+                  }}
+                >
+                  {t("searchEngine.selectAll")}
+                </Checkbox>
+                <Checkbox
+                  checked={searchEngineNames.length === 0}
+                  onChange={e => {
+                    if (e.target.checked) {
+                      onChangeSearchEngines([]);
+                    }
+                  }}
+                >
+                  {t("searchEngine.removeAll")}
+                </Checkbox>
+              </div>
+              <Select
+                className="new-tab__settings-menu_search-engine-content-selector"
+                popupClassName={clsx(
+                  "new-tab__settings-menu_search-engine-content-dropdown",
+                  { dark: isDark }
+                )}
+                mode="multiple"
+                maxTagCount="responsive"
+                value={searchEngineNames}
+                onChange={onChangeSearchEngines}
+                options={searchEngineOptions}
+              />
+            </div>
+          </Panel>
+        </Collapse>
+        <Collapse accordion={true} bordered={false} expandIconPosition="end">
+          <Panel
             className={clsx("new-tab__settings-menu_dark-mode", {
               dark: isDark
             })}
             header={
               <div
-                className={clsx("new-tab__settings-menu_dark-mode_header", {
+                className={clsx("new-tab__settings-menu_dark-mode-header", {
                   dark: isDark
                 })}
               >
@@ -108,10 +198,10 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
               })}
             >
               <Select
-                className="new-tab__settings-menu_dark-mode-content_selector"
+                className="new-tab__settings-menu_dark-mode-content-selector"
                 size="small"
                 popupClassName={clsx(
-                  "new-tab__settings-menu_dark-mode-content_dropdown",
+                  "new-tab__settings-menu_dark-mode-content-dropdown",
                   { dark: isDark }
                 )}
                 disabled={darkMode === MANUAL && !navigator.geolocation}
@@ -120,7 +210,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
                 options={darkModeOptions}
               />
               <Switch
-                className="new-tab__settings-menu_dark-mode-content_switcher"
+                className="new-tab__settings-menu_dark-mode-content-switcher"
                 checkedChildren={t("turnOn")}
                 unCheckedChildren={t("turnOff")}
                 checked={isDark}
