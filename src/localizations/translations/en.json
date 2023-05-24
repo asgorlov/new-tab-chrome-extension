@@ -16,6 +16,7 @@
   },
   "searchEngine": {
     "title": "Search system",
+    "brave": "Brave",
     "yahoo": "Yahoo",
     "bing": "Bing",
     "duckduckgo": "DuckDuckGo",

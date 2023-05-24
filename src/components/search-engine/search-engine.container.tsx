@@ -2,6 +2,7 @@ import React, { FC, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   BING,
+  BRAVE,
   DUCK,
   GOOGLE,
   YAHOO,
@@ -11,6 +12,7 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
 import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo-search-icon.svg";
+import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave-search-icon.svg";
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 
 interface SearchEngineContainerProps {
@@ -40,6 +42,8 @@ const SearchEngineContainer: FC<SearchEngineContainerProps> = ({
         );
       case YAHOO:
         return <YahooSearchIcon />;
+      case BRAVE:
+        return <BraveSearchIcon />;
       default:
         return <></>;
     }
