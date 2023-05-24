@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
-  getDarkByLocationTime,
+  getSunsetTimeByLocation,
   selectSearchEngines,
   selectSunset,
   setDarkMode,
@@ -33,7 +33,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [isDark, dispatch]
   );
 
-  const changeSearchEngines = useCallback(
+  const changeSearchEnginesHandler = useCallback(
     (v: string[]) => dispatch(setSearchEngines(v)),
     [dispatch]
   );
@@ -48,41 +48,67 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     [dispatch]
   );
 
-  const changeDarkModeBySunsetTime = useCallback(() => {
-    const now = new Date();
-    const sunsetDate = sunset ? new Date(sunset) : null;
-    const sunsetDateCached =
-      sunsetDate &&
-      sunsetDate.getFullYear() === now.getFullYear() &&
-      sunsetDate.getMonth() === now.getMonth() &&
-      sunsetDate.getDate() === now.getDate();
+  const changeDarkModeCollapseHandler = useCallback(
+    (key: string | string[]) => {
+      const isCached = (): boolean => {
+        const now = new Date();
+        const sunsetDate = sunset ? new Date(sunset) : null;
 
-    if (sunsetDateCached) {
-      dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        location => {
+        return (
+          !!sunsetDate &&
+          sunsetDate.getFullYear() === now.getFullYear() &&
+          sunsetDate.getMonth() === now.getMonth() &&
+          sunsetDate.getDate() === now.getDate()
+        );
+      };
+
+      if (key.length && !isCached()) {
+        navigator.geolocation.getCurrentPosition(location => {
           const coords = location?.coords;
           if (coords && coords.latitude && coords.longitude) {
             const coordinate = {
               lat: coords.latitude,
               lng: coords.longitude
             };
-            dispatch(getDarkByLocationTime(coordinate));
-          } else {
-            dispatch(setDarkMode(MANUAL));
+            dispatch(getSunsetTimeByLocation(coordinate));
           }
-        },
-        () => dispatch(setDarkMode(MANUAL))
-      );
-    }
-  }, [dispatch, sunset]);
+        });
+      }
+    },
+    [sunset, dispatch]
+  );
 
   useEffect(() => {
     if (darkMode === AUTO) {
-      changeDarkModeBySunsetTime();
+      const now = new Date();
+      const sunsetDate = sunset ? new Date(sunset) : null;
+      const sunsetDateCached =
+        sunsetDate &&
+        sunsetDate.getFullYear() === now.getFullYear() &&
+        sunsetDate.getMonth() === now.getMonth() &&
+        sunsetDate.getDate() === now.getDate();
+
+      if (sunsetDateCached) {
+        dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          location => {
+            const coords = location?.coords;
+            if (coords && coords.latitude && coords.longitude) {
+              const coordinate = {
+                lat: coords.latitude,
+                lng: coords.longitude
+              };
+              dispatch(getSunsetTimeByLocation(coordinate));
+            } else {
+              dispatch(setDarkMode(MANUAL));
+            }
+          },
+          () => dispatch(setDarkMode(MANUAL))
+        );
+      }
     }
-  }, [darkMode, changeDarkModeBySunsetTime]);
+  }, [sunset, darkMode, dispatch]);
 
   return (
     <SettingsMenuComponent
@@ -93,8 +119,8 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
-      onChangeSearchEngines={changeSearchEngines}
-      changeDarkModeBySunsetTime={changeDarkModeBySunsetTime}
+      onChangeSearchEngines={changeSearchEnginesHandler}
+      onChangeDarkModeCollapse={changeDarkModeCollapseHandler}
     />
   );
 };

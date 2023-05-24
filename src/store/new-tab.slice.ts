@@ -51,19 +51,15 @@ export const loadDataFromStorage = createAsyncThunk(
   }
 );
 
-export const getDarkByLocationTime = createAsyncThunk(
+export const getSunsetTimeByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
   async (coordinate: Coordinate) => {
     const { data } = await axios.get(
       `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
     );
     const sunset = new Date(data.results.sunset);
-    const now = new Date();
 
-    return {
-      sunset: sunset.toString(),
-      isDark: sunset.getTime() <= now.getTime()
-    };
+    return sunset.toString();
   }
 );
 
@@ -145,19 +141,13 @@ export const newTabSlice = createSlice({
       state.currentLanguage = defaultStorageParameters.currentLanguage;
     });
 
-    builder.addCase(getDarkByLocationTime.fulfilled, (state, action) => {
-      const { sunset, isDark } = action.payload;
+    builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
+      const sunset = action.payload;
       if (chrome?.storage) {
         chrome.storage.sync.set({ sunset: sunset });
       }
 
       state.sunset = sunset;
-      state.isDark = isDark;
-    });
-
-    builder.addCase(getDarkByLocationTime.rejected, state => {
-      state.isDark = defaultStorageParameters.isDark;
-      state.darkMode = defaultStorageParameters.darkMode;
     });
   }
 });

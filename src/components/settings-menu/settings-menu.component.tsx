@@ -20,7 +20,7 @@ interface DarkModeComponentProps {
   onChangeDarkMode: (value: string) => void;
   onChangeLanguage: (value: string) => void;
   onChangeSearchEngines: (values: string[]) => void;
-  changeDarkModeBySunsetTime: () => void;
+  onChangeDarkModeCollapse: (values: string | string[]) => void;
   isDark: boolean;
   darkMode: string;
   searchEngine: string;
@@ -32,7 +32,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   onChangeDarkMode,
   onChangeLanguage,
   onChangeSearchEngines,
-  changeDarkModeBySunsetTime,
+  onChangeDarkModeCollapse,
   isDark,
   darkMode,
   searchEngine,
@@ -181,7 +181,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
           accordion={true}
           bordered={false}
           expandIconPosition="end"
-          onChange={changeDarkModeBySunsetTime}
+          onChange={onChangeDarkModeCollapse}
         >
           <Panel
             className={clsx("new-tab__settings-menu_dark-mode", {
