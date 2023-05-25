@@ -3,6 +3,7 @@ import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import { setSearchEngine } from "../../store/new-tab.slice";
 import { useDispatch } from "react-redux";
 import {
+  AOL,
   BING,
   BRAVE,
   DUCK,
@@ -12,6 +13,7 @@ import {
   YANDEX
 } from "../../constants/search-engine.constants";
 import i18n from "../../localizations/i18n";
+import { ReactComponent as AolIcon } from "../../static/svgs/aol/aol-icon.svg";
 import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
 import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
 import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
@@ -52,6 +54,8 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <BraveIcon height={iconSize} width={iconSize} />;
       case SWISSCOWS:
         return <SwisscowsIcon height={iconSize} width={iconSize} />;
+      case AOL:
+        return <AolIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }

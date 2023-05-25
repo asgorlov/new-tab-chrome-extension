@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
+  AOL,
   BING,
   BRAVE,
   DUCK,
@@ -15,7 +16,7 @@ import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/goo
 import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo-search-icon.svg";
 import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave-search-icon.svg";
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
-import { ReactComponent as SwisscowsIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
+import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 
 interface SearchEngineContainerProps {
   searchEngine: string;
@@ -47,7 +48,14 @@ const SearchEngineContainer: FC<SearchEngineContainerProps> = ({
       case BRAVE:
         return <BraveSearchIcon />;
       case SWISSCOWS:
-        return <SwisscowsIcon />;
+        return <SwisscowsSearchIcon />;
+      case AOL:
+        return (
+          <div className="mag-glass">
+            <div className="lens"></div>
+            <div className="handle"></div>
+          </div>
+        );
       default:
         return <></>;
     }

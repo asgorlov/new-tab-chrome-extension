@@ -9,8 +9,10 @@ export const SEARCH_ENGINE_NAMES = [
   "bing",
   "yahoo",
   "brave",
-  "swisscows"
+  "swisscows",
+  "aol"
 ];
+export const AOL = SEARCH_ENGINE_NAMES[7];
 export const SWISSCOWS = SEARCH_ENGINE_NAMES[6];
 export const BRAVE = SEARCH_ENGINE_NAMES[5];
 export const YAHOO = SEARCH_ENGINE_NAMES[4];
@@ -20,6 +22,7 @@ export const GOOGLE = SEARCH_ENGINE_NAMES[1];
 export const YANDEX = SEARCH_ENGINE_NAMES[0];
 
 export const SEARCH_ENGINE_LINKS: Record<string, string> = {
+  aol: "https://search.aol.co.uk/aol/webhome/",
   bing: "https://www.bing.com/",
   brave: "https://search.brave.com/",
   yahoo: "https://www.yahoo.com/",
@@ -30,6 +33,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
 };
 
 export const SEARCH_QUERY_LINKS: Record<string, string> = {
+  aol: "https://search.aol.co.uk/aol/search",
   bing: "https://www.bing.com/search",
   brave: "https://search.brave.com/search",
   yahoo: "https://www.search.yahoo.com/search",
@@ -40,6 +44,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
 };
 
 export const SEARCH_THEMES: Record<string, string> = {
+  aol: "#2f9aff",
   bing: "#007DAA",
   brave: "#ff2000",
   yahoo: "#6001d2",

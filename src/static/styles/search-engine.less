@@ -109,6 +109,19 @@
                 background-image: url("../svgs/swisscows/swisscows-logo-dark.svg");
             }
         }
+
+        &.aol {
+            transition: @fast-transition;
+            height: 41px;
+            width: 103px;
+            margin-bottom: 12px;
+            background-image: url("../svgs/aol/aol-logo.svg");
+
+            &.dark {
+                transition: @fast-transition;
+                background-image: url("../svgs/aol/aol-logo-dark.svg");
+            }
+        }
     }
 
     &_form-background {
@@ -228,6 +241,12 @@
             border: none transparent;
             border-radius: 26px;
         }
+
+        &.aol {
+            transition: @fast-transition;
+            border: none transparent;
+            border-radius: 0;
+        }
     }
 
     &_input {
@@ -314,6 +333,7 @@
         }
 
         &.brave {
+            transition: @fast-transition;
             border: none transparent;
             border-radius: 16px 0 0 16px;
 
@@ -325,6 +345,7 @@
         }
 
         &.swisscows {
+            transition: @fast-transition;
             border: none transparent;
             border-radius: 26px 0 0 26px;
 
@@ -336,6 +357,17 @@
 
             &.ant-input {
                 padding-right: 0;
+            }
+        }
+
+        &.aol {
+            transition: @fast-transition;
+            border: 1px solid #7590f5;
+            border-radius: 0;
+
+            &:hover {
+                box-shadow: 0 0 3px #a5b2f4;
+                outline: none;
             }
         }
     }
@@ -501,6 +533,49 @@
 
             &:hover {
                 background: none;
+            }
+        }
+
+        &.aol {
+            transition: @fast-transition;
+            margin: 0;
+            width: 65px;
+            background: #524dfe;
+            border-radius: 0;
+
+            &:hover {
+                background: #524dfe;
+            }
+
+            .mag-glass {
+                color: white;
+                font-size: 0;
+                display: inline-block;
+                width: 26px;
+                height: 26px;
+                position: relative;
+                transform: scale(0.8);
+
+                .lens {
+                    position: absolute;
+                    border: 3px solid white;
+                    width: 16px;
+                    height: 16px;
+                    background: transparent;
+                    border-radius: 100px;
+                }
+
+                .handle {
+                    position: absolute;
+                    display: block;
+                    background-color: white;
+                    width: 16px;
+                    height: 4px;
+                    right: -5px;
+                    bottom: 0;
+                    top: 21px;
+                    transform: rotate(45deg);
+                }
             }
         }
     }
