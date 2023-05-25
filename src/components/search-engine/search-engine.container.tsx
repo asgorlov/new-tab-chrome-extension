@@ -8,11 +8,13 @@ import {
   GOOGLE,
   SWISSCOWS,
   YAHOO,
-  YANDEX
+  YANDEX,
+  YOUCOM
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
+import { ReactComponent as YuoComSearchIcon } from "../../static/svgs/youcom/you-com-search-icon.svg";
 import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo-search-icon.svg";
 import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave-search-icon.svg";
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
@@ -56,6 +58,8 @@ const SearchEngineContainer: FC<SearchEngineContainerProps> = ({
             <div className="handle"></div>
           </div>
         );
+      case YOUCOM:
+        return <YuoComSearchIcon />;
       default:
         return <></>;
     }

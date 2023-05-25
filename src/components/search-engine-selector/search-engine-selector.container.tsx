@@ -10,13 +10,15 @@ import {
   GOOGLE,
   SWISSCOWS,
   YAHOO,
-  YANDEX
+  YANDEX,
+  YOUCOM
 } from "../../constants/search-engine.constants";
 import i18n from "../../localizations/i18n";
 import { ReactComponent as AolIcon } from "../../static/svgs/aol/aol-icon.svg";
 import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
 import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
 import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
+import { ReactComponent as YouComIcon } from "../../static/svgs/youcom/you-com-icon.svg";
 import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
 import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
@@ -56,6 +58,8 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <SwisscowsIcon height={iconSize} width={iconSize} />;
       case AOL:
         return <AolIcon height={iconSize} width={iconSize} />;
+      case YOUCOM:
+        return <YouComIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }

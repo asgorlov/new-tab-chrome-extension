@@ -122,6 +122,14 @@
                 background-image: url("../svgs/aol/aol-logo-dark.svg");
             }
         }
+
+        &.youcom {
+            transition: @fast-transition;
+            height: 62px;
+            width: 205px;
+            margin-bottom: 10px;
+            background-image: url("../svgs/youcom/you-com-logo.svg");
+        }
     }
 
     &_form-background {
@@ -247,6 +255,27 @@
             border: none transparent;
             border-radius: 0;
         }
+
+        &.youcom {
+            transition: @fast-transition;
+            border: 1px solid transparent;
+            border-radius: 24px;
+            box-shadow: #00000011 0 -0.5px 0, #00000019 0 0 18px;
+
+            &:focus-within {
+                box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
+                border: 1px solid #4A72F5FF;
+            }
+
+            &.dark {
+                box-shadow: #FFFFFF11 0 -0.5px 0, #FFFFFF19 0 0 18px;
+
+                &:focus-within {
+                    box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
+                    border: 1px solid #4A72F5FF;
+                }
+            }
+        }
     }
 
     &_input {
@@ -368,6 +397,22 @@
             &:hover {
                 box-shadow: 0 0 3px #a5b2f4;
                 outline: none;
+            }
+        }
+
+        &.youcom {
+            transition: @fast-transition;
+            border: none transparent;
+            border-radius: 24px 0 0 24px;
+
+            &.ant-input:focus,
+            &.ant-input:hover {
+                border-color: transparent;
+                box-shadow: none;
+            }
+
+            &.ant-input {
+                padding-right: 0;
             }
         }
     }
@@ -576,6 +621,21 @@
                     top: 21px;
                     transform: rotate(45deg);
                 }
+            }
+        }
+
+        &.youcom {
+            transition: @fast-transition;
+            border: none transparent;
+            border-radius: 0 24px 24px 0;
+            width: 40px;
+
+            &:hover {
+                background: none;
+            }
+
+            svg path {
+                fill: #808080;
             }
         }
     }
