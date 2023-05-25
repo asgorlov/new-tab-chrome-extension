@@ -3,19 +3,29 @@ import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import { setSearchEngine } from "../../store/new-tab.slice";
 import { useDispatch } from "react-redux";
 import {
+  AOL,
   BING,
+  BRAVE,
   DUCK,
+  GIBIRU,
   GOOGLE,
+  SWISSCOWS,
   YAHOO,
-  YANDEX
+  YANDEX,
+  YOUCOM
 } from "../../constants/search-engine.constants";
 import i18n from "../../localizations/i18n";
+import { ReactComponent as AolIcon } from "../../static/svgs/aol/aol-icon.svg";
 import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
 import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
 import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
+import { ReactComponent as YouComIcon } from "../../static/svgs/youcom/you-com-icon.svg";
+import { ReactComponent as GibiruIcon } from "../../static/svgs/gibiru/gibiru-icon.svg";
 import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
 import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
+import { ReactComponent as BraveIcon } from "../../static/svgs/brave/brave-icon.svg";
+import { ReactComponent as SwisscowsIcon } from "../../static/svgs/swisscows/swisscows-icon.svg";
 
 interface SearchSelectedContainerProps {
   searchEngine: string;
@@ -26,10 +36,9 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const iconSize = 32;
-  const searchEngineNames = [YAHOO, BING, DUCK, GOOGLE, YANDEX];
-
   const getIcon = useCallback((name: string) => {
+    const iconSize = 32;
+
     switch (name) {
       case YANDEX:
         return i18n.language.includes("ru") ? (
@@ -45,6 +54,16 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <BingIcon height={iconSize} width={iconSize} />;
       case YAHOO:
         return <YahooIcon height={iconSize} width={iconSize} />;
+      case BRAVE:
+        return <BraveIcon height={iconSize} width={iconSize} />;
+      case SWISSCOWS:
+        return <SwisscowsIcon height={iconSize} width={iconSize} />;
+      case AOL:
+        return <AolIcon height={iconSize} width={iconSize} />;
+      case YOUCOM:
+        return <YouComIcon height={iconSize} width={iconSize} />;
+      case GIBIRU:
+        return <GibiruIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }
@@ -60,7 +79,6 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
 
   return (
     <SearchEngineSelectorComponent
-      searchEngineNames={searchEngineNames}
       searchEngine={searchEngine}
       onClick={handleClick}
       getIcon={getIcon}

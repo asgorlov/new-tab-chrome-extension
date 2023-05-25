@@ -1,0 +1,36 @@
+{
+  "webSearch": "Поиск в Интернете",
+  "tabTitle": "Новая вкладка",
+  "searchQuery": "Введите поисковый запрос...",
+  "searchButton": "Найти",
+  "noTracking": "Без отслеживания",
+  "anonymous": "Анонимно",
+  "familyFriendly": "Для всей семьи",
+  "darkModeTitle": "Темный режим",
+  "turnOn": "Вкл.",
+  "turnOff": "Выкл.",
+  "auto": "Авто",
+  "manual": "Вручную",
+  "system": "Системный",
+  "settingsTitle": "Настройки",
+  "language": {
+    "title": "Язык",
+    "ru": "Русский",
+    "en": "Английский"
+  },
+  "searchEngine": {
+    "title": "Поисковая система",
+    "swisscows": "Swisscows",
+    "brave": "Brave",
+    "aol": "Aol",
+    "youcom": "You.com",
+    "gibiru": "Gibiru",
+    "yahoo": "Yahoo",
+    "bing": "Bing",
+    "duckduckgo": "DuckDuckGo",
+    "google": "Google",
+    "yandex": "Яндекс",
+    "selectAll": "Выбрать все",
+    "removeAll": "Убрать все"
+  }
+}

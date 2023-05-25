@@ -1,4 +1,4 @@
-@import "constants.less";
+@import "constants";
 
 .new-tab__search-engine-selector {
     position: inherit;
@@ -9,6 +9,11 @@
     &_google,
     &_duckduckgo,
     &_bing,
+    &_aol,
+    &_brave,
+    &_youcom,
+    &_gibiru,
+    &_swisscows,
     &_yahoo {
         transition: @slow-transition;
         background-color: inherit;
@@ -19,6 +24,10 @@
 
         &.grey {
             filter: grayscale(100%);
+        }
+
+        &.ant-btn-default {
+            box-shadow: none;
         }
     }
 }
