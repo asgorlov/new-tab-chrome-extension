@@ -11,8 +11,10 @@ export const SEARCH_ENGINE_NAMES = [
   "brave",
   "swisscows",
   "aol",
-  "youcom"
+  "youcom",
+  "gibiru"
 ];
+export const GIBIRU = SEARCH_ENGINE_NAMES[9];
 export const YOUCOM = SEARCH_ENGINE_NAMES[8];
 export const AOL = SEARCH_ENGINE_NAMES[7];
 export const SWISSCOWS = SEARCH_ENGINE_NAMES[6];
@@ -30,6 +32,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   yahoo: "https://www.yahoo.com/",
   yandex: "https://ya.ru/",
   youcom: "https://you.com/",
+  gibiru: "https://gibiru.com/",
   google: "https://google.com/",
   swisscows: "https://swisscows.com/",
   duckduckgo: "https://duckduckgo.com/"
@@ -42,6 +45,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   yahoo: "https://www.search.yahoo.com/search",
   yandex: "https://yandex.ru/search",
   youcom: "https://you.com/search",
+  gibiru: "https://gibiru.com/results.html",
   google: "https://google.com/search",
   swisscows: "https://swisscows.com/web",
   duckduckgo: "https://duckduckgo.com"
@@ -54,6 +58,7 @@ export const SEARCH_THEMES: Record<string, string> = {
   yahoo: "#6001d2",
   yandex: "#fc0",
   youcom: "#4153fe",
+  gibiru: "#fc243b",
   google: "#4285f4",
   swisscows: "#dc2f2f",
   duckduckgo: "#DE5833"
