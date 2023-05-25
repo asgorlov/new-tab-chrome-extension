@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
+  SWISSCOWS,
   YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
@@ -10,6 +11,9 @@ import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
 import i18n from "../../localizations/i18n";
 import { Button, Input } from "antd";
+import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
+import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
+import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 
 interface SearchEngineProps {
   searchEngine: string;
@@ -23,6 +27,16 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
   isDark
 }) => {
   const { t } = useTranslation();
+  const getInputName = (searchEngine: string): string => {
+    switch (searchEngine) {
+      case YANDEX:
+        return "text";
+      case SWISSCOWS:
+        return "query";
+      default:
+        return "q";
+    }
+  };
 
   return (
     <div className="new-tab__search-engine">
@@ -35,6 +49,24 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
         )}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
       />
+      <div
+        className={clsx("new-tab__search-engine_form-background", searchEngine)}
+      >
+        <div className="new-tab__search-engine_form-background-text-group">
+          <div className="new-tab__search-engine_form-background-text-item">
+            <NoTrackingIcon />
+            {t("noTracking")}
+          </div>
+          <div className="new-tab__search-engine_form-background-text-item">
+            <AnonymousIcon />
+            {t("anonymous")}
+          </div>
+          <div className="new-tab__search-engine_form-background-text-item">
+            <ForFamilyIcon />
+            {t("familyFriendly")}
+          </div>
+        </div>
+      </div>
       <form
         className={clsx("new-tab__search-engine_form", searchEngine, {
           dark: isDark
@@ -49,7 +81,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           tabIndex={1}
           autoComplete="off"
           maxLength={400}
-          name={searchEngine === YANDEX ? "text" : "q"}
+          name={getInputName(searchEngine)}
         />
         <Button
           className={clsx("new-tab__search-engine_button", searchEngine)}

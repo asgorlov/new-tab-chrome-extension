@@ -3,6 +3,9 @@
   "tabTitle": "Новая вкладка",
   "searchQuery": "Введите поисковый запрос...",
   "searchButton": "Найти",
+  "noTracking": "Без отслеживания",
+  "anonymous": "Анонимно",
+  "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
   "turnOn": "Вкл.",
   "turnOff": "Выкл.",
@@ -16,6 +19,7 @@
   },
   "searchEngine": {
     "title": "Поисковая система",
+    "swisscows": "Swisscows",
     "brave": "Brave",
     "yahoo": "Yahoo",
     "bing": "Bing",

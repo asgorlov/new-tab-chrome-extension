@@ -7,8 +7,10 @@ export const SEARCH_ENGINE_NAMES = [
   "duckduckgo",
   "bing",
   "yahoo",
-  "brave"
+  "brave",
+  "swisscows"
 ];
+export const SWISSCOWS = SEARCH_ENGINE_NAMES[6];
 export const BRAVE = SEARCH_ENGINE_NAMES[5];
 export const YAHOO = SEARCH_ENGINE_NAMES[4];
 export const BING = SEARCH_ENGINE_NAMES[3];
@@ -22,6 +24,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   yahoo: "https://www.yahoo.com/",
   yandex: "https://ya.ru/",
   google: "https://google.com/",
+  swisscows: "https://swisscows.com/",
   duckduckgo: "https://duckduckgo.com/"
 };
 
@@ -31,6 +34,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   yahoo: "https://www.search.yahoo.com/search",
   yandex: "https://yandex.ru/search",
   google: "https://google.com/search",
+  swisscows: "https://swisscows.com/web",
   duckduckgo: "https://duckduckgo.com"
 };
 
@@ -40,5 +44,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   yahoo: "#6001d2",
   yandex: "#fc0",
   google: "#4285f4",
+  swisscows: "#dc2f2f",
   duckduckgo: "#DE5833"
 };
