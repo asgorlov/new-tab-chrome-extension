@@ -11,6 +11,7 @@
   "turnOff": "Off",
   "auto": "Auto",
   "manual": "Manual",
+  "system": "System",
   "settingsTitle": "Settings",
   "language": {
     "title": "Language",

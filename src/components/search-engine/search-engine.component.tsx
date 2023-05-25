@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import {
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
-  SWISSCOWS,
   YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
@@ -14,6 +13,7 @@ import { Button, Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
+import { getInputName } from "../../utils/search-engine.utils";
 
 interface SearchEngineProps {
   searchEngine: string;
@@ -27,16 +27,6 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
   isDark
 }) => {
   const { t } = useTranslation();
-  const getInputName = (searchEngine: string): string => {
-    switch (searchEngine) {
-      case YANDEX:
-        return "text";
-      case SWISSCOWS:
-        return "query";
-      default:
-        return "q";
-    }
-  };
 
   return (
     <div className="new-tab__search-engine">

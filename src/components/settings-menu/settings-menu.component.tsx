@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import {
   AUTO,
   MANUAL,
-  SEARCH_ENGINE_NAMES
+  SEARCH_ENGINE_NAMES,
+  SYSTEM
 } from "../../constants/search-engine.constants";
 import { Button, Checkbox, Collapse, Drawer, Select, Switch } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-icon.svg";
@@ -86,6 +87,15 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
       value: MANUAL,
       label: t(MANUAL),
       key: MANUAL
+    },
+    {
+      className: clsx(
+        "new-tab__settings-menu_dark-mode-content-dropdown-item",
+        { dark: isDark }
+      ),
+      value: SYSTEM,
+      label: t(SYSTEM),
+      key: SYSTEM
     }
   ];
 
@@ -221,7 +231,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
                 checkedChildren={t("turnOn")}
                 unCheckedChildren={t("turnOff")}
                 checked={isDark}
-                disabled={darkMode === AUTO}
+                disabled={darkMode !== MANUAL}
                 onClick={onClickSwitcher}
               />
             </div>
