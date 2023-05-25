@@ -1,5 +1,6 @@
 export const AUTO = "auto";
 export const MANUAL = "manual";
+export const SYSTEM = "system";
 
 export const SEARCH_ENGINE_NAMES = [
   "yandex",

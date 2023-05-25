@@ -11,7 +11,11 @@ import {
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { AUTO, MANUAL } from "../../constants/search-engine.constants";
+import { AUTO, MANUAL, SYSTEM } from "../../constants/search-engine.constants";
+import {
+  isBrowserDarkModeEnabled,
+  isSunsetTimeCached
+} from "../../utils/dark-mode.utils";
 
 interface DarkModeContainerProps {
   isDark: boolean;
@@ -50,19 +54,7 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
 
   const changeDarkModeCollapseHandler = useCallback(
     (key: string | string[]) => {
-      const isCached = (): boolean => {
-        const now = new Date();
-        const sunsetDate = sunset ? new Date(sunset) : null;
-
-        return (
-          !!sunsetDate &&
-          sunsetDate.getFullYear() === now.getFullYear() &&
-          sunsetDate.getMonth() === now.getMonth() &&
-          sunsetDate.getDate() === now.getDate()
-        );
-      };
-
-      if (key.length && !isCached()) {
+      if (key.length && !isSunsetTimeCached(sunset)) {
         navigator.geolocation.getCurrentPosition(location => {
           const coords = location?.coords;
           if (coords && coords.latitude && coords.longitude) {
@@ -107,6 +99,8 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
           () => dispatch(setDarkMode(MANUAL))
         );
       }
+    } else if (darkMode === SYSTEM) {
+      dispatch(setIsDark(isBrowserDarkModeEnabled()));
     }
   }, [sunset, darkMode, dispatch]);
 
