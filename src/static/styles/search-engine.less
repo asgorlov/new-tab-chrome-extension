@@ -130,6 +130,19 @@
             margin-bottom: 14px;
             background-image: url("../svgs/youcom/you-com-logo.svg");
         }
+
+        &.gibiru {
+            transition: @fast-transition;
+            height: 41px;
+            width: 205px;
+            margin-bottom: 10px;
+            background-image: url("../svgs/gibiru/gibiru-logo.svg");
+
+            &.dark {
+                transition: @fast-transition;
+                background-image: url("../svgs/gibiru/gibiru-logo-dark.svg");
+            }
+        }
     }
 
     &_form-background {
@@ -276,6 +289,16 @@
                 }
             }
         }
+
+        &.gibiru {
+            transition: @fast-transition;
+            border: 1px solid #828282FF;
+            border-radius: 7px;
+
+            &.dark {
+                border: 1px solid #d5d5d5;
+            }
+        }
     }
 
     &_input {
@@ -413,6 +436,18 @@
 
             &.ant-input {
                 padding-right: 0;
+            }
+        }
+
+        &.gibiru {
+            transition: @fast-transition;
+            border: none transparent;
+            border-radius: 7px 0 0 7px;
+
+            &.ant-input:focus,
+            &.ant-input:hover {
+                border-color: transparent;
+                box-shadow: none;
             }
         }
     }
@@ -636,6 +671,22 @@
 
             svg path {
                 fill: #808080;
+            }
+        }
+
+        &.gibiru {
+            transition: @fast-transition;
+            border: none transparent;
+            border-radius: 0 7px 7px 0;
+            width: 40px;
+            padding-right: 8px;
+
+            &:hover {
+                background: none;
+            }
+
+            svg {
+                transform: scale(0.9);
             }
         }
     }

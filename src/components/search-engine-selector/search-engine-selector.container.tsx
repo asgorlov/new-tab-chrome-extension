@@ -7,6 +7,7 @@ import {
   BING,
   BRAVE,
   DUCK,
+  GIBIRU,
   GOOGLE,
   SWISSCOWS,
   YAHOO,
@@ -19,6 +20,7 @@ import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg
 import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
 import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
 import { ReactComponent as YouComIcon } from "../../static/svgs/youcom/you-com-icon.svg";
+import { ReactComponent as GibiruIcon } from "../../static/svgs/gibiru/gibiru-icon.svg";
 import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
 import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
@@ -60,6 +62,8 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <AolIcon height={iconSize} width={iconSize} />;
       case YOUCOM:
         return <YouComIcon height={iconSize} width={iconSize} />;
+      case GIBIRU:
+        return <GibiruIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }
