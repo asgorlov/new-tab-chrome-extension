@@ -7,6 +7,7 @@ import {
   BRAVE,
   DUCK,
   GOOGLE,
+  SWISSCOWS,
   YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
@@ -18,6 +19,7 @@ import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg
 import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
 import { ReactComponent as BraveIcon } from "../../static/svgs/brave/brave-icon.svg";
+import { ReactComponent as SwisscowsIcon } from "../../static/svgs/swisscows/swisscows-icon.svg";
 
 interface SearchSelectedContainerProps {
   searchEngine: string;
@@ -48,6 +50,8 @@ const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
         return <YahooIcon height={iconSize} width={iconSize} />;
       case BRAVE:
         return <BraveIcon height={iconSize} width={iconSize} />;
+      case SWISSCOWS:
+        return <SwisscowsIcon height={iconSize} width={iconSize} />;
       default:
         return <></>;
     }
