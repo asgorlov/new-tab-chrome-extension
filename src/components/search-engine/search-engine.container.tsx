@@ -21,17 +21,13 @@ import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo
 import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave-search-icon.svg";
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
+import { useSelector } from "react-redux";
+import { selectIsDark, selectSearchEngine } from "../../store/new-tab.slice";
 
-interface SearchEngineContainerProps {
-  searchEngine: string;
-  isDark: boolean;
-}
-
-const SearchEngineContainer: FC<SearchEngineContainerProps> = ({
-  searchEngine,
-  isDark
-}) => {
+const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
+  const isDark = useSelector(selectIsDark);
+  const searchEngine = useSelector(selectSearchEngine);
 
   const buttonLabel = useMemo(() => {
     switch (searchEngine) {

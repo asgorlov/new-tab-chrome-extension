@@ -14,7 +14,7 @@ const i18nextOptions = {
   fallbackLng: ["en", "ru"]
 };
 
-i18n
+await i18n
   .use(LanguageDetector)
   .use(resourceGetter)
   .use(initReactI18next)
