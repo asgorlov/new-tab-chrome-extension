@@ -13,6 +13,13 @@
   "manual": "Manual",
   "system": "System",
   "settingsTitle": "Settings",
+  "resetSettings": {
+    "byDefault": "Revert default settings",
+    "title": "Are you sure?",
+    "message": "This action will return the default settings",
+    "ok": "Yes",
+    "cancel": "No"
+  },
   "language": {
     "title": "Language",
     "ru": "Russian",

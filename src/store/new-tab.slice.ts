@@ -4,8 +4,9 @@ import axios from "axios";
 import { Coordinate } from "../models/coordinate.model";
 import i18n from "../localizations/i18n";
 import {
+  defaultStorageParameters,
   getInitStateFromChrome,
-  setValueToChrome
+  setDataToChrome
 } from "../utils/chrome-storage.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 
@@ -26,10 +27,26 @@ export const getSunsetTimeByLocation = createAsyncThunk(
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
   async (language: string) => {
-    setValueToChrome({ currentLanguage: language });
+    setDataToChrome({ currentLanguage: language });
     await i18n.changeLanguage(language);
 
     return language;
+  }
+);
+
+export const resetSettings = createAsyncThunk(
+  "newTab/resetSettings",
+  async () => {
+    const data = defaultStorageParameters as NewTabState;
+
+    if (navigator.language) {
+      data.currentLanguage = navigator.language;
+    }
+
+    setDataToChrome(data);
+    await i18n.changeLanguage(data.currentLanguage);
+
+    return data;
   }
 );
 
@@ -38,19 +55,19 @@ export const newTabSlice = createSlice({
   initialState,
   reducers: {
     setIsDark(state, action) {
-      setValueToChrome({ isDark: action.payload });
+      setDataToChrome({ isDark: action.payload });
       state.isDark = action.payload;
     },
     setDarkMode(state, action) {
-      setValueToChrome({ darkMode: action.payload });
+      setDataToChrome({ darkMode: action.payload });
       state.darkMode = action.payload;
     },
     setSearchEngine(state, action) {
-      setValueToChrome({ searchEngines: action.payload });
+      setDataToChrome({ searchEngines: action.payload });
       state.searchEngine = action.payload;
     },
     setSearchEngines(state, action) {
-      setValueToChrome({ searchEngines: action.payload });
+      setDataToChrome({ searchEngines: action.payload });
       state.searchEngines = action.payload;
     }
   },
@@ -59,8 +76,25 @@ export const newTabSlice = createSlice({
       state.currentLanguage = action.payload;
     });
 
+    builder.addCase(resetSettings.fulfilled, (state, action) => {
+      const {
+        sunset,
+        isDark,
+        darkMode,
+        searchEngine,
+        searchEngines,
+        currentLanguage
+      } = action.payload;
+      state.sunset = sunset;
+      state.isDark = isDark;
+      state.darkMode = darkMode;
+      state.searchEngine = searchEngine;
+      state.searchEngines = searchEngines;
+      state.currentLanguage = currentLanguage;
+    });
+
     builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
-      setValueToChrome({ sunset: action.payload });
+      setDataToChrome({ sunset: action.payload });
       state.sunset = action.payload;
     });
   }
