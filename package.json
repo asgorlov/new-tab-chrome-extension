@@ -1,6 +1,6 @@
 {
-  "name": "simple-new-tab-chrome-extension",
-  "version": "3.0.0",
+  "name": "new-tab-chrome-extension",
+  "version": "3.0.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
