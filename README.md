@@ -1,4 +1,4 @@
-<h1>Simple New Tab Chrome Extension</h1>
+<h1>New Tab Chrome Extension</h1>
 
 This is a simple search page on a new Chrome browser tab
 <h2>Features: </h2>
