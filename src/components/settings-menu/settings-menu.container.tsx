@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
@@ -11,11 +11,7 @@ import {
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { AUTO, MANUAL, SYSTEM } from "../../constants/search-engine.constants";
-import {
-  isBrowserDarkModeEnabled,
-  isSunsetTimeCached
-} from "../../utils/dark-mode.utils";
+import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
 
 interface DarkModeContainerProps {
   isDark: boolean;
@@ -69,40 +65,6 @@ const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
     },
     [sunset, dispatch]
   );
-
-  useEffect(() => {
-    if (darkMode === AUTO) {
-      const now = new Date();
-      const sunsetDate = sunset ? new Date(sunset) : null;
-      const sunsetDateCached =
-        sunsetDate &&
-        sunsetDate.getFullYear() === now.getFullYear() &&
-        sunsetDate.getMonth() === now.getMonth() &&
-        sunsetDate.getDate() === now.getDate();
-
-      if (sunsetDateCached) {
-        dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
-      } else {
-        navigator.geolocation.getCurrentPosition(
-          location => {
-            const coords = location?.coords;
-            if (coords && coords.latitude && coords.longitude) {
-              const coordinate = {
-                lat: coords.latitude,
-                lng: coords.longitude
-              };
-              dispatch(getSunsetTimeByLocation(coordinate));
-            } else {
-              dispatch(setDarkMode(MANUAL));
-            }
-          },
-          () => dispatch(setDarkMode(MANUAL))
-        );
-      }
-    } else if (darkMode === SYSTEM) {
-      dispatch(setIsDark(isBrowserDarkModeEnabled()));
-    }
-  }, [sunset, darkMode, dispatch]);
 
   return (
     <SettingsMenuComponent
