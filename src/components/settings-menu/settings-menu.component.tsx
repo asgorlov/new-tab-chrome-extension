@@ -6,6 +6,7 @@ import clsx from "clsx";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
+import ResetSettingComponent from "./settings/reset-setting.component";
 
 interface DarkModeComponentProps {
   isDark: boolean;
@@ -48,6 +49,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
         drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
         bodyStyle={{ padding: "0" }}
         title={t("settingsTitle")}
+        footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
         open={isOpen}
         closable={false}
