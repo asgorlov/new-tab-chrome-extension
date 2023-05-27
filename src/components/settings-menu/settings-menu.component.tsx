@@ -49,7 +49,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
         drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
         bodyStyle={{ padding: "0" }}
         title={t("settingsTitle")}
-        footer={<ResetSettingComponent />}
+        footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
         open={isOpen}
         closable={false}

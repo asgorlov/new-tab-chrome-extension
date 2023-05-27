@@ -16,7 +16,7 @@
   "resetSettings": {
     "byDefault": "Revert default settings",
     "title": "Are you sure?",
-    "message": "This action will return the default settings",
+    "message": "This action will reset your settings to default",
     "ok": "Yes",
     "cancel": "No"
   },
