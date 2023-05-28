@@ -3,6 +3,9 @@ import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
   getSunsetTimeByLocation,
+  selectDarkMode,
+  selectIsDark,
+  selectSearchEngine,
   selectSearchEngines,
   selectSunset,
   setDarkMode,
@@ -13,19 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
 
-interface DarkModeContainerProps {
-  isDark: boolean;
-  darkMode: string;
-  searchEngine: string;
-}
-
-const SettingsMenuContainer: FC<DarkModeContainerProps> = ({
-  isDark,
-  darkMode,
-  searchEngine
-}) => {
+const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const sunset = useSelector(selectSunset);
+  const isDark = useSelector(selectIsDark);
+  const darkMode = useSelector(selectDarkMode);
+  const searchEngine = useSelector(selectSearchEngine);
   const searchEngineNames = useSelector(selectSearchEngines);
 
   const toggleDarkHandler = useCallback(

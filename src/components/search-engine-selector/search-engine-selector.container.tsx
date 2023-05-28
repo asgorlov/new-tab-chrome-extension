@@ -1,7 +1,11 @@
 import React, { FC, MouseEvent, useCallback } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
-import { setSearchEngine } from "../../store/new-tab.slice";
-import { useDispatch } from "react-redux";
+import {
+  selectCurrentLanguage,
+  selectSearchEngine,
+  setSearchEngine
+} from "../../store/new-tab.slice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AOL,
   BING,
@@ -14,7 +18,6 @@ import {
   YANDEX,
   YOUCOM
 } from "../../constants/search-engine.constants";
-import i18n from "../../localizations/i18n";
 import { ReactComponent as AolIcon } from "../../static/svgs/aol/aol-icon.svg";
 import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
 import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
@@ -27,47 +30,46 @@ import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.
 import { ReactComponent as BraveIcon } from "../../static/svgs/brave/brave-icon.svg";
 import { ReactComponent as SwisscowsIcon } from "../../static/svgs/swisscows/swisscows-icon.svg";
 
-interface SearchSelectedContainerProps {
-  searchEngine: string;
-}
-
-const SearchEngineSelectorContainer: FC<SearchSelectedContainerProps> = ({
-  searchEngine
-}) => {
+const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
+  const searchEngine = useSelector(selectSearchEngine);
+  const currentLanguage = useSelector(selectCurrentLanguage);
 
-  const getIcon = useCallback((name: string) => {
-    const iconSize = 32;
+  const getIcon = useCallback(
+    (name: string) => {
+      const iconSize = 32;
 
-    switch (name) {
-      case YANDEX:
-        return i18n.language.includes("ru") ? (
-          <YaRuIcon height={iconSize} width={iconSize} />
-        ) : (
-          <YaEnIcon height={iconSize} width={iconSize} />
-        );
-      case GOOGLE:
-        return <GoogleIcon height={iconSize} width={iconSize} />;
-      case DUCK:
-        return <DuckIcon height={iconSize} width={iconSize} />;
-      case BING:
-        return <BingIcon height={iconSize} width={iconSize} />;
-      case YAHOO:
-        return <YahooIcon height={iconSize} width={iconSize} />;
-      case BRAVE:
-        return <BraveIcon height={iconSize} width={iconSize} />;
-      case SWISSCOWS:
-        return <SwisscowsIcon height={iconSize} width={iconSize} />;
-      case AOL:
-        return <AolIcon height={iconSize} width={iconSize} />;
-      case YOUCOM:
-        return <YouComIcon height={iconSize} width={iconSize} />;
-      case GIBIRU:
-        return <GibiruIcon height={iconSize} width={iconSize} />;
-      default:
-        return <></>;
-    }
-  }, []);
+      switch (name) {
+        case YANDEX:
+          return currentLanguage === "ru" ? (
+            <YaRuIcon height={iconSize} width={iconSize} />
+          ) : (
+            <YaEnIcon height={iconSize} width={iconSize} />
+          );
+        case GOOGLE:
+          return <GoogleIcon height={iconSize} width={iconSize} />;
+        case DUCK:
+          return <DuckIcon height={iconSize} width={iconSize} />;
+        case BING:
+          return <BingIcon height={iconSize} width={iconSize} />;
+        case YAHOO:
+          return <YahooIcon height={iconSize} width={iconSize} />;
+        case BRAVE:
+          return <BraveIcon height={iconSize} width={iconSize} />;
+        case SWISSCOWS:
+          return <SwisscowsIcon height={iconSize} width={iconSize} />;
+        case AOL:
+          return <AolIcon height={iconSize} width={iconSize} />;
+        case YOUCOM:
+          return <YouComIcon height={iconSize} width={iconSize} />;
+        case GIBIRU:
+          return <GibiruIcon height={iconSize} width={iconSize} />;
+        default:
+          return <></>;
+      }
+    },
+    [currentLanguage]
+  );
 
   const handleClick = useCallback(
     (e: MouseEvent) => {

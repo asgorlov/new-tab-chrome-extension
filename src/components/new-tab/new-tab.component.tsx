@@ -6,24 +6,14 @@ import SearchEngineContainer from "../search-engine/search-engine.container";
 
 interface NewTabComponentProps {
   isDark: boolean;
-  darkMode: string;
-  searchEngine: string;
 }
 
-const NewTabComponent: FC<NewTabComponentProps> = ({
-  isDark,
-  darkMode,
-  searchEngine
-}) => {
+const NewTabComponent: FC<NewTabComponentProps> = ({ isDark }) => {
   return (
     <div className={clsx("new-tab", { dark: isDark })}>
-      <SettingsMenuContainer
-        isDark={isDark}
-        darkMode={darkMode}
-        searchEngine={searchEngine}
-      />
-      <SearchEngineContainer isDark={isDark} searchEngine={searchEngine} />
-      <SearchEngineSelectorContainer searchEngine={searchEngine} />
+      <SettingsMenuContainer />
+      <SearchEngineContainer />
+      <SearchEngineSelectorContainer />
     </div>
   );
 };

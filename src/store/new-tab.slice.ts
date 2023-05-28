@@ -1,55 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import {
-  MANUAL,
-  SEARCH_ENGINE_NAMES,
-  YANDEX
-} from "../constants/search-engine.constants";
 import axios from "axios";
 import { Coordinate } from "../models/coordinate.model";
 import i18n from "../localizations/i18n";
+import {
+  defaultStorageParameters,
+  getInitStateFromChrome,
+  setDataToChrome
+} from "../utils/chrome-storage.utils";
+import { NewTabState } from "../models/new-tab-state.model";
 
-interface NewTabState {
-  sunset?: string | null;
-  isDark?: boolean;
-  darkMode?: string;
-  searchEngine?: string;
-  searchEngines: string[];
-  currentLanguage: string;
-}
-
-const defaultStorageParameters: NewTabState = {
-  sunset: null,
-  isDark: false,
-  darkMode: MANUAL,
-  searchEngine: YANDEX,
-  searchEngines: SEARCH_ENGINE_NAMES,
-  currentLanguage: i18n.language
-};
-
-const initialState: NewTabState = {
-  searchEngines: SEARCH_ENGINE_NAMES,
-  currentLanguage: i18n.language
-};
-
-export const loadDataFromStorage = createAsyncThunk(
-  "chrome/storage/get",
-  async () => {
-    const data = chrome?.storage
-      ? ((await chrome.storage.sync.get(
-          defaultStorageParameters
-        )) as NewTabState)
-      : defaultStorageParameters;
-
-    if (!data.currentLanguage) {
-      data.currentLanguage = i18n.language;
-    } else if (data.currentLanguage !== i18n.language) {
-      await i18n.changeLanguage(data.currentLanguage);
-    }
-
-    return data;
-  }
-);
+const initialState: NewTabState = await getInitStateFromChrome();
 
 export const getSunsetTimeByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
@@ -66,13 +27,26 @@ export const getSunsetTimeByLocation = createAsyncThunk(
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
   async (language: string) => {
-    if (chrome?.storage) {
-      await chrome.storage.sync.set({ currentLanguage: language });
-    }
-
+    setDataToChrome({ currentLanguage: language });
     await i18n.changeLanguage(language);
 
     return language;
+  }
+);
+
+export const resetSettings = createAsyncThunk(
+  "newTab/resetSettings",
+  async () => {
+    const data = defaultStorageParameters as NewTabState;
+
+    if (navigator.language) {
+      data.currentLanguage = navigator.language;
+    }
+
+    setDataToChrome(data);
+    await i18n.changeLanguage(data.currentLanguage);
+
+    return data;
   }
 );
 
@@ -81,31 +55,19 @@ export const newTabSlice = createSlice({
   initialState,
   reducers: {
     setIsDark(state, action) {
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ isDark: action.payload });
-      }
-
+      setDataToChrome({ isDark: action.payload });
       state.isDark = action.payload;
     },
     setDarkMode(state, action) {
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ darkMode: action.payload });
-      }
-
+      setDataToChrome({ darkMode: action.payload });
       state.darkMode = action.payload;
     },
     setSearchEngine(state, action) {
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ searchEngine: action.payload });
-      }
-
+      setDataToChrome({ searchEngines: action.payload });
       state.searchEngine = action.payload;
     },
     setSearchEngines(state, action) {
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ searchEngines: action.payload });
-      }
-
+      setDataToChrome({ searchEngines: action.payload });
       state.searchEngines = action.payload;
     }
   },
@@ -114,7 +76,7 @@ export const newTabSlice = createSlice({
       state.currentLanguage = action.payload;
     });
 
-    builder.addCase(loadDataFromStorage.fulfilled, (state, action) => {
+    builder.addCase(resetSettings.fulfilled, (state, action) => {
       const {
         sunset,
         isDark,
@@ -123,7 +85,6 @@ export const newTabSlice = createSlice({
         searchEngines,
         currentLanguage
       } = action.payload;
-
       state.sunset = sunset;
       state.isDark = isDark;
       state.darkMode = darkMode;
@@ -132,22 +93,9 @@ export const newTabSlice = createSlice({
       state.currentLanguage = currentLanguage;
     });
 
-    builder.addCase(loadDataFromStorage.rejected, state => {
-      state.sunset = defaultStorageParameters.sunset;
-      state.isDark = defaultStorageParameters.isDark;
-      state.darkMode = defaultStorageParameters.darkMode;
-      state.searchEngine = defaultStorageParameters.searchEngine;
-      state.searchEngines = defaultStorageParameters.searchEngines;
-      state.currentLanguage = defaultStorageParameters.currentLanguage;
-    });
-
     builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
-      const sunset = action.payload;
-      if (chrome?.storage) {
-        chrome.storage.sync.set({ sunset: sunset });
-      }
-
-      state.sunset = sunset;
+      setDataToChrome({ sunset: action.payload });
+      state.sunset = action.payload;
     });
   }
 });

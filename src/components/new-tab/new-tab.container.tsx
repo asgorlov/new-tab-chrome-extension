@@ -2,7 +2,6 @@ import React, { FC, useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSunsetTimeByLocation,
-  loadDataFromStorage,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
@@ -10,7 +9,6 @@ import {
   setDarkMode,
   setIsDark
 } from "../../store/new-tab.slice";
-import { useTranslation } from "react-i18next";
 import { AppDispatch } from "../../store/store";
 import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
@@ -21,6 +19,7 @@ import {
   SYSTEM
 } from "../../constants/search-engine.constants";
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
+import { useTranslation } from "react-i18next";
 
 const NewTabContainer: FC = () => {
   const { t } = useTranslation();
@@ -29,17 +28,10 @@ const NewTabContainer: FC = () => {
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const searchEngine = useSelector(selectSearchEngine);
-  const isDataLoaded =
-    isDark !== undefined &&
-    searchEngine !== undefined &&
-    darkMode !== undefined;
 
   useLayoutEffect(() => {
-    if (!isDataLoaded) {
-      document.title = t("tabTitle");
-      dispatch(loadDataFromStorage());
-    }
-  }, [isDataLoaded, dispatch, t]);
+    document.title = t("tabTitle");
+  }, [t]);
 
   useEffect(() => {
     switch (darkMode) {
@@ -78,7 +70,7 @@ const NewTabContainer: FC = () => {
     }
   }, [sunset, darkMode, dispatch]);
 
-  return isDataLoaded ? (
+  return (
     <ConfigProvider
       theme={{
         token: {
@@ -86,13 +78,9 @@ const NewTabContainer: FC = () => {
         }
       }}
     >
-      <NewTabComponent
-        isDark={isDark}
-        darkMode={darkMode}
-        searchEngine={searchEngine}
-      />
+      <NewTabComponent isDark={isDark} />
     </ConfigProvider>
-  ) : null;
+  );
 };
 
 export default NewTabContainer;
