@@ -63,7 +63,7 @@ export const newTabSlice = createSlice({
       state.darkMode = action.payload;
     },
     setSearchEngine(state, action) {
-      setDataToChrome({ searchEngines: action.payload });
+      setDataToChrome({ searchEngine: action.payload });
       state.searchEngine = action.payload;
     },
     setSearchEngines(state, action) {
