@@ -25,6 +25,13 @@
     "ru": "Russian",
     "en": "English"
   },
+  "update": {
+    "title": "Check for updates",
+    "off": "Off",
+    "onceDay": "Once a day",
+    "onceWeek": "Once a week",
+    "onceMonth": "Once a month"
+  },
   "searchEngine": {
     "title": "Search system",
     "swisscows": "Swisscows",

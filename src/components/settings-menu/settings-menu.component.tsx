@@ -7,6 +7,7 @@ import SearchEngineSettingComponent from "./settings/search-engine-setting.compo
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
 import ResetSettingComponent from "./settings/reset-setting.component";
+import UpdateSettingComponent from "./settings/update-setting.component";
 
 interface DarkModeComponentProps {
   isDark: boolean;
@@ -17,6 +18,7 @@ interface DarkModeComponentProps {
   onChangeDarkMode: (value: string) => void;
   onChangeLanguage: (value: string) => void;
   onChangeSearchEngines: (values: string[]) => void;
+  onChangeCheckForUpdates: (value: string) => void;
   onChangeDarkModeCollapse: (values: string | string[]) => void;
 }
 
@@ -29,6 +31,7 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   onChangeDarkMode,
   onChangeLanguage,
   onChangeSearchEngines,
+  onChangeCheckForUpdates,
   onChangeDarkModeCollapse
 }) => {
   const { t } = useTranslation();
@@ -70,6 +73,10 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
         <LanguageSettingComponent
           isDark={isDark}
           onChangeLanguage={onChangeLanguage}
+        />
+        <UpdateSettingComponent
+          isDark={isDark}
+          onChangeCheckMode={onChangeCheckForUpdates}
         />
       </Drawer>
     </div>

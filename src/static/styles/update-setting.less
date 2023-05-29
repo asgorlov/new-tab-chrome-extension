@@ -1,15 +1,16 @@
 @import "constants";
 @import "mixins";
 
-.new-tab__settings-menu_language {
+.new-tab__settings-menu_update {
   .setting-item-container();
+  border-top: none;
 
   &.dark {
     transition: border-color @slow-transition, color @fast-transition;
     border-color: @dark-border-color;
     color: @light-color;
 
-    &>.new-tab__settings-menu_language-selector {
+    &>.new-tab__settings-menu_update-selector {
       &>.ant-select-selector {
         &>.ant-select-selection-item {
           transition: @fast-transition;
@@ -20,16 +21,22 @@
 
     svg {
       transition: @fast-transition;
-      stroke: @light-color;
+      fill: @light-color;
     }
   }
 
   &-header {
     .settings-menu-header-item();
 
+    &-icon {
+      display: flex;
+      width: max-content;
+      height: max-content;
+    }
+
     svg {
       transition: @fast-transition;
-      margin: 0 6px 0 4px;
+      margin: 0 6px;
     }
   }
 
