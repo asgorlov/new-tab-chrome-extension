@@ -52,6 +52,9 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
         drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
         bodyStyle={{ padding: "0" }}
         title={t("settingsTitle")}
+        getContainer={() =>
+          document.querySelector(".new-tab__settings-menu") as Element
+        }
         footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
         open={isOpen}
