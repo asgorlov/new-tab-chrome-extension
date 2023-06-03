@@ -1,6 +1,7 @@
 export interface UpdateModel {
+  lastVersion: string;
   showMessage: boolean;
-  requestDate: number;
+  lastUpdateDate: number;
 }
 
 export interface UpdateResponseModel {

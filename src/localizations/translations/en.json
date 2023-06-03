@@ -26,6 +26,11 @@
     "en": "English"
   },
   "update": {
+    "info": {
+      "message": "Update available",
+      "description": "A new version {{lastVersion}} has been released",
+      "download": "Download"
+    },
     "title": "Check for updates",
     "off": "Off",
     "onceDay": "Once a day",
