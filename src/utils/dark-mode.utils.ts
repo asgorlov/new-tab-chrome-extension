@@ -10,10 +10,5 @@ export const isSunsetTimeCached = (
   const now = new Date();
   const sunsetDate = sunset ? new Date(sunset) : null;
 
-  return (
-    !!sunsetDate &&
-    sunsetDate.getFullYear() === now.getFullYear() &&
-    sunsetDate.getMonth() === now.getMonth() &&
-    sunsetDate.getDate() === now.getDate()
-  );
+  return !!sunsetDate && sunsetDate.toDateString() === now.toDateString();
 };

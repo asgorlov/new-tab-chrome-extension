@@ -5,14 +5,22 @@ import {
 } from "../constants/search-engine.constants";
 import i18n from "../localizations/i18n";
 import { NewTabState } from "../models/new-tab-state.model";
+import { checkForUpdates } from "../constants/check-for-updates.constants";
+import manifest from "../../public/manifest.json";
 
 export const defaultStorageParameters: Readonly<NewTabState> = {
   sunset: null,
   isDark: false,
+  update: {
+    lastVersion: manifest.version,
+    showMessage: false,
+    lastUpdateDate: Date.now()
+  },
   darkMode: MANUAL,
   searchEngine: YANDEX,
   searchEngines: SEARCH_ENGINE_NAMES,
-  currentLanguage: i18n.language
+  currentLanguage: i18n.language,
+  checkForUpdates: checkForUpdates.WEEK
 };
 
 export const getInitStateFromChrome = async (): Promise<NewTabState> => {

@@ -1,5 +1,5 @@
-@import "constants";
-@import "mixins";
+@import "../constants";
+@import "../mixins";
 
 .new-tab__settings-menu {
     position: absolute;
@@ -84,9 +84,8 @@
                 &>.ant-collapse {
                     transition: @slow-transition;
                     background-color: transparent;
-                    border: 1px solid @light-border-color;
+                    border-top: 1px solid @light-border-color;
                     border-radius: 0;
-                    border-bottom: none;
 
                     &>.ant-collapse-item {
                         &>.ant-collapse-header {

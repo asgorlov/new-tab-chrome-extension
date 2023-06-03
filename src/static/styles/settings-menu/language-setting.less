@@ -1,13 +1,8 @@
-@import "constants";
-@import "mixins";
+@import "../constants";
+@import "../mixins";
 
 .new-tab__settings-menu_language {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border: 1px solid @light-border-color;
-  transition: border-color @slow-transition, color @fast-transition;
+  .setting-item-container();
 
   &.dark {
     transition: border-color @slow-transition, color @fast-transition;
@@ -34,7 +29,7 @@
 
     svg {
       transition: @fast-transition;
-      margin: 0 6px 0 4px;
+      margin: 0 4px;
     }
   }
 
