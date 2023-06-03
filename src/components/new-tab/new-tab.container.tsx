@@ -39,10 +39,7 @@ const NewTabContainer: FC = () => {
         const now = new Date();
         const sunsetDate = sunset ? new Date(sunset) : null;
         const sunsetDateCached =
-          sunsetDate &&
-          sunsetDate.getFullYear() === now.getFullYear() &&
-          sunsetDate.getMonth() === now.getMonth() &&
-          sunsetDate.getDate() === now.getDate();
+          sunsetDate && sunsetDate.toDateString() === now.toDateString();
 
         if (sunsetDateCached) {
           dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));

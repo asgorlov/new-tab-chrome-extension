@@ -25,6 +25,18 @@
     "ru": "Русский",
     "en": "Английский"
   },
+  "update": {
+    "info": {
+      "message": "Доступно обновление",
+      "description": "Появилась новая версия {{lastVersion}}",
+      "download": "Скачать"
+    },
+    "title": "Проверка обновлений",
+    "off": "Отключена",
+    "onceDay": "Раз в день",
+    "onceWeek": "Раз в неделю",
+    "onceMonth": "Раз в месяц"
+  },
   "searchEngine": {
     "title": "Поисковая система",
     "swisscows": "Swisscows",

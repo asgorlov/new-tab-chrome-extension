@@ -8,6 +8,7 @@ import {
   selectSearchEngine,
   selectSearchEngines,
   selectSunset,
+  setCheckForUpdates,
   setDarkMode,
   setIsDark,
   setSearchEngines
@@ -44,6 +45,11 @@ const SettingsMenuContainer: FC = () => {
     [dispatch]
   );
 
+  const changeCheckForUpdatesHandler = useCallback(
+    (v: string) => dispatch(setCheckForUpdates(v)),
+    [dispatch]
+  );
+
   const changeDarkModeCollapseHandler = useCallback(
     (key: string | string[]) => {
       if (key.length && !isSunsetTimeCached(sunset)) {
@@ -72,6 +78,7 @@ const SettingsMenuContainer: FC = () => {
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
       onChangeSearchEngines={changeSearchEnginesHandler}
+      onChangeCheckForUpdates={changeCheckForUpdatesHandler}
       onChangeDarkModeCollapse={changeDarkModeCollapseHandler}
     />
   );
