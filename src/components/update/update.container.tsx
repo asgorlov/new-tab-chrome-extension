@@ -22,7 +22,7 @@ const UpdateContainer: FC = () => {
   }, [dispatch]);
 
   const clickDownloadHandle = useCallback(
-    (e: MouseEvent<HTMLLinkElement>) => {
+    (e: MouseEvent) => {
       if (e.button === 0 || e.button === 1) {
         const link = e.target as HTMLLinkElement;
         window.open(link.href);
