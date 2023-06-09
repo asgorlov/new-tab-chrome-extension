@@ -7,7 +7,7 @@ import {
   defaultStorageParameters,
   getInitStateFromChrome,
   setDataToChrome
-} from "../utils/chrome-storage.utils";
+} from "../utils/chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { UpdateModel, UpdateResponseModel } from "../models/update.model";
 
