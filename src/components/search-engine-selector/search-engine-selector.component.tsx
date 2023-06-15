@@ -34,6 +34,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
     <div className="new-tab__search-engine-selector">
       {searchEngineNames.map((name: string, index: number) => (
         <div
+          data-name={name}
           data-position={index}
           draggable={true}
           onDrop={onDrop}

@@ -23,7 +23,7 @@ const SearchEngineSelectorContainer: FC = () => {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       const element = e.currentTarget as HTMLDivElement;
-      dispatch(setSearchEngine(element.title));
+      dispatch(setSearchEngine(element.dataset.name));
     },
     [dispatch]
   );
