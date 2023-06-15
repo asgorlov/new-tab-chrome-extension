@@ -42,7 +42,13 @@
         }
 
         &.gibiru {
-            background-image: url("../svgs/gibiru/gibiru-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/gibiru/gibiru-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/gibiru/gibiru-icon.svg");
+            }
         }
 
         &.swisscows {
