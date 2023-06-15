@@ -1,33 +1,75 @@
 @import "constants";
 
 .new-tab__search-engine-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     position: inherit;
     bottom: 10px;
-    z-index: 1;
+    height: max-content;
 
-    &_yandex,
-    &_google,
-    &_duckduckgo,
-    &_bing,
-    &_aol,
-    &_brave,
-    &_youcom,
-    &_gibiru,
-    &_swisscows,
-    &_yahoo {
-        transition: @slow-transition;
-        background-color: inherit;
-        width: 100%;
-        margin-right: 6px;
-        border: none;
-        padding: 0;
+    &-item {
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        margin: 2px;
+        border-radius: 4px;
+        transition: filter @slow-transition;
+        filter: grayscale(100%);
 
-        &.grey {
-            filter: grayscale(100%);
+        &.yandex {
+            background-image: url("../svgs/yandex/ya-icon.svg");
         }
 
-        &.ant-btn-default {
-            box-shadow: none;
+        &.yandex-en {
+            background-image: url("../svgs/yandex/ya-icon-en.svg");
+        }
+
+        &.bing {
+            background-image: url("../svgs/bing/bing-icon.svg");
+        }
+
+        &.aol {
+            background-image: url("../svgs/aol/aol-icon.svg");
+        }
+
+        &.brave {
+            background-image: url("../svgs/brave/brave-icon.svg");
+        }
+
+        &.youcom {
+            background-image: url("../svgs/youcom/you-com-icon.svg");
+        }
+
+        &.gibiru {
+            background-image: url("../svgs/gibiru/gibiru-icon.svg");
+        }
+
+        &.swisscows {
+            background-image: url("../svgs/swisscows/swisscows-icon.svg");
+        }
+
+        &.yahoo {
+            background-image: url("../svgs/yahoo/yahoo-icon.svg");
+        }
+
+        &.google {
+            background-image: url("../svgs/google/google-icon.svg");
+        }
+
+        &.duckduckgo {
+            background-image: url("../svgs/duck/duck-icon.svg");
+        }
+
+        &.selected {
+            filter: grayscale(0);
+        }
+
+        &.dragged {
+            transition: filter @slow-transition;
+            filter: grayscale(0);
+            background-image: none;
+            outline: 2px dashed #9aa0a6;
         }
     }
 }

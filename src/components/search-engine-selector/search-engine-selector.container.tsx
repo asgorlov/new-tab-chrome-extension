@@ -1,89 +1,101 @@
-import React, { FC, MouseEvent, useCallback } from "react";
+import React, { FC, MouseEvent, useCallback, useState } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import {
-  selectCurrentLanguage,
   selectSearchEngine,
-  setSearchEngine
+  selectSearchEngines,
+  setSearchEngine,
+  setSearchEngines
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AOL,
-  BING,
-  BRAVE,
-  DUCK,
-  GIBIRU,
-  GOOGLE,
-  SWISSCOWS,
-  YAHOO,
-  YANDEX,
-  YOUCOM
-} from "../../constants/search-engine.constants";
-import { ReactComponent as AolIcon } from "../../static/svgs/aol/aol-icon.svg";
-import { ReactComponent as BingIcon } from "../../static/svgs/bing/bing-icon.svg";
-import { ReactComponent as DuckIcon } from "../../static/svgs/duck/duck-icon.svg";
-import { ReactComponent as GoogleIcon } from "../../static/svgs/google/google-icon.svg";
-import { ReactComponent as YouComIcon } from "../../static/svgs/youcom/you-com-icon.svg";
-import { ReactComponent as GibiruIcon } from "../../static/svgs/gibiru/gibiru-icon.svg";
-import { ReactComponent as YaRuIcon } from "../../static/svgs/yandex/ya-icon.svg";
-import { ReactComponent as YaEnIcon } from "../../static/svgs/yandex/ya-icon-en.svg";
-import { ReactComponent as YahooIcon } from "../../static/svgs/yahoo/yahoo-icon.svg";
-import { ReactComponent as BraveIcon } from "../../static/svgs/brave/brave-icon.svg";
-import { ReactComponent as SwisscowsIcon } from "../../static/svgs/swisscows/swisscows-icon.svg";
+import { DragAndDropModel } from "../../models/drag-and-drop.model";
 
 const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
   const searchEngine = useSelector(selectSearchEngine);
-  const currentLanguage = useSelector(selectCurrentLanguage);
+  const searchEngineNames = useSelector(selectSearchEngines);
 
-  const getIcon = useCallback(
-    (name: string) => {
-      const iconSize = 32;
-
-      switch (name) {
-        case YANDEX:
-          return currentLanguage === "ru" ? (
-            <YaRuIcon height={iconSize} width={iconSize} />
-          ) : (
-            <YaEnIcon height={iconSize} width={iconSize} />
-          );
-        case GOOGLE:
-          return <GoogleIcon height={iconSize} width={iconSize} />;
-        case DUCK:
-          return <DuckIcon height={iconSize} width={iconSize} />;
-        case BING:
-          return <BingIcon height={iconSize} width={iconSize} />;
-        case YAHOO:
-          return <YahooIcon height={iconSize} width={iconSize} />;
-        case BRAVE:
-          return <BraveIcon height={iconSize} width={iconSize} />;
-        case SWISSCOWS:
-          return <SwisscowsIcon height={iconSize} width={iconSize} />;
-        case AOL:
-          return <AolIcon height={iconSize} width={iconSize} />;
-        case YOUCOM:
-          return <YouComIcon height={iconSize} width={iconSize} />;
-        case GIBIRU:
-          return <GibiruIcon height={iconSize} width={iconSize} />;
-        default:
-          return <></>;
-      }
-    },
-    [currentLanguage]
-  );
+  const [draggedItem, setDraggedItem] = useState<DragAndDropModel>({
+    draggedFrom: null,
+    draggedTo: null,
+    updatedOrder: []
+  });
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
-      const element = e.currentTarget as HTMLButtonElement;
-      dispatch(setSearchEngine(element.value));
+      const element = e.currentTarget as HTMLDivElement;
+      dispatch(setSearchEngine(element.dataset.name));
     },
     [dispatch]
   );
 
+  const handleDragLeave = useCallback(() => {
+    setDraggedItem({
+      ...draggedItem,
+      draggedTo: null
+    });
+  }, [draggedItem]);
+
+  const handleDragStart = useCallback(
+    (e: MouseEvent) => {
+      const element = e.currentTarget as HTMLDivElement;
+      setDraggedItem({
+        ...draggedItem,
+        draggedFrom: Number(element.dataset.position)
+      });
+    },
+    [draggedItem]
+  );
+
+  const handleDragOver = useCallback(
+    (e: MouseEvent) => {
+      e.preventDefault();
+
+      const draggedFrom = draggedItem.draggedFrom;
+      if (draggedFrom != null) {
+        const element = e.currentTarget as HTMLDivElement;
+        const draggedTo = Number(element.dataset.position);
+        if (draggedTo !== draggedItem.draggedTo) {
+          const draggedSearchEngine = searchEngineNames[draggedFrom];
+          const filteredSearchEngines = searchEngineNames.filter(
+            (_: string, index: number) => index !== draggedFrom
+          );
+          const newList = [
+            ...filteredSearchEngines.slice(0, draggedTo),
+            draggedSearchEngine,
+            ...filteredSearchEngines.slice(draggedTo)
+          ];
+
+          setDraggedItem({
+            ...draggedItem,
+            updatedOrder: newList,
+            draggedTo: draggedTo
+          });
+        }
+      }
+    },
+    [draggedItem, searchEngineNames]
+  );
+
+  const handleDrop = useCallback(() => {
+    dispatch(setSearchEngines(draggedItem.updatedOrder));
+
+    setDraggedItem({
+      ...draggedItem,
+      draggedFrom: null,
+      draggedTo: null
+    });
+  }, [draggedItem, dispatch]);
+
   return (
     <SearchEngineSelectorComponent
+      searchEngineNames={searchEngineNames}
       searchEngine={searchEngine}
+      draggedItem={draggedItem}
+      onDragLeave={handleDragLeave}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
       onClick={handleClick}
-      getIcon={getIcon}
+      onDrop={handleDrop}
     />
   );
 };
