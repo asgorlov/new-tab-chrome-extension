@@ -19,10 +19,10 @@
 
         &.yandex {
             background-image: url("../svgs/yandex/ya-icon.svg");
-        }
 
-        &.yandex-en {
-            background-image: url("../svgs/yandex/ya-icon-en.svg");
+            &-en {
+                background-image: url("../svgs/yandex/ya-icon-en.svg");
+            }
         }
 
         &.bing {
@@ -50,7 +50,13 @@
         }
 
         &.yahoo {
-            background-image: url("../svgs/yahoo/yahoo-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/yahoo/yahoo-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/yahoo/yahoo-icon.svg");
+            }
         }
 
         &.google {
