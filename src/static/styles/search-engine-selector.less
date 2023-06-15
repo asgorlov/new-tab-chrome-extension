@@ -46,7 +46,13 @@
         }
 
         &.swisscows {
-            background-image: url("../svgs/swisscows/swisscows-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/swisscows/swisscows-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/swisscows/swisscows-icon.svg");
+            }
         }
 
         &.yahoo {
