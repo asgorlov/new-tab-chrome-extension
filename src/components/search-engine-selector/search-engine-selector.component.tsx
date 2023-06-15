@@ -4,6 +4,7 @@ import { DragAndDropModel } from "../../models/drag-and-drop.model";
 import { useSelector } from "react-redux";
 import { selectCurrentLanguage } from "../../store/new-tab.slice";
 import { YANDEX } from "../../constants/search-engine.constants";
+import { useTranslation } from "react-i18next";
 
 interface SearchSelectedComponentProps {
   searchEngineNames: string[];
@@ -26,6 +27,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   onClick,
   onDrop
 }) => {
+  const { t } = useTranslation();
   const currentLanguage = useSelector(selectCurrentLanguage);
 
   return (
@@ -50,7 +52,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
             }
           )}
           onClick={onClick}
-          data-name={name}
+          title={t(`searchEngine.${name}`)}
           key={name}
         />
       ))}
