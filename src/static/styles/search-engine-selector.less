@@ -19,10 +19,10 @@
 
         &.yandex {
             background-image: url("../svgs/yandex/ya-icon.svg");
-        }
 
-        &.yandex-en {
-            background-image: url("../svgs/yandex/ya-icon-en.svg");
+            &-en {
+                background-image: url("../svgs/yandex/ya-icon-en.svg");
+            }
         }
 
         &.bing {
@@ -42,15 +42,43 @@
         }
 
         &.gibiru {
-            background-image: url("../svgs/gibiru/gibiru-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/gibiru/gibiru-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/gibiru/gibiru-icon.svg");
+            }
         }
 
         &.swisscows {
-            background-image: url("../svgs/swisscows/swisscows-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/swisscows/swisscows-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/swisscows/swisscows-icon.svg");
+            }
+        }
+
+        &.lycos {
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/lycos/lycos-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/lycos/lycos-icon.svg");
+            }
         }
 
         &.yahoo {
-            background-image: url("../svgs/yahoo/yahoo-icon.svg");
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/yahoo/yahoo-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/yahoo/yahoo-icon.svg");
+            }
         }
 
         &.google {
