@@ -42,7 +42,11 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
       <div
         className={clsx("new-tab__search-engine_form-background", searchEngine)}
       >
-        <div className="new-tab__search-engine_form-background-text-group">
+        <div
+          className={clsx("new-tab__search-engine_form-background-text-group", {
+            dark: isDark
+          })}
+        >
           <div className="new-tab__search-engine_form-background-text-item">
             <NoTrackingIcon />
             {t("noTracking")}

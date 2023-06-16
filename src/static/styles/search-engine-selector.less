@@ -61,6 +61,16 @@
             }
         }
 
+        &.lycos {
+            transition: @slow-transition;
+            filter: grayscale(0);
+            background-image: url("../svgs/lycos/lycos-icon-grey.svg");
+
+            &.selected {
+                background-image: url("../svgs/lycos/lycos-icon.svg");
+            }
+        }
+
         &.yahoo {
             transition: @slow-transition;
             filter: grayscale(0);
