@@ -1,4 +1,5 @@
 @import "constants";
+@import "mixins";
 
 .new-tab__search-engine {
     @search-engine-width: 40vw;
@@ -156,6 +157,19 @@
                 background-image: url("../svgs/lycos/lycos-logo-dark.svg");
             }
         }
+
+        &.nigma {
+            transition: @fast-transition;
+            height: 55px;
+            width: 205px;
+            margin-bottom: 32px;
+            background-image: url("../svgs/nigma/nigma-logo.svg");
+
+            &.dark {
+                transition: @fast-transition;
+                background-image: url("../svgs/nigma/nigma-logo-dark.svg");
+            }
+        }
     }
 
     &_form-background {
@@ -219,6 +233,24 @@
             }
         }
 
+        &.nigma {
+            transition: all @fast-transition, border-color @slow-transition;
+            background: #79ba2a url("../svgs/form-background.svg");
+            top: calc(50% - 62px);
+            padding: 0 20px;
+            border-radius: 20px;
+            min-height: 100px;
+            max-height: 100px;
+            opacity: 1;
+            border: solid 4px @light-color;
+            outline: solid 2px #dadada;
+
+            &.dark {
+                border: solid 4px @dark-color;
+            }
+        }
+
+        &.nigma,
         &.yandex,
         &.google,
         &.duckduckgo,
@@ -353,6 +385,14 @@
             &:focus-within {
                 outline: 2px solid #101010;
             }
+        }
+
+        &.nigma {
+            height: 32px;
+            background-color: #79ba2a;
+            transition: @fast-transition;
+            border: none;
+            border-radius: 0 3px 3px 0;
         }
     }
 
@@ -513,6 +553,17 @@
             &.ant-input:focus,
             &.ant-input:hover {
                 border-color: transparent;
+                box-shadow: none;
+            }
+        }
+
+        &.nigma {
+            border: 1px solid #707070;
+            border-radius: 0;
+
+            &.ant-input:focus,
+            &.ant-input:hover {
+                border: 1px solid #707070;
                 box-shadow: none;
             }
         }
@@ -765,6 +816,23 @@
             &:active,
             &:hover {
                 background: none;
+            }
+        }
+
+        &.nigma {
+            transition: @fast-transition;
+            border: 1px solid #808080;
+            border-radius: 3px;
+            width: 70px;
+            margin-left: 10px;
+            background: #DFFFBD;
+            font-size: 16px;
+
+            &:active,
+            &:hover {
+                background: #74B61D;
+                border-color: @light-color;
+                color: @light-color;
             }
         }
     }

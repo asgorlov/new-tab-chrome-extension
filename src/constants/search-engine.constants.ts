@@ -13,9 +13,11 @@ export const SEARCH_ENGINE_NAMES = [
   "aol",
   "youcom",
   "gibiru",
-  "lycos"
+  "lycos",
+  "nigma"
 ];
 
+export const NIGMA = SEARCH_ENGINE_NAMES[11];
 export const LYCOS = SEARCH_ENGINE_NAMES[10];
 export const GIBIRU = SEARCH_ENGINE_NAMES[9];
 export const YOUCOM = SEARCH_ENGINE_NAMES[8];
@@ -32,6 +34,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   aol: "https://search.aol.co.uk/aol/webhome/",
   bing: "https://bing.com/",
   brave: "https://search.brave.com/",
+  nigma: "https://nigma.net.ru/",
   lycos: "https://lycos.com/",
   yahoo: "https://yahoo.com/",
   yandex: "https://ya.ru/",
@@ -46,6 +49,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   aol: "https://search.aol.co.uk/aol/search",
   bing: "https://bing.com/search",
   brave: "https://search.brave.com/search",
+  nigma: "https://nigma.net.ru/index.php",
   lycos: "https://search.lycos.com/web",
   yahoo: "https://search.yahoo.com/search",
   yandex: "https://yandex.ru/search",
@@ -60,6 +64,7 @@ export const SEARCH_THEMES: Record<string, string> = {
   aol: "#2f9aff",
   bing: "#007DAA",
   brave: "#ff2000",
+  nigma: "#74B61D",
   lycos: "#2e5d9a",
   yahoo: "#6001d2",
   yandex: "#fc0",

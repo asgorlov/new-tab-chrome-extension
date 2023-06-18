@@ -8,6 +8,7 @@ import {
   GIBIRU,
   GOOGLE,
   LYCOS,
+  NIGMA,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -64,6 +65,8 @@ const SearchEngineContainer: FC = () => {
         return <GibiruSearchIcon />;
       case LYCOS:
         return <LycosSearchIcon />;
+      case NIGMA:
+        return <span>{t("searchButton") + "!"}</span>;
       default:
         return <></>;
     }
