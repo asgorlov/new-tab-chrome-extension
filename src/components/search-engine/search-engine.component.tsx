@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  NIGMA,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
   YAHOO,
@@ -8,33 +9,44 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
-import i18n from "../../localizations/i18n";
 import { Button, Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
-import { getInputName } from "../../utils/search-engine.utils";
+import {
+  getInputName,
+  getSearchEngineClass
+} from "../../utils/search-engine.utils";
+import { useSelector } from "react-redux";
+import { selectCurrentLanguage } from "../../store/new-tab.slice";
 
 interface SearchEngineProps {
+  onMouseOverOrOut: () => void;
+  nigmaLogoVariant: number;
   searchEngine: string;
   buttonLabel: ReactNode;
   isDark: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
+  onMouseOverOrOut,
+  nigmaLogoVariant,
   searchEngine,
   buttonLabel,
   isDark
 }) => {
   const { t } = useTranslation();
+  const currentLanguage = useSelector(selectCurrentLanguage);
 
   return (
     <div className="new-tab__search-engine">
       <Link
+        onMouseOver={onMouseOverOrOut}
+        onMouseOut={onMouseOverOrOut}
         className={clsx(
           "new-tab__search-engine_logo",
-          searchEngine,
-          { en: searchEngine === YANDEX && !i18n.language.includes("ru") },
+          getSearchEngineClass(searchEngine, nigmaLogoVariant),
+          { en: searchEngine === YANDEX && currentLanguage !== "ru" },
           { dark: isDark }
         )}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
@@ -69,7 +81,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
       >
         <Input
           className={clsx("new-tab__search-engine_input", searchEngine, {
-            dark: isDark && searchEngine === YAHOO
+            dark: isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
           })}
           placeholder={t("searchQuery")}
           tabIndex={1}

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
@@ -8,6 +8,7 @@ import {
   GIBIRU,
   GOOGLE,
   LYCOS,
+  NIGMA,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -15,6 +16,7 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as NigmaSearchIcon } from "../../static/svgs/nigma/nigma-search-icon.svg";
 import { ReactComponent as LycosSearchIcon } from "../../static/svgs/lycos/lycos-search-icon.svg";
 import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
 import { ReactComponent as YuoComSearchIcon } from "../../static/svgs/youcom/you-com-search-icon.svg";
@@ -30,6 +32,7 @@ const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
   const isDark = useSelector(selectIsDark);
   const searchEngine = useSelector(selectSearchEngine);
+  const [nigmaLogoVariant, setNigmaLogoVariant] = useState(1);
 
   const buttonLabel = useMemo(() => {
     switch (searchEngine) {
@@ -64,13 +67,23 @@ const SearchEngineContainer: FC = () => {
         return <GibiruSearchIcon />;
       case LYCOS:
         return <LycosSearchIcon />;
+      case NIGMA:
+        return <NigmaSearchIcon />;
       default:
         return <></>;
     }
   }, [searchEngine, isDark, t]);
 
+  const handleMouseOverOrOut = useCallback(() => {
+    if (searchEngine === NIGMA) {
+      setNigmaLogoVariant(nigmaLogoVariant === 4 ? 1 : nigmaLogoVariant + 1);
+    }
+  }, [searchEngine, nigmaLogoVariant]);
+
   return (
     <SearchEngineComponent
+      onMouseOverOrOut={handleMouseOverOrOut}
+      nigmaLogoVariant={nigmaLogoVariant}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
       isDark={isDark}
