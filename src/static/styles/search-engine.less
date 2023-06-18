@@ -162,13 +162,12 @@
             transition: @fast-transition;
             height: 55px;
             width: 205px;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             background-image: url("../svgs/nigma/nigma-logo.svg");
 
             &.dark {
-                // toDo: адаптировать логотип под темную тему
-                //transition: @fast-transition;
-                //background-image: url("../svgs/nigma/nigma-logo-dark.svg");
+                transition: @fast-transition;
+                background-image: url("../svgs/nigma/nigma-logo-dark.svg");
             }
         }
     }
@@ -235,6 +234,7 @@
         }
 
         &.nigma {
+            transition: all @fast-transition, border-color @slow-transition;
             background: #79ba2a url("../svgs/form-background.svg");
             top: calc(50% - 62px);
             padding: 0 20px;
@@ -388,6 +388,7 @@
         }
 
         &.nigma {
+            height: 32px;
             background-color: #79ba2a;
             transition: @fast-transition;
             border: none;
