@@ -11,14 +11,3 @@ export const getInputName = (searchEngine: string): string => {
       return "q";
   }
 };
-
-export const getSearchEngineClass = (
-  searchEngine: string,
-  logoVariant: number
-): string => {
-  if (searchEngine === NIGMA) {
-    return `${searchEngine}-${logoVariant}`;
-  }
-
-  return searchEngine;
-};

@@ -13,24 +13,17 @@ import { Button, Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
-import {
-  getInputName,
-  getSearchEngineClass
-} from "../../utils/search-engine.utils";
+import { getInputName } from "../../utils/search-engine.utils";
 import { useSelector } from "react-redux";
 import { selectCurrentLanguage } from "../../store/new-tab.slice";
 
 interface SearchEngineProps {
-  onMouseOverOrOut: () => void;
-  nigmaLogoVariant: number;
   searchEngine: string;
   buttonLabel: ReactNode;
   isDark: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
-  onMouseOverOrOut,
-  nigmaLogoVariant,
   searchEngine,
   buttonLabel,
   isDark
@@ -41,18 +34,20 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
   return (
     <div className="new-tab__search-engine">
       <Link
-        onMouseOver={onMouseOverOrOut}
-        onMouseOut={onMouseOverOrOut}
         className={clsx(
           "new-tab__search-engine_logo",
-          getSearchEngineClass(searchEngine, nigmaLogoVariant),
+          searchEngine,
           { en: searchEngine === YANDEX && currentLanguage !== "ru" },
           { dark: isDark }
         )}
         href={SEARCH_ENGINE_LINKS[searchEngine]}
       />
       <div
-        className={clsx("new-tab__search-engine_form-background", searchEngine)}
+        className={clsx(
+          "new-tab__search-engine_form-background",
+          searchEngine,
+          { dark: isDark }
+        )}
       >
         <div
           className={clsx("new-tab__search-engine_form-background-text-group", {
