@@ -16,7 +16,7 @@ import { ReactComponent as CloseIcon } from "../../static/svgs/close-icon.svg";
 interface UpdateComponentProps {
   open: boolean;
   onClose: () => void;
-  onMouseDown: (e: MouseEvent<HTMLLinkElement>) => void;
+  onMouseDown: (e: MouseEvent) => void;
 }
 
 const UpdateComponent: FC<UpdateComponentProps> = ({

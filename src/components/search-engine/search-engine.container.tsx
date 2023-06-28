@@ -7,6 +7,8 @@ import {
   DUCK,
   GIBIRU,
   GOOGLE,
+  LYCOS,
+  NIGMA,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -14,6 +16,7 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as LycosSearchIcon } from "../../static/svgs/lycos/lycos-search-icon.svg";
 import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
 import { ReactComponent as YuoComSearchIcon } from "../../static/svgs/youcom/you-com-search-icon.svg";
 import { ReactComponent as GibiruSearchIcon } from "../../static/svgs/gibiru/gibiru-search-icon.svg";
@@ -60,6 +63,10 @@ const SearchEngineContainer: FC = () => {
         return <YuoComSearchIcon />;
       case GIBIRU:
         return <GibiruSearchIcon />;
+      case LYCOS:
+        return <LycosSearchIcon />;
+      case NIGMA:
+        return <span>{t("searchButton") + "!"}</span>;
       default:
         return <></>;
     }

@@ -7,6 +7,7 @@ import i18n from "../localizations/i18n";
 import { NewTabState } from "../models/new-tab-state.model";
 import { checkForUpdates } from "../constants/check-for-updates.constants";
 import manifest from "../../public/manifest.json";
+import { updateStateWithFeatures } from "./update.utils";
 
 export const defaultStorageParameters: Readonly<NewTabState> = {
   sunset: null,
@@ -33,6 +34,8 @@ export const getInitStateFromChrome = async (): Promise<NewTabState> => {
   } else if (data.currentLanguage !== i18n.language) {
     await i18n.changeLanguage(data.currentLanguage);
   }
+
+  updateStateWithFeatures(data);
 
   return data;
 };
