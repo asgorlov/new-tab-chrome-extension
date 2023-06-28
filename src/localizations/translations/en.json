@@ -29,7 +29,8 @@
     "info": {
       "message": "Update available",
       "description": "A new version {{lastVersion}} has been released",
-      "download": "Download"
+      "downloadZip": "Download .zip",
+      "downloadCrx": "Download .crx"
     },
     "title": "Check for updates",
     "off": "Off",

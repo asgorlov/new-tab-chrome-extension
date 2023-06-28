@@ -29,7 +29,8 @@
     "info": {
       "message": "Доступно обновление",
       "description": "Появилась новая версия {{lastVersion}}",
-      "download": "Скачать"
+      "downloadZip": "Скачать .zip",
+      "downloadCrx": "Скачать .crx"
     },
     "title": "Проверка обновлений",
     "off": "Отключена",
