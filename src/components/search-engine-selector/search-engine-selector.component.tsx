@@ -43,9 +43,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
           onDragLeave={onDragLeave}
           className={clsx(
             "new-tab__search-engine-selector-item",
-            searchEngine === YANDEX && currentLanguage !== "ru"
-              ? name + "-en"
-              : name,
+            name === YANDEX && currentLanguage !== "ru" ? name + "-en" : name,
             { selected: searchEngine === name },
             {
               dragged:
