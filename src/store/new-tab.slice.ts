@@ -30,6 +30,7 @@ export const checkUpdates = createAsyncThunk(
   async (lastUpdateDate: number, thunkAPI): Promise<UpdateModel> => {
     const state = thunkAPI.getState() as RootState;
     const lastVersion = state.newTab.update.lastVersion;
+    const previousVersion = state.newTab.update.previousVersion;
 
     const { data } = await axios.get<UpdateResponseModel>(
       "https://raw.githubusercontent.com/asgorlov/new-tab-chrome-extension/main/public/manifest.json"
@@ -38,7 +39,8 @@ export const checkUpdates = createAsyncThunk(
     return {
       lastVersion: data.version,
       showMessage: data.version > lastVersion,
-      lastUpdateDate: lastUpdateDate
+      lastUpdateDate: lastUpdateDate,
+      previousVersion: previousVersion
     };
   }
 );
@@ -57,6 +59,8 @@ export const resetSettings = createAsyncThunk(
   "newTab/resetSettings",
   async () => {
     const data = defaultStorageParameters as NewTabState;
+
+    data.update.previousVersion = data.update.lastVersion;
 
     if (navigator.language) {
       data.currentLanguage = navigator.language;
@@ -100,11 +104,13 @@ export const newTabSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
-      const { lastUpdateDate, showMessage, lastVersion } = action.payload;
+      const { lastUpdateDate, showMessage, lastVersion, previousVersion } =
+        action.payload;
 
       state.update.showMessage = showMessage;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
+      state.update.previousVersion = previousVersion;
       setDataToChrome({ update: state.update });
     });
 
@@ -116,18 +122,22 @@ export const newTabSlice = createSlice({
       const {
         sunset,
         isDark,
+        update,
         darkMode,
         searchEngine,
         searchEngines,
-        currentLanguage
+        currentLanguage,
+        checkForUpdates
       } = action.payload;
 
       state.sunset = sunset;
       state.isDark = isDark;
+      state.update = update;
       state.darkMode = darkMode;
       state.searchEngine = searchEngine;
       state.searchEngines = searchEngines;
       state.currentLanguage = currentLanguage;
+      state.checkForUpdates = checkForUpdates;
     });
 
     builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
