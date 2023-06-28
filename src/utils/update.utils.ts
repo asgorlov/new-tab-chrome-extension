@@ -29,10 +29,10 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   }
 };
 
-export const getDownloadLink = (version: string, isZip: boolean) => {
+export const getDownloadLink = (version: string) => {
   return (
     "https://github.com/asgorlov/new-tab-chrome-extension/releases/download" +
-    `/v${version}/build-v${version}${isZip ? ".zip" : ".crx"}`
+    `/v${version}/build-v${version}.zip`
   );
 };
 

@@ -40,22 +40,13 @@ const UpdateComponent: FC<UpdateComponentProps> = ({
       <div className="new-tab__update-header">{t("update.info.message")}</div>
       <div className="new-tab__update-content">
         <span>{t("update.info.description", { lastVersion })}</span>
-        <div>
-          <Link
-            target="_blank"
-            href={getDownloadLink(lastVersion, true)}
-            onMouseDown={onMouseDown}
-          >
-            {t("update.info.downloadZip")}
-          </Link>
-          <Link
-            target="_blank"
-            href={getDownloadLink(lastVersion, false)}
-            onMouseDown={onMouseDown}
-          >
-            {t("update.info.downloadCrx")}
-          </Link>
-        </div>
+        <Link
+          target="_blank"
+          href={getDownloadLink(lastVersion)}
+          onMouseDown={onMouseDown}
+        >
+          {t("update.info.download")}
+        </Link>
       </div>
       <Button
         className="new-tab__update-close-btn"
