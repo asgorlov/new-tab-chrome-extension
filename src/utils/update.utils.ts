@@ -3,6 +3,7 @@ import {
   AOL,
   BING,
   BRAVE,
+  ECOSIA,
   GIBIRU,
   LYCOS,
   NIGMA,
@@ -96,6 +97,10 @@ const getLastVersionFeaturesRegardingPrevious = (
   } else if (previousVersion <= "3.0.2") {
     return {
       searchEngines: [LYCOS, NIGMA]
+    };
+  } else if (previousVersion === "3.1.0") {
+    return {
+      searchEngines: [ECOSIA]
     };
   }
 
