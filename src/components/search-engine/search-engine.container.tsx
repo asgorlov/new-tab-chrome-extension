@@ -5,6 +5,7 @@ import {
   BING,
   BRAVE,
   DUCK,
+  ECOSIA,
   GIBIRU,
   GOOGLE,
   LYCOS,
@@ -16,6 +17,7 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as EcosiaSearchIcon } from "../../static/svgs/ecosia/ecosia-search-icon.svg";
 import { ReactComponent as LycosSearchIcon } from "../../static/svgs/lycos/lycos-search-icon.svg";
 import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
 import { ReactComponent as YuoComSearchIcon } from "../../static/svgs/youcom/you-com-search-icon.svg";
@@ -67,6 +69,8 @@ const SearchEngineContainer: FC = () => {
         return <LycosSearchIcon />;
       case NIGMA:
         return <span>{t("searchButton") + "!"}</span>;
+      case ECOSIA:
+        return <EcosiaSearchIcon />;
       default:
         return <></>;
     }

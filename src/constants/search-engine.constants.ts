@@ -14,9 +14,11 @@ export const SEARCH_ENGINE_NAMES = [
   "youcom",
   "gibiru",
   "lycos",
-  "nigma"
+  "nigma",
+  "ecosia"
 ];
 
+export const ECOSIA = SEARCH_ENGINE_NAMES[12];
 export const NIGMA = SEARCH_ENGINE_NAMES[11];
 export const LYCOS = SEARCH_ENGINE_NAMES[10];
 export const GIBIRU = SEARCH_ENGINE_NAMES[9];
@@ -37,6 +39,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   nigma: "https://nigma.net.ru/",
   lycos: "https://lycos.com/",
   yahoo: "https://yahoo.com/",
+  ecosia: "https://ecosia.org/",
   yandex: "https://ya.ru/",
   youcom: "https://you.com/",
   gibiru: "https://gibiru.com/",
@@ -52,6 +55,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   nigma: "https://nigma.net.ru/index.php",
   lycos: "https://search.lycos.com/web",
   yahoo: "https://search.yahoo.com/search",
+  ecosia: "https://ecosia.org/search",
   yandex: "https://yandex.ru/search",
   youcom: "https://you.com/search",
   gibiru: "https://gibiru.com/results.html",
@@ -67,6 +71,7 @@ export const SEARCH_THEMES: Record<string, string> = {
   nigma: "#74B61D",
   lycos: "#2e5d9a",
   yahoo: "#6001d2",
+  ecosia: "#008009",
   yandex: "#fc0",
   youcom: "#4153fe",
   gibiru: "#fc243b",

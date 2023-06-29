@@ -170,6 +170,14 @@
                 background-image: url("../svgs/nigma/nigma-logo-dark.svg");
             }
         }
+
+        &.ecosia {
+            transition: @fast-transition;
+            height: 40px;
+            width: 140px;
+            margin-bottom: 12px;
+            background-image: url("../svgs/ecosia/ecosia-logo.svg");
+        }
     }
 
     &_form-background {
@@ -250,6 +258,7 @@
             }
         }
 
+        &.ecosia,
         &.nigma,
         &.yandex,
         &.google,
@@ -393,6 +402,17 @@
             transition: @fast-transition;
             border: none;
             border-radius: 0 3px 3px 0;
+        }
+
+        &.ecosia {
+            transition: @fast-transition;
+            border: 1px solid #bebeb9;
+            border-radius: 9999px;
+            box-shadow: 0 1px 2px #1A1A1A2D,0 0 8px #1A1A1A0F;
+
+            &.dark {
+                box-shadow: 0 1px 2px #D0D0D02D,0 0 8px #D0D0D00F;
+            }
         }
     }
 
@@ -547,6 +567,7 @@
         }
 
         &.lycos {
+            transition: @fast-transition;
             border: none;
             border-radius: 4px 0 0 4px;
 
@@ -558,12 +579,24 @@
         }
 
         &.nigma {
+            transition: @fast-transition;
             border: 1px solid #707070;
             border-radius: 0;
 
             &.ant-input:focus,
             &.ant-input:hover {
                 border: 1px solid #707070;
+                box-shadow: none;
+            }
+        }
+
+        &.ecosia {
+            border: none;
+            border-radius: 9999px 0 0 9999px;
+
+            &.ant-input:focus,
+            &.ant-input:hover {
+                border-color: transparent;
                 box-shadow: none;
             }
         }
@@ -833,6 +866,32 @@
                 background: #74B61D;
                 border-color: @light-color;
                 color: @light-color;
+            }
+        }
+
+        &.ecosia {
+            transition: all @fast-transition outline 0.1s;
+            border: none transparent;
+            border-radius: 0 9999px 9999px 0;
+            width: 48px;
+
+            &:focus-within {
+                outline: 2px solid #0094c7;
+                outline-offset: 1px;
+                border-color: @ecosia-color;
+                background: @ecosia-color;
+
+                svg {
+                    fill: @light-color;
+                }
+            }
+
+            &:hover {
+                background: #006600;
+
+                svg {
+                    fill: @light-color;
+                }
             }
         }
     }
