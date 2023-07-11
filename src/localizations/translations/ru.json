@@ -7,6 +7,16 @@
   "anonymous": "Анонимно",
   "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
+  "wallpaper": {
+    "title": "Фон",
+    "choice": "Выбрать фон",
+    "uploading": "Загрузить свой фон",
+    "default": "Стандартный",
+    "mountains": "Тихие горы",
+    "ocean": "Спокойный океан",
+    "field": "Зеленое поле",
+    "custom": "Пользовательский"
+  },
   "turnOn": "Вкл.",
   "turnOff": "Выкл.",
   "auto": "Авто",

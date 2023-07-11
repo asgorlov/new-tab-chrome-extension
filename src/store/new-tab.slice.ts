@@ -85,6 +85,10 @@ export const newTabSlice = createSlice({
       state.darkMode = action.payload;
       setDataToChrome({ darkMode: action.payload });
     },
+    setWallpaper(state, action) {
+      state.wallpaper = action.payload;
+      setDataToChrome({ wallpaper: action.payload });
+    },
     setSearchEngine(state, action) {
       state.searchEngine = action.payload;
       setDataToChrome({ searchEngine: action.payload });
@@ -124,6 +128,7 @@ export const newTabSlice = createSlice({
         isDark,
         update,
         darkMode,
+        wallpaper,
         searchEngine,
         searchEngines,
         currentLanguage,
@@ -134,6 +139,7 @@ export const newTabSlice = createSlice({
       state.isDark = isDark;
       state.update = update;
       state.darkMode = darkMode;
+      state.wallpaper = wallpaper;
       state.searchEngine = searchEngine;
       state.searchEngines = searchEngines;
       state.currentLanguage = currentLanguage;
@@ -152,6 +158,8 @@ export const selectSunset = (state: RootState): string | null =>
 export const selectIsDark = (state: RootState): boolean => state.newTab.isDark;
 export const selectDarkMode = (state: RootState): string =>
   state.newTab.darkMode;
+export const selectWallpaper = (state: RootState): string =>
+  state.newTab.wallpaper;
 export const selectLastVersion = (state: RootState): string =>
   state.newTab.update.lastVersion;
 export const selectSearchEngine = (state: RootState): string =>
@@ -170,6 +178,7 @@ export const selectShowUpdateMessage = (state: RootState): boolean =>
 export const {
   setIsDark,
   setDarkMode,
+  setWallpaper,
   setSearchEngine,
   setSearchEngines,
   setCheckForUpdates,

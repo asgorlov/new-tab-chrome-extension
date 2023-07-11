@@ -6,6 +6,7 @@ import {
   selectIsDark,
   selectSearchEngine,
   selectSunset,
+  selectWallpaper,
   setDarkMode,
   setIsDark
 } from "../../store/new-tab.slice";
@@ -27,6 +28,7 @@ const NewTabContainer: FC = () => {
   const sunset = useSelector(selectSunset);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
+  const wallpaper = useSelector(selectWallpaper);
   const searchEngine = useSelector(selectSearchEngine);
 
   useLayoutEffect(() => {
@@ -75,7 +77,7 @@ const NewTabContainer: FC = () => {
         }
       }}
     >
-      <NewTabComponent isDark={isDark} />
+      <NewTabComponent isDark={isDark} wallpaper={wallpaper} />
     </ConfigProvider>
   );
 };

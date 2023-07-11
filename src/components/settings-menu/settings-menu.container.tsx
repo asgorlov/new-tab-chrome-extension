@@ -8,10 +8,12 @@ import {
   selectSearchEngine,
   selectSearchEngines,
   selectSunset,
+  selectWallpaper,
   setCheckForUpdates,
   setDarkMode,
   setIsDark,
-  setSearchEngines
+  setSearchEngines,
+  setWallpaper
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -22,8 +24,14 @@ const SettingsMenuContainer: FC = () => {
   const sunset = useSelector(selectSunset);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
+  const wallpaper = useSelector(selectWallpaper);
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngineNames = useSelector(selectSearchEngines);
+
+  const clickWallpaper = useCallback(
+    (v: string) => dispatch(setWallpaper(v)),
+    [dispatch]
+  );
 
   const toggleDarkHandler = useCallback(
     () => dispatch(setIsDark(!isDark)),
@@ -72,9 +80,11 @@ const SettingsMenuContainer: FC = () => {
     <SettingsMenuComponent
       searchEngineNames={searchEngineNames}
       searchEngine={searchEngine}
+      wallpaper={wallpaper}
       darkMode={darkMode}
       isDark={isDark}
       onClickSwitcher={toggleDarkHandler}
+      onClickWallpaper={clickWallpaper}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
       onChangeSearchEngines={changeSearchEnginesHandler}

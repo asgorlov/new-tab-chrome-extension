@@ -7,6 +7,16 @@
   "anonymous": "Anonymous",
   "familyFriendly": "Family-friendly",
   "darkModeTitle": "Dark mode",
+  "wallpaper": {
+    "title": "Wallpaper",
+    "choice": "Choose wallpaper",
+    "uploading": "Upload your wallpaper",
+    "default": "Default",
+    "mountains": "Quiet mountains",
+    "ocean": "Calm ocean",
+    "field": "Green field",
+    "custom": "Custom"
+  },
   "turnOn": "On",
   "turnOff": "Off",
   "auto": "Auto",

@@ -8,6 +8,7 @@ import { NewTabState } from "../models/new-tab-state.model";
 import { checkForUpdates } from "../constants/check-for-updates.constants";
 import manifest from "../../public/manifest.json";
 import { updateStateWithFeatures } from "./update.utils";
+import { DEFAULT_WALLPAPER } from "../constants/wallpaper.constants";
 
 export const defaultStorageParameters: Readonly<NewTabState> = {
   sunset: null,
@@ -18,6 +19,7 @@ export const defaultStorageParameters: Readonly<NewTabState> = {
     lastUpdateDate: Date.now()
   },
   darkMode: MANUAL,
+  wallpaper: DEFAULT_WALLPAPER,
   searchEngine: YANDEX,
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,

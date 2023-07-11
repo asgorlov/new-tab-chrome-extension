@@ -7,16 +7,22 @@ import UpdateContainer from "../update/update.container";
 
 interface NewTabComponentProps {
   isDark: boolean;
+  wallpaper: string;
 }
 
-const NewTabComponent: FC<NewTabComponentProps> = ({ isDark }) => {
+const NewTabComponent: FC<NewTabComponentProps> = ({ isDark, wallpaper }) => {
   return (
-    <div className={clsx("new-tab", { dark: isDark })}>
-      <UpdateContainer />
-      <SettingsMenuContainer />
-      <SearchEngineContainer />
-      <SearchEngineSelectorContainer />
-    </div>
+    <>
+      <div className={clsx("new-tab", { dark: isDark })}>
+        <div
+          className={clsx("new-tab-background", wallpaper, { dark: isDark })}
+        />
+        <UpdateContainer />
+        <SettingsMenuContainer />
+        <SearchEngineContainer />
+        <SearchEngineSelectorContainer />
+      </div>
+    </>
   );
 };
 

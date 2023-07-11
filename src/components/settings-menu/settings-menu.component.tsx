@@ -8,15 +8,18 @@ import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
 import ResetSettingComponent from "./settings/reset-setting.component";
 import UpdateSettingComponent from "./settings/update-setting.component";
+import WallpaperSettingComponent from "./settings/wallpaper-setting.component";
 
 interface DarkModeComponentProps {
   isDark: boolean;
   darkMode: string;
+  wallpaper: string;
   searchEngine: string;
   searchEngineNames: string[];
   onClickSwitcher: () => void;
   onChangeDarkMode: (value: string) => void;
   onChangeLanguage: (value: string) => void;
+  onClickWallpaper: (value: string) => void;
   onChangeSearchEngines: (values: string[]) => void;
   onChangeCheckForUpdates: (value: string) => void;
   onChangeDarkModeCollapse: (values: string | string[]) => void;
@@ -25,11 +28,13 @@ interface DarkModeComponentProps {
 const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   isDark,
   darkMode,
+  wallpaper,
   searchEngine,
   searchEngineNames,
   onClickSwitcher,
   onChangeDarkMode,
   onChangeLanguage,
+  onClickWallpaper,
   onChangeSearchEngines,
   onChangeCheckForUpdates,
   onChangeDarkModeCollapse
@@ -72,6 +77,12 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
           onClickSwitcher={onClickSwitcher}
           onChangeDarkMode={onChangeDarkMode}
           onChangeDarkModeCollapse={onChangeDarkModeCollapse}
+        />
+        <WallpaperSettingComponent
+          isDark={isDark}
+          wallpaper={wallpaper}
+          searchEngine={searchEngine}
+          onClickWallpaper={onClickWallpaper}
         />
         <LanguageSettingComponent
           isDark={isDark}

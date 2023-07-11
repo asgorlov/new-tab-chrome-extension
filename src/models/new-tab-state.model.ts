@@ -5,6 +5,7 @@ export interface NewTabState {
   isDark: boolean;
   update: UpdateModel;
   darkMode: string;
+  wallpaper: string;
   searchEngine: string;
   searchEngines: string[];
   currentLanguage: string;

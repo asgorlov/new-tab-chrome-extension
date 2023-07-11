@@ -9,9 +9,53 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    background-color: @light-color;
 
     &.dark {
+        background-color: @dark-color;
+    }
+
+    &-background {
         transition: @slow-transition;
-        background: @dark-color;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-image: url("../imgs/empty.png");
+        opacity: 0;
+
+        &.dark {
+            transition: @slow-transition;
+        }
+
+        &.mountains {
+            background-image: url("../imgs/mountains-light.jpg");
+            opacity: 1;
+
+            &.dark {
+                background-image: url("../imgs/mountains-dark.jpg");
+            }
+        }
+
+        &.ocean {
+            background-image: url("../imgs/ocean-light.jpg");
+            opacity: 1;
+
+            &.dark {
+                background-image: url("../imgs/ocean-dark.jpg");
+            }
+        }
+
+        &.field {
+            background-image: url("../imgs/field-light.jpg");
+            opacity: 1;
+
+            &.dark {
+                background-image: url("../imgs/field-dark.jpg");
+            }
+
+        }
     }
 }
