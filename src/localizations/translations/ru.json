@@ -9,13 +9,19 @@
   "darkModeTitle": "Темный режим",
   "wallpaper": {
     "title": "Фон",
-    "choice": "Выбрать фон",
-    "uploading": "Загрузить свой фон",
+    "forBothThemes": "Для обеих тем",
+    "uploadForLight": "Светлая тема",
+    "uploadForDark": "Темная тема",
+    "uploadForBoth": "Светлая и темная тема",
+    "uploading": "Загрузите свой фон",
     "default": "Стандартный",
     "mountains": "Тихие горы",
     "ocean": "Спокойный океан",
     "field": "Зеленое поле",
-    "custom": "Пользовательский"
+    "custom": "Пользовательский",
+    "ok": "Ок",
+    "cancel": "Отмена",
+    "unacceptableFormat": "Недопустимый формат изображения"
   },
   "turnOn": "Вкл.",
   "turnOff": "Выкл.",

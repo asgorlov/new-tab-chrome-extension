@@ -3,13 +3,11 @@ import { RootState } from "./store";
 import axios from "axios";
 import { Coordinate } from "../models/coordinate.model";
 import i18n from "../localizations/i18n";
-import {
-  defaultStorageParameters,
-  getInitStateFromChrome,
-  setDataToChrome
-} from "../utils/chrome.utils";
+import { getInitStateFromChrome, setDataToChrome } from "../utils/chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { UpdateModel, UpdateResponseModel } from "../models/update.model";
+import { CustomWallpaper } from "../models/custom-wallpaper.model";
+import defaultStore from "../constants/default-store.constants";
 
 const initialState: NewTabState = await getInitStateFromChrome();
 
@@ -58,7 +56,7 @@ export const changeLanguage = createAsyncThunk(
 export const resetSettings = createAsyncThunk(
   "newTab/resetSettings",
   async () => {
-    const data = defaultStorageParameters as NewTabState;
+    const data = defaultStore as NewTabState;
 
     data.update.previousVersion = data.update.lastVersion;
 
@@ -97,6 +95,10 @@ export const newTabSlice = createSlice({
       state.searchEngines = action.payload;
       setDataToChrome({ searchEngines: action.payload });
     },
+    setCustomWallpaper(state, action) {
+      state.customWallpaper = action.payload;
+      setDataToChrome({ customWallpaper: action.payload });
+    },
     setCheckForUpdates(state, action) {
       state.checkForUpdates = action.payload;
       setDataToChrome({ checkForUpdates: action.payload });
@@ -132,7 +134,8 @@ export const newTabSlice = createSlice({
         searchEngine,
         searchEngines,
         currentLanguage,
-        checkForUpdates
+        checkForUpdates,
+        customWallpaper
       } = action.payload;
 
       state.sunset = sunset;
@@ -144,6 +147,7 @@ export const newTabSlice = createSlice({
       state.searchEngines = searchEngines;
       state.currentLanguage = currentLanguage;
       state.checkForUpdates = checkForUpdates;
+      state.customWallpaper = customWallpaper;
     });
 
     builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
@@ -174,6 +178,9 @@ export const selectCurrentLanguage = (state: RootState): string =>
   state.newTab.currentLanguage;
 export const selectShowUpdateMessage = (state: RootState): boolean =>
   state.newTab.update.showMessage;
+export const selectCustomWallpaper = (
+  state: RootState
+): CustomWallpaper | null => state.newTab.customWallpaper;
 
 export const {
   setIsDark,
@@ -181,6 +188,7 @@ export const {
   setWallpaper,
   setSearchEngine,
   setSearchEngines,
+  setCustomWallpaper,
   setCheckForUpdates,
   setShowUpdateMessage
 } = newTabSlice.actions;

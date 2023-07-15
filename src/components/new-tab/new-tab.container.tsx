@@ -2,6 +2,7 @@ import React, { FC, useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSunsetTimeByLocation,
+  selectCustomWallpaper,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
@@ -30,6 +31,7 @@ const NewTabContainer: FC = () => {
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
   const searchEngine = useSelector(selectSearchEngine);
+  const customWallpaper = useSelector(selectCustomWallpaper);
 
   useLayoutEffect(() => {
     document.title = t("tabTitle");
@@ -77,7 +79,11 @@ const NewTabContainer: FC = () => {
         }
       }}
     >
-      <NewTabComponent isDark={isDark} wallpaper={wallpaper} />
+      <NewTabComponent
+        isDark={isDark}
+        wallpaper={wallpaper}
+        customWallpaper={customWallpaper}
+      />
     </ConfigProvider>
   );
 };

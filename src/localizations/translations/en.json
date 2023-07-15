@@ -9,13 +9,19 @@
   "darkModeTitle": "Dark mode",
   "wallpaper": {
     "title": "Wallpaper",
-    "choice": "Choose wallpaper",
+    "forBothThemes": "For both theme",
+    "uploadForLight": "Light theme",
+    "uploadForDark": "Dark theme",
+    "uploadForBoth": "Light and dark theme",
     "uploading": "Upload your wallpaper",
     "default": "Default",
     "mountains": "Quiet mountains",
     "ocean": "Calm ocean",
     "field": "Green field",
-    "custom": "Custom"
+    "custom": "Custom",
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "unacceptableFormat": "Unacceptable image format"
   },
   "turnOn": "On",
   "turnOff": "Off",

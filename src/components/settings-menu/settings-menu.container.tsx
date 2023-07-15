@@ -3,6 +3,7 @@ import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
   getSunsetTimeByLocation,
+  selectCustomWallpaper,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
@@ -10,6 +11,7 @@ import {
   selectSunset,
   selectWallpaper,
   setCheckForUpdates,
+  setCustomWallpaper,
   setDarkMode,
   setIsDark,
   setSearchEngines,
@@ -18,6 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
+import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,10 +29,16 @@ const SettingsMenuContainer: FC = () => {
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
   const searchEngine = useSelector(selectSearchEngine);
+  const customWallpaper = useSelector(selectCustomWallpaper);
   const searchEngineNames = useSelector(selectSearchEngines);
 
-  const clickWallpaper = useCallback(
+  const changeWallpaper = useCallback(
     (v: string) => dispatch(setWallpaper(v)),
+    [dispatch]
+  );
+
+  const changeCustomWallpaper = useCallback(
+    (v: CustomWallpaper | null) => dispatch(setCustomWallpaper(v)),
     [dispatch]
   );
 
@@ -79,12 +88,14 @@ const SettingsMenuContainer: FC = () => {
   return (
     <SettingsMenuComponent
       searchEngineNames={searchEngineNames}
+      customWallpaper={customWallpaper}
       searchEngine={searchEngine}
       wallpaper={wallpaper}
       darkMode={darkMode}
       isDark={isDark}
+      setWallpaper={changeWallpaper}
+      setCustomWallpaper={changeCustomWallpaper}
       onClickSwitcher={toggleDarkHandler}
-      onClickWallpaper={clickWallpaper}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
       onChangeSearchEngines={changeSearchEnginesHandler}
