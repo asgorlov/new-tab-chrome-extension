@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Collapse, Modal, Upload } from "antd";
+import { Button, Modal, Upload } from "antd";
 import clsx from "clsx";
-import { ReactComponent as WallpaperIcon } from "../../../../static/svgs/wallpaper-icon.svg";
+import { ReactComponent as WallpaperIcon } from "../../../../static/svgs/menu-settings/wallpaper-icon.svg";
 import { Checkbox } from "antd/lib";
 import {
   ACCEPT_IMG_FORMAT,
@@ -13,6 +13,7 @@ import {
 } from "../../../../constants/wallpaper.constants";
 import { UploadOutlined } from "@ant-design/icons";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
+import CollapseComponent from "../collapse.component";
 
 interface WallpaperSettingProps {
   open: boolean;
@@ -52,53 +53,37 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
   onClickWallpaper
 }) => {
   const { t } = useTranslation();
-  const { Panel } = Collapse;
+  const getImage = (name: string): ReactNode => {
+    return (
+      <img
+        className={clsx(
+          "new-tab__settings-menu_wallpaper-content_choice-option",
+          { selected: wallpaper === name },
+          searchEngine
+        )}
+        title={t(`wallpaper.${name}`)}
+        key={name}
+        src={require(`../../../../static/imgs/${name}.png`)}
+        onClick={() => onClickWallpaper(name)}
+        alt={name}
+      />
+    );
+  };
 
   return (
     <>
-      <Collapse accordion={true} bordered={false} expandIconPosition="end">
-        <Panel
-          className={clsx("new-tab__settings-menu_wallpaper", {
-            dark: isDark
-          })}
-          header={
-            <div
-              className={clsx("new-tab__settings-menu_wallpaper-header", {
-                dark: isDark
-              })}
-            >
-              <WallpaperIcon />
-              <span>{t("wallpaper.title")}</span>
-            </div>
-          }
-          key={t("wallpaper.title")}
-        >
-          <div
-            className={clsx("new-tab__settings-menu_wallpaper-content", {
-              dark: isDark
-            })}
-          >
-            <div className="new-tab__settings-menu_wallpaper-content_choice">
-              <div className="new-tab__settings-menu_wallpaper-content_choice-group">
-                {WALLPAPER_PRESETS.map(name => (
-                  <img
-                    className={clsx(
-                      "new-tab__settings-menu_wallpaper-content_choice-option",
-                      { selected: wallpaper === name },
-                      searchEngine
-                    )}
-                    title={t(`wallpaper.${name}`)}
-                    key={name}
-                    src={require(`../../../../static/imgs/${name}.png`)}
-                    onClick={() => onClickWallpaper(name)}
-                    alt={name}
-                  />
-                ))}
-              </div>
-            </div>
+      <CollapseComponent
+        icon={<WallpaperIcon />}
+        title={t("wallpaper.title")}
+        isDark={isDark}
+        className="new-tab__settings-menu_wallpaper"
+      >
+        <div className="new-tab__settings-menu_wallpaper-content_choice">
+          <div className="new-tab__settings-menu_wallpaper-content_choice-group">
+            {WALLPAPER_PRESETS.map(name => getImage(name))}
           </div>
-        </Panel>
-      </Collapse>
+        </div>
+      </CollapseComponent>
       <Modal
         className={clsx("new-tab__settings-menu_wallpaper-modal", {
           dark: isDark

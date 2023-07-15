@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import clsx from "clsx";
-import { ReactComponent as UpdateIcon } from "../../../static/svgs/update-icon.svg";
+import { ReactComponent as UpdateIcon } from "../../../static/svgs/menu-settings/update-icon.svg";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

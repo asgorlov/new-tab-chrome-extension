@@ -6,37 +6,24 @@
   border-bottom: 1px solid @light-border-color;
 
   &.dark {
-    transition: border-color @slow-transition, color @fast-transition;
-    border-color: @dark-border-color;
-    color: @light-color;
+    .settings-menu-regular-dark();
 
     &>.new-tab__settings-menu_update-selector {
-      &>.ant-select-selector {
-        &>.ant-select-selection-item {
-          transition: @fast-transition;
-          color: @light-color;
-        }
-      }
+      .setting-menu-selection-item-dark();
     }
 
     svg {
-      transition: @fast-transition;
       fill: @light-color;
     }
   }
 
   &-header {
-    .settings-menu-header-item();
+    .settings-menu-regular-header-item();
 
     &-icon {
       display: flex;
       width: max-content;
       height: max-content;
-    }
-
-    svg {
-      transition: @fast-transition;
-      margin: 0 6px;
     }
   }
 

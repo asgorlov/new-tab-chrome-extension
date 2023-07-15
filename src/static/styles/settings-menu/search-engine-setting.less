@@ -2,31 +2,13 @@
 @import "../mixins";
 
 .new-tab__settings-menu_search-engine {
-  &.dark {
-    .ant-collapse-expand-icon {
-      color: @light-color;
-    }
-  }
+  .settings-menu-collapse-dark();
 
   &-header {
-    .settings-menu-header-item();
-    transition: @fast-transition;
+    .settings-menu-collapse-header-item();
 
-    svg {
-      margin: 0 4px;
-
-      path {
-        transition: @fast-transition;
-      }
-    }
-
-    &.dark {
-      color: @light-color;
-
-      svg path {
-        transition: @fast-transition;
-        fill: @light-color;
-      }
+    svg path {
+      transition: @fast-transition;
     }
   }
 
@@ -76,22 +58,7 @@
 
     &.dark {
       &>.new-tab__settings-menu_search-engine-content-selector {
-        &>.ant-select-selector {
-          border-color: @dark-border-color;
-          transition: @slow-transition;
-          background-color: @dark-color;
-
-          &>.ant-select-selection-item {
-            transition: @fast-transition;
-            color: @light-color;
-          }
-        }
-
-        &>.ant-select-arrow {
-          &>.anticon {
-            transition: @fast-transition;
-          }
-        }
+        .setting-menu-select-selector-dark();
       }
 
       &>.new-tab__settings-menu_search-engine-content-checkbox-group {

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import clsx from "clsx";
-import { ReactComponent as LanguageIcon } from "../../../static/svgs/language-icon.svg";
+import { ReactComponent as LanguageIcon } from "../../../static/svgs/menu-settings/language-icon.svg";
 import { Select } from "antd";
 import { useSelector } from "react-redux";
 import { selectCurrentLanguage } from "../../../store/new-tab.slice";
