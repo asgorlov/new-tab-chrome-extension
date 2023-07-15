@@ -1,7 +1,6 @@
 import { FC, useCallback, useState } from "react";
 import WallpaperSettingComponent from "./wallpaper-setting.component";
 import {
-  ACCEPT_IMG_FORMAT,
   BOTH_INPUT_NAME,
   CUSTOM_WALLPAPER,
   DARK_INPUT_NAME,
@@ -15,7 +14,8 @@ import { CustomWallpaper } from "../../../../models/custom-wallpaper.model";
 import {
   convertImgToBase64,
   getInitialFileList,
-  getInitialOneToBoth
+  getInitialOneToBoth,
+  getUploadingErrorKey
 } from "../../../../utils/wallpaper.utils";
 
 export interface WallpaperSettingContainerProps {
@@ -132,7 +132,7 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
         }
       } else if (file.status === ERROR_STATUS) {
         const errorIndex = inputName === DARK_INPUT_NAME ? 1 : 0;
-        uploadingErrors[errorIndex] = file.error;
+        uploadingErrors[errorIndex] = file.error.message;
         setUploadingErrors([...uploadingErrors]);
       }
 
@@ -146,14 +146,11 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
   );
   const handleUpload = useCallback(
     (options: any) => {
-      const acceptFormats = ACCEPT_IMG_FORMAT.split(",");
-      const file = options.file as File;
-
-      if (acceptFormats.includes(file.type)) {
-        options.onSuccess(file);
+      const errorKey = getUploadingErrorKey(options.file);
+      if (errorKey) {
+        options.onError(new Error(t(errorKey)));
       } else {
-        const error = new Error(t("wallpaper.unacceptableFormat"));
-        options.onError(error);
+        options.onSuccess(options.file);
       }
     },
     [t]
@@ -173,6 +170,7 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
       onClickCheckbox={handleClickCheckbox}
       onChangeUpload={handleChangeUpload}
       onRemoveUpload={handleRemoveUpload}
+      uploadingErrors={uploadingErrors}
       customRequest={handleUpload}
       lightFileList={lightFileList}
       darkFileList={darkFileList}

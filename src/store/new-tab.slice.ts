@@ -3,7 +3,11 @@ import { RootState } from "./store";
 import axios from "axios";
 import { Coordinate } from "../models/coordinate.model";
 import i18n from "../localizations/i18n";
-import { getInitStateFromChrome, setDataToChrome } from "../utils/chrome.utils";
+import {
+  getInitStateFromChrome,
+  setDataToChromeLocalStorage,
+  setDataToChromeSyncStorage
+} from "../utils/chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { UpdateModel, UpdateResponseModel } from "../models/update.model";
 import { CustomWallpaper } from "../models/custom-wallpaper.model";
@@ -46,7 +50,7 @@ export const checkUpdates = createAsyncThunk(
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
   async (language: string): Promise<string> => {
-    setDataToChrome({ currentLanguage: language });
+    setDataToChromeSyncStorage({ currentLanguage: language });
     await i18n.changeLanguage(language);
 
     return language;
@@ -64,7 +68,8 @@ export const resetSettings = createAsyncThunk(
       data.currentLanguage = navigator.language;
     }
 
-    setDataToChrome(data);
+    setDataToChromeSyncStorage(data);
+    setDataToChromeLocalStorage({ customWallpaper: data.customWallpaper });
     await i18n.changeLanguage(data.currentLanguage);
 
     return data;
@@ -77,35 +82,35 @@ export const newTabSlice = createSlice({
   reducers: {
     setIsDark(state, action) {
       state.isDark = action.payload;
-      setDataToChrome({ isDark: action.payload });
+      setDataToChromeSyncStorage({ isDark: action.payload });
     },
     setDarkMode(state, action) {
       state.darkMode = action.payload;
-      setDataToChrome({ darkMode: action.payload });
+      setDataToChromeSyncStorage({ darkMode: action.payload });
     },
     setWallpaper(state, action) {
       state.wallpaper = action.payload;
-      setDataToChrome({ wallpaper: action.payload });
+      setDataToChromeSyncStorage({ wallpaper: action.payload });
     },
     setSearchEngine(state, action) {
       state.searchEngine = action.payload;
-      setDataToChrome({ searchEngine: action.payload });
+      setDataToChromeSyncStorage({ searchEngine: action.payload });
     },
     setSearchEngines(state, action) {
       state.searchEngines = action.payload;
-      setDataToChrome({ searchEngines: action.payload });
+      setDataToChromeSyncStorage({ searchEngines: action.payload });
     },
     setCustomWallpaper(state, action) {
       state.customWallpaper = action.payload;
-      setDataToChrome({ customWallpaper: action.payload });
+      setDataToChromeLocalStorage({ customWallpaper: action.payload });
     },
     setCheckForUpdates(state, action) {
       state.checkForUpdates = action.payload;
-      setDataToChrome({ checkForUpdates: action.payload });
+      setDataToChromeSyncStorage({ checkForUpdates: action.payload });
     },
     setShowUpdateMessage(state, action) {
       state.update.showMessage = action.payload;
-      setDataToChrome({ update: state.update });
+      setDataToChromeSyncStorage({ update: state.update });
     }
   },
   extraReducers: builder => {
@@ -117,7 +122,7 @@ export const newTabSlice = createSlice({
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
       state.update.previousVersion = previousVersion;
-      setDataToChrome({ update: state.update });
+      setDataToChromeSyncStorage({ update: state.update });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
@@ -152,7 +157,7 @@ export const newTabSlice = createSlice({
 
     builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
       state.sunset = action.payload;
-      setDataToChrome({ sunset: action.payload });
+      setDataToChromeSyncStorage({ sunset: action.payload });
     });
   }
 });

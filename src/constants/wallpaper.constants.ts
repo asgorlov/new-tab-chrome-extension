@@ -11,6 +11,7 @@ export const OCEAN_WALLPAPER = WALLPAPER_PRESETS[2];
 export const MOUNTAINS_WALLPAPER = WALLPAPER_PRESETS[1];
 export const DEFAULT_WALLPAPER = WALLPAPER_PRESETS[0];
 
+export const MIN_SIZE_IMG = 2621440;
 export const ACCEPT_IMG_FORMAT =
   "image/jpeg,image/jpg,image/webp,image/png,image/bmp";
 export const LIGHT_INPUT_NAME = "light";

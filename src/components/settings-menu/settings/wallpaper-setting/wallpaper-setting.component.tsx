@@ -23,6 +23,7 @@ interface WallpaperSettingProps {
   searchEngine: string;
   darkFileList: UploadFile[];
   lightFileList: UploadFile[];
+  uploadingErrors: string[];
   onOk: () => void;
   onCancel: () => void;
   customRequest: (option: any) => void;
@@ -41,6 +42,7 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
   searchEngine,
   darkFileList,
   lightFileList,
+  uploadingErrors,
   onOk,
   onCancel,
   customRequest,
@@ -112,53 +114,65 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
       >
         <div className="new-tab__settings-menu_wallpaper-modal-content">
           <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-group">
-            <Upload
+            <div
               className={clsx(
                 "new-tab__settings-menu_wallpaper-modal-content_uploading",
                 { "auto-width": oneToBoth }
               )}
-              listType="picture"
-              fileList={lightFileList}
-              accept={ACCEPT_IMG_FORMAT}
-              maxCount={1}
-              onChange={info =>
-                onChangeUpload(
-                  info,
-                  oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME
-                )
-              }
-              onRemove={() =>
-                onRemoveUpload(oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME)
-              }
-              customRequest={customRequest}
             >
-              <Button
-                className="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
-                icon={<UploadOutlined />}
-              >
-                {t(
-                  `wallpaper.${oneToBoth ? "uploadForBoth" : "uploadForLight"}`
-                )}
-              </Button>
-            </Upload>
-            {!oneToBoth && (
               <Upload
-                className="new-tab__settings-menu_wallpaper-modal-content_uploading"
                 listType="picture"
-                fileList={darkFileList}
+                fileList={lightFileList}
                 accept={ACCEPT_IMG_FORMAT}
                 maxCount={1}
-                onChange={info => onChangeUpload(info, DARK_INPUT_NAME)}
-                onRemove={() => onRemoveUpload(DARK_INPUT_NAME)}
+                onChange={info =>
+                  onChangeUpload(
+                    info,
+                    oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME
+                  )
+                }
+                onRemove={() =>
+                  onRemoveUpload(oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME)
+                }
                 customRequest={customRequest}
               >
                 <Button
                   className="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
                   icon={<UploadOutlined />}
                 >
-                  {t("wallpaper.uploadForDark")}
+                  {t(
+                    `wallpaper.${
+                      oneToBoth ? "uploadForBoth" : "uploadForLight"
+                    }`
+                  )}
                 </Button>
               </Upload>
+              <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-error-message">
+                {uploadingErrors[0]}
+              </div>
+            </div>
+            {!oneToBoth && (
+              <div className="new-tab__settings-menu_wallpaper-modal-content_uploading">
+                <Upload
+                  listType="picture"
+                  fileList={darkFileList}
+                  accept={ACCEPT_IMG_FORMAT}
+                  maxCount={1}
+                  onChange={info => onChangeUpload(info, DARK_INPUT_NAME)}
+                  onRemove={() => onRemoveUpload(DARK_INPUT_NAME)}
+                  customRequest={customRequest}
+                >
+                  <Button
+                    className="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
+                    icon={<UploadOutlined />}
+                  >
+                    {t("wallpaper.uploadForDark")}
+                  </Button>
+                </Upload>
+                <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-error-message">
+                  {uploadingErrors[1]}
+                </div>
+              </div>
             )}
           </div>
           <Checkbox

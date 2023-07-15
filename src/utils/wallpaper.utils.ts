@@ -1,5 +1,9 @@
 import { CustomWallpaper } from "../models/custom-wallpaper.model";
 import { RcFile, UploadFile } from "antd/es/upload/interface";
+import {
+  ACCEPT_IMG_FORMAT,
+  MIN_SIZE_IMG
+} from "../constants/wallpaper.constants";
 
 export const convertImgToBase64 = async (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -62,4 +66,17 @@ export const getInitialOneToBoth = (
   wallpaper: CustomWallpaper | null
 ): boolean => {
   return !wallpaper || !!(wallpaper.lightTheme && !wallpaper.darkTheme);
+};
+
+export const getUploadingErrorKey = (file: File): string => {
+  const acceptFormats = ACCEPT_IMG_FORMAT.split(",");
+  if (!acceptFormats.includes(file.type)) {
+    return "wallpaper.unacceptableFormat";
+  }
+
+  if (file.size > MIN_SIZE_IMG) {
+    return "wallpaper.unacceptableSize";
+  }
+
+  return "";
 };

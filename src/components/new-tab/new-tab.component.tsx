@@ -22,7 +22,7 @@ const NewTabComponent: FC<NewTabComponentProps> = ({
   const customBackgroundStyle =
     customWallpaper && wallpaper === CUSTOM_WALLPAPER
       ? {
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundImage: `url(${getImgUrl(customWallpaper, isDark)})`
         }
       : {};

@@ -21,7 +21,8 @@
     "custom": "Custom",
     "ok": "Ok",
     "cancel": "Cancel",
-    "unacceptableFormat": "Unacceptable image format"
+    "unacceptableFormat": "Unacceptable image format",
+    "unacceptableSize": "Image size can't be more than 2.5Mb"
   },
   "turnOn": "On",
   "turnOff": "Off",
