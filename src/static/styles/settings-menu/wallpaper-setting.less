@@ -2,29 +2,14 @@
 @import "../mixins";
 
 .new-tab__settings-menu_wallpaper {
+  .settings-menu-collapse-dark();
   border-radius: 0;
 
-  &.dark {
-    .ant-collapse-expand-icon {
-      color: @light-color;
-    }
-  }
-
   &-header {
-    .settings-menu-header-item();
-    transition: @fast-transition;
+    .settings-menu-collapse-header-item();
 
     svg {
       transition: @fast-transition;
-      margin: 0 6px 0 4px;
-    }
-
-    &.dark {
-      color: @light-color;
-
-      svg {
-        fill: @light-color;
-      }
     }
   }
 

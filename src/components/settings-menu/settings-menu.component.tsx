@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Drawer } from "antd";
-import { ReactComponent as MenuIcon } from "../../static/svgs/menu-icon.svg";
+import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
 import clsx from "clsx";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
