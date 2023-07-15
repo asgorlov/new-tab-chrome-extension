@@ -8,15 +8,21 @@ import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
 import ResetSettingComponent from "./settings/reset-setting.component";
 import UpdateSettingComponent from "./settings/update-setting.component";
+import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
+import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 
 interface DarkModeComponentProps {
   isDark: boolean;
   darkMode: string;
+  wallpaper: string;
   searchEngine: string;
+  customWallpaper: CustomWallpaper | null;
   searchEngineNames: string[];
+  setWallpaper: (value: string) => void;
   onClickSwitcher: () => void;
   onChangeDarkMode: (value: string) => void;
   onChangeLanguage: (value: string) => void;
+  setCustomWallpaper: (value: CustomWallpaper | null) => void;
   onChangeSearchEngines: (values: string[]) => void;
   onChangeCheckForUpdates: (value: string) => void;
   onChangeDarkModeCollapse: (values: string | string[]) => void;
@@ -25,11 +31,15 @@ interface DarkModeComponentProps {
 const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   isDark,
   darkMode,
+  wallpaper,
   searchEngine,
+  customWallpaper,
   searchEngineNames,
+  setWallpaper,
   onClickSwitcher,
   onChangeDarkMode,
   onChangeLanguage,
+  setCustomWallpaper,
   onChangeSearchEngines,
   onChangeCheckForUpdates,
   onChangeDarkModeCollapse
@@ -72,6 +82,14 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
           onClickSwitcher={onClickSwitcher}
           onChangeDarkMode={onChangeDarkMode}
           onChangeDarkModeCollapse={onChangeDarkModeCollapse}
+        />
+        <WallpaperSettingContainer
+          isDark={isDark}
+          wallpaper={wallpaper}
+          customWallpaper={customWallpaper}
+          searchEngine={searchEngine}
+          setWallpaper={setWallpaper}
+          setCustomWallpaper={setCustomWallpaper}
         />
         <LanguageSettingComponent
           isDark={isDark}

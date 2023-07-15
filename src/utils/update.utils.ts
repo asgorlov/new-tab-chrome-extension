@@ -11,7 +11,7 @@ import {
   YAHOO,
   YOUCOM
 } from "../constants/search-engine.constants";
-import { setDataToChrome } from "./chrome.utils";
+import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
@@ -40,7 +40,7 @@ export const getDownloadLink = (version: string) => {
 export const updateStateWithFeatures = (data: NewTabState) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChrome({ update: data.update });
+    setDataToChromeSyncStorage({ update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -52,10 +52,10 @@ export const updateStateWithFeatures = (data: NewTabState) => {
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
-    setDataToChrome({ searchEngines: data.searchEngines });
+    setDataToChromeSyncStorage({ searchEngines: data.searchEngines });
 
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChrome({ update: data.update });
+    setDataToChromeSyncStorage({ update: data.update });
   }
 };
 
