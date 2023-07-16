@@ -2,13 +2,13 @@ import React, { FC, useCallback } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
-  getSunsetTimeByLocation,
+  getNightPeriodByLocation,
   selectCustomWallpaper,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
   selectSearchEngines,
-  selectSunset,
+  selectNightPeriod,
   selectWallpaper,
   setCheckForUpdates,
   setCustomWallpaper,
@@ -24,10 +24,10 @@ import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const sunset = useSelector(selectSunset);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
+  const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const customWallpaper = useSelector(selectCustomWallpaper);
   const searchEngineNames = useSelector(selectSearchEngines);
@@ -69,7 +69,7 @@ const SettingsMenuContainer: FC = () => {
 
   const changeDarkModeCollapseHandler = useCallback(
     (key: string | string[]) => {
-      if (key.length && !isSunsetTimeCached(sunset)) {
+      if (key.length && !isSunsetTimeCached(nightPeriod)) {
         navigator.geolocation.getCurrentPosition(location => {
           const coords = location?.coords;
           if (coords && coords.latitude && coords.longitude) {
@@ -77,12 +77,12 @@ const SettingsMenuContainer: FC = () => {
               lat: coords.latitude,
               lng: coords.longitude
             };
-            dispatch(getSunsetTimeByLocation(coordinate));
+            dispatch(getNightPeriodByLocation(coordinate));
           }
         });
       }
     },
-    [sunset, dispatch]
+    [nightPeriod, dispatch]
   );
 
   return (
