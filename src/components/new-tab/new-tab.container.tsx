@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getSunsetTimeByLocation,
+  getNightPeriodByLocation,
   selectCustomWallpaper,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
-  selectSunset,
+  selectNightPeriod,
   selectWallpaper,
   setDarkMode,
   setIsDark
@@ -26,10 +26,10 @@ import { useTranslation } from "react-i18next";
 const NewTabContainer: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-  const sunset = useSelector(selectSunset);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
+  const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const customWallpaper = useSelector(selectCustomWallpaper);
 
@@ -41,12 +41,18 @@ const NewTabContainer: FC = () => {
     switch (darkMode) {
       case AUTO:
         const now = new Date();
-        const sunsetDate = sunset ? new Date(sunset) : null;
-        const sunsetDateCached =
-          sunsetDate && sunsetDate.toDateString() === now.toDateString();
+        const sunset = nightPeriod.sunset ? new Date(nightPeriod.sunset) : null;
+        const sunrise = nightPeriod.sunrise
+          ? new Date(nightPeriod.sunrise)
+          : null;
+        const nightPeriodCached =
+          sunset && sunrise && sunrise.toDateString() === now.toDateString();
 
-        if (sunsetDateCached) {
-          dispatch(setIsDark(sunsetDate.getTime() <= now.getTime()));
+        if (nightPeriodCached) {
+          const isNightPeriod =
+            sunrise.getTime() >= now.getTime() ||
+            sunset.getTime() <= now.getTime();
+          dispatch(setIsDark(isNightPeriod));
         } else {
           navigator.geolocation.getCurrentPosition(
             location => {
@@ -56,7 +62,7 @@ const NewTabContainer: FC = () => {
                   lat: coords.latitude,
                   lng: coords.longitude
                 };
-                dispatch(getSunsetTimeByLocation(coordinate));
+                dispatch(getNightPeriodByLocation(coordinate));
               } else {
                 dispatch(setDarkMode(MANUAL));
               }
@@ -69,7 +75,7 @@ const NewTabContainer: FC = () => {
         dispatch(setIsDark(isBrowserDarkModeEnabled()));
         break;
     }
-  }, [sunset, darkMode, dispatch]);
+  }, [nightPeriod, darkMode, dispatch]);
 
   return (
     <ConfigProvider

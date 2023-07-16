@@ -6,7 +6,6 @@ import i18n from "../localizations/i18n";
 import { checkForUpdates } from "./check-for-updates.constants";
 
 const defaultStore: Readonly<NewTabState> = {
-  sunset: null,
   isDark: false,
   update: {
     lastVersion: manifest.version,
@@ -15,6 +14,10 @@ const defaultStore: Readonly<NewTabState> = {
   },
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
+  nightPeriod: {
+    sunset: null,
+    sunrise: null
+  },
   searchEngine: YANDEX,
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,

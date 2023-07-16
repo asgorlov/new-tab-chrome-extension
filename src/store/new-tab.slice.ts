@@ -12,18 +12,21 @@ import { NewTabState } from "../models/new-tab-state.model";
 import { UpdateModel, UpdateResponseModel } from "../models/update.model";
 import { CustomWallpaper } from "../models/custom-wallpaper.model";
 import defaultStore from "../constants/default-store.constants";
+import { NightPeriod } from "../models/night-period.model";
 
 const initialState: NewTabState = await getInitStateFromChrome();
 
-export const getSunsetTimeByLocation = createAsyncThunk(
+export const getNightPeriodByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
-  async (coordinate: Coordinate): Promise<string> => {
+  async (coordinate: Coordinate): Promise<NightPeriod> => {
     const { data } = await axios.get(
       `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
     );
-    const sunset = new Date(data.results.sunset);
 
-    return sunset.toString();
+    return {
+      sunset: new Date(data.results.sunset).toString(),
+      sunrise: new Date(data.results.sunrise).toString()
+    };
   }
 );
 
@@ -131,11 +134,11 @@ export const newTabSlice = createSlice({
 
     builder.addCase(resetSettings.fulfilled, (state, action) => {
       const {
-        sunset,
         isDark,
         update,
         darkMode,
         wallpaper,
+        nightPeriod,
         searchEngine,
         searchEngines,
         currentLanguage,
@@ -143,11 +146,11 @@ export const newTabSlice = createSlice({
         customWallpaper
       } = action.payload;
 
-      state.sunset = sunset;
       state.isDark = isDark;
       state.update = update;
       state.darkMode = darkMode;
       state.wallpaper = wallpaper;
+      state.nightPeriod = nightPeriod;
       state.searchEngine = searchEngine;
       state.searchEngines = searchEngines;
       state.currentLanguage = currentLanguage;
@@ -155,15 +158,15 @@ export const newTabSlice = createSlice({
       state.customWallpaper = customWallpaper;
     });
 
-    builder.addCase(getSunsetTimeByLocation.fulfilled, (state, action) => {
-      state.sunset = action.payload;
-      setDataToChromeSyncStorage({ sunset: action.payload });
+    builder.addCase(getNightPeriodByLocation.fulfilled, (state, action) => {
+      state.nightPeriod = action.payload;
+      setDataToChromeSyncStorage({ nightPeriod: action.payload });
     });
   }
 });
 
-export const selectSunset = (state: RootState): string | null =>
-  state.newTab.sunset;
+export const selectNightPeriod = (state: RootState): NightPeriod =>
+  state.newTab.nightPeriod;
 export const selectIsDark = (state: RootState): boolean => state.newTab.isDark;
 export const selectDarkMode = (state: RootState): string =>
   state.newTab.darkMode;

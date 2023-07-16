@@ -1,14 +1,17 @@
+import { NightPeriod } from "../models/night-period.model";
+
 export const isBrowserDarkModeEnabled = (): boolean => {
   const mediaQueryString = "(prefers-color-scheme: dark)";
 
   return window.matchMedia(mediaQueryString).matches;
 };
 
-export const isSunsetTimeCached = (
-  sunset: string | null | undefined
-): boolean => {
+export const isSunsetTimeCached = (nightPeriod: NightPeriod): boolean => {
   const now = new Date();
-  const sunsetDate = sunset ? new Date(sunset) : null;
+  const sunset = nightPeriod.sunset ? new Date(nightPeriod.sunset) : null;
+  const sunrise = nightPeriod.sunrise ? new Date(nightPeriod.sunrise) : null;
 
-  return !!sunsetDate && sunsetDate.toDateString() === now.toDateString();
+  return Boolean(
+    sunset && sunrise && sunrise.toDateString() === now.toDateString()
+  );
 };
