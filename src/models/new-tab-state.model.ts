@@ -8,6 +8,7 @@ export interface NewTabState {
   darkMode: string;
   wallpaper: string;
   nightPeriod: NightPeriod;
+  checkLoading: boolean;
   searchEngine: string;
   searchEngines: string[];
   currentLanguage: string;

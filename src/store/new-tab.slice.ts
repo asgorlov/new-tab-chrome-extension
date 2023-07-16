@@ -32,7 +32,7 @@ export const getNightPeriodByLocation = createAsyncThunk(
 
 export const checkUpdates = createAsyncThunk(
   "api/manifest/get",
-  async (lastUpdateDate: number, thunkAPI): Promise<UpdateModel> => {
+  async (_, thunkAPI): Promise<UpdateModel> => {
     const state = thunkAPI.getState() as RootState;
     const lastVersion = state.newTab.update.lastVersion;
     const previousVersion = state.newTab.update.previousVersion;
@@ -44,7 +44,7 @@ export const checkUpdates = createAsyncThunk(
     return {
       lastVersion: data.version,
       showMessage: data.version > lastVersion,
-      lastUpdateDate: lastUpdateDate,
+      lastUpdateDate: Date.now(),
       previousVersion: previousVersion
     };
   }
@@ -117,10 +117,19 @@ export const newTabSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    builder.addCase(checkUpdates.pending, state => {
+      state.checkLoading = true;
+    });
+
+    builder.addCase(checkUpdates.rejected, state => {
+      state.checkLoading = false;
+    });
+
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
       const { lastUpdateDate, showMessage, lastVersion, previousVersion } =
         action.payload;
 
+      state.checkLoading = false;
       state.update.showMessage = showMessage;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
@@ -174,6 +183,8 @@ export const selectWallpaper = (state: RootState): string =>
   state.newTab.wallpaper;
 export const selectLastVersion = (state: RootState): string =>
   state.newTab.update.lastVersion;
+export const selectCheckLoading = (state: RootState): boolean =>
+  state.newTab.checkLoading;
 export const selectSearchEngine = (state: RootState): string =>
   state.newTab.searchEngine;
 export const selectSearchEngines = (state: RootState): string[] =>
@@ -184,12 +195,11 @@ export const selectCheckForUpdates = (state: RootState): string =>
   state.newTab.checkForUpdates;
 export const selectCurrentLanguage = (state: RootState): string =>
   state.newTab.currentLanguage;
-export const selectShowUpdateMessage = (state: RootState): boolean =>
-  state.newTab.update.showMessage;
 export const selectCustomWallpaper = (
   state: RootState
 ): CustomWallpaper | null => state.newTab.customWallpaper;
-
+export const selectShowUpdateMessage = (state: RootState): boolean =>
+  state.newTab.update.showMessage;
 export const {
   setIsDark,
   setDarkMode,

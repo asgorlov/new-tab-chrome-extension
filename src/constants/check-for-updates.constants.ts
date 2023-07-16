@@ -1,5 +1,5 @@
 export const checkForUpdates: Record<string, string> = {
-  OFF: "off",
+  MANUAL: "manual",
   DAY: "onceDay",
   WEEK: "onceWeek",
   MONTH: "onceMonth"

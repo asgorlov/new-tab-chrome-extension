@@ -46,10 +46,13 @@
     "info": {
       "message": "Update available",
       "description": "A new version {{lastVersion}} has been released",
-      "download": "Download"
+      "download": "Download",
+      "notFound": "No updates found",
+      "lastVersion": "You have the latest version {{lastVersion}} installed"
     },
-    "title": "Check for updates",
-    "off": "Off",
+    "title": "Updates",
+    "check": "Check",
+    "manual": "Manual",
     "onceDay": "Once a day",
     "onceWeek": "Once a week",
     "onceMonth": "Once a month"
