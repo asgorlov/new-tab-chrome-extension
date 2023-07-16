@@ -9,6 +9,7 @@ import {
 } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import CollapseComponent from "./collapse.component";
+import { SelectOption } from "../../../models/select-option.model";
 
 interface DarkModeSettingProps {
   isDark: boolean;
@@ -26,6 +27,17 @@ const DarkModeSettingComponent: FC<DarkModeSettingProps> = ({
   onChangeDarkModeCollapse
 }) => {
   const { t } = useTranslation();
+  const getOption = (option: string): SelectOption => {
+    return {
+      className: clsx(
+        "new-tab__settings-menu_dark-mode-content-dropdown-item",
+        { dark: isDark }
+      ),
+      value: option,
+      label: t(option),
+      key: option
+    };
+  };
 
   return (
     <CollapseComponent
@@ -45,17 +57,7 @@ const DarkModeSettingComponent: FC<DarkModeSettingProps> = ({
         disabled={darkMode === MANUAL && !navigator.geolocation}
         defaultValue={darkMode}
         onChange={onChangeDarkMode}
-        options={[AUTO, MANUAL, SYSTEM].map(option => {
-          return {
-            className: clsx(
-              "new-tab__settings-menu_dark-mode-content-dropdown-item",
-              { dark: isDark }
-            ),
-            value: option,
-            label: t(option),
-            key: option
-          };
-        })}
+        options={[AUTO, MANUAL, SYSTEM].map(option => getOption(option))}
       />
       <Switch
         className="new-tab__settings-menu_dark-mode-content-switcher"

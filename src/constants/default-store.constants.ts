@@ -18,6 +18,7 @@ const defaultStore: Readonly<NewTabState> = {
     sunset: null,
     sunrise: null
   },
+  checkLoading: false,
   searchEngine: YANDEX,
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,

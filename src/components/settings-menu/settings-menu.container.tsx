@@ -15,7 +15,12 @@ import {
   setDarkMode,
   setIsDark,
   setSearchEngines,
-  setWallpaper
+  setWallpaper,
+  selectCheckForUpdates,
+  selectCheckLoading,
+  checkUpdates,
+  selectLastVersion,
+  selectShowUpdateMessage
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -27,10 +32,19 @@ const SettingsMenuContainer: FC = () => {
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
+  const checkMode = useSelector(selectCheckForUpdates);
+  const showMessage = useSelector(selectShowUpdateMessage);
+  const lastVersion = useSelector(selectLastVersion);
   const nightPeriod = useSelector(selectNightPeriod);
+  const checkLoading = useSelector(selectCheckLoading);
   const searchEngine = useSelector(selectSearchEngine);
   const customWallpaper = useSelector(selectCustomWallpaper);
   const searchEngineNames = useSelector(selectSearchEngines);
+
+  const manualCheckUpdates = useCallback(
+    () => dispatch(checkUpdates()),
+    [dispatch]
+  );
 
   const changeWallpaper = useCallback(
     (v: string) => dispatch(setWallpaper(v)),
@@ -90,10 +104,15 @@ const SettingsMenuContainer: FC = () => {
       searchEngineNames={searchEngineNames}
       customWallpaper={customWallpaper}
       searchEngine={searchEngine}
+      checkLoading={checkLoading}
+      lastVersion={lastVersion}
+      showMessage={showMessage}
       wallpaper={wallpaper}
+      checkMode={checkMode}
       darkMode={darkMode}
       isDark={isDark}
       setWallpaper={changeWallpaper}
+      onClickUpdates={manualCheckUpdates}
       setCustomWallpaper={changeCustomWallpaper}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}

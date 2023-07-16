@@ -95,6 +95,34 @@
   }
 }
 
+.setting-menu-selector() {
+  min-width: 105px;
+
+  &>.ant-select-arrow {
+    transition: @fast-transition;
+  }
+
+  &.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    transition: @slow-transition;
+  }
+}
+
+.setting-menu-dropdown() {
+  &-item {
+    .dark-select-dropdown-item();
+  }
+
+  &.dark {
+    .dark-box-shadow();
+  }
+
+  &.ant-select-dropdown {
+    & .dark.ant-select-item-option-active:not(.ant-select-item-option-selected) {
+      background-color: @dark-background-backlight;
+    }
+  }
+}
+
 .dark-select-dropdown-item() {
   .ant-select-item-option-content {
     transition: color @fast-transition;
