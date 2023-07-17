@@ -35,7 +35,7 @@ const UpdateContainer: FC = () => {
 
   useEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {
-      dispatch(checkUpdates(lastUpdateDate));
+      dispatch(checkUpdates());
     }
   }, [checkMode, lastUpdateDate, dispatch]);
 

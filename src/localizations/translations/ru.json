@@ -7,6 +7,23 @@
   "anonymous": "Анонимно",
   "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
+  "wallpaper": {
+    "title": "Фон",
+    "forBothThemes": "Для обеих тем",
+    "uploadForLight": "Светлая тема",
+    "uploadForDark": "Темная тема",
+    "uploadForBoth": "Светлая и темная тема",
+    "uploading": "Загрузите свой фон",
+    "default": "Стандартный",
+    "mountains": "Тихие горы",
+    "ocean": "Спокойный океан",
+    "field": "Зеленое поле",
+    "custom": "Пользовательский",
+    "ok": "Ок",
+    "cancel": "Отмена",
+    "unacceptableFormat": "Недопустимый формат изображения",
+    "unacceptableSize": "Размер изображения не может быть больше 2.5Мб"
+  },
   "turnOn": "Вкл.",
   "turnOff": "Выкл.",
   "auto": "Авто",
@@ -29,10 +46,13 @@
     "info": {
       "message": "Доступно обновление",
       "description": "Появилась новая версия {{lastVersion}}",
-      "download": "Скачать"
+      "download": "Скачать",
+      "notFound": "Обновлений не найдено",
+      "lastVersion": "На данный момент у вас установлена актуальная версия {{lastVersion}}"
     },
-    "title": "Проверка обновлений",
-    "off": "Отключена",
+    "title": "Обновления",
+    "check": "Проверить",
+    "manual": "Вручную",
     "onceDay": "Раз в день",
     "onceWeek": "Раз в неделю",
     "onceMonth": "Раз в месяц"

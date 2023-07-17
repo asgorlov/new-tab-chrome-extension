@@ -14,10 +14,113 @@
   transition: border-color @slow-transition, color @fast-transition;
 }
 
+.settings-menu-collapse-dark() {
+  &.dark {
+    .ant-collapse-expand-icon {
+      color: @light-color;
+    }
+  }
+}
+
+.settings-menu-regular-dark() {
+  transition: border-color @slow-transition, color @fast-transition;
+  border-color: @dark-border-color;
+  color: @light-color;
+
+  svg {
+    transition: @fast-transition;
+  }
+}
+
+.settings-menu-collapse-header-item() {
+  transition: @fast-transition;
+  .settings-menu-header-item();
+
+  &.dark {
+    color: @light-color;
+
+    svg {
+      stroke: @light-color;
+      fill: @light-color;
+    }
+  }
+}
+
+.settings-menu-regular-header-item() {
+  .settings-menu-header-item();
+
+  svg {
+    transition: @fast-transition;
+  }
+}
+
 .settings-menu-header-item() {
   display: flex;
   align-items: center;
   font-weight: 500;
+
+  svg {
+    margin-right: 4px;
+  }
+}
+
+.setting-menu-selection-item-dark() {
+  &>.ant-select-selector {
+    &>.ant-select-selection-item {
+      transition: @fast-transition;
+      color: @light-color;
+    }
+  }
+}
+
+.setting-menu-select-selector-dark() {
+  &>.ant-select-selector {
+    border-color: @dark-border-color;
+    transition: @slow-transition;
+    background-color: @dark-color;
+
+    &>.ant-select-selection-item {
+      transition: @fast-transition;
+      color: @light-color;
+    }
+  }
+
+  &>.ant-select-arrow {
+    transition: @fast-transition;
+    color: @light-color;
+
+    &>.anticon {
+      transition: @fast-transition;
+    }
+  }
+}
+
+.setting-menu-selector() {
+  min-width: 105px;
+
+  &>.ant-select-arrow {
+    transition: @fast-transition;
+  }
+
+  &.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    transition: @slow-transition;
+  }
+}
+
+.setting-menu-dropdown() {
+  &-item {
+    .dark-select-dropdown-item();
+  }
+
+  &.dark {
+    .dark-box-shadow();
+  }
+
+  &.ant-select-dropdown {
+    & .dark.ant-select-item-option-active:not(.ant-select-item-option-selected) {
+      background-color: @dark-background-backlight;
+    }
+  }
 }
 
 .dark-select-dropdown-item() {
@@ -43,4 +146,9 @@
 .open-update-popup {
   transition: 0.3s;
   right: 0;
+}
+
+.settings-menu-icon(@color) {
+  transition: @fast-transition;
+  fill: @color;
 }

@@ -2,28 +2,59 @@ import React, { FC, useCallback } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
-  getSunsetTimeByLocation,
+  getNightPeriodByLocation,
+  selectCustomWallpaper,
   selectDarkMode,
   selectIsDark,
   selectSearchEngine,
   selectSearchEngines,
-  selectSunset,
+  selectNightPeriod,
+  selectWallpaper,
   setCheckForUpdates,
+  setCustomWallpaper,
   setDarkMode,
   setIsDark,
-  setSearchEngines
+  setSearchEngines,
+  setWallpaper,
+  selectCheckForUpdates,
+  selectCheckLoading,
+  checkUpdates,
+  selectLastVersion,
+  selectShowUpdateMessage
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
+import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const sunset = useSelector(selectSunset);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
+  const wallpaper = useSelector(selectWallpaper);
+  const checkMode = useSelector(selectCheckForUpdates);
+  const showMessage = useSelector(selectShowUpdateMessage);
+  const lastVersion = useSelector(selectLastVersion);
+  const nightPeriod = useSelector(selectNightPeriod);
+  const checkLoading = useSelector(selectCheckLoading);
   const searchEngine = useSelector(selectSearchEngine);
+  const customWallpaper = useSelector(selectCustomWallpaper);
   const searchEngineNames = useSelector(selectSearchEngines);
+
+  const manualCheckUpdates = useCallback(
+    () => dispatch(checkUpdates()),
+    [dispatch]
+  );
+
+  const changeWallpaper = useCallback(
+    (v: string) => dispatch(setWallpaper(v)),
+    [dispatch]
+  );
+
+  const changeCustomWallpaper = useCallback(
+    (v: CustomWallpaper | null) => dispatch(setCustomWallpaper(v)),
+    [dispatch]
+  );
 
   const toggleDarkHandler = useCallback(
     () => dispatch(setIsDark(!isDark)),
@@ -52,7 +83,7 @@ const SettingsMenuContainer: FC = () => {
 
   const changeDarkModeCollapseHandler = useCallback(
     (key: string | string[]) => {
-      if (key.length && !isSunsetTimeCached(sunset)) {
+      if (key.length && !isSunsetTimeCached(nightPeriod)) {
         navigator.geolocation.getCurrentPosition(location => {
           const coords = location?.coords;
           if (coords && coords.latitude && coords.longitude) {
@@ -60,20 +91,29 @@ const SettingsMenuContainer: FC = () => {
               lat: coords.latitude,
               lng: coords.longitude
             };
-            dispatch(getSunsetTimeByLocation(coordinate));
+            dispatch(getNightPeriodByLocation(coordinate));
           }
         });
       }
     },
-    [sunset, dispatch]
+    [nightPeriod, dispatch]
   );
 
   return (
     <SettingsMenuComponent
       searchEngineNames={searchEngineNames}
+      customWallpaper={customWallpaper}
       searchEngine={searchEngine}
+      checkLoading={checkLoading}
+      lastVersion={lastVersion}
+      showMessage={showMessage}
+      wallpaper={wallpaper}
+      checkMode={checkMode}
       darkMode={darkMode}
       isDark={isDark}
+      setWallpaper={changeWallpaper}
+      onClickUpdates={manualCheckUpdates}
+      setCustomWallpaper={changeCustomWallpaper}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}

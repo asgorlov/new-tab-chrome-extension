@@ -3,34 +3,22 @@
 
 .new-tab__settings-menu_language {
   .setting-item-container();
+  border-bottom: 1px solid @light-border-color;
 
   &.dark {
-    transition: border-color @slow-transition, color @fast-transition;
-    border-color: @dark-border-color;
-    color: @light-color;
+    .settings-menu-regular-dark();
 
     &>.new-tab__settings-menu_language-selector {
-      &>.ant-select-selector {
-        &>.ant-select-selection-item {
-          transition: @fast-transition;
-          color: @light-color;
-        }
-      }
+      .setting-menu-selection-item-dark();
     }
 
     svg {
-      transition: @fast-transition;
       stroke: @light-color;
     }
   }
 
   &-header {
-    .settings-menu-header-item();
-
-    svg {
-      transition: @fast-transition;
-      margin: 0 4px;
-    }
+    .settings-menu-regular-header-item();
   }
 
   &-selector {

@@ -3,6 +3,7 @@ import {
   AOL,
   BING,
   BRAVE,
+  ECOSIA,
   GIBIRU,
   LYCOS,
   NIGMA,
@@ -10,7 +11,7 @@ import {
   YAHOO,
   YOUCOM
 } from "../constants/search-engine.constants";
-import { setDataToChrome } from "./chrome.utils";
+import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
@@ -39,7 +40,7 @@ export const getDownloadLink = (version: string) => {
 export const updateStateWithFeatures = (data: NewTabState) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChrome({ update: data.update });
+    setDataToChromeSyncStorage({ update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -51,10 +52,10 @@ export const updateStateWithFeatures = (data: NewTabState) => {
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
-    setDataToChrome({ searchEngines: data.searchEngines });
+    setDataToChromeSyncStorage({ searchEngines: data.searchEngines });
 
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChrome({ update: data.update });
+    setDataToChromeSyncStorage({ update: data.update });
   }
 };
 
@@ -76,7 +77,9 @@ const getLastVersionFeaturesRegardingPrevious = (
         NIGMA
       ]
     };
-  } else if (previousVersion === "2.3.0") {
+  }
+
+  if (previousVersion === "2.3.0") {
     return {
       searchEngines: [
         YAHOO,
@@ -89,13 +92,23 @@ const getLastVersionFeaturesRegardingPrevious = (
         NIGMA
       ]
     };
-  } else if (previousVersion === "2.4.0") {
+  }
+
+  if (previousVersion === "2.4.0") {
     return {
       searchEngines: [BRAVE, SWISSCOWS, AOL, YOUCOM, GIBIRU, LYCOS, NIGMA]
     };
-  } else if (previousVersion <= "3.0.2") {
+  }
+
+  if (previousVersion <= "3.0.2") {
     return {
       searchEngines: [LYCOS, NIGMA]
+    };
+  }
+
+  if (previousVersion === "3.1.0") {
+    return {
+      searchEngines: [ECOSIA]
     };
   }
 

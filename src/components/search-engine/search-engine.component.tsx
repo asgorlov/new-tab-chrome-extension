@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  ECOSIA,
   NIGMA,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
@@ -83,6 +84,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
           autoComplete="off"
           maxLength={400}
           name={getInputName(searchEngine)}
+          required={searchEngine === ECOSIA}
         />
         <Button
           className={clsx("new-tab__search-engine_button", searchEngine)}
