@@ -77,7 +77,9 @@ const getLastVersionFeaturesRegardingPrevious = (
         NIGMA
       ]
     };
-  } else if (previousVersion === "2.3.0") {
+  }
+
+  if (previousVersion === "2.3.0") {
     return {
       searchEngines: [
         YAHOO,
@@ -90,15 +92,21 @@ const getLastVersionFeaturesRegardingPrevious = (
         NIGMA
       ]
     };
-  } else if (previousVersion === "2.4.0") {
+  }
+
+  if (previousVersion === "2.4.0") {
     return {
       searchEngines: [BRAVE, SWISSCOWS, AOL, YOUCOM, GIBIRU, LYCOS, NIGMA]
     };
-  } else if (previousVersion <= "3.0.2") {
+  }
+
+  if (previousVersion <= "3.0.2") {
     return {
       searchEngines: [LYCOS, NIGMA]
     };
-  } else if (previousVersion === "3.1.0") {
+  }
+
+  if (previousVersion === "3.1.0") {
     return {
       searchEngines: [ECOSIA]
     };
