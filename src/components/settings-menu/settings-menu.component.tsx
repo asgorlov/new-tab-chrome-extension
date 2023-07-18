@@ -16,7 +16,6 @@ interface DarkModeComponentProps {
   darkMode: string;
   checkMode: string;
   wallpaper: string;
-  showMessage: boolean;
   lastVersion: string;
   checkLoading: boolean;
   searchEngine: string;
@@ -38,7 +37,6 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   darkMode,
   checkMode,
   wallpaper,
-  showMessage,
   lastVersion,
   checkLoading,
   searchEngine,
@@ -105,7 +103,6 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
           isDark={isDark}
           loading={checkLoading}
           checkMode={checkMode}
-          showMessage={showMessage}
           lastVersion={lastVersion}
           onClickUpdates={onClickUpdates}
           onChangeCheckMode={onChangeCheckForUpdates}

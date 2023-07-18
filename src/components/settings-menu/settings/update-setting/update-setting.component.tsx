@@ -4,7 +4,10 @@ import { ReactComponent as UpdateIcon } from "../../../../static/svgs/menu-setti
 import { Button, Popover, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { CloudDownloadOutlined } from "@ant-design/icons";
-import { checkForUpdates } from "../../../../constants/check-for-updates.constants";
+import {
+  checkForUpdates,
+  CURRENT_EXT_VERSION
+} from "../../../../constants/update.constants";
 import CollapseComponent from "../collapse.component";
 import { SelectOption } from "../../../../models/select-option.model";
 
@@ -12,7 +15,6 @@ interface UpdateSettingComponentProps {
   isDark: boolean;
   loading: boolean;
   checkMode: string;
-  lastVersion: string;
   isPopoverOpen: boolean;
   onClickUpdates: () => void;
   onChangeCheckMode: (value: string) => void;
@@ -23,7 +25,6 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
   isDark,
   loading,
   checkMode,
-  lastVersion,
   isPopoverOpen,
   onClickUpdates,
   onChangeCheckMode,
@@ -65,7 +66,9 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
         destroyTooltipOnHide={true}
         overlayStyle={{ width: "200px" }}
         title={t("update.info.notFound")}
-        content={t("update.info.lastVersion", { lastVersion })}
+        content={t("update.info.actualVersion", {
+          actualVersion: CURRENT_EXT_VERSION
+        })}
         trigger="click"
         onOpenChange={onOpenPopoverChange}
         getPopupContainer={() =>

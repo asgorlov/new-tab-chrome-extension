@@ -70,7 +70,7 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
 
       setWallpaper(name);
     },
-    [setWallpaper]
+    [setWallpaper, setCustomWallpaper]
   );
   const handleClickCheckbox = useCallback(
     () => setOneToBoth(!oneToBoth),
