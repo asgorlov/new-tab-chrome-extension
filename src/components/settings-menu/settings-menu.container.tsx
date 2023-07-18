@@ -19,8 +19,7 @@ import {
   selectCheckForUpdates,
   selectCheckLoading,
   checkUpdates,
-  selectLastVersion,
-  selectShowUpdateMessage
+  selectLastVersion
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -33,7 +32,6 @@ const SettingsMenuContainer: FC = () => {
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
   const checkMode = useSelector(selectCheckForUpdates);
-  const showMessage = useSelector(selectShowUpdateMessage);
   const lastVersion = useSelector(selectLastVersion);
   const nightPeriod = useSelector(selectNightPeriod);
   const checkLoading = useSelector(selectCheckLoading);
@@ -106,7 +104,6 @@ const SettingsMenuContainer: FC = () => {
       searchEngine={searchEngine}
       checkLoading={checkLoading}
       lastVersion={lastVersion}
-      showMessage={showMessage}
       wallpaper={wallpaper}
       checkMode={checkMode}
       darkMode={darkMode}

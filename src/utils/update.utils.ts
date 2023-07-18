@@ -1,4 +1,4 @@
-import { checkForUpdates } from "../constants/check-for-updates.constants";
+import { checkForUpdates } from "../constants/update.constants";
 import {
   AOL,
   BING,
@@ -44,7 +44,7 @@ export const updateStateWithFeatures = (data: NewTabState) => {
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
-    const features = getLastVersionFeaturesRegardingPrevious(
+    const features = getDeltaChanges(
       data.update.lastVersion,
       data.update.previousVersion
     );
@@ -52,14 +52,17 @@ export const updateStateWithFeatures = (data: NewTabState) => {
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
-    setDataToChromeSyncStorage({ searchEngines: data.searchEngines });
 
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChromeSyncStorage({ update: data.update });
+
+    setDataToChromeSyncStorage({
+      searchEngines: data.searchEngines,
+      update: data.update
+    });
   }
 };
 
-const getLastVersionFeaturesRegardingPrevious = (
+const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {

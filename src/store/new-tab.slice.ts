@@ -13,6 +13,7 @@ import { UpdateModel, UpdateResponseModel } from "../models/update.model";
 import { CustomWallpaper } from "../models/custom-wallpaper.model";
 import defaultStore from "../constants/default-store.constants";
 import { NightPeriod } from "../models/night-period.model";
+import { CURRENT_EXT_VERSION } from "../constants/update.constants";
 
 const initialState: NewTabState = await getInitStateFromChrome();
 
@@ -32,20 +33,15 @@ export const getNightPeriodByLocation = createAsyncThunk(
 
 export const checkUpdates = createAsyncThunk(
   "api/manifest/get",
-  async (_, thunkAPI): Promise<UpdateModel> => {
-    const state = thunkAPI.getState() as RootState;
-    const lastVersion = state.newTab.update.lastVersion;
-    const previousVersion = state.newTab.update.previousVersion;
-
+  async (): Promise<UpdateModel> => {
     const { data } = await axios.get<UpdateResponseModel>(
       "https://raw.githubusercontent.com/asgorlov/new-tab-chrome-extension/main/public/manifest.json"
     );
 
     return {
       lastVersion: data.version,
-      showMessage: data.version > lastVersion,
-      lastUpdateDate: Date.now(),
-      previousVersion: previousVersion
+      showMessage: data.version > CURRENT_EXT_VERSION,
+      lastUpdateDate: Date.now()
     };
   }
 );
@@ -126,14 +122,12 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
-      const { lastUpdateDate, showMessage, lastVersion, previousVersion } =
-        action.payload;
+      const { lastUpdateDate, showMessage, lastVersion } = action.payload;
 
       state.checkLoading = false;
       state.update.showMessage = showMessage;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
-      state.update.previousVersion = previousVersion;
       setDataToChromeSyncStorage({ update: state.update });
     });
 
