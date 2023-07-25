@@ -1,61 +1,75 @@
 import React, { FC, MouseEvent } from "react";
 import clsx from "clsx";
-import { DragAndDropModel } from "../../models/drag-and-drop.model";
-import { useSelector } from "react-redux";
-import { selectCurrentLanguage } from "../../store/new-tab.slice";
+import {
+  Draggable,
+  DroppableProvided,
+  DraggableProvided,
+  DraggableStateSnapshot
+} from "react-beautiful-dnd";
 import { YANDEX } from "../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
+import StrictModeDroppable from "../../utils/strict-mode-droppable";
 
 interface SearchSelectedComponentProps {
   searchEngineNames: string[];
+  currentLanguage: string;
   searchEngine: string;
-  draggedItem: DragAndDropModel;
-  onDragLeave: () => void;
-  onDragStart: (event: MouseEvent) => void;
-  onDragOver: (event: MouseEvent) => void;
   onClick: (event: MouseEvent) => void;
-  onDrop: () => void;
 }
 
 const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   searchEngineNames,
+  currentLanguage,
   searchEngine,
-  draggedItem,
-  onDragLeave,
-  onDragStart,
-  onDragOver,
-  onClick,
-  onDrop
+  onClick
 }) => {
   const { t } = useTranslation();
-  const currentLanguage = useSelector(selectCurrentLanguage);
+  const getItemClassName = (itemName: string): string => {
+    return clsx(
+      "new-tab__search-engine-selector-item",
+      itemName === YANDEX && currentLanguage !== "ru"
+        ? itemName + "-en"
+        : itemName,
+      { selected: searchEngine === itemName }
+    );
+  };
 
   return (
-    <div className="new-tab__search-engine-selector">
-      {searchEngineNames.map((name: string, index: number) => (
+    <StrictModeDroppable
+      droppableId="search-engine-selector"
+      direction="horizontal"
+    >
+      {(dropProvided: DroppableProvided) => (
         <div
-          data-name={name}
-          data-position={index}
-          draggable={true}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-          onDragStart={onDragStart}
-          onDragLeave={onDragLeave}
-          className={clsx(
-            "new-tab__search-engine-selector-item",
-            name === YANDEX && currentLanguage !== "ru" ? name + "-en" : name,
-            { selected: searchEngine === name },
-            {
-              dragged:
-                draggedItem.draggedTo != null && draggedItem.draggedTo === index
-            }
-          )}
-          onClick={onClick}
-          title={t(`searchEngine.${name}`)}
-          key={name}
-        />
-      ))}
-    </div>
+          className="new-tab__search-engine-selector"
+          ref={dropProvided.innerRef}
+          {...dropProvided.droppableProps}
+        >
+          {searchEngineNames.map((name: string, index: number) => (
+            <Draggable key={name} draggableId={name} index={index}>
+              {(
+                dragProvided: DraggableProvided,
+                dragSnapshot: DraggableStateSnapshot
+              ) => (
+                <div
+                  ref={dragProvided.innerRef}
+                  {...dragProvided.draggableProps}
+                  {...dragProvided.dragHandleProps}
+                  className={getItemClassName(name)}
+                  style={{
+                    ...dragProvided.draggableProps.style,
+                    cursor: dragSnapshot.isDragging ? "grabbing" : "pointer"
+                  }}
+                  title={t(`searchEngine.${name}`)}
+                  onClick={onClick}
+                />
+              )}
+            </Draggable>
+          ))}
+          {dropProvided.placeholder}
+        </div>
+      )}
+    </StrictModeDroppable>
   );
 };
 
