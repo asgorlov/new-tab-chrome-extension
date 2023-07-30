@@ -76,6 +76,11 @@
     "removeAll": "Remove all"
   },
   "tour": {
+    "button": {
+      "next": "Next",
+      "previous": "Previous",
+      "finish": "Close"
+    },
     "step1": {
       "title": "Search engine",
       "description": "Use the search query form to find the necessary information. You can go to the search engine page by clicking on the logo."

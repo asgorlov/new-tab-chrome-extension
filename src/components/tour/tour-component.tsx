@@ -33,7 +33,10 @@ const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
         title: t("tour.step1.title"),
         description: t("tour.step1.description"),
         placement: "bottom",
-        target: () => tourCtx?.searchEngineRef.current
+        target: () => tourCtx?.searchEngineRef.current,
+        nextButtonProps: {
+          children: t("tour.button.next")
+        }
       },
       {
         title: t("tour.step2.title"),
@@ -41,7 +44,11 @@ const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
         placement: "top",
         target: () => tourCtx?.searchEngineSelectorRef.current,
         nextButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(true))
+          onClick: () => dispatch(setIsOpenMenu(true)),
+          children: t("tour.button.next")
+        },
+        prevButtonProps: {
+          children: t("tour.button.previous")
         }
       },
       {
@@ -54,10 +61,12 @@ const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
             : null;
         },
         prevButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(false))
+          onClick: () => dispatch(setIsOpenMenu(false)),
+          children: t("tour.button.previous")
         },
         nextButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(false))
+          onClick: () => dispatch(setIsOpenMenu(false)),
+          children: t("tour.button.finish")
         }
       }
     ] as TourStepProps[];
