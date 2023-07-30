@@ -10,10 +10,10 @@ interface TourContextProviderProps {
 }
 
 const TourContextProvider: FC<TourContextProviderProps> = ({ children }) => {
-  const tourContext = {
+  const tourContext: TourContextModel = {
     searchEngineRef: useRef<HTMLDivElement>(),
-    settingsMenuClass: "",
-    searchEngineSelectorRef: useRef<HTMLDivElement>()
+    searchEngineSelectorRef: useRef<HTMLDivElement>(),
+    settingsMenuContainerClass: ""
   };
 
   return <TourContext.Provider value={tourContext} children={children} />;
