@@ -23,9 +23,11 @@ export const getDataFromChrome = async (): Promise<NewTabState> => {
   if (chrome?.storage) {
     data = (await chrome.storage.sync.get(defaultStore)) as NewTabState;
     const localData = (await chrome.storage.local.get({
+      showTour: true,
       customWallpaper: null
     })) as NewTabState;
 
+    data.showTour = localData.showTour;
     data.customWallpaper = localData.customWallpaper;
   } else {
     data = { ...defaultStore };

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useContext, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
@@ -27,12 +27,19 @@ import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 import { useSelector } from "react-redux";
-import { selectIsDark, selectSearchEngine } from "../../store/new-tab.slice";
+import {
+  selectCurrentLanguage,
+  selectIsDark,
+  selectSearchEngine
+} from "../../store/new-tab.slice";
+import { TourContext } from "../../contexts/tour.context";
 
 const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
   const isDark = useSelector(selectIsDark);
+  const tourCtx = useContext(TourContext);
   const searchEngine = useSelector(selectSearchEngine);
+  const currentLanguage = useSelector(selectCurrentLanguage);
 
   const buttonLabel = useMemo(() => {
     switch (searchEngine) {
@@ -78,8 +85,10 @@ const SearchEngineContainer: FC = () => {
 
   return (
     <SearchEngineComponent
+      currentLanguage={currentLanguage}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
+      tourCtx={tourCtx}
       isDark={isDark}
     />
   );

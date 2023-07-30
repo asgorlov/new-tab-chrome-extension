@@ -9,7 +9,8 @@ import {
   selectNightPeriod,
   selectWallpaper,
   setDarkMode,
-  setIsDark
+  setIsDark,
+  selectShowTour
 } from "../../store/new-tab.slice";
 import { AppDispatch } from "../../store/store";
 import NewTabComponent from "./new-tab.component";
@@ -28,6 +29,7 @@ const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
+  const showTour = useSelector(selectShowTour);
   const wallpaper = useSelector(selectWallpaper);
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
@@ -87,6 +89,7 @@ const NewTabContainer: FC = () => {
     >
       <NewTabComponent
         isDark={isDark}
+        showTour={showTour}
         wallpaper={wallpaper}
         customWallpaper={customWallpaper}
       />

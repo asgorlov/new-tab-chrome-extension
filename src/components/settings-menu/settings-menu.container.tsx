@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useContext } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
   changeLanguage,
@@ -19,19 +19,24 @@ import {
   selectCheckForUpdates,
   selectCheckLoading,
   checkUpdates,
-  selectLastVersion
+  selectLastVersion,
+  selectIsOpenMenu,
+  setIsOpenMenu
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
+import { TourContext } from "../../contexts/tour.context";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const tourCtx = useContext(TourContext);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
   const checkMode = useSelector(selectCheckForUpdates);
+  const isOpenMenu = useSelector(selectIsOpenMenu);
   const lastVersion = useSelector(selectLastVersion);
   const nightPeriod = useSelector(selectNightPeriod);
   const checkLoading = useSelector(selectCheckLoading);
@@ -51,6 +56,13 @@ const SettingsMenuContainer: FC = () => {
 
   const changeCustomWallpaper = useCallback(
     (v: CustomWallpaper | null) => dispatch(setCustomWallpaper(v)),
+    [dispatch]
+  );
+
+  const changeIsOpenMenu = useCallback(
+    (v: boolean) => {
+      dispatch(setIsOpenMenu(v));
+    },
     [dispatch]
   );
 
@@ -104,16 +116,19 @@ const SettingsMenuContainer: FC = () => {
       searchEngine={searchEngine}
       checkLoading={checkLoading}
       lastVersion={lastVersion}
+      isOpenMenu={isOpenMenu}
       wallpaper={wallpaper}
       checkMode={checkMode}
       darkMode={darkMode}
+      tourCtx={tourCtx}
       isDark={isDark}
       setWallpaper={changeWallpaper}
+      setIsOpenMenu={changeIsOpenMenu}
       onClickUpdates={manualCheckUpdates}
-      setCustomWallpaper={changeCustomWallpaper}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
+      setCustomWallpaper={changeCustomWallpaper}
       onChangeSearchEngines={changeSearchEnginesHandler}
       onChangeCheckForUpdates={changeCheckForUpdatesHandler}
       onChangeDarkModeCollapse={changeDarkModeCollapseHandler}

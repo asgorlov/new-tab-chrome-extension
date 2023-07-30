@@ -15,85 +15,98 @@ import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/sw
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
-import { useSelector } from "react-redux";
-import { selectCurrentLanguage } from "../../store/new-tab.slice";
+import { TourContextModel } from "../../models/tour-context.model";
 
 interface SearchEngineProps {
+  currentLanguage: string;
   searchEngine: string;
   buttonLabel: ReactNode;
+  tourCtx?: TourContextModel;
   isDark: boolean;
 }
 
 const SearchEngineComponent: FC<SearchEngineProps> = ({
+  currentLanguage,
   searchEngine,
   buttonLabel,
+  tourCtx,
   isDark
 }) => {
   const { t } = useTranslation();
-  const currentLanguage = useSelector(selectCurrentLanguage);
+
+  const setRef = (ref: HTMLDivElement | null) => {
+    if (tourCtx) {
+      tourCtx.searchEngineRef.current = ref;
+    }
+  };
 
   return (
     <div className="new-tab__search-engine">
-      <Link
-        className={clsx(
-          "new-tab__search-engine_logo",
-          searchEngine,
-          { en: searchEngine === YANDEX && currentLanguage !== "ru" },
-          { dark: isDark }
-        )}
-        href={SEARCH_ENGINE_LINKS[searchEngine]}
-      />
-      <div
-        className={clsx(
-          "new-tab__search-engine_form-background",
-          searchEngine,
-          { dark: isDark }
-        )}
-      >
+      <div className="new-tab__search-engine-container" ref={setRef}>
+        <Link
+          className={clsx(
+            "new-tab__search-engine_logo",
+            searchEngine,
+            { en: searchEngine === YANDEX && currentLanguage !== "ru" },
+            { dark: isDark }
+          )}
+          href={SEARCH_ENGINE_LINKS[searchEngine]}
+        />
         <div
-          className={clsx("new-tab__search-engine_form-background-text-group", {
-            dark: isDark
-          })}
+          className={clsx(
+            "new-tab__search-engine_form-background",
+            searchEngine,
+            { dark: isDark }
+          )}
         >
-          <div className="new-tab__search-engine_form-background-text-item">
-            <NoTrackingIcon />
-            {t("noTracking")}
-          </div>
-          <div className="new-tab__search-engine_form-background-text-item">
-            <AnonymousIcon />
-            {t("anonymous")}
-          </div>
-          <div className="new-tab__search-engine_form-background-text-item">
-            <ForFamilyIcon />
-            {t("familyFriendly")}
+          <div
+            className={clsx(
+              "new-tab__search-engine_form-background-text-group",
+              {
+                dark: isDark
+              }
+            )}
+          >
+            <div className="new-tab__search-engine_form-background-text-item">
+              <NoTrackingIcon />
+              {t("noTracking")}
+            </div>
+            <div className="new-tab__search-engine_form-background-text-item">
+              <AnonymousIcon />
+              {t("anonymous")}
+            </div>
+            <div className="new-tab__search-engine_form-background-text-item">
+              <ForFamilyIcon />
+              {t("familyFriendly")}
+            </div>
           </div>
         </div>
-      </div>
-      <form
-        className={clsx("new-tab__search-engine_form", searchEngine, {
-          dark: isDark
-        })}
-        action={SEARCH_QUERY_LINKS[searchEngine]}
-      >
-        <Input
-          className={clsx("new-tab__search-engine_input", searchEngine, {
-            dark: isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
+        <form
+          className={clsx("new-tab__search-engine_form", searchEngine, {
+            dark: isDark
           })}
-          placeholder={t("searchQuery")}
-          tabIndex={1}
-          autoComplete="off"
-          maxLength={400}
-          name={getInputName(searchEngine)}
-          required={searchEngine === ECOSIA}
-        />
-        <Button
-          className={clsx("new-tab__search-engine_button", searchEngine)}
-          htmlType="submit"
-          type="text"
-          tabIndex={2}
-          children={buttonLabel}
-        />
-      </form>
+          action={SEARCH_QUERY_LINKS[searchEngine]}
+        >
+          <Input
+            className={clsx("new-tab__search-engine_input", searchEngine, {
+              dark: isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
+            })}
+            placeholder={t("searchQuery")}
+            tabIndex={1}
+            autoComplete="off"
+            maxLength={400}
+            name={getInputName(searchEngine)}
+            required={searchEngine === ECOSIA}
+          />
+          <Button
+            className={clsx("new-tab__search-engine_button", searchEngine)}
+            htmlType="submit"
+            type="text"
+            tabIndex={2}
+            children={buttonLabel}
+          />
+        </form>
+      </div>
     </div>
   );
 };

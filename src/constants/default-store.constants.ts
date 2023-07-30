@@ -11,6 +11,7 @@ const defaultStore: Readonly<NewTabState> = {
     showMessage: false,
     lastUpdateDate: Date.now()
   },
+  showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
   nightPeriod: {
