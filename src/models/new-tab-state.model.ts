@@ -5,8 +5,10 @@ import { NightPeriod } from "./night-period.model";
 export interface NewTabState {
   isDark: boolean;
   update: UpdateModel;
+  showTour: boolean;
   darkMode: string;
   wallpaper: string;
+  isOpenMenu?: boolean;
   nightPeriod: NightPeriod;
   checkLoading: boolean;
   searchEngine: string;

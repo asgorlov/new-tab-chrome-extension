@@ -83,6 +83,10 @@ export const newTabSlice = createSlice({
       state.isDark = action.payload;
       setDataToChromeSyncStorage({ isDark: action.payload });
     },
+    setShowTour(state, action) {
+      state.showTour = action.payload;
+      setDataToChromeLocalStorage({ showTour: action.payload });
+    },
     setDarkMode(state, action) {
       state.darkMode = action.payload;
       setDataToChromeSyncStorage({ darkMode: action.payload });
@@ -90,6 +94,9 @@ export const newTabSlice = createSlice({
     setWallpaper(state, action) {
       state.wallpaper = action.payload;
       setDataToChromeSyncStorage({ wallpaper: action.payload });
+    },
+    setIsOpenMenu(state, action) {
+      state.isOpenMenu = action.payload;
     },
     setSearchEngine(state, action) {
       state.searchEngine = action.payload;
@@ -168,13 +175,17 @@ export const newTabSlice = createSlice({
   }
 });
 
-export const selectNightPeriod = (state: RootState): NightPeriod =>
-  state.newTab.nightPeriod;
 export const selectIsDark = (state: RootState): boolean => state.newTab.isDark;
+export const selectShowTour = (state: RootState): boolean =>
+  state.newTab.showTour;
 export const selectDarkMode = (state: RootState): string =>
   state.newTab.darkMode;
 export const selectWallpaper = (state: RootState): string =>
   state.newTab.wallpaper;
+export const selectIsOpenMenu = (state: RootState): boolean =>
+  !!state.newTab.isOpenMenu;
+export const selectNightPeriod = (state: RootState): NightPeriod =>
+  state.newTab.nightPeriod;
 export const selectLastVersion = (state: RootState): string =>
   state.newTab.update.lastVersion;
 export const selectCheckLoading = (state: RootState): boolean =>
@@ -196,8 +207,10 @@ export const selectShowUpdateMessage = (state: RootState): boolean =>
   state.newTab.update.showMessage;
 export const {
   setIsDark,
+  setShowTour,
   setDarkMode,
   setWallpaper,
+  setIsOpenMenu,
   setSearchEngine,
   setSearchEngines,
   setCustomWallpaper,

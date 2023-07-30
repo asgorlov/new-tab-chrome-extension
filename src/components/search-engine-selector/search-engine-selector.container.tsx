@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useCallback } from "react";
+import React, { FC, MouseEvent, useCallback, useContext } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import {
   selectCurrentLanguage,
@@ -9,9 +9,11 @@ import {
 } from "../../store/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { TourContext } from "../../contexts/tour.context";
 
 const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
+  const tourCtx = useContext(TourContext);
   const searchEngine = useSelector(selectSearchEngine);
   const currentLanguage = useSelector(selectCurrentLanguage);
   const searchEngineNames = useSelector(selectSearchEngines);
@@ -42,6 +44,7 @@ const SearchEngineSelectorContainer: FC = () => {
         searchEngineNames={searchEngineNames}
         currentLanguage={currentLanguage}
         searchEngine={searchEngine}
+        tourCtx={tourCtx}
         onClick={handleClick}
       />
     </DragDropContext>

@@ -9,11 +9,13 @@ import {
 import { YANDEX } from "../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import StrictModeDroppable from "../../utils/strict-mode-droppable";
+import { TourContextModel } from "../../models/tour-context.model";
 
 interface SearchSelectedComponentProps {
   searchEngineNames: string[];
   currentLanguage: string;
   searchEngine: string;
+  tourCtx?: TourContextModel;
   onClick: (event: MouseEvent) => void;
 }
 
@@ -21,9 +23,18 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   searchEngineNames,
   currentLanguage,
   searchEngine,
+  tourCtx,
   onClick
 }) => {
   const { t } = useTranslation();
+
+  const setRef = (ref: HTMLDivElement | null, provided: DroppableProvided) => {
+    if (tourCtx) {
+      tourCtx.searchEngineSelectorRef.current = ref;
+    }
+
+    provided.innerRef(ref);
+  };
   const getItemClassName = (itemName: string): string => {
     return clsx(
       "new-tab__search-engine-selector-item",
@@ -42,7 +53,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
       {(dropProvided: DroppableProvided) => (
         <div
           className="new-tab__search-engine-selector"
-          ref={dropProvided.innerRef}
+          ref={ref => setRef(ref, dropProvided)}
           {...dropProvided.droppableProps}
         >
           {searchEngineNames.map((name: string, index: number) => (

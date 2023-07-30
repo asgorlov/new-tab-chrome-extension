@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Drawer } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
@@ -10,18 +10,22 @@ import LanguageSettingComponent from "./settings/language-setting.component";
 import ResetSettingComponent from "./settings/reset-setting.component";
 import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
 import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
+import { TourContextModel } from "../../models/tour-context.model";
 
-interface DarkModeComponentProps {
+interface SettingsMenuComponentProps {
   isDark: boolean;
+  tourCtx?: TourContextModel;
   darkMode: string;
   checkMode: string;
   wallpaper: string;
+  isOpenMenu: boolean;
   lastVersion: string;
   checkLoading: boolean;
   searchEngine: string;
   customWallpaper: CustomWallpaper | null;
   searchEngineNames: string[];
   setWallpaper: (value: string) => void;
+  setIsOpenMenu: (value: boolean) => void;
   onClickUpdates: () => void;
   onClickSwitcher: () => void;
   onChangeDarkMode: (value: string) => void;
@@ -32,17 +36,20 @@ interface DarkModeComponentProps {
   onChangeDarkModeCollapse: (values: string | string[]) => void;
 }
 
-const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
+const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
   isDark,
+  tourCtx,
   darkMode,
   checkMode,
   wallpaper,
+  isOpenMenu,
   lastVersion,
   checkLoading,
   searchEngine,
   customWallpaper,
   searchEngineNames,
   setWallpaper,
+  setIsOpenMenu,
   onClickUpdates,
   onClickSwitcher,
   onChangeDarkMode,
@@ -53,31 +60,38 @@ const SettingsMenuComponent: FC<DarkModeComponentProps> = ({
   onChangeDarkModeCollapse
 }) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
+  const menuClass = "new-tab__settings-menu";
+  const menuContainerClass = "new-tab__settings-menu-container";
+
+  useEffect(() => {
+    if (tourCtx) {
+      tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
+    }
+  }, [tourCtx]);
 
   return (
-    <div className="new-tab__settings-menu">
+    <div className={menuClass}>
       <Button
         className="new-tab__settings-menu-button"
         type="text"
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpenMenu(true)}
       >
         <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
       </Button>
       <Drawer
-        className={clsx("new-tab__settings-menu-container", { dark: isDark })}
+        className={clsx(menuContainerClass, { dark: isDark })}
         contentWrapperStyle={{ width: "300px" }}
         drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
         bodyStyle={{ padding: "0" }}
         title={t("settingsTitle")}
         getContainer={() =>
-          document.querySelector(".new-tab__settings-menu") as Element
+          document.querySelector(`.${menuClass}`) as HTMLDivElement
         }
         footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
-        open={isOpen}
+        open={isOpenMenu}
         closable={false}
-        onClose={() => setIsOpen(false)}
+        onClose={() => setIsOpenMenu(false)}
       >
         <SearchEngineSettingComponent
           isDark={isDark}
