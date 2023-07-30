@@ -56,8 +56,8 @@ const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
         description: t("tour.step3.description"),
         placement: "left",
         target: () => {
-          return tourCtx?.settingsMenuClass
-            ? document.querySelector(tourCtx.settingsMenuClass)
+          return tourCtx?.settingsMenuContainerClass
+            ? document.querySelector(tourCtx.settingsMenuContainerClass)
             : null;
         },
         prevButtonProps: {

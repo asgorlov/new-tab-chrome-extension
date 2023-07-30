@@ -60,16 +60,17 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
   onChangeDarkModeCollapse
 }) => {
   const { t } = useTranslation();
-  const settingMenuContainerClass = "new-tab__settings-menu-container";
+  const menuClass = "new-tab__settings-menu";
+  const menuContainerClass = "new-tab__settings-menu-container";
 
   useEffect(() => {
     if (tourCtx) {
-      tourCtx.settingsMenuClass = `.${settingMenuContainerClass}`;
+      tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
     }
   }, [tourCtx]);
 
   return (
-    <div className="new-tab__settings-menu">
+    <div className={menuClass}>
       <Button
         className="new-tab__settings-menu-button"
         type="text"
@@ -78,13 +79,13 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
         <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
       </Button>
       <Drawer
-        className={clsx(settingMenuContainerClass, { dark: isDark })}
+        className={clsx(menuContainerClass, { dark: isDark })}
         contentWrapperStyle={{ width: "300px" }}
         drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
         bodyStyle={{ padding: "0" }}
         title={t("settingsTitle")}
         getContainer={() =>
-          document.querySelector(".new-tab__settings-menu") as Element
+          document.querySelector(`.${menuClass}`) as HTMLDivElement
         }
         footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
