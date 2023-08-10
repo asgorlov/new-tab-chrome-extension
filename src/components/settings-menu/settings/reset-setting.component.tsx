@@ -2,9 +2,9 @@ import { FC } from "react";
 import { Button, Popconfirm } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { resetSettings } from "../../../store/new-tab.slice";
 import { AppDispatch } from "../../../store/store";
 import clsx from "clsx";
+import { resetSettings } from "../../../store/new-tab/new-tab.thunks";
 
 interface ResetSettingProps {
   isDark: boolean;

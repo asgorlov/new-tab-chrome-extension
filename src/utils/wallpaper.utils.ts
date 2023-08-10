@@ -5,6 +5,11 @@ import {
   MIN_SIZE_IMG
 } from "../constants/wallpaper.constants";
 
+/**
+ * Метод, конвертирующий файл картинки в base64
+ * @param file - файл картинки
+ * @return {@link string} - строку в формате base64
+ */
 export const convertImgToBase64 = async (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -14,10 +19,22 @@ export const convertImgToBase64 = async (file: File): Promise<string> => {
   });
 };
 
+/**
+ * Метод, конвертирующий строку base64 в файл картинки
+ * @param base64 - строка в формате base64
+ * @param name - имя файла
+ * @return {@link File} - файл картинки
+ */
 export const convertBase64ToImg = (base64: string, name: string): File => {
   return new File([new Blob([base64])], name);
 };
 
+/**
+ * Метод для получения url картинки в зависимости от темы
+ * @param wallpaper - объекта картинки для фона
+ * @param isDark - флаг темной темы
+ * @return {@link string} - url картинки в формате base64
+ */
 export const getImgUrl = (
   wallpaper: CustomWallpaper,
   isDark: boolean
@@ -28,6 +45,12 @@ export const getImgUrl = (
   return url ?? "";
 };
 
+/**
+ * Метод, получающий файл загруженной картинки для компонента <tt>Upload</tt>
+ * @param imgUrl - строка картинки в формате base64
+ * @param theme - тема приложения
+ * @return {@link UploadFile}[] - массив с загруженным файлом или пустой список
+ */
 export const getInitialFileList = (
   imgUrl: string | undefined,
   theme: "dark" | "light"
@@ -62,12 +85,22 @@ export const getInitialFileList = (
   return [];
 };
 
+/**
+ * Метод, позволяющий узнать загружена одна картинка или две
+ * @param wallpaper
+ * @return {@link boolean} - <b>true</b>, если для темной и светлой темы используется одна картинка
+ */
 export const getInitialOneToBoth = (
   wallpaper: CustomWallpaper | null
 ): boolean => {
   return !wallpaper || !!(wallpaper.lightTheme && !wallpaper.darkTheme);
 };
 
+/**
+ * Метод, проверяющий тип и размер файла
+ * @param file - файл для проверки
+ * @return {@link string} - ключ локализации ошибки или пустую строку
+ */
 export const getUploadingErrorKey = (file: File): string => {
   const acceptFormats = ACCEPT_IMG_FORMAT.split(",");
   if (!acceptFormats.includes(file.type)) {

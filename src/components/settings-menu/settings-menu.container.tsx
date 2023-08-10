@@ -1,33 +1,37 @@
 import React, { FC, useCallback, useContext } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
-  changeLanguage,
-  getNightPeriodByLocation,
-  selectCustomWallpaper,
-  selectDarkMode,
-  selectIsDark,
-  selectSearchEngine,
-  selectSearchEngines,
-  selectNightPeriod,
-  selectWallpaper,
   setCheckForUpdates,
   setCustomWallpaper,
   setDarkMode,
   setIsDark,
   setSearchEngines,
   setWallpaper,
-  selectCheckForUpdates,
-  selectCheckLoading,
-  checkUpdates,
-  selectLastVersion,
-  selectIsOpenMenu,
   setIsOpenMenu
-} from "../../store/new-tab.slice";
+} from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { TourContext } from "../../contexts/tour.context";
+import {
+  selectCheckForUpdates,
+  selectCheckLoading,
+  selectCustomWallpaper,
+  selectDarkMode,
+  selectIsDark,
+  selectIsOpenMenu,
+  selectLastVersion,
+  selectNightPeriod,
+  selectSearchEngine,
+  selectSearchEngines,
+  selectWallpaper
+} from "../../store/new-tab/new-tab.selectors";
+import {
+  changeLanguage,
+  checkUpdates,
+  getNightPeriodByLocation
+} from "../../store/new-tab/new-tab.thunks";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();

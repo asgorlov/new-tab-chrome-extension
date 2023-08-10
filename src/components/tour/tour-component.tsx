@@ -3,12 +3,9 @@ import { TourStepProps } from "antd/es/tour/interface";
 import { useTranslation } from "react-i18next";
 import { TourContext } from "../../contexts/tour.context";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsDark,
-  setIsOpenMenu,
-  setShowTour
-} from "../../store/new-tab.slice";
+import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
+import { selectIsDark } from "../../store/new-tab/new-tab.selectors";
 
 interface TourComponentProps {
   showTour: boolean;

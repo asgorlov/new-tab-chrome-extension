@@ -27,12 +27,12 @@ import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 import { useSelector } from "react-redux";
+import { TourContext } from "../../contexts/tour.context";
 import {
   selectCurrentLanguage,
   selectIsDark,
   selectSearchEngine
-} from "../../store/new-tab.slice";
-import { TourContext } from "../../contexts/tour.context";
+} from "../../store/new-tab/new-tab.selectors";
 
 const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();

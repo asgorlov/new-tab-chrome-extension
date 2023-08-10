@@ -15,6 +15,12 @@ import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
+/**
+ * Метод, позволяющий узнать необходимо ли отправлять запрос за последними обновлениями
+ * @param dateInMs - дата последней проверки в мс
+ * @param checkMode - параметр, определяющий режим проверки
+ * @return {@link boolean} - <b>true</b>, если необходима проверка обновлений
+ */
 export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   const delta = (Date.now() - dateInMs) / 86400000;
 
@@ -30,6 +36,11 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   }
 };
 
+/**
+ * Метод, получающий ссылку на скачивание файла приложения указанной версии
+ * @param version - версия приложения
+ * @return {@link string} - url для скачивания файла приложения
+ */
 export const getDownloadLink = (version: string) => {
   return (
     "https://github.com/asgorlov/new-tab-chrome-extension/releases/download" +
@@ -37,6 +48,10 @@ export const getDownloadLink = (version: string) => {
   );
 };
 
+/**
+ * Метод обновляющий стейт в зависимости от версии приложения
+ * @param data - данные из браузера
+ */
 export const updateStateWithFeatures = (data: NewTabState) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
@@ -62,6 +77,12 @@ export const updateStateWithFeatures = (data: NewTabState) => {
   }
 };
 
+/**
+ * Метод, получающий дельту изменений в зависимости от передаваемых версий приложения
+ * @param lastVersion - последняя версия приложения
+ * @param previousVersion - предыдущая версия приложения
+ * @return {@link Features} - объект с данными для обновления стейта
+ */
 const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string

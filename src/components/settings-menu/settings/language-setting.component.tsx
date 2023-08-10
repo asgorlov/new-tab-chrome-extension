@@ -3,9 +3,9 @@ import clsx from "clsx";
 import { ReactComponent as LanguageIcon } from "../../../static/svgs/menu-settings/language-icon.svg";
 import { Select } from "antd";
 import { useSelector } from "react-redux";
-import { selectCurrentLanguage } from "../../../store/new-tab.slice";
 import i18n from "../../../localizations/i18n";
 import { useTranslation } from "react-i18next";
+import { selectCurrentLanguage } from "../../../store/new-tab/new-tab.selectors";
 
 interface LanguageSettingProps {
   isDark: boolean;

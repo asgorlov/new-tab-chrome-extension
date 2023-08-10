@@ -4,6 +4,12 @@ import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
 import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
 
+/**
+ * Значения стейта по умолчанию
+ * @constant
+ * @type {NewTabState}
+ * @default
+ */
 const defaultStore: Readonly<NewTabState> = {
   isDark: false,
   update: {
