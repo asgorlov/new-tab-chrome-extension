@@ -2,8 +2,9 @@ import { NIGMA, SWISSCOWS, YANDEX } from "../constants/search-engine.constants";
 
 /**
  * Метод для получения названия инпута поискового запроса
+ * @category Search Engine Utilities
  * @param searchEngine - поисковая система
- * @return {@link string} - имя инпута, которое вставляется в url поискового запроса
+ * @returns - имя инпута, которое вставляется в url поискового запроса
  */
 export const getInputName = (searchEngine: string): string => {
   switch (searchEngine) {

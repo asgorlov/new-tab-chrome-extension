@@ -1,0 +1,9 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "New Tab Chrome Extension",
+  "out": "build/docs",
+  "entryPoints": ["src/typedoc"],
+  "navigationLinks": {
+    "GitHub": "https://github.com/asgorlov/new-tab-chrome-extension"
+  }
+}

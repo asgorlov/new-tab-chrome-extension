@@ -2,9 +2,7 @@ import manifest from "../../public/manifest.json";
 
 /**
  * Список режимов как часто отправлять запрос за обновлениями
- * @constant
- * @type {Record<string, string>}
- * @default
+ * @category Update Constants
  */
 export const checkForUpdates: Record<string, string> = {
   MANUAL: "manual",
@@ -15,8 +13,6 @@ export const checkForUpdates: Record<string, string> = {
 
 /**
  * Версия текущего приложения
- * @constant
- * @type {string}
- * @default
+ * @category Update Constants
  */
 export const CURRENT_EXT_VERSION = manifest.version;

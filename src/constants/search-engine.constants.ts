@@ -1,30 +1,22 @@
 /**
  * Значение режима автоматического включения темной темы
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const AUTO = "auto";
 /**
  * Значение режима ручного включения темной темы
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const MANUAL = "manual";
 /**
  * Значение режима включения темной темы как в системе
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const SYSTEM = "system";
 
 /**
  * Список всех поисковых систем
- * @constant
- * @type {string[]}
- * @default
+ * @category Search Engine Constants
  */
 export const SEARCH_ENGINE_NAMES = [
   "yandex",
@@ -44,101 +36,73 @@ export const SEARCH_ENGINE_NAMES = [
 
 /**
  * Поисковая система Ecosia
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const ECOSIA = SEARCH_ENGINE_NAMES[12];
 /**
  * Поисковая система Nigma
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const NIGMA = SEARCH_ENGINE_NAMES[11];
 /**
  * Поисковая система Lycos
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const LYCOS = SEARCH_ENGINE_NAMES[10];
 /**
  * Поисковая система Gibiru
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const GIBIRU = SEARCH_ENGINE_NAMES[9];
 /**
  * Поисковая система You.com
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const YOUCOM = SEARCH_ENGINE_NAMES[8];
 /**
  * Поисковая система AOL
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const AOL = SEARCH_ENGINE_NAMES[7];
 /**
  * Поисковая система Swisscows
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const SWISSCOWS = SEARCH_ENGINE_NAMES[6];
 /**
  * Поисковая система Brave
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const BRAVE = SEARCH_ENGINE_NAMES[5];
 /**
  * Поисковая система Yahoo
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const YAHOO = SEARCH_ENGINE_NAMES[4];
 /**
  * Поисковая система Bing
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const BING = SEARCH_ENGINE_NAMES[3];
 /**
  * Поисковая система Duck Duck Go
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const DUCK = SEARCH_ENGINE_NAMES[2];
 /**
  * Поисковая система Google
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const GOOGLE = SEARCH_ENGINE_NAMES[1];
 /**
  * Поисковая система Yandex
- * @constant
- * @type {string}
- * @default
+ * @category Search Engine Constants
  */
 export const YANDEX = SEARCH_ENGINE_NAMES[0];
 
 /**
  * Список домашних страниц поисковых систем
- * @constant
- * @type {Record<string, string>}
- * @default
+ * @category Search Engine Constants
  */
 export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   aol: "https://search.aol.co.uk/aol/webhome/",
@@ -158,9 +122,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
 
 /**
  * Список ссылок запросов поисковых систем
- * @constant
- * @type {Record<string, string>}
- * @default
+ * @category Search Engine Constants
  */
 export const SEARCH_QUERY_LINKS: Record<string, string> = {
   aol: "https://search.aol.co.uk/aol/search",
@@ -180,9 +142,7 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
 
 /**
  * Список цветовых схем поисковых систем
- * @constant
- * @type {Record<string, string>}
- * @default
+ * @category Search Engine Constants
  */
 export const SEARCH_THEMES: Record<string, string> = {
   aol: "#2f9aff",

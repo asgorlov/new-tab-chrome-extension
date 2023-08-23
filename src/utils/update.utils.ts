@@ -17,9 +17,10 @@ import { Features } from "../models/update.model";
 
 /**
  * Метод, позволяющий узнать необходимо ли отправлять запрос за последними обновлениями
+ * @category Update Utilities
  * @param dateInMs - дата последней проверки в мс
  * @param checkMode - параметр, определяющий режим проверки
- * @return {@link boolean} - <b>true</b>, если необходима проверка обновлений
+ * @returns - <b>true</b>, если необходима проверка обновлений
  */
 export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   const delta = (Date.now() - dateInMs) / 86400000;
@@ -38,8 +39,9 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
 
 /**
  * Метод, получающий ссылку на скачивание файла приложения указанной версии
+ * @category Update Utilities
  * @param version - версия приложения
- * @return {@link string} - url для скачивания файла приложения
+ * @returns - url для скачивания файла приложения
  */
 export const getDownloadLink = (version: string) => {
   return (
@@ -50,6 +52,7 @@ export const getDownloadLink = (version: string) => {
 
 /**
  * Метод обновляющий стейт в зависимости от версии приложения
+ * @category Update Utilities
  * @param data - данные из браузера
  */
 export const updateStateWithFeatures = (data: NewTabState) => {
@@ -79,9 +82,10 @@ export const updateStateWithFeatures = (data: NewTabState) => {
 
 /**
  * Метод, получающий дельту изменений в зависимости от передаваемых версий приложения
+ * @category Update Utilities
  * @param lastVersion - последняя версия приложения
  * @param previousVersion - предыдущая версия приложения
- * @return {@link Features} - объект с данными для обновления стейта
+ * @returns - объект с данными для обновления стейта {@link Features}
  */
 const getDeltaChanges = (
   lastVersion: string,

@@ -6,9 +6,7 @@ import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
 
 /**
  * Значения стейта по умолчанию
- * @constant
- * @type {NewTabState}
- * @default
+ * @category Default Store Constants
  */
 const defaultStore: Readonly<NewTabState> = {
   isDark: false,

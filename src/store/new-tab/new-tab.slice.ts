@@ -16,6 +16,7 @@ const initialState: NewTabState = await getInitStateFromChrome();
 
 /**
  * Слайс для работы со страничкой <tt>new-tab</tt>
+ * @category New Tab Slice
  */
 export const newTabSlice = createSlice({
   name: "newTab",
@@ -117,29 +118,56 @@ export const newTabSlice = createSlice({
   }
 });
 
-/**
- * Экшены для работы с данными стейта
- * @property setIsDark - сеттинг флага темного режима
- * @property setShowTour - сеттинг флага показать ознакомительный тур
- * @property setDarkMode - сеттинг режима включения темного режима
- * @property setWallpaper - сеттинг имени фоновых картинок
- * @property setIsOpenMenu - сеттинг флага открытия меню настроек
- * @property setSearchEngine - сеттинг текущей поисковой системы
- * @property setSearchEngines - сеттинг списка доступный для выбора поисковых систем
- * @property setCustomWallpaper - сеттинг фоновых картинок пользователя
- * @property setCheckForUpdates - сеттинг режима запросов обновлений
- * @property setShowUpdateMessage - сеттинг флага показа окна с новой версией приложения
- */
 export const {
+  /**
+   * Функция изменения флага темного режима
+   * @category New Tab Slice
+   */
   setIsDark,
+  /**
+   * Функция изменения флага показать ознакомительный тур
+   * @category New Tab Slice
+   */
   setShowTour,
+  /**
+   * Функция изменения флага режима включения темного режима
+   * @category New Tab Slice
+   */
   setDarkMode,
+  /**
+   * Функция изменения имени фоновых картинок
+   * @category New Tab Slice
+   */
   setWallpaper,
+  /**
+   * Функция изменения флага открытия меню настроек
+   * @category New Tab Slice
+   */
   setIsOpenMenu,
+  /**
+   * Функция изменения текущей поисковой системы
+   * @category New Tab Slice
+   */
   setSearchEngine,
+  /**
+   * Функция изменения списка доступный для выбора поисковых систем
+   * @category New Tab Slice
+   */
   setSearchEngines,
+  /**
+   * Функция изменения фоновых картинок пользователя
+   * @category New Tab Slice
+   */
   setCustomWallpaper,
+  /**
+   * Функция изменения режима запросов обновлений
+   * @category New Tab Slice
+   */
   setCheckForUpdates,
+  /**
+   * Функция изменения флага показа окна с новой версией приложения
+   * @category New Tab Slice
+   */
   setShowUpdateMessage
 } = newTabSlice.actions;
 

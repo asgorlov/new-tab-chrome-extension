@@ -31,10 +31,11 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && npm run typedoc",
     "test": "craco test",
     "eject": "craco eject",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "typedoc": "typedoc --logLevel Verbose"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +64,8 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "typedoc": "^0.24.8"
   },
   "lint-staged": {
     "*.{ts, tsx}": [
