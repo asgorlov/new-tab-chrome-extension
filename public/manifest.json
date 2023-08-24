@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "New Tab Page",
-  "description": "New Tab Page",
+  "description": "Расширение заменяет новую вкладку браузера на страницу поисковой системы с разнообразным функционалом",
   "homepage_url": "https://github.com/asgorlov/new-tab-chrome-extension",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "permissions": [
     "storage",
     "geolocation",

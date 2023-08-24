@@ -1,6 +1,6 @@
 {
   "name": "new-tab-chrome-extension",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build && npm run typedoc",
+    "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
     "precommit": "lint-staged",
