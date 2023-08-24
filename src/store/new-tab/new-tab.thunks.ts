@@ -14,7 +14,7 @@ import { NewTabState } from "../../models/new-tab-state.model";
 
 /**
  * Асинхронный запрос для получения периода ночи указанной локации
- * @category New Tab Thunks
+ * @category Thunks - New Tab
  */
 export const getNightPeriodByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
@@ -32,7 +32,7 @@ export const getNightPeriodByLocation = createAsyncThunk(
 
 /**
  * Асинхронный запрос для получения обновлений
- * @category New Tab Thunks
+ * @category Thunks - New Tab
  */
 export const checkUpdates = createAsyncThunk(
   "api/manifest/get",
@@ -51,7 +51,7 @@ export const checkUpdates = createAsyncThunk(
 
 /**
  * Асинхронный запрос для смены языка
- * @category New Tab Thunks
+ * @category Thunks - New Tab
  */
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
@@ -65,7 +65,7 @@ export const changeLanguage = createAsyncThunk(
 
 /**
  * Асинхронный запрос сброса настроек
- * @category New Tab Thunks
+ * @category Thunks - New Tab
  */
 export const resetSettings = createAsyncThunk(
   "newTab/resetSettings",

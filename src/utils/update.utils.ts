@@ -17,7 +17,7 @@ import { Features } from "../models/update.model";
 
 /**
  * Метод, позволяющий узнать необходимо ли отправлять запрос за последними обновлениями
- * @category Update Utilities
+ * @category Utilities - Update
  * @param dateInMs - дата последней проверки в мс
  * @param checkMode - параметр, определяющий режим проверки
  * @returns - <b>true</b>, если необходима проверка обновлений
@@ -39,7 +39,7 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
 
 /**
  * Метод, получающий ссылку на скачивание файла приложения указанной версии
- * @category Update Utilities
+ * @category Utilities - Update
  * @param version - версия приложения
  * @returns - url для скачивания файла приложения
  */
@@ -52,7 +52,7 @@ export const getDownloadLink = (version: string) => {
 
 /**
  * Метод обновляющий стейт в зависимости от версии приложения
- * @category Update Utilities
+ * @category Utilities - Update
  * @param data - данные из браузера
  */
 export const updateStateWithFeatures = (data: NewTabState) => {
@@ -82,7 +82,7 @@ export const updateStateWithFeatures = (data: NewTabState) => {
 
 /**
  * Метод, получающий дельту изменений в зависимости от передаваемых версий приложения
- * @category Update Utilities
+ * @category Utilities - Update
  * @param lastVersion - последняя версия приложения
  * @param previousVersion - предыдущая версия приложения
  * @returns - объект с данными для обновления стейта {@link Features}

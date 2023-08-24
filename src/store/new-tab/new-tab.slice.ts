@@ -16,7 +16,7 @@ const initialState: NewTabState = await getInitStateFromChrome();
 
 /**
  * Слайс для работы со страничкой <tt>new-tab</tt>
- * @category New Tab Slice
+ * @category Slice - New Tab
  */
 export const newTabSlice = createSlice({
   name: "newTab",
@@ -121,52 +121,52 @@ export const newTabSlice = createSlice({
 export const {
   /**
    * Функция изменения флага темного режима
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setIsDark,
   /**
    * Функция изменения флага показать ознакомительный тур
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setShowTour,
   /**
    * Функция изменения флага режима включения темного режима
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setDarkMode,
   /**
    * Функция изменения имени фоновых картинок
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setWallpaper,
   /**
    * Функция изменения флага открытия меню настроек
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setIsOpenMenu,
   /**
    * Функция изменения текущей поисковой системы
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setSearchEngine,
   /**
    * Функция изменения списка доступный для выбора поисковых систем
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setSearchEngines,
   /**
    * Функция изменения фоновых картинок пользователя
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setCustomWallpaper,
   /**
    * Функция изменения режима запросов обновлений
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setCheckForUpdates,
   /**
    * Функция изменения флага показа окна с новой версией приложения
-   * @category New Tab Slice
+   * @category Slice - New Tab
    */
   setShowUpdateMessage
 } = newTabSlice.actions;

@@ -2,7 +2,7 @@ import { NIGMA, SWISSCOWS, YANDEX } from "../constants/search-engine.constants";
 
 /**
  * Метод для получения названия инпута поискового запроса
- * @category Search Engine Utilities
+ * @category Utilities - Search Engine
  * @param searchEngine - поисковая система
  * @returns - имя инпута, которое вставляется в url поискового запроса
  */

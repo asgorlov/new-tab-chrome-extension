@@ -2,7 +2,7 @@ import { NightPeriod } from "../models/night-period.model";
 
 /**
  * Метод, позволяющий узнать включена ли темная тема в браузере
- * @category Dark Mode Utilities
+ * @category Utilities - Dark Mode
  * @returns - <b>true</b>, если в браузере включен темный режим
  */
 export const isBrowserDarkModeEnabled = (): boolean => {
@@ -13,7 +13,7 @@ export const isBrowserDarkModeEnabled = (): boolean => {
 
 /**
  * Метод, позволяющий узнать закэширован ли ночной период
- * @category Dark Mode Utilities
+ * @category Utilities - Dark Mode
  * @param nightPeriod - ночной период
  * @returns - <b>true</b>, если ночной период закэширован
  */

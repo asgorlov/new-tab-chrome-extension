@@ -6,7 +6,7 @@ import { ChromeStorage } from "../models/chrome-storage.model";
 
 /**
  * Асинхронный метод для получения начальных данных стейта из браузера
- * @category Chrome Utilities
+ * @category Utilities - Chrome
  * @returns - начальные данные {@link NewTabState}
  */
 export const getInitStateFromChrome = async (): Promise<NewTabState> => {
@@ -25,7 +25,7 @@ export const getInitStateFromChrome = async (): Promise<NewTabState> => {
 
 /**
  * Асинхронный метод для получения данных из всех хранилищ браузера
- * @category Chrome Utilities
+ * @category Utilities - Chrome
  * @returns - сохраненные в браузере данные {@link NewTabState}
  */
 export const getDataFromChrome = async (): Promise<NewTabState> => {
@@ -48,7 +48,7 @@ export const getDataFromChrome = async (): Promise<NewTabState> => {
 
 /**
  * Метод для сохранения данных в синхронизируемое хранилище браузера
- * @category Chrome Utilities
+ * @category Utilities - Chrome
  * @param items - сохраняемые объекты
  * @returns - <b>true</b>, если данные удалось сохранить
  */
@@ -64,7 +64,7 @@ export const setDataToChromeSyncStorage = (items: ChromeStorage): boolean => {
 
 /**
  * Метод для сохранения данных в локальное хранилище браузера
- * @category Chrome Utilities
+ * @category Utilities - Chrome
  * @param items - сохраняемые объекты
  * @returns - <b>true</b>, если данные удалось сохранить
  */
