@@ -1,14 +1,10 @@
 /**
  * Интерфейс ночного периода
- * @interface NightPeriod
+ * @property sunset - Время заката
+ * @property sunrise - Время восхода
+ * @interface
  */
 export interface NightPeriod {
-  /**
-   * Время заката
-   */
   sunset: string | null;
-  /**
-   * Время восхода
-   */
   sunrise: string | null;
 }

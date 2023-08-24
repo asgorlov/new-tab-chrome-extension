@@ -10,13 +10,25 @@ import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
 import TourComponent from "../tour/tour-component";
 
-interface NewTabComponentProps {
+/**
+ * Передаваемые параметры для компонента страницы новой вкладки
+ * @property isDark - Флаг темной темы
+ * @property showTour - Флаг ознакомительного тура
+ * @property wallpaper - Название фона приложения
+ * @property customWallpaper - Пользовательские фоны
+ * @interface
+ */
+export interface NewTabComponentProps {
   isDark: boolean;
   showTour: boolean;
   wallpaper: string;
   customWallpaper: CustomWallpaper | null;
 }
 
+/**
+ * Компонент страницы новой вкладки
+ * @category Components
+ */
 const NewTabComponent: FC<NewTabComponentProps> = ({
   isDark,
   showTour,

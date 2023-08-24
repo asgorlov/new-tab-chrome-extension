@@ -4,59 +4,33 @@ import { NightPeriod } from "./night-period.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
- * @interface NewTabState
+ * @property isDark - Флаг темной темы
+ * @property update - Модель обновлений
+ * @property showTour - Флаг ознакомительного тура
+ * @property darkMode - Режимы включения темной темы
+ * @property wallpaper - Название фона приложения. Используется для разграничения стандартных и пользовательских фонов
+ * @property isOpenMenu - Флаг открытия меню настроек
+ * @property nightPeriod - Ночной период
+ * @property checkLoading - Флаг запуска проверки обновлений
+ * @property searchEngine - Выбранная поисковая система
+ * @property searchEngines - Список выбранных поисковых систем для переключения
+ * @property currentLanguage - Текущий язык
+ * @property checkForUpdates - Режим запросов обновлений
+ * @property customWallpaper - Пользовательские фоны
+ * @interface
  */
 export interface NewTabState {
-  /**
-   * Флаг темной темы
-   */
   isDark: boolean;
-  /**
-   * Модель обновлений
-   */
   update: UpdateModel;
-  /**
-   * Флаг ознакомительного тура
-   */
   showTour: boolean;
-  /**
-   * Режимы включения темной темы
-   */
   darkMode: string;
-  /**
-   * Название фона приложения. Используется для разграничения стандартных и пользовательских фонов
-   */
   wallpaper: string;
-  /**
-   * Флаг открытия меню настроек
-   */
   isOpenMenu?: boolean;
-  /**
-   * Ночной период
-   */
   nightPeriod: NightPeriod;
-  /**
-   * Флаг проверки обновлений
-   */
   checkLoading: boolean;
-  /**
-   * Выбранная поисковая система
-   */
   searchEngine: string;
-  /**
-   * Список выбранных поисковых систем для переключения
-   */
   searchEngines: string[];
-  /**
-   * Текущий язык
-   */
   currentLanguage: string;
-  /**
-   * Режим запросов обновлений
-   */
   checkForUpdates: string;
-  /**
-   * Пользовательские фоны
-   */
   customWallpaper: CustomWallpaper | null;
 }

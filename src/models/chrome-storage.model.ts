@@ -1,10 +1,7 @@
 /**
  * Интерфейс хранилища браузера Chrome
- * @interface ChromeStorage
+ * @interface
  */
 export interface ChromeStorage {
-  /**
-   * Словарь, где ключ - имя поля, значение - любой тип данных
-   */
   [key: string]: any;
 }

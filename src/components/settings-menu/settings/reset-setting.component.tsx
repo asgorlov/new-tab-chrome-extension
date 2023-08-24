@@ -6,10 +6,19 @@ import { AppDispatch } from "../../../store/store";
 import clsx from "clsx";
 import { resetSettings } from "../../../store/new-tab/new-tab.thunks";
 
-interface ResetSettingProps {
+/**
+ * Передаваемые параметры для компонента сброса настроек
+ * @property isDark - Флаг темной темы
+ * @interface
+ */
+export interface ResetSettingProps {
   isDark: boolean;
 }
 
+/**
+ * Компонент сброса настроек
+ * @category Components
+ */
 const ResetSettingComponent: FC<ResetSettingProps> = ({ isDark }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();

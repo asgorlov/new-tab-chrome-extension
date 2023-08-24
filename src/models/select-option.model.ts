@@ -1,22 +1,14 @@
 /**
  * Интерфейс опции селектора
- * @interface SelectOption
+ * @property className - Имя класса стилей
+ * @property value - Значение
+ * @property label - Отображаемый текст
+ * @property key - Внутренний идентификатор для корректной работы React в массивах
+ * @interface
  */
 export interface SelectOption {
-  /**
-   * Имя класса стилей
-   */
   className: string;
-  /**
-   * Значение
-   */
   value: string;
-  /**
-   * Отображаемый текст
-   */
   label: any;
-  /**
-   * Внутренний идентификатор для корректной работы React в массивах
-   */
   key: string;
 }

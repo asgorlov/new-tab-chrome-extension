@@ -7,10 +7,19 @@ import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
 import { selectIsDark } from "../../store/new-tab/new-tab.selectors";
 
-interface TourComponentProps {
+/**
+ * Передаваемые параметры для компонента ознакомительного тура
+ * @property showTour - Флаг ознакомительного тура
+ * @interface
+ */
+export interface TourComponentProps {
   showTour: boolean;
 }
 
+/**
+ * Компонент ознакомительного тура
+ * @category Components
+ */
 const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();

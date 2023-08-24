@@ -7,11 +7,21 @@ import i18n from "../../../localizations/i18n";
 import { useTranslation } from "react-i18next";
 import { selectCurrentLanguage } from "../../../store/new-tab/new-tab.selectors";
 
-interface LanguageSettingProps {
+/**
+ * Передаваемые параметры для компонента настройки языка
+ * @property isDark - Флаг темной темы
+ * @property onChangeLanguage - Функция смены языка приложения
+ * @interface LanguageSettingProps
+ */
+export interface LanguageSettingProps {
   isDark: boolean;
   onChangeLanguage: (value: string) => void;
 }
 
+/**
+ * Компонент настройки языка
+ * @category Components
+ */
 const LanguageSettingComponent: FC<LanguageSettingProps> = ({
   isDark,
   onChangeLanguage

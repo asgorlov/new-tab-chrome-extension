@@ -13,12 +13,23 @@ import {
   selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
 
-interface UpdateComponentProps {
+/**
+ * Передаваемые параметры для компонента обновлений приложения
+ * @property open - Флаг появления нотификации об обновлении
+ * @property onClose - Функция закрытия нотификации
+ * @property onMouseDown - Функция клика по ссылке скачивания обновлений
+ * @interface
+ */
+export interface UpdateComponentProps {
   open: boolean;
   onClose: () => void;
   onMouseDown: (e: MouseEvent) => void;
 }
 
+/**
+ * Компонент обновлений приложения
+ * @category Components
+ */
 const UpdateComponent: FC<UpdateComponentProps> = ({
   open,
   onClose,

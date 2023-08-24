@@ -1,14 +1,10 @@
 /**
  * Интерфейс координат местоположения
- * @interface Coordinate
+ * @property lat - Поле широты
+ * @property lng - Поле долготы
+ * @interface
  */
 export interface Coordinate {
-  /**
-   * Поле широты
-   */
   lat: number;
-  /**
-   * Поле долготы
-   */
   lng: number;
 }

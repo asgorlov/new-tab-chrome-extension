@@ -1,44 +1,32 @@
 /**
  * Интерфейс модели обновлений
- * @interface UpdateModel
+ * @property lastVersion - Последняя версия приложения
+ * @property showMessage - Флаг показа сообщения об обновлении
+ * @property lastUpdateDate - Дата последнего запроса обновлений
+ * @property previousVersion - Предыдущая версия приложения
+ * @interface
  */
 export interface UpdateModel {
-  /**
-   * Последняя версия приложения
-   */
   lastVersion: string;
-  /**
-   * Флаг показа сообщения об обновлении
-   */
   showMessage: boolean;
-  /**
-   * Дата последнего запроса обновлений
-   */
   lastUpdateDate: number;
-  /**
-   * Предыдущая версия приложения
-   */
   previousVersion?: string;
 }
 
 /**
  * Интерфейс модели ответа при запросе обновлений
- * @interface UpdateModel
+ * @property version - Версия приложения
+ * @interface
  */
 export interface UpdateResponseModel {
-  /**
-   * Версия приложения
-   */
   version: string;
 }
 
 /**
  * Интерфейс модели нового функционала относительно предыдущей версии приложения
- * @interface UpdateModel
+ * @property searchEngines - Массив новых поисковых систем
+ * @interface
  */
 export interface Features {
-  /**
-   * Массив новых поисковых систем
-   */
   searchEngines: string[];
 }

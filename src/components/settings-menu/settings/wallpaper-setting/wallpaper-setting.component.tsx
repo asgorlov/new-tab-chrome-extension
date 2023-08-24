@@ -15,7 +15,27 @@ import { UploadOutlined } from "@ant-design/icons";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import CollapseComponent from "../collapse.component";
 
-interface WallpaperSettingProps {
+/**
+ * Передаваемые параметры для компонента настройки фонового изображения
+ * @property open - Флаг открытия окна загрузки
+ * @property isDark - Флаг темной темы
+ * @property oneToBoth - Флаг, показывающий использование одного пользовательского фона для темной и светлой темы
+ * @property wallpaper - Название фона приложения
+ * @property disabledOk - Флаг недоступности кнопки Ok окна загрузки
+ * @property searchEngine - Выбранная поисковая система
+ * @property darkFileList - Список файлов(в данном случае один) для темной темы
+ * @property lightFileList - Список файлов(в данном случае один) для светлой темы
+ * @property uploadingErrors - Ошибки при загрузке фоновых изображений
+ * @property onOk - Функция, вызываемая при нажатии кнопки Ok окна загрузки
+ * @property onCancel - Функция, вызываемая при нажатии кнопки Cancel окна загрузки
+ * @property customRequest - Функция, вызываемая при загрузке изображения
+ * @property onChangeUpload - Функция, вызываемая после удачной загрузки
+ * @property onRemoveUpload - Функция, вызываемая после удаления загруженного файла
+ * @property onClickCheckbox - Функция, переключающая режим загрузки изображения: одно или два для темной и светлой темы
+ * @property onClickWallpaper - Функция выбора предустановленный фоновых изображений
+ * @interface
+ */
+export interface WallpaperSettingProps {
   open: boolean;
   isDark: boolean;
   oneToBoth: boolean;
@@ -34,6 +54,10 @@ interface WallpaperSettingProps {
   onClickWallpaper: (value: string) => void;
 }
 
+/**
+ * Компонент настройки фонового изображения
+ * @category Components
+ */
 const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
   open,
   isDark,

@@ -17,7 +17,16 @@ import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swi
 import { getInputName } from "../../utils/search-engine.utils";
 import { TourContextModel } from "../../models/tour-context.model";
 
-interface SearchEngineProps {
+/**
+ * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
+ * @property currentLanguage - Текущий язык
+ * @property searchEngine - Выбранная поисковая система
+ * @property buttonLabel - Содержимое внутри кнопки
+ * @property tourCtx - Модель контекста ознакомительно тура
+ * @property isDark - Флаг темной темы
+ * @interface
+ */
+export interface SearchEngineProps {
   currentLanguage: string;
   searchEngine: string;
   buttonLabel: ReactNode;
@@ -25,6 +34,10 @@ interface SearchEngineProps {
   isDark: boolean;
 }
 
+/**
+ * Компонент поисковой системы с полем ввода с логотипом
+ * @category Components
+ */
 const SearchEngineComponent: FC<SearchEngineProps> = ({
   currentLanguage,
   searchEngine,

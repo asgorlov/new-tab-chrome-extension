@@ -12,7 +12,32 @@ import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-se
 import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
 import { TourContextModel } from "../../models/tour-context.model";
 
-interface SettingsMenuComponentProps {
+/**
+ * Передаваемые параметры для компонента меню настроек
+ * @property isDark - Флаг темной темы
+ * @property tourCtx - Модель контекста ознакомительно тура
+ * @property darkMode - Режимы включения темной темы
+ * @property checkMode - Режимы запуска проверки обновлений
+ * @property wallpaper - Название фона приложения
+ * @property isOpenMenu - Флаг открытия меню настроек
+ * @property lastVersion - Последняя версия приложения
+ * @property checkLoading - Флаг запуска проверки обновлений
+ * @property searchEngine - Выбранная поисковая система
+ * @property customWallpaper - Пользовательские фоны
+ * @property searchEngineNames - Список выбранных поисковых систем для переключения
+ * @property setWallpaper - Функция изменения название фона приложения
+ * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
+ * @property onClickUpdates - Функция, вызываемая при клике по кнопке запуска обновлений
+ * @property onClickSwitcher - Функция переключения темной темы
+ * @property onChangeDarkMode - Функция, вызываемая при изменении режима включения темной темы
+ * @property onChangeLanguage - Функция, вызываемая при смене языка
+ * @property setCustomWallpaper - Функция изменения пользовательских фонов
+ * @property onChangeSearchEngines - Функция, вызываемая при изменении списка выбранных поисковых систем
+ * @property onChangeCheckForUpdates - Функция, вызываемая при изменении режима запуска проверки обновлений
+ * @property onChangeDarkModeCollapse - Функция вызывается при нажатии на сворачиваемый компонент
+ * @interface
+ */
+export interface SettingsMenuComponentProps {
   isDark: boolean;
   tourCtx?: TourContextModel;
   darkMode: string;
@@ -36,6 +61,10 @@ interface SettingsMenuComponentProps {
   onChangeDarkModeCollapse: (values: string | string[]) => void;
 }
 
+/**
+ * Компонент меню настроек
+ * @category Components
+ */
 const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
   isDark,
   tourCtx,
