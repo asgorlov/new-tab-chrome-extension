@@ -23,7 +23,11 @@ const SearchEngineSelectorContainer: FC = () => {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       const element = e.currentTarget as HTMLDivElement;
-      dispatch(setSearchEngine(element.dataset.rbdDraggableId));
+      const id = element.dataset.rbdDraggableId;
+
+      if (id) {
+        dispatch(setSearchEngine(id));
+      }
     },
     [dispatch]
   );

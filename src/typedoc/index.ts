@@ -6,7 +6,7 @@ export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 // Store
 export * from "../store/new-tab/new-tab.selectors";
-export * from "../store/new-tab/new-tab.slice";
+export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
 // Models
 export * from "../models/chrome-storage.model";

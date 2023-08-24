@@ -11,6 +11,8 @@ import {
   getNightPeriodByLocation,
   resetSettings
 } from "./new-tab.thunks";
+import { CustomWallpaper } from "../../models/custom-wallpaper.model";
+import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 
 const initialState: NewTabState = await getInitStateFromChrome();
 
@@ -22,42 +24,75 @@ export const newTabSlice = createSlice({
   name: "newTab",
   initialState,
   reducers: {
-    setIsDark(state, action) {
+    /**
+     * Функция изменения флага темного режима
+     * */
+    setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
       setDataToChromeSyncStorage({ isDark: action.payload });
     },
-    setShowTour(state, action) {
+    /**
+     * Функция изменения флага показать ознакомительный тур
+     * */
+    setShowTour(state: NewTabState, action: PayloadAction<boolean>) {
       state.showTour = action.payload;
       setDataToChromeLocalStorage({ showTour: action.payload });
     },
-    setDarkMode(state, action) {
+    /**
+     * Функция изменения флага режима включения темного режима
+     */
+    setDarkMode(state: NewTabState, action: PayloadAction<string>) {
       state.darkMode = action.payload;
       setDataToChromeSyncStorage({ darkMode: action.payload });
     },
-    setWallpaper(state, action) {
+    /**
+     * Функция изменения флага открытия меню настроек
+     */
+    setWallpaper(state: NewTabState, action: PayloadAction<string>) {
       state.wallpaper = action.payload;
       setDataToChromeSyncStorage({ wallpaper: action.payload });
     },
-    setIsOpenMenu(state, action) {
+    /**
+     * Функция изменения флага открытия меню настроек
+     */
+    setIsOpenMenu(state: NewTabState, action: PayloadAction<boolean>) {
       state.isOpenMenu = action.payload;
     },
-    setSearchEngine(state, action) {
+    /**
+     * Функция изменения текущей поисковой системы
+     */
+    setSearchEngine(state: NewTabState, action: PayloadAction<string>) {
       state.searchEngine = action.payload;
       setDataToChromeSyncStorage({ searchEngine: action.payload });
     },
-    setSearchEngines(state, action) {
+    /**
+     * Функция изменения списка доступный для выбора поисковых систем
+     */
+    setSearchEngines(state: NewTabState, action: PayloadAction<string[]>) {
       state.searchEngines = action.payload;
       setDataToChromeSyncStorage({ searchEngines: action.payload });
     },
-    setCustomWallpaper(state, action) {
+    /**
+     * Функция изменения фоновых картинок пользователя
+     */
+    setCustomWallpaper(
+      state: NewTabState,
+      action: PayloadAction<CustomWallpaper | null>
+    ) {
       state.customWallpaper = action.payload;
       setDataToChromeLocalStorage({ customWallpaper: action.payload });
     },
-    setCheckForUpdates(state, action) {
+    /**
+     * Функция изменения режима запросов обновлений
+     */
+    setCheckForUpdates(state: NewTabState, action: PayloadAction<string>) {
       state.checkForUpdates = action.payload;
       setDataToChromeSyncStorage({ checkForUpdates: action.payload });
     },
-    setShowUpdateMessage(state, action) {
+    /**
+     * Функция изменения флага показа окна с новой версией приложения
+     */
+    setShowUpdateMessage(state: NewTabState, action: PayloadAction<boolean>) {
       state.update.showMessage = action.payload;
       setDataToChromeSyncStorage({ update: state.update });
     }
@@ -119,55 +154,15 @@ export const newTabSlice = createSlice({
 });
 
 export const {
-  /**
-   * Функция изменения флага темного режима
-   * @category Slice - New Tab
-   */
   setIsDark,
-  /**
-   * Функция изменения флага показать ознакомительный тур
-   * @category Slice - New Tab
-   */
   setShowTour,
-  /**
-   * Функция изменения флага режима включения темного режима
-   * @category Slice - New Tab
-   */
   setDarkMode,
-  /**
-   * Функция изменения имени фоновых картинок
-   * @category Slice - New Tab
-   */
   setWallpaper,
-  /**
-   * Функция изменения флага открытия меню настроек
-   * @category Slice - New Tab
-   */
   setIsOpenMenu,
-  /**
-   * Функция изменения текущей поисковой системы
-   * @category Slice - New Tab
-   */
   setSearchEngine,
-  /**
-   * Функция изменения списка доступный для выбора поисковых систем
-   * @category Slice - New Tab
-   */
   setSearchEngines,
-  /**
-   * Функция изменения фоновых картинок пользователя
-   * @category Slice - New Tab
-   */
   setCustomWallpaper,
-  /**
-   * Функция изменения режима запросов обновлений
-   * @category Slice - New Tab
-   */
   setCheckForUpdates,
-  /**
-   * Функция изменения флага показа окна с новой версией приложения
-   * @category Slice - New Tab
-   */
   setShowUpdateMessage
 } = newTabSlice.actions;
 
