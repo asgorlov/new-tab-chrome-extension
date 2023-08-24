@@ -1,4 +1,4 @@
-import { checkForUpdates } from "../constants/check-for-updates.constants";
+import { checkForUpdates } from "../constants/update.constants";
 import {
   AOL,
   BING,
@@ -15,6 +15,13 @@ import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabState } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
+/**
+ * Метод, позволяющий узнать необходимо ли отправлять запрос за последними обновлениями
+ * @category Utilities - Update
+ * @param dateInMs - дата последней проверки в мс
+ * @param checkMode - параметр, определяющий режим проверки
+ * @returns - <b>true</b>, если необходима проверка обновлений
+ */
 export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   const delta = (Date.now() - dateInMs) / 86400000;
 
@@ -30,6 +37,12 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   }
 };
 
+/**
+ * Метод, получающий ссылку на скачивание файла приложения указанной версии
+ * @category Utilities - Update
+ * @param version - версия приложения
+ * @returns - url для скачивания файла приложения
+ */
 export const getDownloadLink = (version: string) => {
   return (
     "https://github.com/asgorlov/new-tab-chrome-extension/releases/download" +
@@ -37,6 +50,11 @@ export const getDownloadLink = (version: string) => {
   );
 };
 
+/**
+ * Метод обновляющий стейт в зависимости от версии приложения
+ * @category Utilities - Update
+ * @param data - данные из браузера
+ */
 export const updateStateWithFeatures = (data: NewTabState) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
@@ -44,7 +62,7 @@ export const updateStateWithFeatures = (data: NewTabState) => {
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
-    const features = getLastVersionFeaturesRegardingPrevious(
+    const features = getDeltaChanges(
       data.update.lastVersion,
       data.update.previousVersion
     );
@@ -52,14 +70,24 @@ export const updateStateWithFeatures = (data: NewTabState) => {
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
-    setDataToChromeSyncStorage({ searchEngines: data.searchEngines });
 
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChromeSyncStorage({ update: data.update });
+
+    setDataToChromeSyncStorage({
+      searchEngines: data.searchEngines,
+      update: data.update
+    });
   }
 };
 
-const getLastVersionFeaturesRegardingPrevious = (
+/**
+ * Метод, получающий дельту изменений в зависимости от передаваемых версий приложения
+ * @category Utilities - Update
+ * @param lastVersion - последняя версия приложения
+ * @param previousVersion - предыдущая версия приложения
+ * @returns - объект с данными для обновления стейта {@link Features}
+ */
+const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {

@@ -48,7 +48,7 @@
       "description": "A new version {{lastVersion}} has been released",
       "download": "Download",
       "notFound": "No updates found",
-      "lastVersion": "You have the latest version {{lastVersion}} installed"
+      "actualVersion": "You have the latest version {{actualVersion}} installed"
     },
     "title": "Updates",
     "check": "Check",
@@ -71,7 +71,27 @@
     "duckduckgo": "DuckDuckGo",
     "google": "Google",
     "yandex": "Yandex",
+    "ecosia": "Ecosia",
     "selectAll": "Select all",
     "removeAll": "Remove all"
+  },
+  "tour": {
+    "button": {
+      "next": "Next",
+      "previous": "Previous",
+      "finish": "Close"
+    },
+    "step1": {
+      "title": "Search engine",
+      "description": "Use the search query form to find the necessary information. You can go to the search engine page by clicking on the logo."
+    },
+    "step2": {
+      "title": "Search engine switch",
+      "description": "Switch search engines. Icons can be swapped using \"drag-and-drop\". The visibility of the icons can be changed in the settings menu."
+    },
+    "step3": {
+      "title": "Settings menu",
+      "description": "Change the main settings of the page: language, dark mode, background and others."
+    }
   }
 }

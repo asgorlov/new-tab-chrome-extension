@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { FC, MouseEvent, useCallback, useEffect } from "react";
-import {
-  checkUpdates,
-  selectCheckForUpdates,
-  selectLastUpdateDate,
-  selectShowUpdateMessage,
-  setShowUpdateMessage
-} from "../../store/new-tab.slice";
+import { setShowUpdateMessage } from "../../store/new-tab/new-tab.slice";
 import UpdateComponent from "./update.component";
 import { shouldBeCheck } from "../../utils/update.utils";
+import {
+  selectCheckForUpdates,
+  selectLastUpdateDate,
+  selectShowUpdateMessage
+} from "../../store/new-tab/new-tab.selectors";
+import { checkUpdates } from "../../store/new-tab/new-tab.thunks";
 
 const UpdateContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();

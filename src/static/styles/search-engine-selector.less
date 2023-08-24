@@ -9,7 +9,6 @@
     height: max-content;
 
     &-item {
-        cursor: pointer;
         width: 32px;
         height: 32px;
         margin: 2px;
@@ -42,7 +41,7 @@
         }
 
         &.gibiru {
-            transition: @slow-transition;
+            transition: filter @slow-transition;
             filter: grayscale(0);
             background-image: url("../svgs/gibiru/gibiru-icon-grey.svg");
 
@@ -52,7 +51,7 @@
         }
 
         &.swisscows {
-            transition: @slow-transition;
+            transition: filter @slow-transition;
             filter: grayscale(0);
             background-image: url("../svgs/swisscows/swisscows-icon-grey.svg");
 
@@ -62,7 +61,7 @@
         }
 
         &.lycos {
-            transition: @slow-transition;
+            transition: filter @slow-transition;
             filter: grayscale(0);
             background-image: url("../svgs/lycos/lycos-icon-grey.svg");
 
@@ -76,7 +75,7 @@
         }
 
         &.yahoo {
-            transition: @slow-transition;
+            transition: filter @slow-transition;
             filter: grayscale(0);
             background-image: url("../svgs/yahoo/yahoo-icon-grey.svg");
 
@@ -99,13 +98,6 @@
 
         &.selected {
             filter: grayscale(0);
-        }
-
-        &.dragged {
-            transition: filter @slow-transition;
-            filter: grayscale(0);
-            background-image: none;
-            outline: 2px dashed #9aa0a6;
         }
     }
 }

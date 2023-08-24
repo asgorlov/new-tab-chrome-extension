@@ -1,39 +1,46 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useContext } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import {
-  changeLanguage,
-  getNightPeriodByLocation,
-  selectCustomWallpaper,
-  selectDarkMode,
-  selectIsDark,
-  selectSearchEngine,
-  selectSearchEngines,
-  selectNightPeriod,
-  selectWallpaper,
   setCheckForUpdates,
   setCustomWallpaper,
   setDarkMode,
   setIsDark,
   setSearchEngines,
   setWallpaper,
-  selectCheckForUpdates,
-  selectCheckLoading,
-  checkUpdates,
-  selectLastVersion,
-  selectShowUpdateMessage
-} from "../../store/new-tab.slice";
+  setIsOpenMenu
+} from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { isSunsetTimeCached } from "../../utils/dark-mode.utils";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
+import { TourContext } from "../../contexts/tour.context";
+import {
+  selectCheckForUpdates,
+  selectCheckLoading,
+  selectCustomWallpaper,
+  selectDarkMode,
+  selectIsDark,
+  selectIsOpenMenu,
+  selectLastVersion,
+  selectNightPeriod,
+  selectSearchEngine,
+  selectSearchEngines,
+  selectWallpaper
+} from "../../store/new-tab/new-tab.selectors";
+import {
+  changeLanguage,
+  checkUpdates,
+  getNightPeriodByLocation
+} from "../../store/new-tab/new-tab.thunks";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const tourCtx = useContext(TourContext);
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
   const wallpaper = useSelector(selectWallpaper);
   const checkMode = useSelector(selectCheckForUpdates);
-  const showMessage = useSelector(selectShowUpdateMessage);
+  const isOpenMenu = useSelector(selectIsOpenMenu);
   const lastVersion = useSelector(selectLastVersion);
   const nightPeriod = useSelector(selectNightPeriod);
   const checkLoading = useSelector(selectCheckLoading);
@@ -53,6 +60,13 @@ const SettingsMenuContainer: FC = () => {
 
   const changeCustomWallpaper = useCallback(
     (v: CustomWallpaper | null) => dispatch(setCustomWallpaper(v)),
+    [dispatch]
+  );
+
+  const changeIsOpenMenu = useCallback(
+    (v: boolean) => {
+      dispatch(setIsOpenMenu(v));
+    },
     [dispatch]
   );
 
@@ -106,17 +120,19 @@ const SettingsMenuContainer: FC = () => {
       searchEngine={searchEngine}
       checkLoading={checkLoading}
       lastVersion={lastVersion}
-      showMessage={showMessage}
+      isOpenMenu={isOpenMenu}
       wallpaper={wallpaper}
       checkMode={checkMode}
       darkMode={darkMode}
+      tourCtx={tourCtx}
       isDark={isDark}
       setWallpaper={changeWallpaper}
+      setIsOpenMenu={changeIsOpenMenu}
       onClickUpdates={manualCheckUpdates}
-      setCustomWallpaper={changeCustomWallpaper}
       onClickSwitcher={toggleDarkHandler}
       onChangeDarkMode={changeDarkModeHandler}
       onChangeLanguage={changeLanguageHandler}
+      setCustomWallpaper={changeCustomWallpaper}
       onChangeSearchEngines={changeSearchEnginesHandler}
       onChangeCheckForUpdates={changeCheckForUpdatesHandler}
       onChangeDarkModeCollapse={changeDarkModeCollapseHandler}

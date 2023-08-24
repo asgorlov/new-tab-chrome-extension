@@ -1,11 +1,11 @@
 import { FC, useCallback, useState } from "react";
 import UpdateSettingComponent from "./update-setting.component";
+import { CURRENT_EXT_VERSION } from "../../../../constants/update.constants";
 
 interface UpdateSettingContainerProps {
   isDark: boolean;
   loading: boolean;
   checkMode: string;
-  showMessage: boolean;
   lastVersion: string;
   onClickUpdates: () => void;
   onChangeCheckMode: (value: string) => void;
@@ -15,7 +15,6 @@ const UpdateSettingContainer: FC<UpdateSettingContainerProps> = ({
   isDark,
   loading,
   checkMode,
-  showMessage,
   lastVersion,
   onClickUpdates,
   onChangeCheckMode
@@ -37,8 +36,9 @@ const UpdateSettingContainer: FC<UpdateSettingContainerProps> = ({
       isDark={isDark}
       loading={loading}
       checkMode={checkMode}
-      lastVersion={lastVersion}
-      isPopoverOpen={isClicked && !loading && !showMessage}
+      isPopoverOpen={
+        isClicked && !loading && lastVersion === CURRENT_EXT_VERSION
+      }
       onClickUpdates={handleClickUpdates}
       onChangeCheckMode={onChangeCheckMode}
       onOpenPopoverChange={handleOpenChange}

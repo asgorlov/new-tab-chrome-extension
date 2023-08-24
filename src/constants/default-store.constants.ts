@@ -1,17 +1,21 @@
 import { NewTabState } from "../models/new-tab-state.model";
-import manifest from "../../public/manifest.json";
 import { MANUAL, SEARCH_ENGINE_NAMES, YANDEX } from "./search-engine.constants";
 import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
-import { checkForUpdates } from "./check-for-updates.constants";
+import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
 
+/**
+ * Значения стейта по умолчанию
+ * @category Constants - Default Store
+ */
 const defaultStore: Readonly<NewTabState> = {
   isDark: false,
   update: {
-    lastVersion: manifest.version,
+    lastVersion: CURRENT_EXT_VERSION,
     showMessage: false,
     lastUpdateDate: Date.now()
   },
+  showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
   nightPeriod: {

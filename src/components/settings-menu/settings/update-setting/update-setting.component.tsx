@@ -4,26 +4,42 @@ import { ReactComponent as UpdateIcon } from "../../../../static/svgs/menu-setti
 import { Button, Popover, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { CloudDownloadOutlined } from "@ant-design/icons";
-import { checkForUpdates } from "../../../../constants/check-for-updates.constants";
+import {
+  checkForUpdates,
+  CURRENT_EXT_VERSION
+} from "../../../../constants/update.constants";
 import CollapseComponent from "../collapse.component";
 import { SelectOption } from "../../../../models/select-option.model";
 
-interface UpdateSettingComponentProps {
+/**
+ * Передаваемые параметры для компонента настройки обновлений
+ * @property isDark - Флаг темной темы
+ * @property loading - Флаг загрузки обновлений
+ * @property checkMode - Режимы запуска проверки обновлений
+ * @property isPopoverOpen - Флаг открытия поповера рядом с кнопкой
+ * @property onClickUpdates - Функция, вызываемая при клике по кнопке запуска обновлений
+ * @property onChangeCheckMode - Функция, вызываемая при изменении режима запуска проверки обновлений
+ * @property onOpenPopoverChange - Функция, вызываемая при клике по поповеру для скрытия
+ * @interface
+ */
+export interface UpdateSettingComponentProps {
   isDark: boolean;
   loading: boolean;
   checkMode: string;
-  lastVersion: string;
   isPopoverOpen: boolean;
   onClickUpdates: () => void;
   onChangeCheckMode: (value: string) => void;
   onOpenPopoverChange: (value: boolean) => void;
 }
 
+/**
+ * Компонент настройки обновлений
+ * @category Components
+ */
 const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
   isDark,
   loading,
   checkMode,
-  lastVersion,
   isPopoverOpen,
   onClickUpdates,
   onChangeCheckMode,
@@ -65,7 +81,9 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
         destroyTooltipOnHide={true}
         overlayStyle={{ width: "200px" }}
         title={t("update.info.notFound")}
-        content={t("update.info.lastVersion", { lastVersion })}
+        content={t("update.info.actualVersion", {
+          actualVersion: CURRENT_EXT_VERSION
+        })}
         trigger="click"
         onOpenChange={onOpenPopoverChange}
         getPopupContainer={() =>

@@ -1,6 +1,6 @@
 {
   "name": "new-tab-chrome-extension",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -21,6 +21,7 @@
     "i18next-resources-to-backend": "^1.1.4",
     "nth-check": "^2.0.1",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.3",
     "react-redux": "^8.0.2",
@@ -33,7 +34,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "typedoc": "typedoc --logLevel Verbose"
   },
   "eslintConfig": {
     "extends": [
@@ -56,12 +58,14 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.10",
     "@types/chrome": "^0.0.193",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "typedoc": "^0.24.8"
   },
   "lint-staged": {
     "*.{ts, tsx}": [

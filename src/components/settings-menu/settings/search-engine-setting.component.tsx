@@ -7,12 +7,23 @@ import { useTranslation } from "react-i18next";
 import { SelectOption } from "../../../models/select-option.model";
 import CollapseComponent from "./collapse.component";
 
-interface SearchEngineSettingProps {
+/**
+ * Передаваемые параметры для компонента настройки выбора поисковых систем
+ * @property isDark - Флаг темной темы
+ * @property searchEngineNames - Список выбранных поисковых систем для переключения
+ * @property onChangeSearchEngines - Функция, вызываемая при изменении списка выбранных поисковых систем
+ * @interface
+ */
+export interface SearchEngineSettingProps {
   isDark: boolean;
   searchEngineNames: string[];
   onChangeSearchEngines: (values: string[]) => void;
 }
 
+/**
+ * Компонент настройки выбора поисковых систем
+ * @category Components
+ */
 const SearchEngineSettingComponent: FC<SearchEngineSettingProps> = ({
   isDark,
   searchEngineNames,
