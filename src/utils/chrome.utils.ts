@@ -4,6 +4,11 @@ import { updateStateWithFeatures } from "./update.utils";
 import defaultStore from "../constants/default-store.constants";
 import { ChromeStorage } from "../models/chrome-storage.model";
 
+/**
+ * Асинхронный метод для получения начальных данных стейта из браузера
+ * @category Utilities - Chrome
+ * @returns - начальные данные {@link NewTabState}
+ */
 export const getInitStateFromChrome = async (): Promise<NewTabState> => {
   const data = await getDataFromChrome();
 
@@ -18,6 +23,11 @@ export const getInitStateFromChrome = async (): Promise<NewTabState> => {
   return data;
 };
 
+/**
+ * Асинхронный метод для получения данных из всех хранилищ браузера
+ * @category Utilities - Chrome
+ * @returns - сохраненные в браузере данные {@link NewTabState}
+ */
 export const getDataFromChrome = async (): Promise<NewTabState> => {
   let data;
   if (chrome?.storage) {
@@ -36,6 +46,12 @@ export const getDataFromChrome = async (): Promise<NewTabState> => {
   return data;
 };
 
+/**
+ * Метод для сохранения данных в синхронизируемое хранилище браузера
+ * @category Utilities - Chrome
+ * @param items - сохраняемые объекты
+ * @returns - <b>true</b>, если данные удалось сохранить
+ */
 export const setDataToChromeSyncStorage = (items: ChromeStorage): boolean => {
   if (chrome?.storage) {
     chrome.storage.sync.set(items).then();
@@ -46,6 +62,12 @@ export const setDataToChromeSyncStorage = (items: ChromeStorage): boolean => {
   return false;
 };
 
+/**
+ * Метод для сохранения данных в локальное хранилище браузера
+ * @category Utilities - Chrome
+ * @param items - сохраняемые объекты
+ * @returns - <b>true</b>, если данные удалось сохранить
+ */
 export const setDataToChromeLocalStorage = (items: ChromeStorage): boolean => {
   if (chrome?.storage) {
     chrome.storage.local.set(items).then();

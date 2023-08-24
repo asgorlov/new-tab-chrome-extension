@@ -2,7 +2,17 @@ import React, { FC, ReactNode } from "react";
 import clsx from "clsx";
 import { Collapse } from "antd";
 
-interface CollapseComponentProps {
+/**
+ * Передаваемые параметры для сворачиваемого компонента настройки
+ * @property icon - Иконка в хедере перед текстом
+ * @property title - Название в хедере
+ * @property isDark - Флаг темного режима
+ * @property children - Компоненты-потомки
+ * @property className - Название класса компонента
+ * @property onChange - Функция передает имя сворачиваемого компонента при нажатии на него
+ * @interface
+ */
+export interface CollapseComponentProps {
   icon: ReactNode;
   title: string;
   isDark: boolean;
@@ -11,6 +21,10 @@ interface CollapseComponentProps {
   onChange?: (values: string | string[]) => void;
 }
 
+/**
+ * Сворачиваемый компонент настройки
+ * @category Components
+ */
 const CollapseComponent: FC<CollapseComponentProps> = ({
   icon,
   title,

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import NewTabReducer from "./new-tab.slice";
+import NewTabReducer from "./new-tab/new-tab.slice";
 
 export const store = configureStore({
   reducer: {

@@ -11,7 +11,16 @@ import { useTranslation } from "react-i18next";
 import StrictModeDroppable from "../../utils/strict-mode-droppable";
 import { TourContextModel } from "../../models/tour-context.model";
 
-interface SearchSelectedComponentProps {
+/**
+ * Передаваемые параметры для компонента выбора поисковой системы
+ * @property searchEngineNames - Список выбранных поисковых систем для переключения
+ * @property currentLanguage - Текущий язык
+ * @property searchEngine - Выбранная поисковая система
+ * @property tourCtx - Модель контекста ознакомительно тура
+ * @property onClick - Функция, вызываемая при клике на кнопку выбора поисковой системы
+ * @interface
+ */
+export interface SearchSelectedComponentProps {
   searchEngineNames: string[];
   currentLanguage: string;
   searchEngine: string;
@@ -19,6 +28,10 @@ interface SearchSelectedComponentProps {
   onClick: (event: MouseEvent) => void;
 }
 
+/**
+ * Компонент выбора поисковой системы
+ * @category Components
+ */
 const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   searchEngineNames,
   currentLanguage,

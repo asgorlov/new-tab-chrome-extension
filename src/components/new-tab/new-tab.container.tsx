@@ -1,17 +1,6 @@
 import React, { FC, useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getNightPeriodByLocation,
-  selectCustomWallpaper,
-  selectDarkMode,
-  selectIsDark,
-  selectSearchEngine,
-  selectNightPeriod,
-  selectWallpaper,
-  setDarkMode,
-  setIsDark,
-  selectShowTour
-} from "../../store/new-tab.slice";
+import { setDarkMode, setIsDark } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
 import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
@@ -23,6 +12,16 @@ import {
 } from "../../constants/search-engine.constants";
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
 import { useTranslation } from "react-i18next";
+import {
+  selectCustomWallpaper,
+  selectDarkMode,
+  selectIsDark,
+  selectNightPeriod,
+  selectSearchEngine,
+  selectShowTour,
+  selectWallpaper
+} from "../../store/new-tab/new-tab.selectors";
+import { getNightPeriodByLocation } from "../../store/new-tab/new-tab.thunks";
 
 const NewTabContainer: FC = () => {
   const { t } = useTranslation();

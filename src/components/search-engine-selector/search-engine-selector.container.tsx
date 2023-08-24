@@ -1,15 +1,17 @@
 import React, { FC, MouseEvent, useCallback, useContext } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import {
-  selectCurrentLanguage,
-  selectSearchEngine,
-  selectSearchEngines,
   setSearchEngine,
   setSearchEngines
-} from "../../store/new-tab.slice";
+} from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { TourContext } from "../../contexts/tour.context";
+import {
+  selectCurrentLanguage,
+  selectSearchEngine,
+  selectSearchEngines
+} from "../../store/new-tab/new-tab.selectors";
 
 const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,11 @@ const SearchEngineSelectorContainer: FC = () => {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       const element = e.currentTarget as HTMLDivElement;
-      dispatch(setSearchEngine(element.dataset.rbdDraggableId));
+      const id = element.dataset.rbdDraggableId;
+
+      if (id) {
+        dispatch(setSearchEngine(id));
+      }
     },
     [dispatch]
   );

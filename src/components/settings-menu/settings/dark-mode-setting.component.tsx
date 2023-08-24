@@ -11,7 +11,16 @@ import { useTranslation } from "react-i18next";
 import CollapseComponent from "./collapse.component";
 import { SelectOption } from "../../../models/select-option.model";
 
-interface DarkModeSettingProps {
+/**
+ * Передаваемые параметры для компонента настройки темного режима
+ * @property isDark - Флаг темной темы
+ * @property darkMode - Режимы включения темной темы
+ * @property onClickSwitcher - Функция переключения темной темы
+ * @property onChangeDarkMode - Функция изменения режима запуска темной темы
+ * @property onChangeDarkModeCollapse - Функция вызывается при нажатии на сворачиваемый компонент
+ * @interface
+ */
+export interface DarkModeSettingProps {
   isDark: boolean;
   darkMode: string;
   onClickSwitcher: () => void;
@@ -19,6 +28,10 @@ interface DarkModeSettingProps {
   onChangeDarkModeCollapse: (values: string | string[]) => void;
 }
 
+/**
+ * Компонент настройки темного режима
+ * @category Components
+ */
 const DarkModeSettingComponent: FC<DarkModeSettingProps> = ({
   isDark,
   darkMode,

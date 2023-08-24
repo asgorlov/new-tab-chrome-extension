@@ -11,7 +11,18 @@ import {
 import CollapseComponent from "../collapse.component";
 import { SelectOption } from "../../../../models/select-option.model";
 
-interface UpdateSettingComponentProps {
+/**
+ * Передаваемые параметры для компонента настройки обновлений
+ * @property isDark - Флаг темной темы
+ * @property loading - Флаг загрузки обновлений
+ * @property checkMode - Режимы запуска проверки обновлений
+ * @property isPopoverOpen - Флаг открытия поповера рядом с кнопкой
+ * @property onClickUpdates - Функция, вызываемая при клике по кнопке запуска обновлений
+ * @property onChangeCheckMode - Функция, вызываемая при изменении режима запуска проверки обновлений
+ * @property onOpenPopoverChange - Функция, вызываемая при клике по поповеру для скрытия
+ * @interface
+ */
+export interface UpdateSettingComponentProps {
   isDark: boolean;
   loading: boolean;
   checkMode: string;
@@ -21,6 +32,10 @@ interface UpdateSettingComponentProps {
   onOpenPopoverChange: (value: boolean) => void;
 }
 
+/**
+ * Компонент настройки обновлений
+ * @category Components
+ */
 const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
   isDark,
   loading,
