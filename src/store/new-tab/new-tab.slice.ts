@@ -26,13 +26,17 @@ export const newTabSlice = createSlice({
   reducers: {
     /**
      * Функция изменения флага темного режима
-     * */
+     * @param state - стор
+     * @param action - экшн
+     */
     setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
       setDataToChromeSyncStorage({ isDark: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
+     * @param state - стор
+     * @param action - экшн
      * */
     setShowTour(state: NewTabState, action: PayloadAction<boolean>) {
       state.showTour = action.payload;
@@ -40,6 +44,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения флага режима включения темного режима
+     * @param state - стор
+     * @param action - экшн
      */
     setDarkMode(state: NewTabState, action: PayloadAction<string>) {
       state.darkMode = action.payload;
@@ -47,6 +53,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения флага открытия меню настроек
+     * @param state - стор
+     * @param action - экшн
      */
     setWallpaper(state: NewTabState, action: PayloadAction<string>) {
       state.wallpaper = action.payload;
@@ -54,12 +62,16 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения флага открытия меню настроек
+     * @param state - стор
+     * @param action - экшн
      */
     setIsOpenMenu(state: NewTabState, action: PayloadAction<boolean>) {
       state.isOpenMenu = action.payload;
     },
     /**
      * Функция изменения текущей поисковой системы
+     * @param state - стор
+     * @param action - экшн
      */
     setSearchEngine(state: NewTabState, action: PayloadAction<string>) {
       state.searchEngine = action.payload;
@@ -67,6 +79,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения списка доступный для выбора поисковых систем
+     * @param state - стор
+     * @param action - экшн
      */
     setSearchEngines(state: NewTabState, action: PayloadAction<string[]>) {
       state.searchEngines = action.payload;
@@ -74,6 +88,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения фоновых картинок пользователя
+     * @param state - стор
+     * @param action - экшн
      */
     setCustomWallpaper(
       state: NewTabState,
@@ -84,6 +100,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения режима запросов обновлений
+     * @param state - стор
+     * @param action - экшн
      */
     setCheckForUpdates(state: NewTabState, action: PayloadAction<string>) {
       state.checkForUpdates = action.payload;
@@ -91,6 +109,8 @@ export const newTabSlice = createSlice({
     },
     /**
      * Функция изменения флага показа окна с новой версией приложения
+     * @param state - стор
+     * @param action - экшн
      */
     setShowUpdateMessage(state: NewTabState, action: PayloadAction<boolean>) {
       state.update.showMessage = action.payload;
