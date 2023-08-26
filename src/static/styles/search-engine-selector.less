@@ -1,15 +1,51 @@
 @import "constants";
+@import "mixins";
 
 .new-tab__search-engine-selector {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     position: inherit;
     bottom: 10px;
     height: max-content;
+    outline: 2px solid;
+    border-radius: 8px;
+    transition: outline-color @fast-transition;
+
+    &-scrollable {
+        display: inherit;
+        transition: background-color @slow-transition;
+        padding: 2px;
+        overflow-x: auto;
+        background-color: #ffffff80;
+        max-width: 360px;
+
+        &::-webkit-scrollbar {
+            height: 0;
+        }
+
+        &.dark {
+            background-color: #292c3580;
+        }
+    }
+
+    &-left-button,
+    &-right-button {
+        transition: @fast-transition;
+        cursor: pointer;
+        border: 0;
+        width: 24px;
+        padding: 0;
+    }
+
+    &-left-button {
+        border-radius: 6px 0 0 6px;
+    }
+
+    &-right-button {
+        border-radius: 0 6px 6px 0;
+    }
 
     &-droppable-aria {
-        display: flex;
+        display: inherit;
     }
 
     &-item {
@@ -19,6 +55,7 @@
         border-radius: 4px;
         transition: filter @slow-transition;
         filter: grayscale(100%);
+        background-size: cover;
 
         &.yandex {
             background-image: url("../svgs/yandex/ya-icon.svg");
@@ -103,5 +140,62 @@
         &.selected {
             filter: grayscale(0);
         }
+    }
+
+    &.yandex {
+        .scrollable-selector-theme(@ya-color);
+    }
+
+    &.bing {
+        .scrollable-selector-theme(@bing-color);
+    }
+
+    &.aol {
+        .scrollable-selector-theme(@aol-color);
+    }
+
+    &.brave {
+        .scrollable-selector-theme(@brave-color);
+    }
+
+    &.youcom {
+        .scrollable-selector-theme(@youcom-color);
+    }
+
+    &.gibiru {
+        .scrollable-selector-theme(@gibiru-color);
+    }
+
+    &.swisscows {
+        .scrollable-selector-theme(@cows-color);
+    }
+
+    &.lycos {
+        .scrollable-selector-theme(@lycos-color);
+    }
+
+    &.nigma {
+        .scrollable-selector-theme(@nigma-color);
+    }
+
+    &.yahoo {
+        .scrollable-selector-theme(@yahoo-color);
+    }
+
+    &.google {
+        .scrollable-selector-theme(@goo-color);
+    }
+
+    &.duckduckgo {
+        .scrollable-selector-theme(@duck-color);
+    }
+
+    &.ecosia {
+        .scrollable-selector-theme(@ecosia-color);
+    }
+
+    &._hidden {
+        opacity: 0;
+        width: 0;
     }
 }

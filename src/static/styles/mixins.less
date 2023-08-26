@@ -152,3 +152,21 @@
   transition: @fast-transition;
   fill: @color;
 }
+
+.scrollable-selector-theme(@color) {
+  outline-color: @color;
+
+  .new-tab__search-engine-selector-left-button,
+  .new-tab__search-engine-selector-right-button {
+    background-color: @color;
+
+    &:active {
+      background-color: darken(@color, 10%);
+    }
+
+    &._hidden {
+      opacity: 0;
+      width: 0;
+    }
+  }
+}

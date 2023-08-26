@@ -20,8 +20,11 @@ export * from "../models/update.model";
 // Constants
 export * from "../constants/update.constants";
 export * from "../constants/search-engine.constants";
+export * from "../constants/search-engine-selector.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
+// Hooks
+export * from "../hooks/use-horizontal-scroll";
 // Components
 export { default as NewTabComponent } from "../components/new-tab/new-tab.component";
 export { type NewTabComponentProps } from "../components/new-tab/new-tab.component";
@@ -29,6 +32,8 @@ export { default as SearchEngineComponent } from "../components/search-engine/se
 export { type SearchEngineProps } from "../components/search-engine/search-engine.component";
 export { default as SearchEngineSelectorComponent } from "../components/search-engine-selector/search-engine-selector.component";
 export { type SearchSelectedComponentProps } from "../components/search-engine-selector/search-engine-selector.component";
+export { default as DroppableAriaComponent } from "../components/search-engine-selector/droppable-aria/droppable-aria.component";
+export { type DroppableAriaComponentProps } from "../components/search-engine-selector/droppable-aria/droppable-aria.component";
 export { default as SettingsMenuComponent } from "../components/settings-menu/settings-menu.component";
 export { type SettingsMenuComponentProps } from "../components/settings-menu/settings-menu.component";
 export { default as UpdateSettingComponent } from "../components/settings-menu/settings/update-setting/update-setting.component";
