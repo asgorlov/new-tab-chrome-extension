@@ -5,14 +5,14 @@ import { RefObject, useEffect, useRef } from "react";
  * @category Hooks
  * @returns ref элемента
  */
-export const useHorizontalScroll = <T>(
+export const useHorizontalScroll = <T extends HTMLElement>(
   delta: number = 0,
   initValue: T | null = null
 ): RefObject<T> => {
   const elementRef = useRef<T>(initValue);
 
   useEffect(() => {
-    const element: any = elementRef.current;
+    const element = elementRef.current;
 
     if (element) {
       const onWheel = (e: WheelEvent) => {
