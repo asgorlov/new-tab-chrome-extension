@@ -9,7 +9,7 @@ import { DELTA_Y } from "../../constants/search-engine-selector.constants";
  * @property isDark - Флаг темной темы
  * @property scrollRef - Ref элемента селектора со скроллом
  * @property searchEngine - Выбранная поисковая система
- * @property searchEngineNames - Список выбранных поисковых систем для переключения
+ * @property searchEngines - Список выбранных поисковых систем для переключения
  * @property onClickMoving - Функция движения объектов в элементе со скроллом
  * @interface
  */
@@ -17,7 +17,7 @@ export interface SearchSelectedComponentProps {
   isDark: boolean;
   scrollRef: RefObject<HTMLDivElement>;
   searchEngine: string;
-  searchEngineNames: string[];
+  searchEngines: string[];
   onClickMoving: (distance: number) => void;
 }
 
@@ -29,18 +29,18 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   isDark,
   scrollRef,
   searchEngine,
-  searchEngineNames,
+  searchEngines,
   onClickMoving
 }) => {
   return (
     <div
       className={clsx("new-tab__search-engine-selector", searchEngine, {
-        _hidden: !searchEngineNames.length
+        _hidden: !searchEngines.length
       })}
     >
       <button
         className={clsx("new-tab__search-engine-selector-left-button", {
-          _hidden: searchEngineNames.length < 11
+          _hidden: searchEngines.length < 11
         })}
         children={<LeftOutlined />}
         onClick={() => onClickMoving(DELTA_Y)}
@@ -51,11 +51,11 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
           dark: isDark
         })}
       >
-        <DroppableAriaContainer visibleSearchEngines={searchEngineNames} />
+        <DroppableAriaContainer visibleSearchEngines={searchEngines} />
       </div>
       <button
         className={clsx("new-tab__search-engine-selector-right-button", {
-          _hidden: searchEngineNames.length < 11
+          _hidden: searchEngines.length < 11
         })}
         children={<RightOutlined />}
         onClick={() => onClickMoving(-DELTA_Y)}

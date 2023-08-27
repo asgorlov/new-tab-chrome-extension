@@ -23,8 +23,6 @@ export * from "../constants/search-engine.constants";
 export * from "../constants/search-engine-selector.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
-// Hooks
-export * from "../hooks/use-horizontal-scroll";
 // Components
 export { default as NewTabComponent } from "../components/new-tab/new-tab.component";
 export { type NewTabComponentProps } from "../components/new-tab/new-tab.component";
