@@ -1,59 +1,86 @@
-import React, { FC, MouseEvent, useCallback, useContext } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
-import {
-  setSearchEngine,
-  setSearchEngines
-} from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { TourContext } from "../../contexts/tour.context";
 import {
-  selectCurrentLanguage,
+  selectIsDark,
   selectSearchEngine,
   selectSearchEngines
 } from "../../store/new-tab/new-tab.selectors";
+import { DELTA_Y } from "../../constants/search-engine-selector.constants";
+import { setSearchEngines } from "../../store/new-tab/new-tab.slice";
 
 const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
-  const tourCtx = useContext(TourContext);
+  const isDark = useSelector(selectIsDark);
   const searchEngine = useSelector(selectSearchEngine);
-  const currentLanguage = useSelector(selectCurrentLanguage);
-  const searchEngineNames = useSelector(selectSearchEngines);
+  const searchEngines = useSelector(selectSearchEngines);
 
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      const element = e.currentTarget as HTMLDivElement;
-      const id = element.dataset.rbdDraggableId;
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [isDragged, setIsDragged] = useState(false);
 
-      if (id) {
-        dispatch(setSearchEngine(id));
+  const handleClickMoving = useCallback(
+    (distance: number) => {
+      const element = scrollRef.current;
+
+      if (element) {
+        const { scrollLeft, scrollWidth, clientWidth } = element;
+
+        // Если поворот налево
+        if (distance > 0) {
+          if (scrollLeft === scrollWidth - clientWidth) {
+            const newSearchEngines = [...searchEngines];
+            const firstElement = newSearchEngines.shift();
+
+            if (firstElement) {
+              newSearchEngines.push(firstElement);
+              dispatch(setSearchEngines(newSearchEngines));
+            }
+          }
+        } else if (scrollLeft === 0) {
+          const newSearchEngines = [...searchEngines];
+          const lastElement = newSearchEngines.pop();
+
+          if (lastElement) {
+            newSearchEngines.unshift(lastElement);
+            dispatch(setSearchEngines(newSearchEngines));
+          }
+        }
       }
+
+      scrollRef.current?.scrollBy({ left: distance, behavior: "smooth" });
     },
-    [dispatch]
+    [dispatch, searchEngines]
   );
 
-  const handleDragEnd = (result: DropResult) => {
-    if (result.destination) {
-      const endIndex = result.destination.index;
-      const startIndex = result.source.index;
-      const newSearchEngineNames = Array.from(searchEngineNames);
-      const [removed] = newSearchEngineNames.splice(startIndex, 1);
-      newSearchEngineNames.splice(endIndex, 0, removed);
+  useEffect(() => {
+    const element = scrollRef.current;
 
-      dispatch(setSearchEngines(newSearchEngineNames));
+    if (element) {
+      const onWheel = (e: WheelEvent) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+
+          if (!isDragged) {
+            handleClickMoving(e.deltaY > 0 ? DELTA_Y : -DELTA_Y);
+          }
+        }
+      };
+
+      element.addEventListener("wheel", onWheel);
+
+      return () => element.removeEventListener("wheel", onWheel);
     }
-  };
+  }, [handleClickMoving, isDragged]);
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <SearchEngineSelectorComponent
-        searchEngineNames={searchEngineNames}
-        currentLanguage={currentLanguage}
-        searchEngine={searchEngine}
-        tourCtx={tourCtx}
-        onClick={handleClick}
-      />
-    </DragDropContext>
+    <SearchEngineSelectorComponent
+      isDark={isDark}
+      scrollRef={scrollRef}
+      searchEngine={searchEngine}
+      searchEngines={searchEngines}
+      onDragged={setIsDragged}
+      onClickMoving={handleClickMoving}
+    />
   );
 };
 

@@ -1,31 +1,26 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, RefObject } from "react";
+import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import clsx from "clsx";
-import {
-  Draggable,
-  DroppableProvided,
-  DraggableProvided,
-  DraggableStateSnapshot
-} from "react-beautiful-dnd";
-import { YANDEX } from "../../constants/search-engine.constants";
-import { useTranslation } from "react-i18next";
-import StrictModeDroppable from "../../utils/strict-mode-droppable";
-import { TourContextModel } from "../../models/tour-context.model";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { DELTA_Y } from "../../constants/search-engine-selector.constants";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
- * @property searchEngineNames - Список выбранных поисковых систем для переключения
- * @property currentLanguage - Текущий язык
+ * @property isDark - Флаг темной темы
+ * @property scrollRef - Ref элемента селектора со скроллом
  * @property searchEngine - Выбранная поисковая система
- * @property tourCtx - Модель контекста ознакомительно тура
- * @property onClick - Функция, вызываемая при клике на кнопку выбора поисковой системы
+ * @property searchEngines - Список выбранных поисковых систем для переключения
+ * @property onDragged - Функция установки флага, что элемента захвачен для переноса(dnd)
+ * @property onClickMoving - Функция движения объектов в элементе со скроллом
  * @interface
  */
 export interface SearchSelectedComponentProps {
-  searchEngineNames: string[];
-  currentLanguage: string;
+  isDark: boolean;
+  scrollRef: RefObject<HTMLDivElement>;
   searchEngine: string;
-  tourCtx?: TourContextModel;
-  onClick: (event: MouseEvent) => void;
+  searchEngines: string[];
+  onDragged: (v: boolean) => void;
+  onClickMoving: (distance: number) => void;
 }
 
 /**
@@ -33,67 +28,42 @@ export interface SearchSelectedComponentProps {
  * @category Components
  */
 const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
-  searchEngineNames,
-  currentLanguage,
+  isDark,
+  scrollRef,
   searchEngine,
-  tourCtx,
-  onClick
+  searchEngines,
+  onDragged,
+  onClickMoving
 }) => {
-  const { t } = useTranslation();
-
-  const setRef = (ref: HTMLDivElement | null, provided: DroppableProvided) => {
-    if (tourCtx) {
-      tourCtx.searchEngineSelectorRef.current = ref;
-    }
-
-    provided.innerRef(ref);
-  };
-  const getItemClassName = (itemName: string): string => {
-    return clsx(
-      "new-tab__search-engine-selector-item",
-      itemName === YANDEX && currentLanguage !== "ru"
-        ? itemName + "-en"
-        : itemName,
-      { selected: searchEngine === itemName }
-    );
-  };
-
   return (
-    <StrictModeDroppable
-      droppableId="search-engine-selector"
-      direction="horizontal"
+    <div
+      className={clsx("new-tab__search-engine-selector", searchEngine, {
+        _hidden: !searchEngines.length
+      })}
     >
-      {(dropProvided: DroppableProvided) => (
-        <div
-          className="new-tab__search-engine-selector"
-          ref={ref => setRef(ref, dropProvided)}
-          {...dropProvided.droppableProps}
-        >
-          {searchEngineNames.map((name: string, index: number) => (
-            <Draggable key={name} draggableId={name} index={index}>
-              {(
-                dragProvided: DraggableProvided,
-                dragSnapshot: DraggableStateSnapshot
-              ) => (
-                <div
-                  ref={dragProvided.innerRef}
-                  {...dragProvided.draggableProps}
-                  {...dragProvided.dragHandleProps}
-                  className={getItemClassName(name)}
-                  style={{
-                    ...dragProvided.draggableProps.style,
-                    cursor: dragSnapshot.isDragging ? "grabbing" : "pointer"
-                  }}
-                  title={t(`searchEngine.${name}`)}
-                  onClick={onClick}
-                />
-              )}
-            </Draggable>
-          ))}
-          {dropProvided.placeholder}
-        </div>
-      )}
-    </StrictModeDroppable>
+      <button
+        className={clsx("new-tab__search-engine-selector-left-button", {
+          _hidden: searchEngines.length < 11
+        })}
+        children={<LeftOutlined />}
+        onClick={() => onClickMoving(DELTA_Y)}
+      />
+      <div
+        ref={scrollRef}
+        className={clsx("new-tab__search-engine-selector-scrollable", {
+          dark: isDark
+        })}
+      >
+        <DroppableAriaContainer onDragged={onDragged} />
+      </div>
+      <button
+        className={clsx("new-tab__search-engine-selector-right-button", {
+          _hidden: searchEngines.length < 11
+        })}
+        children={<RightOutlined />}
+        onClick={() => onClickMoving(-DELTA_Y)}
+      />
+    </div>
   );
 };
 
