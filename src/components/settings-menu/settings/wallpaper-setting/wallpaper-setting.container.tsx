@@ -10,32 +10,34 @@ import {
 } from "../../../../constants/wallpaper.constants";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { useTranslation } from "react-i18next";
-import { CustomWallpaper } from "../../../../models/custom-wallpaper.model";
 import {
   convertImgToBase64,
   getInitialFileList,
   getInitialOneToBoth,
   getUploadingErrorKey
 } from "../../../../utils/wallpaper.utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCustomWallpaper,
+  selectIsDark,
+  selectSearchEngine,
+  selectWallpaper
+} from "../../../../store/new-tab/new-tab.selectors";
+import {
+  setCustomWallpaper,
+  setWallpaper
+} from "../../../../store/new-tab/new-tab.slice";
+import { AppDispatch } from "../../../../store/store";
 
-export interface WallpaperSettingContainerProps {
-  isDark: boolean;
-  wallpaper: string;
-  searchEngine: string;
-  customWallpaper: CustomWallpaper | null;
-  setWallpaper: (wallpaper: string) => void;
-  setCustomWallpaper: (customWallpaper: CustomWallpaper | null) => void;
-}
-
-const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
-  isDark,
-  wallpaper,
-  searchEngine,
-  customWallpaper,
-  setWallpaper,
-  setCustomWallpaper
-}) => {
+const WallpaperSettingContainer: FC = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const isDark = useSelector(selectIsDark);
+  const wallpaper = useSelector(selectWallpaper);
+  const searchEngine = useSelector(selectSearchEngine);
+  const customWallpaper = useSelector(selectCustomWallpaper);
+
   const [open, setOpen] = useState(false);
   const [oneToBoth, setOneToBoth] = useState(
     getInitialOneToBoth(customWallpaper)
@@ -61,16 +63,16 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
       if (name === CUSTOM_WALLPAPER) {
         setOpen(true);
       } else {
-        setCustomWallpaper(null);
+        dispatch(setCustomWallpaper(null));
         setUploadedWallpaper(null);
         setDarkFileList([]);
         setLightFileList([]);
         setOneToBoth(true);
       }
 
-      setWallpaper(name);
+      dispatch(setWallpaper(name));
     },
-    [setWallpaper, setCustomWallpaper]
+    [dispatch]
   );
   const handleClickCheckbox = useCallback(
     () => setOneToBoth(!oneToBoth),
@@ -158,11 +160,11 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
   const handleCancel = useCallback(() => setOpen(false), []);
   const handleOk = useCallback(() => {
     if (uploadedWallpaper) {
-      setCustomWallpaper(uploadedWallpaper);
+      dispatch(setCustomWallpaper(uploadedWallpaper));
     }
 
     handleCancel();
-  }, [handleCancel, uploadedWallpaper, setCustomWallpaper]);
+  }, [handleCancel, uploadedWallpaper, dispatch]);
 
   return (
     <WallpaperSettingComponent

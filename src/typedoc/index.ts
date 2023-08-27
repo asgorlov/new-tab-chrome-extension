@@ -41,13 +41,10 @@ export { type WallpaperSettingProps } from "../components/settings-menu/settings
 export { default as CollapseComponent } from "../components/settings-menu/settings/collapse.component";
 export { type CollapseComponentProps } from "../components/settings-menu/settings/collapse.component";
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
-export { type DarkModeSettingProps } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
-export { type LanguageSettingProps } from "../components/settings-menu/settings/language-setting.component";
 export { default as ResetSettingComponent } from "../components/settings-menu/settings/reset-setting.component";
 export { type ResetSettingProps } from "../components/settings-menu/settings/reset-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
-export { type SearchEngineSettingProps } from "../components/settings-menu/settings/search-engine-setting.component";
 export { default as TourComponent } from "../components/tour/tour-component";
 export { type TourComponentProps } from "../components/tour/tour-component";
 export { default as UpdateComponent } from "../components/update/update.component";

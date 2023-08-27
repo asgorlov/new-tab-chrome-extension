@@ -6,30 +6,25 @@ import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants"
 import { useTranslation } from "react-i18next";
 import { SelectOption } from "../../../models/select-option.model";
 import CollapseComponent from "./collapse.component";
-
-/**
- * Передаваемые параметры для компонента настройки выбора поисковых систем
- * @property isDark - Флаг темной темы
- * @property searchEngineNames - Список выбранных поисковых систем для переключения
- * @property onChangeSearchEngines - Функция, вызываемая при изменении списка выбранных поисковых систем
- * @interface
- */
-export interface SearchEngineSettingProps {
-  isDark: boolean;
-  searchEngineNames: string[];
-  onChangeSearchEngines: (values: string[]) => void;
-}
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsDark,
+  selectSearchEngines
+} from "../../../store/new-tab/new-tab.selectors";
+import { AppDispatch } from "../../../store/store";
+import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
 
 /**
  * Компонент настройки выбора поисковых систем
  * @category Components
  */
-const SearchEngineSettingComponent: FC<SearchEngineSettingProps> = ({
-  isDark,
-  searchEngineNames,
-  onChangeSearchEngines
-}) => {
+const SearchEngineSettingComponent: FC = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const isDark = useSelector(selectIsDark);
+  const searchEngines = useSelector(selectSearchEngines);
+
   const getOption = (name: string): SelectOption => {
     return {
       className: clsx(
@@ -53,25 +48,25 @@ const SearchEngineSettingComponent: FC<SearchEngineSettingProps> = ({
     >
       <div className="new-tab__settings-menu_search-engine-content-checkbox-group">
         <Checkbox
-          checked={searchEngineNames.length === SEARCH_ENGINE_NAMES.length}
+          checked={searchEngines.length === SEARCH_ENGINE_NAMES.length}
           onChange={e => {
             if (e.target.checked) {
-              const allSearchEngines = searchEngineNames.concat(
+              const allSearchEngines = searchEngines.concat(
                 SEARCH_ENGINE_NAMES.filter(
-                  name => !searchEngineNames.includes(name)
+                  name => !searchEngines.includes(name)
                 )
               );
-              onChangeSearchEngines(allSearchEngines);
+              dispatch(setSearchEngines(allSearchEngines));
             }
           }}
         >
           {t("searchEngine.selectAll")}
         </Checkbox>
         <Checkbox
-          checked={searchEngineNames.length === 0}
+          checked={searchEngines.length === 0}
           onChange={e => {
             if (e.target.checked) {
-              onChangeSearchEngines([]);
+              dispatch(setSearchEngines([]));
             }
           }}
         >
@@ -86,8 +81,8 @@ const SearchEngineSettingComponent: FC<SearchEngineSettingProps> = ({
         )}
         mode="multiple"
         maxTagCount="responsive"
-        value={searchEngineNames}
-        onChange={onChangeSearchEngines}
+        value={searchEngines}
+        onChange={v => dispatch(setSearchEngines(v))}
         options={SEARCH_ENGINE_NAMES.map(name => getOption(name))}
       />
     </CollapseComponent>

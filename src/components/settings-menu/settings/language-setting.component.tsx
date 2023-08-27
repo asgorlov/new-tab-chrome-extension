@@ -2,31 +2,25 @@ import React, { FC } from "react";
 import clsx from "clsx";
 import { ReactComponent as LanguageIcon } from "../../../static/svgs/menu-settings/language-icon.svg";
 import { Select } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import i18n from "../../../localizations/i18n";
 import { useTranslation } from "react-i18next";
-import { selectCurrentLanguage } from "../../../store/new-tab/new-tab.selectors";
-
-/**
- * Передаваемые параметры для компонента настройки языка
- * @property isDark - Флаг темной темы
- * @property onChangeLanguage - Функция смены языка приложения
- * @interface LanguageSettingProps
- */
-export interface LanguageSettingProps {
-  isDark: boolean;
-  onChangeLanguage: (value: string) => void;
-}
+import {
+  selectCurrentLanguage,
+  selectIsDark
+} from "../../../store/new-tab/new-tab.selectors";
+import { changeLanguage } from "../../../store/new-tab/new-tab.thunks";
+import { AppDispatch } from "../../../store/store";
 
 /**
  * Компонент настройки языка
  * @category Components
  */
-const LanguageSettingComponent: FC<LanguageSettingProps> = ({
-  isDark,
-  onChangeLanguage
-}) => {
+const LanguageSettingComponent: FC = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const isDark = useSelector(selectIsDark);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
   return (
@@ -45,7 +39,7 @@ const LanguageSettingComponent: FC<LanguageSettingProps> = ({
         bordered={false}
         showArrow={false}
         value={currentLanguage}
-        onChange={onChangeLanguage}
+        onChange={v => dispatch(changeLanguage(v))}
         placement="bottomRight"
         optionLabelProp="label"
         options={i18n.languages.map(lng => {
