@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TourContext } from "../../../contexts/tour.context";
 import {
   selectCurrentLanguage,
-  selectSearchEngine
+  selectSearchEngine,
+  selectSearchEngines
 } from "../../../store/new-tab/new-tab.selectors";
 import {
   setSearchEngine,
@@ -19,27 +20,30 @@ import {
 } from "../../../store/new-tab/new-tab.slice";
 
 export interface DroppableAriaContainerProps {
-  visibleSearchEngines: string[];
+  onDragged: (v: boolean) => void;
 }
 
 const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
-  visibleSearchEngines
+  onDragged
 }) => {
   const dispatch = useDispatch();
   const tourCtx = useContext(TourContext);
   const searchEngine = useSelector(selectSearchEngine);
+  const searchEngines = useSelector(selectSearchEngines);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
   const handleDragEnd = (result: DropResult) => {
     if (result.destination) {
       const endIndex = result.destination.index;
       const startIndex = result.source.index;
-      const newSearchEngineNames = Array.from(visibleSearchEngines);
-      const [removed] = newSearchEngineNames.splice(startIndex, 1);
-      newSearchEngineNames.splice(endIndex, 0, removed);
+      const newSearchEngines = Array.from(searchEngines);
+      const [removed] = newSearchEngines.splice(startIndex, 1);
+      newSearchEngines.splice(endIndex, 0, removed);
 
-      dispatch(setSearchEngines(newSearchEngineNames));
+      dispatch(setSearchEngines(newSearchEngines));
     }
+
+    onDragged(false);
   };
 
   const getItemClassName = useCallback(
@@ -77,12 +81,15 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
   );
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
+    <DragDropContext
+      onDragStart={() => onDragged(true)}
+      onDragEnd={handleDragEnd}
+    >
       <DroppableAriaComponent
         getItemClassName={getItemClassName}
         onSearchEngineClick={handleSearchEngineClick}
         setDroppableAreaRef={setDroppableAriaRef}
-        visibleSearchEngines={visibleSearchEngines}
+        searchEngines={searchEngines}
       />
     </DragDropContext>
   );

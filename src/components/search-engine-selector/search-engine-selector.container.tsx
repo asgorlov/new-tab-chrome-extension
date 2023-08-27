@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,6 +16,7 @@ const SearchEngineSelectorContainer: FC = () => {
   const searchEngines = useSelector(selectSearchEngines);
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [isDragged, setIsDragged] = useState(false);
 
   const handleClickMoving = useCallback(
     (distance: number) => {
@@ -58,7 +59,10 @@ const SearchEngineSelectorContainer: FC = () => {
       const onWheel = (e: WheelEvent) => {
         if (e.deltaY !== 0) {
           e.preventDefault();
-          handleClickMoving(e.deltaY > 0 ? DELTA_Y : -DELTA_Y);
+
+          if (!isDragged) {
+            handleClickMoving(e.deltaY > 0 ? DELTA_Y : -DELTA_Y);
+          }
         }
       };
 
@@ -66,7 +70,7 @@ const SearchEngineSelectorContainer: FC = () => {
 
       return () => element.removeEventListener("wheel", onWheel);
     }
-  }, [handleClickMoving]);
+  }, [handleClickMoving, isDragged]);
 
   return (
     <SearchEngineSelectorComponent
@@ -74,6 +78,7 @@ const SearchEngineSelectorContainer: FC = () => {
       scrollRef={scrollRef}
       searchEngine={searchEngine}
       searchEngines={searchEngines}
+      onDragged={setIsDragged}
       onClickMoving={handleClickMoving}
     />
   );

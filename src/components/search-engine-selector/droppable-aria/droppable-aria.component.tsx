@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
  * @property getItemClassName - Функция для получения класса каждого элемента списка поисковых систем
  * @property onSearchEngineClick - Функция, вызываемая при выборе поисковой системы
  * @property setDroppableAreaRef - Функция, устанавливающая ref области куда можно перетаскивать элементы
- * @property visibleSearchEngines - Список выбранных поисковых систем для переключения
+ * @property searchEngines - Список выбранных поисковых систем для переключения
  * @interface
  */
 export interface DroppableAriaComponentProps {
@@ -23,7 +23,7 @@ export interface DroppableAriaComponentProps {
     ref: HTMLDivElement | null,
     dropProvided: DroppableProvided
   ) => void;
-  visibleSearchEngines: string[];
+  searchEngines: string[];
 }
 
 /**
@@ -34,7 +34,7 @@ const DroppableAriaComponent: FC<DroppableAriaComponentProps> = ({
   getItemClassName,
   onSearchEngineClick,
   setDroppableAreaRef,
-  visibleSearchEngines
+  searchEngines
 }) => {
   const { t } = useTranslation();
 
@@ -49,7 +49,7 @@ const DroppableAriaComponent: FC<DroppableAriaComponentProps> = ({
           ref={ref => setDroppableAreaRef(ref, dropProvided)}
           {...dropProvided.droppableProps}
         >
-          {visibleSearchEngines.map((name: string, index: number) => (
+          {searchEngines.map((name: string, index: number) => (
             <Draggable key={name} draggableId={name} index={index}>
               {(
                 dragProvided: DraggableProvided,

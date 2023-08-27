@@ -10,6 +10,7 @@ import { DELTA_Y } from "../../constants/search-engine-selector.constants";
  * @property scrollRef - Ref элемента селектора со скроллом
  * @property searchEngine - Выбранная поисковая система
  * @property searchEngines - Список выбранных поисковых систем для переключения
+ * @property onDragged - Функция установки флага, что элемента захвачен для переноса(dnd)
  * @property onClickMoving - Функция движения объектов в элементе со скроллом
  * @interface
  */
@@ -18,6 +19,7 @@ export interface SearchSelectedComponentProps {
   scrollRef: RefObject<HTMLDivElement>;
   searchEngine: string;
   searchEngines: string[];
+  onDragged: (v: boolean) => void;
   onClickMoving: (distance: number) => void;
 }
 
@@ -30,6 +32,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   scrollRef,
   searchEngine,
   searchEngines,
+  onDragged,
   onClickMoving
 }) => {
   return (
@@ -51,7 +54,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
           dark: isDark
         })}
       >
-        <DroppableAriaContainer visibleSearchEngines={searchEngines} />
+        <DroppableAriaContainer onDragged={onDragged} />
       </div>
       <button
         className={clsx("new-tab__search-engine-selector-right-button", {
