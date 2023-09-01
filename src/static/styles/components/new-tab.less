@@ -1,4 +1,4 @@
-@import "constants";
+@import "src/static/styles/constants";
 
 .new-tab {
     transition: @slow-transition;
@@ -23,7 +23,7 @@
         width: 100vw;
         height: 100vh;
         background-size: cover;
-        background-image: url("../imgs/empty.png");
+        background-image: url("../../imgs/empty.png");
         opacity: 0;
         z-index: -10;
 
@@ -32,29 +32,29 @@
         }
 
         &.mountains {
-            background-image: url("../imgs/mountains-light.jpg");
+            background-image: url("../../imgs/mountains-light.jpg");
             opacity: 1;
 
             &.dark {
-                background-image: url("../imgs/mountains-dark.jpg");
+                background-image: url("../../imgs/mountains-dark.jpg");
             }
         }
 
         &.ocean {
-            background-image: url("../imgs/ocean-light.jpg");
+            background-image: url("../../imgs/ocean-light.jpg");
             opacity: 1;
 
             &.dark {
-                background-image: url("../imgs/ocean-dark.jpg");
+                background-image: url("../../imgs/ocean-dark.jpg");
             }
         }
 
         &.field {
-            background-image: url("../imgs/field-light.jpg");
+            background-image: url("../../imgs/field-light.jpg");
             opacity: 1;
 
             &.dark {
-                background-image: url("../imgs/field-dark.jpg");
+                background-image: url("../../imgs/field-dark.jpg");
             }
 
         }
