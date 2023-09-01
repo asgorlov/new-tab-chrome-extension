@@ -64,18 +64,20 @@ export const changeLanguage = createAsyncThunk(
 );
 
 /**
- * Асинхронный запрос сброса настроек
+ * Асинхронный запрос изменения или сброса настроек
  * @category Thunks - New Tab
  */
-export const resetSettings = createAsyncThunk(
-  "newTab/resetSettings",
-  async () => {
-    const data = defaultStore as NewTabState;
+export const applySettings = createAsyncThunk(
+  "newTab/applySettings",
+  async (settings?: NewTabState): Promise<NewTabState> => {
+    const data: NewTabState = settings ?? defaultStore;
 
-    data.update.previousVersion = data.update.lastVersion;
+    if (!settings) {
+      data.update.previousVersion = data.update.lastVersion;
 
-    if (navigator.language) {
-      data.currentLanguage = navigator.language;
+      if (navigator.language) {
+        data.currentLanguage = navigator.language;
+      }
     }
 
     setDataToChromeSyncStorage(data);

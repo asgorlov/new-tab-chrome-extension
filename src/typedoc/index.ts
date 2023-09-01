@@ -1,5 +1,6 @@
 // Utils
 export * from "../utils/chrome.utils";
+export * from "../utils/common-setting.utils";
 export * from "../utils/dark-mode.utils";
 export * from "../utils/search-engine.utils";
 export * from "../utils/update.utils";
@@ -23,6 +24,7 @@ export * from "../constants/search-engine.constants";
 export * from "../constants/search-engine-selector.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
+export * from "../constants/common-setting.constants";
 // Components
 export { default as NewTabComponent } from "../components/new-tab/new-tab.component";
 export { type NewTabComponentProps } from "../components/new-tab/new-tab.component";
@@ -34,6 +36,8 @@ export { default as DroppableAriaComponent } from "../components/search-engine-s
 export { type DroppableAriaComponentProps } from "../components/search-engine-selector/droppable-aria/droppable-aria.component";
 export { default as SettingsMenuComponent } from "../components/settings-menu/settings-menu.component";
 export { type SettingsMenuComponentProps } from "../components/settings-menu/settings-menu.component";
+export { default as CommonSettingComponent } from "../components/settings-menu/settings/common-setting/common-setting.component";
+export { type CommonSettingComponentProps } from "../components/settings-menu/settings/common-setting/common-setting.component";
 export { default as UpdateSettingComponent } from "../components/settings-menu/settings/update-setting/update-setting.component";
 export { type UpdateSettingComponentProps } from "../components/settings-menu/settings/update-setting/update-setting.component";
 export { default as WallpaperSettingComponent } from "../components/settings-menu/settings/wallpaper-setting/wallpaper-setting.component";
@@ -42,8 +46,6 @@ export { default as CollapseComponent } from "../components/settings-menu/settin
 export { type CollapseComponentProps } from "../components/settings-menu/settings/collapse.component";
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
-export { default as ResetSettingComponent } from "../components/settings-menu/settings/reset-setting.component";
-export { type ResetSettingProps } from "../components/settings-menu/settings/reset-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
 export { default as TourComponent } from "../components/tour/tour-component";
 export { type TourComponentProps } from "../components/tour/tour-component";

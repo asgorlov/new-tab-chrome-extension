@@ -1,0 +1,108 @@
+@import "../constants";
+@import "../mixins";
+
+.new-tab__settings-menu_common {
+  &-header {
+    .settings-menu-collapse-header-item();
+
+    svg {
+      transition: @fast-transition;
+    }
+  }
+
+  &-buttons-group {
+    &.yandex {
+      .common-setting-btn-hover-color(@ya-color);
+    }
+
+    &.google {
+      .common-setting-btn-hover-color(@goo-color);
+    }
+
+    &.duckduckgo {
+      .common-setting-btn-hover-color(@duck-color);
+    }
+
+    &.bing {
+      .common-setting-btn-hover-color(@bing-color);
+    }
+
+    &.yahoo {
+      .common-setting-btn-hover-color(@yahoo-color);
+    }
+
+    &.brave {
+      .common-setting-btn-hover-color(@brave-color);
+    }
+
+    &.swisscows {
+      .common-setting-btn-hover-color(@cows-color);
+    }
+
+    &.aol {
+      .common-setting-btn-hover-color(@aol-color);
+    }
+
+    &.youcom {
+      .common-setting-btn-hover-color(@youcom-color);
+    }
+
+    &.gibiru {
+      .common-setting-btn-hover-color(@gibiru-color);
+    }
+
+    &.lycos {
+      .common-setting-btn-hover-color(@lycos-color);
+    }
+
+    &.nigma {
+      .common-setting-btn-hover-color(@nigma-color);
+    }
+
+    &.ecosia {
+      .common-setting-btn-hover-color(@ecosia-color);
+    }
+
+    &.dark {
+      button {
+        color: @light-color;
+      }
+    }
+  }
+
+  &-export-btn,
+  &-import-btn,
+  &-reset-btn {
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+    background-color: transparent;
+  }
+
+  &-import-btn {
+    border-top: 1px solid @light-border-color;
+    border-bottom: 1px solid @light-border-color;
+  }
+
+  &-modal-content {
+    display: flex;
+    flex-direction: column;
+
+    &_radio-group {
+      margin-bottom: 8px;
+    }
+
+    &_uploading {
+      margin-bottom: 2px;
+
+      &-button {}
+    }
+
+    &_error-message {
+      color: #ff4d4f;
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+}

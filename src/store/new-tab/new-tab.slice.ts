@@ -9,7 +9,7 @@ import {
   changeLanguage,
   checkUpdates,
   getNightPeriodByLocation,
-  resetSettings
+  applySettings
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
@@ -140,7 +140,7 @@ export const newTabSlice = createSlice({
       state.currentLanguage = action.payload;
     });
 
-    builder.addCase(resetSettings.fulfilled, (state, action) => {
+    builder.addCase(applySettings.fulfilled, (state, action) => {
       const {
         isDark,
         update,

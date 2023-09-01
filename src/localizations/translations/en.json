@@ -24,19 +24,33 @@
     "unacceptableFormat": "Unacceptable image format",
     "unacceptableSize": "Image size can't be more than 2.5Mb"
   },
+  "commonSetting": {
+    "title": "Common",
+    "ok": "Yes",
+    "cancel": "No",
+    "export": {
+      "title": "Save settings",
+      "device": "To device",
+      "cloud": "To cloud"
+    },
+    "import": {
+      "title": "Upload settings",
+      "device": "From device",
+      "cloud": "From cloud",
+      "uploadTitle": "Upload",
+      "typeError": "Invalid settings file format"
+    },
+    "reset": {
+      "title": "Reset settings",
+      "message": "This action will return the default settings. Are you sure?"
+    }
+  },
   "turnOn": "On",
   "turnOff": "Off",
   "auto": "Auto",
   "manual": "Manual",
   "system": "System",
   "settingsTitle": "Settings",
-  "resetSettings": {
-    "byDefault": "Revert default settings",
-    "title": "Are you sure?",
-    "message": "This action will reset your settings to default",
-    "ok": "Yes",
-    "cancel": "No"
-  },
   "language": {
     "title": "Language",
     "ru": "Russian",

@@ -6,10 +6,10 @@ import clsx from "clsx";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
-import ResetSettingComponent from "./settings/reset-setting.component";
 import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
 import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
 import { TourContextModel } from "../../models/tour-context.model";
+import CommonSettingContainer from "./settings/common-setting/common-setting.container";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -67,12 +67,12 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
         getContainer={() =>
           document.querySelector(`.${menuClass}`) as HTMLDivElement
         }
-        footer={<ResetSettingComponent isDark={isDark} />}
         placement="right"
         open={isOpenMenu}
         closable={false}
         onClose={() => setIsOpenMenu(false)}
       >
+        <CommonSettingContainer />
         <SearchEngineSettingComponent />
         <DarkModeSettingComponent />
         <WallpaperSettingContainer />

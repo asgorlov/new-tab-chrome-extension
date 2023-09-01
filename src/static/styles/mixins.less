@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
+  padding-inline-start: 12px;
   border-top: 1px solid @light-border-color;
   transition: border-color @slow-transition, color @fast-transition;
 }
@@ -167,6 +168,20 @@
     &._hidden {
       opacity: 0;
       width: 0;
+    }
+  }
+}
+
+.common-setting-btn-hover-color(@color) {
+  .new-tab__settings-menu_common {
+    &-export-btn,
+    &-import-btn,
+    &-reset-btn {
+      transition: @fast-transition;
+
+      &:hover {
+        color: @color;
+      }
     }
   }
 }
