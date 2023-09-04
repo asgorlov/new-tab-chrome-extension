@@ -5,24 +5,19 @@ import { TourContext } from "../../contexts/tour.context";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
-import { selectIsDark } from "../../store/new-tab/new-tab.selectors";
-
-/**
- * Передаваемые параметры для компонента ознакомительного тура
- * @property showTour - Флаг ознакомительного тура
- * @interface
- */
-export interface TourComponentProps {
-  showTour: boolean;
-}
+import {
+  selectIsDark,
+  selectShowTour
+} from "../../store/new-tab/new-tab.selectors";
 
 /**
  * Компонент ознакомительного тура
  * @category Components
  */
-const TourComponent: FC<TourComponentProps> = ({ showTour }) => {
+const TourComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const showTour = useSelector(selectShowTour);
   const tourCtx = useContext(TourContext);
   const isDark = useSelector(selectIsDark);
   const [open, setOpen] = useState(showTour);

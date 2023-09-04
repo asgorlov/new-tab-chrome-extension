@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, memo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Drawer } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
@@ -83,4 +83,4 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
   );
 };
 
-export default SettingsMenuComponent;
+export default memo(SettingsMenuComponent);

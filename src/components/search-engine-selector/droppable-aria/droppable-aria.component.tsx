@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, memo, MouseEvent } from "react";
 import {
   Draggable,
   DraggableProvided,
@@ -77,4 +77,4 @@ const DroppableAriaComponent: FC<DroppableAriaComponentProps> = ({
   );
 };
 
-export default DroppableAriaComponent;
+export default memo(DroppableAriaComponent);

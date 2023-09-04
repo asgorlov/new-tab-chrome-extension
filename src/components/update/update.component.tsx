@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import { FC, memo, MouseEvent } from "react";
 import Link from "antd/lib/typography/Link";
 import { getDownloadLink } from "../../utils/update.utils";
 import { useTranslation } from "react-i18next";
@@ -69,4 +69,4 @@ const UpdateComponent: FC<UpdateComponentProps> = ({
   );
 };
 
-export default UpdateComponent;
+export default memo(UpdateComponent);

@@ -13,26 +13,24 @@ import {
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
 import { useTranslation } from "react-i18next";
 import {
-  selectCustomWallpaper,
   selectDarkMode,
-  selectIsDark,
   selectNightPeriod,
-  selectSearchEngine,
-  selectShowTour,
-  selectWallpaper
+  selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
 import { getNightPeriodByLocation } from "../../store/new-tab/new-tab.thunks";
 
 const NewTabContainer: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-  const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
-  const showTour = useSelector(selectShowTour);
-  const wallpaper = useSelector(selectWallpaper);
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
-  const customWallpaper = useSelector(selectCustomWallpaper);
+
+  const theme = {
+    token: {
+      colorPrimary: SEARCH_THEMES[searchEngine]
+    }
+  };
 
   useLayoutEffect(() => {
     document.title = t("tabTitle");
@@ -79,19 +77,8 @@ const NewTabContainer: FC = () => {
   }, [nightPeriod, darkMode, dispatch]);
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: SEARCH_THEMES[searchEngine]
-        }
-      }}
-    >
-      <NewTabComponent
-        isDark={isDark}
-        showTour={showTour}
-        wallpaper={wallpaper}
-        customWallpaper={customWallpaper}
-      />
+    <ConfigProvider theme={theme}>
+      <NewTabComponent />
     </ConfigProvider>
   );
 };

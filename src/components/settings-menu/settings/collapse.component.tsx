@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, memo, ReactNode } from "react";
 import clsx from "clsx";
 import { Collapse } from "antd";
 
@@ -60,4 +60,4 @@ const CollapseComponent: FC<CollapseComponentProps> = ({
   );
 };
 
-export default CollapseComponent;
+export default memo(CollapseComponent);

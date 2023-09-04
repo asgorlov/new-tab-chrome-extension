@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import clsx from "clsx";
 import { ReactComponent as UpdateIcon } from "../../../../static/svgs/menu-settings/update-icon.svg";
 import { Button, Popover, Select } from "antd";
@@ -109,4 +109,4 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = ({
   );
 };
 
-export default UpdateSettingComponent;
+export default memo(UpdateSettingComponent);

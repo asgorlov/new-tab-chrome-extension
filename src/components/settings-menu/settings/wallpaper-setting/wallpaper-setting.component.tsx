@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, Upload } from "antd";
 import clsx from "clsx";
@@ -196,4 +196,4 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
   );
 };
 
-export default WallpaperSettingComponent;
+export default memo(WallpaperSettingComponent);

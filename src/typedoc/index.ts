@@ -27,7 +27,6 @@ export * from "../constants/wallpaper.constants";
 export * from "../constants/common-setting.constants";
 // Components
 export { default as NewTabComponent } from "../components/new-tab/new-tab.component";
-export { type NewTabComponentProps } from "../components/new-tab/new-tab.component";
 export { default as SearchEngineComponent } from "../components/search-engine/search-engine.component";
 export { type SearchEngineProps } from "../components/search-engine/search-engine.component";
 export { default as SearchEngineSelectorComponent } from "../components/search-engine-selector/search-engine-selector.component";
@@ -48,6 +47,5 @@ export { default as DarkModeSettingComponent } from "../components/settings-menu
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
 export { default as TourComponent } from "../components/tour/tour-component";
-export { type TourComponentProps } from "../components/tour/tour-component";
 export { default as UpdateComponent } from "../components/update/update.component";
 export { type UpdateComponentProps } from "../components/update/update.component";

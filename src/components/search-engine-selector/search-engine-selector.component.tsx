@@ -1,4 +1,4 @@
-import React, { FC, RefObject } from "react";
+import React, { FC, memo, RefObject } from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import clsx from "clsx";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -67,4 +67,4 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
   );
 };
 
-export default SearchEngineSelectorComponent;
+export default memo(SearchEngineSelectorComponent);

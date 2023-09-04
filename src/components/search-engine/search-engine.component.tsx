@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
@@ -124,4 +124,4 @@ const SearchEngineComponent: FC<SearchEngineProps> = ({
   );
 };
 
-export default SearchEngineComponent;
+export default memo(SearchEngineComponent);

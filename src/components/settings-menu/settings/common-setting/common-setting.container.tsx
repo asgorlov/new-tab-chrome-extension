@@ -19,9 +19,7 @@ import {
 } from "../../../../constants/wallpaper.constants";
 import { RadioChangeEvent } from "antd/es/radio/interface";
 
-export interface CommonSettingContainerProps {}
-
-const CommonSettingContainer: FC<CommonSettingContainerProps> = () => {
+const CommonSettingContainer: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -112,7 +110,7 @@ const CommonSettingContainer: FC<CommonSettingContainerProps> = () => {
 
       handleCancel();
     },
-    [selectedOption, handleCancel, dispatch]
+    [uploadedSettings, selectedOption, handleCancel, dispatch]
   );
 
   return (

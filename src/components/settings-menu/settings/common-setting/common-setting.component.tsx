@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, memo, MouseEvent } from "react";
 import { ReactComponent as CommonIcon } from "../../../../static/svgs/menu-settings/common-icon.svg";
 import CollapseComponent from "../collapse.component";
 import { useTranslation } from "react-i18next";
@@ -159,4 +159,4 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
   );
 };
 
-export default CommonSettingComponent;
+export default memo(CommonSettingComponent);
