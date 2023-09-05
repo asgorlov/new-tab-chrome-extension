@@ -49,3 +49,5 @@ export { default as SearchEngineSettingComponent } from "../components/settings-
 export { default as TourComponent } from "../components/tour/tour-component";
 export { default as UpdateComponent } from "../components/update/update.component";
 export { type UpdateComponentProps } from "../components/update/update.component";
+export { default as UploadComponent } from "../components/upload/upload.component";
+export { type UploadComponentProps } from "../components/upload/upload.component";

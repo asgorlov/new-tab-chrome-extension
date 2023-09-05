@@ -110,25 +110,11 @@
         &-button {
           min-width: 170px;
         }
-
-        &-error-message {
-          font-size: 0.75em;
-          color: red;
-        }
       }
     }
 
     &.dark {
       .new-tab__settings-menu_wallpaper-modal-content {
-        &_uploading-button {
-          background-color: @dark-color;
-          border-color: @dark-border-color;
-
-          span {
-            color: @light-color;
-          }
-        }
-
         &_one-to-both {
           color: @light-color;
 
@@ -164,6 +150,15 @@
             &:not(:hover) {
               color: @light-color;
               border-color: @dark-border-color;
+            }
+          }
+
+          &>.ant-btn-primary {
+            box-shadow: none;
+            border-color: @dark-border-color;
+
+            &:disabled {
+              color: darken(@light-color, 35%);
             }
           }
         }

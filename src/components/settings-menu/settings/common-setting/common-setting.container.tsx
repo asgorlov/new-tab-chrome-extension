@@ -11,7 +11,6 @@ import {
 } from "../../../../constants/common-setting.constants";
 import { downloadFile } from "../../../../utils/common-setting.utils";
 import { getInitStateFromChrome } from "../../../../utils/chrome.utils";
-import { useTranslation } from "react-i18next";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import {
   DONE_STATUS,
@@ -20,7 +19,6 @@ import {
 import { RadioChangeEvent } from "antd/es/radio/interface";
 
 const CommonSettingContainer: FC = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const [radioOption, setRadioOption] = useState(DEVICE_OPTION);
@@ -76,13 +74,10 @@ const CommonSettingContainer: FC = () => {
     setSettingFileList(info.fileList);
   }, []);
 
-  const handleUpload = useCallback(
-    (options: any) => {
-      options.file.type !== SETTINGS_FILE_TYPE
-        ? options.onError(new Error(t("commonSetting.import.typeError")))
-        : options.onSuccess(options.file);
-    },
-    [t]
+  const validateUploading = useCallback(
+    (file: File): string =>
+      file.type !== SETTINGS_FILE_TYPE ? "commonSetting.import.typeError" : "",
+    []
   );
 
   const handleConfirm = useCallback(
@@ -127,8 +122,8 @@ const CommonSettingContainer: FC = () => {
       onCancel={handleCancel}
       onChange={handleChange}
       onRemove={handleResetImportSettings}
-      customRequest={handleUpload}
       onClickOpenModal={handleClickOpenModal}
+      validateUploading={validateUploading}
       onChangeRadioOption={handleChangeRadioOption}
     />
   );

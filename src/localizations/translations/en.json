@@ -7,6 +7,7 @@
   "anonymous": "Anonymous",
   "familyFriendly": "Family-friendly",
   "darkModeTitle": "Dark mode",
+  "uploadTitle": "Upload",
   "wallpaper": {
     "title": "Wallpaper",
     "forBothThemes": "For both theme",
@@ -37,7 +38,6 @@
       "title": "Upload settings",
       "device": "From device",
       "cloud": "From cloud",
-      "uploadTitle": "Upload",
       "typeError": "Invalid settings file format"
     },
     "reset": {

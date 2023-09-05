@@ -8,15 +8,15 @@ import {
   selectSearchEngine
 } from "../../../../store/new-tab/new-tab.selectors";
 import clsx from "clsx";
-import { Button, Modal, Radio, Upload } from "antd";
+import { Modal, Radio } from "antd";
 import {
   BUTTON_NAMES,
   DEVICE_OPTION,
   SETTINGS_FILE_TYPE
 } from "../../../../constants/common-setting.constants";
-import { UploadOutlined } from "@ant-design/icons";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { RadioChangeEvent } from "antd/es/radio/interface";
+import UploadComponent from "../../../upload/upload.component";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -29,8 +29,8 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
  * @property onCancel - Функция при нажатии на кнопку Cancel
  * @property onChange - Функция при загрузке файла настроек
  * @property onRemove - Функция при удалении файла настроек
- * @property customRequest - Функция, проставляющая статус загрузки настроек
  * @property onClickOpenModal - Функция, которая вызывается при открытии модального окна
+ * @property validateUploading - Функция валидации загруженного файла
  * @property onChangeRadioOption - Функция, проставляющая опцию выбора импорта\экспорта настроек
  * @interface
  */
@@ -44,8 +44,8 @@ export interface CommonSettingComponentProps {
   onCancel: () => void;
   onChange: (info: UploadChangeParam) => void;
   onRemove: (file: UploadFile) => void | boolean | Promise<void | boolean>;
-  customRequest: (options: any) => void;
   onClickOpenModal: (event: MouseEvent<HTMLButtonElement>) => void;
+  validateUploading: (file: File) => string;
   onChangeRadioOption: (event: RadioChangeEvent) => void;
 }
 
@@ -63,7 +63,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
   onCancel,
   onChange,
   onRemove,
-  customRequest,
+  validateUploading,
   onClickOpenModal,
   onChangeRadioOption
 }) => {
@@ -71,6 +71,9 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
 
   const isDark = useSelector(selectIsDark);
   const searchEngine = useSelector(selectSearchEngine);
+
+  const showUpload =
+    radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
 
   return (
     <CollapseComponent
@@ -127,30 +130,19 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
                   {t(`commonSetting.${selectedOption}.device`)}
                 </Radio>
               </Radio.Group>
-              {radioOption === DEVICE_OPTION &&
-                selectedOption === BUTTON_NAMES.import && (
-                  <>
-                    <Upload
-                      accept={SETTINGS_FILE_TYPE}
-                      maxCount={1}
-                      fileList={settingFileList}
-                      onChange={onChange}
-                      onRemove={onRemove}
-                      className="new-tab__settings-menu_common-modal-content_uploading"
-                      customRequest={customRequest}
-                    >
-                      <Button
-                        className="new-tab__settings-menu_common-modal-content_uploading-button"
-                        icon={<UploadOutlined />}
-                      >
-                        {t("commonSetting.import.uploadTitle")}
-                      </Button>
-                    </Upload>
-                    <div className="new-tab__settings-menu_common-modal-content_error-message">
-                      {uploadingError}
-                    </div>
-                  </>
-                )}
+              {showUpload && (
+                <UploadComponent
+                  isDark={isDark}
+                  uploadError={uploadingError}
+                  uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
+                  validateUploadedFile={validateUploading}
+                  uploadButtonClassName="new-tab__settings-menu_common-modal-content_uploading-button"
+                  accept={SETTINGS_FILE_TYPE}
+                  fileList={settingFileList}
+                  onChange={onChange}
+                  onRemove={onRemove}
+                />
+              )}
             </>
           )}
         </div>

@@ -7,6 +7,7 @@
   "anonymous": "Анонимно",
   "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
+  "uploadTitle": "Загрузить",
   "wallpaper": {
     "title": "Фон",
     "forBothThemes": "Для обеих тем",
@@ -37,7 +38,6 @@
       "title": "Загрузить настройки",
       "device": "С устройства",
       "cloud": "С облака",
-      "uploadTitle": "Загрузить",
       "typeError": "Неверный формат файла настроек"
     },
     "reset": {
