@@ -17,19 +17,16 @@ export interface RadioComponentProps extends RadioProps {
  * Компонент переключателя
  * @category Components
  */
-const RadioComponent: FC<RadioComponentProps> = ({
-  isDark = false,
-  children,
-  className = "",
-  ...rest
-}) => {
-  return (
-    <Radio
-      children={children}
-      className={clsx("new-tab__radio", { dark: isDark }, className)}
-      {...rest}
-    />
-  );
-};
+const RadioComponent: FC<RadioComponentProps> = memo(
+  ({ isDark = false, children, className = "", ...rest }) => {
+    return (
+      <Radio
+        children={children}
+        className={clsx("new-tab__radio", { dark: isDark }, className)}
+        {...rest}
+      />
+    );
+  }
+);
 
-export default memo(RadioComponent);
+export default RadioComponent;

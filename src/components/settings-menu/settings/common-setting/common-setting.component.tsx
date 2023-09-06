@@ -55,102 +55,104 @@ export interface CommonSettingComponentProps {
  * Компонент общих настроек
  * @category Components
  */
-const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
-  disableOk,
-  radioOption,
-  uploadingError,
-  selectedOption,
-  settingFileList,
-  onOk,
-  onCancel,
-  onChange,
-  onRemove,
-  validateUploading,
-  onClickOpenModal,
-  onChangeRadioOption
-}) => {
-  const { t } = useTranslation();
+const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
+  ({
+    disableOk,
+    radioOption,
+    uploadingError,
+    selectedOption,
+    settingFileList,
+    onOk,
+    onCancel,
+    onChange,
+    onRemove,
+    validateUploading,
+    onClickOpenModal,
+    onChangeRadioOption
+  }) => {
+    const { t } = useTranslation();
 
-  const isDark = useSelector(selectIsDark);
-  const searchEngine = useSelector(selectSearchEngine);
+    const isDark = useSelector(selectIsDark);
+    const searchEngine = useSelector(selectSearchEngine);
 
-  const showUpload =
-    radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
+    const showUpload =
+      radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
 
-  return (
-    <CollapseComponent
-      icon={<CommonIcon />}
-      title={t("commonSetting.title")}
-      isDark={isDark}
-      className="new-tab__settings-menu_common"
-    >
-      <div
-        className={clsx(
-          "new-tab__settings-menu_common-buttons-group",
-          searchEngine,
-          { dark: isDark }
-        )}
-      >
-        {Object.values(BUTTON_NAMES).map(name => {
-          return (
-            <button
-              className={`new-tab__settings-menu_common-${name}-btn`}
-              onClick={onClickOpenModal}
-              name={name}
-              key={name}
-            >
-              {t(`commonSetting.${name}.title`)}
-            </button>
-          );
-        })}
-      </div>
-      <ModalComponent
+    return (
+      <CollapseComponent
+        icon={<CommonIcon />}
+        title={t("commonSetting.title")}
         isDark={isDark}
-        title={t(`commonSetting.${selectedOption}.title`)}
-        open={Boolean(selectedOption)}
-        centered
-        onOk={onOk}
-        onCancel={onCancel}
-        okText={t("commonSetting.ok")}
-        cancelText={t("commonSetting.cancel")}
-        okButtonProps={{ disabled: disableOk }}
+        className="new-tab__settings-menu_common"
       >
         <div
-          className={clsx("new-tab__settings-menu_common-modal-content", {
-            dark: isDark
-          })}
-        >
-          {selectedOption === BUTTON_NAMES.reset ? (
-            <span>{t("commonSetting.reset.message")}</span>
-          ) : (
-            <>
-              <Radio.Group
-                className="new-tab__settings-menu_common-modal-content_radio-group"
-                onChange={onChangeRadioOption}
-                value={radioOption}
-              >
-                <RadioComponent value={DEVICE_OPTION} isDark={isDark}>
-                  {t(`commonSetting.${selectedOption}.device`)}
-                </RadioComponent>
-              </Radio.Group>
-              {showUpload && (
-                <UploadComponent
-                  isDark={isDark}
-                  uploadError={uploadingError}
-                  uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
-                  validateUploadedFile={validateUploading}
-                  accept={SETTINGS_FILE_TYPE}
-                  fileList={settingFileList}
-                  onChange={onChange}
-                  onRemove={onRemove}
-                />
-              )}
-            </>
+          className={clsx(
+            "new-tab__settings-menu_common-buttons-group",
+            searchEngine,
+            { dark: isDark }
           )}
+        >
+          {Object.values(BUTTON_NAMES).map(name => {
+            return (
+              <button
+                className={`new-tab__settings-menu_common-${name}-btn`}
+                onClick={onClickOpenModal}
+                name={name}
+                key={name}
+              >
+                {t(`commonSetting.${name}.title`)}
+              </button>
+            );
+          })}
         </div>
-      </ModalComponent>
-    </CollapseComponent>
-  );
-};
+        <ModalComponent
+          isDark={isDark}
+          title={t(`commonSetting.${selectedOption}.title`)}
+          open={Boolean(selectedOption)}
+          centered
+          onOk={onOk}
+          onCancel={onCancel}
+          okText={t("commonSetting.ok")}
+          cancelText={t("commonSetting.cancel")}
+          okButtonProps={{ disabled: disableOk }}
+        >
+          <div
+            className={clsx("new-tab__settings-menu_common-modal-content", {
+              dark: isDark
+            })}
+          >
+            {selectedOption === BUTTON_NAMES.reset ? (
+              <span>{t("commonSetting.reset.message")}</span>
+            ) : (
+              <>
+                <Radio.Group
+                  className="new-tab__settings-menu_common-modal-content_radio-group"
+                  onChange={onChangeRadioOption}
+                  value={radioOption}
+                >
+                  <RadioComponent value={DEVICE_OPTION} isDark={isDark}>
+                    {t(`commonSetting.${selectedOption}.device`)}
+                  </RadioComponent>
+                </Radio.Group>
+                {showUpload && (
+                  <UploadComponent
+                    isDark={isDark}
+                    uploadError={uploadingError}
+                    uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
+                    validateUploadedFile={validateUploading}
+                    accept={SETTINGS_FILE_TYPE}
+                    fileList={settingFileList}
+                    onChange={onChange}
+                    onRemove={onRemove}
+                  />
+                )}
+              </>
+            )}
+          </div>
+        </ModalComponent>
+      </CollapseComponent>
+    );
+  }
+);
 
-export default memo(CommonSettingComponent);
+export default CommonSettingComponent;

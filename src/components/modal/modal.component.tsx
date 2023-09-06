@@ -18,21 +18,17 @@ export interface ModalComponentProps extends ModalProps {
  * Компонент модального окна
  * @category Components
  */
-const ModalComponent: FC<ModalComponentProps> = ({
-  width = "400px",
-  isDark,
-  children,
-  className = "",
-  ...rest
-}) => {
-  return (
-    <Modal
-      width="400px"
-      className={clsx("new-tab__modal", { dark: isDark }, className)}
-      children={children}
-      {...rest}
-    />
-  );
-};
+const ModalComponent: FC<ModalComponentProps> = memo(
+  ({ width = "400px", isDark, children, className = "", ...rest }) => {
+    return (
+      <Modal
+        width="400px"
+        className={clsx("new-tab__modal", { dark: isDark }, className)}
+        children={children}
+        {...rest}
+      />
+    );
+  }
+);
 
-export default memo(ModalComponent);
+export default ModalComponent;

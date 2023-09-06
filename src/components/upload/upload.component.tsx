@@ -28,49 +28,53 @@ export interface UploadComponentProps extends UploadProps {
  * Компонент поля загрузки файлов
  * @category Components
  */
-const UploadComponent: FC<UploadComponentProps> = ({
-  isDark = false,
-  listType = "picture",
-  maxCount = 1,
-  uploadError = "",
-  uploadClassName = "",
-  uploadButtonText,
-  validateUploadedFile,
-  uploadButtonClassName = "",
-  ...rest
-}) => {
-  const { t } = useTranslation();
+const UploadComponent: FC<UploadComponentProps> = memo(
+  ({
+    isDark = false,
+    listType = "picture",
+    maxCount = 1,
+    uploadError = "",
+    uploadClassName = "",
+    uploadButtonText,
+    validateUploadedFile,
+    uploadButtonClassName = "",
+    ...rest
+  }) => {
+    const { t } = useTranslation();
 
-  const customRequest = (options: any) => {
-    const errorKey = validateUploadedFile
-      ? validateUploadedFile(options.file)
-      : "";
+    const customRequest = (options: any) => {
+      const errorKey = validateUploadedFile
+        ? validateUploadedFile(options.file)
+        : "";
 
-    if (errorKey) {
-      options.onError(new Error(t(errorKey)));
-    } else {
-      options.onSuccess(options.file);
-    }
-  };
+      if (errorKey) {
+        options.onError(new Error(t(errorKey)));
+      } else {
+        options.onSuccess(options.file);
+      }
+    };
 
-  return (
-    <div className={clsx("new-tab__upload", { dark: isDark }, uploadClassName)}>
-      <Upload
-        maxCount={maxCount}
-        listType={listType}
-        customRequest={customRequest}
-        {...rest}
+    return (
+      <div
+        className={clsx("new-tab__upload", { dark: isDark }, uploadClassName)}
       >
-        <Button
-          className={clsx("new-tab__upload-button", uploadButtonClassName)}
-          icon={<UploadOutlined />}
+        <Upload
+          maxCount={maxCount}
+          listType={listType}
+          customRequest={customRequest}
+          {...rest}
         >
-          {uploadButtonText ?? t("uploadTitle")}
-        </Button>
-      </Upload>
-      <div className="new-tab__upload-error-message">{uploadError}</div>
-    </div>
-  );
-};
+          <Button
+            className={clsx("new-tab__upload-button", uploadButtonClassName)}
+            icon={<UploadOutlined />}
+          >
+            {uploadButtonText ?? t("uploadTitle")}
+          </Button>
+        </Upload>
+        <div className="new-tab__upload-error-message">{uploadError}</div>
+      </div>
+    );
+  }
+);
 
-export default memo(UploadComponent);
+export default UploadComponent;

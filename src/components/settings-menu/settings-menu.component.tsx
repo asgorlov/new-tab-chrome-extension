@@ -32,55 +32,51 @@ export interface SettingsMenuComponentProps {
  * Компонент меню настроек
  * @category Components
  */
-const SettingsMenuComponent: FC<SettingsMenuComponentProps> = ({
-  isDark,
-  tourCtx,
-  isOpenMenu,
-  searchEngine,
-  setIsOpenMenu
-}) => {
-  const { t } = useTranslation();
-  const menuClass = "new-tab__settings-menu";
-  const menuContainerClass = "new-tab__settings-menu-container";
+const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
+  ({ isDark, tourCtx, isOpenMenu, searchEngine, setIsOpenMenu }) => {
+    const { t } = useTranslation();
+    const menuClass = "new-tab__settings-menu";
+    const menuContainerClass = "new-tab__settings-menu-container";
 
-  useEffect(() => {
-    if (tourCtx) {
-      tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
-    }
-  }, [tourCtx]);
+    useEffect(() => {
+      if (tourCtx) {
+        tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
+      }
+    }, [tourCtx]);
 
-  return (
-    <div className={menuClass}>
-      <Button
-        className="new-tab__settings-menu-button"
-        type="text"
-        onClick={() => setIsOpenMenu(true)}
-      >
-        <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
-      </Button>
-      <Drawer
-        className={clsx(menuContainerClass, { dark: isDark })}
-        contentWrapperStyle={{ width: "300px" }}
-        drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
-        bodyStyle={{ padding: "0" }}
-        title={t("settingsTitle")}
-        getContainer={() =>
-          document.querySelector(`.${menuClass}`) as HTMLDivElement
-        }
-        placement="right"
-        open={isOpenMenu}
-        closable={false}
-        onClose={() => setIsOpenMenu(false)}
-      >
-        <CommonSettingContainer />
-        <SearchEngineSettingComponent />
-        <DarkModeSettingComponent />
-        <WallpaperSettingContainer />
-        <UpdateSettingContainer />
-        <LanguageSettingComponent />
-      </Drawer>
-    </div>
-  );
-};
+    return (
+      <div className={menuClass}>
+        <Button
+          className="new-tab__settings-menu-button"
+          type="text"
+          onClick={() => setIsOpenMenu(true)}
+        >
+          <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
+        </Button>
+        <Drawer
+          className={clsx(menuContainerClass, { dark: isDark })}
+          contentWrapperStyle={{ width: "300px" }}
+          drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
+          bodyStyle={{ padding: "0" }}
+          title={t("settingsTitle")}
+          getContainer={() =>
+            document.querySelector(`.${menuClass}`) as HTMLDivElement
+          }
+          placement="right"
+          open={isOpenMenu}
+          closable={false}
+          onClose={() => setIsOpenMenu(false)}
+        >
+          <CommonSettingContainer />
+          <SearchEngineSettingComponent />
+          <DarkModeSettingComponent />
+          <WallpaperSettingContainer />
+          <UpdateSettingContainer />
+          <LanguageSettingComponent />
+        </Drawer>
+      </div>
+    );
+  }
+);
 
-export default memo(SettingsMenuComponent);
+export default SettingsMenuComponent;

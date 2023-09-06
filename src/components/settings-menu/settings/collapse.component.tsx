@@ -25,39 +25,34 @@ export interface CollapseComponentProps {
  * Сворачиваемый компонент настройки
  * @category Components
  */
-const CollapseComponent: FC<CollapseComponentProps> = ({
-  icon,
-  title,
-  isDark,
-  children,
-  className,
-  onChange = () => {}
-}) => {
-  const { Panel } = Collapse;
+const CollapseComponent: FC<CollapseComponentProps> = memo(
+  ({ icon, title, isDark, children, className, onChange = () => {} }) => {
+    const { Panel } = Collapse;
 
-  return (
-    <Collapse
-      accordion={true}
-      bordered={false}
-      expandIconPosition="end"
-      onChange={onChange}
-    >
-      <Panel
-        className={clsx(className, { dark: isDark })}
-        header={
-          <div className={clsx(`${className}-header`, { dark: isDark })}>
-            <>{icon}</>
-            <span>{title}</span>
-          </div>
-        }
-        key={title}
+    return (
+      <Collapse
+        accordion={true}
+        bordered={false}
+        expandIconPosition="end"
+        onChange={onChange}
       >
-        <div className={clsx(`${className}-content`, { dark: isDark })}>
-          {children}
-        </div>
-      </Panel>
-    </Collapse>
-  );
-};
+        <Panel
+          className={clsx(className, { dark: isDark })}
+          header={
+            <div className={clsx(`${className}-header`, { dark: isDark })}>
+              <>{icon}</>
+              <span>{title}</span>
+            </div>
+          }
+          key={title}
+        >
+          <div className={clsx(`${className}-content`, { dark: isDark })}>
+            {children}
+          </div>
+        </Panel>
+      </Collapse>
+    );
+  }
+);
 
-export default memo(CollapseComponent);
+export default CollapseComponent;

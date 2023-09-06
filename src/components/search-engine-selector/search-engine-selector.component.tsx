@@ -27,44 +27,46 @@ export interface SearchSelectedComponentProps {
  * Компонент выбора поисковой системы
  * @category Components
  */
-const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
-  isDark,
-  scrollRef,
-  searchEngine,
-  searchEngines,
-  onDragged,
-  onClickMoving
-}) => {
-  return (
-    <div
-      className={clsx("new-tab__search-engine-selector", searchEngine, {
-        _hidden: !searchEngines.length
-      })}
-    >
-      <button
-        className={clsx("new-tab__search-engine-selector-left-button", {
-          _hidden: searchEngines.length < 11
-        })}
-        children={<LeftOutlined />}
-        onClick={() => onClickMoving(DELTA_Y)}
-      />
+const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
+  ({
+    isDark,
+    scrollRef,
+    searchEngine,
+    searchEngines,
+    onDragged,
+    onClickMoving
+  }) => {
+    return (
       <div
-        ref={scrollRef}
-        className={clsx("new-tab__search-engine-selector-scrollable", {
-          dark: isDark
+        className={clsx("new-tab__search-engine-selector", searchEngine, {
+          _hidden: !searchEngines.length
         })}
       >
-        <DroppableAriaContainer onDragged={onDragged} />
+        <button
+          className={clsx("new-tab__search-engine-selector-left-button", {
+            _hidden: searchEngines.length < 11
+          })}
+          children={<LeftOutlined />}
+          onClick={() => onClickMoving(DELTA_Y)}
+        />
+        <div
+          ref={scrollRef}
+          className={clsx("new-tab__search-engine-selector-scrollable", {
+            dark: isDark
+          })}
+        >
+          <DroppableAriaContainer onDragged={onDragged} />
+        </div>
+        <button
+          className={clsx("new-tab__search-engine-selector-right-button", {
+            _hidden: searchEngines.length < 11
+          })}
+          children={<RightOutlined />}
+          onClick={() => onClickMoving(-DELTA_Y)}
+        />
       </div>
-      <button
-        className={clsx("new-tab__search-engine-selector-right-button", {
-          _hidden: searchEngines.length < 11
-        })}
-        children={<RightOutlined />}
-        onClick={() => onClickMoving(-DELTA_Y)}
-      />
-    </div>
-  );
-};
+    );
+  }
+);
 
-export default memo(SearchEngineSelectorComponent);
+export default SearchEngineSelectorComponent;

@@ -57,114 +57,116 @@ export interface WallpaperSettingProps {
  * Компонент настройки фонового изображения
  * @category Components
  */
-const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
-  open,
-  isDark,
-  oneToBoth,
-  wallpaper,
-  disabledOk,
-  searchEngine,
-  darkFileList,
-  lightFileList,
-  uploadingErrors,
-  onOk,
-  onCancel,
-  onChangeUpload,
-  onRemoveUpload,
-  onClickCheckbox,
-  onClickWallpaper
-}) => {
-  const { t } = useTranslation();
-  const getImage = (name: string): ReactNode => {
-    return (
-      <img
-        className={clsx(
-          "new-tab__settings-menu_wallpaper-content_choice-option",
-          { selected: wallpaper === name },
-          searchEngine
-        )}
-        title={t(`wallpaper.${name}`)}
-        key={name}
-        src={require(`../../../../static/imgs/${name}.png`)}
-        onClick={() => onClickWallpaper(name)}
-        alt={name}
-      />
-    );
-  };
+const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
+  ({
+    open,
+    isDark,
+    oneToBoth,
+    wallpaper,
+    disabledOk,
+    searchEngine,
+    darkFileList,
+    lightFileList,
+    uploadingErrors,
+    onOk,
+    onCancel,
+    onChangeUpload,
+    onRemoveUpload,
+    onClickCheckbox,
+    onClickWallpaper
+  }) => {
+    const { t } = useTranslation();
+    const getImage = (name: string): ReactNode => {
+      return (
+        <img
+          className={clsx(
+            "new-tab__settings-menu_wallpaper-content_choice-option",
+            { selected: wallpaper === name },
+            searchEngine
+          )}
+          title={t(`wallpaper.${name}`)}
+          key={name}
+          src={require(`../../../../static/imgs/${name}.png`)}
+          onClick={() => onClickWallpaper(name)}
+          alt={name}
+        />
+      );
+    };
 
-  return (
-    <>
-      <CollapseComponent
-        icon={<WallpaperIcon />}
-        title={t("wallpaper.title")}
-        isDark={isDark}
-        className="new-tab__settings-menu_wallpaper"
-      >
-        <div className="new-tab__settings-menu_wallpaper-content_choice-group">
-          {WALLPAPER_PRESETS.map(name => getImage(name))}
-        </div>
-      </CollapseComponent>
-      <ModalComponent
-        isDark={isDark}
-        title={t("wallpaper.uploading")}
-        open={open}
-        onOk={onOk}
-        onCancel={onCancel}
-        okText={t("wallpaper.ok")}
-        cancelText={t("wallpaper.cancel")}
-        okButtonProps={{ disabled: disabledOk }}
-      >
-        <div className="new-tab__settings-menu_wallpaper-modal-content">
-          <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-group">
-            <UploadComponent
-              isDark={isDark}
-              uploadClassName={clsx(
-                "new-tab__settings-menu_wallpaper-modal-content_uploading",
-                { "auto-width": oneToBoth }
-              )}
-              uploadButtonClassName="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
-              validateUploadedFile={getUploadingErrorKey}
-              uploadButtonText={t(
-                `wallpaper.${oneToBoth ? "uploadForBoth" : "uploadForLight"}`
-              )}
-              uploadError={uploadingErrors[0]}
-              fileList={lightFileList}
-              accept={ACCEPT_IMG_FORMAT}
-              onChange={info =>
-                onChangeUpload(
-                  info,
-                  oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME
-                )
-              }
-              onRemove={() =>
-                onRemoveUpload(oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME)
-              }
-            />
-            {!oneToBoth && (
+    return (
+      <>
+        <CollapseComponent
+          icon={<WallpaperIcon />}
+          title={t("wallpaper.title")}
+          isDark={isDark}
+          className="new-tab__settings-menu_wallpaper"
+        >
+          <div className="new-tab__settings-menu_wallpaper-content_choice-group">
+            {WALLPAPER_PRESETS.map(name => getImage(name))}
+          </div>
+        </CollapseComponent>
+        <ModalComponent
+          isDark={isDark}
+          title={t("wallpaper.uploading")}
+          open={open}
+          onOk={onOk}
+          onCancel={onCancel}
+          okText={t("wallpaper.ok")}
+          cancelText={t("wallpaper.cancel")}
+          okButtonProps={{ disabled: disabledOk }}
+        >
+          <div className="new-tab__settings-menu_wallpaper-modal-content">
+            <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-group">
               <UploadComponent
                 isDark={isDark}
-                uploadClassName="new-tab__settings-menu_wallpaper-modal-content_uploading"
+                uploadClassName={clsx(
+                  "new-tab__settings-menu_wallpaper-modal-content_uploading",
+                  { "auto-width": oneToBoth }
+                )}
                 uploadButtonClassName="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
                 validateUploadedFile={getUploadingErrorKey}
-                uploadButtonText={t("wallpaper.uploadForDark")}
-                uploadError={uploadingErrors[1]}
-                fileList={darkFileList}
+                uploadButtonText={t(
+                  `wallpaper.${oneToBoth ? "uploadForBoth" : "uploadForLight"}`
+                )}
+                uploadError={uploadingErrors[0]}
+                fileList={lightFileList}
                 accept={ACCEPT_IMG_FORMAT}
-                onChange={info => onChangeUpload(info, DARK_INPUT_NAME)}
-                onRemove={() => onRemoveUpload(DARK_INPUT_NAME)}
+                onChange={info =>
+                  onChangeUpload(
+                    info,
+                    oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME
+                  )
+                }
+                onRemove={() =>
+                  onRemoveUpload(oneToBoth ? BOTH_INPUT_NAME : LIGHT_INPUT_NAME)
+                }
               />
-            )}
+              {!oneToBoth && (
+                <UploadComponent
+                  isDark={isDark}
+                  uploadClassName="new-tab__settings-menu_wallpaper-modal-content_uploading"
+                  uploadButtonClassName="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
+                  validateUploadedFile={getUploadingErrorKey}
+                  uploadButtonText={t("wallpaper.uploadForDark")}
+                  uploadError={uploadingErrors[1]}
+                  fileList={darkFileList}
+                  accept={ACCEPT_IMG_FORMAT}
+                  onChange={info => onChangeUpload(info, DARK_INPUT_NAME)}
+                  onRemove={() => onRemoveUpload(DARK_INPUT_NAME)}
+                />
+              )}
+            </div>
+            <CheckboxComponent
+              isDark={isDark}
+              checked={oneToBoth}
+              onClick={onClickCheckbox}
+              children={t(`wallpaper.forBothThemes`)}
+            />
           </div>
-          <CheckboxComponent
-            isDark={isDark}
-            checked={oneToBoth}
-            onClick={onClickCheckbox}
-            children={t(`wallpaper.forBothThemes`)}
-          />
-        </div>
-      </ModalComponent>
-    </>
-  );
-};
+        </ModalComponent>
+      </>
+    );
+  }
+);
 
-export default memo(WallpaperSettingComponent);
+export default WallpaperSettingComponent;
