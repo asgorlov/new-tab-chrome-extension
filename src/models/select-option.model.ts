@@ -1,6 +1,6 @@
 /**
  * Интерфейс опции селектора
- * @property className - Имя класса стилей
+ * @property className - Название класса компонента
  * @property value - Значение
  * @property label - Отображаемый текст
  * @property key - Внутренний идентификатор для корректной работы React в массивах

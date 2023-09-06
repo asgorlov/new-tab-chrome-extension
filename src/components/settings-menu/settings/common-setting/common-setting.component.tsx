@@ -8,7 +8,7 @@ import {
   selectSearchEngine
 } from "../../../../store/new-tab/new-tab.selectors";
 import clsx from "clsx";
-import { Modal, Radio } from "antd";
+import { Radio } from "antd";
 import {
   BUTTON_NAMES,
   DEVICE_OPTION,
@@ -17,6 +17,8 @@ import {
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { RadioChangeEvent } from "antd/es/radio/interface";
 import UploadComponent from "../../../upload/upload.component";
+import ModalComponent from "../../../modal/modal.component";
+import RadioComponent from "../../../radio/radio.component";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -102,11 +104,8 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
           );
         })}
       </div>
-      <Modal
-        className={clsx("new-tab__settings-menu_common-modal", {
-          dark: isDark
-        })}
-        width="400px"
+      <ModalComponent
+        isDark={isDark}
         title={t(`commonSetting.${selectedOption}.title`)}
         open={Boolean(selectedOption)}
         centered
@@ -116,7 +115,11 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
         cancelText={t("commonSetting.cancel")}
         okButtonProps={{ disabled: disableOk }}
       >
-        <div className="new-tab__settings-menu_common-modal-content">
+        <div
+          className={clsx("new-tab__settings-menu_common-modal-content", {
+            dark: isDark
+          })}
+        >
           {selectedOption === BUTTON_NAMES.reset ? (
             <span>{t("commonSetting.reset.message")}</span>
           ) : (
@@ -126,9 +129,9 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
                 onChange={onChangeRadioOption}
                 value={radioOption}
               >
-                <Radio value={DEVICE_OPTION}>
+                <RadioComponent value={DEVICE_OPTION} isDark={isDark}>
                   {t(`commonSetting.${selectedOption}.device`)}
-                </Radio>
+                </RadioComponent>
               </Radio.Group>
               {showUpload && (
                 <UploadComponent
@@ -136,7 +139,6 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
                   uploadError={uploadingError}
                   uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
                   validateUploadedFile={validateUploading}
-                  uploadButtonClassName="new-tab__settings-menu_common-modal-content_uploading-button"
                   accept={SETTINGS_FILE_TYPE}
                   fileList={settingFileList}
                   onChange={onChange}
@@ -146,7 +148,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = ({
             </>
           )}
         </div>
-      </Modal>
+      </ModalComponent>
     </CollapseComponent>
   );
 };

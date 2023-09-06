@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import clsx from "clsx";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
-import { Checkbox, Select } from "antd";
+import { Select } from "antd";
 import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import { SelectOption } from "../../../models/select-option.model";
@@ -13,6 +13,8 @@ import {
 } from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
 import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
+import CheckboxComponent from "../../checkbox/checkbox.component";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -38,6 +40,19 @@ const SearchEngineSettingComponent: FC = () => {
       key: name
     };
   };
+  const handleChangeAddAll = (event: CheckboxChangeEvent) => {
+    if (event.target.checked) {
+      const allSearchEngines = searchEngines.concat(
+        SEARCH_ENGINE_NAMES.filter(name => !searchEngines.includes(name))
+      );
+      dispatch(setSearchEngines(allSearchEngines));
+    }
+  };
+  const handleChangeRemoveAll = (e: CheckboxChangeEvent) => {
+    if (e.target.checked) {
+      dispatch(setSearchEngines([]));
+    }
+  };
 
   return (
     <CollapseComponent
@@ -47,31 +62,18 @@ const SearchEngineSettingComponent: FC = () => {
       className="new-tab__settings-menu_search-engine"
     >
       <div className="new-tab__settings-menu_search-engine-content-checkbox-group">
-        <Checkbox
+        <CheckboxComponent
           checked={searchEngines.length === SEARCH_ENGINE_NAMES.length}
-          onChange={e => {
-            if (e.target.checked) {
-              const allSearchEngines = searchEngines.concat(
-                SEARCH_ENGINE_NAMES.filter(
-                  name => !searchEngines.includes(name)
-                )
-              );
-              dispatch(setSearchEngines(allSearchEngines));
-            }
-          }}
+          onChange={handleChangeAddAll}
         >
           {t("searchEngine.selectAll")}
-        </Checkbox>
-        <Checkbox
+        </CheckboxComponent>
+        <CheckboxComponent
           checked={searchEngines.length === 0}
-          onChange={e => {
-            if (e.target.checked) {
-              dispatch(setSearchEngines([]));
-            }
-          }}
+          onChange={handleChangeRemoveAll}
         >
           {t("searchEngine.removeAll")}
-        </Checkbox>
+        </CheckboxComponent>
       </div>
       <Select
         className="new-tab__settings-menu_search-engine-content-selector"

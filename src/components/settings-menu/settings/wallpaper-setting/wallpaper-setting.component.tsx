@@ -1,9 +1,7 @@
 import React, { FC, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal } from "antd";
 import clsx from "clsx";
 import { ReactComponent as WallpaperIcon } from "../../../../static/svgs/menu-settings/wallpaper-icon.svg";
-import { Checkbox } from "antd/lib";
 import {
   ACCEPT_IMG_FORMAT,
   BOTH_INPUT_NAME,
@@ -15,6 +13,8 @@ import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import CollapseComponent from "../collapse.component";
 import UploadComponent from "../../../upload/upload.component";
 import { getUploadingErrorKey } from "../../../../utils/wallpaper.utils";
+import ModalComponent from "../../../modal/modal.component";
+import CheckboxComponent from "../../../checkbox/checkbox.component";
 
 /**
  * Передаваемые параметры для компонента настройки фонового изображения
@@ -100,17 +100,12 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
         isDark={isDark}
         className="new-tab__settings-menu_wallpaper"
       >
-        <div className="new-tab__settings-menu_wallpaper-content_choice">
-          <div className="new-tab__settings-menu_wallpaper-content_choice-group">
-            {WALLPAPER_PRESETS.map(name => getImage(name))}
-          </div>
+        <div className="new-tab__settings-menu_wallpaper-content_choice-group">
+          {WALLPAPER_PRESETS.map(name => getImage(name))}
         </div>
       </CollapseComponent>
-      <Modal
-        className={clsx("new-tab__settings-menu_wallpaper-modal", {
-          dark: isDark
-        })}
-        width="400px"
+      <ModalComponent
+        isDark={isDark}
         title={t("wallpaper.uploading")}
         open={open}
         onOk={onOk}
@@ -160,14 +155,14 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = ({
               />
             )}
           </div>
-          <Checkbox
-            className="new-tab__settings-menu_wallpaper-modal-content_one-to-both"
+          <CheckboxComponent
+            isDark={isDark}
             checked={oneToBoth}
             onClick={onClickCheckbox}
             children={t(`wallpaper.forBothThemes`)}
           />
         </div>
-      </Modal>
+      </ModalComponent>
     </>
   );
 };

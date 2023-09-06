@@ -20,10 +20,6 @@
       transition: @fast-transition;
     }
 
-    .ant-checkbox-inner {
-      transition: @slow-transition;
-    }
-
     &-checkbox-group {
       display: flex;
       justify-content: space-between;
@@ -41,19 +37,6 @@
     &.dark {
       &>.new-tab__settings-menu_search-engine-content-selector {
         .setting-menu-select-selector-dark();
-      }
-
-      &>.new-tab__settings-menu_search-engine-content-checkbox-group {
-        &>.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) {
-          .ant-checkbox-inner {
-            transition: @slow-transition;
-            background: @dark-color;
-          }
-        }
-
-        .ant-checkbox-inner {
-          border-color: @dark-border-color;
-        }
       }
 
       span {

@@ -1,0 +1,30 @@
+@import "../constants";
+
+.new-tab__checkbox {
+  .ant-checkbox-inner {
+    transition: @slow-transition;
+  }
+
+  &.dark {
+    color: @light-color;
+
+    &>.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) {
+      .ant-checkbox-inner {
+        transition: @slow-transition;
+        background: @dark-color;
+      }
+    }
+
+    .ant-checkbox-inner {
+      border-color: @dark-border-color;
+    }
+
+    &:not(.ant-checkbox-wrapper-checked)>.ant-checkbox>.ant-checkbox-inner {
+      background: @dark-color;
+    }
+
+    .ant-checkbox-inner {
+      border-color: @dark-border-color;
+    }
+  }
+}

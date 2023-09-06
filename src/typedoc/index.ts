@@ -26,6 +26,10 @@ export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
 export * from "../constants/common-setting.constants";
 // Components
+export { default as ModalComponent } from "../components/modal/modal.component";
+export { type ModalComponentProps } from "../components/modal/modal.component";
+export { default as RadioComponent } from "../components/radio/radio.component";
+export { type RadioComponentProps } from "../components/radio/radio.component";
 export { default as NewTabComponent } from "../components/new-tab/new-tab.component";
 export { default as SearchEngineComponent } from "../components/search-engine/search-engine.component";
 export { type SearchEngineProps } from "../components/search-engine/search-engine.component";
