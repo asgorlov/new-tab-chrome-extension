@@ -10,7 +10,7 @@ import {
   WALLPAPER_PRESETS
 } from "../../../../constants/wallpaper.constants";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
-import CollapseComponent from "../collapse.component";
+import CollapseComponent from "../../../collapse/collapse.component";
 import UploadComponent from "../../../upload/upload.component";
 import { getUploadingErrorKey } from "../../../../utils/wallpaper.utils";
 import ModalComponent from "../../../modal/modal.component";

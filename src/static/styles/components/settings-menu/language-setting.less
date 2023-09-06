@@ -6,10 +6,21 @@
   border-bottom: 1px solid @light-border-color;
 
   &.dark {
-    .settings-menu-regular-dark();
+    transition: border-color @slow-transition, color @fast-transition;
+    border-color: @dark-border-color;
+    color: @light-color;
+
+    svg {
+      transition: @fast-transition;
+    }
 
     &>.new-tab__settings-menu_language-selector {
-      .setting-menu-selection-item-dark();
+      &>.ant-select-selector {
+        &>.ant-select-selection-item {
+          transition: @fast-transition;
+          color: @light-color;
+        }
+      }
     }
 
     svg {
@@ -18,7 +29,14 @@
   }
 
   &-header {
-    .settings-menu-regular-header-item();
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    svg {
+      transition: @fast-transition;
+      margin-right: 4px;
+    }
   }
 
   &-selector {

@@ -8,7 +8,7 @@ import {
   SYSTEM
 } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
-import CollapseComponent from "./collapse.component";
+import CollapseComponent from "../../collapse/collapse.component";
 import { SelectOption } from "../../../models/select-option.model";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -71,26 +71,30 @@ const DarkModeSettingComponent: FC = () => {
       onChange={onChangeDarkModeCollapse}
       className="new-tab__settings-menu_dark-mode"
     >
-      <Select
-        className="new-tab__settings-menu_dark-mode-content-selector"
-        size="small"
-        popupClassName={clsx(
-          "new-tab__settings-menu_dark-mode-content-dropdown",
-          { dark: isDark }
-        )}
-        disabled={darkMode === MANUAL && !navigator.geolocation}
-        defaultValue={darkMode}
-        onChange={v => dispatch(setDarkMode(v))}
-        options={[AUTO, MANUAL, SYSTEM].map(option => getOption(option))}
-      />
-      <Switch
-        className="new-tab__settings-menu_dark-mode-content-switcher"
-        checkedChildren={t("turnOn")}
-        unCheckedChildren={t("turnOff")}
-        checked={isDark}
-        disabled={darkMode !== MANUAL}
-        onClick={() => dispatch(setIsDark(!isDark))}
-      />
+      <div className="new-tab__settings-menu_dark-mode-content">
+        <Select
+          className={clsx("new-tab__settings-menu_dark-mode-content-selector", {
+            dark: isDark
+          })}
+          size="small"
+          popupClassName={clsx(
+            "new-tab__settings-menu_dark-mode-content-dropdown",
+            { dark: isDark }
+          )}
+          disabled={darkMode === MANUAL && !navigator.geolocation}
+          defaultValue={darkMode}
+          onChange={v => dispatch(setDarkMode(v))}
+          options={[AUTO, MANUAL, SYSTEM].map(option => getOption(option))}
+        />
+        <Switch
+          className="new-tab__settings-menu_dark-mode-content-switcher"
+          checkedChildren={t("turnOn")}
+          unCheckedChildren={t("turnOff")}
+          checked={isDark}
+          disabled={darkMode !== MANUAL}
+          onClick={() => dispatch(setIsDark(!isDark))}
+        />
+      </div>
     </CollapseComponent>
   );
 };

@@ -8,7 +8,7 @@ import {
   checkForUpdates,
   CURRENT_EXT_VERSION
 } from "../../../../constants/update.constants";
-import CollapseComponent from "../collapse.component";
+import CollapseComponent from "../../../collapse/collapse.component";
 import { SelectOption } from "../../../../models/select-option.model";
 
 /**
@@ -65,52 +65,56 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = memo(
         isDark={isDark}
         className="new-tab__settings-menu_update"
       >
-        <Select
-          className="new-tab__settings-menu_update-content-selector"
-          popupClassName={clsx(
-            "new-tab__settings-menu_update-content-dropdown",
-            {
+        <div className="new-tab__settings-menu_update-content">
+          <Select
+            className={clsx("new-tab__settings-menu_update-content-selector", {
               dark: isDark
-            }
-          )}
-          dropdownStyle={{ minWidth: "max-content" }}
-          size="small"
-          value={checkMode}
-          onChange={onChangeCheckMode}
-          options={Object.values(checkForUpdates).map(value =>
-            getOption(value)
-          )}
-        />
-        <Popover
-          placement="bottom"
-          open={isPopoverOpen}
-          destroyTooltipOnHide={true}
-          overlayStyle={{ width: "200px" }}
-          title={t("update.info.notFound")}
-          content={t("update.info.actualVersion", {
-            actualVersion: CURRENT_EXT_VERSION
-          })}
-          trigger="click"
-          onOpenChange={onOpenPopoverChange}
-          getPopupContainer={() =>
-            document.querySelector(
-              ".new-tab__settings-menu_update-content"
-            ) as HTMLElement
-          }
-        >
-          <Button
-            className={clsx(
-              "new-tab__settings-menu_update-content-check-button",
-              { dark: isDark }
+            })}
+            popupClassName={clsx(
+              "new-tab__settings-menu_update-content-dropdown",
+              {
+                dark: isDark
+              }
             )}
-            icon={<CloudDownloadOutlined />}
-            loading={loading}
-            disabled={checkMode !== checkForUpdates.MANUAL}
+            dropdownStyle={{ minWidth: "max-content" }}
             size="small"
-            onClick={onClickUpdates}
-            children={t("update.check")}
+            value={checkMode}
+            onChange={onChangeCheckMode}
+            options={Object.values(checkForUpdates).map(value =>
+              getOption(value)
+            )}
           />
-        </Popover>
+          <Popover
+            placement="bottom"
+            open={isPopoverOpen}
+            destroyTooltipOnHide={true}
+            overlayStyle={{ width: "200px" }}
+            title={t("update.info.notFound")}
+            content={t("update.info.actualVersion", {
+              actualVersion: CURRENT_EXT_VERSION
+            })}
+            trigger="click"
+            onOpenChange={onOpenPopoverChange}
+            getPopupContainer={() =>
+              document.querySelector(
+                ".new-tab__settings-menu_update-content"
+              ) as HTMLElement
+            }
+          >
+            <Button
+              className={clsx(
+                "new-tab__settings-menu_update-content-check-button",
+                { dark: isDark }
+              )}
+              icon={<CloudDownloadOutlined />}
+              loading={loading}
+              disabled={checkMode !== checkForUpdates.MANUAL}
+              size="small"
+              onClick={onClickUpdates}
+              children={t("update.check")}
+            />
+          </Popover>
+        </div>
       </CollapseComponent>
     );
   }

@@ -2,20 +2,7 @@
 @import "../../mixins";
 
 .new-tab__settings-menu_update {
-  .settings-menu-collapse-dark();
   border-radius: 0;
-
-  &.dark>.new-tab__settings-menu_update-content-selector {
-    .setting-menu-selection-item-dark();
-  }
-
-  &-header {
-    .settings-menu-collapse-header-item();
-
-    svg {
-      transition: @fast-transition;
-    }
-  }
 
   &-content {
     display: flex;
@@ -23,6 +10,10 @@
 
     &-selector {
       .setting-menu-selector();
+
+      &.dark {
+        .setting-menu-select-selector-dark();
+      }
     }
 
     &-dropdown {
@@ -46,10 +37,6 @@
     }
 
     &.dark {
-      &>.new-tab__settings-menu_update-content-selector {
-        .setting-menu-select-selector-dark();
-      }
-
       &>.ant-popover {
         &>.ant-popover-arrow:before {
           transition: all, background-color @slow-transition, color @fast-transition;

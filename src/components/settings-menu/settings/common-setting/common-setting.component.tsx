@@ -1,6 +1,6 @@
 import React, { FC, memo, MouseEvent } from "react";
 import { ReactComponent as CommonIcon } from "../../../../static/svgs/menu-settings/common-icon.svg";
-import CollapseComponent from "../collapse.component";
+import CollapseComponent from "../../../collapse/collapse.component";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import {

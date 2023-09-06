@@ -15,65 +15,6 @@
   transition: border-color @slow-transition, color @fast-transition;
 }
 
-.settings-menu-collapse-dark() {
-  &.dark {
-    .ant-collapse-expand-icon {
-      color: @light-color;
-    }
-  }
-}
-
-.settings-menu-regular-dark() {
-  transition: border-color @slow-transition, color @fast-transition;
-  border-color: @dark-border-color;
-  color: @light-color;
-
-  svg {
-    transition: @fast-transition;
-  }
-}
-
-.settings-menu-collapse-header-item() {
-  transition: @fast-transition;
-  .settings-menu-header-item();
-
-  &.dark {
-    color: @light-color;
-
-    svg {
-      stroke: @light-color;
-      fill: @light-color;
-    }
-  }
-}
-
-.settings-menu-regular-header-item() {
-  .settings-menu-header-item();
-
-  svg {
-    transition: @fast-transition;
-  }
-}
-
-.settings-menu-header-item() {
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-
-  svg {
-    margin-right: 4px;
-  }
-}
-
-.setting-menu-selection-item-dark() {
-  &>.ant-select-selector {
-    &>.ant-select-selection-item {
-      transition: @fast-transition;
-      color: @light-color;
-    }
-  }
-}
-
 .setting-menu-select-selector-dark() {
   &>.ant-select-selector {
     border-color: @dark-border-color;

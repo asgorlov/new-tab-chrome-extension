@@ -2,23 +2,9 @@
 @import "../../mixins";
 
 .new-tab__settings-menu_wallpaper {
-  .settings-menu-collapse-dark();
   border-radius: 0;
 
-  &-header {
-    .settings-menu-collapse-header-item();
-
-    svg {
-      transition: @fast-transition;
-    }
-  }
-
   &-content {
-    &.dark {
-      transition: @fast-transition;
-      color: @light-color;
-    }
-
     &_choice {
       &-group {
         display: flex;

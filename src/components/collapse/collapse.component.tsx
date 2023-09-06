@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Collapse } from "antd";
 
 /**
- * Передаваемые параметры для сворачиваемого компонента настройки
+ * Передаваемые параметры для сворачиваемого компонента
  * @property icon - Иконка в хедере перед текстом
  * @property title - Название в хедере
  * @property isDark - Флаг темного режима
@@ -17,39 +17,41 @@ export interface CollapseComponentProps {
   title: string;
   isDark: boolean;
   children?: ReactNode;
-  className: string;
+  className?: string;
   onChange?: (values: string | string[]) => void;
 }
 
 /**
- * Сворачиваемый компонент настройки
+ * Сворачиваемый компонент
  * @category Components
  */
 const CollapseComponent: FC<CollapseComponentProps> = memo(
-  ({ icon, title, isDark, children, className, onChange = () => {} }) => {
+  ({ icon, title, isDark, children, className = "", onChange = () => {} }) => {
     const { Panel } = Collapse;
+    const panelClassName = clsx(
+      "new-tab__collapse",
+      { dark: isDark },
+      className
+    );
 
     return (
       <Collapse
-        accordion={true}
+        accordion
         bordered={false}
         expandIconPosition="end"
         onChange={onChange}
       >
         <Panel
-          className={clsx(className, { dark: isDark })}
+          className={panelClassName}
+          children={children}
           header={
-            <div className={clsx(`${className}-header`, { dark: isDark })}>
+            <div className="new-tab__collapse-header">
               <>{icon}</>
               <span>{title}</span>
             </div>
           }
           key={title}
-        >
-          <div className={clsx(`${className}-content`, { dark: isDark })}>
-            {children}
-          </div>
-        </Panel>
+        />
       </Collapse>
     );
   }

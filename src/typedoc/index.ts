@@ -45,8 +45,8 @@ export { default as UpdateSettingComponent } from "../components/settings-menu/s
 export { type UpdateSettingComponentProps } from "../components/settings-menu/settings/update-setting/update-setting.component";
 export { default as WallpaperSettingComponent } from "../components/settings-menu/settings/wallpaper-setting/wallpaper-setting.component";
 export { type WallpaperSettingProps } from "../components/settings-menu/settings/wallpaper-setting/wallpaper-setting.component";
-export { default as CollapseComponent } from "../components/settings-menu/settings/collapse.component";
-export { type CollapseComponentProps } from "../components/settings-menu/settings/collapse.component";
+export { default as CollapseComponent } from "../components/collapse/collapse.component";
+export { type CollapseComponentProps } from "../components/collapse/collapse.component";
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
