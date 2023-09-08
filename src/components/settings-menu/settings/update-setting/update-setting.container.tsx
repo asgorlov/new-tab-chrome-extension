@@ -1,24 +1,24 @@
 import { FC, useCallback, useState } from "react";
 import UpdateSettingComponent from "./update-setting.component";
 import { CURRENT_EXT_VERSION } from "../../../../constants/update.constants";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCheckForUpdates,
+  selectCheckLoading,
+  selectIsDark,
+  selectLastVersion
+} from "../../../../store/new-tab/new-tab.selectors";
+import { checkUpdates } from "../../../../store/new-tab/new-tab.thunks";
+import { AppDispatch } from "../../../../store/store";
+import { setCheckForUpdates } from "../../../../store/new-tab/new-tab.slice";
 
-interface UpdateSettingContainerProps {
-  isDark: boolean;
-  loading: boolean;
-  checkMode: string;
-  lastVersion: string;
-  onClickUpdates: () => void;
-  onChangeCheckMode: (value: string) => void;
-}
+const UpdateSettingContainer: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const isDark = useSelector(selectIsDark);
+  const checkMode = useSelector(selectCheckForUpdates);
+  const lastVersion = useSelector(selectLastVersion);
+  const checkLoading = useSelector(selectCheckLoading);
 
-const UpdateSettingContainer: FC<UpdateSettingContainerProps> = ({
-  isDark,
-  loading,
-  checkMode,
-  lastVersion,
-  onClickUpdates,
-  onChangeCheckMode
-}) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleOpenChange = (visible: boolean) => {
@@ -27,20 +27,20 @@ const UpdateSettingContainer: FC<UpdateSettingContainerProps> = ({
     }
   };
   const handleClickUpdates = useCallback(() => {
-    onClickUpdates();
+    dispatch(checkUpdates());
     setIsClicked(true);
-  }, [onClickUpdates]);
+  }, [dispatch]);
 
   return (
     <UpdateSettingComponent
       isDark={isDark}
-      loading={loading}
+      loading={checkLoading}
       checkMode={checkMode}
       isPopoverOpen={
-        isClicked && !loading && lastVersion === CURRENT_EXT_VERSION
+        isClicked && !checkLoading && lastVersion === CURRENT_EXT_VERSION
       }
       onClickUpdates={handleClickUpdates}
-      onChangeCheckMode={onChangeCheckMode}
+      onChangeCheckMode={v => dispatch(setCheckForUpdates(v))}
       onOpenPopoverChange={handleOpenChange}
     />
   );

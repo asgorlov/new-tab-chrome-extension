@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { Droppable, DroppableProps } from "react-beautiful-dnd";
 
 // ToDo: this workaround is used to make "react-beautiful-dnd" work in react v18 with strict mode.
@@ -18,4 +18,4 @@ const StrictModeDroppable: FC<DroppableProps> = ({ children, ...rest }) => {
   return enabled ? <Droppable children={children} {...rest} /> : null;
 };
 
-export default StrictModeDroppable;
+export default memo(StrictModeDroppable);

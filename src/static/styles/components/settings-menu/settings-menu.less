@@ -1,5 +1,5 @@
-@import "../constants";
-@import "../mixins";
+@import "../../constants";
+@import "../../mixins";
 
 .new-tab__settings-menu {
     position: absolute;
@@ -139,57 +139,6 @@
                     }
                 }
             }
-        }
-    }
-
-    &_reset {
-        &-popconfirm {
-            width: 250px;
-
-            .ant-popconfirm-message,
-            .ant-popconfirm-description {
-                transition: @fast-transition;
-            }
-
-            .ant-popover-arrow::before,
-            .ant-popover-inner {
-                transition: @slow-transition;
-            }
-
-            &.dark {
-                .ant-popconfirm-message,
-                .ant-popconfirm-description {
-                    color: @light-color;
-                }
-
-                .ant-popover-arrow::before,
-                .ant-popover-inner {
-                    .dark-box-shadow();
-                }
-            }
-        }
-
-        &-btn {
-            transition: @fast-transition;
-            padding: 0;
-            width: 100%;
-            height: 56px;
-            font-weight: 500;
-            border-radius: 0;
-            background-color: transparent;
-            border: none;
-
-            &.dark {
-                color: @light-color;
-
-                &:not(:disabled):hover {
-                    background-color: transparent;
-                }
-            }
-        }
-
-        &-confirm {
-            width: 300px;
         }
     }
 }

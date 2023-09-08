@@ -1,37 +1,19 @@
-@import "../constants";
-@import "../mixins";
+@import "../../constants";
+@import "../../mixins";
 
 .new-tab__settings-menu_update {
-  .settings-menu-collapse-dark();
   border-radius: 0;
-
-  &.dark>.new-tab__settings-menu_update-content-selector {
-    .setting-menu-selection-item-dark();
-  }
-
-  &-header {
-    .settings-menu-collapse-header-item();
-
-    svg {
-      transition: @fast-transition;
-    }
-  }
 
   &-content {
     display: flex;
     justify-content: space-between;
 
-    &-selector {
-      .setting-menu-selector();
-    }
-
-    &-dropdown {
-      .setting-menu-dropdown();
-    }
-
     &-check-button {
-      transition: border-color @slow-transition, color @fast-transition;
       background: transparent;
+
+      button {
+        transition: background-color @slow-transition, border-color @slow-transition, color @fast-transition;
+      }
 
       &.dark {
         color: @light-color;
@@ -46,10 +28,6 @@
     }
 
     &.dark {
-      &>.new-tab__settings-menu_update-content-selector {
-        .setting-menu-select-selector-dark();
-      }
-
       &>.ant-popover {
         &>.ant-popover-arrow:before {
           transition: all, background-color @slow-transition, color @fast-transition;

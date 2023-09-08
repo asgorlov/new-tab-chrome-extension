@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useCallback, useContext } from "react";
+import { FC, memo, MouseEvent, useCallback, useContext } from "react";
 import DroppableAriaComponent from "./droppable-aria.component";
 import {
   DragDropContext,
@@ -95,4 +95,4 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
   );
 };
 
-export default DroppableAriaContainer;
+export default memo(DroppableAriaContainer);

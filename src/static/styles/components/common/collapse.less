@@ -1,0 +1,30 @@
+@import "../../constants";
+
+.new-tab__collapse {
+  &-header {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    transition: @fast-transition;
+
+    svg {
+      transition: @fast-transition;
+      margin-right: 4px;
+    }
+  }
+
+  &.dark {
+    .new-tab__collapse-header {
+      color: @light-color;
+
+      svg {
+        stroke: @light-color;
+        fill: @light-color;
+      }
+    }
+
+    .ant-collapse-expand-icon {
+      color: @light-color;
+    }
+  }
+}
