@@ -1,14 +1,9 @@
 @import "../../constants";
-@import "../../mixins";
 
 .new-tab__settings-menu_search-engine {
   &-content {
     display: flex;
     flex-direction: column;
-
-    span {
-      transition: @fast-transition;
-    }
 
     &-checkbox-group {
       display: flex;
@@ -18,15 +13,6 @@
 
     &-selector {
       width: 100%;
-      .setting-menu-selector();
-
-      &.dark {
-        .setting-menu-select-selector-dark();
-      }
-    }
-
-    &-dropdown {
-      .setting-menu-dropdown();
     }
   }
 }

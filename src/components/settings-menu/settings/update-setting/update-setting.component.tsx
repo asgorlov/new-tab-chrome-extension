@@ -1,7 +1,7 @@
-import React, { FC, memo } from "react";
+import React, { FC, memo, useMemo } from "react";
 import clsx from "clsx";
 import { ReactComponent as UpdateIcon } from "../../../../static/svgs/menu-settings/update-icon.svg";
-import { Button, Popover, Select } from "antd";
+import { Button, Popover } from "antd";
 import { useTranslation } from "react-i18next";
 import { CloudDownloadOutlined } from "@ant-design/icons";
 import {
@@ -9,7 +9,7 @@ import {
   CURRENT_EXT_VERSION
 } from "../../../../constants/update.constants";
 import CollapseComponent from "../../../collapse/collapse.component";
-import { SelectOption } from "../../../../models/select-option.model";
+import SelectComponent from "../../../select/select.component";
 
 /**
  * Передаваемые параметры для компонента настройки обновлений
@@ -47,16 +47,16 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = memo(
     onOpenPopoverChange
   }) => {
     const { t } = useTranslation();
-    const getOption = (value: string): SelectOption => {
-      return {
-        className: clsx("new-tab__settings-menu_update-content-dropdown-item", {
-          dark: isDark
-        }),
-        value: value,
-        label: t(`update.${value}`),
-        key: value
-      };
-    };
+
+    const options = useMemo(() => {
+      return Object.values(checkForUpdates).map(value => {
+        return {
+          value: value,
+          label: t(`update.${value}`),
+          key: value
+        };
+      });
+    }, [t]);
 
     return (
       <CollapseComponent
@@ -66,23 +66,13 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = memo(
         className="new-tab__settings-menu_update"
       >
         <div className="new-tab__settings-menu_update-content">
-          <Select
-            className={clsx("new-tab__settings-menu_update-content-selector", {
-              dark: isDark
-            })}
-            popupClassName={clsx(
-              "new-tab__settings-menu_update-content-dropdown",
-              {
-                dark: isDark
-              }
-            )}
+          <SelectComponent
+            isDark={isDark}
             dropdownStyle={{ minWidth: "max-content" }}
             size="small"
             value={checkMode}
             onChange={onChangeCheckMode}
-            options={Object.values(checkForUpdates).map(value =>
-              getOption(value)
-            )}
+            options={options}
           />
           <Popover
             placement="bottom"

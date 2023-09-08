@@ -1,10 +1,7 @@
-import React, { FC } from "react";
-import clsx from "clsx";
+import React, { FC, useMemo } from "react";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
-import { Select } from "antd";
 import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
-import { SelectOption } from "../../../models/select-option.model";
 import CollapseComponent from "../../collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,6 +12,7 @@ import { AppDispatch } from "../../../store/store";
 import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import SelectComponent from "../../select/select.component";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -27,19 +25,16 @@ const SearchEngineSettingComponent: FC = () => {
   const isDark = useSelector(selectIsDark);
   const searchEngines = useSelector(selectSearchEngines);
 
-  const getOption = (name: string): SelectOption => {
-    return {
-      className: clsx(
-        "new-tab__settings-menu_search-engine-content-dropdown-item",
-        {
-          dark: isDark
-        }
-      ),
-      value: name,
-      label: t(`searchEngine.${name}`),
-      key: name
-    };
-  };
+  const options = useMemo(() => {
+    return SEARCH_ENGINE_NAMES.map(name => {
+      return {
+        value: name,
+        label: t(`searchEngine.${name}`),
+        key: name
+      };
+    });
+  }, [t]);
+
   const handleChangeAddAll = (event: CheckboxChangeEvent) => {
     if (event.target.checked) {
       const allSearchEngines = searchEngines.concat(
@@ -48,8 +43,8 @@ const SearchEngineSettingComponent: FC = () => {
       dispatch(setSearchEngines(allSearchEngines));
     }
   };
-  const handleChangeRemoveAll = (e: CheckboxChangeEvent) => {
-    if (e.target.checked) {
+  const handleChangeRemoveAll = (event: CheckboxChangeEvent) => {
+    if (event.target.checked) {
       dispatch(setSearchEngines([]));
     }
   };
@@ -77,20 +72,14 @@ const SearchEngineSettingComponent: FC = () => {
           {t("searchEngine.removeAll")}
         </CheckboxComponent>
       </div>
-      <Select
-        className={clsx(
-          "new-tab__settings-menu_search-engine-content-selector",
-          { dark: isDark }
-        )}
-        popupClassName={clsx(
-          "new-tab__settings-menu_search-engine-content-dropdown",
-          { dark: isDark }
-        )}
+      <SelectComponent
+        isDark={isDark}
+        className="new-tab__settings-menu_search-engine-content-selector"
         mode="multiple"
         maxTagCount="responsive"
         value={searchEngines}
         onChange={v => dispatch(setSearchEngines(v))}
-        options={SEARCH_ENGINE_NAMES.map(name => getOption(name))}
+        options={options}
       />
     </CollapseComponent>
   );

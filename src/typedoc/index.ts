@@ -15,7 +15,6 @@ export * from "../models/coordinate.model";
 export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
 export * from "../models/night-period.model";
-export * from "../models/select-option.model";
 export * from "../models/tour-context.model";
 export * from "../models/update.model";
 // Constants

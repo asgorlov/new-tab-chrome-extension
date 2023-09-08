@@ -8,21 +8,12 @@
     display: flex;
     justify-content: space-between;
 
-    &-selector {
-      .setting-menu-selector();
-
-      &.dark {
-        .setting-menu-select-selector-dark();
-      }
-    }
-
-    &-dropdown {
-      .setting-menu-dropdown();
-    }
-
     &-check-button {
-      transition: border-color @slow-transition, color @fast-transition;
       background: transparent;
+
+      button {
+        transition: background-color @slow-transition, border-color @slow-transition, color @fast-transition;
+      }
 
       &.dark {
         color: @light-color;

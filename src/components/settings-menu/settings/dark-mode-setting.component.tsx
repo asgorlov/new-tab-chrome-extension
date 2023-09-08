@@ -1,7 +1,6 @@
-import React, { FC, useCallback } from "react";
-import clsx from "clsx";
+import React, { FC, useCallback, useMemo } from "react";
 import { ReactComponent as DarkModeIcon } from "../../../static/svgs/menu-settings/dark-mode-icon.svg";
-import { Select, Switch } from "antd";
+import { Switch } from "antd";
 import {
   AUTO,
   MANUAL,
@@ -9,7 +8,6 @@ import {
 } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import CollapseComponent from "../../collapse/collapse.component";
-import { SelectOption } from "../../../models/select-option.model";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectDarkMode,
@@ -20,6 +18,7 @@ import { AppDispatch } from "../../../store/store";
 import { setDarkMode, setIsDark } from "../../../store/new-tab/new-tab.slice";
 import { isSunsetTimeCached } from "../../../utils/dark-mode.utils";
 import { getNightPeriodByLocation } from "../../../store/new-tab/new-tab.thunks";
+import SelectComponent from "../../select/select.component";
 
 /**
  * Компонент настройки темного режима
@@ -33,17 +32,15 @@ const DarkModeSettingComponent: FC = () => {
   const darkMode = useSelector(selectDarkMode);
   const nightPeriod = useSelector(selectNightPeriod);
 
-  const getOption = (option: string): SelectOption => {
-    return {
-      className: clsx(
-        "new-tab__settings-menu_dark-mode-content-dropdown-item",
-        { dark: isDark }
-      ),
-      value: option,
-      label: t(option),
-      key: option
-    };
-  };
+  const options = useMemo(() => {
+    return [AUTO, MANUAL, SYSTEM].map(name => {
+      return {
+        value: name,
+        label: t(name),
+        key: name
+      };
+    });
+  }, [t]);
 
   const onChangeDarkModeCollapse = useCallback(
     (key: string | string[]) => {
@@ -72,19 +69,13 @@ const DarkModeSettingComponent: FC = () => {
       className="new-tab__settings-menu_dark-mode"
     >
       <div className="new-tab__settings-menu_dark-mode-content">
-        <Select
-          className={clsx("new-tab__settings-menu_dark-mode-content-selector", {
-            dark: isDark
-          })}
+        <SelectComponent
+          isDark={isDark}
           size="small"
-          popupClassName={clsx(
-            "new-tab__settings-menu_dark-mode-content-dropdown",
-            { dark: isDark }
-          )}
           disabled={darkMode === MANUAL && !navigator.geolocation}
           defaultValue={darkMode}
           onChange={v => dispatch(setDarkMode(v))}
-          options={[AUTO, MANUAL, SYSTEM].map(option => getOption(option))}
+          options={options}
         />
         <Switch
           className="new-tab__settings-menu_dark-mode-content-switcher"
