@@ -7,7 +7,7 @@ import {
   SYSTEM
 } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
-import CollapseComponent from "../../collapse/collapse.component";
+import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectDarkMode,
@@ -18,7 +18,7 @@ import { AppDispatch } from "../../../store/store";
 import { setDarkMode, setIsDark } from "../../../store/new-tab/new-tab.slice";
 import { isSunsetTimeCached } from "../../../utils/dark-mode.utils";
 import { getNightPeriodByLocation } from "../../../store/new-tab/new-tab.thunks";
-import SelectComponent from "../../select/select.component";
+import SelectComponent from "../../common/select/select.component";
 
 /**
  * Компонент настройки темного режима

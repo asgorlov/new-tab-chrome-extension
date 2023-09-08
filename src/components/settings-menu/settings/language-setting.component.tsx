@@ -10,7 +10,7 @@ import {
 } from "../../../store/new-tab/new-tab.selectors";
 import { changeLanguage } from "../../../store/new-tab/new-tab.thunks";
 import { AppDispatch } from "../../../store/store";
-import SelectComponent from "../../select/select.component";
+import SelectComponent from "../../common/select/select.component";
 
 /**
  * Компонент настройки языка

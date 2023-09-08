@@ -1,6 +1,6 @@
 import React, { FC, memo, MouseEvent } from "react";
 import { ReactComponent as CommonIcon } from "../../../../static/svgs/menu-settings/common-icon.svg";
-import CollapseComponent from "../../../collapse/collapse.component";
+import CollapseComponent from "../../../common/collapse/collapse.component";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import {
@@ -16,9 +16,9 @@ import {
 } from "../../../../constants/common-setting.constants";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { RadioChangeEvent } from "antd/es/radio/interface";
-import UploadComponent from "../../../upload/upload.component";
-import ModalComponent from "../../../modal/modal.component";
-import RadioComponent from "../../../radio/radio.component";
+import UploadComponent from "../../../common/upload/upload.component";
+import ModalComponent from "../../../common/modal/modal.component";
+import RadioComponent from "../../../common/radio/radio.component";
 
 /**
  * Передаваемые параметры для компонента общих настроек

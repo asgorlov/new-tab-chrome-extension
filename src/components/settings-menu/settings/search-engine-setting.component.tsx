@@ -2,7 +2,7 @@ import React, { FC, useMemo } from "react";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
 import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
-import CollapseComponent from "../../collapse/collapse.component";
+import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsDark,
@@ -10,9 +10,9 @@ import {
 } from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
 import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
-import CheckboxComponent from "../../checkbox/checkbox.component";
+import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
-import SelectComponent from "../../select/select.component";
+import SelectComponent from "../../common/select/select.component";
 
 /**
  * Компонент настройки выбора поисковых систем

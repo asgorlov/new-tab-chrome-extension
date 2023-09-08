@@ -8,8 +8,8 @@ import {
   checkForUpdates,
   CURRENT_EXT_VERSION
 } from "../../../../constants/update.constants";
-import CollapseComponent from "../../../collapse/collapse.component";
-import SelectComponent from "../../../select/select.component";
+import CollapseComponent from "../../../common/collapse/collapse.component";
+import SelectComponent from "../../../common/select/select.component";
 
 /**
  * Передаваемые параметры для компонента настройки обновлений
