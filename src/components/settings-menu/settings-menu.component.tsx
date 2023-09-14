@@ -9,6 +9,7 @@ import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-se
 import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
 import CommonSettingContainer from "./settings/common-setting/common-setting.container";
 import DrawerComponent from "../common/drawer/drawer.component";
+import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -51,7 +52,10 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           type="text"
           onClick={() => setIsOpenMenu(true)}
         >
-          <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
+          <MenuIcon
+            className="new-tab__settings-menu-icon"
+            style={{ fill: SEARCH_THEMES[searchEngine] }}
+          />
         </Button>
         <DrawerComponent
           title={t("settingsTitle")}

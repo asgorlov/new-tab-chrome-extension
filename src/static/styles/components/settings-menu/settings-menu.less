@@ -1,5 +1,4 @@
 @import "../../constants";
-@import "../../mixins";
 
 .new-tab__settings-menu {
     position: absolute;
@@ -14,58 +13,6 @@
     }
 
     &-icon {
-        padding: 2px;
-
-        &-yandex {
-            .settings-menu-icon(@ya-color);
-        }
-
-        &-google {
-            .settings-menu-icon(@goo-color);
-        }
-
-        &-duckduckgo {
-            .settings-menu-icon(@duck-color);
-        }
-
-        &-bing {
-            .settings-menu-icon(@bing-color);
-        }
-
-        &-yahoo {
-            .settings-menu-icon(@yahoo-color);
-        }
-
-        &-brave {
-            .settings-menu-icon(@brave-color);
-        }
-
-        &-swisscows {
-            .settings-menu-icon(@cows-color);
-        }
-
-        &-aol {
-            .settings-menu-icon(@aol-color);
-        }
-
-        &-youcom {
-            .settings-menu-icon(@youcom-color);
-        }
-
-        &-gibiru {
-            .settings-menu-icon(@gibiru-color);
-        }
-
-        &-lycos {
-            .settings-menu-icon(@lycos-color);
-        }
-
-        &-nigma {
-            .settings-menu-icon(@nigma-color);
-        }
-
-        &-ecosia {
-            .settings-menu-icon(@ecosia-color);
-        }
+        transition: @fast-transition;
     }
 }

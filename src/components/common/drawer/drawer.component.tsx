@@ -3,12 +3,23 @@ import { Drawer, DrawerProps } from "antd";
 import clsx from "clsx";
 import { GetContainer } from "@rc-component/portal/es/Portal";
 
+/**
+ * Передаваемые параметры для компонента меню
+ * @property isDark - Флаг темной темы
+ * @property children - Компоненты-потомки
+ * @property menuClassName - Название класса стилей для меню настроек
+ * @interface
+ */
 export interface DrawerComponentProps extends DrawerProps {
   isDark?: boolean;
   children?: ReactNode;
   menuClassName?: string;
 }
 
+/**
+ * Компонент меню
+ * @category Components
+ */
 const DrawerComponent: FC<DrawerComponentProps> = memo(
   ({
     isDark = false,
