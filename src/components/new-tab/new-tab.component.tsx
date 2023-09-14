@@ -4,7 +4,6 @@ import SettingsMenuContainer from "../settings-menu/settings-menu.container";
 import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
 import SearchEngineContainer from "../search-engine/search-engine.container";
 import UpdateContainer from "../update/update.container";
-import { CUSTOM_WALLPAPER } from "../../constants/wallpaper.constants";
 import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
 import TourComponent from "../tour/tour-component";
@@ -24,20 +23,17 @@ const NewTabComponent: FC = () => {
   const wallpaper = useSelector(selectWallpaper);
   const customWallpaper = useSelector(selectCustomWallpaper);
 
-  const customBackgroundStyle =
-    customWallpaper && wallpaper === CUSTOM_WALLPAPER
-      ? {
-          backgroundSize: "cover",
-          backgroundImage: `url(${getImgUrl(customWallpaper, isDark)})`
-        }
-      : {};
+  const getBackgroundStyle = () => {
+    const url = getImgUrl(customWallpaper, wallpaper, isDark);
+    return url ? { backgroundImage: `url(${url})` } : {};
+  };
 
   return (
     <TourContextProvider>
       <div className={clsx("new-tab", { dark: isDark })}>
         <div
-          className={clsx("new-tab-background", wallpaper, { dark: isDark })}
-          style={customBackgroundStyle}
+          className={clsx("new-tab-background", wallpaper)}
+          style={getBackgroundStyle()}
         />
         <TourComponent />
         <UpdateContainer />

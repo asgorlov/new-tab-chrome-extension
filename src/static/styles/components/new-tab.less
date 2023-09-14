@@ -27,39 +27,10 @@
         opacity: 0;
         z-index: -10;
 
-        &.dark {
-            transition: @slow-transition;
-        }
-
+        &.ocean,
+        &.field,
+        &.custom,
         &.mountains {
-            background-image: url("../../imgs/mountains-light.jpg");
-            opacity: 1;
-
-            &.dark {
-                background-image: url("../../imgs/mountains-dark.jpg");
-            }
-        }
-
-        &.ocean {
-            background-image: url("../../imgs/ocean-light.jpg");
-            opacity: 1;
-
-            &.dark {
-                background-image: url("../../imgs/ocean-dark.jpg");
-            }
-        }
-
-        &.field {
-            background-image: url("../../imgs/field-light.jpg");
-            opacity: 1;
-
-            &.dark {
-                background-image: url("../../imgs/field-dark.jpg");
-            }
-
-        }
-
-        &.custom {
             opacity: 1;
         }
     }

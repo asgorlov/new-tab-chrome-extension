@@ -2,8 +2,18 @@ import { CustomWallpaper } from "../models/custom-wallpaper.model";
 import { RcFile, UploadFile } from "antd/es/upload/interface";
 import {
   ACCEPT_IMG_FORMAT,
-  MIN_SIZE_IMG
+  CUSTOM_WALLPAPER,
+  FIELD_WALLPAPER,
+  MIN_SIZE_IMG,
+  MOUNTAINS_WALLPAPER,
+  OCEAN_WALLPAPER
 } from "../constants/wallpaper.constants";
+import mountainsLight from "../static/imgs/mountains-light.jpg";
+import mountainsDark from "../static/imgs/mountains-dark.jpg";
+import oceanLight from "../static/imgs/ocean-light.jpg";
+import oceanDark from "../static/imgs/ocean-dark.jpg";
+import fieldLight from "../static/imgs/field-light.jpg";
+import fieldDark from "../static/imgs/field-dark.jpg";
 
 /**
  * Метод, конвертирующий файл картинки в base64
@@ -34,16 +44,36 @@ export const convertBase64ToImg = (base64: string, name: string): File => {
 /**
  * Метод для получения url картинки в зависимости от темы
  * @category Utilities - Wallpaper
- * @param wallpaper - объекта картинки для фона
+ * @param customWallpaper - объекта фоновой картинки для темной и светлой темы
+ * @param wallpaper - название кейса фоновой картинки
  * @param isDark - флаг темной темы
  * @returns - url картинки в формате base64
  */
 export const getImgUrl = (
-  wallpaper: CustomWallpaper,
+  customWallpaper: CustomWallpaper | null,
+  wallpaper: string,
   isDark: boolean
 ): string => {
-  const url =
-    isDark && wallpaper.darkTheme ? wallpaper.darkTheme : wallpaper.lightTheme;
+  let url;
+
+  switch (wallpaper) {
+    case CUSTOM_WALLPAPER:
+      if (customWallpaper) {
+        url =
+          isDark && customWallpaper.darkTheme
+            ? customWallpaper.darkTheme
+            : customWallpaper.lightTheme;
+      }
+      break;
+    case FIELD_WALLPAPER:
+      url = isDark ? fieldDark : fieldLight;
+      break;
+    case OCEAN_WALLPAPER:
+      url = isDark ? oceanDark : oceanLight;
+      break;
+    case MOUNTAINS_WALLPAPER:
+      url = isDark ? mountainsDark : mountainsLight;
+  }
 
   return url ?? "";
 };
