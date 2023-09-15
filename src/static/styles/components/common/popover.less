@@ -1,0 +1,34 @@
+@import "../../constants";
+@import "../../mixins";
+
+.new-tab__popover {
+  &.dark {
+    &.ant-popover {
+      &>.ant-popover-arrow:before {
+        transition: all, background-color @slow-transition, color @fast-transition;
+        background-color: @dark-color;
+      }
+      &>.ant-popover-content>.ant-popover-inner {
+        .dark-box-shadow();
+        background-color: @dark-color;
+
+        &>div {
+          color: @light-color;
+        }
+      }
+    }
+  }
+
+  &.ant-popover {
+    &>.ant-popover-arrow:before {
+      transition: all, background-color @slow-transition, color @fast-transition;
+    }
+    &>.ant-popover-content>.ant-popover-inner {
+      transition: all, background-color @slow-transition, color @fast-transition;
+
+      &>div {
+        transition: all, color @fast-transition;
+      }
+    }
+  }
+}

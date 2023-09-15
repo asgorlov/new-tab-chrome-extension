@@ -7,17 +7,21 @@ import {
 } from "react-beautiful-dnd";
 import StrictModeDroppable from "./strict-mode-droppable";
 import { useTranslation } from "react-i18next";
+import { getDraggedStyle } from "../../../utils/search-engine.utils";
+import { useSelector } from "react-redux";
+import {
+  selectCurrentLanguage,
+  selectSearchEngine
+} from "../../../store/new-tab/new-tab.selectors";
 
 /**
  * Передаваемые параметры для drag and drop компонента
- * @property getItemClassName - Функция для получения класса каждого элемента списка поисковых систем
  * @property onSearchEngineClick - Функция, вызываемая при выборе поисковой системы
  * @property setDroppableAreaRef - Функция, устанавливающая ref области куда можно перетаскивать элементы
  * @property searchEngines - Список выбранных поисковых систем для переключения
  * @interface
  */
 export interface DroppableAriaComponentProps {
-  getItemClassName: (value: string) => string;
   onSearchEngineClick: (event: MouseEvent) => void;
   setDroppableAreaRef: (
     ref: HTMLDivElement | null,
@@ -31,13 +35,10 @@ export interface DroppableAriaComponentProps {
  * @category Components
  */
 const DroppableAriaComponent: FC<DroppableAriaComponentProps> = memo(
-  ({
-    getItemClassName,
-    onSearchEngineClick,
-    setDroppableAreaRef,
-    searchEngines
-  }) => {
+  ({ onSearchEngineClick, setDroppableAreaRef, searchEngines }) => {
     const { t } = useTranslation();
+    const searchEngine = useSelector(selectSearchEngine);
+    const currentLanguage = useSelector(selectCurrentLanguage);
 
     return (
       <StrictModeDroppable
@@ -60,11 +61,14 @@ const DroppableAriaComponent: FC<DroppableAriaComponentProps> = memo(
                     ref={dragProvided.innerRef}
                     {...dragProvided.draggableProps}
                     {...dragProvided.dragHandleProps}
-                    className={getItemClassName(name)}
-                    style={{
-                      ...dragProvided.draggableProps.style,
-                      cursor: dragSnapshot.isDragging ? "grabbing" : "pointer"
-                    }}
+                    className="new-tab__search-engine-selector-item"
+                    style={getDraggedStyle(
+                      dragProvided.draggableProps.style,
+                      dragSnapshot.isDragging,
+                      name,
+                      searchEngine,
+                      currentLanguage
+                    )}
                     title={t(`searchEngine.${name}`)}
                     onClick={onSearchEngineClick}
                   />

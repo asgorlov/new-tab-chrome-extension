@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext } from "react";
+import React, { FC, useCallback, useContext, useEffect } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,20 +17,27 @@ const SettingsMenuContainer: FC = () => {
   const isOpenMenu = useSelector(selectIsOpenMenu);
   const searchEngine = useSelector(selectSearchEngine);
 
+  const menuContainerClass = "new-tab__settings-menu-container";
+
   const changeIsOpenMenu = useCallback(
-    (v: boolean) => {
-      dispatch(setIsOpenMenu(v));
-    },
+    (v: boolean) => dispatch(setIsOpenMenu(v)),
     [dispatch]
   );
 
+  useEffect(() => {
+    if (tourCtx) {
+      tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
+    }
+  }, [tourCtx]);
+
   return (
     <SettingsMenuComponent
+      menuContainerClass={menuContainerClass}
+      setIsOpenMenu={changeIsOpenMenu}
       searchEngine={searchEngine}
       isOpenMenu={isOpenMenu}
-      tourCtx={tourCtx}
+      menuClass="new-tab__settings-menu"
       isDark={isDark}
-      setIsOpenMenu={changeIsOpenMenu}
     />
   );
 };

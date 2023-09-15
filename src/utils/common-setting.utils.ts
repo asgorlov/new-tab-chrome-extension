@@ -1,8 +1,8 @@
 /**
  * Функция для скачивания файла
- * @param data - строка с данными
- * @param fileName - имя скачиваемого файла
- * @param fileType - формат скачиваемого файла
+ * @param data - Строка с данными
+ * @param fileName - Имя скачиваемого файла
+ * @param fileType - Формат скачиваемого файла
  * @category Utilities - Common Setting
  */
 export const downloadFile = (

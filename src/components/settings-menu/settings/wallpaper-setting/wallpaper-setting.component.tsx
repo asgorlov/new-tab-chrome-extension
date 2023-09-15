@@ -15,6 +15,7 @@ import UploadComponent from "../../../common/upload/upload.component";
 import { getUploadingErrorKey } from "../../../../utils/wallpaper.utils";
 import ModalComponent from "../../../common/modal/modal.component";
 import CheckboxComponent from "../../../common/checkbox/checkbox.component";
+import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
 
 /**
  * Передаваемые параметры для компонента настройки фонового изображения
@@ -84,6 +85,7 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
             { selected: wallpaper === name },
             searchEngine
           )}
+          style={{ borderColor: SEARCH_THEMES[searchEngine] }}
           title={t(`wallpaper.${name}`)}
           key={name}
           src={require(`../../../../static/imgs/${name}.png`)}

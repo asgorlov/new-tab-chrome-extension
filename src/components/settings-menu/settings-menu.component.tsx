@@ -1,31 +1,33 @@
-import React, { FC, memo, useEffect } from "react";
+import React, { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Drawer } from "antd";
+import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
-import clsx from "clsx";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
 import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
 import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
-import { TourContextModel } from "../../models/tour-context.model";
 import CommonSettingContainer from "./settings/common-setting/common-setting.container";
+import DrawerComponent from "../common/drawer/drawer.component";
+import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 
 /**
  * Передаваемые параметры для компонента меню настроек
  * @property isDark - Флаг темной темы
- * @property tourCtx - Модель контекста ознакомительно тура
+ * @property menuClass - Название класса стилей для меню настроек
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property searchEngine - Выбранная поисковая система
  * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
+ * @property menuContainerClass - Название класса стилей для контейнера меню настроек
  * @interface
  */
 export interface SettingsMenuComponentProps {
   isDark: boolean;
-  tourCtx?: TourContextModel;
+  menuClass: string;
   isOpenMenu: boolean;
   searchEngine: string;
   setIsOpenMenu: (value: boolean) => void;
+  menuContainerClass: string;
 }
 
 /**
@@ -33,16 +35,15 @@ export interface SettingsMenuComponentProps {
  * @category Components
  */
 const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
-  ({ isDark, tourCtx, isOpenMenu, searchEngine, setIsOpenMenu }) => {
+  ({
+    isDark,
+    menuClass,
+    isOpenMenu,
+    searchEngine,
+    setIsOpenMenu,
+    menuContainerClass
+  }) => {
     const { t } = useTranslation();
-    const menuClass = "new-tab__settings-menu";
-    const menuContainerClass = "new-tab__settings-menu-container";
-
-    useEffect(() => {
-      if (tourCtx) {
-        tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
-      }
-    }, [tourCtx]);
 
     return (
       <div className={menuClass}>
@@ -51,20 +52,17 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           type="text"
           onClick={() => setIsOpenMenu(true)}
         >
-          <MenuIcon className={`new-tab__settings-menu-icon-${searchEngine}`} />
+          <MenuIcon
+            className="new-tab__settings-menu-icon"
+            style={{ fill: SEARCH_THEMES[searchEngine] }}
+          />
         </Button>
-        <Drawer
-          className={clsx(menuContainerClass, { dark: isDark })}
-          contentWrapperStyle={{ width: "300px" }}
-          drawerStyle={{ background: isDark ? "#292c35" : "#fff" }}
-          bodyStyle={{ padding: "0" }}
+        <DrawerComponent
           title={t("settingsTitle")}
-          getContainer={() =>
-            document.querySelector(`.${menuClass}`) as HTMLDivElement
-          }
-          placement="right"
+          isDark={isDark}
+          className={menuContainerClass}
+          menuClassName={menuClass}
           open={isOpenMenu}
-          closable={false}
           onClose={() => setIsOpenMenu(false)}
         >
           <CommonSettingContainer />
@@ -73,7 +71,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           <WallpaperSettingContainer />
           <UpdateSettingContainer />
           <LanguageSettingComponent />
-        </Drawer>
+        </DrawerComponent>
       </div>
     );
   }

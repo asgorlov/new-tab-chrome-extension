@@ -1,8 +1,12 @@
-import React, { FC, memo, RefObject } from "react";
+import React, { FC, memo, RefObject, useState } from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import clsx from "clsx";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { DELTA_Y } from "../../constants/search-engine-selector.constants";
+import {
+  getScrollSearchEngineButtonStyle,
+  getSearchEngineSelectorStyle
+} from "../../utils/search-engine.utils";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
@@ -36,18 +40,29 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
     onDragged,
     onClickMoving
   }) => {
+    const [isLeftButtonActive, setIsLeftButtonActive] = useState(false);
+    const [isRightButtonActive, setIsRightButtonActive] = useState(false);
+
     return (
       <div
-        className={clsx("new-tab__search-engine-selector", searchEngine, {
-          _hidden: !searchEngines.length
-        })}
+        className="new-tab__search-engine-selector"
+        style={getSearchEngineSelectorStyle(
+          searchEngine,
+          !searchEngines.length
+        )}
       >
         <button
-          className={clsx("new-tab__search-engine-selector-left-button", {
-            _hidden: searchEngines.length < 11
-          })}
+          className="new-tab__search-engine-selector-left-button"
           children={<LeftOutlined />}
           onClick={() => onClickMoving(DELTA_Y)}
+          onMouseUp={() => setIsLeftButtonActive(false)}
+          onMouseMove={() => setIsLeftButtonActive(false)}
+          onMouseDown={() => setIsLeftButtonActive(true)}
+          style={getScrollSearchEngineButtonStyle(
+            searchEngine,
+            searchEngines.length < 11,
+            isLeftButtonActive
+          )}
         />
         <div
           ref={scrollRef}
@@ -58,11 +73,17 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
           <DroppableAriaContainer onDragged={onDragged} />
         </div>
         <button
-          className={clsx("new-tab__search-engine-selector-right-button", {
-            _hidden: searchEngines.length < 11
-          })}
+          className="new-tab__search-engine-selector-right-button"
           children={<RightOutlined />}
           onClick={() => onClickMoving(-DELTA_Y)}
+          onMouseUp={() => setIsRightButtonActive(false)}
+          onMouseMove={() => setIsRightButtonActive(false)}
+          onMouseDown={() => setIsRightButtonActive(true)}
+          style={getScrollSearchEngineButtonStyle(
+            searchEngine,
+            searchEngines.length < 11,
+            isRightButtonActive
+          )}
         />
       </div>
     );
