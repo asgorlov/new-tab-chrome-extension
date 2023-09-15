@@ -16,7 +16,7 @@ import { NewTabState } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
 /**
- * Метод, позволяющий узнать необходимо ли отправлять запрос за последними обновлениями
+ * Функция, позволяющая узнать необходимо ли отправлять запрос за последними обновлениями
  * @category Utilities - Update
  * @param dateInMs - дата последней проверки в мс
  * @param checkMode - параметр, определяющий режим проверки
@@ -38,7 +38,7 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
 };
 
 /**
- * Метод, получающий ссылку на скачивание файла приложения указанной версии
+ * Функция, получающая ссылку на скачивание файла приложения указанной версии
  * @category Utilities - Update
  * @param version - версия приложения
  * @returns - url для скачивания файла приложения
@@ -51,7 +51,7 @@ export const getDownloadLink = (version: string) => {
 };
 
 /**
- * Метод обновляющий стейт в зависимости от версии приложения
+ * Функция обновляющая стейт в зависимости от версии приложения
  * @category Utilities - Update
  * @param data - данные из браузера
  */
@@ -81,7 +81,7 @@ export const updateStateWithFeatures = (data: NewTabState) => {
 };
 
 /**
- * Метод, получающий дельту изменений в зависимости от передаваемых версий приложения
+ * Функция, получающая дельту изменений в зависимости от передаваемых версий приложения
  * @category Utilities - Update
  * @param lastVersion - последняя версия приложения
  * @param previousVersion - предыдущая версия приложения

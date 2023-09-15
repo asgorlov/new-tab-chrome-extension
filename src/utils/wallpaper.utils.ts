@@ -8,7 +8,7 @@ import {
 } from "../constants/wallpaper.constants";
 
 /**
- * Метод, конвертирующий файл картинки в base64
+ * Функция, конвертирующая файл картинки в base64
  * @category Utilities - Wallpaper
  * @param file - файл картинки
  * @returns - строку в формате base64 {@link File}
@@ -23,7 +23,7 @@ export const convertImgToBase64 = async (file: File): Promise<string> => {
 };
 
 /**
- * Метод, конвертирующий строку base64 в файл картинки
+ * Функция, конвертирующая строку base64 в файл картинки
  * @category Utilities - Wallpaper
  * @param base64 - строка в формате base64
  * @param name - имя файла
@@ -34,7 +34,7 @@ export const convertBase64ToImg = (base64: string, name: string): File => {
 };
 
 /**
- * Метод для получения url картинки в зависимости от темы
+ * Функция для получения url картинки в зависимости от темы
  * @category Utilities - Wallpaper
  * @param customWallpaper - объекта фоновой картинки для темной и светлой темы
  * @param wallpaper - название кейса фоновой картинки
@@ -68,7 +68,7 @@ export const getImgUrl = (
 };
 
 /**
- * Метод, получающий файл загруженной картинки для компонента <tt>Upload</tt>
+ * Функция, получающая файл загруженной картинки для компонента <tt>Upload</tt>
  * @category Utilities - Wallpaper
  * @param imgUrl - строка картинки в формате base64
  * @param theme - тема приложения
@@ -109,7 +109,7 @@ export const getInitialFileList = (
 };
 
 /**
- * Метод, позволяющий узнать загружена одна картинка или две
+ * Функция, позволяющая узнать загружена одна картинка или две
  * @category Utilities - Wallpaper
  * @param wallpaper - объект фоновой картинки для темной и светлой темы
  * @returns - <b>true</b>, если для темной и светлой темы используется одна картинка
@@ -121,7 +121,7 @@ export const getInitialOneToBoth = (
 };
 
 /**
- * Метод, проверяющий тип и размер файла
+ * Функция, проверяющая тип и размер файла
  * @category Utilities - Wallpaper
  * @param file - файл для проверки
  * @returns - ключ локализации ошибки или пустую строку
