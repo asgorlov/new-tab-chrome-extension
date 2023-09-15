@@ -10,6 +10,7 @@
 
     &-check-button {
       background: transparent;
+      transition: border-color @slow-transition, color @fast-transition;
 
       button {
         transition: background-color @slow-transition, border-color @slow-transition, color @fast-transition;
@@ -20,39 +21,9 @@
         border-color: @dark-border-color;
 
         button {
-          color: #FFFFFF3F;
-          background-color: #FFFFFF0A;
+          color: @disabled-text-color;
+          background-color: @disabled-background-color;
           border-color: @dark-border-color;
-        }
-      }
-    }
-
-    &.dark {
-      &>.ant-popover {
-        &>.ant-popover-arrow:before {
-          transition: all, background-color @slow-transition, color @fast-transition;
-          background-color: @dark-color;
-        }
-        &>.ant-popover-content>.ant-popover-inner {
-          .dark-box-shadow();
-          background-color: @dark-color;
-
-          &>div {
-            color: @light-color;
-          }
-        }
-      }
-    }
-
-    &>.ant-popover {
-      &>.ant-popover-arrow:before {
-        transition: all, background-color @slow-transition, color @fast-transition;
-      }
-      &>.ant-popover-content>.ant-popover-inner {
-        transition: all, background-color @slow-transition, color @fast-transition;
-
-        &>div {
-          transition: all, color @fast-transition;
         }
       }
     }

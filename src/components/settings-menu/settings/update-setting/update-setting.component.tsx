@@ -1,7 +1,6 @@
 import React, { FC, memo, useMemo } from "react";
-import clsx from "clsx";
 import { ReactComponent as UpdateIcon } from "../../../../static/svgs/menu-settings/update-icon.svg";
-import { Button, Popover } from "antd";
+import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { CloudDownloadOutlined } from "@ant-design/icons";
 import {
@@ -10,6 +9,7 @@ import {
 } from "../../../../constants/update.constants";
 import CollapseComponent from "../../../common/collapse/collapse.component";
 import SelectComponent from "../../../common/select/select.component";
+import PopoverComponent from "../../../common/popover/popover.component";
 
 /**
  * Передаваемые параметры для компонента настройки обновлений
@@ -74,28 +74,17 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = memo(
             onChange={onChangeCheckMode}
             options={options}
           />
-          <Popover
-            placement="bottom"
+          <PopoverComponent
             open={isPopoverOpen}
-            destroyTooltipOnHide={true}
-            overlayStyle={{ width: "200px" }}
+            isDark={isDark}
             title={t("update.info.notFound")}
             content={t("update.info.actualVersion", {
               actualVersion: CURRENT_EXT_VERSION
             })}
-            trigger="click"
             onOpenChange={onOpenPopoverChange}
-            getPopupContainer={() =>
-              document.querySelector(
-                ".new-tab__settings-menu_update-content"
-              ) as HTMLElement
-            }
+            className={"new-tab__settings-menu_update-content-check-button"}
           >
             <Button
-              className={clsx(
-                "new-tab__settings-menu_update-content-check-button",
-                { dark: isDark }
-              )}
               icon={<CloudDownloadOutlined />}
               loading={loading}
               disabled={checkMode !== checkForUpdates.MANUAL}
@@ -103,7 +92,7 @@ const UpdateSettingComponent: FC<UpdateSettingComponentProps> = memo(
               onClick={onClickUpdates}
               children={t("update.check")}
             />
-          </Popover>
+          </PopoverComponent>
         </div>
       </CollapseComponent>
     );
