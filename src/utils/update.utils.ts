@@ -18,9 +18,9 @@ import { Features } from "../models/update.model";
 /**
  * Функция, позволяющая узнать необходимо ли отправлять запрос за последними обновлениями
  * @category Utilities - Update
- * @param dateInMs - дата последней проверки в мс
- * @param checkMode - параметр, определяющий режим проверки
- * @returns - <b>true</b>, если необходима проверка обновлений
+ * @param dateInMs - Дата последней проверки в мс
+ * @param checkMode - Параметр, определяющий режим проверки
+ * @returns - <b>True</b>, если необходима проверка обновлений
  */
 export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
   const delta = (Date.now() - dateInMs) / 86400000;
@@ -40,8 +40,8 @@ export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
 /**
  * Функция, получающая ссылку на скачивание файла приложения указанной версии
  * @category Utilities - Update
- * @param version - версия приложения
- * @returns - url для скачивания файла приложения
+ * @param version - Версия приложения
+ * @returns - Url для скачивания файла приложения
  */
 export const getDownloadLink = (version: string) => {
   return (
@@ -53,7 +53,7 @@ export const getDownloadLink = (version: string) => {
 /**
  * Функция обновляющая стейт в зависимости от версии приложения
  * @category Utilities - Update
- * @param data - данные из браузера
+ * @param data - Данные из браузера
  */
 export const updateStateWithFeatures = (data: NewTabState) => {
   if (!data.update.previousVersion) {
@@ -83,9 +83,9 @@ export const updateStateWithFeatures = (data: NewTabState) => {
 /**
  * Функция, получающая дельту изменений в зависимости от передаваемых версий приложения
  * @category Utilities - Update
- * @param lastVersion - последняя версия приложения
- * @param previousVersion - предыдущая версия приложения
- * @returns - объект с данными для обновления стейта {@link Features}
+ * @param lastVersion - Последняя версия приложения
+ * @param previousVersion - Предыдущая версия приложения
+ * @returns - Объект с данными для обновления стейта {@link Features}
  */
 const getDeltaChanges = (
   lastVersion: string,

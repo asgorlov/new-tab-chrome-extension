@@ -5,15 +5,9 @@ import {
   DroppableProvided,
   DropResult
 } from "react-beautiful-dnd";
-import clsx from "clsx";
-import { YANDEX } from "../../../constants/search-engine.constants";
 import { useDispatch, useSelector } from "react-redux";
 import { TourContext } from "../../../contexts/tour.context";
-import {
-  selectCurrentLanguage,
-  selectSearchEngine,
-  selectSearchEngines
-} from "../../../store/new-tab/new-tab.selectors";
+import { selectSearchEngines } from "../../../store/new-tab/new-tab.selectors";
 import {
   setSearchEngine,
   setSearchEngines
@@ -28,9 +22,7 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
 }) => {
   const dispatch = useDispatch();
   const tourCtx = useContext(TourContext);
-  const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
-  const currentLanguage = useSelector(selectCurrentLanguage);
 
   const handleDragEnd = (result: DropResult) => {
     if (result.destination) {
@@ -46,18 +38,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
     onDragged(false);
   };
 
-  const getItemClassName = useCallback(
-    (itemName: string): string => {
-      return clsx(
-        "new-tab__search-engine-selector-item",
-        itemName === YANDEX && currentLanguage !== "ru"
-          ? itemName + "-en"
-          : itemName,
-        { selected: searchEngine === itemName }
-      );
-    },
-    [currentLanguage, searchEngine]
-  );
   const setDroppableAriaRef = useCallback(
     (ref: HTMLDivElement | null, provided: DroppableProvided) => {
       if (tourCtx) {
@@ -86,7 +66,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
       onDragEnd={handleDragEnd}
     >
       <DroppableAriaComponent
-        getItemClassName={getItemClassName}
         onSearchEngineClick={handleSearchEngineClick}
         setDroppableAreaRef={setDroppableAriaRef}
         searchEngines={searchEngines}

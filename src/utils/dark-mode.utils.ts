@@ -3,7 +3,7 @@ import { NightPeriod } from "../models/night-period.model";
 /**
  * Функция, позволяющая узнать включена ли темная тема в браузере
  * @category Utilities - Dark Mode
- * @returns - <b>true</b>, если в браузере включен темный режим
+ * @returns - <b>True</b>, если в браузере включен темный режим
  */
 export const isBrowserDarkModeEnabled = (): boolean => {
   const mediaQueryString = "(prefers-color-scheme: dark)";
@@ -14,8 +14,8 @@ export const isBrowserDarkModeEnabled = (): boolean => {
 /**
  * Функция, позволяющая узнать закэширован ли ночной период
  * @category Utilities - Dark Mode
- * @param nightPeriod - ночной период
- * @returns - <b>true</b>, если ночной период закэширован
+ * @param nightPeriod - Ночной период
+ * @returns - <b>True</b>, если ночной период закэширован
  */
 export const isSunsetTimeCached = (nightPeriod: NightPeriod): boolean => {
   const now = new Date();
