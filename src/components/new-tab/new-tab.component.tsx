@@ -6,7 +6,7 @@ import SearchEngineContainer from "../search-engine/search-engine.container";
 import UpdateContainer from "../update/update.container";
 import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
-import TourComponent from "../tour/tour-component";
+import TourComponent from "../tour/tour.component";
 import { useSelector } from "react-redux";
 import {
   selectCustomWallpaper,
