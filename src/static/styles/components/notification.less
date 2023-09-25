@@ -1,0 +1,31 @@
+@import "../constants";
+
+.new-tab__notification {
+  .ant-notification-notice-description,
+  .ant-notification-notice-message,
+  .ant-notification-notice-close,
+  .ant-notification-notice {
+    transition: all, background-color @slow-transition, color @fast-transition;
+  }
+
+  &.dark {
+    .ant-notification-notice {
+      background-color: @dark-color;
+
+      .ant-notification-notice-close:hover {
+        background-color: color-mix(in srgb, @light-color 6%, @dark-color);
+      }
+
+      .ant-notification-notice-description,
+      .ant-notification-notice-message,
+      .ant-notification-notice-close {
+        color: @light-color;
+      }
+    }
+  }
+
+  &_has-new-version-content {
+    display: flex;
+    flex-direction: column;
+  }
+}

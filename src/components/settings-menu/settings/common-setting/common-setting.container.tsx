@@ -86,7 +86,7 @@ const CommonSettingContainer: FC = () => {
 
       switch (selectedOption) {
         case BUTTON_NAMES.reset:
-          dispatch(applySettings());
+          dispatch(applySettings(null));
           break;
         case BUTTON_NAMES.export:
           const settings = await getInitStateFromChrome();

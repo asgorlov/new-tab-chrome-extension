@@ -5,6 +5,7 @@ export * from "../utils/dark-mode.utils";
 export * from "../utils/search-engine.utils";
 export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
+export * from "../utils/store.utils";
 // Store
 export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
@@ -24,11 +25,10 @@ export * from "../constants/search-engine-selector.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
 export * from "../constants/common-setting.constants";
+export * from "../constants/notification.constants";
 // Components
 export { default as SelectComponent } from "../components/common/select/select.component";
 export { type SelectComponentProps } from "../components/common/select/select.component";
-export { default as PopoverComponent } from "../components/common/popover/popover.component";
-export { type PopoverComponentProps } from "../components/common/popover/popover.component";
 export { default as DrawerComponent } from "../components/common/drawer/drawer.component";
 export { type DrawerComponentProps } from "../components/common/drawer/drawer.component";
 export { default as CheckboxComponent } from "../components/common/checkbox/checkbox.component";
@@ -52,13 +52,12 @@ export { default as SettingsMenuComponent } from "../components/settings-menu/se
 export { type SettingsMenuComponentProps } from "../components/settings-menu/settings-menu.component";
 export { default as CommonSettingComponent } from "../components/settings-menu/settings/common-setting/common-setting.component";
 export { type CommonSettingComponentProps } from "../components/settings-menu/settings/common-setting/common-setting.component";
-export { default as UpdateSettingComponent } from "../components/settings-menu/settings/update-setting/update-setting.component";
-export { type UpdateSettingComponentProps } from "../components/settings-menu/settings/update-setting/update-setting.component";
+export { default as UpdateSettingComponent } from "../components/settings-menu/settings/update-setting.component";
 export { default as WallpaperSettingComponent } from "../components/settings-menu/settings/wallpaper-setting/wallpaper-setting.component";
 export { type WallpaperSettingProps } from "../components/settings-menu/settings/wallpaper-setting/wallpaper-setting.component";
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
 export { default as TourComponent } from "../components/tour/tour.component";
-export { default as UpdateComponent } from "../components/update/update.component";
-export { type UpdateComponentProps } from "../components/update/update.component";
+export { default as NotificationComponent } from "../components/notification/notification.component";
+export { default as HasNewVersionComponent } from "../components/notification/info/has-new-version.component";

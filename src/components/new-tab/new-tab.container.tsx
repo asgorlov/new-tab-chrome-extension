@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect } from "react";
+import React, { FC, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setIsDark } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
@@ -13,18 +13,26 @@ import {
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
 import { useTranslation } from "react-i18next";
 import {
+  selectCheckForUpdates,
   selectDarkMode,
+  selectLastUpdateDate,
   selectNightPeriod,
   selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
-import { getNightPeriodByLocation } from "../../store/new-tab/new-tab.thunks";
+import {
+  checkUpdates,
+  getNightPeriodByLocation
+} from "../../store/new-tab/new-tab.thunks";
+import { shouldBeCheck } from "../../utils/update.utils";
 
 const NewTabContainer: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const darkMode = useSelector(selectDarkMode);
+  const checkMode = useSelector(selectCheckForUpdates);
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
+  const lastUpdateDate = useSelector(selectLastUpdateDate);
 
   const theme = {
     token: {
@@ -36,7 +44,13 @@ const NewTabContainer: FC = () => {
     document.title = t("tabTitle");
   }, [t]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (shouldBeCheck(lastUpdateDate, checkMode)) {
+      dispatch(checkUpdates());
+    }
+  }, [checkMode, lastUpdateDate, dispatch]);
+
+  useLayoutEffect(() => {
     switch (darkMode) {
       case AUTO:
         const now = new Date();

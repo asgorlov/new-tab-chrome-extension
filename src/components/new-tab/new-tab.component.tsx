@@ -3,7 +3,6 @@ import clsx from "clsx";
 import SettingsMenuContainer from "../settings-menu/settings-menu.container";
 import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
 import SearchEngineContainer from "../search-engine/search-engine.container";
-import UpdateContainer from "../update/update.container";
 import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
 import TourComponent from "../tour/tour.component";
@@ -13,6 +12,7 @@ import {
   selectIsDark,
   selectWallpaper
 } from "../../store/new-tab/new-tab.selectors";
+import NotificationComponent from "../notification/notification.component";
 
 /**
  * Компонент страницы новой вкладки
@@ -36,7 +36,7 @@ const NewTabComponent: FC = () => {
           style={getBackgroundStyle()}
         />
         <TourComponent />
-        <UpdateContainer />
+        <NotificationComponent />
         <SettingsMenuContainer />
         <SearchEngineContainer />
         <SearchEngineSelectorContainer />

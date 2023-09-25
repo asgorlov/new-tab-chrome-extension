@@ -3,7 +3,6 @@ import { Coordinate } from "../../models/coordinate.model";
 import { NightPeriod } from "../../models/night-period.model";
 import axios from "axios";
 import { UpdateModel, UpdateResponseModel } from "../../models/update.model";
-import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 import {
   setDataToChromeLocalStorage,
   setDataToChromeSyncStorage
@@ -43,7 +42,6 @@ export const checkUpdates = createAsyncThunk(
 
     return {
       lastVersion: data.version,
-      showMessage: data.version > CURRENT_EXT_VERSION,
       lastUpdateDate: Date.now()
     };
   }
@@ -69,8 +67,9 @@ export const changeLanguage = createAsyncThunk(
  */
 export const applySettings = createAsyncThunk(
   "newTab/applySettings",
-  async (settings?: NewTabState): Promise<NewTabState> => {
-    const data: NewTabState = settings ?? defaultStore;
+  async (settings: NewTabState | null, { getState }): Promise<NewTabState> => {
+    const state = getState() as NewTabState;
+    const data: NewTabState = Object.assign(state, settings ?? defaultStore);
 
     if (!settings) {
       data.update.previousVersion = data.update.lastVersion;

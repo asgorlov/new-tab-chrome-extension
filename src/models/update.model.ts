@@ -1,14 +1,12 @@
 /**
  * Интерфейс модели обновлений
  * @property lastVersion - Последняя версия приложения
- * @property showMessage - Флаг показа сообщения об обновлении
  * @property lastUpdateDate - Дата последнего запроса обновлений
  * @property previousVersion - Предыдущая версия приложения
  * @interface
  */
 export interface UpdateModel {
   lastVersion: string;
-  showMessage: boolean;
   lastUpdateDate: number;
   previousVersion?: string;
 }

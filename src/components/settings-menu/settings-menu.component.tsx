@@ -6,10 +6,10 @@ import SearchEngineSettingComponent from "./settings/search-engine-setting.compo
 import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
 import LanguageSettingComponent from "./settings/language-setting.component";
 import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
-import UpdateSettingContainer from "./settings/update-setting/update-setting.container";
 import CommonSettingContainer from "./settings/common-setting/common-setting.container";
 import DrawerComponent from "../common/drawer/drawer.component";
 import { SEARCH_THEMES } from "../../constants/search-engine.constants";
+import UpdateSettingComponent from "./settings/update-setting.component";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -69,7 +69,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           <SearchEngineSettingComponent />
           <DarkModeSettingComponent />
           <WallpaperSettingContainer />
-          <UpdateSettingContainer />
+          <UpdateSettingComponent />
           <LanguageSettingComponent />
         </DrawerComponent>
       </div>

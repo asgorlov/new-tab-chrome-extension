@@ -12,7 +12,7 @@ import {
   YOUCOM
 } from "../constants/search-engine.constants";
 import { setDataToChromeSyncStorage } from "./chrome.utils";
-import { NewTabState } from "../models/new-tab-state.model";
+import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
 /**
@@ -55,7 +55,7 @@ export const getDownloadLink = (version: string) => {
  * @category Utilities - Update
  * @param data - Данные из браузера
  */
-export const updateStateWithFeatures = (data: NewTabState) => {
+export const updateStateWithFeatures = (data: NewTabStateBase) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
     setDataToChromeSyncStorage({ update: data.update });
