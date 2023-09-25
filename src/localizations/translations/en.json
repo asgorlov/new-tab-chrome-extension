@@ -57,13 +57,6 @@
     "en": "English"
   },
   "update": {
-    "info": {
-      "message": "Update available",
-      "description": "A new version {{lastVersion}} has been released",
-      "download": "Download",
-      "notFound": "No updates found",
-      "actualVersion": "You have the latest version {{actualVersion}} installed"
-    },
     "title": "Updates",
     "check": "Check",
     "manual": "Manual",
@@ -106,6 +99,24 @@
     "step3": {
       "title": "Settings menu",
       "description": "Change the main settings of the page: language, dark mode, background and others."
+    }
+  },
+  "notification": {
+    "error": {
+      "title": "Something went wrong...",
+      "canNotGetNightPeriod": "Failed to obtain information about sunrise and sunset times for the current location.",
+      "canNotGetUpdateManifest": "Failed to obtain information about available update."
+    },
+    "info": {
+      "hasNewVersion": {
+        "title": "Update available",
+        "description": "A new version {{lastVersion}} has been released",
+        "download": "Download"
+      },
+      "noNewVersion": {
+        "title": "No updates found",
+        "description": "You have the latest version {{actualVersion}} installed"
+      }
     }
   }
 }

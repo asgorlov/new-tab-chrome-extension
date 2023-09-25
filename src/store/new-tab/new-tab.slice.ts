@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  getInitStateFromChrome,
   setDataToChromeLocalStorage,
   setDataToChromeSyncStorage
 } from "../../utils/chrome.utils";
@@ -13,8 +12,11 @@ import {
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
+import { getInitState } from "../../utils/store.utils";
+import { Notification } from "../../constants/notification.constants";
+import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 
-const initialState: NewTabState = await getInitStateFromChrome();
+const initialState: NewTabState = await getInitState();
 
 /**
  * Слайс для работы со страничкой <tt>new-tab</tt>
@@ -87,6 +89,13 @@ export const newTabSlice = createSlice({
       setDataToChromeSyncStorage({ searchEngines: action.payload });
     },
     /**
+     * Функция сброса массива нотификаций
+     * @param state - стор
+     */
+    resetNotifications(state: NewTabState) {
+      state.notifications = [];
+    },
+    /**
      * Функция изменения фоновых картинок пользователя
      * @param state - стор
      * @param action - экшн
@@ -106,15 +115,6 @@ export const newTabSlice = createSlice({
     setCheckForUpdates(state: NewTabState, action: PayloadAction<string>) {
       state.checkForUpdates = action.payload;
       setDataToChromeSyncStorage({ checkForUpdates: action.payload });
-    },
-    /**
-     * Функция изменения флага показа окна с новой версией приложения
-     * @param state - стор
-     * @param action - экшн
-     */
-    setShowUpdateMessage(state: NewTabState, action: PayloadAction<boolean>) {
-      state.update.showMessage = action.payload;
-      setDataToChromeSyncStorage({ update: state.update });
     }
   },
   extraReducers: builder => {
@@ -123,14 +123,26 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(checkUpdates.rejected, state => {
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetUpdateManifest
+      );
       state.checkLoading = false;
     });
 
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
-      const { lastUpdateDate, showMessage, lastVersion } = action.payload;
+      const { lastUpdateDate, lastVersion } = action.payload;
+
+      if (lastVersion === CURRENT_EXT_VERSION) {
+        state.notifications = state.notifications.concat(
+          Notification.NoNewVersion
+        );
+      } else if (lastVersion > CURRENT_EXT_VERSION) {
+        state.notifications = state.notifications.concat(
+          Notification.HasNewVersion
+        );
+      }
 
       state.checkLoading = false;
-      state.update.showMessage = showMessage;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
       setDataToChromeSyncStorage({ update: state.update });
@@ -166,6 +178,12 @@ export const newTabSlice = createSlice({
       state.customWallpaper = customWallpaper;
     });
 
+    builder.addCase(getNightPeriodByLocation.rejected, state => {
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetNightPeriod
+      );
+    });
+
     builder.addCase(getNightPeriodByLocation.fulfilled, (state, action) => {
       state.nightPeriod = action.payload;
       setDataToChromeSyncStorage({ nightPeriod: action.payload });
@@ -181,9 +199,9 @@ export const {
   setIsOpenMenu,
   setSearchEngine,
   setSearchEngines,
+  resetNotifications,
   setCustomWallpaper,
-  setCheckForUpdates,
-  setShowUpdateMessage
+  setCheckForUpdates
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

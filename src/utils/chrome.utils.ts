@@ -1,5 +1,5 @@
 import i18n from "../localizations/i18n";
-import { NewTabState } from "../models/new-tab-state.model";
+import { NewTabStateBase } from "../models/new-tab-state.model";
 import { updateStateWithFeatures } from "./update.utils";
 import defaultStore from "../constants/default-store.constants";
 import { ChromeStorage } from "../models/chrome-storage.model";
@@ -7,9 +7,9 @@ import { ChromeStorage } from "../models/chrome-storage.model";
 /**
  * Асинхронная функция для получения начальных данных стейта из браузера
  * @category Utilities - Chrome
- * @returns - Начальные данные {@link NewTabState}
+ * @returns - Начальные данные {@link NewTabStateBase}
  */
-export const getInitStateFromChrome = async (): Promise<NewTabState> => {
+export const getInitStateFromChrome = async (): Promise<NewTabStateBase> => {
   const data = await getDataFromChrome();
 
   if (!data.currentLanguage) {
@@ -26,16 +26,16 @@ export const getInitStateFromChrome = async (): Promise<NewTabState> => {
 /**
  * Асинхронная функция для получения данных из всех хранилищ браузера
  * @category Utilities - Chrome
- * @returns - Сохраненные в браузере данные {@link NewTabState}
+ * @returns - Сохраненные в браузере данные {@link NewTabStateBase}
  */
-export const getDataFromChrome = async (): Promise<NewTabState> => {
+export const getDataFromChrome = async (): Promise<NewTabStateBase> => {
   let data;
   if (chrome?.storage) {
-    data = (await chrome.storage.sync.get(defaultStore)) as NewTabState;
+    data = (await chrome.storage.sync.get(defaultStore)) as NewTabStateBase;
     const localData = (await chrome.storage.local.get({
       showTour: true,
       customWallpaper: null
-    })) as NewTabState;
+    })) as NewTabStateBase;
 
     data.showTour = localData.showTour;
     data.customWallpaper = localData.customWallpaper;

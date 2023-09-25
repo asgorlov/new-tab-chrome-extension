@@ -10,17 +10,13 @@
 
     &-check-button {
       background: transparent;
-      transition: border-color @slow-transition, color @fast-transition;
-
-      button {
-        transition: background-color @slow-transition, border-color @slow-transition, color @fast-transition;
-      }
+      transition: background-color @slow-transition, border-color @slow-transition, color @fast-transition;
 
       &.dark {
         color: @light-color;
         border-color: @dark-border-color;
 
-        button {
+        &:disabled {
           color: @disabled-text-color;
           background-color: @disabled-background-color;
           border-color: @dark-border-color;
