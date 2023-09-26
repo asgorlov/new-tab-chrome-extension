@@ -13,7 +13,7 @@ const TourContextProvider: FC<TourContextProviderProps> = ({ children }) => {
   const tourContext: TourContextModel = {
     searchEngineRef: useRef<HTMLDivElement>(),
     searchEngineSelectorRef: useRef<HTMLDivElement>(),
-    settingsMenuContainerClass: ""
+    settingsMenuContentClass: ""
   };
 
   return <TourContext.Provider value={tourContext} children={children} />;
