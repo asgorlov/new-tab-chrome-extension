@@ -18,7 +18,7 @@ import UpdateSettingComponent from "./settings/update-setting.component";
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property searchEngine - Выбранная поисковая система
  * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
- * @property menuContainerClass - Название класса стилей для контейнера меню настроек
+ * @property menuContentClass - Название класса стилей для списка меню настроек
  * @interface
  */
 export interface SettingsMenuComponentProps {
@@ -27,7 +27,7 @@ export interface SettingsMenuComponentProps {
   isOpenMenu: boolean;
   searchEngine: string;
   setIsOpenMenu: (value: boolean) => void;
-  menuContainerClass: string;
+  menuContentClass: string;
 }
 
 /**
@@ -41,7 +41,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
     isOpenMenu,
     searchEngine,
     setIsOpenMenu,
-    menuContainerClass
+    menuContentClass
   }) => {
     const { t } = useTranslation();
 
@@ -60,17 +60,19 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
         <DrawerComponent
           title={t("settingsTitle")}
           isDark={isDark}
-          className={menuContainerClass}
+          className="new-tab__settings-menu-container"
           menuClassName={menuClass}
           open={isOpenMenu}
           onClose={() => setIsOpenMenu(false)}
         >
-          <CommonSettingContainer />
-          <SearchEngineSettingComponent />
-          <DarkModeSettingComponent />
-          <WallpaperSettingContainer />
-          <UpdateSettingComponent />
-          <LanguageSettingComponent />
+          <div className={menuContentClass}>
+            <CommonSettingContainer />
+            <SearchEngineSettingComponent />
+            <DarkModeSettingComponent />
+            <WallpaperSettingContainer />
+            <UpdateSettingComponent />
+            <LanguageSettingComponent />
+          </div>
         </DrawerComponent>
       </div>
     );

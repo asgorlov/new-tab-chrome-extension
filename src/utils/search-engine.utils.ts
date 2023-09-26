@@ -135,19 +135,16 @@ export const getDraggedStyle = (
       url = require(`../static/svgs/${itemName}/${itemName}-icon.svg`);
 
       break;
-    case YAHOO:
-      Object.assign(style, { filter: "grayscale(0)" });
-      url = require(`../static/svgs/yahoo/yahoo-icon${
-        searchEngine !== itemName ? "-grey" : ""
-      }.svg`);
-
-      break;
     case SWISSCOWS:
     case GIBIRU:
     case LYCOS:
+    case YAHOO:
       Object.assign(style, { filter: "grayscale(0)" });
-      url = require(`../static/svgs/${itemName}/${itemName}-icon.svg`);
+      url = require(`../static/svgs/${itemName}/${itemName}-icon${
+        searchEngine !== itemName ? "-grey" : ""
+      }.svg`);
   }
+
   if (url) {
     Object.assign(style, { backgroundImage: `url(${url})` });
   }

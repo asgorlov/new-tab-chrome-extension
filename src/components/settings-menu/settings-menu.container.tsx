@@ -17,7 +17,7 @@ const SettingsMenuContainer: FC = () => {
   const isOpenMenu = useSelector(selectIsOpenMenu);
   const searchEngine = useSelector(selectSearchEngine);
 
-  const menuContainerClass = "new-tab__settings-menu-container";
+  const menuContentClass = "new-tab__settings-menu-content";
 
   const changeIsOpenMenu = useCallback(
     (v: boolean) => dispatch(setIsOpenMenu(v)),
@@ -26,13 +26,13 @@ const SettingsMenuContainer: FC = () => {
 
   useEffect(() => {
     if (tourCtx) {
-      tourCtx.settingsMenuContainerClass = `.${menuContainerClass}`;
+      tourCtx.settingsMenuContentClass = `.${menuContentClass}`;
     }
   }, [tourCtx]);
 
   return (
     <SettingsMenuComponent
-      menuContainerClass={menuContainerClass}
+      menuContentClass={menuContentClass}
       setIsOpenMenu={changeIsOpenMenu}
       searchEngine={searchEngine}
       isOpenMenu={isOpenMenu}

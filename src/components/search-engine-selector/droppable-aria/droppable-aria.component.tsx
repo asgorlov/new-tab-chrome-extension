@@ -17,16 +17,11 @@ import {
 /**
  * Передаваемые параметры для drag and drop компонента
  * @property onSearchEngineClick - Функция, вызываемая при выборе поисковой системы
- * @property setDroppableAreaRef - Функция, устанавливающая ref области куда можно перетаскивать элементы
  * @property searchEngines - Список выбранных поисковых систем для переключения
  * @interface
  */
 export interface DroppableAriaComponentProps {
   onSearchEngineClick: (event: MouseEvent) => void;
-  setDroppableAreaRef: (
-    ref: HTMLDivElement | null,
-    dropProvided: DroppableProvided
-  ) => void;
   searchEngines: string[];
 }
 
@@ -35,7 +30,7 @@ export interface DroppableAriaComponentProps {
  * @category Components
  */
 const DroppableAriaComponent: FC<DroppableAriaComponentProps> = memo(
-  ({ onSearchEngineClick, setDroppableAreaRef, searchEngines }) => {
+  ({ onSearchEngineClick, searchEngines }) => {
     const { t } = useTranslation();
     const searchEngine = useSelector(selectSearchEngine);
     const currentLanguage = useSelector(selectCurrentLanguage);
@@ -48,7 +43,7 @@ const DroppableAriaComponent: FC<DroppableAriaComponentProps> = memo(
         {(dropProvided: DroppableProvided) => (
           <div
             className="new-tab__search-engine-selector-droppable-aria"
-            ref={ref => setDroppableAreaRef(ref, dropProvided)}
+            ref={dropProvided.innerRef}
             {...dropProvided.droppableProps}
           >
             {searchEngines.map((name: string, index: number) => (

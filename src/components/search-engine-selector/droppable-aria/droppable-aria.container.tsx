@@ -1,12 +1,7 @@
-import { FC, memo, MouseEvent, useCallback, useContext } from "react";
+import { FC, memo, MouseEvent, useCallback } from "react";
 import DroppableAriaComponent from "./droppable-aria.component";
-import {
-  DragDropContext,
-  DroppableProvided,
-  DropResult
-} from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { TourContext } from "../../../contexts/tour.context";
 import { selectSearchEngines } from "../../../store/new-tab/new-tab.selectors";
 import {
   setSearchEngine,
@@ -21,7 +16,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
   onDragged
 }) => {
   const dispatch = useDispatch();
-  const tourCtx = useContext(TourContext);
   const searchEngines = useSelector(selectSearchEngines);
 
   const handleDragEnd = (result: DropResult) => {
@@ -38,16 +32,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
     onDragged(false);
   };
 
-  const setDroppableAriaRef = useCallback(
-    (ref: HTMLDivElement | null, provided: DroppableProvided) => {
-      if (tourCtx) {
-        tourCtx.searchEngineSelectorRef.current = ref;
-      }
-
-      provided.innerRef(ref);
-    },
-    [tourCtx]
-  );
   const handleSearchEngineClick = useCallback(
     (e: MouseEvent) => {
       const element = e.currentTarget as HTMLDivElement;
@@ -67,7 +51,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
     >
       <DroppableAriaComponent
         onSearchEngineClick={handleSearchEngineClick}
-        setDroppableAreaRef={setDroppableAriaRef}
         searchEngines={searchEngines}
       />
     </DragDropContext>

@@ -1,5 +1,4 @@
 @import "../constants";
-@import "../mixins";
 
 .new-tab__search-engine {
     @search-engine-width: 40vw;
@@ -316,7 +315,7 @@
             border-radius: 4px;
 
             &.dark {
-                box-shadow: 0 2px 3px #ffffff0f;
+                box-shadow: 0 2px 3px @light-background-color;
             }
         }
 
