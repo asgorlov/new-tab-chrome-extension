@@ -1,4 +1,4 @@
-import React, { FC, memo, RefObject, useState } from "react";
+import React, { FC, memo, RefObject, useContext, useState } from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import clsx from "clsx";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -7,6 +7,7 @@ import {
   getScrollSearchEngineButtonStyle,
   getSearchEngineSelectorStyle
 } from "../../utils/search-engine.utils";
+import { TourContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
@@ -40,11 +41,19 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
     onDragged,
     onClickMoving
   }) => {
+    const tourCtx = useContext(TourContext);
     const [isLeftButtonActive, setIsLeftButtonActive] = useState(false);
     const [isRightButtonActive, setIsRightButtonActive] = useState(false);
 
+    const setSearchEngineSelectorRef = (element: HTMLDivElement | null) => {
+      if (tourCtx) {
+        tourCtx.searchEngineSelectorRef.current = element;
+      }
+    };
+
     return (
       <div
+        ref={setSearchEngineSelectorRef}
         className="new-tab__search-engine-selector"
         style={getSearchEngineSelectorStyle(
           searchEngine,
