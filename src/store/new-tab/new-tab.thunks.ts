@@ -18,9 +18,14 @@ import { NewTabState } from "../../models/new-tab-state.model";
 export const getNightPeriodByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
   async (coordinate: Coordinate): Promise<NightPeriod> => {
-    const { data } = await axios.get(
-      `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
-    );
+    const { data } = await axios.get("https://api.sunrise-sunset.org/json", {
+      params: {
+        lat: coordinate.lat,
+        lng: coordinate.lng,
+        date: "today",
+        formatted: 0
+      }
+    });
 
     return {
       sunset: new Date(data.results.sunset).toString(),
