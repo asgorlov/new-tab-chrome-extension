@@ -25,5 +25,23 @@ $fast-transition: 0.5s;
 
 @font-face {
   font-family: "Duckduck";
-  src: local("Duckduck"), url("../fonts/ddg-serp-icons.woff") format('woff');
+  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format('woff');
+}
+
+:export {
+  darkColor: $dark-color;
+  lightColor: $light-color;
+  yaColor: $ya-color;
+  aolColor: $aol-color;
+  youcomColor: $youcom-color;
+  gibiruColor: $gibiru-color;
+  gooColor: $goo-color;
+  duckColor: $duck-color;
+  bingColor: $bing-color;
+  braveColor: $brave-color;
+  yahooColor: $yahoo-color;
+  lycosColor: $lycos-color;
+  nigmaColor: $nigma-color;
+  cowsColor: $cows-color;
+  ecosiaColor: $ecosia-color;
 }

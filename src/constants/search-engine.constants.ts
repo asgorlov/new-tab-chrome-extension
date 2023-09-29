@@ -1,3 +1,5 @@
+import constants from "../static/styles/modules/constants.module.scss";
+
 /**
  * Значение режима автоматического включения темной темы
  * @category Constants - Search Engine
@@ -145,17 +147,17 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
  * @category Constants - Search Engine
  */
 export const SEARCH_THEMES: Record<string, string> = {
-  aol: "#2f9aff",
-  bing: "#007DAA",
-  brave: "#ff2000",
-  nigma: "#74B61D",
-  lycos: "#2e5d9a",
-  yahoo: "#6001d2",
-  ecosia: "#008009",
-  yandex: "#fc0",
-  youcom: "#4153fe",
-  gibiru: "#fc243b",
-  google: "#4285f4",
-  swisscows: "#dc2f2f",
-  duckduckgo: "#DE5833"
+  aol: constants.aolColor,
+  bing: constants.bingColor,
+  brave: constants.braveColor,
+  nigma: constants.nigmaColor,
+  lycos: constants.lycosColor,
+  yahoo: constants.yahooColor,
+  ecosia: constants.ecosiaColor,
+  yandex: constants.yaColor,
+  youcom: constants.youcomColor,
+  gibiru: constants.gibiruColor,
+  google: constants.gooColor,
+  swisscows: constants.cowsColor,
+  duckduckgo: constants.duckColor
 };
