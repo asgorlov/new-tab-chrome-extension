@@ -1,30 +1,30 @@
-@import "../../constants";
+@import "../../constants.scss";
 
 .new-tab__collapse {
   &-header {
     display: flex;
     align-items: center;
     font-weight: 500;
-    transition: @fast-transition;
+    transition: $fast-transition;
 
     svg {
-      transition: @fast-transition;
+      transition: $fast-transition;
       margin-right: 4px;
     }
   }
 
   &.dark {
     .new-tab__collapse-header {
-      color: @light-color;
+      color: $light-color;
 
       svg {
-        stroke: @light-color;
-        fill: @light-color;
+        stroke: $light-color;
+        fill: $light-color;
       }
     }
 
     .ant-collapse-expand-icon {
-      color: @light-color;
+      color: $light-color;
     }
   }
 }

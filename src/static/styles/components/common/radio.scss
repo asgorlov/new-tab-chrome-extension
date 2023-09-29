@@ -1,8 +1,8 @@
-@import "../../constants";
+@import "../../constants.scss";
 
 .new-tab__radio {
   &.dark {
-    color: @light-color;
+    color: $light-color;
 
     .ant-radio:not(.ant-radio-checked)>.ant-radio-inner {
       background: transparent;

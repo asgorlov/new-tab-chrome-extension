@@ -1,7 +1,7 @@
-@import "../constants";
+@import "../constants.scss";
 
 .new-tab {
-    transition: @slow-transition;
+    transition: $slow-transition;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,14 +9,14 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: @light-color;
+    background-color: $light-color;
 
     &.dark {
-        background-color: @dark-color;
+        background-color: $dark-color;
     }
 
     &-background {
-        transition: background @slow-transition;
+        transition: background $slow-transition;
         position: fixed;
         top: 0;
         left: 0;
