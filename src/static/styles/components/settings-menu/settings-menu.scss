@@ -1,4 +1,4 @@
-@import "../../constants";
+@import "../../constants.scss";
 
 .new-tab__settings-menu {
     position: absolute;
@@ -13,6 +13,6 @@
     }
 
     &-icon {
-        transition: @fast-transition;
+        transition: $fast-transition;
     }
 }

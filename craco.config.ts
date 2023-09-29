@@ -1,5 +1,3 @@
-const CracoAntDesignPlugin = require("craco-antd");
-
 export default module.exports = {
   webpack: {
     configure: (webpackConfig: any) => {
@@ -16,17 +14,5 @@ export default module.exports = {
 
       return webpackConfig;
     }
-  },
-  plugins: [
-    {
-      plugin: CracoAntDesignPlugin,
-      options: {
-        lessLoaderOptions: {
-          lessOptions: {
-            relativeUrls: false
-          }
-        }
-      }
-    }
-  ]
+  }
 };

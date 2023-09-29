@@ -1,4 +1,4 @@
-@import "../../constants";
+@import "../../constants.scss";
 
 .new-tab__drawer {
   .ant-drawer-header {
@@ -6,25 +6,25 @@
   }
 
   .ant-drawer-footer {
-    transition: border-color @slow-transition;
+    transition: border-color $slow-transition;
     padding: 0;
   }
 
   .ant-drawer-wrapper-body {
-    transition: @slow-transition;
+    transition: $slow-transition;
 
     &>.ant-drawer-body {
       .ant-collapse {
-        transition: @slow-transition;
+        transition: $slow-transition;
         background-color: transparent;
-        border-top: 1px solid @light-border-color;
+        border-top: 1px solid $light-border-color;
         border-radius: 0;
 
         &>.ant-collapse-item {
           &>.ant-collapse-header {
             &>.ant-collapse-expand-icon {
               &>.ant-collapse-arrow svg {
-                transition: transform 0.3s, color @fast-transition;
+                transition: transform 0.3s, color $fast-transition;
               }
             }
           }
@@ -39,24 +39,24 @@
     }
 
     .ant-drawer-title {
-      transition: @fast-transition;
+      transition: $fast-transition;
     }
   }
 
   &.dark {
     .ant-drawer-title {
-      transition: @fast-transition;
-      color: @light-color;
+      transition: $fast-transition;
+      color: $light-color;
     }
 
     .ant-drawer-footer {
-      border-top-color: @dark-border-color;
+      border-top-color: $dark-border-color;
     }
 
     &>.ant-drawer-wrapper-body {
       &>.ant-drawer-body {
         .ant-collapse {
-          border-color: @dark-border-color;
+          border-color: $dark-border-color;
           border-bottom: none;
         }
       }

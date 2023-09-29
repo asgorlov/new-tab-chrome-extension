@@ -1,25 +1,25 @@
-@import "../constants";
+@import "../constants.scss";
 
 .new-tab__notification {
   .ant-notification-notice-description,
   .ant-notification-notice-message,
   .ant-notification-notice-close,
   .ant-notification-notice {
-    transition: all, background-color @slow-transition, color @fast-transition;
+    transition: all, background-color $slow-transition, color $fast-transition;
   }
 
   &.dark {
     .ant-notification-notice {
-      background-color: @dark-color;
+      background-color: $dark-color;
 
       .ant-notification-notice-close:hover {
-        background-color: color-mix(in srgb, @light-color 6%, @dark-color);
+        background-color: mix($light-color, $dark-color, 6%);
       }
 
       .ant-notification-notice-description,
       .ant-notification-notice-message,
       .ant-notification-notice-close {
-        color: @light-color;
+        color: $light-color;
       }
     }
   }

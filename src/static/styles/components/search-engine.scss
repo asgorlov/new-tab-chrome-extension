@@ -1,8 +1,8 @@
-@import "../constants";
+@import "../constants.scss";
 
 .new-tab__search-engine {
-    @search-engine-width: 40vw;
-    @search-engine-max-width: 560px;
+    $search-engine-width: 40vw;
+    $search-engine-max-width: 560px;
 
     display: flex;
     flex-direction: column;
@@ -14,8 +14,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: @search-engine-width;
-        max-width: @search-engine-max-width;
+        width: $search-engine-width;
+        max-width: $search-engine-max-width;
     }
 
     &_logo {
@@ -23,32 +23,32 @@
         background-repeat: no-repeat;
 
         &.yandex {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 49px;
             width: 162px;
             margin-bottom: 8px;
             background-image: url("../../svgs/yandex/ya-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/yandex/ya-logo-dark.svg");
             }
 
             &.en {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 height: 41px;
                 width: 162px;
                 background-image: url("../../svgs/yandex/ya-logo-en.svg");
 
                 &.dark {
-                    transition: @fast-transition;
+                    transition: $fast-transition;
                     background-image: url("../../svgs/yandex/ya-logo-en-dark.svg");
                 }
             }
         }
 
         &.google {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 68px;
             width: 205px;
             margin-bottom: 6px;
@@ -56,33 +56,33 @@
         }
 
         &.duckduckgo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 163px;
             width: 205px;
             margin-bottom: 12px;
             background-image: url("../../svgs/duckduckgo/duckduckgo-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/duckduckgo/duckduckgo-logo-dark.svg");
             }
         }
 
         &.bing {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 32px;
             width: 205px;
             margin-bottom: 12px;
             background-image: url("../../svgs/bing/bing-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/bing/bing-logo-dark.svg");
             }
         }
 
         &.yahoo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 59px;
             width: 205px;
             margin-bottom: 6px;
@@ -90,46 +90,46 @@
         }
 
         &.brave {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 66px;
             width: 205px;
             margin-bottom: 6px;
             background-image: url("../../svgs/brave/brave-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/brave/brave-logo-dark.svg");
             }
         }
 
         &.swisscows {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 75px;
             width: 205px;
             margin-bottom: 10px;
             background-image: url("../../svgs/swisscows/swisscows-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/swisscows/swisscows-logo-dark.svg");
             }
         }
 
         &.aol {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 41px;
             width: 103px;
             margin-bottom: 12px;
             background-image: url("../../svgs/aol/aol-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/aol/aol-logo-dark.svg");
             }
         }
 
         &.youcom {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 62px;
             width: 205px;
             margin-bottom: 14px;
@@ -137,46 +137,46 @@
         }
 
         &.gibiru {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 41px;
             width: 205px;
             margin-bottom: 10px;
             background-image: url("../../svgs/gibiru/gibiru-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/gibiru/gibiru-logo-dark.svg");
             }
         }
 
         &.lycos {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 45px;
             width: 205px;
             margin-bottom: 14px;
             background-image: url("../../svgs/lycos/lycos-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/lycos/lycos-logo-dark.svg");
             }
         }
 
         &.nigma {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 55px;
             width: 205px;
             margin-bottom: 32px;
             background-image: url("../../svgs/nigma/nigma-logo.svg");
 
             &.dark {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 background-image: url("../../svgs/nigma/nigma-logo-dark.svg");
             }
         }
 
         &.ecosia {
-            transition: @fast-transition;
+            transition: $fast-transition;
             height: 40px;
             width: 140px;
             margin-bottom: 12px;
@@ -185,11 +185,11 @@
     }
 
     &_form-background {
-        transition: @fast-transition;
+        transition: $fast-transition;
         background-image: url("../../svgs/form-background.svg");
         background-size: cover;
-        width: @search-engine-width;
-        max-width: @search-engine-max-width;
+        width: $search-engine-width;
+        max-width: $search-engine-max-width;
         position: fixed;
         z-index: -1;
         top: calc(50% - 50px);
@@ -209,7 +209,7 @@
             &-item {
                 display: flex;
                 align-items: center;
-                color: @light-color;
+                color: $light-color;
                 font-size: 14px;
                 font-weight: 400;
                 font-family: "Arial", sans-serif;
@@ -246,7 +246,7 @@
         }
 
         &.nigma {
-            transition: all @fast-transition, border-color @slow-transition;
+            transition: all $fast-transition, border-color $slow-transition;
             background: #79ba2a url("../../svgs/form-background.svg");
             top: calc(50% - 62px);
             padding: 0 20px;
@@ -254,11 +254,11 @@
             min-height: 100px;
             max-height: 100px;
             opacity: 1;
-            border: solid 4px @light-color;
+            border: solid 4px $light-color;
             outline: solid 2px #dadada;
 
             &.dark {
-                border: solid 4px @dark-color;
+                border: solid 4px $dark-color;
             }
         }
 
@@ -275,7 +275,7 @@
         &.gibiru,
         &.lycos {
             div {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 opacity: 0;
             }
         }
@@ -288,17 +288,17 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
-        background-color: @light-color;
+        background-color: $light-color;
 
         &.yandex {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 0.625rem;
-            background-color: @ya-color;
+            background-color: $ya-color;
         }
 
         &.google {
-            transition: @fast-transition;
+            transition: $fast-transition;
             box-shadow: 0 1px 6px #20212447;
             border: 1px solid #dfe1e5;
             border-radius: 24px;
@@ -309,18 +309,18 @@
         }
 
         &.duckduckgo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             box-shadow: 0 2px 3px #0000000F;
             border: 1px solid #00000026;
             border-radius: 4px;
 
             &.dark {
-                box-shadow: 0 2px 3px @light-background-color;
+                box-shadow: 0 2px 3px $light-background-color;
             }
         }
 
         &.bing {
-            transition: @fast-transition;
+            transition: $fast-transition;
             box-shadow: 0 2px 4px #0000004C;
             border: none transparent;
             border-radius: 24px;
@@ -331,13 +331,13 @@
         }
 
         &.yahoo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 4px;
         }
 
         &.brave {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 16px;
             box-shadow: 0 2px 4px #0000004C;
@@ -348,19 +348,19 @@
         }
 
         &.swisscows {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 26px;
         }
 
         &.aol {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 0;
         }
 
         &.youcom {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid transparent;
             border-radius: 24px;
             box-shadow: #00000011 0 -0.5px 0, #00000019 0 0 18px;
@@ -381,7 +381,7 @@
         }
 
         &.gibiru {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #828282FF;
             border-radius: 7px;
 
@@ -391,7 +391,7 @@
         }
 
         &.lycos {
-            transition: all @fast-transition, outline 0.05s;;
+            transition: all $fast-transition, outline 0.05s;;
             outline: 1px solid #dddddd;
             border: none;
             border-radius: 4px;
@@ -404,13 +404,13 @@
         &.nigma {
             height: 32px;
             background-color: #79ba2a;
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none;
             border-radius: 0 3px 3px 0;
         }
 
         &.ecosia {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #bebeb9;
             border-radius: 9999px;
             box-shadow: 0 1px 2px #1A1A1A2D,0 0 8px #1A1A1A0F;
@@ -428,12 +428,12 @@
         flex: 1;
 
         &::placeholder {
-            color: @input-placeholder-color;
+            color: $input-placeholder-color;
         }
 
         &.yandex {
-            transition: @fast-transition;
-            background-color: @light-color;
+            transition: $fast-transition;
+            background-color: $light-color;
             background-clip: padding-box;
             border: 3px solid transparent;
             border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
@@ -446,7 +446,7 @@
         }
 
         &.google {
-            transition: @fast-transition;
+            transition: $fast-transition;
             padding: 0 0 0 12px;
             background-color: transparent;
             border: none transparent;
@@ -460,7 +460,7 @@
         }
 
         &.duckduckgo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             padding: 0 10px;
             background-color: transparent;
             border: none transparent;
@@ -473,7 +473,7 @@
         }
 
         &.bing {
-            transition: @fast-transition;
+            transition: $fast-transition;
             padding: 4px 0 4px 12px;
             border-radius: 24px;
             border: none transparent;
@@ -486,7 +486,7 @@
         }
 
         &.yahoo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #188fff;
             border-radius: 4px 0 0 4px;
             font-weight: 500;
@@ -505,7 +505,7 @@
         }
 
         &.brave {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 16px 0 0 16px;
 
@@ -517,7 +517,7 @@
         }
 
         &.swisscows {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 26px 0 0 26px;
 
@@ -533,7 +533,7 @@
         }
 
         &.aol {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #7590f5;
             border-radius: 0;
 
@@ -544,7 +544,7 @@
         }
 
         &.youcom {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 24px 0 0 24px;
 
@@ -560,7 +560,7 @@
         }
 
         &.gibiru {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 7px 0 0 7px;
 
@@ -572,7 +572,7 @@
         }
 
         &.lycos {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none;
             border-radius: 4px 0 0 4px;
 
@@ -584,7 +584,7 @@
         }
 
         &.nigma {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #707070;
             border-radius: 0;
 
@@ -615,12 +615,12 @@
         align-items: center;
 
         &.yandex {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 10px 10px 0;
             width: 100px;
 
             & span {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 font: 18px Arial, Helvetica, sans-serif;
                 padding: 0 18px;
             }
@@ -631,7 +631,7 @@
         }
 
         &.google {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 24px 24px 0;
             width: 48px;
 
@@ -645,12 +645,12 @@
         }
 
         &.duckduckgo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 4px 4px 0;
             width: 50px;
 
             & span {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 padding: 0 15px;
                 font: 18px Duckduck, emoji;
                 color: #999;
@@ -658,12 +658,12 @@
 
             &.ant-btn-text:not(:disabled):hover {
                 background-color: #2950BF;
-                color: @light-color;
+                color: $light-color;
             }
         }
 
         &.bing {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 24px 24px 0;
             width: 40px;
 
@@ -726,13 +726,13 @@
         }
 
         &.yahoo {
-            transition: @fast-transition;
+            transition: $fast-transition;
             background-color: #188fff;
             border-radius: 0 4px 4px 0;
             width: 60px;
 
             & svg path {
-                transition: @fast-transition;
+                transition: $fast-transition;
                 fill: #fff;
             }
 
@@ -740,19 +740,19 @@
                 background-color: #0f69ff;
             }
 
-            @media @tablet {
-                transition: @fast-transition;
+            @media screen and (max-width: 1020px) {
+                transition: $fast-transition;
                 width: 80px;
             }
         }
 
         &.brave {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 10px 10px 0;
             width: 48px;
 
             svg {
-                fill: @light-color;
+                fill: $light-color;
             }
 
             &:hover {
@@ -761,7 +761,7 @@
         }
 
         &.swisscows {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border-radius: 0 26px 26px 0;
             margin: 0;
             width: 40px;
@@ -772,7 +772,7 @@
         }
 
         &.aol {
-            transition: @fast-transition;
+            transition: $fast-transition;
             margin: 0;
             width: 65px;
             background: #524dfe;
@@ -815,7 +815,7 @@
         }
 
         &.youcom {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 0 24px 24px 0;
             width: 40px;
@@ -830,7 +830,7 @@
         }
 
         &.gibiru {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 0 7px 7px 0;
             width: 40px;
@@ -846,7 +846,7 @@
         }
 
         &.lycos {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: none transparent;
             border-radius: 0 4px 4px 0;
             width: 40px;
@@ -858,7 +858,7 @@
         }
 
         &.nigma {
-            transition: @fast-transition;
+            transition: $fast-transition;
             border: 1px solid #808080;
             border-radius: 3px;
             width: 70px;
@@ -869,13 +869,13 @@
             &:active,
             &:hover {
                 background: #74B61D;
-                border-color: @light-color;
-                color: @light-color;
+                border-color: $light-color;
+                color: $light-color;
             }
         }
 
         &.ecosia {
-            transition: all @fast-transition outline 0.1s;
+            transition: all $fast-transition outline 0.1s;
             border: none transparent;
             border-radius: 0 9999px 9999px 0;
             width: 48px;
@@ -883,11 +883,11 @@
             &:focus-within {
                 outline: 2px solid #0094c7;
                 outline-offset: 1px;
-                border-color: @ecosia-color;
-                background: @ecosia-color;
+                border-color: $ecosia-color;
+                background: $ecosia-color;
 
                 svg {
-                    fill: @light-color;
+                    fill: $light-color;
                 }
             }
 
@@ -895,7 +895,7 @@
                 background: #006600;
 
                 svg {
-                    fill: @light-color;
+                    fill: $light-color;
                 }
             }
         }

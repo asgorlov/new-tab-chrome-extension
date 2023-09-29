@@ -1,4 +1,4 @@
-@import "../../constants";
+@import "../../constants.scss";
 
 .new-tab__settings-menu_language {
   display: flex;
@@ -6,16 +6,16 @@
   justify-content: space-between;
   padding: 12px 16px;
   padding-inline-start: 12px;
-  border-top: 1px solid @light-border-color;
-  transition: border-color @slow-transition, color @fast-transition;
-  border-bottom: 1px solid @light-border-color;
+  border-top: 1px solid $light-border-color;
+  transition: border-color $slow-transition, color $fast-transition;
+  border-bottom: 1px solid $light-border-color;
 
   &.dark {
-    border-color: @dark-border-color;
-    color: @light-color;
+    border-color: $dark-border-color;
+    color: $light-color;
 
     svg {
-      stroke: @light-color;
+      stroke: $light-color;
     }
   }
 
@@ -40,6 +40,6 @@
   }
 
   svg {
-    transition: @fast-transition;
+    transition: $fast-transition;
   }
 }

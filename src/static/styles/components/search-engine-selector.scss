@@ -1,4 +1,4 @@
-@import "../constants";
+@import "../constants.scss";
 
 .new-tab__search-engine-selector {
     display: flex;
@@ -7,11 +7,11 @@
     height: max-content;
     outline: 2px solid;
     border-radius: 8px;
-    transition: outline-color @fast-transition;
+    transition: outline-color $fast-transition;
 
     &-scrollable {
         display: inherit;
-        transition: background-color @slow-transition;
+        transition: background-color $slow-transition;
         padding: 2px;
         overflow-x: auto;
         background-color: #ffffff80;
@@ -28,7 +28,7 @@
 
     &-left-button,
     &-right-button {
-        transition: @fast-transition;
+        transition: $fast-transition;
         cursor: pointer;
         border: 0;
         width: 24px;
@@ -52,7 +52,7 @@
         height: 32px;
         margin: 2px;
         border-radius: 4px;
-        transition: filter @slow-transition, background-image @fast-transition;
+        transition: filter $slow-transition, background-image $fast-transition;
         filter: grayscale(100%);
         background-size: cover;
     }
