@@ -27,7 +27,10 @@ const SearchEngineSelectorContainer: FC = () => {
 
         // Если поворот налево
         if (distance > 0) {
-          if (scrollLeft === scrollWidth - clientWidth) {
+          const isScrollLeftEnd =
+            Math.round((scrollWidth - clientWidth) / scrollLeft) === 1;
+
+          if (isScrollLeftEnd) {
             const newSearchEngines = [...searchEngines];
             const firstElement = newSearchEngines.shift();
 
