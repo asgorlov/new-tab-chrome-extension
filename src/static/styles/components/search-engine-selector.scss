@@ -13,6 +13,7 @@
         display: inherit;
         transition: background-color $slow-transition;
         overflow-x: auto;
+        padding: 2px;
         background-color: #ffffff80;
         max-width: 360px;
 
@@ -49,7 +50,7 @@
     &-item {
         width: 32px;
         height: 32px;
-        margin: 4px 2px;
+        margin: 2px;
         border-radius: 4px;
         transition: filter $slow-transition, background-image $fast-transition;
         filter: grayscale(100%);
