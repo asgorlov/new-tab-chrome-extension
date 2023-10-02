@@ -1,0 +1,42 @@
+@import "../../modules/constants.module";
+
+.new-tab__modal {
+  &.dark {
+    &>.ant-modal-content {
+      background-color: $dark-color;
+
+      &>.ant-modal-close {
+        color: mix($light-color, $dark-color, 55%);
+      }
+
+      &>.ant-modal-header {
+        background-color: $dark-color;
+
+        &>.ant-modal-title {
+          color: $light-color;
+        }
+      }
+
+      &>.ant-modal-footer {
+        &>.ant-btn-default {
+          background-color: $dark-color;
+
+          &:not(:hover) {
+            color: $light-color;
+            border-color: $dark-border-color;
+          }
+        }
+
+        &>.ant-btn-primary {
+          box-shadow: none;
+          border-color: $dark-border-color;
+
+          &:disabled {
+            background-color: mix($dark-color, $light-color, 90%);
+            color: mix($light-color, $dark-color, 25%);
+          }
+        }
+      }
+    }
+  }
+}

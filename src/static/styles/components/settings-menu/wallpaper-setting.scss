@@ -1,0 +1,47 @@
+@import "../../modules/constants.module";
+
+.new-tab__settings-menu_wallpaper {
+  border-radius: 0;
+
+  &-content {
+    &_choice {
+      &-group {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-option {
+        transition: $fast-transition;
+        border: 3px solid #b6b6b6;
+        border-radius: 6px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+
+        &.selected {
+          transition: $fast-transition;
+        }
+      }
+    }
+  }
+
+  &-modal-content {
+    &_uploading-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    &_uploading {
+      max-width: 170px;
+
+      &.auto-width {
+        max-width: 100%;
+      }
+
+      &-button {
+        min-width: 170px;
+      }
+    }
+  }
+}

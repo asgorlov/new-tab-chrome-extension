@@ -1,100 +1,102 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, memo, RefObject, useContext, useState } from "react";
+import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import clsx from "clsx";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { DELTA_Y } from "../../constants/search-engine-selector.constants";
 import {
-  Draggable,
-  DroppableProvided,
-  DraggableProvided,
-  DraggableStateSnapshot
-} from "react-beautiful-dnd";
-import { YANDEX } from "../../constants/search-engine.constants";
-import { useTranslation } from "react-i18next";
-import StrictModeDroppable from "../../utils/strict-mode-droppable";
-import { TourContextModel } from "../../models/tour-context.model";
+  getScrollSearchEngineButtonStyle,
+  getSearchEngineSelectorStyle
+} from "../../utils/search-engine.utils";
+import { TourContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
- * @property searchEngineNames - Список выбранных поисковых систем для переключения
- * @property currentLanguage - Текущий язык
+ * @property isDark - Флаг темной темы
+ * @property scrollRef - Ref элемента селектора со скроллом
  * @property searchEngine - Выбранная поисковая система
- * @property tourCtx - Модель контекста ознакомительно тура
- * @property onClick - Функция, вызываемая при клике на кнопку выбора поисковой системы
+ * @property searchEngines - Список выбранных поисковых систем для переключения
+ * @property onDragged - Функция установки флага, что элемента захвачен для переноса(dnd)
+ * @property onClickMoving - Функция движения объектов в элементе со скроллом
  * @interface
  */
 export interface SearchSelectedComponentProps {
-  searchEngineNames: string[];
-  currentLanguage: string;
+  isDark: boolean;
+  scrollRef: RefObject<HTMLDivElement>;
   searchEngine: string;
-  tourCtx?: TourContextModel;
-  onClick: (event: MouseEvent) => void;
+  searchEngines: string[];
+  onDragged: (v: boolean) => void;
+  onClickMoving: (distance: number) => void;
 }
 
 /**
  * Компонент выбора поисковой системы
  * @category Components
  */
-const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = ({
-  searchEngineNames,
-  currentLanguage,
-  searchEngine,
-  tourCtx,
-  onClick
-}) => {
-  const { t } = useTranslation();
+const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
+  ({
+    isDark,
+    scrollRef,
+    searchEngine,
+    searchEngines,
+    onDragged,
+    onClickMoving
+  }) => {
+    const tourCtx = useContext(TourContext);
+    const [isLeftButtonActive, setIsLeftButtonActive] = useState(false);
+    const [isRightButtonActive, setIsRightButtonActive] = useState(false);
 
-  const setRef = (ref: HTMLDivElement | null, provided: DroppableProvided) => {
-    if (tourCtx) {
-      tourCtx.searchEngineSelectorRef.current = ref;
-    }
+    const setSearchEngineSelectorRef = (element: HTMLDivElement | null) => {
+      if (tourCtx) {
+        tourCtx.searchEngineSelectorRef.current = element;
+      }
+    };
 
-    provided.innerRef(ref);
-  };
-  const getItemClassName = (itemName: string): string => {
-    return clsx(
-      "new-tab__search-engine-selector-item",
-      itemName === YANDEX && currentLanguage !== "ru"
-        ? itemName + "-en"
-        : itemName,
-      { selected: searchEngine === itemName }
-    );
-  };
-
-  return (
-    <StrictModeDroppable
-      droppableId="search-engine-selector"
-      direction="horizontal"
-    >
-      {(dropProvided: DroppableProvided) => (
+    return (
+      <div
+        ref={setSearchEngineSelectorRef}
+        className="new-tab__search-engine-selector"
+        style={getSearchEngineSelectorStyle(
+          searchEngine,
+          !searchEngines.length
+        )}
+      >
+        <button
+          className="new-tab__search-engine-selector-left-button"
+          children={<LeftOutlined />}
+          onClick={() => onClickMoving(DELTA_Y)}
+          onMouseUp={() => setIsLeftButtonActive(false)}
+          onMouseMove={() => setIsLeftButtonActive(false)}
+          onMouseDown={() => setIsLeftButtonActive(true)}
+          style={getScrollSearchEngineButtonStyle(
+            searchEngine,
+            searchEngines.length < 11,
+            isLeftButtonActive
+          )}
+        />
         <div
-          className="new-tab__search-engine-selector"
-          ref={ref => setRef(ref, dropProvided)}
-          {...dropProvided.droppableProps}
+          ref={scrollRef}
+          className={clsx("new-tab__search-engine-selector-scrollable", {
+            dark: isDark
+          })}
         >
-          {searchEngineNames.map((name: string, index: number) => (
-            <Draggable key={name} draggableId={name} index={index}>
-              {(
-                dragProvided: DraggableProvided,
-                dragSnapshot: DraggableStateSnapshot
-              ) => (
-                <div
-                  ref={dragProvided.innerRef}
-                  {...dragProvided.draggableProps}
-                  {...dragProvided.dragHandleProps}
-                  className={getItemClassName(name)}
-                  style={{
-                    ...dragProvided.draggableProps.style,
-                    cursor: dragSnapshot.isDragging ? "grabbing" : "pointer"
-                  }}
-                  title={t(`searchEngine.${name}`)}
-                  onClick={onClick}
-                />
-              )}
-            </Draggable>
-          ))}
-          {dropProvided.placeholder}
+          <DroppableAriaContainer onDragged={onDragged} />
         </div>
-      )}
-    </StrictModeDroppable>
-  );
-};
+        <button
+          className="new-tab__search-engine-selector-right-button"
+          children={<RightOutlined />}
+          onClick={() => onClickMoving(-DELTA_Y)}
+          onMouseUp={() => setIsRightButtonActive(false)}
+          onMouseMove={() => setIsRightButtonActive(false)}
+          onMouseDown={() => setIsRightButtonActive(true)}
+          style={getScrollSearchEngineButtonStyle(
+            searchEngine,
+            searchEngines.length < 11,
+            isRightButtonActive
+          )}
+        />
+      </div>
+    );
+  }
+);
 
 export default SearchEngineSelectorComponent;

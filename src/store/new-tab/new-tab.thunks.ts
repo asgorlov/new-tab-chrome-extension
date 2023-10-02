@@ -3,7 +3,6 @@ import { Coordinate } from "../../models/coordinate.model";
 import { NightPeriod } from "../../models/night-period.model";
 import axios from "axios";
 import { UpdateModel, UpdateResponseModel } from "../../models/update.model";
-import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 import {
   setDataToChromeLocalStorage,
   setDataToChromeSyncStorage
@@ -19,9 +18,14 @@ import { NewTabState } from "../../models/new-tab-state.model";
 export const getNightPeriodByLocation = createAsyncThunk(
   "api/sunsetAndSunriseTimes/get",
   async (coordinate: Coordinate): Promise<NightPeriod> => {
-    const { data } = await axios.get(
-      `https://api.sunrise-sunset.org/json?lat=${coordinate.lat}&lng=${coordinate.lng}&date=today&formatted=0`
-    );
+    const { data } = await axios.get("https://api.sunrise-sunset.org/json", {
+      params: {
+        lat: coordinate.lat,
+        lng: coordinate.lng,
+        date: "today",
+        formatted: 0
+      }
+    });
 
     return {
       sunset: new Date(data.results.sunset).toString(),
@@ -43,7 +47,6 @@ export const checkUpdates = createAsyncThunk(
 
     return {
       lastVersion: data.version,
-      showMessage: data.version > CURRENT_EXT_VERSION,
       lastUpdateDate: Date.now()
     };
   }
@@ -64,18 +67,21 @@ export const changeLanguage = createAsyncThunk(
 );
 
 /**
- * Асинхронный запрос сброса настроек
+ * Асинхронный запрос изменения или сброса настроек
  * @category Thunks - New Tab
  */
-export const resetSettings = createAsyncThunk(
-  "newTab/resetSettings",
-  async () => {
-    const data = defaultStore as NewTabState;
+export const applySettings = createAsyncThunk(
+  "newTab/applySettings",
+  async (settings: NewTabState | null, { getState }): Promise<NewTabState> => {
+    const state = getState() as NewTabState;
+    const data: NewTabState = Object.assign(state, settings ?? defaultStore);
 
-    data.update.previousVersion = data.update.lastVersion;
+    if (!settings) {
+      data.update.previousVersion = data.update.lastVersion;
 
-    if (navigator.language) {
-      data.currentLanguage = navigator.language;
+      if (navigator.language) {
+        data.currentLanguage = navigator.language;
+      }
     }
 
     setDataToChromeSyncStorage(data);

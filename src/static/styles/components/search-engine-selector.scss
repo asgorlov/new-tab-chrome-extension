@@ -1,0 +1,59 @@
+@import "../modules/constants.module";
+
+.new-tab__search-engine-selector {
+    display: flex;
+    position: inherit;
+    bottom: 10px;
+    height: max-content;
+    outline: 2px solid;
+    border-radius: 8px;
+    transition: outline-color $fast-transition;
+
+    &-scrollable {
+        display: inherit;
+        transition: background-color $slow-transition;
+        overflow-x: auto;
+        padding: 2px;
+        background-color: #ffffff80;
+        max-width: 360px;
+
+        &::-webkit-scrollbar {
+            height: 0;
+        }
+
+        &.dark {
+            background-color: #292c3580;
+        }
+    }
+
+    &-left-button,
+    &-right-button {
+        transition: $fast-transition;
+        cursor: pointer;
+        border: 0;
+        width: 24px;
+        padding: 0;
+    }
+
+    &-left-button {
+        border-radius: 6px 0 0 6px;
+    }
+
+    &-right-button {
+        border-radius: 0 6px 6px 0;
+    }
+
+    &-droppable-aria {
+        display: inherit;
+    }
+
+    &-item {
+        width: 32px;
+        height: 32px;
+        margin: 2px;
+        border-radius: 4px;
+        transition: filter $slow-transition, background-image $fast-transition;
+        filter: grayscale(100%);
+        background-size: cover;
+    }
+}

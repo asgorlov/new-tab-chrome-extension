@@ -1,0 +1,45 @@
+@import "../../modules/constants.module";
+
+.new-tab__settings-menu_language {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  padding-inline-start: 12px;
+  border-top: 1px solid $light-border-color;
+  transition: border-color $slow-transition, color $fast-transition;
+  border-bottom: 1px solid $light-border-color;
+
+  &.dark {
+    border-color: $dark-border-color;
+    color: $light-color;
+
+    svg {
+      stroke: $light-color;
+    }
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+
+  &-selector {
+    text-align: end;
+    width: max-content;
+    padding: 0 12px;
+  }
+
+  &-dropdown-item {
+    text-align: end;
+  }
+
+  svg {
+    transition: $fast-transition;
+  }
+}

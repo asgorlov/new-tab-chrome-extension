@@ -9,33 +9,32 @@ import {
   LIGHT_INPUT_NAME
 } from "../../../../constants/wallpaper.constants";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
-import { useTranslation } from "react-i18next";
-import { CustomWallpaper } from "../../../../models/custom-wallpaper.model";
 import {
   convertImgToBase64,
   getInitialFileList,
-  getInitialOneToBoth,
-  getUploadingErrorKey
+  getInitialOneToBoth
 } from "../../../../utils/wallpaper.utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCustomWallpaper,
+  selectIsDark,
+  selectSearchEngine,
+  selectWallpaper
+} from "../../../../store/new-tab/new-tab.selectors";
+import {
+  setCustomWallpaper,
+  setWallpaper
+} from "../../../../store/new-tab/new-tab.slice";
+import { AppDispatch } from "../../../../store/store";
 
-export interface WallpaperSettingContainerProps {
-  isDark: boolean;
-  wallpaper: string;
-  searchEngine: string;
-  customWallpaper: CustomWallpaper | null;
-  setWallpaper: (wallpaper: string) => void;
-  setCustomWallpaper: (customWallpaper: CustomWallpaper | null) => void;
-}
+const WallpaperSettingContainer: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
 
-const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
-  isDark,
-  wallpaper,
-  searchEngine,
-  customWallpaper,
-  setWallpaper,
-  setCustomWallpaper
-}) => {
-  const { t } = useTranslation();
+  const isDark = useSelector(selectIsDark);
+  const wallpaper = useSelector(selectWallpaper);
+  const searchEngine = useSelector(selectSearchEngine);
+  const customWallpaper = useSelector(selectCustomWallpaper);
+
   const [open, setOpen] = useState(false);
   const [oneToBoth, setOneToBoth] = useState(
     getInitialOneToBoth(customWallpaper)
@@ -61,39 +60,47 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
       if (name === CUSTOM_WALLPAPER) {
         setOpen(true);
       } else {
-        setCustomWallpaper(null);
+        dispatch(setCustomWallpaper(null));
         setUploadedWallpaper(null);
         setDarkFileList([]);
         setLightFileList([]);
         setOneToBoth(true);
       }
 
-      setWallpaper(name);
+      dispatch(setWallpaper(name));
     },
-    [setWallpaper, setCustomWallpaper]
+    [dispatch]
   );
+
   const handleClickCheckbox = useCallback(
     () => setOneToBoth(!oneToBoth),
     [oneToBoth]
   );
+
   const handleRemoveUpload = useCallback(
     (inputName: string) => {
       switch (inputName) {
         case BOTH_INPUT_NAME:
           setLightFileList([]);
           setUploadedWallpaper(null);
+          setUploadingErrors([]);
           break;
         case LIGHT_INPUT_NAME:
           setLightFileList([]);
           setUploadedWallpaper({ ...uploadedWallpaper, lightTheme: undefined });
+          uploadingErrors[0] = null;
+          setUploadingErrors([...uploadingErrors]);
           break;
         case DARK_INPUT_NAME:
           setDarkFileList([]);
           setUploadedWallpaper({ ...uploadedWallpaper, darkTheme: undefined });
+          uploadingErrors[1] = null;
+          setUploadingErrors([...uploadingErrors]);
       }
     },
-    [uploadedWallpaper]
+    [uploadedWallpaper, uploadingErrors]
   );
+
   const handleChangeUpload = useCallback(
     async (info: UploadChangeParam, inputName: string) => {
       const file = info.file as UploadFile;
@@ -144,25 +151,16 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
     },
     [uploadedWallpaper, uploadingErrors]
   );
-  const handleUpload = useCallback(
-    (options: any) => {
-      const errorKey = getUploadingErrorKey(options.file);
-      if (errorKey) {
-        options.onError(new Error(t(errorKey)));
-      } else {
-        options.onSuccess(options.file);
-      }
-    },
-    [t]
-  );
+
   const handleCancel = useCallback(() => setOpen(false), []);
+
   const handleOk = useCallback(() => {
     if (uploadedWallpaper) {
-      setCustomWallpaper(uploadedWallpaper);
+      dispatch(setCustomWallpaper(uploadedWallpaper));
     }
 
     handleCancel();
-  }, [handleCancel, uploadedWallpaper, setCustomWallpaper]);
+  }, [handleCancel, uploadedWallpaper, dispatch]);
 
   return (
     <WallpaperSettingComponent
@@ -171,7 +169,6 @@ const WallpaperSettingContainer: FC<WallpaperSettingContainerProps> = ({
       onChangeUpload={handleChangeUpload}
       onRemoveUpload={handleRemoveUpload}
       uploadingErrors={uploadingErrors}
-      customRequest={handleUpload}
       lightFileList={lightFileList}
       darkFileList={darkFileList}
       searchEngine={searchEngine}

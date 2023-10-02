@@ -1,15 +1,15 @@
 import i18n from "../localizations/i18n";
-import { NewTabState } from "../models/new-tab-state.model";
+import { NewTabStateBase } from "../models/new-tab-state.model";
 import { updateStateWithFeatures } from "./update.utils";
 import defaultStore from "../constants/default-store.constants";
 import { ChromeStorage } from "../models/chrome-storage.model";
 
 /**
- * Асинхронный метод для получения начальных данных стейта из браузера
+ * Асинхронная функция для получения начальных данных стейта из браузера
  * @category Utilities - Chrome
- * @returns - начальные данные {@link NewTabState}
+ * @returns - Начальные данные {@link NewTabStateBase}
  */
-export const getInitStateFromChrome = async (): Promise<NewTabState> => {
+export const getInitStateFromChrome = async (): Promise<NewTabStateBase> => {
   const data = await getDataFromChrome();
 
   if (!data.currentLanguage) {
@@ -24,18 +24,18 @@ export const getInitStateFromChrome = async (): Promise<NewTabState> => {
 };
 
 /**
- * Асинхронный метод для получения данных из всех хранилищ браузера
+ * Асинхронная функция для получения данных из всех хранилищ браузера
  * @category Utilities - Chrome
- * @returns - сохраненные в браузере данные {@link NewTabState}
+ * @returns - Сохраненные в браузере данные {@link NewTabStateBase}
  */
-export const getDataFromChrome = async (): Promise<NewTabState> => {
+export const getDataFromChrome = async (): Promise<NewTabStateBase> => {
   let data;
   if (chrome?.storage) {
-    data = (await chrome.storage.sync.get(defaultStore)) as NewTabState;
+    data = (await chrome.storage.sync.get(defaultStore)) as NewTabStateBase;
     const localData = (await chrome.storage.local.get({
       showTour: true,
       customWallpaper: null
-    })) as NewTabState;
+    })) as NewTabStateBase;
 
     data.showTour = localData.showTour;
     data.customWallpaper = localData.customWallpaper;
@@ -47,10 +47,10 @@ export const getDataFromChrome = async (): Promise<NewTabState> => {
 };
 
 /**
- * Метод для сохранения данных в синхронизируемое хранилище браузера
+ * Функция для сохранения данных в синхронизируемое хранилище браузера
  * @category Utilities - Chrome
- * @param items - сохраняемые объекты
- * @returns - <b>true</b>, если данные удалось сохранить
+ * @param items - Сохраняемые объекты
+ * @returns - <b>True</b>, если данные удалось сохранить
  */
 export const setDataToChromeSyncStorage = (items: ChromeStorage): boolean => {
   if (chrome?.storage) {
@@ -63,10 +63,10 @@ export const setDataToChromeSyncStorage = (items: ChromeStorage): boolean => {
 };
 
 /**
- * Метод для сохранения данных в локальное хранилище браузера
+ * Функция для сохранения данных в локальное хранилище браузера
  * @category Utilities - Chrome
- * @param items - сохраняемые объекты
- * @returns - <b>true</b>, если данные удалось сохранить
+ * @param items - Сохраняемые объекты
+ * @returns - <b>True</b>, если данные удалось сохранить
  */
 export const setDataToChromeLocalStorage = (items: ChromeStorage): boolean => {
   if (chrome?.storage) {

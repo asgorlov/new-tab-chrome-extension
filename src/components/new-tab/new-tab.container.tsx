@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect } from "react";
+import React, { FC, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setIsDark } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
@@ -11,34 +11,40 @@ import {
   SYSTEM
 } from "../../constants/search-engine.constants";
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
-import { useTranslation } from "react-i18next";
 import {
-  selectCustomWallpaper,
+  selectCheckForUpdates,
   selectDarkMode,
-  selectIsDark,
+  selectLastUpdateDate,
   selectNightPeriod,
-  selectSearchEngine,
-  selectShowTour,
-  selectWallpaper
+  selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
-import { getNightPeriodByLocation } from "../../store/new-tab/new-tab.thunks";
+import {
+  checkUpdates,
+  getNightPeriodByLocation
+} from "../../store/new-tab/new-tab.thunks";
+import { shouldBeCheck } from "../../utils/update.utils";
 
 const NewTabContainer: FC = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-  const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
-  const showTour = useSelector(selectShowTour);
-  const wallpaper = useSelector(selectWallpaper);
+  const checkMode = useSelector(selectCheckForUpdates);
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
-  const customWallpaper = useSelector(selectCustomWallpaper);
+  const lastUpdateDate = useSelector(selectLastUpdateDate);
+
+  const theme = {
+    token: {
+      colorPrimary: SEARCH_THEMES[searchEngine]
+    }
+  };
 
   useLayoutEffect(() => {
-    document.title = t("tabTitle");
-  }, [t]);
+    if (shouldBeCheck(lastUpdateDate, checkMode)) {
+      dispatch(checkUpdates());
+    }
+  }, [checkMode, lastUpdateDate, dispatch]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     switch (darkMode) {
       case AUTO:
         const now = new Date();
@@ -79,19 +85,8 @@ const NewTabContainer: FC = () => {
   }, [nightPeriod, darkMode, dispatch]);
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: SEARCH_THEMES[searchEngine]
-        }
-      }}
-    >
-      <NewTabComponent
-        isDark={isDark}
-        showTour={showTour}
-        wallpaper={wallpaper}
-        customWallpaper={customWallpaper}
-      />
+    <ConfigProvider theme={theme}>
+      <NewTabComponent />
     </ConfigProvider>
   );
 };

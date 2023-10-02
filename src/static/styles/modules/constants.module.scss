@@ -1,0 +1,42 @@
+$dark-color: #292c35;
+$dark-border-color: #525252;
+$light-border-color: #d9d9d9;
+$light-color: #fff;
+$light-background-color: #ffffff0f;
+$disabled-text-color: #FFFFFF3F;
+$disabled-background-color: #FFFFFF0A;
+$input-placeholder-color: #9aa0a6;
+$ya-color: #fc0;
+$aol-color: #2f9aff;
+$youcom-color: #4153fe;
+$gibiru-color: #fc243b;
+$goo-color: #4285f4;
+$duck-color: #DE5833;
+$bing-color: #007DAA;
+$brave-color: #ff2000;
+$yahoo-color: #6001d2;
+$lycos-color: #2e5d9a;
+$nigma-color: #74B61D;
+$cows-color: #dc2f2f;
+$ecosia-color: #008009;
+
+$slow-transition: 1s;
+$fast-transition: 0.5s;
+
+:export {
+  darkColor: $dark-color;
+  lightColor: $light-color;
+  yaColor: $ya-color;
+  aolColor: $aol-color;
+  youcomColor: $youcom-color;
+  gibiruColor: $gibiru-color;
+  gooColor: $goo-color;
+  duckColor: $duck-color;
+  bingColor: $bing-color;
+  braveColor: $brave-color;
+  yahooColor: $yahoo-color;
+  lycosColor: $lycos-color;
+  nigmaColor: $nigma-color;
+  cowsColor: $cows-color;
+  ecosiaColor: $ecosia-color;
+}

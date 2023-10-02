@@ -1,0 +1,34 @@
+@import "../../modules/constants.module";
+
+.new-tab__upload {
+  &-error-message {
+    margin-top: 2px;
+    margin-left: 6px;
+    font-size: 0.75em;
+    color: red;
+  }
+
+  &.dark {
+    .new-tab__upload-button {
+      background-color: $dark-color;
+      border-color: $dark-border-color;
+
+      span {
+        color: $light-color;
+      }
+    }
+
+    &>.ant-upload-wrapper>.ant-upload-list>.ant-upload-list-item-container>.ant-upload-list-item {
+      border-color: $dark-border-color;
+      color: $light-color;
+
+      &>.ant-upload-list-item-thumbnail svg path:first-child {
+        fill: $dark-color;
+      }
+
+      &:not(.ant-upload-list-item-error) svg {
+        fill: $light-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import "../modules/constants.module";
+
+.new-tab__tour {
+  transition: background-color $slow-transition, color $slow-transition;
+  max-width: 450px;
+
+  &_dark {
+    color: $light-color;
+
+    &>.new-tab__tour_dark-arrow:before {
+      background-color: $dark-color;
+    }
+
+    &>.new-tab__tour_dark-content>.new-tab__tour_dark-inner {
+      background-color: $dark-color;
+
+      &>.new-tab__tour_dark-footer {
+        &>.new-tab__tour_dark-indicators>.new-tab__tour_dark-indicator:not(.new-tab__tour_dark-indicator-active) {
+          background-color: $light-color;
+        }
+
+        &>.new-tab__tour_dark-buttons>.new-tab__tour_dark-prev-btn {
+          background-color: $dark-color;
+
+          span {
+            color: $light-color;
+          }
+        }
+      }
+
+      svg {
+        fill: $light-color;
+      }
+    }
+  }
+}
