@@ -1,7 +1,4 @@
 import type { Configuration as WebpackConfig } from "webpack";
-import type { EntryObject } from "webpack";
-
-const path = require("path");
 
 export default module.exports = {
   webpack: {
@@ -13,12 +10,6 @@ export default module.exports = {
           filename: "static/js/[name].bundle.js"
         };
       }
-
-      // Adding new scripts to index.html
-      webpackConfig.entry = {
-        init: path.resolve(__dirname, "./src/init/init.ts"),
-        main: webpackConfig.entry
-      } as EntryObject;
 
       // Adding the ability to insert "await" into a top-level script
       webpackConfig.experiments = {
