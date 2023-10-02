@@ -11,7 +11,6 @@ import {
   SYSTEM
 } from "../../constants/search-engine.constants";
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
-import { useTranslation } from "react-i18next";
 import {
   selectCheckForUpdates,
   selectDarkMode,
@@ -26,7 +25,6 @@ import {
 import { shouldBeCheck } from "../../utils/update.utils";
 
 const NewTabContainer: FC = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const darkMode = useSelector(selectDarkMode);
   const checkMode = useSelector(selectCheckForUpdates);
@@ -39,10 +37,6 @@ const NewTabContainer: FC = () => {
       colorPrimary: SEARCH_THEMES[searchEngine]
     }
   };
-
-  useLayoutEffect(() => {
-    document.title = t("tabTitle");
-  }, [t]);
 
   useLayoutEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {

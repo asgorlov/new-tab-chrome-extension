@@ -23,11 +23,6 @@ $ecosia-color: #008009;
 $slow-transition: 1s;
 $fast-transition: 0.5s;
 
-@font-face {
-  font-family: "Duckduck";
-  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format('woff');
-}
-
 :export {
   darkColor: $dark-color;
   lightColor: $light-color;
