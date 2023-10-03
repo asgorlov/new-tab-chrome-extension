@@ -9,6 +9,7 @@ import {
   GIBIRU,
   GOOGLE,
   LYCOS,
+  METAGER,
   NIGMA,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -27,6 +28,7 @@ import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo
 import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave-search-icon.svg";
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
+import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { useSelector } from "react-redux";
 import { TourContext } from "../../contexts/tour.context";
 import {
@@ -81,6 +83,8 @@ const SearchEngineContainer: FC = () => {
         return <EcosiaSearchIcon />;
       case SEARCHCRYPT:
         return <span />;
+      case METAGER:
+        return <MetagerSearchIcon />;
       default:
         return <></>;
     }

@@ -70,6 +70,10 @@
       @include common-setting-btn-hover-color($searchcrypt-color);
     }
 
+    &.metager {
+      @include common-setting-btn-hover-color($metager-color);
+    }
+
     &.dark {
       button {
         color: $light-color;

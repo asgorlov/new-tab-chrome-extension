@@ -5,6 +5,7 @@
   "searchButton": "Search",
   "noTracking": "No tracking",
   "anonymous": "Anonymous",
+  "withoutAds": "Set up ad-free search",
   "familyFriendly": "Family-friendly",
   "darkModeTitle": "Dark mode",
   "uploadTitle": "Upload",
@@ -79,6 +80,8 @@
     "google": "Google",
     "yandex": "Yandex",
     "ecosia": "Ecosia",
+    "searchcrypt": "Search Encrypt",
+    "metager": "Metager",
     "selectAll": "Select all",
     "removeAll": "Remove all"
   },
