@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo } from "react";
+import React, { FC, useCallback, useContext, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
@@ -86,12 +86,21 @@ const SearchEngineContainer: FC = () => {
     }
   }, [searchEngine, isDark, t]);
 
+  const setContainerRef = useCallback(
+    (ref: HTMLDivElement | null) => {
+      if (tourCtx) {
+        tourCtx.searchEngineRef.current = ref;
+      }
+    },
+    [tourCtx]
+  );
+
   return (
     <SearchEngineComponent
+      setContainerRef={setContainerRef}
       currentLanguage={currentLanguage}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
-      tourCtx={tourCtx}
       isDark={isDark}
     />
   );

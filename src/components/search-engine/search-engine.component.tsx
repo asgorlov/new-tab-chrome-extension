@@ -15,22 +15,21 @@ import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/sw
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
-import { TourContextModel } from "../../models/tour-context.model";
 
 /**
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
+ * @property setContainerRef - Функция для установки рефа контейнера компонента поисковой системы с полем ввода с логотипом
  * @property currentLanguage - Текущий язык
  * @property searchEngine - Выбранная поисковая система
  * @property buttonLabel - Содержимое внутри кнопки
- * @property tourCtx - Модель контекста ознакомительно тура
  * @property isDark - Флаг темной темы
  * @interface
  */
 export interface SearchEngineProps {
+  setContainerRef: (ref: HTMLDivElement | null) => void;
   currentLanguage: string;
   searchEngine: string;
   buttonLabel: ReactNode;
-  tourCtx?: TourContextModel;
   isDark: boolean;
 }
 
@@ -39,40 +38,44 @@ export interface SearchEngineProps {
  * @category Components
  */
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
-  ({ currentLanguage, searchEngine, buttonLabel, tourCtx, isDark }) => {
+  ({ setContainerRef, currentLanguage, searchEngine, buttonLabel, isDark }) => {
     const { t } = useTranslation();
 
-    const setRef = (ref: HTMLDivElement | null) => {
-      if (tourCtx) {
-        tourCtx.searchEngineRef.current = ref;
-      }
-    };
+    const getSearchEngineLogoClass = (): string =>
+      clsx(
+        "new-tab__search-engine_logo",
+        searchEngine,
+        { en: searchEngine === YANDEX && currentLanguage !== "ru" },
+        { dark: isDark }
+      );
+
+    const getSearchEngineFormClass = (): string =>
+      clsx("new-tab__search-engine_form", searchEngine, {
+        dark: isDark
+      });
+
+    const getSearchEngineInputClass = (): string =>
+      clsx("new-tab__search-engine_input", searchEngine, {
+        dark: isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
+      });
+
+    const getSearchEngineFormBackgroundClass = (): string =>
+      clsx("new-tab__search-engine_form-background", searchEngine, {
+        dark: isDark
+      });
 
     return (
       <div className="new-tab__search-engine">
-        <div className="new-tab__search-engine-container" ref={setRef}>
+        <div className="new-tab__search-engine-container" ref={setContainerRef}>
           <Link
-            className={clsx(
-              "new-tab__search-engine_logo",
-              searchEngine,
-              { en: searchEngine === YANDEX && currentLanguage !== "ru" },
-              { dark: isDark }
-            )}
+            className={getSearchEngineLogoClass()}
             href={SEARCH_ENGINE_LINKS[searchEngine]}
           />
-          <div
-            className={clsx(
-              "new-tab__search-engine_form-background",
-              searchEngine,
-              { dark: isDark }
-            )}
-          >
+          <div className={getSearchEngineFormBackgroundClass()}>
             <div
               className={clsx(
                 "new-tab__search-engine_form-background-text-group",
-                {
-                  dark: isDark
-                }
+                { dark: isDark }
               )}
             >
               <div className="new-tab__search-engine_form-background-text-item">
@@ -90,16 +93,11 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             </div>
           </div>
           <form
-            className={clsx("new-tab__search-engine_form", searchEngine, {
-              dark: isDark
-            })}
+            className={getSearchEngineFormClass()}
             action={SEARCH_QUERY_LINKS[searchEngine]}
           >
             <Input
-              className={clsx("new-tab__search-engine_input", searchEngine, {
-                dark:
-                  isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
-              })}
+              className={getSearchEngineInputClass()}
               placeholder={t("searchQuery")}
               tabIndex={1}
               autoComplete="off"
