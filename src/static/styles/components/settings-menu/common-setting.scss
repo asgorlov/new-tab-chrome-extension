@@ -1,5 +1,16 @@
 @import "../../modules/constants.module";
-@import "../../modules/mixins.module";
+
+@mixin common-setting-btn-hover-color($color) {
+  .new-tab__settings-menu_common {
+    &-export-btn,
+    &-import-btn,
+    &-reset-btn {
+      &:hover {
+        color: $color;
+      }
+    }
+  }
+}
 
 .new-tab__settings-menu_common {
   &-buttons-group {
@@ -53,6 +64,10 @@
 
     &.ecosia {
       @include common-setting-btn-hover-color($ecosia-color);
+    }
+
+    &.searchcrypt {
+      @include common-setting-btn-hover-color($searchcrypt-color);
     }
 
     &.dark {

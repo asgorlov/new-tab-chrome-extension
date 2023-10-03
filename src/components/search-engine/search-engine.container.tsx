@@ -10,6 +10,7 @@ import {
   GOOGLE,
   LYCOS,
   NIGMA,
+  SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -78,6 +79,8 @@ const SearchEngineContainer: FC = () => {
         return <span>{t("searchButton") + "!"}</span>;
       case ECOSIA:
         return <EcosiaSearchIcon />;
+      case SEARCHCRYPT:
+        return <span />;
       default:
         return <></>;
     }

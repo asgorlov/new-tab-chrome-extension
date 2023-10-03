@@ -9,6 +9,7 @@ import {
   LYCOS,
   NIGMA,
   SEARCH_THEMES,
+  SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -129,6 +130,7 @@ export const getDraggedStyle = (
     case YOUCOM:
     case NIGMA:
     case ECOSIA:
+    case SEARCHCRYPT:
       if (searchEngine === itemName) {
         Object.assign(style, { filter: "grayscale(0)" });
       }

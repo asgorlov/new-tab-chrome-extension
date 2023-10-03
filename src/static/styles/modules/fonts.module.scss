@@ -1,4 +1,9 @@
 @font-face {
   font-family: "Duckduck";
-  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format('woff');
+  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SearchCrypt";
+  src: local("SearchCrypt"), url("../../fonts/fa-solid-900.woff") format("woff");
 }

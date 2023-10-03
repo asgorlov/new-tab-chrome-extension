@@ -33,8 +33,15 @@ export const SEARCH_ENGINE_NAMES = [
   "gibiru",
   "lycos",
   "nigma",
-  "ecosia"
+  "ecosia",
+  "searchcrypt"
 ];
+
+/**
+ * Поисковая система Search Crypt
+ * @category Constants - Search Engine
+ */
+export const SEARCHCRYPT = SEARCH_ENGINE_NAMES[13];
 
 /**
  * Поисковая система Ecosia
@@ -119,7 +126,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   gibiru: "https://gibiru.com/",
   google: "https://google.com/",
   swisscows: "https://swisscows.com/",
-  duckduckgo: "https://duckduckgo.com/"
+  duckduckgo: "https://duckduckgo.com/",
+  searchcrypt: "https://searchencrypt.com/home"
 };
 
 /**
@@ -139,7 +147,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   gibiru: "https://gibiru.com/results.html",
   google: "https://google.com/search",
   swisscows: "https://swisscows.com/web",
-  duckduckgo: "https://duckduckgo.com"
+  duckduckgo: "https://duckduckgo.com",
+  searchcrypt: "https://searchencrypt.com/search"
 };
 
 /**
@@ -159,5 +168,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   gibiru: constants.gibiruColor,
   google: constants.gooColor,
   swisscows: constants.cowsColor,
-  duckduckgo: constants.duckColor
+  duckduckgo: constants.duckColor,
+  searchcrypt: constants.searchcryptColor
 };
