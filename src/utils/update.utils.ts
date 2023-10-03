@@ -7,6 +7,7 @@ import {
   GIBIRU,
   LYCOS,
   NIGMA,
+  SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
   YOUCOM
@@ -91,54 +92,26 @@ const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {
-  if (previousVersion <= "2.2.0") {
-    return {
-      searchEngines: [
-        BING,
-        YAHOO,
-        BRAVE,
-        SWISSCOWS,
-        AOL,
-        YOUCOM,
-        GIBIRU,
-        LYCOS,
-        NIGMA
-      ]
-    };
+  const searchEngines = [];
+
+  if (previousVersion < "2.3.0" && lastVersion >= "2.3.0") {
+    searchEngines.push(BING);
+  }
+  if (previousVersion < "2.4.0" && lastVersion >= "2.4.0") {
+    searchEngines.push(YAHOO);
+  }
+  if (previousVersion < "3.0.1" && lastVersion >= "3.0.1") {
+    searchEngines.push(GIBIRU, YOUCOM, AOL, SWISSCOWS, BRAVE);
+  }
+  if (previousVersion < "3.1.0" && lastVersion >= "3.1.0") {
+    searchEngines.push(LYCOS, NIGMA);
+  }
+  if (previousVersion < "3.3.0" && lastVersion >= "3.3.0") {
+    searchEngines.push(ECOSIA);
+  }
+  if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
+    searchEngines.push(SEARCHCRYPT);
   }
 
-  if (previousVersion === "2.3.0") {
-    return {
-      searchEngines: [
-        YAHOO,
-        BRAVE,
-        SWISSCOWS,
-        AOL,
-        YOUCOM,
-        GIBIRU,
-        LYCOS,
-        NIGMA
-      ]
-    };
-  }
-
-  if (previousVersion === "2.4.0") {
-    return {
-      searchEngines: [BRAVE, SWISSCOWS, AOL, YOUCOM, GIBIRU, LYCOS, NIGMA]
-    };
-  }
-
-  if (previousVersion <= "3.0.2") {
-    return {
-      searchEngines: [LYCOS, NIGMA]
-    };
-  }
-
-  if (previousVersion === "3.1.0") {
-    return {
-      searchEngines: [ECOSIA]
-    };
-  }
-
-  return { searchEngines: [] };
+  return { searchEngines };
 };

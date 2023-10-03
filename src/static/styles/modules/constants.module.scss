@@ -6,6 +6,7 @@ $light-background-color: #ffffff0f;
 $disabled-text-color: #FFFFFF3F;
 $disabled-background-color: #FFFFFF0A;
 $input-placeholder-color: #9aa0a6;
+
 $ya-color: #fc0;
 $aol-color: #2f9aff;
 $youcom-color: #4153fe;
@@ -19,9 +20,13 @@ $lycos-color: #2e5d9a;
 $nigma-color: #74B61D;
 $cows-color: #dc2f2f;
 $ecosia-color: #008009;
+$searchcrypt-color: #1c8adb;
 
 $slow-transition: 1s;
 $fast-transition: 0.5s;
+
+$search-engine-width: 40vw;
+$search-engine-max-width: 560px;
 
 :export {
   darkColor: $dark-color;
@@ -39,4 +44,5 @@ $fast-transition: 0.5s;
   nigmaColor: $nigma-color;
   cowsColor: $cows-color;
   ecosiaColor: $ecosia-color;
+  searchcryptColor: $searchcrypt-color;
 }

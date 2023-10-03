@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo } from "react";
+import React, { FC, useCallback, useContext, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
@@ -10,6 +10,7 @@ import {
   GOOGLE,
   LYCOS,
   NIGMA,
+  SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
   YANDEX,
@@ -78,17 +79,28 @@ const SearchEngineContainer: FC = () => {
         return <span>{t("searchButton") + "!"}</span>;
       case ECOSIA:
         return <EcosiaSearchIcon />;
+      case SEARCHCRYPT:
+        return <span />;
       default:
         return <></>;
     }
   }, [searchEngine, isDark, t]);
 
+  const setContainerRef = useCallback(
+    (ref: HTMLDivElement | null) => {
+      if (tourCtx) {
+        tourCtx.searchEngineRef.current = ref;
+      }
+    },
+    [tourCtx]
+  );
+
   return (
     <SearchEngineComponent
+      setContainerRef={setContainerRef}
       currentLanguage={currentLanguage}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
-      tourCtx={tourCtx}
       isDark={isDark}
     />
   );
