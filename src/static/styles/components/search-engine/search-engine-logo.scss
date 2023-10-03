@@ -172,4 +172,12 @@
     margin-bottom: 12px;
     background-image: url("../../../svgs/searchcrypt/searchcrypt-logo.svg");
   }
+
+  &.metager {
+    transition: $fast-transition;
+    height: 44px;
+    width: 250px;
+    margin-bottom: 16px;
+    background-image: url("../../../svgs/metager/metager-logo.svg");
+  }
 }

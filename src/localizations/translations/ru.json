@@ -5,6 +5,7 @@
   "searchButton": "Найти",
   "noTracking": "Без отслеживания",
   "anonymous": "Анонимно",
+  "withoutAds": "Настройте поиск без рекламы",
   "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
   "uploadTitle": "Загрузить",
@@ -79,6 +80,8 @@
     "google": "Google",
     "yandex": "Яндекс",
     "ecosia": "Ecosia",
+    "searchcrypt": "Search Encrypt",
+    "metager": "Metager",
     "selectAll": "Выбрать все",
     "removeAll": "Убрать все"
   },

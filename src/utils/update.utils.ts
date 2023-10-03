@@ -6,6 +6,7 @@ import {
   ECOSIA,
   GIBIRU,
   LYCOS,
+  METAGER,
   NIGMA,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -110,7 +111,7 @@ const getDeltaChanges = (
     searchEngines.push(ECOSIA);
   }
   if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
-    searchEngines.push(SEARCHCRYPT);
+    searchEngines.push(SEARCHCRYPT, METAGER);
   }
 
   return { searchEngines };

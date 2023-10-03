@@ -14,6 +14,7 @@ import { Button, Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
+import { ReactComponent as KeyIcon } from "../../static/svgs/metager/metager-key-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
 
 /**
@@ -40,6 +41,23 @@ export interface SearchEngineProps {
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
   ({ setContainerRef, currentLanguage, searchEngine, buttonLabel, isDark }) => {
     const { t } = useTranslation();
+
+    const getInputPrefix = (): ReactNode => {
+      return (
+        <a
+          href="https://metager.org/keys/key/enter"
+          data-tooltip={t("withoutAds")}
+          className="new-tab__search-engine_input-prefix"
+        >
+          <KeyIcon
+            className={clsx(
+              "new-tab__search-engine_input-prefix-icon",
+              searchEngine
+            )}
+          />
+        </a>
+      );
+    };
 
     const getSearchEngineLogoClass = (): string =>
       clsx(
@@ -97,6 +115,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             action={SEARCH_QUERY_LINKS[searchEngine]}
           >
             <Input
+              prefix={getInputPrefix()}
               className={getSearchEngineInputClass()}
               placeholder={t("searchQuery")}
               tabIndex={1}

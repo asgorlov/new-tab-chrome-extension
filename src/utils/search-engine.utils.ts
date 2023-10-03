@@ -7,6 +7,7 @@ import {
   GIBIRU,
   GOOGLE,
   LYCOS,
+  METAGER,
   NIGMA,
   SEARCH_THEMES,
   SEARCHCRYPT,
@@ -31,6 +32,8 @@ export const getInputName = (searchEngine: string): string => {
     case SWISSCOWS:
     case NIGMA:
       return "query";
+    case METAGER:
+      return "eingabe";
     default:
       return "q";
   }
@@ -131,6 +134,7 @@ export const getDraggedStyle = (
     case NIGMA:
     case ECOSIA:
     case SEARCHCRYPT:
+    case METAGER:
       if (searchEngine === itemName) {
         Object.assign(style, { filter: "grayscale(0)" });
       }

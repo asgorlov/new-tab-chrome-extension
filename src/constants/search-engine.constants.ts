@@ -34,11 +34,18 @@ export const SEARCH_ENGINE_NAMES = [
   "lycos",
   "nigma",
   "ecosia",
-  "searchcrypt"
+  "searchcrypt",
+  "metager"
 ];
 
 /**
- * Поисковая система Search Crypt
+ * Поисковая система Metager
+ * @category Constants - Search Engine
+ */
+export const METAGER = SEARCH_ENGINE_NAMES[14];
+
+/**
+ * Поисковая система Search Encrypt
  * @category Constants - Search Engine
  */
 export const SEARCHCRYPT = SEARCH_ENGINE_NAMES[13];
@@ -127,7 +134,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   google: "https://google.com/",
   swisscows: "https://swisscows.com/",
   duckduckgo: "https://duckduckgo.com/",
-  searchcrypt: "https://searchencrypt.com/home"
+  searchcrypt: "https://searchencrypt.com/home",
+  metager: "https://metager.org/"
 };
 
 /**
@@ -148,7 +156,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   google: "https://google.com/search",
   swisscows: "https://swisscows.com/web",
   duckduckgo: "https://duckduckgo.com",
-  searchcrypt: "https://searchencrypt.com/search"
+  searchcrypt: "https://searchencrypt.com/search",
+  metager: "https://metager.org/meta/meta.ger3"
 };
 
 /**
@@ -169,5 +178,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   google: constants.gooColor,
   swisscows: constants.cowsColor,
   duckduckgo: constants.duckColor,
-  searchcrypt: constants.searchcryptColor
+  searchcrypt: constants.searchcryptColor,
+  metager: constants.metagerColor
 };
