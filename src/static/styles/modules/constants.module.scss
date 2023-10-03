@@ -24,6 +24,9 @@ $searchcrypt-color: #1c8adb;
 $slow-transition: 1s;
 $fast-transition: 0.5s;
 
+$search-engine-width: 40vw;
+$search-engine-max-width: 560px;
+
 :export {
   darkColor: $dark-color;
   lightColor: $light-color;

@@ -1,0 +1,99 @@
+@import "../../modules/constants.module";
+
+.new-tab__search-engine_form-background {
+  transition: $fast-transition;
+  background-image: url("../../../svgs/form-background.svg");
+  background-size: cover;
+  width: $search-engine-width;
+  max-width: $search-engine-max-width;
+  position: fixed;
+  z-index: -1;
+  top: calc(50% - 50px);
+  border-radius: 0;
+  min-height: 50px;
+  max-height: max-content;
+  opacity: 0;
+
+  &-text {
+    &-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 60px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      color: $light-color;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: "Arial", sans-serif;
+      margin-right: 16px;
+    }
+  }
+
+  svg {
+    margin-right: 4px;
+  }
+
+  &.swisscows {
+    background-image: url("../../../svgs/swisscows/swisscows-form-wrapper.svg");
+    border-radius: 20px;
+    padding: 0 36px 12px;
+    opacity: 1;
+
+    div {
+      opacity: 1;
+    }
+  }
+
+  &.lycos {
+    background: #C0C0C099 url("../../../svgs/form-background.svg");
+    top: calc(50% - 121px);
+    min-height: 101px;
+    max-height: 101px;
+    padding: 20px 12px 35px;
+    opacity: 1;
+
+    &.dark {
+      background: #FFFFFF99;
+    }
+  }
+
+  &.nigma {
+    transition: all $fast-transition, border-color $slow-transition;
+    background: #79ba2a url("../../../svgs/form-background.svg");
+    top: calc(50% - 62px);
+    padding: 0 20px;
+    border-radius: 20px;
+    min-height: 100px;
+    max-height: 100px;
+    opacity: 1;
+    border: solid 4px $light-color;
+    outline: solid 2px #dadada;
+
+    &.dark {
+      border: solid 4px $dark-color;
+    }
+  }
+
+  &.searchcrypt,
+  &.ecosia,
+  &.nigma,
+  &.yandex,
+  &.google,
+  &.duckduckgo,
+  &.bing,
+  &.yahoo,
+  &.brave,
+  &.aol,
+  &.youcom,
+  &.gibiru,
+  &.lycos {
+    div {
+      transition: $fast-transition;
+      opacity: 0;
+    }
+  }
+}

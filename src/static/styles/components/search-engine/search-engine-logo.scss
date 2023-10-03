@@ -1,0 +1,175 @@
+@import "../../modules/constants.module";
+
+.new-tab__search-engine_logo {
+  display: flex;
+  background-repeat: no-repeat;
+
+  &.yandex {
+    transition: $fast-transition;
+    height: 49px;
+    width: 162px;
+    margin-bottom: 8px;
+    background-image: url("../../../svgs/yandex/ya-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/yandex/ya-logo-dark.svg");
+    }
+
+    &.en {
+      transition: $fast-transition;
+      height: 41px;
+      width: 162px;
+      background-image: url("../../../svgs/yandex/ya-logo-en.svg");
+
+      &.dark {
+        transition: $fast-transition;
+        background-image: url("../../../svgs/yandex/ya-logo-en-dark.svg");
+      }
+    }
+  }
+
+  &.google {
+    transition: $fast-transition;
+    height: 68px;
+    width: 205px;
+    margin-bottom: 6px;
+    background-image: url("../../../svgs/google/google-logo.svg");
+  }
+
+  &.duckduckgo {
+    transition: $fast-transition;
+    height: 163px;
+    width: 205px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/duckduckgo/duckduckgo-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/duckduckgo/duckduckgo-logo-dark.svg");
+    }
+  }
+
+  &.bing {
+    transition: $fast-transition;
+    height: 32px;
+    width: 205px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/bing/bing-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/bing/bing-logo-dark.svg");
+    }
+  }
+
+  &.yahoo {
+    transition: $fast-transition;
+    height: 59px;
+    width: 205px;
+    margin-bottom: 6px;
+    background-image: url("../../../svgs/yahoo/yahoo-logo.svg");
+  }
+
+  &.brave {
+    transition: $fast-transition;
+    height: 66px;
+    width: 205px;
+    margin-bottom: 6px;
+    background-image: url("../../../svgs/brave/brave-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/brave/brave-logo-dark.svg");
+    }
+  }
+
+  &.swisscows {
+    transition: $fast-transition;
+    height: 75px;
+    width: 205px;
+    margin-bottom: 10px;
+    background-image: url("../../../svgs/swisscows/swisscows-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/swisscows/swisscows-logo-dark.svg");
+    }
+  }
+
+  &.aol {
+    transition: $fast-transition;
+    height: 41px;
+    width: 103px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/aol/aol-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/aol/aol-logo-dark.svg");
+    }
+  }
+
+  &.youcom {
+    transition: $fast-transition;
+    height: 62px;
+    width: 205px;
+    margin-bottom: 14px;
+    background-image: url("../../../svgs/youcom/youcom-logo.svg");
+  }
+
+  &.gibiru {
+    transition: $fast-transition;
+    height: 41px;
+    width: 205px;
+    margin-bottom: 10px;
+    background-image: url("../../../svgs/gibiru/gibiru-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/gibiru/gibiru-logo-dark.svg");
+    }
+  }
+
+  &.lycos {
+    transition: $fast-transition;
+    height: 45px;
+    width: 205px;
+    margin-bottom: 14px;
+    background-image: url("../../../svgs/lycos/lycos-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/lycos/lycos-logo-dark.svg");
+    }
+  }
+
+  &.nigma {
+    transition: $fast-transition;
+    height: 55px;
+    width: 205px;
+    margin-bottom: 32px;
+    background-image: url("../../../svgs/nigma/nigma-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/nigma/nigma-logo-dark.svg");
+    }
+  }
+
+  &.ecosia {
+    transition: $fast-transition;
+    height: 40px;
+    width: 140px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/ecosia/ecosia-logo.svg");
+  }
+
+  &.searchcrypt {
+    transition: $fast-transition;
+    height: 94px;
+    width: 300px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/searchcrypt/searchcrypt-logo.svg");
+  }
+}

@@ -1,0 +1,17 @@
+@import "../../modules/constants.module";
+
+.new-tab__search-engine {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 50vh;
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: $search-engine-width;
+        max-width: $search-engine-max-width;
+    }
+}

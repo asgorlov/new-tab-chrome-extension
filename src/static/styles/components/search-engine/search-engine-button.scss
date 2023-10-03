@@ -1,0 +1,344 @@
+@import "../../modules/constants.module";
+@import "../../modules/fonts.module";
+
+.new-tab__search-engine_button {
+  height: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &.yandex {
+    transition: $fast-transition;
+    border-radius: 0 10px 10px 0;
+    width: 100px;
+    border: none transparent;
+    right: 0;
+
+    & span {
+      transition: $fast-transition;
+      font: 18px Arial, Helvetica, sans-serif;
+      padding: 0 18px;
+    }
+
+    &:focus {
+      background: #f0bf00;
+    }
+  }
+
+  &.google {
+    transition: $fast-transition;
+    border-radius: 0 24px 24px 0;
+    width: 48px;
+    border: none transparent;
+    right: 0;
+
+    & svg {
+      padding: 0 8px;
+    }
+
+    &.ant-btn-text:not(:disabled):hover {
+      background-color: #0000000A;
+    }
+  }
+
+  &.duckduckgo {
+    transition: $fast-transition;
+    border-radius: 0 4px 4px 0;
+    width: 50px;
+    border: none transparent;
+    right: 0;
+
+    & span {
+      transition: $fast-transition;
+      padding: 0 15px;
+      font: 18px Duckduck, emoji;
+      color: #999;
+    }
+
+    &.ant-btn-text:not(:disabled):hover {
+      background-color: #2950BF;
+      color: $light-color;
+    }
+  }
+
+  &.bing {
+    transition: $fast-transition;
+    border-radius: 0 24px 24px 0;
+    width: 40px;
+    border: none transparent;
+    right: 0;
+
+    &.ant-btn-text:not(:disabled):hover {
+      background-color: transparent;
+    }
+
+    & label {
+      display: flex;
+      cursor: pointer;
+
+      &.dark::before {
+        background-color: #d6d6d6;
+      }
+
+      &.dark::after {
+        color: #000000;
+        background-color: #d6d6d6;
+      }
+
+      &::before {
+        z-index: 3;
+        pointer-events: none;
+        transition: all .1s;
+        opacity: 0;
+        height: 10px;
+        width: 10px;
+        left: 50%;
+        background-color: #666;
+        transform: translate3d(-50%,50%,0) rotate(45deg);
+        top: calc(100% - 9px);
+        content: '';
+        position: absolute;
+      }
+
+      &::after {
+        z-index: 3;
+        pointer-events: none;
+        transition: all .1s;
+        opacity: 0;
+        font-size: .8125rem;
+        line-height: 150%;
+        white-space: nowrap;
+        top: 100%;
+        content: attr(aria-label) "";
+        color: #fff;
+        border-radius: 6px;
+        transform: translate3d(-50%,0,0);
+        left: 50%;
+        position: absolute;
+        padding: 10px 15px;
+        background-color: #666;
+      }
+
+      &:hover::before,
+      &:hover::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.yahoo {
+    transition: $fast-transition;
+    background-color: #188fff;
+    border-radius: 0 4px 4px 0;
+    width: 60px;
+    border: none transparent;
+    right: 0;
+
+    & svg path {
+      transition: $fast-transition;
+      fill: #fff;
+    }
+
+    &.ant-btn-text:not(:disabled):hover {
+      background-color: #0f69ff;
+    }
+
+    @media screen and (max-width: 1020px) {
+      transition: $fast-transition;
+      width: 80px;
+    }
+  }
+
+  &.brave {
+    transition: $fast-transition;
+    border-radius: 0 10px 10px 0;
+    width: 48px;
+    border: none transparent;
+    right: 0;
+
+    svg {
+      fill: $light-color;
+    }
+
+    &:hover {
+      background: linear-gradient(302.53deg,#4c54d2 0%,#bf14a2 56.25%,#f73a1c 100%);
+    }
+  }
+
+  &.swisscows {
+    transition: $fast-transition;
+    border-radius: 0 26px 26px 0;
+    margin: 0;
+    width: 40px;
+    border: none transparent;
+    right: 0;
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  &.aol {
+    transition: $fast-transition;
+    margin: 0;
+    width: 65px;
+    background: #524dfe;
+    border-radius: 0;
+    border: none transparent;
+    right: 0;
+
+    &:hover {
+      background: #524dfe;
+    }
+
+    .mag-glass {
+      color: white;
+      font-size: 0;
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      position: relative;
+      transform: scale(0.8);
+
+      .lens {
+        position: absolute;
+        border: 3px solid white;
+        width: 16px;
+        height: 16px;
+        background: transparent;
+        border-radius: 100px;
+      }
+
+      .handle {
+        position: absolute;
+        display: block;
+        background-color: white;
+        width: 16px;
+        height: 4px;
+        right: -5px;
+        bottom: 0;
+        top: 21px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &.youcom {
+    transition: $fast-transition;
+    border: none transparent;
+    border-radius: 0 24px 24px 0;
+    width: 40px;
+    right: 0;
+
+    &:hover {
+      background: none;
+    }
+
+    svg path {
+      fill: #808080;
+    }
+  }
+
+  &.gibiru {
+    transition: $fast-transition;
+    border: none transparent;
+    border-radius: 0 7px 7px 0;
+    width: 40px;
+    padding-right: 8px;
+    right: 0;
+
+    &:hover {
+      background: none;
+    }
+
+    svg {
+      transform: scale(0.9);
+    }
+  }
+
+  &.lycos {
+    transition: $fast-transition;
+    border: none transparent;
+    border-radius: 0 4px 4px 0;
+    width: 40px;
+    right: 0;
+
+    &:active,
+    &:hover {
+      background: none;
+    }
+  }
+
+  &.nigma {
+    transition: $fast-transition;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    width: 70px;
+    margin-left: 10px;
+    background: #DFFFBD;
+    font-size: 16px;
+    right: 0;
+
+    &:active,
+    &:hover {
+      background: #74B61D;
+      border-color: $light-color;
+      color: $light-color;
+    }
+  }
+
+  &.ecosia {
+    transition: all $fast-transition, outline 0.1s;
+    border: none transparent;
+    border-radius: 0 30px 30px 0;
+    width: 48px;
+    right: 0;
+
+    &:focus-within {
+      outline: 2px solid #0094c7;
+      outline-offset: 1px;
+      border-color: $ecosia-color;
+      background: $ecosia-color;
+
+      svg {
+        fill: $light-color;
+      }
+    }
+
+    &:hover {
+      background: #006600;
+
+      svg {
+        fill: $light-color;
+      }
+    }
+  }
+
+  &.searchcrypt {
+    transition: $fast-transition;
+    color: $light-color;
+    width: 60px;
+    border: 1px solid #337ab7;
+    border-radius: 6px;
+    right: 6px;
+    background: linear-gradient(to bottom, #4d90fe, #4787ed) repeat-x;
+    text-shadow: 0 1px rgba(0,0,0,0.12);
+    font-size: 26px;
+
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
+      color: $light-color;
+    }
+
+    span {
+      line-height: 1;
+      font-family: SearchCrypt, sans-serif;
+      font-weight: 900;
+
+      &::before {
+        content: "\f002";
+      }
+    }
+  }
+}
