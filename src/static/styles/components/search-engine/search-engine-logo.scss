@@ -188,4 +188,17 @@
     margin-bottom: 6px;
     background-image: url("../../../svgs/ask/ask-logo.svg");
   }
+
+  &.boardreader {
+    transition: $fast-transition;
+    height: 50px;
+    width: 238px;
+    margin-bottom: 12px;
+    background-image: url("../../../svgs/boardreader/boardreader-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/boardreader/boardreader-logo-dark.svg");
+    }
+  }
 }

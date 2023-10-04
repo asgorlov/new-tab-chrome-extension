@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactNode } from "react";
+import React, { FC, FormEvent, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
@@ -21,6 +21,7 @@ import { getInputName } from "../../utils/search-engine.utils";
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
  * @property setContainerRef - Функция для установки рефа контейнера компонента поисковой системы с полем ввода с логотипом
  * @property currentLanguage - Текущий язык
+ * @property onSubmitForm - Функция, вызываемая при сабмите поискового запроса
  * @property searchEngine - Выбранная поисковая система
  * @property buttonLabel - Содержимое внутри кнопки
  * @property isDark - Флаг темной темы
@@ -29,6 +30,7 @@ import { getInputName } from "../../utils/search-engine.utils";
 export interface SearchEngineProps {
   setContainerRef: (ref: HTMLDivElement | null) => void;
   currentLanguage: string;
+  onSubmitForm: (event: FormEvent<HTMLFormElement>) => void;
   searchEngine: string;
   buttonLabel: ReactNode;
   isDark: boolean;
@@ -39,7 +41,14 @@ export interface SearchEngineProps {
  * @category Components
  */
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
-  ({ setContainerRef, currentLanguage, searchEngine, buttonLabel, isDark }) => {
+  ({
+    setContainerRef,
+    currentLanguage,
+    onSubmitForm,
+    searchEngine,
+    buttonLabel,
+    isDark
+  }) => {
     const { t } = useTranslation();
 
     const getInputPrefix = (): ReactNode => {
@@ -113,6 +122,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
           <form
             className={getSearchEngineFormClass()}
             action={SEARCH_QUERY_LINKS[searchEngine]}
+            onSubmit={onSubmitForm}
           >
             <Input
               prefix={getInputPrefix()}
