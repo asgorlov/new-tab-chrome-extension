@@ -2,6 +2,7 @@ import {
   AOL,
   ASK,
   BING,
+  BOARDREADER,
   BRAVE,
   DUCK,
   ECOSIA,
@@ -10,6 +11,7 @@ import {
   LYCOS,
   METAGER,
   NIGMA,
+  SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -29,14 +31,15 @@ import { DraggingStyle, NotDraggingStyle } from "react-beautiful-dnd";
 export const getInputName = (searchEngine: string): string => {
   switch (searchEngine) {
     case YANDEX:
-      return "text";
+      return SEARCH_INPUT_NAMES[0];
     case SWISSCOWS:
     case NIGMA:
-      return "query";
+    case BOARDREADER:
+      return SEARCH_INPUT_NAMES[1];
     case METAGER:
-      return "eingabe";
+      return SEARCH_INPUT_NAMES[2];
     default:
-      return "q";
+      return SEARCH_INPUT_NAMES[3];
   }
 };
 
@@ -147,6 +150,7 @@ export const getDraggedStyle = (
     case LYCOS:
     case YAHOO:
     case ASK:
+    case BOARDREADER:
       Object.assign(style, { filter: "grayscale(0)" });
       url = require(`../static/svgs/${itemName}/${itemName}-icon${
         searchEngine !== itemName ? "-grey" : ""

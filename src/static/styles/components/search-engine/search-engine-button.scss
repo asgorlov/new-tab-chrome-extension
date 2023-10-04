@@ -158,12 +158,12 @@
     border: none transparent;
     right: 0;
 
-    svg {
-      fill: $light-color;
-    }
-
     &:hover {
       background: linear-gradient(302.53deg,#4c54d2 0%,#bf14a2 56.25%,#f73a1c 100%);
+
+      svg path {
+        fill: $light-color;
+      }
     }
   }
 
@@ -184,13 +184,13 @@
     transition: $fast-transition;
     margin: 0;
     width: 65px;
-    background: #524dfe;
+    background: $aol-color;
     border-radius: 0;
     border: none transparent;
     right: 0;
 
-    &:hover {
-      background: #524dfe;
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
+      background-color: $aol-color;
     }
 
     .mag-glass {
@@ -281,11 +281,18 @@
     font-size: 16px;
     right: 0;
 
+    span {
+      transition: $fast-transition;
+    }
+
     &:active,
     &:hover {
       background: #74B61D;
       border-color: $light-color;
-      color: $light-color;
+
+      span {
+        color: $light-color;
+      }
     }
   }
 
@@ -307,12 +314,12 @@
       }
     }
 
-    &:hover {
-      background: #006600;
+    &:hover svg {
+      fill: $light-color;
+    }
 
-      svg {
-        fill: $light-color;
-      }
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
+      background-color: #006600;
     }
   }
 
@@ -326,6 +333,7 @@
     background: linear-gradient(to bottom, #4d90fe, #4787ed) repeat-x;
     text-shadow: 0 1px rgba(0,0,0,0.12);
     font-size: 26px;
+    z-index: 1;
 
     &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
       color: $light-color;
@@ -373,6 +381,27 @@
 
     svg {
       height: 17px;
+    }
+  }
+
+  &.boardreader {
+    width: 64px;
+    background-color: #9e9e9e33;
+    border: none transparent;
+    border-radius: 0;
+
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
+      background-color: #9e9e9e66;
+    }
+
+    span {
+      font-family: Boardreader, sans-serif;
+      font-size: 32px;
+      padding-top: 2px;
+
+      &::before {
+        content: "\e8b6";
+      }
     }
   }
 }

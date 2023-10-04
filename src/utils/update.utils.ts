@@ -3,6 +3,7 @@ import {
   AOL,
   ASK,
   BING,
+  BOARDREADER,
   BRAVE,
   ECOSIA,
   GIBIRU,
@@ -112,7 +113,7 @@ const getDeltaChanges = (
     searchEngines.push(ECOSIA);
   }
   if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
-    searchEngines.push(SEARCHCRYPT, METAGER, ASK);
+    searchEngines.push(SEARCHCRYPT, METAGER, ASK, BOARDREADER);
   }
 
   return { searchEngines };

@@ -17,6 +17,12 @@ export const MANUAL = "manual";
 export const SYSTEM = "system";
 
 /**
+ * Имена поля ввода для поиска
+ * @category Constants - Search Engine
+ */
+export const SEARCH_INPUT_NAMES = ["text", "query", "eingabe", "q"];
+
+/**
  * Список всех поисковых систем
  * @category Constants - Search Engine
  */
@@ -36,27 +42,30 @@ export const SEARCH_ENGINE_NAMES = [
   "ecosia",
   "searchcrypt",
   "metager",
-  "ask"
+  "ask",
+  "boardreader"
 ];
 
+/**
+ * Поисковая система Board reader
+ * @category Constants - Search Engine
+ */
+export const BOARDREADER = SEARCH_ENGINE_NAMES[16];
 /**
  * Поисковая система Ask.com
  * @category Constants - Search Engine
  */
 export const ASK = SEARCH_ENGINE_NAMES[15];
-
 /**
  * Поисковая система Metager
  * @category Constants - Search Engine
  */
 export const METAGER = SEARCH_ENGINE_NAMES[14];
-
 /**
  * Поисковая система Search Encrypt
  * @category Constants - Search Engine
  */
 export const SEARCHCRYPT = SEARCH_ENGINE_NAMES[13];
-
 /**
  * Поисковая система Ecosia
  * @category Constants - Search Engine
@@ -128,7 +137,7 @@ export const YANDEX = SEARCH_ENGINE_NAMES[0];
  * @category Constants - Search Engine
  */
 export const SEARCH_ENGINE_LINKS: Record<string, string> = {
-  aol: "https://search.aol.co.uk/aol/webhome/",
+  aol: "https://aolsearch.com/",
   bing: "https://bing.com/",
   brave: "https://search.brave.com/",
   nigma: "https://nigma.net.ru/",
@@ -143,7 +152,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   duckduckgo: "https://duckduckgo.com/",
   searchcrypt: "https://searchencrypt.com/home",
   metager: "https://metager.org/",
-  ask: "https://ask.com/"
+  ask: "https://ask.com/",
+  boardreader: "https://boardreader.com/"
 };
 
 /**
@@ -151,7 +161,7 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
  * @category Constants - Search Engine
  */
 export const SEARCH_QUERY_LINKS: Record<string, string> = {
-  aol: "https://search.aol.co.uk/aol/search",
+  aol: "https://aolsearch.com/search",
   bing: "https://bing.com/search",
   brave: "https://search.brave.com/search",
   nigma: "https://nigma.net.ru/index.php",
@@ -166,7 +176,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   duckduckgo: "https://duckduckgo.com",
   searchcrypt: "https://searchencrypt.com/search",
   metager: "https://metager.org/meta/meta.ger3",
-  ask: "https://ask.com/web"
+  ask: "https://ask.com/web",
+  boardreader: "https://boardreader.com/s"
 };
 
 /**
@@ -189,5 +200,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   duckduckgo: constants.duckColor,
   searchcrypt: constants.searchcryptColor,
   metager: constants.metagerColor,
-  ask: constants.askColor
+  ask: constants.askColor,
+  boardreader: constants.boardreaderColor
 };

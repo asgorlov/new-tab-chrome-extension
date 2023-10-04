@@ -1,9 +1,10 @@
-import React, { FC, useCallback, useContext, useMemo } from "react";
+import React, { FC, FormEvent, useCallback, useContext, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
   ASK,
   BING,
+  BOARDREADER,
   BRAVE,
   DUCK,
   ECOSIA,
@@ -12,6 +13,7 @@ import {
   LYCOS,
   METAGER,
   NIGMA,
+  SEARCH_INPUT_NAMES,
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
@@ -84,6 +86,7 @@ const SearchEngineContainer: FC = () => {
       case ECOSIA:
         return <EcosiaSearchIcon />;
       case SEARCHCRYPT:
+      case BOARDREADER:
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;
@@ -103,10 +106,27 @@ const SearchEngineContainer: FC = () => {
     [tourCtx]
   );
 
+  const onSubmitForm = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      if (searchEngine === BOARDREADER) {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const input = form.elements.namedItem(
+          SEARCH_INPUT_NAMES[1]
+        ) as HTMLInputElement;
+
+        window.location.href = `${form.action}/${input.value}.html`;
+      }
+    },
+    [searchEngine]
+  );
+
   return (
     <SearchEngineComponent
       setContainerRef={setContainerRef}
       currentLanguage={currentLanguage}
+      onSubmitForm={onSubmitForm}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
       isDark={isDark}

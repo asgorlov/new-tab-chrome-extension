@@ -12,15 +12,20 @@
 .new-tab__search-engine_input {
   width: 100%;
   height: 100%;
-  font: 17px Arial, Helvetica, sans-serif;
+  font: 17px Arial;
   flex: 1;
 
   .ant-input-prefix {
     margin-inline-end: 0;
   }
 
-  &::placeholder {
-    color: $input-placeholder-color;
+  .ant-input {
+    background: none;
+
+    &::placeholder {
+      font: 17px Arial;
+      color: $input-placeholder-color;
+    }
   }
 
   &-prefix {
@@ -133,7 +138,7 @@
   &.brave {
     transition: $fast-transition;
     border: none transparent;
-    border-radius: 16px 0 0 16px;
+    border-radius: 10px 0 0 10px;
 
     @include hide-pseudo-input-border;
   }
@@ -194,7 +199,12 @@
     border: 1px solid #707070;
     border-radius: 0;
 
-    @include hide-pseudo-input-border;
+    &.ant-input-affix-wrapper:focus,
+    &.ant-input-affix-wrapper:hover,
+    &.ant-input-affix-wrapper-focused {
+      border-color: #707070;
+      box-shadow: none;
+    }
   }
 
   &.ecosia {
@@ -211,12 +221,12 @@
     padding: 0 14px;
     border-radius: 6px;
 
-    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover, {
+    &:hover, {
       border-color: #b7b7b7;
       box-shadow: 0 1px 2px rgba(0,0,0,0.12) inset;
     }
 
-    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):focus {
+    &.ant-input-affix-wrapper-focused {
       border-color: #4d90fe;
       box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 1px 4px rgba(0,163,255,0.2) inset;
     }
@@ -238,5 +248,18 @@
     padding-right: 0;
 
     @include hide-pseudo-input-border;
+  }
+
+  &.boardreader {
+    transition: $fast-transition;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+
+    &.ant-input-affix-wrapper:focus,
+    &.ant-input-affix-wrapper:hover,
+    &.ant-input-affix-wrapper-focused {
+      border-color: #e5e5e5;
+      box-shadow: none;
+    }
   }
 }
