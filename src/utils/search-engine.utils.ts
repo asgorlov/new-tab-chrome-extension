@@ -1,5 +1,6 @@
 import {
   AOL,
+  ASK,
   BING,
   BRAVE,
   DUCK,
@@ -145,6 +146,7 @@ export const getDraggedStyle = (
     case GIBIRU:
     case LYCOS:
     case YAHOO:
+    case ASK:
       Object.assign(style, { filter: "grayscale(0)" });
       url = require(`../static/svgs/${itemName}/${itemName}-icon${
         searchEngine !== itemName ? "-grey" : ""

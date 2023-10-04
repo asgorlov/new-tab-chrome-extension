@@ -180,4 +180,12 @@
     margin-bottom: 16px;
     background-image: url("../../../svgs/metager/metager-logo.svg");
   }
+
+  &.ask {
+    transition: $fast-transition;
+    height: 76px;
+    width: 100px;
+    margin-bottom: 6px;
+    background-image: url("../../../svgs/ask/ask-logo.svg");
+  }
 }
