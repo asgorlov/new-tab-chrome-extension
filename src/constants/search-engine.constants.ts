@@ -35,8 +35,15 @@ export const SEARCH_ENGINE_NAMES = [
   "nigma",
   "ecosia",
   "searchcrypt",
-  "metager"
+  "metager",
+  "ask"
 ];
+
+/**
+ * Поисковая система Ask.com
+ * @category Constants - Search Engine
+ */
+export const ASK = SEARCH_ENGINE_NAMES[15];
 
 /**
  * Поисковая система Metager
@@ -135,7 +142,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   swisscows: "https://swisscows.com/",
   duckduckgo: "https://duckduckgo.com/",
   searchcrypt: "https://searchencrypt.com/home",
-  metager: "https://metager.org/"
+  metager: "https://metager.org/",
+  ask: "https://ask.com/"
 };
 
 /**
@@ -157,7 +165,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   swisscows: "https://swisscows.com/web",
   duckduckgo: "https://duckduckgo.com",
   searchcrypt: "https://searchencrypt.com/search",
-  metager: "https://metager.org/meta/meta.ger3"
+  metager: "https://metager.org/meta/meta.ger3",
+  ask: "https://ask.com/web"
 };
 
 /**
@@ -179,5 +188,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   swisscows: constants.cowsColor,
   duckduckgo: constants.duckColor,
   searchcrypt: constants.searchcryptColor,
-  metager: constants.metagerColor
+  metager: constants.metagerColor,
+  ask: constants.askColor
 };

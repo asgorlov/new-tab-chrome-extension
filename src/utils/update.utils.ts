@@ -1,6 +1,7 @@
 import { checkForUpdates } from "../constants/update.constants";
 import {
   AOL,
+  ASK,
   BING,
   BRAVE,
   ECOSIA,
@@ -111,7 +112,7 @@ const getDeltaChanges = (
     searchEngines.push(ECOSIA);
   }
   if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
-    searchEngines.push(SEARCHCRYPT, METAGER);
+    searchEngines.push(SEARCHCRYPT, METAGER, ASK);
   }
 
   return { searchEngines };

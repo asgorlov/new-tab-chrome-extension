@@ -2,6 +2,7 @@ import React, { FC, useCallback, useContext, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
+  ASK,
   BING,
   BRAVE,
   DUCK,
@@ -29,6 +30,7 @@ import { ReactComponent as BraveSearchIcon } from "../../static/svgs/brave/brave
 import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-search-icon.svg";
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
+import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
 import { useSelector } from "react-redux";
 import { TourContext } from "../../contexts/tour.context";
 import {
@@ -85,6 +87,8 @@ const SearchEngineContainer: FC = () => {
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;
+      case ASK:
+        return <AskSearchIcon />;
       default:
         return <></>;
     }
