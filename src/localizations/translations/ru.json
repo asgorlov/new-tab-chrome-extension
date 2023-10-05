@@ -76,7 +76,7 @@
     "gibiru": "Gibiru",
     "yahoo": "Yahoo",
     "bing": "Bing",
-    "duckduckgo": "DuckDuckGo",
+    "duckduckgo": "Duck Duck Go",
     "google": "Google",
     "yandex": "Яндекс",
     "ecosia": "Ecosia",
@@ -85,6 +85,7 @@
     "ask": "Ask.com",
     "boardreader": "Board Reader",
     "zapmeta": "Zapmeta",
+    "searchch": "Search.ch",
     "selectAll": "Выбрать все",
     "removeAll": "Убрать все"
   },

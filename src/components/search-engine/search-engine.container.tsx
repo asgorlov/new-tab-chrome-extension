@@ -14,6 +14,7 @@ import {
   METAGER,
   NIGMA,
   SEARCH_INPUT_NAMES,
+  SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
@@ -52,6 +53,7 @@ const SearchEngineContainer: FC = () => {
   const buttonLabel = useMemo(() => {
     switch (searchEngine) {
       case YANDEX:
+      case SEARCHCH:
         return <span>{t("searchButton")}</span>;
       case GOOGLE:
         return <GoogleSearchIcon />;

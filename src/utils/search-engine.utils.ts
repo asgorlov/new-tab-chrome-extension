@@ -13,6 +13,7 @@ import {
   NIGMA,
   SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
+  SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
@@ -153,6 +154,7 @@ export const getDraggedStyle = (
     case YAHOO:
     case ASK:
     case BOARDREADER:
+    case SEARCHCH:
       Object.assign(style, { filter: "grayscale(0)" });
       url = require(`../static/svgs/${itemName}/${itemName}-icon${
         searchEngine !== itemName ? "-grey" : ""

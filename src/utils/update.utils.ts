@@ -10,6 +10,7 @@ import {
   LYCOS,
   METAGER,
   NIGMA,
+  SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
@@ -114,7 +115,14 @@ const getDeltaChanges = (
     searchEngines.push(ECOSIA);
   }
   if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
-    searchEngines.push(SEARCHCRYPT, METAGER, ASK, BOARDREADER, ZAPMETA);
+    searchEngines.push(
+      SEARCHCRYPT,
+      METAGER,
+      ASK,
+      BOARDREADER,
+      ZAPMETA,
+      SEARCHCH
+    );
   }
 
   return { searchEngines };

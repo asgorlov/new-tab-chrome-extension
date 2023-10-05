@@ -8,11 +8,12 @@
   max-width: $search-engine-max-width;
   position: fixed;
   z-index: -1;
-  top: calc(50% - 50px);
+  top: calc(50% - 42px);
   border-radius: 0;
-  min-height: 50px;
-  max-height: max-content;
+  min-height: 42px;
+  max-height: 42px;
   opacity: 0;
+  outline: none transparent;
 
   &-text {
     &-group {
@@ -20,6 +21,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 60px;
+      opacity: 0;
     }
 
     &-item {
@@ -40,10 +42,13 @@
   &.swisscows {
     background-image: url("../../../svgs/swisscows/swisscows-form-wrapper.svg");
     border-radius: 20px;
+    top: calc(50% - 50px);
     padding: 0 36px 12px;
+    min-height: 50px;
+    max-height: max-content;
     opacity: 1;
 
-    div {
+    .new-tab__search-engine_form-background-text-group {
       opacity: 1;
     }
   }
@@ -93,12 +98,14 @@
     }
   }
 
-  &.lycos,
-  &.nigma,
-  &.zapmeta {
-    div {
-      transition: $fast-transition;
-      opacity: 0;
-    }
+  &.searchch {
+    background: #4c4c4c url("../../../svgs/form-background.svg");
+    top: calc(50% - 54px);
+    padding: 0 12px;
+    min-height: 66px;
+    max-height: 66px;
+    opacity: 1;
+    border: none transparent;
+    border-radius: 6px;
   }
 }
