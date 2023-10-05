@@ -18,7 +18,8 @@ import {
   SWISSCOWS,
   YAHOO,
   YANDEX,
-  YOUCOM
+  YOUCOM,
+  ZAPMETA
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
@@ -87,6 +88,7 @@ const SearchEngineContainer: FC = () => {
         return <EcosiaSearchIcon />;
       case SEARCHCRYPT:
       case BOARDREADER:
+      case ZAPMETA:
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;

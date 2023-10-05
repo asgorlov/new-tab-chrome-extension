@@ -13,7 +13,8 @@ import {
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
-  YOUCOM
+  YOUCOM,
+  ZAPMETA
 } from "../constants/search-engine.constants";
 import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabStateBase } from "../models/new-tab-state.model";
@@ -113,7 +114,7 @@ const getDeltaChanges = (
     searchEngines.push(ECOSIA);
   }
   if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
-    searchEngines.push(SEARCHCRYPT, METAGER, ASK, BOARDREADER);
+    searchEngines.push(SEARCHCRYPT, METAGER, ASK, BOARDREADER, ZAPMETA);
   }
 
   return { searchEngines };

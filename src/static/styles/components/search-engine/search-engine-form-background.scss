@@ -57,7 +57,7 @@
     opacity: 1;
 
     &.dark {
-      background: #FFFFFF99;
+      background-color: #FFFFFF99;
     }
   }
 
@@ -74,26 +74,28 @@
     outline: solid 2px #dadada;
 
     &.dark {
-      border: solid 4px $dark-color;
+      border-color: $dark-color;
     }
   }
 
-  &.boardreader,
-  &.ask,
-  &.metager,
-  &.searchcrypt,
-  &.ecosia,
+  &.zapmeta {
+    background: #fcfcfc url("../../../svgs/form-background.svg");
+    top: calc(50% - 77px);
+    padding: 0 15px;
+    min-height: 92px;
+    max-height: 92px;
+    opacity: 1;
+    border: solid 1px #eee;
+
+    &.dark {
+      background-color: mix($dark-color, $light-color, 97%);
+      border-color: #333742;
+    }
+  }
+
+  &.lycos,
   &.nigma,
-  &.yandex,
-  &.google,
-  &.duckduckgo,
-  &.bing,
-  &.yahoo,
-  &.brave,
-  &.aol,
-  &.youcom,
-  &.gibiru,
-  &.lycos {
+  &.zapmeta {
     div {
       transition: $fast-transition;
       opacity: 0;

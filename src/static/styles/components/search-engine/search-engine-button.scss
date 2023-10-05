@@ -355,7 +355,7 @@
     margin-right: 12px;
     width: 20px;
 
-    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled){
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled) {
       &:focus-within,
       &:hover {
         background-color: transparent;
@@ -401,6 +401,32 @@
 
       &::before {
         content: "\e8b6";
+      }
+    }
+  }
+
+  &.zapmeta {
+    width: 40px;
+    background-color: $zapmeta-color;
+    border: 1px solid #CFCFD2;
+    border-radius: 0 2px 2px 0;
+    border-left: 0;
+
+    &.ant-btn-text:not(:disabled):not(.ant-btn-disabled) {
+      &:focus-within,
+      &:hover {
+        background-color: $zapmeta-color;
+      }
+    }
+
+    span {
+      font-family: Zapmeta, sans-serif;
+      font-size: 16px;
+      padding-top: 2px;
+      color: $light-color;
+
+      &::before {
+        content: "\e901";
       }
     }
   }
