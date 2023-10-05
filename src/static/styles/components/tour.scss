@@ -11,25 +11,31 @@
       background-color: $dark-color;
     }
 
-    &>.new-tab__tour_dark-content>.new-tab__tour_dark-inner {
-      background-color: $dark-color;
+    &>.new-tab__tour_dark-content {
+      &>.new-tab__tour_dark-inner {
+        background-color: $dark-color;
 
-      &>.new-tab__tour_dark-footer {
-        &>.new-tab__tour_dark-indicators>.new-tab__tour_dark-indicator:not(.new-tab__tour_dark-indicator-active) {
-          background-color: $light-color;
-        }
+        &>.new-tab__tour_dark-footer {
+          &>.new-tab__tour_dark-indicators {
+            &>.new-tab__tour_dark-indicator:not(.new-tab__tour_dark-indicator-active) {
+              background-color: $light-color;
+            }
+          }
 
-        &>.new-tab__tour_dark-buttons>.new-tab__tour_dark-prev-btn {
-          background-color: $dark-color;
+          &>.new-tab__tour_dark-buttons {
+            &>.new-tab__tour_dark-prev-btn {
+              background-color: $dark-color;
 
-          span {
-            color: $light-color;
+              span {
+                color: $light-color;
+              }
+            }
           }
         }
-      }
 
-      svg {
-        fill: $light-color;
+        svg {
+          fill: $light-color;
+        }
       }
     }
   }
