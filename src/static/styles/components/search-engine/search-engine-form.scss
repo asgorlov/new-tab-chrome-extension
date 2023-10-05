@@ -1,12 +1,12 @@
 @import "../../modules/constants.module";
 
-@mixin hide-form-border {
-  transition: $fast-transition;
+@mixin hide-form-border($radius) {
   border: none transparent;
-  border-radius: 0;
+  border-radius: $radius;
 }
 
 .new-tab__search-engine_form {
+  transition: $fast-transition;
   width: 100%;
   min-width: 100px;
   height: 42px;
@@ -14,19 +14,17 @@
   display: flex;
   align-items: center;
   background-color: $light-color;
+  box-shadow: transparent;
 
   &.yandex {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 0.625rem;
     background-color: $ya-color;
+    @include hide-form-border(0.625rem);
   }
 
   &.google {
-    transition: $fast-transition;
-    box-shadow: 0 1px 6px #20212447;
     border: 1px solid #dfe1e5;
     border-radius: 24px;
+    box-shadow: 0 1px 6px #20212447;
 
     &.dark {
       box-shadow: 0 1px 6px #d9dfee47;
@@ -34,10 +32,9 @@
   }
 
   &.duckduckgo {
-    transition: $fast-transition;
-    box-shadow: 0 2px 3px #0000000F;
-    border: 1px solid #00000026;
+    outline: 1px solid #00000026;
     border-radius: 4px;
+    box-shadow: 0 2px 3px #0000000F;
 
     &.dark {
       box-shadow: 0 2px 3px $light-background-color;
@@ -45,10 +42,8 @@
   }
 
   &.bing {
-    transition: $fast-transition;
     box-shadow: 0 2px 4px #0000004C;
-    border: none transparent;
-    border-radius: 24px;
+    @include hide-form-border(24px);
 
     &.dark {
       box-shadow: 0 2px 4px #ffffff4c;
@@ -56,16 +51,12 @@
   }
 
   &.yahoo {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 4px;
+    @include hide-form-border(4px);
   }
 
   &.brave {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 10px;
     box-shadow: 0 2px 4px #0000004C;
+    @include hide-form-border(10px);
 
     &.dark {
       box-shadow: 0 2px 4px #ffffff4c;
@@ -73,24 +64,21 @@
   }
 
   &.swisscows {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 26px;
+    @include hide-form-border(26px);
   }
 
   &.aol {
-    @include hide-form-border;
+    @include hide-form-border(0);
   }
 
   &.youcom {
-    transition: $fast-transition;
     border: 1px solid transparent;
     border-radius: 24px;
     box-shadow: #00000011 0 -0.5px 0, #00000019 0 0 18px;
 
     &:focus-within {
       box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
-      border: 1px solid #4A72F5FF;
+      border-color: #4A72F5FF;
     }
 
     &.dark {
@@ -98,42 +86,37 @@
 
       &:focus-within {
         box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
-        border: 1px solid #4A72F5FF;
+        border-color: #4A72F5FF;
       }
     }
   }
 
   &.gibiru {
-    transition: $fast-transition;
     border: 1px solid #828282FF;
     border-radius: 7px;
 
     &.dark {
-      border: 1px solid #d5d5d5;
+      border-color: #d5d5d5;
     }
   }
 
   &.lycos {
     transition: all $fast-transition, outline 0.05s;;
     outline: 1px solid #dddddd;
-    border: none transparent;
-    border-radius: 4px;
+    @include hide-form-border(4px);
 
     &:focus-within {
-      outline: 2px solid #101010;
+      outline: 2px #101010;
     }
   }
 
   &.nigma {
     height: 32px;
     background-color: #79ba2a;
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 0 3px 3px 0;
+    @include hide-form-border(0 3px 3px 0);
   }
 
   &.ecosia {
-    transition: $fast-transition;
     border: 1px solid #bebeb9;
     border-radius: 30px;
     box-shadow: 0 1px 2px #1A1A1A2D,0 0 8px #1A1A1A0F;
@@ -144,22 +127,18 @@
   }
 
   &.searchcrypt {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 6px;
+    background-color: transparent;
+    @include hide-form-border(6px);
   }
 
   &.metager {
-    transition: $fast-transition;
-    border-radius: 5px;
     border: 1px solid #585858;
+    border-radius: 5px;
   }
 
   &.ask {
-    transition: $fast-transition;
-    border-radius: 24px;
     border: 1px solid #c0c0c0;
-    box-shadow: none;
+    border-radius: 24px;
 
     &:hover {
       border-color: #a0a0a0;
@@ -168,16 +147,15 @@
   }
 
   &.boardreader {
-    @include hide-form-border;
+    @include hide-form-border(0);
   }
 
   &.zapmeta {
-    @include hide-form-border;
+    @include hide-form-border(2px);
   }
 
   &.searchch {
-    @include hide-form-border;
-    border-radius: 8px;
-    background: transparent;
+    background-color: transparent;
+    @include hide-form-border(8px);
   }
 }

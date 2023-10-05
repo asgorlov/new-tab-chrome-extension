@@ -2,7 +2,10 @@ import { FC, memo, ReactNode } from "react";
 import { Drawer, DrawerProps } from "antd";
 import clsx from "clsx";
 import { GetContainer } from "@rc-component/portal/es/Portal";
-import constants from "../../../static/styles/modules/constants.module.scss";
+import {
+  DARK_THEME,
+  LIGHT_THEME
+} from "../../../constants/search-engine.constants";
 
 /**
  * Передаваемые параметры для компонента меню
@@ -57,7 +60,7 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
           contentWrapperStyle
         )}
         drawerStyle={Object.assign(
-          { background: isDark ? constants.darkColor : constants.lightColor },
+          { background: isDark ? DARK_THEME : LIGHT_THEME },
           drawerStyle
         )}
         bodyStyle={Object.assign({ padding: "0" }, bodyStyle)}

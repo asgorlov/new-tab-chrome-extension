@@ -2,6 +2,9 @@
 
 .new-tab__search-engine_form-background {
   transition: $fast-transition;
+  opacity: 0;
+  min-height: 42px;
+  max-height: 42px;
   background-image: url("../../../svgs/form-background.svg");
   background-size: cover;
   width: $search-engine-width;
@@ -9,14 +12,13 @@
   position: fixed;
   z-index: -1;
   top: calc(50% - 42px);
-  border-radius: 0;
-  min-height: 42px;
-  max-height: 42px;
-  opacity: 0;
   outline: none transparent;
+  border: none transparent;
+  border-radius: 0;
 
   &-text {
     &-group {
+      transition: $fast-transition;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -40,13 +42,13 @@
   }
 
   &.swisscows {
-    background-image: url("../../../svgs/swisscows/swisscows-form-wrapper.svg");
-    border-radius: 20px;
-    top: calc(50% - 50px);
-    padding: 0 36px 12px;
-    min-height: 50px;
-    max-height: max-content;
     opacity: 1;
+    min-height: 50px;
+    max-height: 104px;
+    background-image: url("../../../svgs/swisscows/swisscows-form-wrapper.svg");
+    padding: 0 36px 12px;
+    top: calc(50% - 50px);
+    border-radius: 20px;
 
     .new-tab__search-engine_form-background-text-group {
       opacity: 1;
@@ -54,12 +56,12 @@
   }
 
   &.lycos {
-    background: #C0C0C099 url("../../../svgs/form-background.svg");
-    top: calc(50% - 121px);
-    min-height: 101px;
-    max-height: 101px;
-    padding: 20px 12px 35px;
     opacity: 1;
+    min-height: 156px;
+    max-height: 156px;
+    background-color: #C0C0C099;
+    padding: 0 12px;
+    top: calc(50% - 121px);
 
     &.dark {
       background-color: #FFFFFF99;
@@ -68,13 +70,13 @@
 
   &.nigma {
     transition: all $fast-transition, border-color $slow-transition;
-    background: #79ba2a url("../../../svgs/form-background.svg");
-    top: calc(50% - 62px);
-    padding: 0 20px;
-    border-radius: 20px;
+    opacity: 1;
     min-height: 100px;
     max-height: 100px;
-    opacity: 1;
+    background-color: #79ba2a;
+    padding: 0 20px;
+    top: calc(50% - 62px);
+    border-radius: 20px;
     border: solid 4px $light-color;
     outline: solid 2px #dadada;
 
@@ -84,12 +86,12 @@
   }
 
   &.zapmeta {
-    background: #fcfcfc url("../../../svgs/form-background.svg");
-    top: calc(50% - 77px);
-    padding: 0 15px;
+    opacity: 1;
+    background-color: #fcfcfc;
     min-height: 92px;
     max-height: 92px;
-    opacity: 1;
+    top: calc(50% - 77px);
+    padding: 0 15px;
     border: solid 1px #eee;
 
     &.dark {
@@ -99,13 +101,12 @@
   }
 
   &.searchch {
-    background: #4c4c4c url("../../../svgs/form-background.svg");
-    top: calc(50% - 54px);
-    padding: 0 12px;
+    opacity: 1;
     min-height: 66px;
     max-height: 66px;
-    opacity: 1;
-    border: none transparent;
+    background-color: #4c4c4c;
+    top: calc(50% - 54px);
+    padding: 0 12px;
     border-radius: 6px;
   }
 }

@@ -10,6 +10,10 @@
 }
 
 .new-tab__search-engine_input {
+  transition: $fast-transition;
+  background-color: transparent;
+  border: none transparent;
+  border-radius: 0;
   width: 100%;
   height: 100%;
   font: 17px Arial;
@@ -77,41 +81,31 @@
   }
 
   &.yandex {
-    transition: $fast-transition;
     background-color: $light-color;
-    background-clip: padding-box;
     border: 3px solid transparent;
     border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
+    background-clip: padding-box;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.google {
-    transition: $fast-transition;
-    padding: 0 0 0 12px;
-    background-color: transparent;
-    border: none transparent;
     border-radius: 24px 0 0 24px;
+    padding: 0 0 0 12px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.duckduckgo {
-    transition: $fast-transition;
     padding: 0 10px;
-    background-color: transparent;
-    border: none transparent;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.bing {
-    transition: $fast-transition;
-    padding: 4px 0 4px 12px;
     border-radius: 24px;
-    border: none transparent;
+    padding: 4px 0 4px 12px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.yahoo {
-    transition: $fast-transition;
     border: 1px solid #188fff;
     border-radius: 4px 0 0 4px;
     font-weight: 500;
@@ -132,15 +126,11 @@
   }
 
   &.brave {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 10px 0 0 10px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.swisscows {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 26px 0 0 26px;
     @include change-pseudo-input-border-color(transparent);
 
@@ -150,9 +140,7 @@
   }
 
   &.aol {
-    transition: $fast-transition;
     border: 1px solid #7590f5;
-    border-radius: 0;
 
     &:hover {
       box-shadow: 0 0 3px #a5b2f4;
@@ -161,8 +149,6 @@
   }
 
   &.youcom {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 24px 0 0 24px;
     @include change-pseudo-input-border-color(transparent);
 
@@ -172,38 +158,31 @@
   }
 
   &.gibiru {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 7px 0 0 7px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.lycos {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 4px 0 0 4px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.nigma {
-    transition: $fast-transition;
+    background-color: $light-color;
     border: 1px solid #707070;
-    border-radius: 0;
     @include change-pseudo-input-border-color(#707070);
   }
 
   &.ecosia {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 30px 0 0 30px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.searchcrypt {
-    transition: $fast-transition;
+    background-color: $light-color;
     border: 1px solid #dcdcdc;
-    padding: 0 14px;
     border-radius: 6px;
+    padding: 0 14px;
 
     &:hover, {
       border-color: #b7b7b7;
@@ -217,15 +196,11 @@
   }
 
   &.metager {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 5px;
     @include change-pseudo-input-border-color(transparent);
   }
 
   &.ask {
-    transition: $fast-transition;
-    border: none transparent;
     border-radius: 24px 0 0 24px;
     padding-left: 16px;
     padding-right: 0;
@@ -233,20 +208,19 @@
   }
 
   &.boardreader {
-    transition: $fast-transition;
     border: 1px solid #e5e5e5;
-    border-radius: 0;
     @include change-pseudo-input-border-color(#e5e5e5);
   }
 
   &.zapmeta {
-    border-radius: 2px 0 0 2px;
     border: 1px solid #CFCFD2;
+    border-radius: 2px 0 0 2px;
     border-right: 0;
     @include change-pseudo-input-border-color(#CFCFD2);
   }
 
   &.searchch {
+    background-color: $light-color;
     border-radius: 6px;
     margin-right: 12px;
     @include change-pseudo-input-border-color(transparent);

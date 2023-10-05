@@ -19,6 +19,10 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
 import UploadComponent from "../../../common/upload/upload.component";
 import ModalComponent from "../../../common/modal/modal.component";
 import RadioComponent from "../../../common/radio/radio.component";
+import {
+  LIGHT_THEME,
+  SEARCH_THEMES
+} from "../../../../constants/search-engine.constants";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -77,6 +81,10 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
 
     const showUpload =
       radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
+    const onMouseLeave = (e: MouseEvent<HTMLButtonElement>) =>
+      (e.currentTarget.style.color = isDark ? LIGHT_THEME : "black");
+    const onMouseOver = (e: MouseEvent<HTMLButtonElement>) =>
+      (e.currentTarget.style.color = SEARCH_THEMES[searchEngine]);
 
     return (
       <CollapseComponent
@@ -85,26 +93,21 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
         isDark={isDark}
         className="new-tab__settings-menu_common"
       >
-        <div
-          className={clsx(
-            "new-tab__settings-menu_common-buttons-group",
-            searchEngine,
-            { dark: isDark }
-          )}
-        >
-          {Object.values(BUTTON_NAMES).map(name => {
-            return (
-              <button
-                className={`new-tab__settings-menu_common-${name}-btn`}
-                onClick={onClickOpenModal}
-                name={name}
-                key={name}
-              >
-                {t(`commonSetting.${name}.title`)}
-              </button>
-            );
-          })}
-        </div>
+        {Object.values(BUTTON_NAMES).map(name => {
+          return (
+            <button
+              onMouseLeave={onMouseLeave}
+              onMouseOver={onMouseOver}
+              style={{ color: isDark ? LIGHT_THEME : "black" }}
+              className={`new-tab__settings-menu_common-${name}-btn`}
+              onClick={onClickOpenModal}
+              name={name}
+              key={name}
+            >
+              {t(`commonSetting.${name}.title`)}
+            </button>
+          );
+        })}
         <ModalComponent
           isDark={isDark}
           title={t(`commonSetting.${selectedOption}.title`)}
