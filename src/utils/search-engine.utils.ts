@@ -17,7 +17,8 @@ import {
   SWISSCOWS,
   YAHOO,
   YANDEX,
-  YOUCOM
+  YOUCOM,
+  ZAPMETA
 } from "../constants/search-engine.constants";
 import { CSSProperties } from "react";
 import { DraggingStyle, NotDraggingStyle } from "react-beautiful-dnd";
@@ -139,6 +140,7 @@ export const getDraggedStyle = (
     case ECOSIA:
     case SEARCHCRYPT:
     case METAGER:
+    case ZAPMETA:
       if (searchEngine === itemName) {
         Object.assign(style, { filter: "grayscale(0)" });
       }

@@ -201,4 +201,17 @@
       background-image: url("../../../svgs/boardreader/boardreader-logo-dark.svg");
     }
   }
+
+  &.zapmeta {
+    transition: $fast-transition;
+    height: 50px;
+    width: 250px;
+    margin-bottom: 40px;
+    background-image: url("../../../svgs/zapmeta/zapmeta-logo.svg");
+
+    &.dark {
+      transition: $fast-transition;
+      background-image: url("../../../svgs/zapmeta/zapmeta-logo-dark.svg");
+    }
+  }
 }

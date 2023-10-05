@@ -1,5 +1,11 @@
 @import "../../modules/constants.module";
 
+@mixin hide-form-border {
+  transition: $fast-transition;
+  border: none transparent;
+  border-radius: 0;
+}
+
 .new-tab__search-engine_form {
   width: 100%;
   min-width: 100px;
@@ -73,9 +79,7 @@
   }
 
   &.aol {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 0;
+    @include hide-form-border;
   }
 
   &.youcom {
@@ -164,8 +168,10 @@
   }
 
   &.boardreader {
-    transition: $fast-transition;
-    border: none transparent;
-    border-radius: 0;
+    @include hide-form-border;
+  }
+
+  &.zapmeta {
+    @include hide-form-border;
   }
 }
