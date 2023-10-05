@@ -44,9 +44,15 @@ export const SEARCH_ENGINE_NAMES = [
   "metager",
   "ask",
   "boardreader",
-  "zapmeta"
+  "zapmeta",
+  "searchch"
 ];
 
+/**
+ * Поисковая система Search.ch
+ * @category Constants - Search Engine
+ */
+export const SEARCHCH = SEARCH_ENGINE_NAMES[18];
 /**
  * Поисковая система Board reader
  * @category Constants - Search Engine
@@ -160,7 +166,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   metager: "https://metager.org/",
   ask: "https://ask.com/",
   boardreader: "https://boardreader.com/",
-  zapmeta: "https://zapmeta.com/"
+  zapmeta: "https://zapmeta.com/",
+  searchch: "https://search.ch/"
 };
 
 /**
@@ -185,7 +192,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   metager: "https://metager.org/meta/meta.ger3",
   ask: "https://ask.com/web",
   boardreader: "https://boardreader.com/s",
-  zapmeta: "https://zapmeta.com/search"
+  zapmeta: "https://zapmeta.com/search",
+  searchch: "https://search.ch"
 };
 
 /**
@@ -210,5 +218,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   metager: constants.metagerColor,
   ask: constants.askColor,
   boardreader: constants.boardreaderColor,
-  zapmeta: constants.zapmetaColor
+  zapmeta: constants.zapmetaColor,
+  searchch: constants.searchchColor
 };

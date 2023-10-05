@@ -174,4 +174,10 @@
   &.zapmeta {
     @include hide-form-border;
   }
+
+  &.searchch {
+    @include hide-form-border;
+    border-radius: 8px;
+    background: transparent;
+  }
 }

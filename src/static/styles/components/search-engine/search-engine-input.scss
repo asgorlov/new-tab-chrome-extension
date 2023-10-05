@@ -82,7 +82,6 @@
     background-clip: padding-box;
     border: 3px solid transparent;
     border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -92,7 +91,6 @@
     background-color: transparent;
     border: none transparent;
     border-radius: 24px 0 0 24px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -101,7 +99,6 @@
     padding: 0 10px;
     background-color: transparent;
     border: none transparent;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -110,7 +107,6 @@
     padding: 4px 0 4px 12px;
     border-radius: 24px;
     border: none transparent;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -139,7 +135,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 10px 0 0 10px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -147,7 +142,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 26px 0 0 26px;
-
     @include change-pseudo-input-border-color(transparent);
 
     &.ant-input-affix-wrapper {
@@ -170,7 +164,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 24px 0 0 24px;
-
     @include change-pseudo-input-border-color(transparent);
 
     &.ant-input-affix-wrapper {
@@ -182,7 +175,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 7px 0 0 7px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -190,7 +182,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 4px 0 0 4px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -198,7 +189,6 @@
     transition: $fast-transition;
     border: 1px solid #707070;
     border-radius: 0;
-
     @include change-pseudo-input-border-color(#707070);
   }
 
@@ -206,7 +196,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 30px 0 0 30px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -231,7 +220,6 @@
     transition: $fast-transition;
     border: none transparent;
     border-radius: 5px;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -241,7 +229,6 @@
     border-radius: 24px 0 0 24px;
     padding-left: 16px;
     padding-right: 0;
-
     @include change-pseudo-input-border-color(transparent);
   }
 
@@ -249,7 +236,6 @@
     transition: $fast-transition;
     border: 1px solid #e5e5e5;
     border-radius: 0;
-
     @include change-pseudo-input-border-color(#e5e5e5);
   }
 
@@ -257,7 +243,12 @@
     border-radius: 2px 0 0 2px;
     border: 1px solid #CFCFD2;
     border-right: 0;
-
     @include change-pseudo-input-border-color(#CFCFD2);
+  }
+
+  &.searchch {
+    border-radius: 6px;
+    margin-right: 12px;
+    @include change-pseudo-input-border-color(transparent);
   }
 }

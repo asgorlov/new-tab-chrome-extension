@@ -12,7 +12,6 @@
     background-image: url("../../../svgs/yandex/ya-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/yandex/ya-logo-dark.svg");
     }
 
@@ -23,7 +22,6 @@
       background-image: url("../../../svgs/yandex/ya-logo-en.svg");
 
       &.dark {
-        transition: $fast-transition;
         background-image: url("../../../svgs/yandex/ya-logo-en-dark.svg");
       }
     }
@@ -45,7 +43,6 @@
     background-image: url("../../../svgs/duckduckgo/duckduckgo-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/duckduckgo/duckduckgo-logo-dark.svg");
     }
   }
@@ -58,7 +55,6 @@
     background-image: url("../../../svgs/bing/bing-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/bing/bing-logo-dark.svg");
     }
   }
@@ -79,7 +75,6 @@
     background-image: url("../../../svgs/brave/brave-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/brave/brave-logo-dark.svg");
     }
   }
@@ -92,7 +87,6 @@
     background-image: url("../../../svgs/swisscows/swisscows-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/swisscows/swisscows-logo-dark.svg");
     }
   }
@@ -105,7 +99,6 @@
     background-image: url("../../../svgs/aol/aol-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/aol/aol-logo-dark.svg");
     }
   }
@@ -126,7 +119,6 @@
     background-image: url("../../../svgs/gibiru/gibiru-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/gibiru/gibiru-logo-dark.svg");
     }
   }
@@ -139,7 +131,6 @@
     background-image: url("../../../svgs/lycos/lycos-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/lycos/lycos-logo-dark.svg");
     }
   }
@@ -152,7 +143,6 @@
     background-image: url("../../../svgs/nigma/nigma-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/nigma/nigma-logo-dark.svg");
     }
   }
@@ -197,7 +187,6 @@
     background-image: url("../../../svgs/boardreader/boardreader-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/boardreader/boardreader-logo-dark.svg");
     }
   }
@@ -210,8 +199,19 @@
     background-image: url("../../../svgs/zapmeta/zapmeta-logo.svg");
 
     &.dark {
-      transition: $fast-transition;
       background-image: url("../../../svgs/zapmeta/zapmeta-logo-dark.svg");
+    }
+  }
+
+  &.searchch {
+    transition: $fast-transition;
+    height: 40px;
+    width: 205px;
+    margin-bottom: 24px;
+    background-image: url("../../../svgs/searchch/searchch-logo.svg");
+
+    &.dark {
+      background-image: url("../../../svgs/searchch/searchch-logo-dark.svg");
     }
   }
 }
