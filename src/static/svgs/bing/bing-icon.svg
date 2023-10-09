@@ -1,14 +1,8 @@
-<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
- <g>
-  <title>Bing</title>
-  <g id="svg_10" transform="matrix(1.31855 0 0 1.31855 0 0)" stroke="null">
-   <svg class="squares" id="svg_1" x="0" y="0" stroke="null">
-    <path fill="#f26522" d="m11.35,0l-11.35,0l0,11.35l11.35,0l0,-11.35z" id="svg_8" stroke="null"/>
-    <path fill="#8dc63f" d="m23.88,0l-11.35,0l0,11.35l11.35,0l0,-11.35z" id="svg_7" stroke="null"/>
-    <path fill="#00aeef" d="m11.35,12.53l-11.35,0l0,11.35l11.35,0l0,-11.35z" id="svg_6" stroke="null"/>
-    <path fill="#ffc20e" d="m23.88,12.53l-11.35,0l0,11.35l11.35,0l0,-11.35z" id="svg_2" stroke="null"/>
-   </svg>
-  </g>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" >
+ <g transform="matrix(1.31855 0 0 1.31855 0 0)">
+  <path fill="#f26522" d="m11.35,0l-11.35,0l0,11.35l11.35,0l0,-11.35z" />
+  <path fill="#8dc63f" d="m23.88,0l-11.35,0l0,11.35l11.35,0l0,-11.35z" />
+  <path fill="#00aeef" d="m11.35,12.53l-11.35,0l0,11.35l11.35,0l0,-11.35z" />
+  <path fill="#ffc20e" d="m23.88,12.53l-11.35,0l0,11.35l11.35,0l0,-11.35z" />
  </g>
-
 </svg>
