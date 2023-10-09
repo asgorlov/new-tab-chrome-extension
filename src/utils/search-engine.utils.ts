@@ -1,28 +1,13 @@
 import {
-  AOL,
-  ASK,
-  BING,
   BOARDREADER,
-  BRAVE,
-  DUCK,
-  ECOSIA,
-  GIBIRU,
-  GOOGLE,
-  LYCOS,
   METAGER,
   NIGMA,
   SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
-  SEARCHCH,
-  SEARCHCRYPT,
   SWISSCOWS,
-  YAHOO,
-  YANDEX,
-  YOUCOM,
-  ZAPMETA
+  YANDEX
 } from "../constants/search-engine.constants";
 import { CSSProperties } from "react";
-import { DraggingStyle, NotDraggingStyle } from "react-beautiful-dnd";
 
 /**
  * Функция для получения названия инпута поискового запроса
@@ -92,77 +77,6 @@ export const getScrollSearchEngineButtonStyle = (
 
   if (isActive) {
     Object.assign(style, { filter: "brightness(0.8)" });
-  }
-
-  return style;
-};
-
-/**
- * Функция для получения стилей иконок поисковиков в селекторе
- * @param draggedStyle - Стили захваченного элемента
- * @param isDragging - Флаг, отвечающий за захват элемента
- * @param itemName - Имя текущего элемента
- * @param searchEngine - Поисковая система
- * @param currentLanguage - Язык интерфейса
- * @returns - Стили иконок поисковиков в селекторе
- */
-export const getDraggedStyle = (
-  draggedStyle: DraggingStyle | NotDraggingStyle | undefined,
-  isDragging: boolean,
-  itemName: string,
-  searchEngine: string,
-  currentLanguage: string
-): CSSProperties => {
-  const style = { cursor: isDragging ? "grabbing" : "pointer" };
-
-  if (draggedStyle) {
-    Object.assign(style, draggedStyle);
-  }
-
-  let url;
-  switch (itemName) {
-    case YANDEX:
-      if (searchEngine === itemName) {
-        Object.assign(style, { filter: "grayscale(0)" });
-      }
-
-      url = require(`../static/svgs/yandex/ya-icon${
-        currentLanguage !== "ru" ? "-en" : ""
-      }.svg`);
-
-      break;
-    case GOOGLE:
-    case DUCK:
-    case BING:
-    case BRAVE:
-    case AOL:
-    case YOUCOM:
-    case NIGMA:
-    case ECOSIA:
-    case SEARCHCRYPT:
-    case METAGER:
-    case ZAPMETA:
-      if (searchEngine === itemName) {
-        Object.assign(style, { filter: "grayscale(0)" });
-      }
-      url = require(`../static/svgs/${itemName}/${itemName}-icon.svg`);
-
-      break;
-    case SWISSCOWS:
-    case GIBIRU:
-    case LYCOS:
-    case YAHOO:
-    case ASK:
-    case BOARDREADER:
-    case SEARCHCH:
-      Object.assign(style, { filter: "grayscale(0)" });
-      url = require(`../static/svgs/${itemName}/${itemName}-icon${
-        searchEngine !== itemName ? "-grey" : ""
-      }.svg`);
-  }
-
-  if (url) {
-    Object.assign(style, { backgroundImage: `url(${url})` });
   }
 
   return style;
