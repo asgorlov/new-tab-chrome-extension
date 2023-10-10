@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
+  selectIsDark,
   selectSearchEngine,
   selectSearchEngines
 } from "../../../store/new-tab/new-tab.selectors";
@@ -59,6 +60,7 @@ import {
 } from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import TooltipComponent from "../../common/tooltip/tooltip.component";
 
 export interface DroppableAriaContainerProps {
   onDragged: (v: boolean) => void;
@@ -69,6 +71,7 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isDark = useSelector(selectIsDark);
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
   const currentLanguage = useSelector(selectCurrentLanguage);
@@ -152,18 +155,23 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
       };
 
       return (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          title={t(`searchEngine.${draggableId}`)}
-          onClick={onClick}
-          children={getIcon()}
+        <TooltipComponent
+          mouseEnterDelay={1}
           className={getClassName()}
-        />
+          isDark={isDark}
+          title={t(`searchEngine.${draggableId}`)}
+        >
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            onClick={onClick}
+            children={getIcon()}
+          />
+        </TooltipComponent>
       );
     },
-    [currentLanguage, searchEngine, dispatch, t]
+    [isDark, currentLanguage, searchEngine, dispatch, t]
   );
 
   return (
