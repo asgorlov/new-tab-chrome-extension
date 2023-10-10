@@ -4,12 +4,23 @@ import { SelectProps } from "antd/es/select";
 import clsx from "clsx";
 import { DefaultOptionType } from "rc-select/lib/Select";
 
+/**
+ * Передаваемые параметры для компонента селектора
+ * @property isDark - Флаг темной темы
+ * @property options - Опции селектора
+ * @property children - Компоненты-потомки
+ * @interface
+ */
 export interface SelectComponentProps extends SelectProps {
   isDark?: boolean;
   options?: DefaultOptionType[];
   children?: ReactNode;
 }
 
+/**
+ * Компонент селектора
+ * @category Components
+ */
 const SelectComponent: FC<SelectComponentProps> = memo(
   ({
     isDark = false,
