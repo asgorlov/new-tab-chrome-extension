@@ -79,10 +79,11 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     const isDark = useSelector(selectIsDark);
     const searchEngine = useSelector(selectSearchEngine);
 
+    const borderColor = isDark ? LIGHT_THEME : "black";
     const showUpload =
       radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
     const onMouseLeave = (e: MouseEvent<HTMLButtonElement>) =>
-      (e.currentTarget.style.color = isDark ? LIGHT_THEME : "black");
+      (e.currentTarget.style.color = borderColor);
     const onMouseOver = (e: MouseEvent<HTMLButtonElement>) =>
       (e.currentTarget.style.color = SEARCH_THEMES[searchEngine]);
 
@@ -93,21 +94,23 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
         isDark={isDark}
         className="new-tab__settings-menu_common"
       >
-        {Object.values(BUTTON_NAMES).map(name => {
-          return (
+        <div
+          className={clsx("new-tab__settings-menu_common_btn-group", {
+            dark: isDark
+          })}
+        >
+          {Object.values(BUTTON_NAMES).map(name => (
             <button
               onMouseLeave={onMouseLeave}
               onMouseOver={onMouseOver}
-              style={{ color: isDark ? LIGHT_THEME : "black" }}
-              className={`new-tab__settings-menu_common-${name}-btn`}
+              children={t(`commonSetting.${name}.title`)}
               onClick={onClickOpenModal}
+              style={{ color: borderColor }}
               name={name}
               key={name}
-            >
-              {t(`commonSetting.${name}.title`)}
-            </button>
-          );
-        })}
+            />
+          ))}
+        </div>
         <ModalComponent
           isDark={isDark}
           title={t(`commonSetting.${selectedOption}.title`)}

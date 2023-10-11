@@ -1,20 +1,24 @@
 @import "../../modules/constants.module";
 
 .new-tab__settings-menu_common {
-  &-export-btn,
-  &-import-btn,
-  &-reset-btn {
-    width: 100%;
-    border: 0;
-    cursor: pointer;
-    padding: 8px;
-    background-color: transparent;
-    transition: $fast-transition;
-  }
+  &_btn-group {
+    &.dark button {
+      border-color: $dark-border-color;
+    }
 
-  &-import-btn {
-    border-top: 1px solid $light-border-color;
-    border-bottom: 1px solid $light-border-color;
+    button {
+      border: none transparent;
+      border-bottom: 1px solid $light-border-color;
+      width: 100%;
+      cursor: pointer;
+      padding: 8px;
+      background-color: transparent;
+      transition: all $fast-transition, border-color $slow-transition;
+    }
+
+    button:last-child {
+      border-bottom: 0;
+    }
   }
 
   &-modal-content {
