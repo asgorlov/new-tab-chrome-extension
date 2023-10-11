@@ -13,7 +13,7 @@
       cursor: pointer;
       padding: 8px;
       background-color: transparent;
-      transition: $fast-transition;
+      transition: all $fast-transition, border-color $slow-transition;
     }
 
     button:last-child {
