@@ -14,6 +14,24 @@
     transition: $slow-transition;
 
     &>.ant-drawer-body {
+      transition: $slow-transition;
+      background-image: url("../../../svgs/menu-settings/menu-bg-light.svg");
+      background-color: $light-border-color;
+
+      /* полоса прокрутки */
+      &::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      /* ползунок прокрутки */
+      &::-webkit-scrollbar-thumb {
+        transition: background-color $slow-transition;
+        background-color: inherit;
+        background-clip: content-box;
+        border-radius: 6px;
+        border: 1px solid transparent;
+      }
+
       .ant-collapse {
         transition: $slow-transition;
         background-color: transparent;
@@ -55,6 +73,10 @@
 
     &>.ant-drawer-wrapper-body {
       &>.ant-drawer-body {
+        transition: $slow-transition;
+        background-image: url("../../../svgs/menu-settings/menu-bg-dark.svg");
+        background-color: $dark-border-color;
+
         .ant-collapse {
           border-color: $dark-border-color;
           border-bottom: none;
