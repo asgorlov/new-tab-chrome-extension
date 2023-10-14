@@ -9,16 +9,26 @@ import {
   SETTINGS_FILE_NAME,
   SETTINGS_FILE_TYPE
 } from "../../../../constants/common-setting.constants";
-import { downloadFile } from "../../../../utils/common-setting.utils";
+import {
+  downloadFile,
+  getSettingsUploadingErrorKey
+} from "../../../../utils/common-setting.utils";
 import { getInitStateFromChrome } from "../../../../utils/chrome.utils";
-import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
+import {
+  RcFile,
+  UploadChangeParam,
+  UploadFile
+} from "antd/es/upload/interface";
 import {
   DONE_STATUS,
   ERROR_STATUS
 } from "../../../../constants/wallpaper.constants";
 import { RadioChangeEvent } from "antd/es/radio/interface";
+import { useTranslation } from "react-i18next";
+import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 
 const CommonSettingContainer: FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const [radioOption, setRadioOption] = useState(DEVICE_OPTION);
@@ -59,11 +69,13 @@ const CommonSettingContainer: FC = () => {
 
     if (file.status === DONE_STATUS) {
       const reader = new FileReader();
-      reader.onload = (event: ProgressEvent<FileReader>) => {
+      reader.onloadend = (event: ProgressEvent<FileReader>) => {
         const json = event.target?.result?.toString();
+
         if (json) {
+          const parsedSettings = JSON.parse(json);
+          setUploadedSettings(parsedSettings);
           setUploadingError("");
-          setUploadedSettings(JSON.parse(json));
         }
       };
       reader.readAsText(info.file.originFileObj as Blob);
@@ -75,9 +87,17 @@ const CommonSettingContainer: FC = () => {
   }, []);
 
   const validateUploading = useCallback(
-    (file: File): string =>
-      file.type !== SETTINGS_FILE_TYPE ? "commonSetting.import.typeError" : "",
-    []
+    async (options: RcCustomRequestOptions): Promise<void> => {
+      const file = options.file as RcFile;
+      const errorKey = await getSettingsUploadingErrorKey(file);
+
+      if (errorKey) {
+        options.onError?.(new Error(t(errorKey)));
+      } else {
+        options.onSuccess?.(file);
+      }
+    },
+    [t]
   );
 
   const handleConfirm = useCallback(
