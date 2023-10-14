@@ -9,7 +9,7 @@ import {
 } from "../../utils/chrome.utils";
 import i18n from "../../localizations/i18n";
 import defaultStore from "../../constants/default-store.constants";
-import { NewTabState } from "../../models/new-tab-state.model";
+import { NewTabState, NewTabStateBase } from "../../models/new-tab-state.model";
 
 /**
  * Асинхронный запрос для получения периода ночи указанной локации
@@ -72,7 +72,10 @@ export const changeLanguage = createAsyncThunk(
  */
 export const applySettings = createAsyncThunk(
   "newTab/applySettings",
-  async (settings: NewTabState | null, { getState }): Promise<NewTabState> => {
+  async (
+    settings: NewTabStateBase | null,
+    { getState }
+  ): Promise<NewTabState> => {
     const state = getState() as NewTabState;
     const data: NewTabState = Object.assign(state, settings ?? defaultStore);
 

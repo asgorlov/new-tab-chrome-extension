@@ -39,7 +39,8 @@
       "title": "Upload settings",
       "device": "From device",
       "cloud": "From cloud",
-      "typeError": "Invalid settings file format"
+      "typeError": "Invalid settings file format",
+      "parseError": "Failed to parse settings file"
     },
     "reset": {
       "title": "Reset settings",

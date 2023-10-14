@@ -23,6 +23,7 @@ import {
   LIGHT_THEME,
   SEARCH_THEMES
 } from "../../../../constants/search-engine.constants";
+import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -51,7 +52,7 @@ export interface CommonSettingComponentProps {
   onChange: (info: UploadChangeParam) => void;
   onRemove: (file: UploadFile) => void | boolean | Promise<void | boolean>;
   onClickOpenModal: (event: MouseEvent<HTMLButtonElement>) => void;
-  validateUploading: (file: File) => string;
+  validateUploading: (options: RcCustomRequestOptions) => Promise<void>;
   onChangeRadioOption: (event: RadioChangeEvent) => void;
 }
 
@@ -142,10 +143,10 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
                 </Radio.Group>
                 {showUpload && (
                   <UploadComponent
+                    customRequest={validateUploading}
                     isDark={isDark}
                     uploadError={uploadingError}
                     uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
-                    validateUploadedFile={validateUploading}
                     accept={SETTINGS_FILE_TYPE}
                     fileList={settingFileList}
                     onChange={onChange}

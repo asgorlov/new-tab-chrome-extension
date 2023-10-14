@@ -9,23 +9,36 @@ import {
   SETTINGS_FILE_NAME,
   SETTINGS_FILE_TYPE
 } from "../../../../constants/common-setting.constants";
-import { downloadFile } from "../../../../utils/common-setting.utils";
+import {
+  downloadFile,
+  getSettingsAdaptedToCurrentVersion,
+  getSettingsUploadingErrorKey
+} from "../../../../utils/common-setting.utils";
 import { getInitStateFromChrome } from "../../../../utils/chrome.utils";
-import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
+import {
+  RcFile,
+  UploadChangeParam,
+  UploadFile
+} from "antd/es/upload/interface";
 import {
   DONE_STATUS,
   ERROR_STATUS
 } from "../../../../constants/wallpaper.constants";
 import { RadioChangeEvent } from "antd/es/radio/interface";
+import { useTranslation } from "react-i18next";
+import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
+import { NewTabStateBase } from "../../../../models/new-tab-state.model";
 
 const CommonSettingContainer: FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const [radioOption, setRadioOption] = useState(DEVICE_OPTION);
   const [selectedOption, setSelectedOption] = useState("");
   const [uploadingError, setUploadingError] = useState("");
   const [settingFileList, setSettingFileList] = useState<UploadFile[]>([]);
-  const [uploadedSettings, setUploadedSettings] = useState(null);
+  const [uploadedSettings, setUploadedSettings] =
+    useState<NewTabStateBase | null>(null);
 
   const handleResetImportSettings = useCallback(() => {
     if (selectedOption === BUTTON_NAMES.import) {
@@ -59,11 +72,13 @@ const CommonSettingContainer: FC = () => {
 
     if (file.status === DONE_STATUS) {
       const reader = new FileReader();
-      reader.onload = (event: ProgressEvent<FileReader>) => {
+      reader.onloadend = (event: ProgressEvent<FileReader>) => {
         const json = event.target?.result?.toString();
+
         if (json) {
+          const settings = getSettingsAdaptedToCurrentVersion(json);
+          setUploadedSettings(settings);
           setUploadingError("");
-          setUploadedSettings(JSON.parse(json));
         }
       };
       reader.readAsText(info.file.originFileObj as Blob);
@@ -75,9 +90,17 @@ const CommonSettingContainer: FC = () => {
   }, []);
 
   const validateUploading = useCallback(
-    (file: File): string =>
-      file.type !== SETTINGS_FILE_TYPE ? "commonSetting.import.typeError" : "",
-    []
+    async (options: RcCustomRequestOptions): Promise<void> => {
+      const file = options.file as RcFile;
+      const errorKey = await getSettingsUploadingErrorKey(file);
+
+      if (errorKey) {
+        options.onError?.(new Error(t(errorKey)));
+      } else {
+        options.onSuccess?.(file);
+      }
+    },
+    [t]
   );
 
   const handleConfirm = useCallback(
@@ -100,7 +123,6 @@ const CommonSettingContainer: FC = () => {
           if (uploadedSettings) {
             dispatch(applySettings(uploadedSettings));
           }
-          break;
       }
 
       handleCancel();
@@ -110,10 +132,10 @@ const CommonSettingContainer: FC = () => {
 
   return (
     <CommonSettingComponent
-      disableOk={
+      disableOk={Boolean(
         selectedOption === BUTTON_NAMES.import &&
-        (!uploadedSettings || uploadingError)
-      }
+          (!uploadedSettings || uploadingError)
+      )}
       radioOption={radioOption}
       uploadingError={uploadingError}
       selectedOption={selectedOption}
