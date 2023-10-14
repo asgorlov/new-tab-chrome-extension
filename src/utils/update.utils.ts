@@ -93,7 +93,7 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
  * @param previousVersion - Предыдущая версия приложения
  * @returns - Объект с данными для обновления стейта {@link Features}
  */
-const getDeltaChanges = (
+export const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {

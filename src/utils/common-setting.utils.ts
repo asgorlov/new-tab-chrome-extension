@@ -1,5 +1,9 @@
 import { SETTINGS_FILE_TYPE } from "../constants/common-setting.constants";
 import { RcFile } from "antd/es/upload/interface";
+import defaultStore from "../constants/default-store.constants";
+import { NewTabStateBase } from "../models/new-tab-state.model";
+import { CURRENT_EXT_VERSION } from "../constants/update.constants";
+import { getDeltaChanges } from "./update.utils";
 
 /**
  * Функция для скачивания файла
@@ -45,8 +49,9 @@ export const getSettingsUploadingErrorKey = async (
     reader.onloadend = (event: ProgressEvent<FileReader>) => {
       try {
         const json = event.target?.result?.toString();
+        const version = json && JSON.parse(json).update?.previousVersion;
 
-        if (json && JSON.parse(json)) {
+        if (version) {
           resolve("");
           return;
         }
@@ -57,6 +62,36 @@ export const getSettingsUploadingErrorKey = async (
       resolve("commonSetting.import.parseError");
     };
 
-    reader.readAsDataURL(file);
+    reader.readAsText(file);
   });
+};
+
+/**
+ * Функция, конвертирующая json-строку в объект настроек, адаптированных под текущую версию приложения
+ * @param json - Строка с настройками в формате json
+ * @returns - Настройки {@link NewTabStateBase}
+ * @category Utilities - Common Setting
+ */
+export const getSettingsAdaptedToCurrentVersion = (
+  json: string
+): NewTabStateBase => {
+  const settings = JSON.parse(json);
+  const version = settings.update?.previousVersion;
+
+  if (version && version < CURRENT_EXT_VERSION) {
+    const searchEngines = settings.searchEngines;
+    const deltaSearchEngines = getDeltaChanges(
+      CURRENT_EXT_VERSION,
+      version
+    ).searchEngines.filter(engine => !searchEngines.includes(engine));
+    searchEngines.push(...deltaSearchEngines);
+  }
+
+  Object.keys(settings).forEach(name => {
+    if (!Object.hasOwn(defaultStore, name)) {
+      delete settings[name];
+    }
+  });
+
+  return settings;
 };

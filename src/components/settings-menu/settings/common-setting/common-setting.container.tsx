@@ -11,6 +11,7 @@ import {
 } from "../../../../constants/common-setting.constants";
 import {
   downloadFile,
+  getSettingsAdaptedToCurrentVersion,
   getSettingsUploadingErrorKey
 } from "../../../../utils/common-setting.utils";
 import { getInitStateFromChrome } from "../../../../utils/chrome.utils";
@@ -26,6 +27,7 @@ import {
 import { RadioChangeEvent } from "antd/es/radio/interface";
 import { useTranslation } from "react-i18next";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
+import { NewTabStateBase } from "../../../../models/new-tab-state.model";
 
 const CommonSettingContainer: FC = () => {
   const { t } = useTranslation();
@@ -35,7 +37,8 @@ const CommonSettingContainer: FC = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [uploadingError, setUploadingError] = useState("");
   const [settingFileList, setSettingFileList] = useState<UploadFile[]>([]);
-  const [uploadedSettings, setUploadedSettings] = useState(null);
+  const [uploadedSettings, setUploadedSettings] =
+    useState<NewTabStateBase | null>(null);
 
   const handleResetImportSettings = useCallback(() => {
     if (selectedOption === BUTTON_NAMES.import) {
@@ -73,8 +76,8 @@ const CommonSettingContainer: FC = () => {
         const json = event.target?.result?.toString();
 
         if (json) {
-          const parsedSettings = JSON.parse(json);
-          setUploadedSettings(parsedSettings);
+          const settings = getSettingsAdaptedToCurrentVersion(json);
+          setUploadedSettings(settings);
           setUploadingError("");
         }
       };
@@ -120,7 +123,6 @@ const CommonSettingContainer: FC = () => {
           if (uploadedSettings) {
             dispatch(applySettings(uploadedSettings));
           }
-          break;
       }
 
       handleCancel();
@@ -130,10 +132,10 @@ const CommonSettingContainer: FC = () => {
 
   return (
     <CommonSettingComponent
-      disableOk={
+      disableOk={Boolean(
         selectedOption === BUTTON_NAMES.import &&
-        (!uploadedSettings || uploadingError)
-      }
+          (!uploadedSettings || uploadingError)
+      )}
       radioOption={radioOption}
       uploadingError={uploadingError}
       selectedOption={selectedOption}
