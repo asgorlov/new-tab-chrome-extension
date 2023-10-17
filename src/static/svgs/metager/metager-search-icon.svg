@@ -1,23 +1,4 @@
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.1"
-   viewBox="0 0 24.410983 23.632021"
-   height="89.317871"
-   width="92.261986"
->
-  <circle
-     transform="rotate(15.366798)"
-     r="7.3626533"
-     cy="6.1155853"
-     cx="10.750866"
-     id="path2298"
-     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.767277;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     transform="matrix(0.66463899,-0.74716465,0.74301394,0.66927594,0,0)"
-     y="19.314386"
-     x="-2.0791028"
-     height="11.882498"
-     width="2.1384423"
-     id="rect2300"
-     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.69334972;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <circle stroke="#000000" stroke-miterlimit="4" stroke-width="2.76728" fill="none" id="path2298" cx="10.75087" cy="6.11559" r="7.36265" transform="matrix(0.734703 0.201913 -0.201913 0.734703 0.887484 0.855391)"/>
+ <rect stroke="#000000" stroke-miterlimit="4" stroke-width="1.69335" fill="#000000" id="rect2300" width="2.13844" height="11.8825" x="-2.0791" y="19.31439" transform="matrix(0.506417 -0.569297 0.566134 0.50995 0.887484 0.855391)"/>
 </svg>

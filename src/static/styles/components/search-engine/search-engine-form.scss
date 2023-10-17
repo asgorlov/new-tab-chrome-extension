@@ -15,10 +15,13 @@
   align-items: center;
   background-color: $light-color;
   box-shadow: transparent;
+  outline: none transparent;
 
   &.yandex {
-    background-color: $ya-color;
-    @include hide-form-border(0.625rem);
+    height: 38px;
+    padding: 2px 0;
+    outline: 2px solid $ya-color;
+    @include hide-form-border(10px);
   }
 
   &.google {
@@ -33,8 +36,8 @@
 
   &.duckduckgo {
     outline: 1px solid #00000026;
-    border-radius: 4px;
     box-shadow: 0 2px 3px #0000000F;
+    @include hide-form-border(8px);
 
     &.dark {
       box-shadow: 0 2px 3px $light-background-color;
@@ -51,7 +54,24 @@
   }
 
   &.yahoo {
-    @include hide-form-border(4px);
+    background: #f0f3f5;
+    @include hide-form-border(145px);
+
+    &:hover {
+      background: $light-color;
+      box-shadow: 0 4px 8px 0 #00000019, 0 0 1px 0 #00000019;
+    }
+
+    &.dark {
+      &:hover {
+        box-shadow: 0 4px 8px 0 #ffffff19, 0 0 1px 0 #ffffff19;
+      }
+
+      .new-tab__search-engine_button.yahoo::after {
+        color: #000000;
+        background: #b7d2eda8;
+      }
+    }
   }
 
   &.brave {
@@ -77,8 +97,8 @@
     box-shadow: #00000011 0 -0.5px 0, #00000019 0 0 18px;
 
     &:focus-within {
-      box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
-      border-color: #4A72F5FF;
+      box-shadow: #4A72F5FF 0 0 3px;
+      border-color: #ffffff00;
     }
 
     &.dark {
@@ -101,12 +121,13 @@
   }
 
   &.lycos {
-    transition: all $fast-transition, outline 0.05s;;
+    transition: all $fast-transition, outline 0.05s, outline-offset 0.05s;
     outline: 1px solid #dddddd;
     @include hide-form-border(4px);
 
-    &:focus-within {
-      outline: 2px #101010;
+    &._focused {
+      outline-offset: -4px;
+      outline: 2px solid #101010;
     }
   }
 
