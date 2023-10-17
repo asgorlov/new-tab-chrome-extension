@@ -35,6 +35,10 @@
   &-prefix {
     display: flex;
     height: max-content;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
     position: relative;
 
     &[data-tooltip]:after {
@@ -64,26 +68,37 @@
       opacity: 1;
     }
 
-
-    &-icon {
+    span {
       transition: $fast-transition;
       width: 0;
+      height: 0;
       opacity: 0;
+      margin-right: 0;
+      background-image: url("../../../svgs/google/google-search-icon.svg");
+    }
 
-      &.metager {
-        transform: rotate(-90deg);
-        margin-right: 11px;
-        width: 20px;
-        height: 20px;
-        opacity: 1;
-      }
+    &.google span {
+      margin-top: 2px;
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      opacity: 1;
+    }
+
+    &.metager span {
+      transform: rotate(-90deg);
+      margin-right: 11px;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      background-image: url("../../../svgs/metager/metager-key-icon.svg");
     }
   }
 
   &.yandex {
     background-color: $light-color;
-    border: 3px solid transparent;
-    border-radius: 0.75rem 0.625rem 0.625rem 0.75rem;
+    border-radius: 9px;
+    padding: 0 11px;
     background-clip: padding-box;
     @include change-pseudo-input-border-color(transparent);
   }
@@ -106,23 +121,10 @@
   }
 
   &.yahoo {
-    border: 1px solid #188fff;
-    border-radius: 4px 0 0 4px;
+    border-radius: 145px 0 0 145px;
     font-weight: 500;
-    box-shadow: 0 0 8px 0 #0F69FF33, 0 0 1px 0 #0F69FF33;
-
-    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
-    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):focus {
-      border: none transparent;
-      box-shadow: 0 4px 16px 0 #00000033, 0 0 2px 0 #0000000C;
-    }
-
-    &.dark {
-      &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
-      &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):focus {
-        box-shadow: 0 4px 16px 0 #ffffff33, 0 0 2px 0 #ffffff0c;
-      }
-    }
+    padding-left: 16px;
+    @include change-pseudo-input-border-color(transparent);
   }
 
   &.brave {
@@ -141,6 +143,7 @@
 
   &.aol {
     border: 1px solid #7590f5;
+    border-right: 0 transparent;
 
     &:hover {
       box-shadow: 0 0 3px #a5b2f4;

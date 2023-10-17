@@ -13,46 +13,66 @@
   }
 }
 
+@mixin aria-label-after($top, $background) {
+  z-index: 3;
+  pointer-events: none;
+  transition: all .1s;
+  opacity: 0;
+  font-size: .8125rem;
+  line-height: 150%;
+  white-space: nowrap;
+  top: $top;
+  content: attr(aria-label) "";
+  color: #fff;
+  border-radius: 6px;
+  transform: translate3d(-50%,0,0);
+  left: 50%;
+  position: absolute;
+  padding: 10px 15px;
+  background: $background;
+}
+
 .new-tab__search-engine_button {
   transition: $fast-transition;
   border: none transparent;
   height: 100%;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  background: transparent;
+  cursor: pointer;
+  opacity: 1;
 
   &.yandex {
-    width: 100px;
-    border-radius: 0 10px 10px 0;
+    width: 80px;
+    border-radius: 9px;
+    margin-right: 2px;
+    background-color: $ya-color;
 
-    & span {
+    span {
       transition: $fast-transition;
-      font: 18px Arial, Helvetica, sans-serif;
-      padding: 0 18px;
+      font: 16px Arial, sans-serif;
+      font-weight: 500;
     }
 
+    &:hover,
     &:focus {
-      background: #f0bf00;
+      background: darken($ya-color, 2%);
     }
   }
 
   &.google {
-    width: 48px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
     border-radius: 0 24px 24px 0;
-    @include change-btn-hover-bd-color(transparent);
-    @include change-btn-focus-bd-color(transparent);
-
-    & svg {
-      padding: 0 8px;
-    }
   }
 
   &.duckduckgo {
     width: 50px;
-    border-radius: 0 4px 4px 0;
-    @include change-btn-hover-bd-color(#2950BF);
+    border-radius: 0 8px 8px 0;
 
     & span {
       transition: $fast-transition;
@@ -61,15 +81,18 @@
       color: #999;
     }
 
-    &:hover span {
-      color: $light-color;
+    &:hover {
+      background: #2950BF;
+
+      span {
+        color: $light-color;
+      }
     }
   }
 
   &.bing {
     width: 40px;
     border-radius: 0 24px 24px 0;
-    @include change-btn-hover-bd-color(transparent);
 
     & label {
       display: flex;
@@ -100,22 +123,7 @@
       }
 
       &::after {
-        z-index: 3;
-        pointer-events: none;
-        transition: all .1s;
-        opacity: 0;
-        font-size: .8125rem;
-        line-height: 150%;
-        white-space: nowrap;
-        top: 100%;
-        content: attr(aria-label) "";
-        color: #fff;
-        border-radius: 6px;
-        transform: translate3d(-50%,0,0);
-        left: 50%;
-        position: absolute;
-        padding: 10px 15px;
-        background: #666;
+        @include aria-label-after(100%, #666);
       }
 
       &:hover::before,
@@ -126,19 +134,29 @@
   }
 
   &.yahoo {
-    width: 60px;
-    background: #188fff;
-    border-radius: 0 4px 4px 0;
-    @include change-btn-hover-bd-color(#0f69ff);
+    width: 70px;
+    background: $yahoo-color;
+    border-radius: 145px;
 
-    & svg path {
-      transition: $fast-transition;
-      fill: #fff;
+    &::after {
+      @include aria-label-after(110%, #232a31cc);
     }
 
-    @media screen and (max-width: 1020px) {
-      transition: $fast-transition;
-      width: 80px;
+    &:hover {
+      background: darken($yahoo-color, 5%);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    & svg {
+      width: 18px;
+
+      path {
+        transition: $fast-transition;
+        fill: #fff;
+      }
     }
   }
 
@@ -158,14 +176,13 @@
   &.swisscows {
     width: 40px;
     border-radius: 0 26px 26px 0;
-    @include change-btn-hover-bd-color(transparent);
   }
 
   &.aol {
     width: 65px;
     background: $aol-color;
     border-radius: 0;
-    @include change-btn-hover-bd-color($aol-color);
+    z-index: 2;
 
     .mag-glass {
       color: white;
@@ -200,12 +217,14 @@
   }
 
   &.youcom {
-    width: 40px;
-    border-radius: 0 24px 24px 0;
-    @include change-btn-hover-bd-color(transparent);
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    border-radius: 24px;
+    background: #b8b8bf;
 
-    svg path {
-      fill: #808080;
+    &:hover {
+      background: $youcom-color;
     }
   }
 
@@ -213,7 +232,6 @@
     width: 40px;
     border-radius: 0 7px 7px 0;
     padding-right: 8px;
-    @include change-btn-hover-bd-color(transparent);
 
     svg {
       transform: scale(0.9);
@@ -254,9 +272,16 @@
     transition: all $fast-transition, outline 0.1s;
     width: 48px;
     border-radius: 0 30px 30px 0;
-    @include change-btn-hover-bd-color(#006600);
 
-    &:focus-within {
+    &:hover {
+      background: darken($ecosia-color, 5%);
+
+      svg {
+        fill: $light-color;
+      }
+    }
+
+    &:focus {
       outline: 2px solid #0094c7;
       outline-offset: 1px;
       border-color: $ecosia-color;
@@ -267,8 +292,8 @@
       }
     }
 
-    &:hover svg {
-      fill: $light-color;
+    svg {
+      transition: $fast-transition;
     }
   }
 
@@ -280,7 +305,6 @@
     right: 6px;
     text-shadow: 0 1px rgba(0,0,0,0.12);
     z-index: 1;
-    @include change-btn-hover-bd-color($light-color);
 
     span {
       color: $light-color;
@@ -297,10 +321,9 @@
 
   &.metager {
     width: 20px;
+    padding: 0;
     border-radius: 0;
-    margin-right: 12px;
-    @include change-btn-hover-bd-color(transparent);
-    @include change-btn-focus-bd-color(transparent);
+    margin-right: 10px;
 
     svg {
       height: 21px;
@@ -311,8 +334,6 @@
   &.ask {
     width: 42px;
     border-radius: 0;
-    @include change-btn-hover-bd-color(transparent);
-    @include change-btn-focus-bd-color(transparent);
 
     svg {
       height: 17px;
@@ -323,7 +344,10 @@
     width: 64px;
     background: #9e9e9e33;
     border-radius: 0;
-    @include change-btn-hover-bd-color(#9e9e9e66);
+
+    &:hover {
+      background: #9e9e9e66;
+    }
 
     span {
       font-family: Boardreader, sans-serif;
@@ -341,8 +365,6 @@
     background: $zapmeta-color;
     border-radius: 0 2px 2px 0;
     border-left: 0;
-    @include change-btn-hover-bd-color($zapmeta-color);
-    @include change-btn-focus-bd-color($zapmeta-color);
 
     span {
       font-family: Zapmeta, sans-serif;
@@ -362,8 +384,10 @@
     width: 78px;
     background: $btn-color;
     border-radius: 6px;
-    @include change-btn-hover-bd-color($btn-color);
-    @include change-btn-focus-bd-color($btn-color);
+
+    &:hover {
+      background: darken($btn-color, 6%);
+    }
 
     span {
       color: $light-color;

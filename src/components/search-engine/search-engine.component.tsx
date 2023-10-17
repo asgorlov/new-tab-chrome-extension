@@ -2,6 +2,7 @@ import React, { FC, FormEvent, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
+  METAGER,
   NIGMA,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
@@ -10,11 +11,10 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
-import { ReactComponent as KeyIcon } from "../../static/svgs/metager/metager-key-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
 
 /**
@@ -50,23 +50,25 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
     isDark
   }) => {
     const { t } = useTranslation();
+    const [formFocused, setFormFocused] = React.useState(false);
 
-    const getInputPrefix = (): ReactNode => {
-      return (
-        <a
-          href="https://metager.org/keys/key/enter"
+    const inputPrefix =
+      searchEngine === METAGER ? (
+        <button
+          type="button"
+          onClick={() =>
+            (window.location.href = "https://metager.org/keys/key/enter")
+          }
+          className={clsx("new-tab__search-engine_input-prefix", searchEngine)}
           data-tooltip={t("withoutAds")}
-          className="new-tab__search-engine_input-prefix"
-        >
-          <KeyIcon
-            className={clsx(
-              "new-tab__search-engine_input-prefix-icon",
-              searchEngine
-            )}
-          />
-        </a>
+          children={<span />}
+        />
+      ) : (
+        <button
+          className={clsx("new-tab__search-engine_input-prefix", searchEngine)}
+          children={<span />}
+        />
       );
-    };
 
     const getSearchEngineLogoClass = (): string =>
       clsx(
@@ -77,9 +79,12 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
       );
 
     const getSearchEngineFormClass = (): string =>
-      clsx("new-tab__search-engine_form", searchEngine, {
-        dark: isDark
-      });
+      clsx(
+        "new-tab__search-engine_form",
+        searchEngine,
+        { dark: isDark },
+        { _focused: formFocused }
+      );
 
     const getSearchEngineInputClass = (): string =>
       clsx("new-tab__search-engine_input", searchEngine, {
@@ -125,7 +130,9 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             onSubmit={onSubmitForm}
           >
             <Input
-              prefix={getInputPrefix()}
+              onFocus={() => setFormFocused(true)}
+              onBlur={() => setFormFocused(false)}
+              prefix={inputPrefix}
               className={getSearchEngineInputClass()}
               placeholder={t("searchQuery")}
               tabIndex={1}
@@ -134,10 +141,10 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
               name={getInputName(searchEngine)}
               required={searchEngine === ECOSIA}
             />
-            <Button
+            <button
+              aria-label={t("searchTheWeb")}
               className={clsx("new-tab__search-engine_button", searchEngine)}
-              htmlType="submit"
-              type="text"
+              type="submit"
               tabIndex={2}
               children={buttonLabel}
             />

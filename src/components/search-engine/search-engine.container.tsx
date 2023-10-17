@@ -9,7 +9,6 @@ import {
   DUCK,
   ECOSIA,
   GIBIRU,
-  GOOGLE,
   LYCOS,
   METAGER,
   NIGMA,
@@ -26,7 +25,6 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as EcosiaSearchIcon } from "../../static/svgs/ecosia/ecosia-search-icon.svg";
 import { ReactComponent as LycosSearchIcon } from "../../static/svgs/lycos/lycos-search-icon.svg";
-import { ReactComponent as GoogleSearchIcon } from "../../static/svgs/google/google-search-icon.svg";
 import { ReactComponent as YuoComSearchIcon } from "../../static/svgs/youcom/youcom-search-icon.svg";
 import { ReactComponent as GibiruSearchIcon } from "../../static/svgs/gibiru/gibiru-search-icon.svg";
 import { ReactComponent as YahooSearchIcon } from "../../static/svgs/yahoo/yahoo-search-icon.svg";
@@ -55,8 +53,6 @@ const SearchEngineContainer: FC = () => {
       case YANDEX:
       case SEARCHCH:
         return <span>{t("searchButton")}</span>;
-      case GOOGLE:
-        return <GoogleSearchIcon />;
       case DUCK:
         return <span>{"S"}</span>;
       case BING:
