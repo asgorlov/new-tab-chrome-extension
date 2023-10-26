@@ -1,5 +1,4 @@
 import React, { FC, memo } from "react";
-import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
@@ -10,6 +9,7 @@ import CommonSettingContainer from "./settings/common-setting/common-setting.con
 import DrawerComponent from "../common/drawer/drawer.component";
 import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
+import SettingsHeaderContainer from "./settings-header/settings-header.container";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -43,8 +43,6 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
     setIsOpenMenu,
     menuContentClass
   }) => {
-    const { t } = useTranslation();
-
     return (
       <div className={menuClass}>
         <Button
@@ -58,7 +56,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           />
         </Button>
         <DrawerComponent
-          title={t("settingsTitle")}
+          title={<SettingsHeaderContainer />}
           isDark={isDark}
           className="new-tab__settings-menu-container"
           menuClassName={menuClass}
