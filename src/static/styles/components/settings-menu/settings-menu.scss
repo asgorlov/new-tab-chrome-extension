@@ -39,7 +39,7 @@
             right: 0;
             display: flex;
             justify-content: space-between;
-            width: 18px;
+            width: 24px;
             height: 100%;
             border: 1px solid transparent;
             border-radius: 6px;
@@ -52,11 +52,11 @@
                 .new-tab__settings-menu-header__search {
                     &-input {
                         width: 100%;
-                        padding-left: 6px;
+                        padding: 0 6px;
                     }
 
                     &-button {
-                        width: 26px;
+                        //width: 26px;
                     }
                 }
             }
@@ -68,7 +68,7 @@
                 width: 0;
 
                 &.expanded {
-                    width: 34px;
+                    width: max-content;
 
                     div {
                         height: 80%;
@@ -76,15 +76,14 @@
 
                     button {
                         opacity: 1;
-                        width: max-content;
-                        padding: 0 6px;
+                        width: 24px;
                     }
                 }
 
                 div {
-                    transition: $fast-transition;
+                    transition: $fast-transition, border-color $slow-transition;
                     height: 0;
-                    border-left: 1px solid $light-border-color;
+                    border-left: 1.5px solid $light-border-color;
                 }
 
                 button {
@@ -92,21 +91,20 @@
                     opacity: 0;
                     width: 0;
                     height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     cursor: pointer;
                     padding: 0;
                     border: none;
+                    border-radius: 24px;
                     background: transparent;
+                    writing-mode: vertical-rl;
+                    line-height: 8px;
+                    font-size: 16px;
 
                     &:active {
                         background: $light-border-color;
-                    }
-
-                    &:first-child {
-                        border-radius: 5px 0 0 5px;
-                    }
-
-                    &:last-child {
-                        border-radius: 0 5px 5px 0;
                     }
                 }
             }
@@ -123,17 +121,17 @@
 
             &-button {
                 transition: $fast-transition;
-                box-sizing: content-box;
                 position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 18px;
+                width: 24px;
+                height: 100%;
                 cursor: pointer;
                 margin: 0;
                 outline: none;
                 padding: 0;
-                border-radius: 0 5px 5px 0;
+                border-radius: 24px;
                 border: none;
                 filter: invert(0);
                 background-color: transparent;
@@ -176,6 +174,10 @@
                             &:active {
                                 background: $dark-border-color;
                             }
+                        }
+
+                        div {
+                            border-color: $dark-border-color;
                         }
                     }
 

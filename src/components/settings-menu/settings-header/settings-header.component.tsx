@@ -56,15 +56,6 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = () => {
           expanded: isExpanded
         })}
       >
-        <div
-          className={clsx("new-tab__settings-menu-header__search-controls", {
-            expanded: searchQuery
-          })}
-        >
-          <button>{"<"}</button>
-          <div />
-          <button>{">"}</button>
-        </div>
         <input
           ref={inputRef}
           value={searchQuery}
@@ -72,17 +63,28 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = () => {
           className="new-tab__settings-menu-header__search-input"
           placeholder={t("searchBySettings")}
         />
-        <button
-          onClick={onClickButton}
-          className="new-tab__settings-menu-header__search-button"
+        <div
+          className={clsx("new-tab__settings-menu-header__search-controls", {
+            expanded: searchQuery
+          })}
         >
-          <SearchIcon
-            className={clsx("setting-search-icon", { hidden: searchQuery })}
-          />
-          <CloseIcon
-            className={clsx("setting-close-icon", { hidden: !searchQuery })}
-          />
-        </button>
+          <div />
+          <button>{"<"}</button>
+          <button>{">"}</button>
+        </div>
+        <div>
+          <button
+            onClick={onClickButton}
+            className="new-tab__settings-menu-header__search-button"
+          >
+            <SearchIcon
+              className={clsx("setting-search-icon", { hidden: searchQuery })}
+            />
+            <CloseIcon
+              className={clsx("setting-close-icon", { hidden: !searchQuery })}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );
