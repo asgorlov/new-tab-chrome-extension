@@ -34,7 +34,7 @@
         }
 
         &__search {
-            transition: all $fast-transition, background-color $slow-transition, border-color $slow-transition;
+            transition: all $fast-transition, background-color $slow-transition, border-color $slow-transition, width $slow-transition;
             position: absolute;
             right: 0;
             display: flex;
@@ -54,9 +54,38 @@
                         width: 100%;
                         padding: 0 6px;
                     }
+                }
+            }
 
-                    &-button {
-                        //width: 26px;
+            &-counter {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 0;
+                padding-right: 0;
+
+                &-icon {
+                    transition: fill $fast-transition;
+                    fill: black;
+                }
+
+                &-value {
+                    transition: opacity $fast-transition, color $fast-transition;
+                    font-size: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    color: black;
+                }
+
+                &.expanded {
+                    width: 10%;
+                    padding-right: 6px;
+
+                    .new-tab__settings-menu-header__search-counter-value {
+                        opacity: 1;
                     }
                 }
             }
@@ -68,7 +97,7 @@
                 width: 0;
 
                 &.expanded {
-                    width: max-content;
+                    width: 48px;
 
                     div {
                         height: 80%;
@@ -101,7 +130,7 @@
                     background: transparent;
                     writing-mode: vertical-rl;
                     line-height: 8px;
-                    font-size: 16px;
+                    font-size: 14px;
 
                     &:active {
                         background: $light-border-color;
@@ -165,6 +194,16 @@
 
                     &.expanded {
                         border-color: $dark-border-color;
+                    }
+
+                    &-counter {
+                        &-icon {
+                            fill: $light-color;
+                        }
+
+                        &-value {
+                            color: $light-color;
+                        }
                     }
 
                     &-controls {

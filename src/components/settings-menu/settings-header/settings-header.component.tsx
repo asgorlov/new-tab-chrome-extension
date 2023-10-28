@@ -1,93 +1,126 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FC, memo, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectIsDark } from "../../../store/new-tab/new-tab.selectors";
 import { ReactComponent as SearchIcon } from "../../../static/svgs/menu-settings/settings-search-icon.svg";
 import { ReactComponent as CloseIcon } from "../../../static/svgs/menu-settings/settings-search-close-icon.svg";
+import { ReactComponent as LoadingIcon } from "../../../static/svgs/menu-settings/settings-search-loading.svg";
 
-export interface SettingsHeaderComponentProps {}
+export interface SettingsHeaderComponentProps {
+  isExpanded: boolean;
+  searchQuery: string;
+  foundElements: Element[];
+  setIsExpanded: (value: boolean) => void;
+  isSearchLoading: boolean;
+  currentFoundElement: number;
+  onChangeSearchQuery: (value: ChangeEvent<HTMLInputElement>) => void;
+  onClickSearchButton: () => void;
+}
 
-const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = () => {
-  const { t } = useTranslation();
-  const isDark = useSelector(selectIsDark);
+const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
+  ({
+    isExpanded,
+    searchQuery,
+    foundElements,
+    setIsExpanded,
+    isSearchLoading,
+    currentFoundElement,
+    onChangeSearchQuery,
+    onClickSearchButton
+  }) => {
+    const { t } = useTranslation();
+    const isDark = useSelector(selectIsDark);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const searchRef = useRef<HTMLDivElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const searchRef = useRef<HTMLDivElement | null>(null);
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+    const handleClickOutside = useCallback(
+      (event: Event) => {
+        const isClickOutside = !searchRef.current?.contains(
+          event.target as Node
+        );
+        if (isClickOutside) {
+          setIsExpanded(false);
+        }
+      },
+      [searchRef]
+    );
 
-  const clickCallback = useMemo(() => {
-    return (event: Event) => {
-      const isClickOutside = !searchRef.current?.contains(event.target as Node);
-      if (isClickOutside) {
-        setIsExpanded(false);
-      }
+    const onClickButton = () => {
+      inputRef.current?.focus();
+      onClickSearchButton();
     };
-  }, [searchRef]);
 
-  const onClickButton = () => {
-    inputRef.current?.focus();
+    useEffect(() => {
+      const handleListener =
+        isExpanded && !searchQuery
+          ? document.addEventListener
+          : document.removeEventListener;
+      handleListener("click", handleClickOutside);
+    }, [isExpanded, searchQuery, handleClickOutside]);
 
-    if (searchQuery) {
-      setSearchQuery("");
-    } else {
-      setIsExpanded(!isExpanded);
-    }
-  };
-
-  useEffect(() => {
-    const handleListener =
-      isExpanded && !searchQuery
-        ? document.addEventListener
-        : document.removeEventListener;
-    handleListener("click", clickCallback);
-  }, [isExpanded, searchQuery, clickCallback]);
-
-  return (
-    <div className={clsx("new-tab__settings-menu-header", { dark: isDark })}>
-      <span className="new-tab__settings-menu-header__title">
-        {t("settingsTitle")}
-      </span>
-      <div
-        ref={searchRef}
-        className={clsx("new-tab__settings-menu-header__search", {
-          expanded: isExpanded
-        })}
-      >
-        <input
-          ref={inputRef}
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          className="new-tab__settings-menu-header__search-input"
-          placeholder={t("searchBySettings")}
-        />
+    return (
+      <div className={clsx("new-tab__settings-menu-header", { dark: isDark })}>
+        <span className="new-tab__settings-menu-header__title">
+          {t("settingsTitle")}
+        </span>
         <div
-          className={clsx("new-tab__settings-menu-header__search-controls", {
-            expanded: searchQuery
+          ref={searchRef}
+          className={clsx("new-tab__settings-menu-header__search", {
+            expanded: isExpanded
           })}
         >
-          <div />
-          <button>{"<"}</button>
-          <button>{">"}</button>
-        </div>
-        <div>
-          <button
-            onClick={onClickButton}
-            className="new-tab__settings-menu-header__search-button"
+          <input
+            ref={inputRef}
+            value={searchQuery}
+            onChange={onChangeSearchQuery}
+            className="new-tab__settings-menu-header__search-input"
+            placeholder={t("searchBySettings")}
+          />
+          <div
+            className={clsx("new-tab__settings-menu-header__search-counter", {
+              expanded: searchQuery && currentFoundElement >= 0
+            })}
           >
-            <SearchIcon
-              className={clsx("setting-search-icon", { hidden: searchQuery })}
-            />
-            <CloseIcon
-              className={clsx("setting-close-icon", { hidden: !searchQuery })}
-            />
-          </button>
+            {isSearchLoading ? (
+              <div className="new-tab__settings-menu-header__search-counter-icon">
+                <LoadingIcon />
+              </div>
+            ) : (
+              <div className="new-tab__settings-menu-header__search-counter-value">
+                {currentFoundElement >= 0 && (
+                  <>{`${currentFoundElement}/${foundElements.length}`}</>
+                )}
+              </div>
+            )}
+          </div>
+          <div
+            className={clsx("new-tab__settings-menu-header__search-controls", {
+              expanded: searchQuery
+            })}
+          >
+            <div />
+            <button>{"<"}</button>
+            <button>{">"}</button>
+          </div>
+          <div>
+            <button
+              onClick={onClickButton}
+              className="new-tab__settings-menu-header__search-button"
+            >
+              <SearchIcon
+                className={clsx("setting-search-icon", { hidden: searchQuery })}
+              />
+              <CloseIcon
+                className={clsx("setting-close-icon", { hidden: !searchQuery })}
+              />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default SettingsHeaderComponent;

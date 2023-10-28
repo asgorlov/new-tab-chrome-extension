@@ -10,6 +10,7 @@ import DrawerComponent from "../common/drawer/drawer.component";
 import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
 import SettingsHeaderContainer from "./settings-header/settings-header.container";
+import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.constants";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -18,7 +19,6 @@ import SettingsHeaderContainer from "./settings-header/settings-header.container
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property searchEngine - Выбранная поисковая система
  * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
- * @property menuContentClass - Название класса стилей для списка меню настроек
  * @interface
  */
 export interface SettingsMenuComponentProps {
@@ -27,7 +27,6 @@ export interface SettingsMenuComponentProps {
   isOpenMenu: boolean;
   searchEngine: string;
   setIsOpenMenu: (value: boolean) => void;
-  menuContentClass: string;
 }
 
 /**
@@ -35,14 +34,7 @@ export interface SettingsMenuComponentProps {
  * @category Components
  */
 const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
-  ({
-    isDark,
-    menuClass,
-    isOpenMenu,
-    searchEngine,
-    setIsOpenMenu,
-    menuContentClass
-  }) => {
+  ({ isDark, menuClass, isOpenMenu, searchEngine, setIsOpenMenu }) => {
     return (
       <div className={menuClass}>
         <Button
@@ -63,7 +55,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
           open={isOpenMenu}
           onClose={() => setIsOpenMenu(false)}
         >
-          <div className={menuContentClass}>
+          <div className={SETTINGS_MENU_CONTENT_CLASS}>
             <CommonSettingContainer />
             <SearchEngineSettingComponent />
             <DarkModeSettingComponent />

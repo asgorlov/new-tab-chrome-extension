@@ -9,6 +9,7 @@ import {
   selectIsOpenMenu,
   selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
+import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.constants";
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,8 +18,6 @@ const SettingsMenuContainer: FC = () => {
   const isOpenMenu = useSelector(selectIsOpenMenu);
   const searchEngine = useSelector(selectSearchEngine);
 
-  const menuContentClass = "new-tab__settings-menu-content";
-
   const changeIsOpenMenu = useCallback(
     (v: boolean) => dispatch(setIsOpenMenu(v)),
     [dispatch]
@@ -26,13 +25,12 @@ const SettingsMenuContainer: FC = () => {
 
   useEffect(() => {
     if (tourCtx) {
-      tourCtx.settingsMenuContentClass = `.${menuContentClass}`;
+      tourCtx.settingsMenuContentClass = `.${SETTINGS_MENU_CONTENT_CLASS}`;
     }
   }, [tourCtx]);
 
   return (
     <SettingsMenuComponent
-      menuContentClass={menuContentClass}
       setIsOpenMenu={changeIsOpenMenu}
       searchEngine={searchEngine}
       isOpenMenu={isOpenMenu}
