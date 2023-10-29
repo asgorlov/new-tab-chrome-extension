@@ -1,4 +1,12 @@
-import { ChangeEvent, FC, memo, useCallback, useEffect, useRef } from "react";
+import {
+  ChangeEvent,
+  FC,
+  memo,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef
+} from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
@@ -7,6 +15,7 @@ import { ReactComponent as SearchIcon } from "../../../static/svgs/menu-settings
 import { ReactComponent as CloseIcon } from "../../../static/svgs/menu-settings/settings-search-close-icon.svg";
 import { ReactComponent as LoadingIcon } from "../../../static/svgs/menu-settings/settings-search-loading.svg";
 
+// toDo: добавить описание пропертей
 export interface SettingsHeaderComponentProps {
   isExpanded: boolean;
   searchQuery: string;
@@ -16,8 +25,13 @@ export interface SettingsHeaderComponentProps {
   currentFoundElement: number;
   onChangeSearchQuery: (value: ChangeEvent<HTMLInputElement>) => void;
   onClickSearchButton: () => void;
+  onClickSearchNavigation: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
+/**
+ * Компонент хэдера меню настроек с поиском
+ * @category Components
+ */
 const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
   ({
     isExpanded,
@@ -27,7 +41,8 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
     isSearchLoading,
     currentFoundElement,
     onChangeSearchQuery,
-    onClickSearchButton
+    onClickSearchButton,
+    onClickSearchNavigation
   }) => {
     const { t } = useTranslation();
     const isDark = useSelector(selectIsDark);
@@ -44,7 +59,7 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
           setIsExpanded(false);
         }
       },
-      [searchRef]
+      [searchRef, setIsExpanded]
     );
 
     const onClickButton = () => {
@@ -101,8 +116,12 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
             })}
           >
             <div />
-            <button>{"<"}</button>
-            <button>{">"}</button>
+            <button name="up" onClick={onClickSearchNavigation}>
+              {"<"}
+            </button>
+            <button name="down" onClick={onClickSearchNavigation}>
+              {">"}
+            </button>
           </div>
           <div>
             <button

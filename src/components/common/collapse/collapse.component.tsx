@@ -42,6 +42,7 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
         onChange={onChange}
       >
         <Panel
+          forceRender
           className={panelClassName}
           children={children}
           header={

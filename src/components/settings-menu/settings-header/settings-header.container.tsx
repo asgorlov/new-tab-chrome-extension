@@ -1,7 +1,11 @@
-import { ChangeEvent, FC, useCallback, useState } from "react";
+import { ChangeEvent, FC, MouseEvent, useCallback, useState } from "react";
 import SettingsHeaderComponent from "./settings-header.component";
 import { useDebounceEffect } from "ahooks";
 import { SETTINGS_MENU_CONTENT_CLASS } from "../../../constants/settings-menu.constants";
+import {
+  getNextElementIndex,
+  scrollToElement
+} from "../../../utils/settings-header.utils";
 
 const SettingsHeaderContainer: FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,11 +15,11 @@ const SettingsHeaderContainer: FC = () => {
   const [currentFoundElement, setCurrentFoundElement] = useState<number>(-1);
 
   const handleChangeSearchQuery = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setSearchQuery(event.target.value);
-    },
+    (event: ChangeEvent<HTMLInputElement>) =>
+      setSearchQuery(event.target.value),
     []
   );
+
   const handleClickSearchButton = useCallback(() => {
     if (searchQuery) {
       setSearchQuery("");
@@ -24,6 +28,22 @@ const SettingsHeaderContainer: FC = () => {
       setIsExpanded(!isExpanded);
     }
   }, [searchQuery, isExpanded]);
+
+  const handleClickSearchNavigation = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      if (foundElements.length > 1) {
+        const nextElementIndex = getNextElementIndex(
+          event.currentTarget.name,
+          currentFoundElement,
+          foundElements
+        );
+
+        setCurrentFoundElement(nextElementIndex + 1);
+        scrollToElement(foundElements[nextElementIndex]);
+      }
+    },
+    [foundElements, currentFoundElement]
+  );
 
   useDebounceEffect(
     () => {
@@ -34,11 +54,11 @@ const SettingsHeaderContainer: FC = () => {
 
         if (query) {
           setIsSearchLoading(true);
-          const menu = document.querySelector(
+          const menuContainer = document.querySelector(
             `.${SETTINGS_MENU_CONTENT_CLASS}`
           );
 
-          if (menu) {
+          if (menuContainer) {
             const searchPattern = new RegExp(query, "gi");
             const findByQuery = (element: Element) => {
               if (element.children.length) {
@@ -50,7 +70,7 @@ const SettingsHeaderContainer: FC = () => {
               }
             };
 
-            for (let child of menu.children) {
+            for (let child of menuContainer.children) {
               findByQuery(child);
             }
           }
@@ -60,10 +80,13 @@ const SettingsHeaderContainer: FC = () => {
 
         setFoundElements(matchedElements);
         setCurrentFoundElement(currentElementNumber);
-        setTimeout(() => setIsSearchLoading(false), 1000);
+        setTimeout(() => {
+          setIsSearchLoading(false);
+          scrollToElement(matchedElements[0]);
+        }, 1000);
       }
     },
-    [isExpanded, searchQuery],
+    [isExpanded, searchQuery, scrollToElement],
     { wait: 500 }
   );
 
@@ -77,6 +100,7 @@ const SettingsHeaderContainer: FC = () => {
       currentFoundElement={currentFoundElement}
       onChangeSearchQuery={handleChangeSearchQuery}
       onClickSearchButton={handleClickSearchButton}
+      onClickSearchNavigation={handleClickSearchNavigation}
     />
   );
 };
