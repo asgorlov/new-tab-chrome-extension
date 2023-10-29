@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, MouseEvent, useCallback, useState } from "react";
 import SettingsHeaderComponent from "./settings-header.component";
 import { useDebounceEffect } from "ahooks";
-import { SETTINGS_MENU_CONTENT_CLASS } from "../../../constants/settings-menu.constants";
 import {
+  getMatchedElements,
   getNextElementIndex,
   scrollToElement
 } from "../../../utils/settings-header.utils";
@@ -49,32 +49,11 @@ const SettingsHeaderContainer: FC = () => {
     () => {
       if (isExpanded) {
         const query = searchQuery.trim();
-        const matchedElements: Element[] = [];
+        const matchedElements: Element[] = getMatchedElements(query);
         let currentElementNumber = -1;
 
         if (query) {
           setIsSearchLoading(true);
-          const menuContainer = document.querySelector(
-            `.${SETTINGS_MENU_CONTENT_CLASS}`
-          );
-
-          if (menuContainer) {
-            const searchPattern = new RegExp(query, "gi");
-            const findByQuery = (element: Element) => {
-              if (element.children.length) {
-                for (let child of element.children) {
-                  findByQuery(child);
-                }
-              } else if (element.textContent?.match(searchPattern)?.length) {
-                matchedElements.push(element);
-              }
-            };
-
-            for (let child of menuContainer.children) {
-              findByQuery(child);
-            }
-          }
-
           currentElementNumber = matchedElements.length ? 1 : 0;
         }
 
