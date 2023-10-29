@@ -236,4 +236,16 @@
             }
         }
     }
+
+    &-content {
+        .highlighted-text {
+            transition: $fast-transition;
+            color: black;
+            background-color: $highlighted-text-color;
+
+            &.current {
+                background-color: $current-highlighted-text-color;
+            }
+        }
+    }
 }

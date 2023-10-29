@@ -4,7 +4,7 @@ import { useDebounceEffect } from "ahooks";
 import {
   getMatchedElements,
   getNextElementIndex,
-  scrollToElement
+  scrollToSelectedElement
 } from "../../../utils/settings-header.utils";
 
 const SettingsHeaderContainer: FC = () => {
@@ -39,7 +39,7 @@ const SettingsHeaderContainer: FC = () => {
         );
 
         setCurrentFoundElement(nextElementIndex + 1);
-        scrollToElement(foundElements[nextElementIndex]);
+        scrollToSelectedElement(nextElementIndex, foundElements);
       }
     },
     [foundElements, currentFoundElement]
@@ -61,11 +61,11 @@ const SettingsHeaderContainer: FC = () => {
         setCurrentFoundElement(currentElementNumber);
         setTimeout(() => {
           setIsSearchLoading(false);
-          scrollToElement(matchedElements[0]);
+          scrollToSelectedElement(0, matchedElements);
         }, 1000);
       }
     },
-    [isExpanded, searchQuery, scrollToElement],
+    [isExpanded, searchQuery, scrollToSelectedElement],
     { wait: 500 }
   );
 
