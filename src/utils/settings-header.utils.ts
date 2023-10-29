@@ -1,9 +1,17 @@
 import {
-  SETTINGS_MENU_CONTENT_CLASS,
   FOUND_SEARCH_QUERY,
+  SETTINGS_MENU_CONTENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT
 } from "../constants/settings-menu.constants";
 import { HighlightedTextModel } from "../models/highlighted-text.model";
+
+/**
+ * Функция получения контейнера меню настроек, в котором будет происходить поиск
+ * @category Utilities - Settings Header
+ * @returns - Контейнер меню настроек {@link Element} или null
+ */
+export const getSettingsMenuContainer = (): Element | null =>
+  document.querySelector(`.${SETTINGS_MENU_CONTENT_CLASS}`);
 
 /**
  * Функция для перехода на указанный элемент
@@ -53,42 +61,40 @@ export const getNextElementIndex = (
  * Функция получения массива элементов, удовлетворяющих поиску
  * @category Utilities - Settings Header
  * @param query - Поисковый запрос
+ * @param container - Контейнер, в котором производится поиск
  * @returns - Массив элементов, удовлетворяющих поиску
  */
-export const getMatchedElements = (query: string): Element[] => {
+export const getMatchedElements = (
+  query: string,
+  container: Element
+): Element[] => {
   const matchedElements: Element[] = [];
 
   if (query) {
-    const menuContainer = document.querySelector(
-      `.${SETTINGS_MENU_CONTENT_CLASS}`
-    );
+    const findByQuery = (element: Element) => {
+      if (element.children.length) {
+        for (let child of element.children) {
+          findByQuery(child);
+        }
+      } else {
+        const textContent = element.textContent;
 
-    if (menuContainer) {
-      const findByQuery = (element: Element) => {
-        if (element.children.length) {
-          for (let child of element.children) {
-            findByQuery(child);
-          }
-        } else {
-          const textContent = element.textContent;
+        if (textContent) {
+          const highlightedText = getHighlightedTextModel(query, textContent);
 
-          if (textContent) {
-            const highlightedText = getHighlightedTextModel(query, textContent);
-
-            if (highlightedText.containsSearchQuery) {
-              element.innerHTML = highlightedText.content;
-              const elementsByQuery = element.querySelectorAll(
-                `[data-name='${FOUND_SEARCH_QUERY}']`
-              );
-              matchedElements.push(...elementsByQuery);
-            }
+          if (highlightedText.containsSearchQuery) {
+            element.innerHTML = highlightedText.content;
+            const elementsByQuery = element.querySelectorAll(
+              `[data-name='${FOUND_SEARCH_QUERY}']`
+            );
+            matchedElements.push(...elementsByQuery);
           }
         }
-      };
-
-      for (let child of menuContainer.children) {
-        findByQuery(child);
       }
+    };
+
+    for (let child of container.children) {
+      findByQuery(child);
     }
   }
 

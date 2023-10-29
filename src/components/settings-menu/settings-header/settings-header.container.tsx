@@ -4,10 +4,12 @@ import { useDebounceEffect } from "ahooks";
 import {
   getMatchedElements,
   getNextElementIndex,
+  getSettingsMenuContainer,
   scrollToSelectedElement
 } from "../../../utils/settings-header.utils";
 
 const SettingsHeaderContainer: FC = () => {
+  const [clonedMenu, setClonedMenu] = useState<Node | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [foundElements, setFoundElements] = useState<Element[]>([]);
@@ -24,10 +26,14 @@ const SettingsHeaderContainer: FC = () => {
     if (searchQuery) {
       setSearchQuery("");
       setFoundElements([]);
+
+      if (clonedMenu) {
+        getSettingsMenuContainer()?.replaceWith(clonedMenu);
+      }
     } else {
       setIsExpanded(!isExpanded);
     }
-  }, [searchQuery, isExpanded]);
+  }, [searchQuery, isExpanded, clonedMenu]);
 
   const handleClickSearchNavigation = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -49,23 +55,32 @@ const SettingsHeaderContainer: FC = () => {
     () => {
       if (isExpanded) {
         const query = searchQuery.trim();
-        const matchedElements: Element[] = getMatchedElements(query);
+        const matchedElements: Element[] = [];
         let currentElementNumber = -1;
 
         if (query) {
-          setIsSearchLoading(true);
-          currentElementNumber = matchedElements.length ? 1 : 0;
+          const menuContainer = getSettingsMenuContainer();
+
+          if (menuContainer) {
+            setIsSearchLoading(true);
+            setClonedMenu(menuContainer.cloneNode(true));
+            matchedElements.push(...getMatchedElements(query, menuContainer));
+            currentElementNumber = matchedElements.length ? 1 : 0;
+          }
+        } else if (clonedMenu && currentFoundElement !== -1) {
+          getSettingsMenuContainer()?.replaceWith(clonedMenu);
         }
 
         setFoundElements(matchedElements);
         setCurrentFoundElement(currentElementNumber);
+
         setTimeout(() => {
           setIsSearchLoading(false);
           scrollToSelectedElement(0, matchedElements);
         }, 1000);
       }
     },
-    [isExpanded, searchQuery, scrollToSelectedElement],
+    [isExpanded, searchQuery, scrollToSelectedElement, clonedMenu],
     { wait: 500 }
   );
 
