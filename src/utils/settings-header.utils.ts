@@ -1,9 +1,13 @@
 import {
-  FOUND_SEARCH_QUERY,
+  FOUND_SEARCH_QUERY_NAME,
   SETTINGS_MENU_CONTENT_CLASS,
-  SETTINGS_MENU_HIGHLIGHTED_TEXT
+  SETTINGS_MENU_CURRENT_CLASS,
+  SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
 } from "../constants/settings-menu.constants";
-import { HighlightedTextModel } from "../models/highlighted-text.model";
+import {
+  HighlightedTextModel,
+  MatchedElement
+} from "../models/settings-search.model";
 
 /**
  * Функция получения контейнера меню настроек, в котором будет происходить поиск
@@ -14,63 +18,98 @@ export const getSettingsMenuContainer = (): Element | null =>
   document.querySelector(`.${SETTINGS_MENU_CONTENT_CLASS}`);
 
 /**
+ * Функция восстановления текста для поиска на исходный
+ * @category Utilities - Settings Header
+ * @param matchedElements - Массив элементов, удовлетворяющих поисковому запросу
+ *
+ */
+export const resetMatchedElements = (matchedElements: MatchedElement[]) => {
+  const parentsForReset: { parent: Element | null; backup: string }[] = [];
+  matchedElements.forEach(e => {
+    const parent = e.item.parentElement;
+    const isContained =
+      parent && parentsForReset.some(p => p.parent === parent);
+
+    if (!isContained) {
+      parentsForReset.push({
+        parent: e.item.parentElement,
+        backup: e.textContentBackup
+      });
+    }
+  });
+
+  parentsForReset.forEach(p => {
+    if (p.parent) {
+      p.parent.textContent = p.backup;
+    }
+  });
+};
+
+/**
  * Функция для перехода на указанный элемент
  * @category Utilities - Settings Header
- * @param selectedIndex - Индекс выбранного элемента
- * @param foundElements - Массив элементов, удовлетворяющих поисковому запросу
+ * @param matchedElements - Массив элементов, удовлетворяющих поисковому запросу
+ * @param nextIndex - Индекс выбранного элемента для перехода на него
+ * @param currentIndex - Индекс текущего элемента
  */
-export const scrollToSelectedElement = (
-  selectedIndex: number,
-  foundElements: Element[]
+export const scrollToSelectedMatchedElement = (
+  matchedElements: MatchedElement[],
+  nextIndex: number,
+  currentIndex: number = nextIndex
 ) => {
-  const element = foundElements[selectedIndex];
+  const nextElement = matchedElements[nextIndex]?.item;
 
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-    enrichFoundElementsWithColor(selectedIndex, foundElements);
+  if (nextElement) {
+    nextElement.scrollIntoView({ behavior: "smooth" });
+
+    nextElement.classList.add(SETTINGS_MENU_CURRENT_CLASS);
+
+    if (currentIndex !== nextIndex && matchedElements.length > 1) {
+      matchedElements[currentIndex].item.classList.remove(
+        SETTINGS_MENU_CURRENT_CLASS
+      );
+    }
   }
 };
 
 /**
  * Функция для расчета индекса следующего для перехода элемента
  * @category Utilities - Settings Header
- * @param buttonName - Имя нажатой кнопки в меню навигации поиска
- * @param currentFoundElement - Текущий номер элемента в поиске
- * @param foundElements - Массив с элементами, удовлетворяющими поиску
+ * @param matchedElements - Массив с элементами, удовлетворяющими поиску
+ * @param currentIndex - Индекс текущего элемента в поиске
+ * @param movement - Движение по поиску (вверх, вниз). По умолчанию вверх
  * @returns - Индекс следующего для перехода элемента
  */
-export const getNextElementIndex = (
-  buttonName: string,
-  currentFoundElement: number,
-  foundElements: Element[]
+export const getNextMatchedElementIndex = (
+  matchedElements: MatchedElement[],
+  currentIndex: number,
+  movement?: string
 ): number => {
-  const currentElementIndex = currentFoundElement - 1;
-
-  if (buttonName === "up") {
-    return currentElementIndex === 0
-      ? foundElements.length - 1
-      : currentElementIndex - 1;
-  } else {
-    return currentElementIndex === foundElements.length - 1
-      ? 0
-      : currentElementIndex + 1;
+  if (matchedElements.length > 1 && movement) {
+    if (movement === "down") {
+      return currentIndex === matchedElements.length - 1 ? 0 : currentIndex + 1;
+    } else {
+      return currentIndex === 0 ? matchedElements.length - 1 : currentIndex - 1;
+    }
   }
+
+  return currentIndex;
 };
 
 /**
- * Функция получения массива элементов, удовлетворяющих поиску
+ * Функция получения объекта с преобразованными элементами, которые совпадают с поисковым запросом, и их резервной копией
  * @category Utilities - Settings Header
  * @param query - Поисковый запрос
  * @param container - Контейнер, в котором производится поиск
- * @returns - Массив элементов, удовлетворяющих поиску
+ * @returns - Массив объектов с информацией об элементах, которые совпадают с поисковым запросом {@link MatchedElement}
  */
-export const getMatchedElements = (
+export const matchElements = (
   query: string,
-  container: Element
-): Element[] => {
-  const matchedElements: Element[] = [];
+  container: Element | null
+): MatchedElement[] => {
+  const matchedElements: MatchedElement[] = [];
 
-  if (query) {
+  if (query && container) {
     const findByQuery = (element: Element) => {
       if (element.children.length) {
         for (let child of element.children) {
@@ -84,10 +123,16 @@ export const getMatchedElements = (
 
           if (highlightedText.containsSearchQuery) {
             element.innerHTML = highlightedText.content;
-            const elementsByQuery = element.querySelectorAll(
-              `[data-name='${FOUND_SEARCH_QUERY}']`
-            );
-            matchedElements.push(...elementsByQuery);
+            const elements = [
+              ...element.querySelectorAll(
+                `[data-name='${FOUND_SEARCH_QUERY_NAME}']`
+              )
+            ].map(e => ({
+              item: e,
+              textContentBackup: textContent
+            }));
+
+            matchedElements.push(...elements);
           }
         }
       }
@@ -131,7 +176,7 @@ const getHighlightedTextModel = (
 
       result.push(
         firstTextPart,
-        `<span data-name=${FOUND_SEARCH_QUERY}>${secondTextPart}</span>`
+        `<span data-name=${FOUND_SEARCH_QUERY_NAME} class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</span>`
       );
 
       verifiableText = verifiableText.substring(
@@ -145,27 +190,4 @@ const getHighlightedTextModel = (
   }
 
   return { content: content ?? "", containsSearchQuery };
-};
-
-/**
- * Функция изменения цвета поискового текста
- * @category Utilities - Settings Header
- * @param selectedIndex - Индекс выбранного элемента
- * @param foundElements - Массив элементов, удовлетворяющих поисковому запросу
- */
-const enrichFoundElementsWithColor = (
-  selectedIndex: number,
-  foundElements: Element[]
-) => {
-  const currentClass = "current";
-
-  foundElements.forEach(e => e.classList.add(SETTINGS_MENU_HIGHLIGHTED_TEXT));
-
-  foundElements[selectedIndex].classList.add(currentClass);
-
-  if (foundElements.length > 1) {
-    const previousIndex =
-      selectedIndex === 0 ? foundElements.length - 1 : selectedIndex - 1;
-    foundElements[previousIndex].classList.remove(currentClass);
-  }
 };

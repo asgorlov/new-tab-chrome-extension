@@ -2,85 +2,104 @@ import { ChangeEvent, FC, MouseEvent, useCallback, useState } from "react";
 import SettingsHeaderComponent from "./settings-header.component";
 import { useDebounceEffect } from "ahooks";
 import {
-  getMatchedElements,
-  getNextElementIndex,
+  matchElements,
+  getNextMatchedElementIndex,
   getSettingsMenuContainer,
-  scrollToSelectedElement
+  scrollToSelectedMatchedElement,
+  resetMatchedElements
 } from "../../../utils/settings-header.utils";
+import { MatchedElement } from "../../../models/settings-search.model";
 
 const SettingsHeaderContainer: FC = () => {
-  const [clonedMenu, setClonedMenu] = useState<Node | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [foundElements, setFoundElements] = useState<Element[]>([]);
-  const [isSearchLoading, setIsSearchLoading] = useState(false);
-  const [currentFoundElement, setCurrentFoundElement] = useState<number>(-1);
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout>();
+  const [matchedElements, setMatchedElements] = useState<MatchedElement[]>([]);
+  const [currentMatchedElement, setCurrentMatchedElement] =
+    useState<number>(-1);
+
+  const removeSearchLoading = useCallback(() => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+      setSearchTimeout(undefined);
+    }
+  }, [searchTimeout]);
 
   const handleChangeSearchQuery = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) =>
-      setSearchQuery(event.target.value),
-    []
+    (event: ChangeEvent<HTMLInputElement>) => {
+      removeSearchLoading();
+
+      setSearchQuery(event.target.value);
+    },
+    [removeSearchLoading]
   );
 
   const handleClickSearchButton = useCallback(() => {
-    if (searchQuery) {
-      setSearchQuery("");
-      setFoundElements([]);
+    removeSearchLoading();
 
-      if (clonedMenu) {
-        getSettingsMenuContainer()?.replaceWith(clonedMenu);
-      }
+    if (searchQuery) {
+      resetMatchedElements(matchedElements);
+
+      setSearchQuery("");
+      setMatchedElements([]);
     } else {
       setIsExpanded(!isExpanded);
     }
-  }, [searchQuery, isExpanded, clonedMenu]);
+  }, [searchQuery, isExpanded, removeSearchLoading, matchedElements]);
 
   const handleClickSearchNavigation = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      if (foundElements.length > 1) {
-        const nextElementIndex = getNextElementIndex(
-          event.currentTarget.name,
-          currentFoundElement,
-          foundElements
+      if (matchedElements.length > 1) {
+        const buttonName = event.currentTarget.name;
+        const currentElementIndex = currentMatchedElement - 1;
+        const nextElementIndex = getNextMatchedElementIndex(
+          matchedElements,
+          currentElementIndex,
+          buttonName
         );
 
-        setCurrentFoundElement(nextElementIndex + 1);
-        scrollToSelectedElement(nextElementIndex, foundElements);
+        setCurrentMatchedElement(nextElementIndex + 1);
+        scrollToSelectedMatchedElement(
+          matchedElements,
+          nextElementIndex,
+          currentElementIndex
+        );
       }
     },
-    [foundElements, currentFoundElement]
+    [matchedElements, currentMatchedElement]
   );
 
   useDebounceEffect(
     () => {
       if (isExpanded) {
         const query = searchQuery.trim();
-        const matchedElements: Element[] = [];
-        let currentElementNumber = -1;
+        const timeout = setTimeout(
+          () => {
+            resetMatchedElements(matchedElements);
 
-        if (query) {
-          const menuContainer = getSettingsMenuContainer();
+            if (query) {
+              const menuContainer = getSettingsMenuContainer();
+              if (menuContainer) {
+                const elements = matchElements(query, menuContainer);
+                setCurrentMatchedElement(elements.length ? 1 : 0);
+                setMatchedElements(elements);
 
-          if (menuContainer) {
-            setIsSearchLoading(true);
-            setClonedMenu(menuContainer.cloneNode(true));
-            matchedElements.push(...getMatchedElements(query, menuContainer));
-            currentElementNumber = matchedElements.length ? 1 : 0;
-          }
-        } else if (clonedMenu && currentFoundElement !== -1) {
-          getSettingsMenuContainer()?.replaceWith(clonedMenu);
-        }
+                scrollToSelectedMatchedElement(elements, 0);
+              }
+            } else {
+              setMatchedElements([]);
+              setCurrentMatchedElement(-1);
+            }
 
-        setFoundElements(matchedElements);
-        setCurrentFoundElement(currentElementNumber);
+            setSearchTimeout(undefined);
+          },
+          query ? 500 : 0
+        );
 
-        setTimeout(() => {
-          setIsSearchLoading(false);
-          scrollToSelectedElement(0, matchedElements);
-        }, 1000);
+        setSearchTimeout(timeout);
       }
     },
-    [isExpanded, searchQuery, scrollToSelectedElement, clonedMenu],
+    [isExpanded, searchQuery],
     { wait: 500 }
   );
 
@@ -88,10 +107,10 @@ const SettingsHeaderContainer: FC = () => {
     <SettingsHeaderComponent
       isExpanded={isExpanded}
       searchQuery={searchQuery}
-      foundElements={foundElements}
       setIsExpanded={setIsExpanded}
-      isSearchLoading={isSearchLoading}
-      currentFoundElement={currentFoundElement}
+      isSearchLoading={Boolean(searchTimeout)}
+      matchedElements={matchedElements}
+      currentMatchedElement={currentMatchedElement}
       onChangeSearchQuery={handleChangeSearchQuery}
       onClickSearchButton={handleClickSearchButton}
       onClickSearchNavigation={handleClickSearchNavigation}

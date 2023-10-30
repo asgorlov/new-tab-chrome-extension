@@ -14,15 +14,16 @@ import { selectIsDark } from "../../../store/new-tab/new-tab.selectors";
 import { ReactComponent as SearchIcon } from "../../../static/svgs/menu-settings/settings-search-icon.svg";
 import { ReactComponent as CloseIcon } from "../../../static/svgs/menu-settings/settings-search-close-icon.svg";
 import { ReactComponent as LoadingIcon } from "../../../static/svgs/menu-settings/settings-search-loading.svg";
+import { MatchedElement } from "../../../models/settings-search.model";
 
 // toDo: добавить описание пропертей
 export interface SettingsHeaderComponentProps {
   isExpanded: boolean;
   searchQuery: string;
-  foundElements: Element[];
   setIsExpanded: (value: boolean) => void;
   isSearchLoading: boolean;
-  currentFoundElement: number;
+  matchedElements: MatchedElement[];
+  currentMatchedElement: number;
   onChangeSearchQuery: (value: ChangeEvent<HTMLInputElement>) => void;
   onClickSearchButton: () => void;
   onClickSearchNavigation: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -36,10 +37,10 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
   ({
     isExpanded,
     searchQuery,
-    foundElements,
     setIsExpanded,
     isSearchLoading,
-    currentFoundElement,
+    matchedElements,
+    currentMatchedElement,
     onChangeSearchQuery,
     onClickSearchButton,
     onClickSearchNavigation
@@ -95,7 +96,8 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
           />
           <div
             className={clsx("new-tab__settings-menu-header__search-counter", {
-              expanded: searchQuery && currentFoundElement >= 0
+              expanded:
+                (searchQuery && currentMatchedElement >= 0) || isSearchLoading
             })}
           >
             {isSearchLoading ? (
@@ -104,8 +106,8 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
               </div>
             ) : (
               <div className="new-tab__settings-menu-header__search-counter-value">
-                {currentFoundElement >= 0 && (
-                  <>{`${currentFoundElement}/${foundElements.length}`}</>
+                {currentMatchedElement >= 0 && (
+                  <>{`${currentMatchedElement}/${matchedElements.length}`}</>
                 )}
               </div>
             )}
@@ -123,7 +125,7 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
               {">"}
             </button>
           </div>
-          <div>
+          <div style={{ minWidth: "24px" }}>
             <button
               onClick={onClickButton}
               className="new-tab__settings-menu-header__search-button"
