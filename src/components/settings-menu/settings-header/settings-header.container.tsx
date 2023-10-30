@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, MouseEvent, useCallback, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useState
+} from "react";
 import SettingsHeaderComponent from "./settings-header.component";
 import { useDebounceEffect } from "ahooks";
 import {
@@ -28,7 +35,6 @@ const SettingsHeaderContainer: FC = () => {
   const handleChangeSearchQuery = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       removeSearchLoading();
-
       setSearchQuery(event.target.value);
     },
     [removeSearchLoading]
@@ -47,15 +53,14 @@ const SettingsHeaderContainer: FC = () => {
     }
   }, [searchQuery, isExpanded, removeSearchLoading, matchedElements]);
 
-  const handleClickSearchNavigation = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
+  const navigateToNextMatchedElement = useCallback(
+    (movement: string) => {
       if (matchedElements.length > 1) {
-        const buttonName = event.currentTarget.name;
         const currentElementIndex = currentMatchedElement - 1;
         const nextElementIndex = getNextMatchedElementIndex(
           matchedElements,
           currentElementIndex,
-          buttonName
+          movement
         );
 
         setCurrentMatchedElement(nextElementIndex + 1);
@@ -66,7 +71,22 @@ const SettingsHeaderContainer: FC = () => {
         );
       }
     },
-    [matchedElements, currentMatchedElement]
+    [currentMatchedElement, matchedElements]
+  );
+
+  const handleClickSearchNavigation = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) =>
+      navigateToNextMatchedElement(event.currentTarget.name),
+    [navigateToNextMatchedElement]
+  );
+
+  const handleKeyDownSearch = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter" && currentMatchedElement >= 0) {
+        navigateToNextMatchedElement("down");
+      }
+    },
+    [navigateToNextMatchedElement, currentMatchedElement]
   );
 
   useDebounceEffect(
@@ -79,6 +99,7 @@ const SettingsHeaderContainer: FC = () => {
 
             if (query) {
               const menuContainer = getSettingsMenuContainer();
+
               if (menuContainer) {
                 const elements = matchElements(query, menuContainer);
                 setCurrentMatchedElement(elements.length ? 1 : 0);
@@ -110,9 +131,10 @@ const SettingsHeaderContainer: FC = () => {
       setIsExpanded={setIsExpanded}
       isSearchLoading={Boolean(searchTimeout)}
       matchedElements={matchedElements}
-      currentMatchedElement={currentMatchedElement}
+      onKeyDownSearch={handleKeyDownSearch}
       onChangeSearchQuery={handleChangeSearchQuery}
       onClickSearchButton={handleClickSearchButton}
+      currentMatchedElement={currentMatchedElement}
       onClickSearchNavigation={handleClickSearchNavigation}
     />
   );

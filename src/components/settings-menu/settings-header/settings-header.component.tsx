@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FC,
+  KeyboardEvent,
   memo,
   MouseEvent,
   useCallback,
@@ -16,16 +17,30 @@ import { ReactComponent as CloseIcon } from "../../../static/svgs/menu-settings/
 import { ReactComponent as LoadingIcon } from "../../../static/svgs/menu-settings/settings-search-loading.svg";
 import { MatchedElement } from "../../../models/settings-search.model";
 
-// toDo: добавить описание пропертей
+/**
+ * Передаваемые параметры для компонента хэдэра меню настроек с поиском
+ * @property isExpanded - Флаг разворота поля ввода для поиска
+ * @property searchQuery - Поисковый запрос
+ * @property setIsExpanded - Функция для установки флага разворота поля ввода для поиска
+ * @property isSearchLoading - Флаг, показывающий, что совершается поиск по настройкам
+ * @property matchedElements - Элементы, удовлетворяющие поиску
+ * @property onKeyDownSearch - Функция, срабатывающая на при нажатии клавиши Enter
+ * @property onChangeSearchQuery - Функция, меняющая значение поля ввода поискового запроса
+ * @property onClickSearchButton - Функция, которая срабатывает по клику кнопки открытия или очищения поля ввода
+ * @property currentMatchedElement - Номер текущего элемента поиска
+ * @property onClickSearchNavigation - Функция навигации по найденным элементам
+ * @interface
+ */
 export interface SettingsHeaderComponentProps {
   isExpanded: boolean;
   searchQuery: string;
   setIsExpanded: (value: boolean) => void;
   isSearchLoading: boolean;
   matchedElements: MatchedElement[];
-  currentMatchedElement: number;
+  onKeyDownSearch: (event: KeyboardEvent<HTMLInputElement>) => void;
   onChangeSearchQuery: (value: ChangeEvent<HTMLInputElement>) => void;
   onClickSearchButton: () => void;
+  currentMatchedElement: number;
   onClickSearchNavigation: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -40,9 +55,10 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
     setIsExpanded,
     isSearchLoading,
     matchedElements,
-    currentMatchedElement,
+    onKeyDownSearch,
     onChangeSearchQuery,
     onClickSearchButton,
+    currentMatchedElement,
     onClickSearchNavigation
   }) => {
     const { t } = useTranslation();
@@ -73,7 +89,7 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
         isExpanded && !searchQuery
           ? document.addEventListener
           : document.removeEventListener;
-      handleListener("click", handleClickOutside);
+      handleListener("mousedown", handleClickOutside);
     }, [isExpanded, searchQuery, handleClickOutside]);
 
     return (
@@ -93,6 +109,7 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
             onChange={onChangeSearchQuery}
             className="new-tab__settings-menu-header__search-input"
             placeholder={t("searchBySettings")}
+            onKeyDown={onKeyDownSearch}
           />
           <div
             className={clsx("new-tab__settings-menu-header__search-counter", {
