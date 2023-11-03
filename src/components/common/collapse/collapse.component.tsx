@@ -27,13 +27,6 @@ export interface CollapseComponentProps {
  */
 const CollapseComponent: FC<CollapseComponentProps> = memo(
   ({ icon, title, isDark, children, className = "", onChange = () => {} }) => {
-    const { Panel } = Collapse;
-    const panelClassName = clsx(
-      "new-tab__collapse",
-      { dark: isDark },
-      className
-    );
-
     return (
       <Collapse
         accordion
@@ -41,9 +34,9 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
         expandIconPosition="end"
         onChange={onChange}
       >
-        <Panel
+        <Collapse.Panel
           forceRender
-          className={panelClassName}
+          className={clsx("new-tab__collapse", { dark: isDark }, className)}
           children={children}
           header={
             <div className="new-tab__collapse-header">
