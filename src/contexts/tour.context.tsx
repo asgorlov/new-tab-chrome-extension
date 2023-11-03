@@ -1,13 +1,13 @@
-import { createContext, FC, ReactNode, useRef } from "react";
+import { createContext, FC, ReactNode, useContext, useRef } from "react";
 import { TourContextModel } from "../models/tour-context.model";
 
 interface TourContextProviderProps {
   children: ReactNode | undefined;
 }
 
-export const TourContext = createContext<TourContextModel | undefined>(
-  undefined
-);
+const TourContext = createContext<TourContextModel | undefined>(undefined);
+
+export const useTourContext = () => useContext(TourContext);
 
 const TourContextProvider: FC<TourContextProviderProps> = ({ children }) => {
   const tourContext: TourContextModel = {

@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useContext, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import SettingsMenuComponent from "./settings-menu.component";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { TourContext } from "../../contexts/tour.context";
+import { useTourContext } from "../../contexts/tour.context";
 import {
   selectIsDark,
   selectIsOpenMenu,
@@ -13,7 +13,7 @@ import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.const
 
 const SettingsMenuContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const tourCtx = useContext(TourContext);
+  const tourCtx = useTourContext();
   const isDark = useSelector(selectIsDark);
   const isOpenMenu = useSelector(selectIsOpenMenu);
   const searchEngine = useSelector(selectSearchEngine);
