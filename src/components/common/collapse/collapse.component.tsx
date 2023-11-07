@@ -1,10 +1,13 @@
 import React, { FC, memo, ReactNode } from "react";
 import clsx from "clsx";
 import { Collapse } from "antd";
+import { MenuSetting } from "../../../constants/settings-menu.constants";
+import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
 
 /**
  * Передаваемые параметры для сворачиваемого компонента
  * @property icon - Иконка в хедере перед текстом
+ * @property type - Тип настройки меню
  * @property title - Название в хедере
  * @property isDark - Флаг темного режима
  * @property children - Компоненты-потомки
@@ -14,6 +17,7 @@ import { Collapse } from "antd";
  */
 export interface CollapseComponentProps {
   icon: ReactNode;
+  type: MenuSetting;
   title: string;
   isDark: boolean;
   children?: ReactNode;
@@ -26,7 +30,17 @@ export interface CollapseComponentProps {
  * @category Components
  */
 const CollapseComponent: FC<CollapseComponentProps> = memo(
-  ({ icon, title, isDark, children, className = "", onChange = () => {} }) => {
+  ({
+    icon,
+    type,
+    title,
+    isDark,
+    children,
+    className = "",
+    onChange = () => {}
+  }) => {
+    const settingsSearchCtx = useSettingRefsContext();
+
     return (
       <Collapse
         accordion
@@ -44,7 +58,8 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
               <span>{title}</span>
             </div>
           }
-          key={title}
+          key={type}
+          ref={settingsSearchCtx[type]}
         />
       </Collapse>
     );

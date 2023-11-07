@@ -24,6 +24,7 @@ import {
   SEARCH_THEMES
 } from "../../../../constants/search-engine.constants";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
+import { MenuSetting } from "../../../../constants/settings-menu.constants";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -91,6 +92,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     return (
       <CollapseComponent
         icon={<CommonIcon />}
+        type={MenuSetting.COMMON}
         title={t("commonSetting.title")}
         isDark={isDark}
         className="new-tab__settings-menu_common"

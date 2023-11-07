@@ -1,3 +1,5 @@
+import { MenuSetting } from "../constants/settings-menu.constants";
+
 /**
  * Интерфейс объекта с информацией об элементах, удовлетворяющих поиску
  * @property item - Элемент, в котором есть поисковый запрос
@@ -18,4 +20,12 @@ export interface MatchedElement {
 export interface HighlightedTextModel {
   content: string;
   containsSearchQuery: boolean;
+}
+
+/**
+ * Интерфейс хранилища информации о настройках, по которым будет совершаться поиск
+ * @interface
+ */
+export interface SettingsStorage<T> {
+  [key: MenuSetting | string]: T;
 }

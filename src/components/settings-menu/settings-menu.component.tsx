@@ -11,6 +11,7 @@ import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
 import SettingsHeaderContainer from "./settings-header/settings-header.container";
 import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.constants";
+import SettingRefsContextProvider from "../../contexts/setting-refs.context";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -47,23 +48,25 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
             style={{ fill: SEARCH_THEMES[searchEngine] }}
           />
         </Button>
-        <DrawerComponent
-          title={<SettingsHeaderContainer />}
-          isDark={isDark}
-          className="new-tab__settings-menu-container"
-          menuClassName={menuClass}
-          open={isOpenMenu}
-          onClose={() => setIsOpenMenu(false)}
-        >
-          <div className={SETTINGS_MENU_CONTENT_CLASS}>
-            <CommonSettingContainer />
-            <SearchEngineSettingComponent />
-            <DarkModeSettingComponent />
-            <WallpaperSettingContainer />
-            <UpdateSettingComponent />
-            <LanguageSettingComponent />
-          </div>
-        </DrawerComponent>
+        <SettingRefsContextProvider>
+          <DrawerComponent
+            title={<SettingsHeaderContainer />}
+            isDark={isDark}
+            className="new-tab__settings-menu-container"
+            menuClassName={menuClass}
+            open={isOpenMenu}
+            onClose={() => setIsOpenMenu(false)}
+          >
+            <div className={SETTINGS_MENU_CONTENT_CLASS}>
+              <CommonSettingContainer />
+              <SearchEngineSettingComponent />
+              <DarkModeSettingComponent />
+              <WallpaperSettingContainer />
+              <UpdateSettingComponent />
+              <LanguageSettingComponent />
+            </div>
+          </DrawerComponent>
+        </SettingRefsContextProvider>
       </div>
     );
   }

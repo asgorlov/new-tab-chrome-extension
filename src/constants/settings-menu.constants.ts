@@ -18,3 +18,12 @@ export const SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS = "highlighted-text";
  * @category Constants - Settings menu
  */
 export const SETTINGS_MENU_CURRENT_CLASS = "current";
+
+export enum MenuSetting {
+  COMMON = "common",
+  SEARCH_ENGINE = "searchEngine",
+  DARK_MODE = "darkMode",
+  WALLPAPER = "wallpaper",
+  UPDATE = "update",
+  LANGUAGE = "language"
+}

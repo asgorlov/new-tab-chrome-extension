@@ -11,13 +11,14 @@ import { useDebounceEffect } from "ahooks";
 import {
   matchElements,
   getNextMatchedElementIndex,
-  getSettingsMenuContainer,
   scrollToSelectedMatchedElement,
   resetMatchedElements
 } from "../../../utils/settings-header.utils";
 import { MatchedElement } from "../../../models/settings-search.model";
+import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
 
 const SettingsHeaderContainer: FC = () => {
+  const settingsSearchCtx = useSettingRefsContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout>();
@@ -98,15 +99,11 @@ const SettingsHeaderContainer: FC = () => {
             resetMatchedElements(matchedElements);
 
             if (query) {
-              const menuContainer = getSettingsMenuContainer();
+              const elements = matchElements(query, settingsSearchCtx);
+              setCurrentMatchedElement(elements.length ? 1 : 0);
+              setMatchedElements(elements);
 
-              if (menuContainer) {
-                const elements = matchElements(query, menuContainer);
-                setCurrentMatchedElement(elements.length ? 1 : 0);
-                setMatchedElements(elements);
-
-                scrollToSelectedMatchedElement(elements, 0);
-              }
+              scrollToSelectedMatchedElement(elements, 0);
             } else {
               setMatchedElements([]);
               setCurrentMatchedElement(-1);
@@ -120,7 +117,7 @@ const SettingsHeaderContainer: FC = () => {
         setSearchTimeout(timeout);
       }
     },
-    [isExpanded, searchQuery],
+    [isExpanded, searchQuery, settingsSearchCtx],
     { wait: 500 }
   );
 

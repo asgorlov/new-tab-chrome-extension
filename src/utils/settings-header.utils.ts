@@ -1,21 +1,14 @@
 import {
   FOUND_SEARCH_QUERY_NAME,
-  SETTINGS_MENU_CONTENT_CLASS,
   SETTINGS_MENU_CURRENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
 } from "../constants/settings-menu.constants";
 import {
   HighlightedTextModel,
-  MatchedElement
+  MatchedElement,
+  SettingsStorage
 } from "../models/settings-search.model";
-
-/**
- * Функция получения контейнера меню настроек, в котором будет происходить поиск
- * @category Utilities - Settings Header
- * @returns - Контейнер меню настроек {@link Element} или null
- */
-export const getSettingsMenuContainer = (): Element | null =>
-  document.querySelector(`.${SETTINGS_MENU_CONTENT_CLASS}`);
+import { MutableRefObject } from "react";
 
 /**
  * Функция восстановления текста для поиска на исходный
@@ -100,20 +93,20 @@ export const getNextMatchedElementIndex = (
  * Функция получения объекта с преобразованными элементами, которые совпадают с поисковым запросом, и их резервной копией
  * @category Utilities - Settings Header
  * @param query - Поисковый запрос
- * @param container - Контейнер, в котором производится поиск
+ * @param context - Контейнер, в котором производится поиск
  * @returns - Массив объектов с информацией об элементах, которые совпадают с поисковым запросом {@link MatchedElement}
  */
 export const matchElements = (
   query: string,
-  container: Element | null
+  context: SettingsStorage<MutableRefObject<HTMLDivElement | null>>
 ): MatchedElement[] => {
   const matchedElements: MatchedElement[] = [];
 
-  if (query && container) {
-    const findByQuery = (element: Element) => {
+  if (query) {
+    const findByQuery = (element: Element, key: string) => {
       if (element.children.length) {
         for (let child of element.children) {
-          findByQuery(child);
+          findByQuery(child, key);
         }
       } else {
         const textContent = element.textContent;
@@ -138,9 +131,11 @@ export const matchElements = (
       }
     };
 
-    for (let child of container.children) {
-      findByQuery(child);
-    }
+    Object.entries(context).forEach(([key, value]) => {
+      if (value.current) {
+        findByQuery(value.current, key);
+      }
+    });
   }
 
   return matchedElements;

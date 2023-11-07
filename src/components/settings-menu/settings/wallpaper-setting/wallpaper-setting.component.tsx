@@ -16,6 +16,7 @@ import { getUploadingErrorKey } from "../../../../utils/wallpaper.utils";
 import ModalComponent from "../../../common/modal/modal.component";
 import CheckboxComponent from "../../../common/checkbox/checkbox.component";
 import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
+import { MenuSetting } from "../../../../constants/settings-menu.constants";
 
 /**
  * Передаваемые параметры для компонента настройки фонового изображения
@@ -99,6 +100,7 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
       <>
         <CollapseComponent
           icon={<WallpaperIcon />}
+          type={MenuSetting.WALLPAPER}
           title={t("wallpaper.title")}
           isDark={isDark}
           className="new-tab__settings-menu_wallpaper"
