@@ -130,7 +130,7 @@ export const matchElements = (
         }
       }
     };
-
+    //todo: проставлять активкейсы по имени настройки, где найдено совпадение
     Object.entries(context).forEach(([key, value]) => {
       if (value.current) {
         findByQuery(value.current, key);

@@ -2,6 +2,9 @@ import { RootState } from "../store";
 import { NightPeriod } from "../../models/night-period.model";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { Notification } from "../../constants/notification.constants";
+import { SettingsStorage } from "../../models/settings-search.model";
+import { MenuSetting } from "../../constants/settings-menu.constants";
+import { createSelector } from "@reduxjs/toolkit";
 
 /**
  * Селектор получения флага темной темы
@@ -123,3 +126,27 @@ export const selectCurrentLanguage = (state: RootState): string =>
 export const selectCustomWallpaper = (
   state: RootState
 ): CustomWallpaper | null => state.newTab.customWallpaper;
+/**
+ * Селектор получения списка всех настроек меню
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Хранилище с информацией о настройках меню {@link SettingsStorage}
+ */
+export const selectAllSettingsActiveKeys = (
+  state: RootState
+): SettingsStorage<string[]> => state.newTab.settingsActiveKeys;
+/**
+ * Селектор получения запрашиваемой настройки меню
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @param name - Алиас настройки меню
+ * @returns - Массив с ключами раскрытых настроек, если пустой, значит настройка свернута
+ */
+export const selectSettingActiveKeysByName = createSelector(
+  [
+    selectAllSettingsActiveKeys,
+    (state: RootState, name: MenuSetting): MenuSetting => name
+  ],
+  (allActiveKeys: SettingsStorage<string[]>, name: MenuSetting): string[] =>
+    allActiveKeys[name]
+);

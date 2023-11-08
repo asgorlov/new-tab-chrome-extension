@@ -10,7 +10,12 @@ import {
 import { SettingsStorage } from "../models/settings-search.model";
 import { MenuSetting } from "../constants/settings-menu.constants";
 
-interface SettingRefsContextProviderProps {
+/**
+ * Интерфейс провайдера контекста настроек меню
+ * @param children - Потомки, куда передается контекст
+ * @interface
+ */
+export interface SettingRefsContextProviderProps {
   children: ReactNode;
 }
 
@@ -18,6 +23,18 @@ const SettingRefsContext = createContext<
   SettingsStorage<MutableRefObject<HTMLDivElement | null>>
 >({});
 
+/**
+ * Хук получения контекста настроек меню
+ * @category Hooks - Settings menu
+ */
+export const useSettingRefsContext = (): SettingsStorage<
+  MutableRefObject<HTMLDivElement | null>
+> => useContext(SettingRefsContext);
+
+/**
+ * Компонент провайдера контекста настроек меню
+ * @category Contexts - Settings menu
+ */
 const SettingRefsContextProvider: FC<SettingRefsContextProviderProps> = ({
   children
 }) => {
@@ -35,9 +52,5 @@ const SettingRefsContextProvider: FC<SettingRefsContextProviderProps> = ({
     <SettingRefsContext.Provider value={refsStorage} children={children} />
   );
 };
-
-export const useSettingRefsContext = (): SettingsStorage<
-  MutableRefObject<HTMLDivElement | null>
-> => useContext(SettingRefsContext);
 
 export default SettingRefsContextProvider;

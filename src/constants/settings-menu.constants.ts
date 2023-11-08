@@ -19,11 +19,33 @@ export const SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS = "highlighted-text";
  */
 export const SETTINGS_MENU_CURRENT_CLASS = "current";
 
+/**
+ * Алиасы настроек меню
+ * @category Constants - Settings menu
+ */
 export enum MenuSetting {
+  /**
+   * Общие настройки
+   */
   COMMON = "common",
+  /**
+   * Настройка поисковых систем
+   */
   SEARCH_ENGINE = "searchEngine",
+  /**
+   * Настройка темной темы
+   */
   DARK_MODE = "darkMode",
+  /**
+   * Настройка фоновых изображений
+   */
   WALLPAPER = "wallpaper",
+  /**
+   * Настройка обновлений
+   */
   UPDATE = "update",
+  /**
+   * Настройка языка
+   */
   LANGUAGE = "language"
 }

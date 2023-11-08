@@ -1,8 +1,11 @@
-import React, { FC, memo, ReactNode } from "react";
+import React, { FC, memo, ReactNode, useCallback } from "react";
 import clsx from "clsx";
 import { Collapse } from "antd";
 import { MenuSetting } from "../../../constants/settings-menu.constants";
 import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
+import { useSettingActiveKeys } from "../../../hooks/use-active-keys.hook";
+import { useDispatch } from "react-redux";
+import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
 
 /**
  * Передаваемые параметры для сворачиваемого компонента
@@ -39,14 +42,25 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
     className = "",
     onChange = () => {}
   }) => {
+    const dispatch = useDispatch();
     const settingsSearchCtx = useSettingRefsContext();
+    const settingActiveKeys = useSettingActiveKeys(type);
+
+    const handleChange = useCallback(
+      (key: string | string[]) => {
+        onChange(key);
+        dispatch(setSettingsActiveKeys({ [type]: key }));
+      },
+      [dispatch, onChange, type]
+    );
 
     return (
       <Collapse
         accordion
         bordered={false}
+        activeKey={settingActiveKeys}
         expandIconPosition="end"
-        onChange={onChange}
+        onChange={handleChange}
       >
         <Collapse.Panel
           forceRender
