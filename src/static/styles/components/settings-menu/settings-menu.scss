@@ -38,7 +38,7 @@
             position: absolute;
             right: 0;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             min-width: min-content;
             width: 0;
             height: 100%;
@@ -52,7 +52,6 @@
 
                 .new-tab__settings-menu-header__search {
                     &-input {
-                        width: 100%;
                         padding: 0 6px;
                     }
                 }
@@ -142,7 +141,7 @@
             &-input {
                 transition: $fast-transition;
                 box-sizing: border-box;
-                width: 0;
+                width: 100%;
                 outline: none;
                 padding: 0;
                 border: none;
