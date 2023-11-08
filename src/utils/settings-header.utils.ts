@@ -1,5 +1,6 @@
 import {
   FOUND_SEARCH_QUERY_NAME,
+  MenuSetting,
   SETTINGS_MENU_CURRENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
 } from "../constants/settings-menu.constants";
@@ -103,10 +104,10 @@ export const matchElements = (
   const matchedElements: MatchedElement[] = [];
 
   if (query) {
-    const findByQuery = (element: Element, key: string) => {
+    const findByQuery = (element: Element, type: MenuSetting) => {
       if (element.children.length) {
         for (let child of element.children) {
-          findByQuery(child, key);
+          findByQuery(child, type);
         }
       } else {
         const textContent = element.textContent;
@@ -122,6 +123,7 @@ export const matchElements = (
               )
             ].map(e => ({
               item: e,
+              type,
               textContentBackup: textContent
             }));
 
@@ -130,10 +132,10 @@ export const matchElements = (
         }
       }
     };
-    //todo: проставлять активкейсы по имени настройки, где найдено совпадение
+
     Object.entries(context).forEach(([key, value]) => {
       if (value.current) {
-        findByQuery(value.current, key);
+        findByQuery(value.current, key as MenuSetting);
       }
     });
   }

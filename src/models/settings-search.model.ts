@@ -8,6 +8,7 @@ import { MenuSetting } from "../constants/settings-menu.constants";
  */
 export interface MatchedElement {
   item: Element;
+  type: MenuSetting;
   textContentBackup: string;
 }
 

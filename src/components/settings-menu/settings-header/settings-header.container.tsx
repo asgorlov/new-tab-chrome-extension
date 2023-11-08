@@ -16,15 +16,41 @@ import {
 } from "../../../utils/settings-header.utils";
 import { MatchedElement } from "../../../models/settings-search.model";
 import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAllSettingsActiveKeys } from "../../../store/new-tab/new-tab.selectors";
+import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
 
 const SettingsHeaderContainer: FC = () => {
+  const settingsActiveKeys = useSelector(selectAllSettingsActiveKeys);
   const settingsSearchCtx = useSettingRefsContext();
+  const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout>();
   const [matchedElements, setMatchedElements] = useState<MatchedElement[]>([]);
   const [currentMatchedElement, setCurrentMatchedElement] =
     useState<number>(-1);
+
+  const scrollToElement = useCallback(
+    (
+      elements: MatchedElement[],
+      nextIndex: number,
+      currentIndex: number = nextIndex
+    ) => {
+      const storage = {};
+      Array.from(new Set(elements.map(e => e.type))).forEach(t => {
+        if (!settingsActiveKeys[t].length) {
+          Object.assign(storage, { [t]: [t] });
+        }
+      });
+      if (Object.keys(storage).length) {
+        dispatch(setSettingsActiveKeys(storage));
+      }
+
+      scrollToSelectedMatchedElement(elements, nextIndex, currentIndex);
+    },
+    [settingsActiveKeys, dispatch]
+  );
 
   const removeSearchLoading = useCallback(() => {
     if (searchTimeout) {
@@ -65,14 +91,10 @@ const SettingsHeaderContainer: FC = () => {
         );
 
         setCurrentMatchedElement(nextElementIndex + 1);
-        scrollToSelectedMatchedElement(
-          matchedElements,
-          nextElementIndex,
-          currentElementIndex
-        );
+        scrollToElement(matchedElements, nextElementIndex, currentElementIndex);
       }
     },
-    [currentMatchedElement, matchedElements]
+    [currentMatchedElement, matchedElements, scrollToElement]
   );
 
   const handleClickSearchNavigation = useCallback(
@@ -103,7 +125,7 @@ const SettingsHeaderContainer: FC = () => {
               setCurrentMatchedElement(elements.length ? 1 : 0);
               setMatchedElements(elements);
 
-              scrollToSelectedMatchedElement(elements, 0);
+              scrollToElement(elements, 0);
             } else {
               setMatchedElements([]);
               setCurrentMatchedElement(-1);
