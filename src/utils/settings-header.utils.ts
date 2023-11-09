@@ -104,7 +104,6 @@ export const matchElements = (
   const matchedElements: MatchedElement[] = [];
 
   if (query) {
-    //todo: сделать так, чтобы поиск не искал внутри селекторов(возможно, их как-то пометить через атрибуты)
     const findByQuery = (element: Element, type: CollapsedMenuSetting) => {
       if (element.children.length) {
         for (let child of element.children) {
@@ -156,7 +155,8 @@ const getHighlightedTextModel = (
   text: string
 ): HighlightedTextModel => {
   let content = text;
-  const regExp = new RegExp(query, "i");
+  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regExp = new RegExp(escapedQuery, "i");
   let startingIndex = content.search(regExp);
   const containsSearchQuery = startingIndex !== -1;
 
