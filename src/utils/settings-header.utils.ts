@@ -1,6 +1,6 @@
 import {
   FOUND_SEARCH_QUERY_NAME,
-  MenuSetting,
+  CollapsedMenuSetting,
   SETTINGS_MENU_CURRENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
 } from "../constants/settings-menu.constants";
@@ -104,7 +104,8 @@ export const matchElements = (
   const matchedElements: MatchedElement[] = [];
 
   if (query) {
-    const findByQuery = (element: Element, type: MenuSetting) => {
+    //todo: сделать так, чтобы поиск не искал внутри селекторов(возможно, их как-то пометить через атрибуты)
+    const findByQuery = (element: Element, type: CollapsedMenuSetting) => {
       if (element.children.length) {
         for (let child of element.children) {
           findByQuery(child, type);
@@ -135,7 +136,7 @@ export const matchElements = (
 
     Object.entries(context).forEach(([key, value]) => {
       if (value.current) {
-        findByQuery(value.current, key as MenuSetting);
+        findByQuery(value.current, key as CollapsedMenuSetting);
       }
     });
   }

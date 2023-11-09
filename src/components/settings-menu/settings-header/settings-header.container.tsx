@@ -19,6 +19,7 @@ import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllSettingsActiveKeys } from "../../../store/new-tab/new-tab.selectors";
 import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 const SettingsHeaderContainer: FC = () => {
   const settingsActiveKeys = useSelector(selectAllSettingsActiveKeys);
@@ -37,14 +38,13 @@ const SettingsHeaderContainer: FC = () => {
       nextIndex: number,
       currentIndex: number = nextIndex
     ) => {
-      const storage = {};
-      Array.from(new Set(elements.map(e => e.type))).forEach(t => {
-        if (!settingsActiveKeys[t].length) {
-          Object.assign(storage, { [t]: [t] });
-        }
-      });
-      if (Object.keys(storage).length) {
-        dispatch(setSettingsActiveKeys(storage));
+      const next = elements[nextIndex];
+      const mustBeExpanded =
+        next?.item &&
+        Object.values(CollapsedMenuSetting).includes(next.type) &&
+        !settingsActiveKeys[next.type].length;
+      if (mustBeExpanded) {
+        dispatch(setSettingsActiveKeys({ [next.type]: [next.type] }));
       }
 
       scrollToSelectedMatchedElement(elements, nextIndex, currentIndex);
@@ -92,6 +92,8 @@ const SettingsHeaderContainer: FC = () => {
 
         setCurrentMatchedElement(nextElementIndex + 1);
         scrollToElement(matchedElements, nextElementIndex, currentElementIndex);
+      } else {
+        scrollToElement(matchedElements, 0);
       }
     },
     [currentMatchedElement, matchedElements, scrollToElement]

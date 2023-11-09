@@ -1,6 +1,6 @@
 import { NewTabState } from "../models/new-tab-state.model";
 import { getInitStateFromChrome } from "./chrome.utils";
-import { MenuSetting } from "../constants/settings-menu.constants";
+import { CollapsedMenuSetting } from "../constants/settings-menu.constants";
 
 /**
  * Асинхронная функция для получения начальных данных стейта
@@ -11,7 +11,7 @@ export const getInitState = async (): Promise<NewTabState> => {
   const data = await getInitStateFromChrome();
   const settingsActiveKeys = {};
 
-  Object.values(MenuSetting).forEach(s => {
+  Object.values(CollapsedMenuSetting).forEach(s => {
     Object.assign(settingsActiveKeys, { [s]: [] });
   });
 

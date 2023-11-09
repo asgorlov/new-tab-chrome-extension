@@ -13,7 +13,7 @@ import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import SelectComponent from "../../common/select/select.component";
-import { MenuSetting } from "../../../constants/settings-menu.constants";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -53,7 +53,7 @@ const SearchEngineSettingComponent: FC = () => {
   return (
     <CollapseComponent
       icon={<SearchEngineIcon />}
-      type={MenuSetting.SEARCH_ENGINE}
+      type={CollapsedMenuSetting.SEARCH_ENGINE}
       title={t("searchEngine.title")}
       isDark={isDark}
       className="new-tab__settings-menu_search-engine"

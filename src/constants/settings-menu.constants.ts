@@ -20,10 +20,10 @@ export const SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS = "highlighted-text";
 export const SETTINGS_MENU_CURRENT_CLASS = "current";
 
 /**
- * Алиасы настроек меню
+ * Алиасы сворачиваемых настроек меню
  * @category Constants - Settings menu
  */
-export enum MenuSetting {
+export enum CollapsedMenuSetting {
   /**
    * Общие настройки
    */
@@ -43,7 +43,13 @@ export enum MenuSetting {
   /**
    * Настройка обновлений
    */
-  UPDATE = "update",
+  UPDATE = "update"
+}
+/**
+ * Алиасы настроек меню
+ * @category Constants - Settings menu
+ */
+export enum MenuSetting {
   /**
    * Настройка языка
    */

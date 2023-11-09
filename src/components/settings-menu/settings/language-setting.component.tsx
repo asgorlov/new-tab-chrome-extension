@@ -44,7 +44,7 @@ const LanguageSettingComponent: FC = () => {
     >
       <div className="new-tab__settings-menu_language-header">
         <LanguageIcon />
-        <span>{t(`${MenuSetting.LANGUAGE}.title`)}</span>
+        <span>{t("language.title")}</span>
       </div>
       <SelectComponent
         isDark={isDark}

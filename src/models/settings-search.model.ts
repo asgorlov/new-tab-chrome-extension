@@ -1,4 +1,4 @@
-import { MenuSetting } from "../constants/settings-menu.constants";
+import { CollapsedMenuSetting } from "../constants/settings-menu.constants";
 
 /**
  * Интерфейс объекта с информацией об элементах, удовлетворяющих поиску
@@ -8,7 +8,7 @@ import { MenuSetting } from "../constants/settings-menu.constants";
  */
 export interface MatchedElement {
   item: Element;
-  type: MenuSetting;
+  type: CollapsedMenuSetting;
   textContentBackup: string;
 }
 
@@ -28,5 +28,5 @@ export interface HighlightedTextModel {
  * @interface
  */
 export interface SettingsStorage<T> {
-  [key: MenuSetting | string]: T;
+  [key: CollapsedMenuSetting | string]: T;
 }

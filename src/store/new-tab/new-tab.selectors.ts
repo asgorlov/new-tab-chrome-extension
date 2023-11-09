@@ -3,7 +3,7 @@ import { NightPeriod } from "../../models/night-period.model";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { Notification } from "../../constants/notification.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
-import { MenuSetting } from "../../constants/settings-menu.constants";
+import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
 
 /**
@@ -145,8 +145,10 @@ export const selectAllSettingsActiveKeys = (
 export const selectSettingActiveKeysByName = createSelector(
   [
     selectAllSettingsActiveKeys,
-    (state: RootState, name: MenuSetting): MenuSetting => name
+    (state: RootState, name: CollapsedMenuSetting): CollapsedMenuSetting => name
   ],
-  (allActiveKeys: SettingsStorage<string[]>, name: MenuSetting): string[] =>
-    allActiveKeys[name]
+  (
+    allActiveKeys: SettingsStorage<string[]>,
+    name: CollapsedMenuSetting
+  ): string[] => allActiveKeys[name]
 );

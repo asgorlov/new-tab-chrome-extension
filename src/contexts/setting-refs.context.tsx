@@ -8,7 +8,10 @@ import {
   useMemo
 } from "react";
 import { SettingsStorage } from "../models/settings-search.model";
-import { MenuSetting } from "../constants/settings-menu.constants";
+import {
+  CollapsedMenuSetting,
+  MenuSetting
+} from "../constants/settings-menu.constants";
 
 /**
  * Интерфейс провайдера контекста настроек меню
@@ -41,7 +44,7 @@ const SettingRefsContextProvider: FC<SettingRefsContextProviderProps> = ({
   const refsStorage = useMemo(() => {
     const storage = {};
 
-    Object.values(MenuSetting).forEach(s => {
+    Object.values({ ...CollapsedMenuSetting, ...MenuSetting }).forEach(s => {
       Object.assign(storage, { [s]: createRef<HTMLDivElement>() });
     });
 

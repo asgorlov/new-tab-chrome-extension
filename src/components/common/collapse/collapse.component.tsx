@@ -1,7 +1,7 @@
 import React, { FC, memo, ReactNode, useCallback } from "react";
 import clsx from "clsx";
 import { Collapse } from "antd";
-import { MenuSetting } from "../../../constants/settings-menu.constants";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
 import { useSettingActiveKeys } from "../../../hooks/use-active-keys.hook";
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
  */
 export interface CollapseComponentProps {
   icon: ReactNode;
-  type: MenuSetting;
+  type: CollapsedMenuSetting;
   title: string;
   isDark: boolean;
   children?: ReactNode;
