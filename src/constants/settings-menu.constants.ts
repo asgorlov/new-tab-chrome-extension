@@ -52,6 +52,7 @@ export enum MenuSetting {
 }
 /**
  * Массив с алиасами настроек, у которых есть селекторы
+ * @category Constants - Settings menu
  */
 export const SETTINGS_WITH_SELECTOR = [
   CollapsedMenuSetting.SEARCH_ENGINE,
