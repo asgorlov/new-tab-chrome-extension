@@ -1,6 +1,5 @@
 import {
   CollapsedMenuSetting,
-  FOUND_SEARCH_QUERY_NAME,
   SETTINGS_WITH_SELECTOR,
   SETTINGS_MENU_CURRENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
@@ -126,7 +125,7 @@ export const matchElements = (
             element.innerHTML = highlightedText.content;
             const elements = [
               ...element.querySelectorAll(
-                `[data-name='${FOUND_SEARCH_QUERY_NAME}']`
+                `.${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}`
               )
             ].map(e => ({
               item: e,
@@ -181,7 +180,7 @@ const getHighlightedTextModel = (
 
       result.push(
         firstTextPart,
-        `<span data-name=${FOUND_SEARCH_QUERY_NAME} class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</span>`
+        `<span class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</span>`
       );
 
       verifiableText = verifiableText.substring(
