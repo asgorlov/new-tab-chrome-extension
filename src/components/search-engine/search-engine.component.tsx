@@ -128,6 +128,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             className={getSearchEngineFormClass()}
             action={SEARCH_QUERY_LINKS[searchEngine]}
             onSubmit={onSubmitForm}
+            name="search-engine-form"
           >
             <Input
               onFocus={() => setFormFocused(true)}

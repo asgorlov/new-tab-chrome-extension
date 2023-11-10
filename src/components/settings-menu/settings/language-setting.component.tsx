@@ -52,7 +52,7 @@ const LanguageSettingComponent: FC = () => {
         dropdownStyle={{ minWidth: "max-content" }}
         size="small"
         bordered={false}
-        showArrow={false}
+        suffixIcon={null}
         value={currentLanguage}
         onChange={v => dispatch(changeLanguage(v))}
         placement="bottomRight"

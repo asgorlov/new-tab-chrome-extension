@@ -46,6 +46,21 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
     const settingsSearchCtx = useSettingRefsContext();
     const settingActiveKeys = useSettingActiveKeys(type);
 
+    const items = [
+      {
+        className: clsx("new-tab__collapse", { dark: isDark }, className),
+        children,
+        label: (
+          <div className="new-tab__collapse-header">
+            <>{icon}</>
+            <span>{title}</span>
+          </div>
+        ),
+        ref: settingsSearchCtx[type],
+        key: type
+      }
+    ];
+
     const handleChange = useCallback(
       (key: string | string[]) => {
         onChange(key);
@@ -61,20 +76,8 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
         activeKey={settingActiveKeys}
         expandIconPosition="end"
         onChange={handleChange}
-      >
-        <Collapse.Panel
-          className={clsx("new-tab__collapse", { dark: isDark }, className)}
-          children={children}
-          header={
-            <div className="new-tab__collapse-header">
-              <>{icon}</>
-              <span>{title}</span>
-            </div>
-          }
-          key={type}
-          ref={settingsSearchCtx[type]}
-        />
-      </Collapse>
+        items={items}
+      />
     );
   }
 );

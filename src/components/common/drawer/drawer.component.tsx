@@ -27,17 +27,25 @@ export interface DrawerComponentProps extends DrawerProps {
 const DrawerComponent: FC<DrawerComponentProps> = memo(
   ({
     isDark = false,
+    styles = {},
     children,
     closable = false,
     className,
     placement = "right",
-    bodyStyle = {},
     drawerStyle = {},
     getContainer,
     menuClassName,
     contentWrapperStyle = {},
     ...rest
   }) => {
+    const drawerStyles = Object.assign(
+      {
+        body: {
+          padding: "0"
+        }
+      },
+      styles
+    );
     const containerGetFunction = (): GetContainer | undefined => {
       if (getContainer) {
         return getContainer;
@@ -63,11 +71,11 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
           { background: isDark ? DARK_THEME : LIGHT_THEME },
           drawerStyle
         )}
-        bodyStyle={Object.assign({ padding: "0" }, bodyStyle)}
         getContainer={containerGetFunction()}
         placement={placement}
         closable={closable}
         children={children}
+        styles={drawerStyles}
         {...rest}
       />
     );
