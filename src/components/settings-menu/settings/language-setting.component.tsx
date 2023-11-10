@@ -11,6 +11,8 @@ import {
 import { changeLanguage } from "../../../store/new-tab/new-tab.thunks";
 import { AppDispatch } from "../../../store/store";
 import SelectComponent from "../../common/select/select.component";
+import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
+import { MenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки языка
@@ -19,6 +21,7 @@ import SelectComponent from "../../common/select/select.component";
 const LanguageSettingComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+  const settingsSearchCtx = useSettingRefsContext();
 
   const isDark = useSelector(selectIsDark);
   const currentLanguage = useSelector(selectCurrentLanguage);
@@ -35,7 +38,10 @@ const LanguageSettingComponent: FC = () => {
   }, [t]);
 
   return (
-    <div className={clsx("new-tab__settings-menu_language", { dark: isDark })}>
+    <div
+      ref={settingsSearchCtx[MenuSetting.LANGUAGE]}
+      className={clsx("new-tab__settings-menu_language", { dark: isDark })}
+    >
       <div className="new-tab__settings-menu_language-header">
         <LanguageIcon />
         <span>{t("language.title")}</span>

@@ -15,6 +15,7 @@ import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
 import { Notification } from "../../constants/notification.constants";
 import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
+import { SettingsStorage } from "../../models/settings-search.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -115,6 +116,21 @@ export const newTabSlice = createSlice({
     setCheckForUpdates(state: NewTabState, action: PayloadAction<string>) {
       state.checkForUpdates = action.payload;
       setDataToChromeSyncStorage({ checkForUpdates: action.payload });
+    },
+    /**
+     * Функция изменения списка развернутых настроек
+     * @param state - стор
+     * @param action - экшн
+     */
+    setSettingsActiveKeys(
+      state: NewTabState,
+      action: PayloadAction<SettingsStorage<string | string[]>>
+    ) {
+      state.settingsActiveKeys = Object.assign(
+        {},
+        state.settingsActiveKeys,
+        action.payload
+      );
     }
   },
   extraReducers: builder => {
@@ -201,7 +217,8 @@ export const {
   setSearchEngines,
   resetNotifications,
   setCustomWallpaper,
-  setCheckForUpdates
+  setCheckForUpdates,
+  setSettingsActiveKeys
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

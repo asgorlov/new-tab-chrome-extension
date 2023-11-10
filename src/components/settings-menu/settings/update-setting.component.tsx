@@ -16,6 +16,7 @@ import {
 } from "../../../store/new-tab/new-tab.selectors";
 import { checkUpdates } from "../../../store/new-tab/new-tab.thunks";
 import { setCheckForUpdates } from "../../../store/new-tab/new-tab.slice";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки обновлений
@@ -44,6 +45,7 @@ const UpdateSettingComponent: FC = () => {
   return (
     <CollapseComponent
       icon={<UpdateIcon />}
+      type={CollapsedMenuSetting.UPDATE}
       title={t("update.title")}
       isDark={isDark}
       className="new-tab__settings-menu_update"

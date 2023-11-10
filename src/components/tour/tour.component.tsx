@@ -1,7 +1,7 @@
-import { FC, useContext, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { TourStepProps } from "antd/es/tour/interface";
 import { useTranslation } from "react-i18next";
-import { TourContext } from "../../contexts/tour.context";
+import { useTourContext } from "../../contexts/tour.context";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
@@ -18,7 +18,7 @@ const TourComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const showTour = useSelector(selectShowTour);
-  const tourCtx = useContext(TourContext);
+  const tourCtx = useTourContext();
   const isDark = useSelector(selectIsDark);
   const [open, setOpen] = useState(showTour);
 

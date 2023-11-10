@@ -7,7 +7,7 @@ import { selectLastVersion } from "../../../store/new-tab/new-tab.selectors";
 
 /**
  * Компонент контента информационной нотификации о новой версии обновления
- * @category Component
+ * @category Components
  */
 const HasNewVersionComponent: FC = () => {
   const { t } = useTranslation();

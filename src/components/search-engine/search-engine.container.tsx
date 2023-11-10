@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useCallback, useContext, useMemo } from "react";
+import React, { FC, FormEvent, useCallback, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
   AOL,
@@ -34,7 +34,7 @@ import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swissco
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
 import { useSelector } from "react-redux";
-import { TourContext } from "../../contexts/tour.context";
+import { useTourContext } from "../../contexts/tour.context";
 import {
   selectCurrentLanguage,
   selectIsDark,
@@ -44,7 +44,7 @@ import {
 const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
   const isDark = useSelector(selectIsDark);
-  const tourCtx = useContext(TourContext);
+  const tourCtx = useTourContext();
   const searchEngine = useSelector(selectSearchEngine);
   const currentLanguage = useSelector(selectCurrentLanguage);
 

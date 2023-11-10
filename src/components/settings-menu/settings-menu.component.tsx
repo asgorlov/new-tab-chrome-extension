@@ -1,5 +1,4 @@
 import React, { FC, memo } from "react";
-import { useTranslation } from "react-i18next";
 import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
@@ -10,6 +9,9 @@ import CommonSettingContainer from "./settings/common-setting/common-setting.con
 import DrawerComponent from "../common/drawer/drawer.component";
 import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
+import SettingsHeaderContainer from "./settings-header/settings-header.container";
+import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.constants";
+import SettingRefsContextProvider from "../../contexts/setting-refs.context";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -18,7 +20,6 @@ import UpdateSettingComponent from "./settings/update-setting.component";
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property searchEngine - Выбранная поисковая система
  * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
- * @property menuContentClass - Название класса стилей для списка меню настроек
  * @interface
  */
 export interface SettingsMenuComponentProps {
@@ -27,7 +28,6 @@ export interface SettingsMenuComponentProps {
   isOpenMenu: boolean;
   searchEngine: string;
   setIsOpenMenu: (value: boolean) => void;
-  menuContentClass: string;
 }
 
 /**
@@ -35,16 +35,7 @@ export interface SettingsMenuComponentProps {
  * @category Components
  */
 const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
-  ({
-    isDark,
-    menuClass,
-    isOpenMenu,
-    searchEngine,
-    setIsOpenMenu,
-    menuContentClass
-  }) => {
-    const { t } = useTranslation();
-
+  ({ isDark, menuClass, isOpenMenu, searchEngine, setIsOpenMenu }) => {
     return (
       <div className={menuClass}>
         <Button
@@ -57,23 +48,25 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
             style={{ fill: SEARCH_THEMES[searchEngine] }}
           />
         </Button>
-        <DrawerComponent
-          title={t("settingsTitle")}
-          isDark={isDark}
-          className="new-tab__settings-menu-container"
-          menuClassName={menuClass}
-          open={isOpenMenu}
-          onClose={() => setIsOpenMenu(false)}
-        >
-          <div className={menuContentClass}>
-            <CommonSettingContainer />
-            <SearchEngineSettingComponent />
-            <DarkModeSettingComponent />
-            <WallpaperSettingContainer />
-            <UpdateSettingComponent />
-            <LanguageSettingComponent />
-          </div>
-        </DrawerComponent>
+        <SettingRefsContextProvider>
+          <DrawerComponent
+            title={<SettingsHeaderContainer />}
+            isDark={isDark}
+            className="new-tab__settings-menu-container"
+            menuClassName={menuClass}
+            open={isOpenMenu}
+            onClose={() => setIsOpenMenu(false)}
+          >
+            <div className={SETTINGS_MENU_CONTENT_CLASS}>
+              <CommonSettingContainer />
+              <SearchEngineSettingComponent />
+              <DarkModeSettingComponent />
+              <WallpaperSettingContainer />
+              <UpdateSettingComponent />
+              <LanguageSettingComponent />
+            </div>
+          </DrawerComponent>
+        </SettingRefsContextProvider>
       </div>
     );
   }

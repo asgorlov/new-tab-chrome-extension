@@ -1,14 +1,27 @@
-import { createContext, FC, ReactNode, useRef } from "react";
+import { createContext, FC, ReactNode, useContext, useRef } from "react";
 import { TourContextModel } from "../models/tour-context.model";
 
-interface TourContextProviderProps {
-  children: ReactNode | undefined;
+/**
+ * Интерфейс провайдера контекста ознакомительного тура
+ * @param children - Потомки, куда передается контекст
+ * @interface
+ */
+export interface TourContextProviderProps {
+  children: ReactNode;
 }
 
-export const TourContext = createContext<TourContextModel | undefined>(
-  undefined
-);
+const TourContext = createContext<TourContextModel | null>(null);
 
+/**
+ * Хук получения контекста ознакомительного тура
+ * @category Hooks - Tour
+ */
+export const useTourContext = () => useContext(TourContext);
+
+/**
+ * Компонент провайдера контекста ознакомительного тура
+ * @category Contexts - Tour
+ */
 const TourContextProvider: FC<TourContextProviderProps> = ({ children }) => {
   const tourContext: TourContextModel = {
     searchEngineRef: useRef<HTMLDivElement>(),
