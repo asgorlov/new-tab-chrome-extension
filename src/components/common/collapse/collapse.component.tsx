@@ -63,7 +63,6 @@ const CollapseComponent: FC<CollapseComponentProps> = memo(
         onChange={handleChange}
       >
         <Collapse.Panel
-          forceRender
           className={clsx("new-tab__collapse", { dark: isDark }, className)}
           children={children}
           header={

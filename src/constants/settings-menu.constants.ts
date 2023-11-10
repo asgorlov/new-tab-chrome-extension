@@ -55,3 +55,11 @@ export enum MenuSetting {
    */
   LANGUAGE = "language"
 }
+/**
+ * Массив с алиасами настроек, у которых есть селекторы
+ */
+export const SETTINGS_WITH_SELECTOR = [
+  CollapsedMenuSetting.SEARCH_ENGINE,
+  CollapsedMenuSetting.DARK_MODE,
+  CollapsedMenuSetting.UPDATE
+];

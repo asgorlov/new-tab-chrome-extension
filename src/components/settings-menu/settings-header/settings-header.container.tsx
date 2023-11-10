@@ -16,13 +16,11 @@ import {
 } from "../../../utils/settings-header.utils";
 import { MatchedElement } from "../../../models/settings-search.model";
 import { useSettingRefsContext } from "../../../contexts/setting-refs.context";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAllSettingsActiveKeys } from "../../../store/new-tab/new-tab.selectors";
+import { useDispatch } from "react-redux";
 import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 const SettingsHeaderContainer: FC = () => {
-  const settingsActiveKeys = useSelector(selectAllSettingsActiveKeys);
   const settingsSearchCtx = useSettingRefsContext();
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -31,26 +29,6 @@ const SettingsHeaderContainer: FC = () => {
   const [matchedElements, setMatchedElements] = useState<MatchedElement[]>([]);
   const [currentMatchedElement, setCurrentMatchedElement] =
     useState<number>(-1);
-
-  const scrollToElement = useCallback(
-    (
-      elements: MatchedElement[],
-      nextIndex: number,
-      currentIndex: number = nextIndex
-    ) => {
-      const next = elements[nextIndex];
-      const mustBeExpanded =
-        next?.item &&
-        Object.values(CollapsedMenuSetting).includes(next.type) &&
-        !settingsActiveKeys[next.type].length;
-      if (mustBeExpanded) {
-        dispatch(setSettingsActiveKeys({ [next.type]: [next.type] }));
-      }
-
-      scrollToSelectedMatchedElement(elements, nextIndex, currentIndex);
-    },
-    [settingsActiveKeys, dispatch]
-  );
 
   const removeSearchLoading = useCallback(() => {
     if (searchTimeout) {
@@ -91,12 +69,16 @@ const SettingsHeaderContainer: FC = () => {
         );
 
         setCurrentMatchedElement(nextElementIndex + 1);
-        scrollToElement(matchedElements, nextElementIndex, currentElementIndex);
+        scrollToSelectedMatchedElement(
+          matchedElements,
+          nextElementIndex,
+          currentElementIndex
+        );
       } else {
-        scrollToElement(matchedElements, 0);
+        scrollToSelectedMatchedElement(matchedElements, 0);
       }
     },
-    [currentMatchedElement, matchedElements, scrollToElement]
+    [currentMatchedElement, matchedElements]
   );
 
   const handleClickSearchNavigation = useCallback(
@@ -116,6 +98,20 @@ const SettingsHeaderContainer: FC = () => {
 
   useDebounceEffect(
     () => {
+      if (isExpanded && searchQuery.trim()) {
+        const storage = {};
+        Object.values(CollapsedMenuSetting).forEach(s =>
+          Object.assign(storage, { [s]: [s] })
+        );
+        dispatch(setSettingsActiveKeys(storage));
+      }
+    },
+    [isExpanded, searchQuery, dispatch],
+    { wait: 500 }
+  );
+
+  useDebounceEffect(
+    () => {
       if (isExpanded) {
         const query = searchQuery.trim();
         const timeout = setTimeout(
@@ -127,7 +123,7 @@ const SettingsHeaderContainer: FC = () => {
               setCurrentMatchedElement(elements.length ? 1 : 0);
               setMatchedElements(elements);
 
-              scrollToElement(elements, 0);
+              scrollToSelectedMatchedElement(elements, 0);
             } else {
               setMatchedElements([]);
               setCurrentMatchedElement(-1);

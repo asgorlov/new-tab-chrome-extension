@@ -1,6 +1,7 @@
 import {
-  FOUND_SEARCH_QUERY_NAME,
   CollapsedMenuSetting,
+  FOUND_SEARCH_QUERY_NAME,
+  SETTINGS_WITH_SELECTOR,
   SETTINGS_MENU_CURRENT_CLASS,
   SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
 } from "../constants/settings-menu.constants";
@@ -51,15 +52,21 @@ export const scrollToSelectedMatchedElement = (
   nextIndex: number,
   currentIndex: number = nextIndex
 ) => {
-  const nextElement = matchedElements[nextIndex]?.item;
+  const matchedElem = matchedElements[nextIndex];
+  const nextElement = matchedElem?.item as HTMLElement;
 
   if (nextElement) {
+    if (SETTINGS_WITH_SELECTOR.includes(matchedElem.type))
+      nextElement.dispatchEvent(
+        new CustomEvent("search", { bubbles: true, cancelable: true })
+      );
+
     nextElement.scrollIntoView({ behavior: "smooth" });
 
     nextElement.classList.add(SETTINGS_MENU_CURRENT_CLASS);
 
     if (currentIndex !== nextIndex && matchedElements.length > 1) {
-      matchedElements[currentIndex].item.classList.remove(
+      matchedElements[currentIndex]?.item.classList.remove(
         SETTINGS_MENU_CURRENT_CLASS
       );
     }
