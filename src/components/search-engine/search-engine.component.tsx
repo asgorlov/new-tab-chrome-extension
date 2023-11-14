@@ -16,10 +16,10 @@ import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/sw
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
+import { useTourStepOneContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
- * @property setContainerRef - Функция для установки рефа контейнера компонента поисковой системы с полем ввода с логотипом
  * @property currentLanguage - Текущий язык
  * @property onSubmitForm - Функция, вызываемая при сабмите поискового запроса
  * @property searchEngine - Выбранная поисковая система
@@ -28,7 +28,6 @@ import { getInputName } from "../../utils/search-engine.utils";
  * @interface
  */
 export interface SearchEngineProps {
-  setContainerRef: (ref: HTMLDivElement | null) => void;
   currentLanguage: string;
   onSubmitForm: (event: FormEvent<HTMLFormElement>) => void;
   searchEngine: string;
@@ -41,15 +40,9 @@ export interface SearchEngineProps {
  * @category Components
  */
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
-  ({
-    setContainerRef,
-    currentLanguage,
-    onSubmitForm,
-    searchEngine,
-    buttonLabel,
-    isDark
-  }) => {
+  ({ currentLanguage, onSubmitForm, searchEngine, buttonLabel, isDark }) => {
     const { t } = useTranslation();
+    const tourCtx = useTourStepOneContext();
     const [formFocused, setFormFocused] = React.useState(false);
 
     const inputPrefix =
@@ -98,7 +91,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
 
     return (
       <div className="new-tab__search-engine">
-        <div className="new-tab__search-engine-container" ref={setContainerRef}>
+        <div className="new-tab__search-engine-container" ref={tourCtx}>
           <Link
             className={getSearchEngineLogoClass()}
             href={SEARCH_ENGINE_LINKS[searchEngine]}

@@ -1,7 +1,11 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { TourStepProps } from "antd/es/tour/interface";
 import { useTranslation } from "react-i18next";
-import { useTourContext } from "../../contexts/tour.context";
+import {
+  useTourStepOneContext,
+  useTourStepThreeContext,
+  useTourStepTwoContext
+} from "../../contexts/tour.context";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
@@ -17,9 +21,13 @@ import {
 const TourComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const searchEngineRef = useTourStepOneContext();
+  const settingsMenuContentRef = useTourStepThreeContext();
+  const searchEngineSelectorRef = useTourStepTwoContext();
+
   const showTour = useSelector(selectShowTour);
-  const tourCtx = useTourContext();
   const isDark = useSelector(selectIsDark);
+
   const [open, setOpen] = useState(showTour);
 
   const handleTourClose = () => {
@@ -28,50 +36,44 @@ const TourComponent: FC = () => {
     dispatch(setIsOpenMenu(false));
   };
 
-  const steps = useMemo(() => {
-    return [
-      {
-        title: t("tour.step1.title"),
-        description: t("tour.step1.description"),
-        placement: "bottom",
-        target: () => tourCtx?.searchEngineRef.current,
-        nextButtonProps: {
-          children: t("tour.button.next")
-        }
-      },
-      {
-        title: t("tour.step2.title"),
-        description: t("tour.step2.description"),
-        placement: "top",
-        target: () => tourCtx?.searchEngineSelectorRef.current,
-        nextButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(true)),
-          children: t("tour.button.next")
-        },
-        prevButtonProps: {
-          children: t("tour.button.previous")
-        }
-      },
-      {
-        title: t("tour.step3.title"),
-        description: t("tour.step3.description"),
-        placement: "left",
-        target: () => {
-          return tourCtx?.settingsMenuContentClass
-            ? document.querySelector(tourCtx.settingsMenuContentClass)
-            : null;
-        },
-        prevButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(false)),
-          children: t("tour.button.previous")
-        },
-        nextButtonProps: {
-          onClick: () => dispatch(setIsOpenMenu(false)),
-          children: t("tour.button.finish")
-        }
+  const steps = [
+    {
+      title: t("tour.step1.title"),
+      description: t("tour.step1.description"),
+      placement: "bottom",
+      target: searchEngineRef.current,
+      nextButtonProps: {
+        children: t("tour.button.next")
       }
-    ] as TourStepProps[];
-  }, [tourCtx, t, dispatch]);
+    },
+    {
+      title: t("tour.step2.title"),
+      description: t("tour.step2.description"),
+      placement: "top",
+      target: searchEngineSelectorRef.current,
+      nextButtonProps: {
+        onClick: () => dispatch(setIsOpenMenu(true)),
+        children: t("tour.button.next")
+      },
+      prevButtonProps: {
+        children: t("tour.button.previous")
+      }
+    },
+    {
+      title: t("tour.step3.title"),
+      description: t("tour.step3.description"),
+      placement: "left",
+      target: () => settingsMenuContentRef.current,
+      prevButtonProps: {
+        onClick: () => dispatch(setIsOpenMenu(false)),
+        children: t("tour.button.previous")
+      },
+      nextButtonProps: {
+        onClick: () => dispatch(setIsOpenMenu(false)),
+        children: t("tour.button.finish")
+      }
+    }
+  ] as TourStepProps[];
 
   return (
     <Tour

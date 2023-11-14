@@ -34,7 +34,6 @@ import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swissco
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
 import { useSelector } from "react-redux";
-import { useTourContext } from "../../contexts/tour.context";
 import {
   selectCurrentLanguage,
   selectIsDark,
@@ -44,7 +43,6 @@ import {
 const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
   const isDark = useSelector(selectIsDark);
-  const tourCtx = useTourContext();
   const searchEngine = useSelector(selectSearchEngine);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
@@ -97,15 +95,6 @@ const SearchEngineContainer: FC = () => {
     }
   }, [searchEngine, isDark, t]);
 
-  const setContainerRef = useCallback(
-    (ref: HTMLDivElement | null) => {
-      if (tourCtx) {
-        tourCtx.searchEngineRef.current = ref;
-      }
-    },
-    [tourCtx]
-  );
-
   const onSubmitForm = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       if (searchEngine === BOARDREADER) {
@@ -124,7 +113,6 @@ const SearchEngineContainer: FC = () => {
 
   return (
     <SearchEngineComponent
-      setContainerRef={setContainerRef}
       currentLanguage={currentLanguage}
       onSubmitForm={onSubmitForm}
       searchEngine={searchEngine}
