@@ -18,15 +18,17 @@ export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
 export * from "../models/night-period.model";
 export * from "../models/settings-search.model";
-export * from "../models/tour-context.model";
 export * from "../models/update.model";
 // Hooks
 export * from "../hooks/use-active-keys.hook";
 // Contexts
 export {
-  useTourContext,
+  useTourStepOneContext,
+  useTourStepTwoContext,
+  useTourStepThreeContext,
   default as TourContextProvider,
-  type TourContextProviderProps
+  type TourContextProviderProps,
+  type TourStepContext
 } from "../contexts/tour.context";
 export {
   useSettingRefsContext,

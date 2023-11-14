@@ -7,7 +7,7 @@ import {
   getScrollSearchEngineButtonStyle,
   getSearchEngineSelectorStyle
 } from "../../utils/search-engine.utils";
-import { useTourContext } from "../../contexts/tour.context";
+import { useTourStepTwoContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
@@ -41,19 +41,13 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
     onDragged,
     onClickMoving
   }) => {
-    const tourCtx = useTourContext();
+    const tourCtx = useTourStepTwoContext();
     const [isLeftButtonActive, setIsLeftButtonActive] = useState(false);
     const [isRightButtonActive, setIsRightButtonActive] = useState(false);
 
-    const setSearchEngineSelectorRef = (element: HTMLDivElement | null) => {
-      if (tourCtx) {
-        tourCtx.searchEngineSelectorRef.current = element;
-      }
-    };
-
     return (
       <div
-        ref={setSearchEngineSelectorRef}
+        ref={tourCtx}
         className="new-tab__search-engine-selector"
         style={getSearchEngineSelectorStyle(
           searchEngine,

@@ -29,19 +29,19 @@ const NewTabComponent: FC = () => {
   };
 
   return (
-    <TourContextProvider>
-      <div className={clsx("new-tab", { dark: isDark })}>
-        <div
-          className={clsx("new-tab-background", wallpaper)}
-          style={getBackgroundStyle()}
-        />
-        <TourComponent />
-        <NotificationComponent />
+    <div className={clsx("new-tab", { dark: isDark })}>
+      <div
+        className={clsx("new-tab-background", wallpaper)}
+        style={getBackgroundStyle()}
+      />
+      <NotificationComponent />
+      <TourContextProvider>
         <SettingsMenuContainer />
         <SearchEngineContainer />
         <SearchEngineSelectorContainer />
-      </div>
-    </TourContextProvider>
+        <TourComponent />
+      </TourContextProvider>
+    </div>
   );
 };
 

@@ -10,8 +10,8 @@ import DrawerComponent from "../common/drawer/drawer.component";
 import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
 import SettingsHeaderContainer from "./settings-header/settings-header.container";
-import { SETTINGS_MENU_CONTENT_CLASS } from "../../constants/settings-menu.constants";
 import SettingRefsContextProvider from "../../contexts/setting-refs.context";
+import { useTourStepThreeContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента меню настроек
@@ -36,6 +36,8 @@ export interface SettingsMenuComponentProps {
  */
 const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
   ({ isDark, menuClass, isOpenMenu, searchEngine, setIsOpenMenu }) => {
+    const tourCtx = useTourStepThreeContext();
+
     return (
       <div className={menuClass}>
         <Button
@@ -57,7 +59,7 @@ const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
             open={isOpenMenu}
             onClose={() => setIsOpenMenu(false)}
           >
-            <div className={SETTINGS_MENU_CONTENT_CLASS}>
+            <div ref={tourCtx} className="new-tab__settings-menu-content">
               <CommonSettingContainer />
               <SearchEngineSettingComponent />
               <DarkModeSettingComponent />
