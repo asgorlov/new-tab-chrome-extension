@@ -2,13 +2,9 @@
 
 .new-tab__settings-menu_common {
   &_btn-group {
-    &.dark button {
-      border-color: $dark-border-color;
-    }
-
     button {
       border: none transparent;
-      border-bottom: 1px solid $light-border-color;
+      border-bottom: 1px solid var(--menu-border-color);
       width: 100%;
       cursor: pointer;
       padding: 8px;
@@ -24,6 +20,7 @@
   &-modal-content {
     display: flex;
     flex-direction: column;
+    color: var(--text-color);
 
     &_radio-group {
       margin-bottom: 8px;
@@ -31,10 +28,6 @@
 
     &_uploading {
       margin-bottom: 2px;
-    }
-
-    &.dark {
-      color: $light-color;
     }
   }
 }

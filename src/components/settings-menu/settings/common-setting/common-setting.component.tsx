@@ -7,7 +7,6 @@ import {
   selectIsDark,
   selectSearchEngine
 } from "../../../../store/new-tab/new-tab.selectors";
-import clsx from "clsx";
 import { Radio } from "antd";
 import {
   BUTTON_NAMES,
@@ -97,11 +96,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
         title={t("commonSetting.title")}
         className="new-tab__settings-menu_common"
       >
-        <div
-          className={clsx("new-tab__settings-menu_common_btn-group", {
-            dark: isDark
-          })}
-        >
+        <div className="new-tab__settings-menu_common_btn-group">
           {Object.values(BUTTON_NAMES).map(name => (
             <button
               onMouseLeave={onMouseLeave}
@@ -125,11 +120,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
           cancelText={t("commonSetting.cancel")}
           okButtonProps={{ disabled: disableOk }}
         >
-          <div
-            className={clsx("new-tab__settings-menu_common-modal-content", {
-              dark: isDark
-            })}
-          >
+          <div className="new-tab__settings-menu_common-modal-content">
             {selectedOption === BUTTON_NAMES.reset ? (
               <span>{t("commonSetting.reset.message")}</span>
             ) : (

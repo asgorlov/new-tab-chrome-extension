@@ -16,7 +16,7 @@
     &>.ant-drawer-body {
       transition: $slow-transition;
       background-image: var(--drawer-body-bg-image);
-      background-color: var(--drawer-body-border-color);
+      background-color: var(--menu-border-color);
 
       /* полоса прокрутки */
       &::-webkit-scrollbar {
@@ -35,7 +35,7 @@
       .ant-collapse {
         transition: $slow-transition;
         background-color: transparent;
-        border-top: 1px solid var(--drawer-body-border-color);
+        border-top: 1px solid var(--menu-border-color);
         border-radius: 0;
 
         &>.ant-collapse-item {
