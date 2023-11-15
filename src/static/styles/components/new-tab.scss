@@ -9,11 +9,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: $light-color;
-
-    &.dark {
-        background-color: $dark-color;
-    }
+    background-color: var(--main-color);
 
     &-background {
         transition: background $slow-transition;

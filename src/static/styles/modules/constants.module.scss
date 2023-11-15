@@ -35,6 +35,16 @@ $fast-transition: 0.5s;
 $search-engine-width: 40vw;
 $search-engine-max-width: 560px;
 
+[data-theme="light"] {
+  --main-color: #{$light-color};
+  --border-color: #d9d9d9;
+}
+
+[data-theme="dark"] {
+  --main-color: #{$dark-color};
+  --border-color: #525252;
+}
+
 :export {
   darkColor: $dark-color;
   lightColor: $light-color;

@@ -226,9 +226,9 @@ export const SEARCH_THEMES: Record<string, string> = {
  * Цвет для темной темы
  * @category Constants - Search Engine
  */
-export const DARK_THEME = constants.darkColor;
+export const DARK_THEME_COLOR = constants.darkColor;
 /**
  * Цвет для светлой темы
  * @category Constants - Search Engine
  */
-export const LIGHT_THEME = constants.lightColor;
+export const LIGHT_THEME_COLOR = constants.lightColor;

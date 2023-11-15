@@ -13,6 +13,10 @@ import {
   selectWallpaper
 } from "../../store/new-tab/new-tab.selectors";
 import NotificationComponent from "../notification/notification.component";
+import {
+  DARK_THEME_NAME,
+  LIGHT_THEME_NAME
+} from "../../constants/common.constants";
 
 /**
  * Компонент страницы новой вкладки
@@ -29,7 +33,10 @@ const NewTabComponent: FC = () => {
   };
 
   return (
-    <div className={clsx("new-tab", { dark: isDark })}>
+    <div
+      data-theme={isDark ? DARK_THEME_NAME : LIGHT_THEME_NAME}
+      className="new-tab"
+    >
       <div
         className={clsx("new-tab-background", wallpaper)}
         style={getBackgroundStyle()}

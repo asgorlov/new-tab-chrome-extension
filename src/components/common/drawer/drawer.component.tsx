@@ -3,8 +3,8 @@ import { Drawer, DrawerProps } from "antd";
 import clsx from "clsx";
 import { GetContainer } from "@rc-component/portal/es/Portal";
 import {
-  DARK_THEME,
-  LIGHT_THEME
+  DARK_THEME_COLOR,
+  LIGHT_THEME_COLOR
 } from "../../../constants/search-engine.constants";
 
 /**
@@ -68,7 +68,7 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
           contentWrapperStyle
         )}
         drawerStyle={Object.assign(
-          { background: isDark ? DARK_THEME : LIGHT_THEME },
+          { background: isDark ? DARK_THEME_COLOR : LIGHT_THEME_COLOR },
           drawerStyle
         )}
         getContainer={containerGetFunction()}
