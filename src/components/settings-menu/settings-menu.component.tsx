@@ -33,8 +33,10 @@ const SettingsMenuComponent: FC = () => {
   const isOpenMenu = useSelector(selectIsOpenMenu);
   const searchEngine = useSelector(selectSearchEngine);
 
+  const menuClass = "new-tab__settings-menu";
+
   return (
-    <div className="new-tab__settings-menu">
+    <div className={menuClass}>
       <Button
         className="new-tab__settings-menu-button"
         type="text"
@@ -50,7 +52,7 @@ const SettingsMenuComponent: FC = () => {
           title={<SettingsHeaderContainer />}
           isDark={isDark}
           className="new-tab__settings-menu-container"
-          menuClassName="new-tab__settings-menu"
+          menuClassName={menuClass}
           open={isOpenMenu}
           onClose={() => dispatch(setIsOpenMenu(false))}
         >
