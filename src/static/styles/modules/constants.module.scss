@@ -42,6 +42,8 @@ $search-engine-max-width: 560px;
   --bg-hover-color: #0000000f;
   --bg-scrollable-color: #ffffff80;
   --text-color: #{$light-text-color};
+  --tooltip-text-color: inherit;
+  --tooltip-box-shadow: 0 6px 16px 0 #00000014, 0 3px 6px -4px #0000001E, 0 9px 28px 8px #0000000C;
   --border-color: #d9d9d9;
   --tour-indicator-color: #00000026;
 }
@@ -51,6 +53,8 @@ $search-engine-max-width: 560px;
   --bg-hover-color: #ffffff0f;
   --bg-scrollable-color: #292c3580;
   --text-color: #{$dark-text-color};
+  --tooltip-text-color: #{$dark-text-color};
+  --tooltip-box-shadow: 0 6px 16px 0 #FFFFFF14, 0 3px 6px -4px #FFFFFF1E, 0 9px 28px 8px #FFFFFF0C;
   --border-color: #525252;
   --tour-indicator-color: #ffffff26;
 }
