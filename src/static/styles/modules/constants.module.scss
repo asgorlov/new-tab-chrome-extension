@@ -40,6 +40,7 @@ $search-engine-max-width: 560px;
 [data-theme="light"] {
   --bg-color: #{$light-color};
   --bg-hover-color: #0000000f;
+  --bg-scrollable-color: #ffffff80;
   --text-color: #{$light-text-color};
   --border-color: #d9d9d9;
   --tour-indicator-color: #00000026;
@@ -48,6 +49,7 @@ $search-engine-max-width: 560px;
 [data-theme="dark"] {
   --bg-color: #{$dark-color};
   --bg-hover-color: #ffffff0f;
+  --bg-scrollable-color: #292c3580;
   --text-color: #{$dark-text-color};
   --border-color: #525252;
   --tour-indicator-color: #ffffff26;

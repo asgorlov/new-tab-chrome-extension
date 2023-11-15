@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import SearchEngineSelectorComponent from "./search-engine-selector.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectIsDark,
   selectSearchEngine,
   selectSearchEngines
 } from "../../store/new-tab/new-tab.selectors";
@@ -11,7 +10,7 @@ import { setSearchEngines } from "../../store/new-tab/new-tab.slice";
 
 const SearchEngineSelectorContainer: FC = () => {
   const dispatch = useDispatch();
-  const isDark = useSelector(selectIsDark);
+
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
@@ -77,7 +76,6 @@ const SearchEngineSelectorContainer: FC = () => {
 
   return (
     <SearchEngineSelectorComponent
-      isDark={isDark}
       scrollRef={scrollRef}
       searchEngine={searchEngine}
       searchEngines={searchEngines}

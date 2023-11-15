@@ -1,6 +1,5 @@
 import React, { FC, memo, RefObject, useState } from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
-import clsx from "clsx";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { DELTA_Y } from "../../constants/search-engine-selector.constants";
 import {
@@ -11,7 +10,6 @@ import { useTourStepTwoContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента выбора поисковой системы
- * @property isDark - Флаг темной темы
  * @property scrollRef - Ref элемента селектора со скроллом
  * @property searchEngine - Выбранная поисковая система
  * @property searchEngines - Список выбранных поисковых систем для переключения
@@ -20,7 +18,6 @@ import { useTourStepTwoContext } from "../../contexts/tour.context";
  * @interface
  */
 export interface SearchSelectedComponentProps {
-  isDark: boolean;
   scrollRef: RefObject<HTMLDivElement>;
   searchEngine: string;
   searchEngines: string[];
@@ -33,14 +30,7 @@ export interface SearchSelectedComponentProps {
  * @category Components
  */
 const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
-  ({
-    isDark,
-    scrollRef,
-    searchEngine,
-    searchEngines,
-    onDragged,
-    onClickMoving
-  }) => {
+  ({ scrollRef, searchEngine, searchEngines, onDragged, onClickMoving }) => {
     const tourCtx = useTourStepTwoContext();
     const [isLeftButtonActive, setIsLeftButtonActive] = useState(false);
     const [isRightButtonActive, setIsRightButtonActive] = useState(false);
@@ -69,9 +59,7 @@ const SearchEngineSelectorComponent: FC<SearchSelectedComponentProps> = memo(
         />
         <div
           ref={scrollRef}
-          className={clsx("new-tab__search-engine-selector-scrollable", {
-            dark: isDark
-          })}
+          className="new-tab__search-engine-selector-scrollable"
         >
           <DroppableAriaContainer onDragged={onDragged} />
         </div>

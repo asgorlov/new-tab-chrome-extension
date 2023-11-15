@@ -14,15 +14,11 @@
         transition: background-color $slow-transition;
         overflow-x: auto;
         padding: 2px;
-        background-color: #ffffff80;
+        background-color: var(--bg-scrollable-color);
         max-width: 360px;
 
         &::-webkit-scrollbar {
             height: 0;
-        }
-
-        &.dark {
-            background-color: #292c3580;
         }
     }
 
