@@ -27,30 +27,18 @@
   &.google {
     border: 1px solid #dfe1e5;
     border-radius: 24px;
-    box-shadow: 0 1px 6px #20212447;
-
-    &.dark {
-      box-shadow: 0 1px 6px #d9dfee47;
-    }
+    box-shadow: var(--google-form-box-shadow);
   }
 
   &.duckduckgo {
     outline: 1px solid #00000026;
-    box-shadow: 0 2px 3px #0000000F;
+    box-shadow: var(--duck-form-box-shadow);
     @include hide-form-border(8px);
-
-    &.dark {
-      box-shadow: 0 2px 3px $light-background-color;
-    }
   }
 
   &.bing {
-    box-shadow: 0 2px 4px #0000004C;
+    box-shadow: var(--bing-form-box-shadow);
     @include hide-form-border(24px);
-
-    &.dark {
-      box-shadow: 0 2px 4px #ffffff4c;
-    }
   }
 
   &.yahoo {
@@ -59,28 +47,13 @@
 
     &:hover {
       background: $light-color;
-      box-shadow: 0 4px 8px 0 #00000019, 0 0 1px 0 #00000019;
-    }
-
-    &.dark {
-      &:hover {
-        box-shadow: 0 4px 8px 0 #ffffff19, 0 0 1px 0 #ffffff19;
-      }
-
-      .new-tab__search-engine_button.yahoo::after {
-        color: #000000;
-        background: #b7d2eda8;
-      }
+      box-shadow: var(--yahoo-form-box-shadow);
     }
   }
 
   &.brave {
-    box-shadow: 0 2px 4px #0000004C;
+    box-shadow: var(--brave-form-box-shadow);
     @include hide-form-border(10px);
-
-    &.dark {
-      box-shadow: 0 2px 4px #ffffff4c;
-    }
   }
 
   &.swisscows {
@@ -94,30 +67,16 @@
   &.youcom {
     border: 1px solid transparent;
     border-radius: 24px;
-    box-shadow: #00000011 0 -0.5px 0, #00000019 0 0 18px;
+    box-shadow: var(--youcom-form-box-shadow);
 
     &:focus-within {
-      box-shadow: #4A72F5FF 0 0 3px;
-      border-color: #ffffff00;
-    }
-
-    &.dark {
-      box-shadow: #FFFFFF11 0 -0.5px 0, #FFFFFF19 0 0 18px;
-
-      &:focus-within {
-        box-shadow: #00D4FF3F 0 0 4px, #0000FF19 0 4px 18px;
-        border-color: #4A72F5FF;
-      }
+      border-color: #4A72F5FF;
     }
   }
 
   &.gibiru {
-    border: 1px solid #828282FF;
+    border: 1px solid var(--gibiru-form-border-color);
     border-radius: 7px;
-
-    &.dark {
-      border-color: #d5d5d5;
-    }
   }
 
   &.lycos {
@@ -140,11 +99,7 @@
   &.ecosia {
     border: 1px solid #bebeb9;
     border-radius: 30px;
-    box-shadow: 0 1px 2px #1A1A1A2D,0 0 8px #1A1A1A0F;
-
-    &.dark {
-      box-shadow: 0 1px 2px #D0D0D02D,0 0 8px #D0D0D00F;
-    }
+    box-shadow: var(--ecosia-form-box-shadow);
   }
 
   &.searchcrypt {

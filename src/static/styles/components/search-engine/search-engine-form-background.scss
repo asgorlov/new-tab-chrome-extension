@@ -59,13 +59,9 @@
     opacity: 1;
     min-height: 156px;
     max-height: 156px;
-    background-color: #C0C0C099;
+    background-color: var(--lycos-form-bg-color);
     padding: 0 12px;
     top: calc(50% - 121px);
-
-    &.dark {
-      background-color: #FFFFFF99;
-    }
   }
 
   &.nigma {
@@ -77,27 +73,18 @@
     padding: 0 20px;
     top: calc(50% - 62px);
     border-radius: 20px;
-    border: solid 4px $light-color;
+    border: solid 4px var(--nigma-form-border-color);
     outline: solid 2px #dadada;
-
-    &.dark {
-      border-color: $dark-color;
-    }
   }
 
   &.zapmeta {
     opacity: 1;
-    background-color: #fcfcfc;
+    background-color: var(--zapmeta-form-bg-color);
     min-height: 92px;
     max-height: 92px;
     top: calc(50% - 77px);
     padding: 0 15px;
-    border: solid 1px #eee;
-
-    &.dark {
-      background-color: mix($dark-color, $light-color, 97%);
-      border-color: #333742;
-    }
+    border: solid 1px var(--zapmeta-form-border-color);
   }
 
   &.searchch {

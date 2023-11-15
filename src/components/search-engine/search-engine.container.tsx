@@ -21,7 +21,6 @@ import {
   YOUCOM,
   ZAPMETA
 } from "../../constants/search-engine.constants";
-import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as EcosiaSearchIcon } from "../../static/svgs/ecosia/ecosia-search-icon.svg";
 import { ReactComponent as LycosSearchIcon } from "../../static/svgs/lycos/lycos-search-icon.svg";
@@ -36,13 +35,12 @@ import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-searc
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
-  selectIsDark,
   selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
 
 const SearchEngineContainer: FC = () => {
   const { t } = useTranslation();
-  const isDark = useSelector(selectIsDark);
+
   const searchEngine = useSelector(selectSearchEngine);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
@@ -55,7 +53,7 @@ const SearchEngineContainer: FC = () => {
         return <span>{"S"}</span>;
       case BING:
         return (
-          <label className={clsx({ dark: isDark })} aria-label={t("webSearch")}>
+          <label aria-label={t("webSearch")}>
             <BingSearchIcon />
           </label>
         );
@@ -93,7 +91,7 @@ const SearchEngineContainer: FC = () => {
       default:
         return <></>;
     }
-  }, [searchEngine, isDark, t]);
+  }, [searchEngine, t]);
 
   const onSubmitForm = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -117,7 +115,6 @@ const SearchEngineContainer: FC = () => {
       onSubmitForm={onSubmitForm}
       searchEngine={searchEngine}
       buttonLabel={buttonLabel}
-      isDark={isDark}
     />
   );
 };
