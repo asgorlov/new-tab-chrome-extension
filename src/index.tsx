@@ -3,11 +3,8 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import i18n from "./localizations/i18n";
 import "./static/styles/styles.scss";
 import NewTabContainer from "./components/new-tab/new-tab.container";
-
-document.title = i18n.t("tabTitle");
 
 const main = ReactDOM.createRoot(
   document.getElementById("main") as HTMLElement

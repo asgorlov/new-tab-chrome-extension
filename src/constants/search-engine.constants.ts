@@ -221,14 +221,3 @@ export const SEARCH_THEMES: Record<string, string> = {
   zapmeta: constants.zapmetaColor,
   searchch: constants.searchchColor
 };
-
-/**
- * Цвет для темной темы
- * @category Constants - Search Engine
- */
-export const DARK_THEME_COLOR = constants.darkColor;
-/**
- * Цвет для светлой темы
- * @category Constants - Search Engine
- */
-export const LIGHT_THEME_COLOR = constants.lightColor;

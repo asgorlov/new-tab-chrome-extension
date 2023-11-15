@@ -1,7 +1,9 @@
 $dark-color: #292c35;
+$light-color: #fff;
+$dark-text-color: #fff;
+$light-text-color: #000000e0;
 $dark-border-color: #525252;
 $light-border-color: #d9d9d9;
-$light-color: #fff;
 $light-background-color: #ffffff0f;
 $disabled-text-color: #FFFFFF3F;
 $disabled-background-color: #FFFFFF0A;
@@ -36,18 +38,26 @@ $search-engine-width: 40vw;
 $search-engine-max-width: 560px;
 
 [data-theme="light"] {
-  --main-color: #{$light-color};
+  --bg-color: #{$light-color};
+  --bg-hover-color: #0000000f;
+  --text-color: #{$light-text-color};
   --border-color: #d9d9d9;
+  --tour-indicator-color: #00000026;
 }
 
 [data-theme="dark"] {
-  --main-color: #{$dark-color};
+  --bg-color: #{$dark-color};
+  --bg-hover-color: #ffffff0f;
+  --text-color: #{$dark-text-color};
   --border-color: #525252;
+  --tour-indicator-color: #ffffff26;
 }
 
 :export {
   darkColor: $dark-color;
   lightColor: $light-color;
+  darkTextColor: $dark-text-color;
+  lightTextColor: $light-text-color;
   yaColor: $ya-color;
   aolColor: $aol-color;
   youcomColor: $youcom-color;

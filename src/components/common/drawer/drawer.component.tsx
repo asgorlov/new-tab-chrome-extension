@@ -5,7 +5,7 @@ import { GetContainer } from "@rc-component/portal/es/Portal";
 import {
   DARK_THEME_COLOR,
   LIGHT_THEME_COLOR
-} from "../../../constants/search-engine.constants";
+} from "../../../constants/common.constants";
 
 /**
  * Передаваемые параметры для компонента меню

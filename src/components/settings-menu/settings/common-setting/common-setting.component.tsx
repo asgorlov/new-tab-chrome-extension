@@ -19,12 +19,13 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
 import UploadComponent from "../../../common/upload/upload.component";
 import ModalComponent from "../../../common/modal/modal.component";
 import RadioComponent from "../../../common/radio/radio.component";
-import {
-  LIGHT_THEME_COLOR,
-  SEARCH_THEMES
-} from "../../../../constants/search-engine.constants";
+import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { CollapsedMenuSetting } from "../../../../constants/settings-menu.constants";
+import {
+  DARK_TEXT_COLOR,
+  LIGHT_TEXT_COLOR
+} from "../../../../constants/common.constants";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -81,7 +82,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     const isDark = useSelector(selectIsDark);
     const searchEngine = useSelector(selectSearchEngine);
 
-    const borderColor = isDark ? LIGHT_THEME_COLOR : "black";
+    const borderColor = isDark ? DARK_TEXT_COLOR : LIGHT_TEXT_COLOR;
     const showUpload =
       radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
     const onMouseLeave = (e: MouseEvent<HTMLButtonElement>) =>

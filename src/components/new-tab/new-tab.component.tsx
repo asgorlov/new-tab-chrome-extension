@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import clsx from "clsx";
 import SettingsMenuContainer from "../settings-menu/settings-menu.container";
 import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
@@ -17,12 +17,14 @@ import {
   DARK_THEME_NAME,
   LIGHT_THEME_NAME
 } from "../../constants/common.constants";
+import { useTranslation } from "react-i18next";
 
 /**
  * Компонент страницы новой вкладки
  * @category Components
  */
 const NewTabComponent: FC = () => {
+  const { t } = useTranslation();
   const isDark = useSelector(selectIsDark);
   const wallpaper = useSelector(selectWallpaper);
   const customWallpaper = useSelector(selectCustomWallpaper);
@@ -32,11 +34,19 @@ const NewTabComponent: FC = () => {
     return url ? { backgroundImage: `url(${url})` } : {};
   };
 
+  useEffect(() => {
+    document.title = t("tabTitle");
+  }, [t]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      isDark ? DARK_THEME_NAME : LIGHT_THEME_NAME
+    );
+  }, [isDark]);
+
   return (
-    <div
-      data-theme={isDark ? DARK_THEME_NAME : LIGHT_THEME_NAME}
-      className="new-tab"
-    >
+    <div className="new-tab">
       <div
         className={clsx("new-tab-background", wallpaper)}
         style={getBackgroundStyle()}
