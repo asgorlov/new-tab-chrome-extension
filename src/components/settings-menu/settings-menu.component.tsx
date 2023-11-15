@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
@@ -12,66 +12,60 @@ import UpdateSettingComponent from "./settings/update-setting.component";
 import SettingsHeaderContainer from "./settings-header/settings-header.container";
 import SettingRefsContextProvider from "../../contexts/setting-refs.context";
 import { useTourStepThreeContext } from "../../contexts/tour.context";
-
-/**
- * Передаваемые параметры для компонента меню настроек
- * @property isDark - Флаг темной темы
- * @property menuClass - Название класса стилей для меню настроек
- * @property isOpenMenu - Флаг открытия меню настроек
- * @property searchEngine - Выбранная поисковая система
- * @property setIsOpenMenu - Функция изменения флага открытия меню настроек
- * @interface
- */
-export interface SettingsMenuComponentProps {
-  isDark: boolean;
-  menuClass: string;
-  isOpenMenu: boolean;
-  searchEngine: string;
-  setIsOpenMenu: (value: boolean) => void;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import {
+  selectIsDark,
+  selectIsOpenMenu,
+  selectSearchEngine
+} from "../../store/new-tab/new-tab.selectors";
+import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 
 /**
  * Компонент меню настроек
  * @category Components
  */
-const SettingsMenuComponent: FC<SettingsMenuComponentProps> = memo(
-  ({ isDark, menuClass, isOpenMenu, searchEngine, setIsOpenMenu }) => {
-    const tourCtx = useTourStepThreeContext();
+const SettingsMenuComponent: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const tourCtx = useTourStepThreeContext();
 
-    return (
-      <div className={menuClass}>
-        <Button
-          className="new-tab__settings-menu-button"
-          type="text"
-          onClick={() => setIsOpenMenu(true)}
+  const isDark = useSelector(selectIsDark);
+  const isOpenMenu = useSelector(selectIsOpenMenu);
+  const searchEngine = useSelector(selectSearchEngine);
+
+  return (
+    <div className="new-tab__settings-menu">
+      <Button
+        className="new-tab__settings-menu-button"
+        type="text"
+        onClick={() => dispatch(setIsOpenMenu(true))}
+      >
+        <MenuIcon
+          className="new-tab__settings-menu-icon"
+          style={{ fill: SEARCH_THEMES[searchEngine] }}
+        />
+      </Button>
+      <SettingRefsContextProvider>
+        <DrawerComponent
+          title={<SettingsHeaderContainer />}
+          isDark={isDark}
+          className="new-tab__settings-menu-container"
+          menuClassName="new-tab__settings-menu"
+          open={isOpenMenu}
+          onClose={() => dispatch(setIsOpenMenu(false))}
         >
-          <MenuIcon
-            className="new-tab__settings-menu-icon"
-            style={{ fill: SEARCH_THEMES[searchEngine] }}
-          />
-        </Button>
-        <SettingRefsContextProvider>
-          <DrawerComponent
-            title={<SettingsHeaderContainer />}
-            isDark={isDark}
-            className="new-tab__settings-menu-container"
-            menuClassName={menuClass}
-            open={isOpenMenu}
-            onClose={() => setIsOpenMenu(false)}
-          >
-            <div ref={tourCtx} className="new-tab__settings-menu-content">
-              <CommonSettingContainer />
-              <SearchEngineSettingComponent />
-              <DarkModeSettingComponent />
-              <WallpaperSettingContainer />
-              <UpdateSettingComponent />
-              <LanguageSettingComponent />
-            </div>
-          </DrawerComponent>
-        </SettingRefsContextProvider>
-      </div>
-    );
-  }
-);
+          <div ref={tourCtx} className="new-tab__settings-menu-content">
+            <CommonSettingContainer />
+            <SearchEngineSettingComponent />
+            <DarkModeSettingComponent />
+            <WallpaperSettingContainer />
+            <UpdateSettingComponent />
+            <LanguageSettingComponent />
+          </div>
+        </DrawerComponent>
+      </SettingRefsContextProvider>
+    </div>
+  );
+};
 
 export default SettingsMenuComponent;

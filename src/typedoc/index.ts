@@ -84,10 +84,7 @@ export {
   default as DroppableAriaComponent,
   type DroppableAriaComponentProps
 } from "../components/search-engine-selector/droppable-aria/droppable-aria.component";
-export {
-  default as SettingsMenuComponent,
-  type SettingsMenuComponentProps
-} from "../components/settings-menu/settings-menu.component";
+export { default as SettingsMenuComponent } from "../components/settings-menu/settings-menu.component";
 export {
   default as CommonSettingComponent,
   type CommonSettingComponentProps

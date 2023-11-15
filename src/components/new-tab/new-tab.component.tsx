@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from "react";
 import clsx from "clsx";
-import SettingsMenuContainer from "../settings-menu/settings-menu.container";
 import SearchEngineContainer from "../search-engine/search-engine.container";
 import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
@@ -18,6 +17,7 @@ import {
 } from "../../constants/common.constants";
 import { useTranslation } from "react-i18next";
 import SearchEngineSelectorComponent from "../search-engine-selector/search-engine-selector.component";
+import SettingsMenuComponent from "../settings-menu/settings-menu.component";
 
 /**
  * Компонент страницы новой вкладки
@@ -53,7 +53,7 @@ const NewTabComponent: FC = () => {
       />
       <NotificationComponent />
       <TourContextProvider>
-        <SettingsMenuContainer />
+        <SettingsMenuComponent />
         <SearchEngineContainer />
         <SearchEngineSelectorComponent />
         <TourComponent />
