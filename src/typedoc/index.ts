@@ -79,10 +79,7 @@ export {
   default as SearchEngineComponent,
   type SearchEngineProps
 } from "../components/search-engine/search-engine.component";
-export {
-  default as SearchEngineSelectorComponent,
-  type SearchSelectedComponentProps
-} from "../components/search-engine-selector/search-engine-selector.component";
+export { default as SearchEngineSelectorComponent } from "../components/search-engine-selector/search-engine-selector.component";
 export {
   default as DroppableAriaComponent,
   type DroppableAriaComponentProps

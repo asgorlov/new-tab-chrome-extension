@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from "react";
 import clsx from "clsx";
 import SettingsMenuContainer from "../settings-menu/settings-menu.container";
-import SearchEngineSelectorContainer from "../search-engine-selector/search-engine-selector.container";
 import SearchEngineContainer from "../search-engine/search-engine.container";
 import { getImgUrl } from "../../utils/wallpaper.utils";
 import TourContextProvider from "../../contexts/tour.context";
@@ -18,6 +17,7 @@ import {
   LIGHT_THEME_NAME
 } from "../../constants/common.constants";
 import { useTranslation } from "react-i18next";
+import SearchEngineSelectorComponent from "../search-engine-selector/search-engine-selector.component";
 
 /**
  * Компонент страницы новой вкладки
@@ -55,7 +55,7 @@ const NewTabComponent: FC = () => {
       <TourContextProvider>
         <SettingsMenuContainer />
         <SearchEngineContainer />
-        <SearchEngineSelectorContainer />
+        <SearchEngineSelectorComponent />
         <TourComponent />
       </TourContextProvider>
     </div>
