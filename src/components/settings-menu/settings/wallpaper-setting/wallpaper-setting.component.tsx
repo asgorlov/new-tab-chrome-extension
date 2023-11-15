@@ -102,7 +102,6 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
           icon={<WallpaperIcon />}
           type={CollapsedMenuSetting.WALLPAPER}
           title={t("wallpaper.title")}
-          isDark={isDark}
           className="new-tab__settings-menu_wallpaper"
         >
           <div className="new-tab__settings-menu_wallpaper-content_choice-group">

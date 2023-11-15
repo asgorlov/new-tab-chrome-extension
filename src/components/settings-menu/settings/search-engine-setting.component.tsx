@@ -55,7 +55,6 @@ const SearchEngineSettingComponent: FC = () => {
       icon={<SearchEngineIcon />}
       type={CollapsedMenuSetting.SEARCH_ENGINE}
       title={t("searchEngine.title")}
-      isDark={isDark}
       className="new-tab__settings-menu_search-engine"
     >
       <div className="new-tab__settings-menu_search-engine-content-checkbox-group">

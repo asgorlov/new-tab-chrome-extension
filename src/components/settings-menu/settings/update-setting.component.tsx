@@ -47,7 +47,6 @@ const UpdateSettingComponent: FC = () => {
       icon={<UpdateIcon />}
       type={CollapsedMenuSetting.UPDATE}
       title={t("update.title")}
-      isDark={isDark}
       className="new-tab__settings-menu_update"
     >
       <div className="new-tab__settings-menu_update-content">

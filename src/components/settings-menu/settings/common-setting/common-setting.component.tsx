@@ -95,7 +95,6 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
         icon={<CommonIcon />}
         type={CollapsedMenuSetting.COMMON}
         title={t("commonSetting.title")}
-        isDark={isDark}
         className="new-tab__settings-menu_common"
       >
         <div

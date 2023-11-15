@@ -12,7 +12,6 @@ import { setSettingsActiveKeys } from "../../../store/new-tab/new-tab.slice";
  * @property icon - Иконка в хедере перед текстом
  * @property type - Тип настройки меню
  * @property title - Название в хедере
- * @property isDark - Флаг темного режима
  * @property children - Компоненты-потомки
  * @property className - Название класса компонента
  * @property onChange - Функция передает имя сворачиваемого компонента при нажатии на него
@@ -22,7 +21,6 @@ export interface CollapseComponentProps {
   icon: ReactNode;
   type: CollapsedMenuSetting;
   title: string;
-  isDark: boolean;
   children?: ReactNode;
   className?: string;
   onChange?: (values: string | string[]) => void;
@@ -33,22 +31,14 @@ export interface CollapseComponentProps {
  * @category Components
  */
 const CollapseComponent: FC<CollapseComponentProps> = memo(
-  ({
-    icon,
-    type,
-    title,
-    isDark,
-    children,
-    className = "",
-    onChange = () => {}
-  }) => {
+  ({ icon, type, title, children, className = "", onChange = () => {} }) => {
     const dispatch = useDispatch();
     const settingsSearchCtx = useSettingRefsContext();
     const settingActiveKeys = useSettingActiveKeys(type);
 
     const items = [
       {
-        className: clsx("new-tab__collapse", { dark: isDark }, className),
+        className: clsx("new-tab__collapse", className),
         children,
         label: (
           <div className="new-tab__collapse-header">
