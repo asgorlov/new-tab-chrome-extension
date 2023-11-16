@@ -4,11 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { notification } from "antd";
 import { useTranslation } from "react-i18next";
 import { resetNotifications } from "../../store/new-tab/new-tab.slice";
-import {
-  selectIsDark,
-  selectNotifications
-} from "../../store/new-tab/new-tab.selectors";
-import clsx from "clsx";
+import { selectNotifications } from "../../store/new-tab/new-tab.selectors";
 import HasNewVersionComponent from "./info/has-new-version.component";
 import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 
@@ -21,7 +17,6 @@ const NotificationComponent: FC = () => {
   const dispatch = useDispatch();
   const notificationRef = useRef(null);
 
-  const isDark = useSelector(selectIsDark);
   const notifications = useSelector(selectNotifications);
 
   const [api, contextHolder] = notification.useNotification({
@@ -69,10 +64,7 @@ const NotificationComponent: FC = () => {
   }, [api, t, notifications, dispatch]);
 
   return (
-    <div
-      className={clsx("new-tab__notification", { dark: isDark })}
-      ref={notificationRef}
-    >
+    <div className="new-tab__notification" ref={notificationRef}>
       {contextHolder}
     </div>
   );
