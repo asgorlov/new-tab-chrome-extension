@@ -120,7 +120,6 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
           <div className="new-tab__settings-menu_wallpaper-modal-content">
             <div className="new-tab__settings-menu_wallpaper-modal-content_uploading-group">
               <UploadComponent
-                isDark={isDark}
                 uploadClassName={clsx(
                   "new-tab__settings-menu_wallpaper-modal-content_uploading",
                   { "auto-width": oneToBoth }
@@ -145,7 +144,6 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
               />
               {!oneToBoth && (
                 <UploadComponent
-                  isDark={isDark}
                   uploadClassName="new-tab__settings-menu_wallpaper-modal-content_uploading"
                   uploadButtonClassName="new-tab__settings-menu_wallpaper-modal-content_uploading-button"
                   validateUploadedFile={getUploadingErrorKey}

@@ -136,7 +136,6 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
                 {showUpload && (
                   <UploadComponent
                     customRequest={validateUploading}
-                    isDark={isDark}
                     uploadError={uploadingError}
                     uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
                     accept={SETTINGS_FILE_TYPE}
