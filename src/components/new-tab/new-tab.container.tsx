@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setIsDark } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
@@ -38,13 +38,13 @@ const NewTabContainer: FC = () => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {
       dispatch(checkUpdates());
     }
   }, [checkMode, lastUpdateDate, dispatch]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     switch (darkMode) {
       case AUTO:
         const now = new Date();

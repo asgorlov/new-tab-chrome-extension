@@ -66,13 +66,11 @@ const DarkModeSettingComponent: FC = () => {
       icon={<DarkModeIcon />}
       type={CollapsedMenuSetting.DARK_MODE}
       title={t("darkModeTitle")}
-      isDark={isDark}
       onChange={onChangeDarkModeCollapse}
       className="new-tab__settings-menu_dark-mode"
     >
       <div className="new-tab__settings-menu_dark-mode-content">
         <SelectComponent
-          isDark={isDark}
           size="small"
           disabled={darkMode === MANUAL && !navigator.geolocation}
           defaultValue={darkMode}

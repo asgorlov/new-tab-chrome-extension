@@ -2,6 +2,8 @@
  * Список пресетов фоновых картинок
  * @category Constants - Wallpaper
  */
+import { DARK_THEME_NAME, LIGHT_THEME_NAME } from "./common.constants";
+
 export const WALLPAPER_PRESETS = [
   "default",
   "mountains",
@@ -50,12 +52,12 @@ export const ACCEPT_IMG_FORMAT =
  * Имя инпута загрузки картинки для светлой темы
  * @category Constants - Wallpaper
  */
-export const LIGHT_INPUT_NAME = "light";
+export const LIGHT_INPUT_NAME = LIGHT_THEME_NAME;
 /**
  * Имя инпута загрузки картинки для темной темы
  * @category Constants - Wallpaper
  */
-export const DARK_INPUT_NAME = "dark";
+export const DARK_INPUT_NAME = DARK_THEME_NAME;
 /**
  * Имя инпута загрузки картинки для светлой и темной темы
  * @category Constants - Wallpaper

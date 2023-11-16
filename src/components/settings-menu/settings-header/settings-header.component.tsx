@@ -10,8 +10,6 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { selectIsDark } from "../../../store/new-tab/new-tab.selectors";
 import { ReactComponent as SearchIcon } from "../../../static/svgs/menu-settings/settings-search-icon.svg";
 import { ReactComponent as CloseIcon } from "../../../static/svgs/menu-settings/settings-search-close-icon.svg";
 import { ReactComponent as LoadingIcon } from "../../../static/svgs/menu-settings/settings-search-loading.svg";
@@ -62,7 +60,6 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
     onClickSearchNavigation
   }) => {
     const { t } = useTranslation();
-    const isDark = useSelector(selectIsDark);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const searchRef = useRef<HTMLDivElement | null>(null);
@@ -93,7 +90,7 @@ const SettingsHeaderComponent: FC<SettingsHeaderComponentProps> = memo(
     }, [isExpanded, searchQuery, handleClickOutside]);
 
     return (
-      <div className={clsx("new-tab__settings-menu-header", { dark: isDark })}>
+      <div className="new-tab__settings-menu-header">
         <span className="new-tab__settings-menu-header__title">
           {t("settingsTitle")}
         </span>

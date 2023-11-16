@@ -9,7 +9,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
-  selectIsDark,
   selectSearchEngine,
   selectSearchEngines
 } from "../../../store/new-tab/new-tab.selectors";
@@ -71,7 +70,7 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const isDark = useSelector(selectIsDark);
+
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
   const currentLanguage = useSelector(selectCurrentLanguage);
@@ -158,7 +157,6 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
         <TooltipComponent
           mouseEnterDelay={1}
           className={getClassName()}
-          isDark={isDark}
           title={t(`searchEngine.${draggableId}`)}
         >
           <div
@@ -171,7 +169,7 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
         </TooltipComponent>
       );
     },
-    [isDark, currentLanguage, searchEngine, dispatch, t]
+    [currentLanguage, searchEngine, dispatch, t]
   );
 
   return (

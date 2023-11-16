@@ -8,18 +8,15 @@
     justify-content: space-between;
 
     &-check-button {
+      color: var(--text-color);
+      border-color: var(--border-color);
       background: transparent;
       transition: background-color $slow-transition, border-color $slow-transition, color $fast-transition;
 
-      &.dark {
-        color: $light-color;
-        border-color: $dark-border-color;
-
-        &:disabled {
-          color: $disabled-text-color;
-          background-color: $disabled-background-color;
-          border-color: $dark-border-color;
-        }
+      &:disabled {
+        color: var(--btn-disabled-text-color);
+        border-color: var(--border-color);
+        background-color: var(--btn-disabled-bg-color);
       }
     }
   }

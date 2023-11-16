@@ -9,10 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpenMenu, setShowTour } from "../../store/new-tab/new-tab.slice";
 import { Tour } from "antd";
-import {
-  selectIsDark,
-  selectShowTour
-} from "../../store/new-tab/new-tab.selectors";
+import { selectShowTour } from "../../store/new-tab/new-tab.selectors";
 
 /**
  * Компонент ознакомительного тура
@@ -26,7 +23,6 @@ const TourComponent: FC = () => {
   const searchEngineSelectorRef = useTourStepTwoContext();
 
   const showTour = useSelector(selectShowTour);
-  const isDark = useSelector(selectIsDark);
 
   const [open, setOpen] = useState(showTour);
 
@@ -77,7 +73,7 @@ const TourComponent: FC = () => {
 
   return (
     <Tour
-      prefixCls={`new-tab__tour${isDark ? "_dark" : ""}`}
+      prefixCls="new-tab__tour"
       open={open}
       steps={steps}
       onClose={handleTourClose}

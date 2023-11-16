@@ -6,25 +6,17 @@
     align-items: center;
     font-weight: 500;
     transition: $fast-transition;
+    color: var(--text-color);
 
     svg {
       transition: $fast-transition;
       margin-right: 4px;
+      stroke: var(--text-color);
+      fill: var(--text-color);
     }
   }
 
-  &.dark {
-    .new-tab__collapse-header {
-      color: $light-color;
-
-      svg {
-        stroke: $light-color;
-        fill: $light-color;
-      }
-    }
-
-    .ant-collapse-expand-icon {
-      color: $light-color;
-    }
+  .ant-collapse-expand-icon {
+    color: var(--text-color);
   }
 }

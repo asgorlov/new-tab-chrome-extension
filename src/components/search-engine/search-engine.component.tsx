@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
   METAGER,
-  NIGMA,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
-  YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
@@ -24,7 +22,6 @@ import { useTourStepOneContext } from "../../contexts/tour.context";
  * @property onSubmitForm - Функция, вызываемая при сабмите поискового запроса
  * @property searchEngine - Выбранная поисковая система
  * @property buttonLabel - Содержимое внутри кнопки
- * @property isDark - Флаг темной темы
  * @interface
  */
 export interface SearchEngineProps {
@@ -32,7 +29,6 @@ export interface SearchEngineProps {
   onSubmitForm: (event: FormEvent<HTMLFormElement>) => void;
   searchEngine: string;
   buttonLabel: ReactNode;
-  isDark: boolean;
 }
 
 /**
@@ -40,7 +36,7 @@ export interface SearchEngineProps {
  * @category Components
  */
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
-  ({ currentLanguage, onSubmitForm, searchEngine, buttonLabel, isDark }) => {
+  ({ currentLanguage, onSubmitForm, searchEngine, buttonLabel }) => {
     const { t } = useTranslation();
     const tourCtx = useTourStepOneContext();
     const [formFocused, setFormFocused] = React.useState(false);
@@ -64,30 +60,20 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
       );
 
     const getSearchEngineLogoClass = (): string =>
-      clsx(
-        "new-tab__search-engine_logo",
-        searchEngine,
-        { en: searchEngine === YANDEX && currentLanguage !== "ru" },
-        { dark: isDark }
-      );
+      clsx("new-tab__search-engine_logo", searchEngine, {
+        en: searchEngine === YANDEX && currentLanguage !== "ru"
+      });
 
     const getSearchEngineFormClass = (): string =>
-      clsx(
-        "new-tab__search-engine_form",
-        searchEngine,
-        { dark: isDark },
-        { _focused: formFocused }
-      );
+      clsx("new-tab__search-engine_form", searchEngine, {
+        _focused: formFocused
+      });
 
     const getSearchEngineInputClass = (): string =>
-      clsx("new-tab__search-engine_input", searchEngine, {
-        dark: isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
-      });
+      clsx("new-tab__search-engine_input", searchEngine);
 
     const getSearchEngineFormBackgroundClass = (): string =>
-      clsx("new-tab__search-engine_form-background", searchEngine, {
-        dark: isDark
-      });
+      clsx("new-tab__search-engine_form-background", searchEngine);
 
     return (
       <div className="new-tab__search-engine">
@@ -97,12 +83,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             href={SEARCH_ENGINE_LINKS[searchEngine]}
           />
           <div className={getSearchEngineFormBackgroundClass()}>
-            <div
-              className={clsx(
-                "new-tab__search-engine_form-background-text-group",
-                { dark: isDark }
-              )}
-            >
+            <div className="new-tab__search-engine_form-background-text-group">
               <div className="new-tab__search-engine_form-background-text-item">
                 <NoTrackingIcon />
                 {t("noTracking")}

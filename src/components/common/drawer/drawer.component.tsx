@@ -3,9 +3,9 @@ import { Drawer, DrawerProps } from "antd";
 import clsx from "clsx";
 import { GetContainer } from "@rc-component/portal/es/Portal";
 import {
-  DARK_THEME,
-  LIGHT_THEME
-} from "../../../constants/search-engine.constants";
+  DARK_THEME_COLOR,
+  LIGHT_THEME_COLOR
+} from "../../../constants/common.constants";
 
 /**
  * Передаваемые параметры для компонента меню
@@ -38,14 +38,11 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
     contentWrapperStyle = {},
     ...rest
   }) => {
-    const drawerStyles = Object.assign(
-      {
-        body: {
-          padding: "0"
-        }
-      },
-      styles
+    const style = Object.assign(
+      { background: isDark ? DARK_THEME_COLOR : LIGHT_THEME_COLOR },
+      drawerStyle
     );
+    const drawerStyles = Object.assign({ body: { padding: "0" } }, styles);
     const containerGetFunction = (): GetContainer | undefined => {
       if (getContainer) {
         return getContainer;
@@ -62,15 +59,12 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
 
     return (
       <Drawer
-        className={clsx("new-tab__drawer", { dark: isDark }, className)}
+        className={clsx("new-tab__drawer", className)}
         contentWrapperStyle={Object.assign(
           { width: "300px" },
           contentWrapperStyle
         )}
-        drawerStyle={Object.assign(
-          { background: isDark ? DARK_THEME : LIGHT_THEME },
-          drawerStyle
-        )}
+        drawerStyle={style}
         getContainer={containerGetFunction()}
         placement={placement}
         closable={closable}

@@ -15,13 +15,11 @@ import { BaseSelectRef } from "rc-select";
 
 /**
  * Передаваемые параметры для компонента селектора
- * @property isDark - Флаг темной темы
  * @property options - Опции селектора
  * @property children - Компоненты-потомки
  * @interface
  */
 export interface SelectComponentProps extends SelectProps {
-  isDark?: boolean;
   options?: DefaultOptionType[];
   children?: ReactNode;
 }
@@ -32,7 +30,6 @@ export interface SelectComponentProps extends SelectProps {
  */
 const SelectComponent: FC<SelectComponentProps> = memo(
   ({
-    isDark = false,
     options = [],
     children,
     className = "",
@@ -45,14 +42,10 @@ const SelectComponent: FC<SelectComponentProps> = memo(
       return options.map(option => {
         return {
           ...option,
-          className: clsx(
-            "new-tab__select-dropdown-item",
-            { dark: isDark },
-            option.className
-          )
+          className: clsx("new-tab__select-dropdown-item", option.className)
         };
       });
-    }, [options, isDark]);
+    }, [options]);
 
     const selectFocus = useCallback(
       (event: Event) => {
@@ -77,12 +70,8 @@ const SelectComponent: FC<SelectComponentProps> = memo(
           ref={selectRef}
           options={enrichedOptions}
           children={children}
-          className={clsx("new-tab__select", { dark: isDark }, className)}
-          popupClassName={clsx(
-            "new-tab__select-dropdown",
-            { dark: isDark },
-            popupClassName
-          )}
+          className={clsx("new-tab__select", className)}
+          popupClassName={clsx("new-tab__select-dropdown", popupClassName)}
           {...rest}
         />
       </div>

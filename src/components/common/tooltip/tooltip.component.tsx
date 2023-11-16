@@ -5,12 +5,10 @@ import clsx from "clsx";
 
 /**
  * Передаваемые параметры для компонента тултип
- * @property isDark - Флаг темной темы
  * @property children - Компоненты-потомки
  * @interface
  */
 export interface TooltipComponentProps extends TooltipPropsWithTitle {
-  isDark?: boolean;
   children?: ReactNode;
 }
 
@@ -19,23 +17,13 @@ export interface TooltipComponentProps extends TooltipPropsWithTitle {
  * @category Components
  */
 const TooltipComponent: FC<TooltipComponentProps> = memo(
-  ({
-    isDark = false,
-    children,
-    placement = "top",
-    overlayClassName = "",
-    ...rest
-  }) => {
+  ({ children, placement = "top", overlayClassName = "", ...rest }) => {
     return (
       <Tooltip
         {...rest}
         children={children}
         placement={placement}
-        overlayClassName={clsx(
-          "new-tab__tooltip",
-          { dark: isDark },
-          overlayClassName
-        )}
+        overlayClassName={clsx("new-tab__tooltip", overlayClassName)}
       />
     );
   }

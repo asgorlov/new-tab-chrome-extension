@@ -1,26 +1,20 @@
 @import "../modules/constants.module";
 
 .new-tab__notification {
-  .ant-notification-notice-description,
-  .ant-notification-notice-message,
-  .ant-notification-notice-close,
   .ant-notification-notice {
-    transition: all, background-color $slow-transition, color $fast-transition;
-  }
+    transition: all, background-color $slow-transition;
+    background-color: var(--bg-color);
 
-  &.dark {
-    .ant-notification-notice {
-      background-color: $dark-color;
+    .ant-notification-notice-close:hover {
+      color: var(--text-color);
+      background-color: var(--bg-hover-color);
+    }
 
-      .ant-notification-notice-close:hover {
-        background-color: mix($light-color, $dark-color, 6%);
-      }
-
-      .ant-notification-notice-description,
-      .ant-notification-notice-message,
-      .ant-notification-notice-close {
-        color: $light-color;
-      }
+    .ant-notification-notice-description,
+    .ant-notification-notice-message,
+    .ant-notification-notice-close {
+      transition: all, color $fast-transition;
+      color: var(--text-color);
     }
   }
 

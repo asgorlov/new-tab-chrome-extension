@@ -7,7 +7,6 @@ import {
   selectIsDark,
   selectSearchEngine
 } from "../../../../store/new-tab/new-tab.selectors";
-import clsx from "clsx";
 import { Radio } from "antd";
 import {
   BUTTON_NAMES,
@@ -19,12 +18,13 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
 import UploadComponent from "../../../common/upload/upload.component";
 import ModalComponent from "../../../common/modal/modal.component";
 import RadioComponent from "../../../common/radio/radio.component";
-import {
-  LIGHT_THEME,
-  SEARCH_THEMES
-} from "../../../../constants/search-engine.constants";
+import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { CollapsedMenuSetting } from "../../../../constants/settings-menu.constants";
+import {
+  DARK_TEXT_COLOR,
+  LIGHT_TEXT_COLOR
+} from "../../../../constants/common.constants";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -81,7 +81,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     const isDark = useSelector(selectIsDark);
     const searchEngine = useSelector(selectSearchEngine);
 
-    const borderColor = isDark ? LIGHT_THEME : "black";
+    const borderColor = isDark ? DARK_TEXT_COLOR : LIGHT_TEXT_COLOR;
     const showUpload =
       radioOption === DEVICE_OPTION && selectedOption === BUTTON_NAMES.import;
     const onMouseLeave = (e: MouseEvent<HTMLButtonElement>) =>
@@ -94,14 +94,9 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
         icon={<CommonIcon />}
         type={CollapsedMenuSetting.COMMON}
         title={t("commonSetting.title")}
-        isDark={isDark}
         className="new-tab__settings-menu_common"
       >
-        <div
-          className={clsx("new-tab__settings-menu_common_btn-group", {
-            dark: isDark
-          })}
-        >
+        <div className="new-tab__settings-menu_common_btn-group">
           {Object.values(BUTTON_NAMES).map(name => (
             <button
               onMouseLeave={onMouseLeave}
@@ -115,7 +110,6 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
           ))}
         </div>
         <ModalComponent
-          isDark={isDark}
           title={t(`commonSetting.${selectedOption}.title`)}
           open={Boolean(selectedOption)}
           centered
@@ -125,11 +119,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
           cancelText={t("commonSetting.cancel")}
           okButtonProps={{ disabled: disableOk }}
         >
-          <div
-            className={clsx("new-tab__settings-menu_common-modal-content", {
-              dark: isDark
-            })}
-          >
+          <div className="new-tab__settings-menu_common-modal-content">
             {selectedOption === BUTTON_NAMES.reset ? (
               <span>{t("commonSetting.reset.message")}</span>
             ) : (
@@ -139,14 +129,13 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
                   onChange={onChangeRadioOption}
                   value={radioOption}
                 >
-                  <RadioComponent value={DEVICE_OPTION} isDark={isDark}>
+                  <RadioComponent value={DEVICE_OPTION}>
                     {t(`commonSetting.${selectedOption}.device`)}
                   </RadioComponent>
                 </Radio.Group>
                 {showUpload && (
                   <UploadComponent
                     customRequest={validateUploading}
-                    isDark={isDark}
                     uploadError={uploadingError}
                     uploadClassName="new-tab__settings-menu_common-modal-content_uploading"
                     accept={SETTINGS_FILE_TYPE}

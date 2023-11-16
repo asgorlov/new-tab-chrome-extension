@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 
 /**
  * Передаваемые параметры для компонента обновлений приложения
- * @property isDark - Флаг темной темы
  * @property uploadError - Текст ошибки при загрузке
  * @property uploadClassName - Класс поля загрузки
  * @property uploadButtonText - Текст кнопки для загрузки
@@ -16,7 +15,6 @@ import { useTranslation } from "react-i18next";
  * @interface
  */
 export interface UploadComponentProps extends UploadProps {
-  isDark?: boolean;
   uploadError?: string;
   uploadClassName?: string;
   uploadButtonText?: string;
@@ -30,7 +28,6 @@ export interface UploadComponentProps extends UploadProps {
  */
 const UploadComponent: FC<UploadComponentProps> = memo(
   ({
-    isDark = false,
     listType = "picture",
     maxCount = 1,
     uploadError = "",
@@ -55,9 +52,7 @@ const UploadComponent: FC<UploadComponentProps> = memo(
     };
 
     return (
-      <div
-        className={clsx("new-tab__upload", { dark: isDark }, uploadClassName)}
-      >
+      <div className={clsx("new-tab__upload", uploadClassName)}>
         <Upload
           maxCount={maxCount}
           listType={listType}

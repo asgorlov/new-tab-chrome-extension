@@ -13,7 +13,7 @@
   }
 }
 
-@mixin aria-label-after($top, $background) {
+@mixin aria-label-after($top, $bg, $color) {
   z-index: 3;
   pointer-events: none;
   transition: all .1s;
@@ -23,13 +23,13 @@
   white-space: nowrap;
   top: $top;
   content: attr(aria-label) "";
-  color: #fff;
+  color: $color;
   border-radius: 6px;
   transform: translate3d(-50%,0,0);
   left: 50%;
   position: absolute;
   padding: 10px 15px;
-  background: $background;
+  background: $bg;
 }
 
 .new-tab__search-engine_button {
@@ -98,15 +98,6 @@
       display: flex;
       cursor: pointer;
 
-      &.dark::before {
-        background: #d6d6d6;
-      }
-
-      &.dark::after {
-        color: #000000;
-        background: #d6d6d6;
-      }
-
       &::before {
         z-index: 3;
         pointer-events: none;
@@ -115,7 +106,7 @@
         height: 10px;
         width: 10px;
         left: 50%;
-        background: #666;
+        background: var(--bing-label-bg-color);
         transform: translate3d(-50%,50%,0) rotate(45deg);
         top: calc(100% - 9px);
         content: '';
@@ -123,7 +114,7 @@
       }
 
       &::after {
-        @include aria-label-after(100%, #666);
+        @include aria-label-after(100%, var(--bing-label-bg-color), #fff);
       }
 
       &:hover::before,
@@ -139,7 +130,7 @@
     border-radius: 145px;
 
     &::after {
-      @include aria-label-after(110%, #232a31cc);
+      @include aria-label-after(110%, var(--yahoo-tooltip-bg-color), var(--text-color));
     }
 
     &:hover {

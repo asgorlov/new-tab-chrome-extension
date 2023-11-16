@@ -1,13 +1,9 @@
 import React, { FC, useMemo } from "react";
-import clsx from "clsx";
 import { ReactComponent as LanguageIcon } from "../../../static/svgs/menu-settings/language-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import i18n from "../../../localizations/i18n";
 import { useTranslation } from "react-i18next";
-import {
-  selectCurrentLanguage,
-  selectIsDark
-} from "../../../store/new-tab/new-tab.selectors";
+import { selectCurrentLanguage } from "../../../store/new-tab/new-tab.selectors";
 import { changeLanguage } from "../../../store/new-tab/new-tab.thunks";
 import { AppDispatch } from "../../../store/store";
 import SelectComponent from "../../common/select/select.component";
@@ -23,7 +19,6 @@ const LanguageSettingComponent: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const settingsSearchCtx = useSettingRefsContext();
 
-  const isDark = useSelector(selectIsDark);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
   const options = useMemo(() => {
@@ -40,14 +35,13 @@ const LanguageSettingComponent: FC = () => {
   return (
     <div
       ref={settingsSearchCtx[MenuSetting.LANGUAGE]}
-      className={clsx("new-tab__settings-menu_language", { dark: isDark })}
+      className="new-tab__settings-menu_language"
     >
       <div className="new-tab__settings-menu_language-header">
         <LanguageIcon />
         <span>{t("language.title")}</span>
       </div>
       <SelectComponent
-        isDark={isDark}
         className="new-tab__settings-menu_language-selector"
         dropdownStyle={{ minWidth: "max-content" }}
         size="small"
