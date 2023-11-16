@@ -1,11 +1,15 @@
 @import "../../modules/constants.module";
 
 .new-tab__radio {
-  &.dark {
-    color: $light-color;
+  color: var(--text-color);
 
-    .ant-radio:not(.ant-radio-checked)>.ant-radio-inner {
+  .ant-radio {
+    &:not(.ant-radio-checked)>.ant-radio-inner {
       background: transparent;
+    }
+
+    &>.ant-radio-inner {
+      border-color: var(--border-color);
     }
   }
 }

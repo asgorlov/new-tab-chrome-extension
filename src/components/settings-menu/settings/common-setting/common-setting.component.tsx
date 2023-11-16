@@ -129,7 +129,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
                   onChange={onChangeRadioOption}
                   value={radioOption}
                 >
-                  <RadioComponent value={DEVICE_OPTION} isDark={isDark}>
+                  <RadioComponent value={DEVICE_OPTION}>
                     {t(`commonSetting.${selectedOption}.device`)}
                   </RadioComponent>
                 </Radio.Group>

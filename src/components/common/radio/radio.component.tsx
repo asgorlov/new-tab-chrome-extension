@@ -4,12 +4,10 @@ import { Radio, RadioProps } from "antd";
 
 /**
  * Передаваемые параметры для компонента переключателя
- * @property isDark - Флаг темной темы
  * @property children - Компоненты-потомки
  * @interface
  */
 export interface RadioComponentProps extends RadioProps {
-  isDark?: boolean;
   children?: ReactNode;
 }
 
@@ -18,11 +16,11 @@ export interface RadioComponentProps extends RadioProps {
  * @category Components
  */
 const RadioComponent: FC<RadioComponentProps> = memo(
-  ({ isDark = false, children, className = "", ...rest }) => {
+  ({ children, className = "", ...rest }) => {
     return (
       <Radio
         children={children}
-        className={clsx("new-tab__radio", { dark: isDark }, className)}
+        className={clsx("new-tab__radio", className)}
         {...rest}
       />
     );
