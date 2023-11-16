@@ -27,9 +27,9 @@
       }
 
       &>.ant-btn-primary:disabled {
-        color: var(--modal-btn-text-color);
+        color: var(--btn-disabled-text-color);
         border-color: var(--border-color);
-        background-color: var(--modal-btn-bg-color);
+        background-color: var(--btn-disabled-bg-color);
       }
     }
   }
