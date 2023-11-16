@@ -21,7 +21,6 @@ import { CollapsedMenuSetting } from "../../../../constants/settings-menu.consta
 /**
  * Передаваемые параметры для компонента настройки фонового изображения
  * @property open - Флаг открытия окна загрузки
- * @property isDark - Флаг темной темы
  * @property oneToBoth - Флаг, показывающий использование одного пользовательского фона для темной и светлой темы
  * @property wallpaper - Название фона приложения
  * @property disabledOk - Флаг недоступности кнопки Ok окна загрузки
@@ -39,7 +38,6 @@ import { CollapsedMenuSetting } from "../../../../constants/settings-menu.consta
  */
 export interface WallpaperSettingProps {
   open: boolean;
-  isDark: boolean;
   oneToBoth: boolean;
   wallpaper: string;
   disabledOk: boolean;
@@ -62,7 +60,6 @@ export interface WallpaperSettingProps {
 const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
   ({
     open,
-    isDark,
     oneToBoth,
     wallpaper,
     disabledOk,
@@ -157,7 +154,6 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
               )}
             </div>
             <CheckboxComponent
-              isDark={isDark}
               checked={oneToBoth}
               onClick={onClickCheckbox}
               children={t(`wallpaper.forBothThemes`)}

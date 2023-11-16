@@ -59,14 +59,12 @@ const SearchEngineSettingComponent: FC = () => {
     >
       <div className="new-tab__settings-menu_search-engine-content-checkbox-group">
         <CheckboxComponent
-          isDark={isDark}
           checked={searchEngines.length === SEARCH_ENGINE_NAMES.length}
           onChange={handleChangeAddAll}
         >
           {t("searchEngine.selectAll")}
         </CheckboxComponent>
         <CheckboxComponent
-          isDark={isDark}
           checked={searchEngines.length === 0}
           onChange={handleChangeRemoveAll}
         >

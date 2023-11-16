@@ -17,7 +17,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCustomWallpaper,
-  selectIsDark,
   selectSearchEngine,
   selectWallpaper
 } from "../../../../store/new-tab/new-tab.selectors";
@@ -30,7 +29,6 @@ import { AppDispatch } from "../../../../store/store";
 const WallpaperSettingContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const isDark = useSelector(selectIsDark);
   const wallpaper = useSelector(selectWallpaper);
   const searchEngine = useSelector(selectSearchEngine);
   const customWallpaper = useSelector(selectCustomWallpaper);
@@ -176,7 +174,6 @@ const WallpaperSettingContainer: FC = () => {
       wallpaper={wallpaper}
       oneToBoth={oneToBoth}
       onCancel={handleCancel}
-      isDark={isDark}
       onOk={handleOk}
       open={open}
     />

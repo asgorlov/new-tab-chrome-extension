@@ -2,21 +2,14 @@
 
 .new-tab__checkbox {
   transition: $fast-transition;
+  color: var(--text-color);
 
   .ant-checkbox-inner {
     transition: $slow-transition;
+    border-color: var(--border-color);
   }
 
-  &.dark {
-    color: $light-color;
-
-    .ant-checkbox-inner {
-      transition: $slow-transition;
-      border-color: $dark-border-color;
-    }
-
-    &>.ant-checkbox:not(.ant-checkbox-checked)>.ant-checkbox-inner {
-      background: $dark-color;
-    }
+  &>.ant-checkbox:not(.ant-checkbox-checked)>.ant-checkbox-inner {
+    background: var(--bg-color);
   }
 }

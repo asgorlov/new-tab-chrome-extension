@@ -4,12 +4,10 @@ import clsx from "clsx";
 
 /**
  * Передаваемые параметры для компонента чекбокса
- * @property isDark - Флаг темной темы
  * @property children - Компоненты-потомки
  * @interface
  */
 export interface CheckboxComponentProps extends CheckboxProps {
-  isDark?: boolean;
   children?: ReactNode;
 }
 
@@ -18,11 +16,11 @@ export interface CheckboxComponentProps extends CheckboxProps {
  * @category Components
  */
 const CheckboxComponent: FC<CheckboxComponentProps> = memo(
-  ({ isDark = false, children, className = "", ...rest }) => {
+  ({ children, className = "", ...rest }) => {
     return (
       <Checkbox
         children={children}
-        className={clsx("new-tab__checkbox", { dark: isDark }, className)}
+        className={clsx("new-tab__checkbox", className)}
         {...rest}
       />
     );
