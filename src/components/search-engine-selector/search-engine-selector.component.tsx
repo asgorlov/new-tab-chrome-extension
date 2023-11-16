@@ -1,7 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { DELTA_Y } from "../../constants/search-engine-selector.constants";
+import {
+  DELTA_Y,
+  MAX_ELEMENTS_LENGTH
+} from "../../constants/search-engine-selector.constants";
 import {
   getScrollSearchEngineButtonStyle,
   getSearchEngineSelectorStyle
@@ -30,62 +39,98 @@ const SearchEngineSelectorComponent = () => {
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
-  const handleClickMoving = useCallback(
-    (distance: number) => {
-      const element = scrollRef.current;
+  const visibleSearchEngines = useMemo(
+    () =>
+      searchEngines.length <= MAX_ELEMENTS_LENGTH
+        ? [...searchEngines]
+        : searchEngines.slice(0, MAX_ELEMENTS_LENGTH),
+    [searchEngines]
+  );
 
-      if (element) {
-        const { scrollLeft, scrollWidth, clientWidth } = element;
+  const setVisibleSearchEngines = useCallback(
+    (visibleEngines: string[]) => {
+      const newSearchEngines =
+        searchEngines.length <= MAX_ELEMENTS_LENGTH
+          ? visibleEngines
+          : visibleEngines.concat(
+              searchEngines.slice(MAX_ELEMENTS_LENGTH, searchEngines.length)
+            );
 
-        // Если поворот налево
-        if (distance > 0) {
-          const isScrollLeftEnd =
-            Math.round((scrollWidth - clientWidth) / scrollLeft) === 1;
-
-          if (isScrollLeftEnd) {
-            const newSearchEngines = [...searchEngines];
-            const firstElement = newSearchEngines.shift();
-
-            if (firstElement) {
-              newSearchEngines.push(firstElement);
-              dispatch(setSearchEngines(newSearchEngines));
-            }
-          }
-        } else if (scrollLeft === 0) {
-          const newSearchEngines = [...searchEngines];
-          const lastElement = newSearchEngines.pop();
-
-          if (lastElement) {
-            newSearchEngines.unshift(lastElement);
-            dispatch(setSearchEngines(newSearchEngines));
-          }
-        }
-      }
-
-      scrollRef.current?.scrollBy({ left: distance, behavior: "smooth" });
+      dispatch(setSearchEngines(newSearchEngines));
     },
     [dispatch, searchEngines]
   );
 
-  useEffect(() => {
-    const element = scrollRef.current;
+  const handleClickMoving = useCallback(
+    (distance: number) => {
+      const newSearchEngines = Array.from(visibleSearchEngines);
 
-    if (element) {
-      const onWheel = (e: WheelEvent) => {
-        if (e.deltaY !== 0) {
-          e.preventDefault();
+      // Если поворот налево
+      if (distance > 0) {
+        const firstElement = newSearchEngines.shift();
 
-          if (!isDragged) {
-            handleClickMoving(e.deltaY > 0 ? DELTA_Y : -DELTA_Y);
+        if (firstElement) {
+          if (firstElement === searchEngine) {
+            const secondElement = newSearchEngines.shift();
+
+            if (secondElement) {
+              newSearchEngines.push(secondElement);
+            }
+
+            newSearchEngines.unshift(firstElement);
+          } else {
+            newSearchEngines.push(firstElement);
           }
+
+          setVisibleSearchEngines(newSearchEngines);
         }
-      };
+      } else {
+        const lastElement = newSearchEngines.pop();
 
-      element.addEventListener("wheel", onWheel);
+        if (lastElement) {
+          if (lastElement === searchEngine) {
+            const secondToLastElement = newSearchEngines.pop();
 
-      return () => element.removeEventListener("wheel", onWheel);
+            if (secondToLastElement) {
+              newSearchEngines.unshift(secondToLastElement);
+            }
+
+            newSearchEngines.push(lastElement);
+          } else {
+            newSearchEngines.unshift(lastElement);
+          }
+
+          setVisibleSearchEngines(newSearchEngines);
+        }
+      }
+    },
+    [searchEngine, visibleSearchEngines, setVisibleSearchEngines]
+  );
+
+  const onWheel = useCallback(
+    (e: WheelEvent) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+
+        if (!isDragged) {
+          handleClickMoving(e.deltaY > 0 ? DELTA_Y : -DELTA_Y);
+        }
+      }
+    },
+    [handleClickMoving, isDragged]
+  );
+
+  useEffect(() => {
+    if (searchEngines.length > MAX_ELEMENTS_LENGTH) {
+      const element = scrollRef.current;
+
+      if (element) {
+        element.addEventListener("wheel", onWheel);
+
+        return () => element.removeEventListener("wheel", onWheel);
+      }
     }
-  }, [handleClickMoving, isDragged]);
+  }, [scrollRef, onWheel, searchEngines]);
 
   return (
     <div
@@ -102,7 +147,7 @@ const SearchEngineSelectorComponent = () => {
         onMouseDown={() => setIsLeftButtonActive(true)}
         style={getScrollSearchEngineButtonStyle(
           searchEngine,
-          searchEngines.length < 11,
+          searchEngines.length <= MAX_ELEMENTS_LENGTH,
           isLeftButtonActive
         )}
       />
@@ -110,7 +155,11 @@ const SearchEngineSelectorComponent = () => {
         ref={scrollRef}
         className="new-tab__search-engine-selector-scrollable"
       >
-        <DroppableAriaContainer onDragged={setIsDragged} />
+        <DroppableAriaContainer
+          onDragged={setIsDragged}
+          visibleSearchEngines={visibleSearchEngines}
+          setVisibleSearchEngines={setVisibleSearchEngines}
+        />
       </div>
       <button
         className="new-tab__search-engine-selector-right-button"
@@ -121,7 +170,7 @@ const SearchEngineSelectorComponent = () => {
         onMouseDown={() => setIsRightButtonActive(true)}
         style={getScrollSearchEngineButtonStyle(
           searchEngine,
-          searchEngines.length < 11,
+          searchEngines.length <= MAX_ELEMENTS_LENGTH,
           isRightButtonActive
         )}
       />
