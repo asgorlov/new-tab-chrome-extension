@@ -109,7 +109,6 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
           </div>
         </CollapseComponent>
         <ModalComponent
-          isDark={isDark}
           title={t("wallpaper.uploading")}
           open={open}
           onOk={onOk}

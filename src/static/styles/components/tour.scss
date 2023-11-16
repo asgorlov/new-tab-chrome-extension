@@ -18,10 +18,10 @@
       &>.new-tab__tour-close {
         transition: color $fast-transition;
         cursor: pointer;
-        color: var(--text-color);
+        color: var(--modal-close-color);
 
         &:hover {
-          color: var(--text-color);
+          color: var(--modal-close-color);
           background-color: var(--bg-hover-color);
         }
       }

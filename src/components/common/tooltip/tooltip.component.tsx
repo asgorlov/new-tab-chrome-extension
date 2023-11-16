@@ -5,7 +5,6 @@ import clsx from "clsx";
 
 /**
  * Передаваемые параметры для компонента тултип
- * @property isDark - Флаг темной темы
  * @property children - Компоненты-потомки
  * @interface
  */

@@ -110,7 +110,6 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
           ))}
         </div>
         <ModalComponent
-          isDark={isDark}
           title={t(`commonSetting.${selectedOption}.title`)}
           open={Boolean(selectedOption)}
           centered
