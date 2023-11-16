@@ -51,7 +51,6 @@ const UpdateSettingComponent: FC = () => {
     >
       <div className="new-tab__settings-menu_update-content">
         <SelectComponent
-          isDark={isDark}
           dropdownStyle={{ minWidth: "max-content" }}
           size="small"
           value={checkMode}

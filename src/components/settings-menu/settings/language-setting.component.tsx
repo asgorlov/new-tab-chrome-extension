@@ -47,7 +47,6 @@ const LanguageSettingComponent: FC = () => {
         <span>{t("language.title")}</span>
       </div>
       <SelectComponent
-        isDark={isDark}
         className="new-tab__settings-menu_language-selector"
         dropdownStyle={{ minWidth: "max-content" }}
         size="small"

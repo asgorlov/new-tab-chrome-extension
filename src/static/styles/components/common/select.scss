@@ -4,78 +4,43 @@
   min-width: 105px;
 
   &-dropdown {
-    transition: background-color $slow-transition;
+    transition: all, background-color $slow-transition, box-shadow $fast-transition;
+    background-color: var(--bg-color);
+    box-shadow: var(--selector-dropdown-box-shadow);
 
     &-item {
-      .ant-select-item-option-content {
-        transition: color $fast-transition;
-      }
-
-      &.dark {
+      &:not(.ant-select-item-option-selected) {
         .ant-select-item-option-content {
-          color: $light-color;
-          transition: color $fast-transition;
-        }
-
-        &.ant-select-item-option-selected {
-          .ant-select-item-option-content {
-            color: #000000E0;
-            transition: color $fast-transition;
-          }
+          transition: all, color $fast-transition;
+          color: var(--text-color);
         }
       }
-    }
 
-    &.dark {
-      background-color: $dark-color;
-      box-shadow: 0 6px 16px 0 #FFFFFF14, 0 3px 6px -4px #FFFFFF1E, 0 9px 28px 8px #FFFFFF0C;
-    }
-
-    &.ant-select-dropdown {
-      & .dark.ant-select-item-option-active:not(.ant-select-item-option-selected) {
-        background-color: mix($light-color, $dark-color, 20%);
+      &.ant-select-item-option-active:not(.ant-select-item-option-selected) {
+        background-color: var(--selector-dropdown-hover-bg-color);
       }
     }
   }
 
-  &.dark {
+  &.ant-select:not(.ant-select-customize-input) {
     .ant-select-selector {
-      border-color: $dark-border-color;
-      background-color: $dark-color;
+      transition: all, background-color $slow-transition, border-color $slow-transition;
+      border-color: var(--border-color);
+      background-color: var(--bg-color);
+    }
 
-      .ant-select-selection-item {
-        color: $light-color;
-      }
+    .ant-select-selection-item {
+      transition: all, color $fast-transition, background-color $fast-transition;
+      color: var(--text-color);
+    }
 
-      .ant-select-selection-overflow-item>.ant-select-selection-item {
-        background-color: $light-background-color;
-      }
+    .ant-select-selection-overflow-item>.ant-select-selection-item {
+      background-color: var(--selector-dropdown-overflow-item-bg-color);
     }
 
     span {
-      color: $light-color;
+      transition: all, color $fast-transition;
+      color: var(--text-color);
     }
-  }
-
-  &:not(.ant-select-customize-input) {
-    .ant-select-selector {
-      transition: all, background-color $slow-transition, border-color $slow-transition;
-    }
-  }
-
-  &.ant-select {
-    .ant-select-arrow {
-      .anticon {
-        transition: all, color $fast-transition;
-      }
-    }
-  }
-
-  .ant-select-selection-overflow-item>.ant-select-selection-item {
-    transition: all, background-color $slow-transition;
-  }
-
-  span {
-    transition: all, color $fast-transition;
   }
 }

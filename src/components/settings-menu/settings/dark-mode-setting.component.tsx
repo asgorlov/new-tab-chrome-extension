@@ -71,7 +71,6 @@ const DarkModeSettingComponent: FC = () => {
     >
       <div className="new-tab__settings-menu_dark-mode-content">
         <SelectComponent
-          isDark={isDark}
           size="small"
           disabled={darkMode === MANUAL && !navigator.geolocation}
           defaultValue={darkMode}
