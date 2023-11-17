@@ -2,16 +2,19 @@ import { UpdateModel } from "./update.model";
 import { CustomWallpaper } from "./custom-wallpaper.model";
 import { NightPeriod } from "./night-period.model";
 import { Notification } from "../constants/notification.constants";
+import { SettingsStorage } from "./settings-search.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property notifications - Список нотификаций
+ * @property settingsActiveKeys - Хранилище с информацией о настройках меню
  * @interface
  */
 export interface NewTabState extends NewTabStateBase {
   isOpenMenu: boolean;
   notifications: Notification[];
+  settingsActiveKeys: SettingsStorage<string[]>;
 }
 
 /**

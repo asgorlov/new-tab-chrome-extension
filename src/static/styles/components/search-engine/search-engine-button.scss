@@ -1,0 +1,388 @@
+@import "../../modules/constants.module";
+@import "../../modules/fonts.module";
+
+@mixin change-btn-hover-bd-color($color) {
+  &.ant-btn-text:not(:disabled):hover {
+    background: $color;
+  }
+}
+
+@mixin change-btn-focus-bd-color($color) {
+  &.ant-btn-text:not(:disabled):focus {
+    background: $color;
+  }
+}
+
+@mixin aria-label-after($top, $bg, $color) {
+  z-index: 3;
+  pointer-events: none;
+  transition: all .1s;
+  opacity: 0;
+  font-size: .8125rem;
+  line-height: 150%;
+  white-space: nowrap;
+  top: $top;
+  content: attr(aria-label) "";
+  color: $color;
+  border-radius: 6px;
+  transform: translate3d(-50%,0,0);
+  left: 50%;
+  position: absolute;
+  padding: 10px 15px;
+  background: $bg;
+}
+
+.new-tab__search-engine_button {
+  transition: $fast-transition;
+  border: none transparent;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  opacity: 1;
+
+  &.yandex {
+    width: 80px;
+    border-radius: 9px;
+    margin-right: 2px;
+    background-color: $ya-color;
+
+    span {
+      transition: $fast-transition;
+      font: 16px Arial, sans-serif;
+      font-weight: 500;
+    }
+
+    &:hover,
+    &:focus {
+      background: darken($ya-color, 2%);
+    }
+  }
+
+  &.google {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    border-radius: 0 24px 24px 0;
+  }
+
+  &.duckduckgo {
+    width: 50px;
+    border-radius: 0 8px 8px 0;
+
+    & span {
+      transition: $fast-transition;
+      padding: 0 15px;
+      font: 18px Duckduck, emoji;
+      color: #999;
+    }
+
+    &:hover {
+      background: #2950BF;
+
+      span {
+        color: $light-color;
+      }
+    }
+  }
+
+  &.bing {
+    width: 40px;
+    border-radius: 0 24px 24px 0;
+
+    & label {
+      display: flex;
+      cursor: pointer;
+
+      &::before {
+        z-index: 3;
+        pointer-events: none;
+        transition: all .1s;
+        opacity: 0;
+        height: 10px;
+        width: 10px;
+        left: 50%;
+        background: var(--bing-label-bg-color);
+        transform: translate3d(-50%,50%,0) rotate(45deg);
+        top: calc(100% - 9px);
+        content: '';
+        position: absolute;
+      }
+
+      &::after {
+        @include aria-label-after(100%, var(--bing-label-bg-color), #fff);
+      }
+
+      &:hover::before,
+      &:hover::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.yahoo {
+    width: 70px;
+    background: $yahoo-color;
+    border-radius: 145px;
+
+    &::after {
+      @include aria-label-after(110%, var(--yahoo-tooltip-bg-color), var(--text-color));
+    }
+
+    &:hover {
+      background: darken($yahoo-color, 5%);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    & svg {
+      width: 18px;
+
+      path {
+        transition: $fast-transition;
+        fill: #fff;
+      }
+    }
+  }
+
+  &.brave {
+    width: 48px;
+    border-radius: 0 9px 9px 0;
+
+    &:hover {
+      background: linear-gradient(302.53deg,#4c54d2 0%,#bf14a2 56.25%,#f73a1c 100%);
+
+      svg path {
+        fill: $light-color;
+      }
+    }
+  }
+
+  &.swisscows {
+    width: 40px;
+    border-radius: 0 26px 26px 0;
+  }
+
+  &.aol {
+    width: 65px;
+    background: $aol-color;
+    border-radius: 0;
+    z-index: 2;
+
+    .mag-glass {
+      color: white;
+      font-size: 0;
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      position: relative;
+      transform: scale(0.8);
+
+      .lens {
+        position: absolute;
+        border: 3px solid white;
+        width: 16px;
+        height: 16px;
+        background: transparent;
+        border-radius: 100px;
+      }
+
+      .handle {
+        position: absolute;
+        display: block;
+        background: $light-color;
+        width: 16px;
+        height: 4px;
+        right: -5px;
+        bottom: 0;
+        top: 21px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &.youcom {
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    border-radius: 24px;
+    background: #b8b8bf;
+
+    &:hover {
+      background: $youcom-color;
+    }
+  }
+
+  &.gibiru {
+    width: 40px;
+    border-radius: 0 7px 7px 0;
+    padding-right: 8px;
+
+    svg {
+      transform: scale(0.9);
+    }
+  }
+
+  &.lycos {
+    width: 40px;
+    border-radius: 0 4px 4px 0;
+    @include change-btn-hover-bd-color(transparent);
+    @include change-btn-focus-bd-color(transparent);
+  }
+
+  &.nigma {
+    width: 70px;
+    background: #DFFFBD;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    margin-left: 10px;
+
+    span {
+      transition: $fast-transition;
+      font-size: 16px;
+    }
+
+    &:active,
+    &:hover {
+      background: #74B61D;
+      border-color: $light-color;
+
+      span {
+        color: $light-color;
+      }
+    }
+  }
+
+  &.ecosia {
+    transition: all $fast-transition, outline 0.1s;
+    width: 48px;
+    border-radius: 0 30px 30px 0;
+
+    &:hover {
+      background: darken($ecosia-color, 5%);
+
+      svg {
+        fill: $light-color;
+      }
+    }
+
+    &:focus {
+      outline: 2px solid #0094c7;
+      outline-offset: 1px;
+      border-color: $ecosia-color;
+      background: $ecosia-color;
+
+      svg {
+        fill: $light-color;
+      }
+    }
+
+    svg {
+      transition: $fast-transition;
+    }
+  }
+
+  &.searchcrypt {
+    width: 60px;
+    background: linear-gradient(to bottom, #4d90fe, #4787ed) repeat-x;
+    border: 1px solid #337ab7;
+    border-radius: 6px;
+    right: 6px;
+    text-shadow: 0 1px rgba(0,0,0,0.12);
+    z-index: 1;
+
+    span {
+      color: $light-color;
+      font-size: 26px;
+      line-height: 1;
+      font-family: SearchCrypt, sans-serif;
+      font-weight: 900;
+
+      &::before {
+        content: "\f002";
+      }
+    }
+  }
+
+  &.metager {
+    width: 20px;
+    padding: 0;
+    border-radius: 0;
+    margin-right: 10px;
+
+    svg {
+      height: 21px;
+      width: 20px;
+    }
+  }
+
+  &.ask {
+    width: 42px;
+    border-radius: 0;
+
+    svg {
+      height: 17px;
+    }
+  }
+
+  &.boardreader {
+    width: 64px;
+    background: #9e9e9e33;
+    border-radius: 0;
+
+    &:hover {
+      background: #9e9e9e66;
+    }
+
+    span {
+      font-family: Boardreader, sans-serif;
+      font-size: 32px;
+      padding-top: 2px;
+
+      &::before {
+        content: "\e8b6";
+      }
+    }
+  }
+
+  &.zapmeta {
+    width: 40px;
+    background: $zapmeta-color;
+    border-radius: 0 2px 2px 0;
+    border-left: 0;
+
+    span {
+      font-family: Zapmeta, sans-serif;
+      font-size: 16px;
+      padding-top: 2px;
+      color: $light-color;
+
+      &::before {
+        content: "\e901";
+      }
+    }
+  }
+
+  &.searchch {
+    $btn-color:#38f;
+
+    width: 78px;
+    background: $btn-color;
+    border-radius: 6px;
+
+    &:hover {
+      background: darken($btn-color, 6%);
+    }
+
+    span {
+      color: $light-color;
+      font-size: 18px;
+    }
+  }
+}

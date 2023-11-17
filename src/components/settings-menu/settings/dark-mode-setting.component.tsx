@@ -19,6 +19,7 @@ import { setDarkMode, setIsDark } from "../../../store/new-tab/new-tab.slice";
 import { isSunsetTimeCached } from "../../../utils/dark-mode.utils";
 import { getNightPeriodByLocation } from "../../../store/new-tab/new-tab.thunks";
 import SelectComponent from "../../common/select/select.component";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки темного режима
@@ -63,14 +64,13 @@ const DarkModeSettingComponent: FC = () => {
   return (
     <CollapseComponent
       icon={<DarkModeIcon />}
+      type={CollapsedMenuSetting.DARK_MODE}
       title={t("darkModeTitle")}
-      isDark={isDark}
       onChange={onChangeDarkModeCollapse}
       className="new-tab__settings-menu_dark-mode"
     >
       <div className="new-tab__settings-menu_dark-mode-content">
         <SelectComponent
-          isDark={isDark}
           size="small"
           disabled={darkMode === MANUAL && !navigator.geolocation}
           defaultValue={darkMode}

@@ -1,21 +1,13 @@
 import {
-  AOL,
-  BING,
-  BRAVE,
-  DUCK,
-  ECOSIA,
-  GIBIRU,
-  GOOGLE,
-  LYCOS,
+  BOARDREADER,
+  METAGER,
   NIGMA,
+  SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
   SWISSCOWS,
-  YAHOO,
-  YANDEX,
-  YOUCOM
+  YANDEX
 } from "../constants/search-engine.constants";
 import { CSSProperties } from "react";
-import { DraggingStyle, NotDraggingStyle } from "react-beautiful-dnd";
 
 /**
  * Функция для получения названия инпута поискового запроса
@@ -26,12 +18,15 @@ import { DraggingStyle, NotDraggingStyle } from "react-beautiful-dnd";
 export const getInputName = (searchEngine: string): string => {
   switch (searchEngine) {
     case YANDEX:
-      return "text";
+      return SEARCH_INPUT_NAMES[0];
     case SWISSCOWS:
     case NIGMA:
-      return "query";
+    case BOARDREADER:
+      return SEARCH_INPUT_NAMES[1];
+    case METAGER:
+      return SEARCH_INPUT_NAMES[2];
     default:
-      return "q";
+      return SEARCH_INPUT_NAMES[3];
   }
 };
 
@@ -82,71 +77,6 @@ export const getScrollSearchEngineButtonStyle = (
 
   if (isActive) {
     Object.assign(style, { filter: "brightness(0.8)" });
-  }
-
-  return style;
-};
-
-/**
- * Функция для получения стилей иконок поисковиков в селекторе
- * @param draggedStyle - Стили захваченного элемента
- * @param isDragging - Флаг, отвечающий за захват элемента
- * @param itemName - Имя текущего элемента
- * @param searchEngine - Поисковая система
- * @param currentLanguage - Язык интерфейса
- * @returns - Стили иконок поисковиков в селекторе
- */
-export const getDraggedStyle = (
-  draggedStyle: DraggingStyle | NotDraggingStyle | undefined,
-  isDragging: boolean,
-  itemName: string,
-  searchEngine: string,
-  currentLanguage: string
-): CSSProperties => {
-  const style = { cursor: isDragging ? "grabbing" : "pointer" };
-
-  if (draggedStyle) {
-    Object.assign(style, draggedStyle);
-  }
-
-  let url;
-  switch (itemName) {
-    case YANDEX:
-      if (searchEngine === itemName) {
-        Object.assign(style, { filter: "grayscale(0)" });
-      }
-
-      url = require(`../static/svgs/yandex/ya-icon${
-        currentLanguage !== "ru" ? "-en" : ""
-      }.svg`);
-
-      break;
-    case GOOGLE:
-    case DUCK:
-    case BING:
-    case BRAVE:
-    case AOL:
-    case YOUCOM:
-    case NIGMA:
-    case ECOSIA:
-      if (searchEngine === itemName) {
-        Object.assign(style, { filter: "grayscale(0)" });
-      }
-      url = require(`../static/svgs/${itemName}/${itemName}-icon.svg`);
-
-      break;
-    case SWISSCOWS:
-    case GIBIRU:
-    case LYCOS:
-    case YAHOO:
-      Object.assign(style, { filter: "grayscale(0)" });
-      url = require(`../static/svgs/${itemName}/${itemName}-icon${
-        searchEngine !== itemName ? "-grey" : ""
-      }.svg`);
-  }
-
-  if (url) {
-    Object.assign(style, { backgroundImage: `url(${url})` });
   }
 
   return style;

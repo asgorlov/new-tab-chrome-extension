@@ -2,7 +2,10 @@ import { FC, memo, ReactNode } from "react";
 import { Drawer, DrawerProps } from "antd";
 import clsx from "clsx";
 import { GetContainer } from "@rc-component/portal/es/Portal";
-import constants from "../../../static/styles/modules/constants.module.scss";
+import {
+  DARK_THEME_COLOR,
+  LIGHT_THEME_COLOR
+} from "../../../constants/common.constants";
 
 /**
  * Передаваемые параметры для компонента меню
@@ -24,17 +27,22 @@ export interface DrawerComponentProps extends DrawerProps {
 const DrawerComponent: FC<DrawerComponentProps> = memo(
   ({
     isDark = false,
+    styles = {},
     children,
     closable = false,
     className,
     placement = "right",
-    bodyStyle = {},
     drawerStyle = {},
     getContainer,
     menuClassName,
     contentWrapperStyle = {},
     ...rest
   }) => {
+    const style = Object.assign(
+      { background: isDark ? DARK_THEME_COLOR : LIGHT_THEME_COLOR },
+      drawerStyle
+    );
+    const drawerStyles = Object.assign({ body: { padding: "0" } }, styles);
     const containerGetFunction = (): GetContainer | undefined => {
       if (getContainer) {
         return getContainer;
@@ -51,20 +59,17 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
 
     return (
       <Drawer
-        className={clsx("new-tab__drawer", { dark: isDark }, className)}
+        className={clsx("new-tab__drawer", className)}
         contentWrapperStyle={Object.assign(
           { width: "300px" },
           contentWrapperStyle
         )}
-        drawerStyle={Object.assign(
-          { background: isDark ? constants.darkColor : constants.lightColor },
-          drawerStyle
-        )}
-        bodyStyle={Object.assign({ padding: "0" }, bodyStyle)}
+        drawerStyle={style}
         getContainer={containerGetFunction()}
         placement={placement}
         closable={closable}
         children={children}
+        styles={drawerStyles}
         {...rest}
       />
     );

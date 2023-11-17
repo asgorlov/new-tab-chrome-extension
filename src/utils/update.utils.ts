@@ -1,15 +1,21 @@
 import { checkForUpdates } from "../constants/update.constants";
 import {
   AOL,
+  ASK,
   BING,
+  BOARDREADER,
   BRAVE,
   ECOSIA,
   GIBIRU,
   LYCOS,
+  METAGER,
   NIGMA,
+  SEARCHCH,
+  SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
-  YOUCOM
+  YOUCOM,
+  ZAPMETA
 } from "../constants/search-engine.constants";
 import { setDataToChromeSyncStorage } from "./chrome.utils";
 import { NewTabStateBase } from "../models/new-tab-state.model";
@@ -87,58 +93,37 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
  * @param previousVersion - Предыдущая версия приложения
  * @returns - Объект с данными для обновления стейта {@link Features}
  */
-const getDeltaChanges = (
+export const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {
-  if (previousVersion <= "2.2.0") {
-    return {
-      searchEngines: [
-        BING,
-        YAHOO,
-        BRAVE,
-        SWISSCOWS,
-        AOL,
-        YOUCOM,
-        GIBIRU,
-        LYCOS,
-        NIGMA
-      ]
-    };
+  const searchEngines = [];
+
+  if (previousVersion < "2.3.0" && lastVersion >= "2.3.0") {
+    searchEngines.push(BING);
+  }
+  if (previousVersion < "2.4.0" && lastVersion >= "2.4.0") {
+    searchEngines.push(YAHOO);
+  }
+  if (previousVersion < "3.0.1" && lastVersion >= "3.0.1") {
+    searchEngines.push(GIBIRU, YOUCOM, AOL, SWISSCOWS, BRAVE);
+  }
+  if (previousVersion < "3.1.0" && lastVersion >= "3.1.0") {
+    searchEngines.push(LYCOS, NIGMA);
+  }
+  if (previousVersion < "3.3.0" && lastVersion >= "3.3.0") {
+    searchEngines.push(ECOSIA);
+  }
+  if (previousVersion < "3.4.0" && lastVersion >= "3.4.0") {
+    searchEngines.push(
+      SEARCHCRYPT,
+      METAGER,
+      ASK,
+      BOARDREADER,
+      ZAPMETA,
+      SEARCHCH
+    );
   }
 
-  if (previousVersion === "2.3.0") {
-    return {
-      searchEngines: [
-        YAHOO,
-        BRAVE,
-        SWISSCOWS,
-        AOL,
-        YOUCOM,
-        GIBIRU,
-        LYCOS,
-        NIGMA
-      ]
-    };
-  }
-
-  if (previousVersion === "2.4.0") {
-    return {
-      searchEngines: [BRAVE, SWISSCOWS, AOL, YOUCOM, GIBIRU, LYCOS, NIGMA]
-    };
-  }
-
-  if (previousVersion <= "3.0.2") {
-    return {
-      searchEngines: [LYCOS, NIGMA]
-    };
-  }
-
-  if (previousVersion === "3.1.0") {
-    return {
-      searchEngines: [ECOSIA]
-    };
-  }
-
-  return { searchEngines: [] };
+  return { searchEngines };
 };

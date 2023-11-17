@@ -1,37 +1,34 @@
-import React, { FC, memo, ReactNode } from "react";
+import React, { FC, FormEvent, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
-  NIGMA,
+  METAGER,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
-  YAHOO,
   YANDEX
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
-import { TourContextModel } from "../../models/tour-context.model";
+import { useTourStepOneContext } from "../../contexts/tour.context";
 
 /**
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
  * @property currentLanguage - Текущий язык
+ * @property onSubmitForm - Функция, вызываемая при сабмите поискового запроса
  * @property searchEngine - Выбранная поисковая система
  * @property buttonLabel - Содержимое внутри кнопки
- * @property tourCtx - Модель контекста ознакомительно тура
- * @property isDark - Флаг темной темы
  * @interface
  */
 export interface SearchEngineProps {
   currentLanguage: string;
+  onSubmitForm: (event: FormEvent<HTMLFormElement>) => void;
   searchEngine: string;
   buttonLabel: ReactNode;
-  tourCtx?: TourContextModel;
-  isDark: boolean;
 }
 
 /**
@@ -39,42 +36,54 @@ export interface SearchEngineProps {
  * @category Components
  */
 const SearchEngineComponent: FC<SearchEngineProps> = memo(
-  ({ currentLanguage, searchEngine, buttonLabel, tourCtx, isDark }) => {
+  ({ currentLanguage, onSubmitForm, searchEngine, buttonLabel }) => {
     const { t } = useTranslation();
+    const tourCtx = useTourStepOneContext();
+    const [formFocused, setFormFocused] = React.useState(false);
 
-    const setRef = (ref: HTMLDivElement | null) => {
-      if (tourCtx) {
-        tourCtx.searchEngineRef.current = ref;
-      }
-    };
+    const inputPrefix =
+      searchEngine === METAGER ? (
+        <button
+          type="button"
+          onClick={() =>
+            (window.location.href = "https://metager.org/keys/key/enter")
+          }
+          className={clsx("new-tab__search-engine_input-prefix", searchEngine)}
+          data-tooltip={t("withoutAds")}
+          children={<span />}
+        />
+      ) : (
+        <button
+          className={clsx("new-tab__search-engine_input-prefix", searchEngine)}
+          children={<span />}
+        />
+      );
+
+    const getSearchEngineLogoClass = (): string =>
+      clsx("new-tab__search-engine_logo", searchEngine, {
+        en: searchEngine === YANDEX && currentLanguage !== "ru"
+      });
+
+    const getSearchEngineFormClass = (): string =>
+      clsx("new-tab__search-engine_form", searchEngine, {
+        _focused: formFocused
+      });
+
+    const getSearchEngineInputClass = (): string =>
+      clsx("new-tab__search-engine_input", searchEngine);
+
+    const getSearchEngineFormBackgroundClass = (): string =>
+      clsx("new-tab__search-engine_form-background", searchEngine);
 
     return (
       <div className="new-tab__search-engine">
-        <div className="new-tab__search-engine-container" ref={setRef}>
+        <div className="new-tab__search-engine-container" ref={tourCtx}>
           <Link
-            className={clsx(
-              "new-tab__search-engine_logo",
-              searchEngine,
-              { en: searchEngine === YANDEX && currentLanguage !== "ru" },
-              { dark: isDark }
-            )}
+            className={getSearchEngineLogoClass()}
             href={SEARCH_ENGINE_LINKS[searchEngine]}
           />
-          <div
-            className={clsx(
-              "new-tab__search-engine_form-background",
-              searchEngine,
-              { dark: isDark }
-            )}
-          >
-            <div
-              className={clsx(
-                "new-tab__search-engine_form-background-text-group",
-                {
-                  dark: isDark
-                }
-              )}
-            >
+          <div className={getSearchEngineFormBackgroundClass()}>
+            <div className="new-tab__search-engine_form-background-text-group">
               <div className="new-tab__search-engine_form-background-text-item">
                 <NoTrackingIcon />
                 {t("noTracking")}
@@ -90,16 +99,16 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             </div>
           </div>
           <form
-            className={clsx("new-tab__search-engine_form", searchEngine, {
-              dark: isDark
-            })}
+            className={getSearchEngineFormClass()}
             action={SEARCH_QUERY_LINKS[searchEngine]}
+            onSubmit={onSubmitForm}
+            name="search-engine-form"
           >
             <Input
-              className={clsx("new-tab__search-engine_input", searchEngine, {
-                dark:
-                  isDark && (searchEngine === YAHOO || searchEngine === NIGMA)
-              })}
+              onFocus={() => setFormFocused(true)}
+              onBlur={() => setFormFocused(false)}
+              prefix={inputPrefix}
+              className={getSearchEngineInputClass()}
               placeholder={t("searchQuery")}
               tabIndex={1}
               autoComplete="off"
@@ -107,10 +116,10 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
               name={getInputName(searchEngine)}
               required={searchEngine === ECOSIA}
             />
-            <Button
+            <button
+              aria-label={t("searchTheWeb")}
               className={clsx("new-tab__search-engine_button", searchEngine)}
-              htmlType="submit"
-              type="text"
+              type="submit"
               tabIndex={2}
               children={buttonLabel}
             />

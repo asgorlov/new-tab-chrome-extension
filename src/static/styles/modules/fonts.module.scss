@@ -1,4 +1,19 @@
 @font-face {
   font-family: "Duckduck";
-  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format('woff');
+  src: local("Duckduck"), url("../../fonts/ddg-serp-icons.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SearchCrypt";
+  src: local("SearchCrypt"), url("../../fonts/fa-solid-900.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Boardreader";
+  src: local("Boardreader"), url("../../fonts/material-icons.woff2") format("woff2");
+}
+
+@font-face{
+  font-family: "Zapmeta";
+  src: local("Zapmeta"), url("../../fonts/visymo.woff") format("woff");
 }

@@ -1,0 +1,10 @@
+@import "../../modules/constants.module";
+
+.new-tab__tooltip {
+  .ant-tooltip-arrow:before,
+  .ant-tooltip-inner {
+    color: var(--tooltip-text-color);
+    background-color: var(--bg-color);
+    box-shadow: var(--tooltip-box-shadow);
+  }
+}

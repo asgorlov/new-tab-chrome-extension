@@ -1,0 +1,99 @@
+@import "../../modules/constants.module";
+
+.new-tab__search-engine_form-background {
+  transition: $fast-transition;
+  opacity: 0;
+  min-height: 42px;
+  max-height: 42px;
+  background-image: url("../../../svgs/form-background.svg");
+  background-size: cover;
+  width: $search-engine-width;
+  max-width: $search-engine-max-width;
+  position: fixed;
+  z-index: -1;
+  top: calc(50% - 42px);
+  outline: none transparent;
+  border: none transparent;
+  border-radius: 0;
+
+  &-text {
+    &-group {
+      transition: $fast-transition;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 60px;
+      opacity: 0;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      color: $light-color;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: "Arial", sans-serif;
+      margin-right: 16px;
+    }
+  }
+
+  svg {
+    margin-right: 4px;
+  }
+
+  &.swisscows {
+    opacity: 1;
+    min-height: 50px;
+    max-height: 104px;
+    background-image: url("../../../svgs/swisscows/swisscows-form-wrapper.svg");
+    padding: 0 36px 12px;
+    top: calc(50% - 50px);
+    border-radius: 20px;
+
+    .new-tab__search-engine_form-background-text-group {
+      opacity: 1;
+    }
+  }
+
+  &.lycos {
+    opacity: 1;
+    min-height: 156px;
+    max-height: 156px;
+    background-color: var(--lycos-form-bg-color);
+    padding: 0 12px;
+    top: calc(50% - 121px);
+  }
+
+  &.nigma {
+    transition: all $fast-transition, border-color $slow-transition;
+    opacity: 1;
+    min-height: 100px;
+    max-height: 100px;
+    background-color: #79ba2a;
+    padding: 0 20px;
+    top: calc(50% - 62px);
+    border-radius: 20px;
+    border: solid 4px var(--nigma-form-border-color);
+    outline: solid 2px #dadada;
+  }
+
+  &.zapmeta {
+    opacity: 1;
+    background-color: var(--zapmeta-form-bg-color);
+    min-height: 92px;
+    max-height: 92px;
+    top: calc(50% - 77px);
+    padding: 0 15px;
+    border: solid 1px var(--zapmeta-form-border-color);
+  }
+
+  &.searchch {
+    opacity: 1;
+    min-height: 66px;
+    max-height: 66px;
+    background-color: #4c4c4c;
+    top: calc(50% - 54px);
+    padding: 0 12px;
+    border-radius: 6px;
+  }
+}

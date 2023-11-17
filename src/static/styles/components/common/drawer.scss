@@ -14,10 +14,28 @@
     transition: $slow-transition;
 
     &>.ant-drawer-body {
+      transition: $slow-transition;
+      background-image: var(--drawer-body-bg-image);
+      background-color: var(--menu-border-color);
+
+      /* полоса прокрутки */
+      &::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      /* ползунок прокрутки */
+      &::-webkit-scrollbar-thumb {
+        transition: background-color $slow-transition;
+        background-color: inherit;
+        background-clip: content-box;
+        border-radius: 6px;
+        border: 1px solid transparent;
+      }
+
       .ant-collapse {
         transition: $slow-transition;
         background-color: transparent;
-        border-top: 1px solid $light-border-color;
+        border-top: 1px solid var(--menu-border-color);
         border-radius: 0;
 
         &>.ant-collapse-item {
@@ -40,26 +58,7 @@
 
     .ant-drawer-title {
       transition: $fast-transition;
-    }
-  }
-
-  &.dark {
-    .ant-drawer-title {
-      transition: $fast-transition;
-      color: $light-color;
-    }
-
-    .ant-drawer-footer {
-      border-top-color: $dark-border-color;
-    }
-
-    &>.ant-drawer-wrapper-body {
-      &>.ant-drawer-body {
-        .ant-collapse {
-          border-color: $dark-border-color;
-          border-bottom: none;
-        }
-      }
+      color: var(--text-color);
     }
   }
 }

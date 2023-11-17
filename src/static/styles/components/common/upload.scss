@@ -1,6 +1,12 @@
 @import "../../modules/constants.module";
 
 .new-tab__upload {
+  &-button {
+    background-color: var(--bg-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+
   &-error-message {
     margin-top: 2px;
     margin-left: 6px;
@@ -8,26 +14,26 @@
     color: red;
   }
 
-  &.dark {
-    .new-tab__upload-button {
-      background-color: $dark-color;
-      border-color: $dark-border-color;
+  &>.ant-upload-wrapper>.ant-upload-list>.ant-upload-list-item-container>.ant-upload-list-item {
+    color: var(--text-color);
 
-      span {
-        color: $light-color;
+    &:not(.ant-upload-list-item-error) {
+      border-color: var(--border-color);
+    }
+
+    &>.ant-upload-list-item-thumbnail svg path:first-child {
+      fill: var(--bg-color);
+    }
+
+    &:not(.ant-upload-list-item-error) {
+      .anticon-delete {
+        color: var(--modal-close-color);
       }
     }
 
-    &>.ant-upload-wrapper>.ant-upload-list>.ant-upload-list-item-container>.ant-upload-list-item {
-      border-color: $dark-border-color;
-      color: $light-color;
-
-      &>.ant-upload-list-item-thumbnail svg path:first-child {
-        fill: $dark-color;
-      }
-
-      &:not(.ant-upload-list-item-error) svg {
-        fill: $light-color;
+    &.ant-upload-list-item-error>.ant-upload-list-item-actions:hover {
+      .anticon-delete {
+        color: #ff4d4f;
       }
     }
   }

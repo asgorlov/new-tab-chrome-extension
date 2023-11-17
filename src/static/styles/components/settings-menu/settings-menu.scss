@@ -5,6 +5,12 @@
     right: 0;
     z-index: 10;
 
+    &-container {
+        .ant-drawer-header {
+            padding: 16px 12px 16px 32px;
+        }
+    }
+
     &-button {
         display: flex;
         height: 100%;
@@ -14,5 +20,187 @@
 
     &-icon {
         transition: $fast-transition;
+    }
+
+    &-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 24px;
+        color: inherit;
+
+        &__title {
+            line-height: 1;
+        }
+
+        &__search {
+            transition: all $fast-transition, background-color $slow-transition, border-color $slow-transition, width $slow-transition;
+            position: absolute;
+            right: 0;
+            display: flex;
+            justify-content: flex-end;
+            min-width: min-content;
+            width: 0;
+            height: 100%;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background-color: var(--bg-color);
+
+            &.expanded {
+                width: 100%;
+                border-color: var(--border-color);
+
+                .new-tab__settings-menu-header__search {
+                    &-input {
+                        padding: 0 6px;
+                    }
+                }
+            }
+
+            &-counter {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 0;
+                padding-right: 0;
+
+                &-icon {
+                    transition: fill $fast-transition;
+                    fill: var(--text-color);
+                }
+
+                &-value {
+                    transition: opacity $fast-transition, color $fast-transition;
+                    font-size: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    color: var(--text-color);
+                }
+
+                &.expanded {
+                    width: 10%;
+                    padding-right: 6px;
+
+                    .new-tab__settings-menu-header__search-counter-value {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &-controls {
+                transition: $fast-transition;
+                display: flex;
+                align-items: center;
+                width: 0;
+
+                &.expanded {
+                    width: 48px;
+
+                    div {
+                        height: 80%;
+                    }
+
+                    button {
+                        opacity: 1;
+                        width: 24px;
+                    }
+                }
+
+                div {
+                    transition: $fast-transition, border-color $slow-transition;
+                    height: 0;
+                    border-left: 1.5px solid var(--border-color);
+                }
+
+                button {
+                    transition: $fast-transition;
+                    opacity: 0;
+                    width: 0;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    padding: 0;
+                    border: none;
+                    border-radius: 24px;
+                    background: transparent;
+                    writing-mode: vertical-rl;
+                    line-height: 8px;
+                    font-size: 14px;
+                    color: var(--text-color);
+
+                    &:active {
+                        background: var(--border-color);
+                    }
+                }
+            }
+
+            &-input {
+                transition: $fast-transition;
+                box-sizing: border-box;
+                width: 100%;
+                outline: none;
+                padding: 0;
+                border: none;
+                background: none;
+                color: var(--text-color);
+            }
+
+            &-button {
+                transition: $fast-transition;
+                position: absolute;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 100%;
+                cursor: pointer;
+                margin: 0;
+                outline: none;
+                padding: 0;
+                border-radius: 24px;
+                border: none;
+                filter: invert(0);
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-position: center center;
+                z-index: 2;
+
+                &:active {
+                    background-color: var(--text-color);
+                }
+
+                .setting-search-icon,
+                .setting-close-icon {
+                    transition: $fast-transition;
+                    position: absolute;
+                    width: 18px;
+                    height: 100%;
+                    opacity: 1;
+                    fill: var(--text-color);
+
+                    &.hidden {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &-content {
+        .highlighted-text {
+            transition: $fast-transition;
+            color: black;
+            background-color: $highlighted-text-color;
+
+            &.current {
+                background-color: $current-highlighted-text-color;
+            }
+        }
     }
 }

@@ -15,5 +15,8 @@ export enum Notification {
    * Информация о новой версии приложения
    */
   HasNewVersion = "hasNewVersion",
+  /**
+   * Информация об отсутствии новых версий приложения
+   */
   NoNewVersion = "noNewVersion"
 }

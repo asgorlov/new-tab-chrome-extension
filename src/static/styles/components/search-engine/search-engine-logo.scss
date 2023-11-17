@@ -1,0 +1,96 @@
+@import "../../modules/constants.module";
+
+@mixin logo-common($height, $width, $margin-bottom, $bg-image) {
+  transition: $fast-transition;
+  height: $height;
+  width: $width;
+  margin-bottom: $margin-bottom;
+  background-image: $bg-image;
+}
+
+.new-tab__search-engine_logo {
+  display: flex;
+  background-repeat: no-repeat;
+
+  &.yandex {
+    @include logo-common(49px, 162px, 8px, var(--yandex-bg-image));
+
+    &.en {
+      height: 41px;
+      width: 162px;
+      background-image: var(--yandex-en-bg-image);
+    }
+  }
+
+  &.google {
+    @include logo-common(68px, 205px, 6px, url("../../../svgs/google/google-logo.svg"));
+  }
+
+  &.duckduckgo {
+    @include logo-common(163px, 205px, 12px, var(--duck-bg-image));
+  }
+
+  &.bing {
+    @include logo-common(32px, 205px, 12px, var(--bing-bg-image));
+  }
+
+  &.yahoo {
+    @include logo-common(59px, 205px, 6px, url("../../../svgs/yahoo/yahoo-logo.svg"));
+  }
+
+  &.brave {
+    @include logo-common(66px, 205px, 6px, var(--brave-bg-image));
+  }
+
+  &.swisscows {
+    @include logo-common(75px, 205px, 10px, var(--swisscows-bg-image));
+  }
+
+  &.aol {
+    @include logo-common(41px, 103px, 12px, var(--aol-bg-image));
+  }
+
+  &.youcom {
+    @include logo-common(62px, 205px, 14px, url("../../../svgs/youcom/youcom-logo.svg"));
+  }
+
+  &.gibiru {
+    @include logo-common(41px, 205px, 10px, var(--gibiru-bg-image));
+  }
+
+  &.lycos {
+    @include logo-common(45px, 205px, 14px, var(--lycos-bg-image));
+  }
+
+  &.nigma {
+    @include logo-common(61px, 277px, 38px, var(--nigma-bg-image));
+  }
+
+  &.ecosia {
+    @include logo-common(40px, 140px, 12px, url("../../../svgs/ecosia/ecosia-logo.svg"));
+  }
+
+  &.searchcrypt {
+    @include logo-common(94px, 300px, 12px, url("../../../svgs/searchcrypt/searchcrypt-logo.svg"));
+  }
+
+  &.metager {
+    @include logo-common(44px, 250px, 16px, url("../../../svgs/metager/metager-logo.svg"));
+  }
+
+  &.ask {
+    @include logo-common(76px, 100px, 6px, url("../../../svgs/ask/ask-logo.svg"));
+  }
+
+  &.boardreader {
+    @include logo-common(50px, 238px, 12px, var(--boardreader-bg-image));
+  }
+
+  &.zapmeta {
+    @include logo-common(50px, 250px, 40px, var(--zapmeta-bg-image));
+  }
+
+  &.searchch {
+    @include logo-common(40px, 205px, 24px, var(--searchch-bg-image));
+  }
+}

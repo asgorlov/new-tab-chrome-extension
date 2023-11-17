@@ -1,10 +1,13 @@
 {
+  "searchTheWeb": "Искать в Интернете",
   "webSearch": "Поиск в Интернете",
+  "searchBySettings": "Поиск по настройкам",
   "tabTitle": "Новая вкладка",
   "searchQuery": "Введите поисковый запрос...",
   "searchButton": "Найти",
   "noTracking": "Без отслеживания",
   "anonymous": "Анонимно",
+  "withoutAds": "Настройте поиск без рекламы",
   "familyFriendly": "Для всей семьи",
   "darkModeTitle": "Темный режим",
   "uploadTitle": "Загрузить",
@@ -38,7 +41,8 @@
       "title": "Загрузить настройки",
       "device": "С устройства",
       "cloud": "С облака",
-      "typeError": "Неверный формат файла настроек"
+      "typeError": "Неверный формат файла настроек",
+      "parseError": "Не удалось обработать файл настроек"
     },
     "reset": {
       "title": "Сбросить настройки",
@@ -75,10 +79,16 @@
     "gibiru": "Gibiru",
     "yahoo": "Yahoo",
     "bing": "Bing",
-    "duckduckgo": "DuckDuckGo",
+    "duckduckgo": "Duck Duck Go",
     "google": "Google",
     "yandex": "Яндекс",
     "ecosia": "Ecosia",
+    "searchcrypt": "Search Encrypt",
+    "metager": "Metager",
+    "ask": "Ask.com",
+    "boardreader": "Board Reader",
+    "zapmeta": "Zapmeta",
+    "searchch": "Search.ch",
     "selectAll": "Выбрать все",
     "removeAll": "Убрать все"
   },

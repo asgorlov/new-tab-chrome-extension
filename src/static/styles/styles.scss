@@ -1,6 +1,8 @@
-@import "modules/constants.module";
-@import "modules/mixins.module";
-@import "modules/fonts.module";
+@import "components/new-tab";
+@import "components/tour";
+@import "components/search-engine-selector";
+@import "components/notification";
+
 @import "components/common/drawer";
 @import "components/common/select";
 @import "components/common/collapse";
@@ -8,11 +10,15 @@
 @import "components/common/modal";
 @import "components/common/radio";
 @import "components/common/upload";
-@import "components/new-tab";
-@import "components/tour";
-@import "components/search-engine-selector";
-@import "components/search-engine";
-@import "components/notification";
+@import "components/common/tooltip";
+
+@import "components/search-engine/search-engine";
+@import "components/search-engine/search-engine-button";
+@import "components/search-engine/search-engine-form";
+@import "components/search-engine/search-engine-form-background";
+@import "components/search-engine/search-engine-input";
+@import "components/search-engine/search-engine-logo";
+
 @import "components/settings-menu/settings-menu";
 @import "components/settings-menu/common-setting";
 @import "components/settings-menu/dark-mode-setting";

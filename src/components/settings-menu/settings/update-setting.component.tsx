@@ -6,16 +6,15 @@ import { CloudDownloadOutlined } from "@ant-design/icons";
 import { checkForUpdates } from "../../../constants/update.constants";
 import CollapseComponent from "../../common/collapse/collapse.component";
 import SelectComponent from "../../common/select/select.component";
-import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import {
   selectCheckForUpdates,
-  selectCheckLoading,
-  selectIsDark
+  selectCheckLoading
 } from "../../../store/new-tab/new-tab.selectors";
 import { checkUpdates } from "../../../store/new-tab/new-tab.thunks";
 import { setCheckForUpdates } from "../../../store/new-tab/new-tab.slice";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки обновлений
@@ -34,7 +33,6 @@ const UpdateSettingComponent: FC = () => {
     [t]
   );
 
-  const isDark = useSelector(selectIsDark);
   const loading = useSelector(selectCheckLoading);
   const checkMode = useSelector(selectCheckForUpdates);
 
@@ -44,13 +42,12 @@ const UpdateSettingComponent: FC = () => {
   return (
     <CollapseComponent
       icon={<UpdateIcon />}
+      type={CollapsedMenuSetting.UPDATE}
       title={t("update.title")}
-      isDark={isDark}
       className="new-tab__settings-menu_update"
     >
       <div className="new-tab__settings-menu_update-content">
         <SelectComponent
-          isDark={isDark}
           dropdownStyle={{ minWidth: "max-content" }}
           size="small"
           value={checkMode}
@@ -58,10 +55,7 @@ const UpdateSettingComponent: FC = () => {
           options={options}
         />
         <Button
-          className={clsx(
-            "new-tab__settings-menu_update-content-check-button",
-            { dark: isDark }
-          )}
+          className="new-tab__settings-menu_update-content-check-button"
           icon={<CloudDownloadOutlined />}
           loading={loading}
           disabled={checkMode !== checkForUpdates.MANUAL}

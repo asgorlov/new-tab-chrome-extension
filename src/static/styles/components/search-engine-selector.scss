@@ -10,20 +10,11 @@
     transition: outline-color $fast-transition;
 
     &-scrollable {
-        display: inherit;
+        display: flex;
         transition: background-color $slow-transition;
-        overflow-x: auto;
         padding: 2px;
-        background-color: #ffffff80;
+        background-color: var(--bg-scrollable-color);
         max-width: 360px;
-
-        &::-webkit-scrollbar {
-            height: 0;
-        }
-
-        &.dark {
-            background-color: #292c3580;
-        }
     }
 
     &-left-button,
@@ -48,12 +39,68 @@
     }
 
     &-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 32px;
         height: 32px;
         margin: 2px;
         border-radius: 4px;
-        transition: filter $slow-transition, background-image $fast-transition;
+        transition: filter $slow-transition;
         filter: grayscale(100%);
-        background-size: cover;
+
+        &[data-rbd-drag-handle-context-id="1"] {
+            cursor: pointer;
+
+            &._dragging {
+                cursor: grabbing;
+            }
+        }
+
+        &.ask,
+        &.yahoo,
+        &.lycos,
+        &.gibiru,
+        &.searchch,
+        &.swisscows,
+        &.boardreader,
+        &._selected {
+            filter: grayscale(0);
+        }
+
+        &:not(._selected) {
+            &.lycos,
+            &.searchch,
+            &.swisscows {
+                svg path.svg-grey {
+                    fill: #545454;
+                }
+            }
+
+            &.ask,
+            &.yahoo,
+            &.gibiru {
+                svg path.svg-grey {
+                    fill: #64646b;
+                }
+            }
+
+            &.boardreader {
+                svg text.svg-grey {
+                    fill: #343434;
+
+                    &:last-child {
+                        fill: #545454;
+                    }
+                }
+            }
+        }
+
+        svg {
+            text,
+            path {
+                transition: fill $slow-transition;
+            }
+        }
     }
 }

@@ -1,0 +1,137 @@
+@import "../../modules/constants.module";
+
+@mixin hide-form-border($radius) {
+  border: none transparent;
+  border-radius: $radius;
+}
+
+.new-tab__search-engine_form {
+  transition: $fast-transition;
+  width: 100%;
+  min-width: 100px;
+  height: 42px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  background-color: $light-color;
+  box-shadow: transparent;
+  outline: none transparent;
+
+  &.yandex {
+    height: 38px;
+    padding: 2px 0;
+    outline: 2px solid $ya-color;
+    @include hide-form-border(10px);
+  }
+
+  &.google {
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    box-shadow: var(--google-form-box-shadow);
+  }
+
+  &.duckduckgo {
+    outline: 1px solid #00000026;
+    box-shadow: var(--duck-form-box-shadow);
+    @include hide-form-border(8px);
+  }
+
+  &.bing {
+    box-shadow: var(--bing-form-box-shadow);
+    @include hide-form-border(24px);
+  }
+
+  &.yahoo {
+    background: #f0f3f5;
+    @include hide-form-border(145px);
+
+    &:hover {
+      background: $light-color;
+      box-shadow: var(--yahoo-form-box-shadow);
+    }
+  }
+
+  &.brave {
+    box-shadow: var(--brave-form-box-shadow);
+    @include hide-form-border(10px);
+  }
+
+  &.swisscows {
+    @include hide-form-border(26px);
+  }
+
+  &.aol {
+    @include hide-form-border(0);
+  }
+
+  &.youcom {
+    border: 1px solid transparent;
+    border-radius: 24px;
+    box-shadow: var(--youcom-form-box-shadow);
+
+    &:focus-within {
+      border-color: #4A72F5FF;
+    }
+  }
+
+  &.gibiru {
+    border: 1px solid var(--gibiru-form-border-color);
+    border-radius: 7px;
+  }
+
+  &.lycos {
+    transition: all $fast-transition, outline 0.05s, outline-offset 0.05s;
+    outline: 1px solid #dddddd;
+    @include hide-form-border(4px);
+
+    &._focused {
+      outline-offset: -4px;
+      outline: 2px solid #101010;
+    }
+  }
+
+  &.nigma {
+    height: 32px;
+    background-color: #79ba2a;
+    @include hide-form-border(0 3px 3px 0);
+  }
+
+  &.ecosia {
+    border: 1px solid #bebeb9;
+    border-radius: 30px;
+    box-shadow: var(--ecosia-form-box-shadow);
+  }
+
+  &.searchcrypt {
+    background-color: transparent;
+    @include hide-form-border(6px);
+  }
+
+  &.metager {
+    border: 1px solid #585858;
+    border-radius: 5px;
+  }
+
+  &.ask {
+    border: 1px solid #c0c0c0;
+    border-radius: 24px;
+
+    &:hover {
+      border-color: #a0a0a0;
+      box-shadow: 0 4px 6px 0 #a0a0a0;
+    }
+  }
+
+  &.boardreader {
+    @include hide-form-border(0);
+  }
+
+  &.zapmeta {
+    @include hide-form-border(2px);
+  }
+
+  &.searchch {
+    background-color: transparent;
+    @include hide-form-border(8px);
+  }
+}

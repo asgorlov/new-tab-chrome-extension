@@ -4,15 +4,13 @@ import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants"
 import { useTranslation } from "react-i18next";
 import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsDark,
-  selectSearchEngines
-} from "../../../store/new-tab/new-tab.selectors";
+import { selectSearchEngines } from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
 import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import SelectComponent from "../../common/select/select.component";
+import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -22,7 +20,6 @@ const SearchEngineSettingComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
-  const isDark = useSelector(selectIsDark);
   const searchEngines = useSelector(selectSearchEngines);
 
   const options = useMemo(() => {
@@ -52,20 +49,18 @@ const SearchEngineSettingComponent: FC = () => {
   return (
     <CollapseComponent
       icon={<SearchEngineIcon />}
+      type={CollapsedMenuSetting.SEARCH_ENGINE}
       title={t("searchEngine.title")}
-      isDark={isDark}
       className="new-tab__settings-menu_search-engine"
     >
       <div className="new-tab__settings-menu_search-engine-content-checkbox-group">
         <CheckboxComponent
-          isDark={isDark}
           checked={searchEngines.length === SEARCH_ENGINE_NAMES.length}
           onChange={handleChangeAddAll}
         >
           {t("searchEngine.selectAll")}
         </CheckboxComponent>
         <CheckboxComponent
-          isDark={isDark}
           checked={searchEngines.length === 0}
           onChange={handleChangeRemoveAll}
         >
@@ -73,7 +68,6 @@ const SearchEngineSettingComponent: FC = () => {
         </CheckboxComponent>
       </div>
       <SelectComponent
-        isDark={isDark}
         className="new-tab__settings-menu_search-engine-content-selector"
         mode="multiple"
         maxTagCount="responsive"

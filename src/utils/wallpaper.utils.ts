@@ -6,6 +6,10 @@ import {
   DEFAULT_WALLPAPER,
   MIN_SIZE_IMG
 } from "../constants/wallpaper.constants";
+import {
+  DARK_THEME_NAME,
+  LIGHT_THEME_NAME
+} from "../constants/common.constants";
 
 /**
  * Функция, конвертирующая файл картинки в base64
@@ -62,9 +66,8 @@ export const getImgUrl = (
     return url ?? "";
   }
 
-  return require(`../static/imgs/${wallpaper}-${
-    isDark ? "dark" : "light"
-  }.jpg`);
+  const theme = isDark ? DARK_THEME_NAME : LIGHT_THEME_NAME;
+  return require(`../static/imgs/${wallpaper}-${theme}.jpg`);
 };
 
 /**
@@ -76,7 +79,7 @@ export const getImgUrl = (
  */
 export const getInitialFileList = (
   imgUrl: string | undefined,
-  theme: "dark" | "light"
+  theme: string
 ): UploadFile[] => {
   if (imgUrl) {
     const file = convertBase64ToImg(imgUrl, `custom-${theme}`);

@@ -1,10 +1,13 @@
 {
+  "searchTheWeb": "Search the web",
   "webSearch": "Web search",
+  "searchBySettings": "Search by settings",
   "tabTitle": "New tab",
   "searchQuery": "Enter search query...",
   "searchButton": "Search",
   "noTracking": "No tracking",
   "anonymous": "Anonymous",
+  "withoutAds": "Set up ad-free search",
   "familyFriendly": "Family-friendly",
   "darkModeTitle": "Dark mode",
   "uploadTitle": "Upload",
@@ -38,7 +41,8 @@
       "title": "Upload settings",
       "device": "From device",
       "cloud": "From cloud",
-      "typeError": "Invalid settings file format"
+      "typeError": "Invalid settings file format",
+      "parseError": "Failed to parse settings file"
     },
     "reset": {
       "title": "Reset settings",
@@ -75,10 +79,16 @@
     "gibiru": "Gibiru",
     "yahoo": "Yahoo",
     "bing": "Bing",
-    "duckduckgo": "DuckDuckGo",
+    "duckduckgo": "Duck Duck Go",
     "google": "Google",
     "yandex": "Yandex",
     "ecosia": "Ecosia",
+    "searchcrypt": "Search Encrypt",
+    "metager": "Metager",
+    "ask": "Ask.com",
+    "boardreader": "Board Reader",
+    "zapmeta": "Zapmeta",
+    "searchch": "Search.ch",
     "selectAll": "Select all",
     "removeAll": "Remove all"
   },
