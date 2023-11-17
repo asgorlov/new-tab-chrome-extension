@@ -10,16 +10,11 @@
     transition: outline-color $fast-transition;
 
     &-scrollable {
-        display: inherit;
+        display: flex;
         transition: background-color $slow-transition;
-        overflow-x: auto;
         padding: 2px;
         background-color: var(--bg-scrollable-color);
         max-width: 360px;
-
-        &::-webkit-scrollbar {
-            height: 0;
-        }
     }
 
     &-left-button,
