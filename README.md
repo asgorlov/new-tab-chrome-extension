@@ -9,5 +9,6 @@
 - Вы можете выбрать поисковые системы, которые будут показаны на новой вкладке.
 - Вы можете настроить частоту выполнения запросов обновлений: раз в день, неделю, месяц или вручную.
 - Вы можете выгрузить и загрузить настройки приложения
+- Поиск по настройкам в меню
 
-<img src="https://github.com/asgorlov/new-tab-chrome-extension/assets/48188924/214e4ddc-cc49-4870-a64c-caf2e699551d" heigt="50%" width="50%"></img>
+<img src="https://github.com/asgorlov/new-tab-chrome-extension/assets/48188924/6b9c4616-a56c-4d76-ada1-49cb9317a878" heigt="50%" width="50%"></img>
