@@ -9,13 +9,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
-  selectSearchEngine,
-  selectSearchEngines
+  selectSearchEngine
 } from "../../../store/new-tab/new-tab.selectors";
-import {
-  setSearchEngine,
-  setSearchEngines
-} from "../../../store/new-tab/new-tab.slice";
+import { setSearchEngine } from "../../../store/new-tab/new-tab.slice";
 import { ReactComponent as AolIcon } from "../../../static/svgs/aol/aol-icon.svg";
 import { ReactComponent as AskIcon } from "../../../static/svgs/ask/ask-icon.svg";
 import { ReactComponent as BingIcon } from "../../../static/svgs/bing/bing-icon.svg";
@@ -63,31 +59,37 @@ import TooltipComponent from "../../common/tooltip/tooltip.component";
 
 export interface DroppableAriaContainerProps {
   onDragged: (v: boolean) => void;
+  visibleSearchEngines: string[];
+  setVisibleSearchEngines: (value: string[]) => void;
 }
 
 const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
-  onDragged
+  onDragged,
+  visibleSearchEngines,
+  setVisibleSearchEngines
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const searchEngine = useSelector(selectSearchEngine);
-  const searchEngines = useSelector(selectSearchEngines);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
-  const handleDragEnd = (result: DropResult) => {
-    if (result.destination) {
-      const endIndex = result.destination.index;
-      const startIndex = result.source.index;
-      const newSearchEngines = Array.from(searchEngines);
-      const [removed] = newSearchEngines.splice(startIndex, 1);
-      newSearchEngines.splice(endIndex, 0, removed);
+  const handleDragEnd = useCallback(
+    (result: DropResult) => {
+      if (result.destination) {
+        const endIndex = result.destination.index;
+        const startIndex = result.source.index;
+        const newVisibleSearchEngines = Array.from(visibleSearchEngines);
+        const [removed] = newVisibleSearchEngines.splice(startIndex, 1);
+        newVisibleSearchEngines.splice(endIndex, 0, removed);
 
-      dispatch(setSearchEngines(newSearchEngines));
-    }
+        setVisibleSearchEngines(newVisibleSearchEngines);
+      }
 
-    onDragged(false);
-  };
+      onDragged(false);
+    },
+    [onDragged, visibleSearchEngines, setVisibleSearchEngines]
+  );
 
   const getDraggableElement = useCallback(
     (
@@ -179,7 +181,7 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
     >
       <DroppableAriaComponent
         getDraggableElement={getDraggableElement}
-        searchEngines={searchEngines}
+        searchEngines={visibleSearchEngines}
       />
     </DragDropContext>
   );
