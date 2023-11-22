@@ -9,6 +9,7 @@ import {
   GIBIRU,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
   SEARCHCH,
   SEARCHCRYPT,
@@ -123,6 +124,9 @@ export const getDeltaChanges = (
       ZAPMETA,
       SEARCHCH
     );
+  }
+  if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
+    searchEngines.push(MOJEEK);
   }
 
   return { searchEngines };

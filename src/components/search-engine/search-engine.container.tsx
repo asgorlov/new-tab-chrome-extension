@@ -11,6 +11,7 @@ import {
   GIBIRU,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
   SEARCH_INPUT_NAMES,
   SEARCHCH,
@@ -32,6 +33,7 @@ import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-se
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
+import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/mojeek-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -88,6 +90,8 @@ const SearchEngineContainer: FC = () => {
         return <MetagerSearchIcon />;
       case ASK:
         return <AskSearchIcon />;
+      case MOJEEK:
+        return <MojeekSearchIcon />;
       default:
         return <></>;
     }

@@ -45,9 +45,15 @@ export const SEARCH_ENGINE_NAMES = [
   "ask",
   "boardreader",
   "zapmeta",
-  "searchch"
+  "searchch",
+  "mojeek"
 ];
 
+/**
+ * Поисковая система mojeek
+ * @category Constants - Search Engine
+ */
+export const MOJEEK = SEARCH_ENGINE_NAMES[19];
 /**
  * Поисковая система Search.ch
  * @category Constants - Search Engine
@@ -167,7 +173,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   ask: "https://ask.com/",
   boardreader: "https://boardreader.com/",
   zapmeta: "https://zapmeta.com/",
-  searchch: "https://search.ch/"
+  searchch: "https://search.ch/",
+  mojeek: "https://mojeek.com/"
 };
 
 /**
@@ -193,7 +200,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   ask: "https://ask.com/web",
   boardreader: "https://boardreader.com/s",
   zapmeta: "https://zapmeta.com/search",
-  searchch: "https://search.ch"
+  searchch: "https://search.ch",
+  mojeek: "https://mojeek.com/search"
 };
 
 /**
@@ -219,5 +227,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   ask: constants.askColor,
   boardreader: constants.boardreaderColor,
   zapmeta: constants.zapmetaColor,
-  searchch: constants.searchchColor
+  searchch: constants.searchchColor,
+  mojeek: constants.mojeekColor
 };

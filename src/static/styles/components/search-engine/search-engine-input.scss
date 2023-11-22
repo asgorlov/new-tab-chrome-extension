@@ -228,4 +228,9 @@
     margin-right: 12px;
     @include change-pseudo-input-border-color(transparent);
   }
+
+  &.mojeek {
+    padding: 0 0 0 12px;
+    @include change-pseudo-input-border-color(transparent);
+  }
 }
