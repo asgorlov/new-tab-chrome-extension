@@ -93,4 +93,8 @@
   &.searchch {
     @include logo-common(40px, 205px, 24px, var(--searchch-bg-image));
   }
+
+  &.mojeek {
+    @include logo-common(62px, 205px, 12px, url("../../../svgs/mojeek/mojeek-logo.svg"));
+  }
 }

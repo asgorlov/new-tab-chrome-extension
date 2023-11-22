@@ -117,8 +117,8 @@
     border-radius: 24px;
 
     &:hover {
-      border-color: #a0a0a0;
-      box-shadow: 0 4px 6px 0 #a0a0a0;
+      border-color: var(--ask-form-hover-border-color);
+      box-shadow: 0 4px 6px 0 var(--ask-form-hover-border-color);
     }
   }
 
@@ -133,5 +133,15 @@
   &.searchch {
     background-color: transparent;
     @include hide-form-border(8px);
+  }
+
+  &.mojeek {
+    border: 1px solid #c7c7c7;
+    border-radius: 4px;
+    box-shadow: var(--mojeek-form-box-shadow);
+
+    &:hover {
+      box-shadow: var(--mojeek-form-hover-box-shadow);
+    }
   }
 }

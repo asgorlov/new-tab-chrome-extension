@@ -32,6 +32,7 @@ import { ReactComponent as YandexIcon } from "../../../static/svgs/yandex/ya-ico
 import { ReactComponent as YandexEnIcon } from "../../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YoucomIcon } from "../../../static/svgs/youcom/youcom-icon.svg";
 import { ReactComponent as ZapmetaIcon } from "../../../static/svgs/zapmeta/zapmeta-icon.svg";
+import { ReactComponent as MojeekIcon } from "../../../static/svgs/mojeek/mojeek-icon.svg";
 import {
   AOL,
   ASK,
@@ -44,6 +45,7 @@ import {
   GOOGLE,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
   SEARCHCH,
   SEARCHCRYPT,
@@ -137,6 +139,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <BoardreaderIcon />;
           case SEARCHCH:
             return <SearchchIcon />;
+          case MOJEEK:
+            return <MojeekIcon />;
           default:
             return <></>;
         }
