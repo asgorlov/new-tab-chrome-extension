@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import DroppableAriaContainer from "./droppable-aria/droppable-aria.container";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import {
@@ -39,13 +33,10 @@ const SearchEngineSelectorComponent = () => {
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
-  const visibleSearchEngines = useMemo(
-    () =>
-      searchEngines.length <= MAX_ELEMENTS_LENGTH
-        ? [...searchEngines]
-        : searchEngines.slice(0, MAX_ELEMENTS_LENGTH),
-    [searchEngines]
-  );
+  const getVisibleSearchEngines = (): string[] =>
+    searchEngines.length <= MAX_ELEMENTS_LENGTH
+      ? [...searchEngines]
+      : searchEngines.slice(0, MAX_ELEMENTS_LENGTH);
 
   const setVisibleSearchEngines = useCallback(
     (visibleEngines: string[]) => {
@@ -63,48 +54,37 @@ const SearchEngineSelectorComponent = () => {
 
   const handleClickMoving = useCallback(
     (distance: number) => {
-      const newSearchEngines = Array.from(visibleSearchEngines);
-
+      let newSearchEngines;
       // Если поворот налево
       if (distance > 0) {
-        const firstElement = newSearchEngines.shift();
-
-        if (firstElement) {
-          if (firstElement === searchEngine) {
-            const secondElement = newSearchEngines.shift();
-
-            if (secondElement) {
-              newSearchEngines.push(secondElement);
-            }
-
-            newSearchEngines.unshift(firstElement);
-          } else {
-            newSearchEngines.push(firstElement);
-          }
-
-          setVisibleSearchEngines(newSearchEngines);
+        if (searchEngines[0] === searchEngine) {
+          newSearchEngines = [searchEngines[0]];
+          newSearchEngines.push(...searchEngines.slice(2), searchEngines[1]);
+        } else {
+          newSearchEngines = searchEngines.slice(1);
+          newSearchEngines.push(searchEngines[0]);
         }
       } else {
-        const lastElement = newSearchEngines.pop();
+        const secondToLastVisibleIndex = MAX_ELEMENTS_LENGTH - 2;
+        const lastVisibleIndex = MAX_ELEMENTS_LENGTH - 1;
+        const lastIndex = searchEngines.length - 1;
+        newSearchEngines = [searchEngines[lastIndex]];
 
-        if (lastElement) {
-          if (lastElement === searchEngine) {
-            const secondToLastElement = newSearchEngines.pop();
-
-            if (secondToLastElement) {
-              newSearchEngines.unshift(secondToLastElement);
-            }
-
-            newSearchEngines.push(lastElement);
-          } else {
-            newSearchEngines.unshift(lastElement);
-          }
-
-          setVisibleSearchEngines(newSearchEngines);
+        if (searchEngines[lastVisibleIndex] === searchEngine) {
+          newSearchEngines.push(
+            ...searchEngines.slice(0, secondToLastVisibleIndex),
+            searchEngines[lastVisibleIndex],
+            searchEngines[secondToLastVisibleIndex],
+            ...searchEngines.slice(MAX_ELEMENTS_LENGTH, lastIndex)
+          );
+        } else {
+          newSearchEngines.push(...searchEngines.slice(0, lastIndex));
         }
       }
+
+      dispatch(setSearchEngines(newSearchEngines));
     },
-    [searchEngine, visibleSearchEngines, setVisibleSearchEngines]
+    [searchEngine, searchEngines, dispatch]
   );
 
   const onWheel = useCallback(
@@ -157,7 +137,7 @@ const SearchEngineSelectorComponent = () => {
       >
         <DroppableAriaContainer
           onDragged={setIsDragged}
-          visibleSearchEngines={visibleSearchEngines}
+          visibleSearchEngines={getVisibleSearchEngines()}
           setVisibleSearchEngines={setVisibleSearchEngines}
         />
       </div>
