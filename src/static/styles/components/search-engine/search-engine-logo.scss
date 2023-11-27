@@ -97,4 +97,8 @@
   &.mojeek {
     @include logo-common(62px, 205px, 12px, url("../../../svgs/mojeek/mojeek-logo.svg"));
   }
+
+  &.alexandria {
+    @include logo-common(38px, 205px, 12px , var(--alexandria-bg-image))
+  }
 }

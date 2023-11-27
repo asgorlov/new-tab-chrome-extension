@@ -144,4 +144,11 @@
       box-shadow: var(--mojeek-form-hover-box-shadow);
     }
   }
+
+  &.alexandria {
+    height: 30px;
+    min-height: max-content;
+    background-color: transparent;
+    @include hide-form-border(2px);
+  }
 }

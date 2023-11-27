@@ -33,7 +33,9 @@ import { ReactComponent as YandexEnIcon } from "../../../static/svgs/yandex/ya-i
 import { ReactComponent as YoucomIcon } from "../../../static/svgs/youcom/youcom-icon.svg";
 import { ReactComponent as ZapmetaIcon } from "../../../static/svgs/zapmeta/zapmeta-icon.svg";
 import { ReactComponent as MojeekIcon } from "../../../static/svgs/mojeek/mojeek-icon.svg";
+import { ReactComponent as AlexandriaIcon } from "../../../static/svgs/alexandria/alexandria-icon.svg";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
@@ -141,6 +143,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <SearchchIcon />;
           case MOJEEK:
             return <MojeekIcon />;
+          case ALEXANDRIA:
+            return <AlexandriaIcon />;
           default:
             return <></>;
         }

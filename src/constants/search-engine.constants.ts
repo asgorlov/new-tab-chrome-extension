@@ -46,9 +46,15 @@ export const SEARCH_ENGINE_NAMES = [
   "boardreader",
   "zapmeta",
   "searchch",
-  "mojeek"
+  "mojeek",
+  "alexandria"
 ];
 
+/**
+ * Поисковая система alexandria
+ * @category Constants - Search Engine
+ */
+export const ALEXANDRIA = SEARCH_ENGINE_NAMES[20];
 /**
  * Поисковая система mojeek
  * @category Constants - Search Engine
@@ -174,7 +180,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   boardreader: "https://boardreader.com/",
   zapmeta: "https://zapmeta.com/",
   searchch: "https://search.ch/",
-  mojeek: "https://mojeek.com/"
+  mojeek: "https://mojeek.com/",
+  alexandria: "https://alexandria.org/"
 };
 
 /**
@@ -201,7 +208,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   boardreader: "https://boardreader.com/s",
   zapmeta: "https://zapmeta.com/search",
   searchch: "https://search.ch",
-  mojeek: "https://mojeek.com/search"
+  mojeek: "https://mojeek.com/search",
+  alexandria: "https://alexandria.org"
 };
 
 /**
@@ -228,5 +236,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   boardreader: constants.boardreaderColor,
   zapmeta: constants.zapmetaColor,
   searchch: constants.searchchColor,
-  mojeek: constants.mojeekColor
+  mojeek: constants.mojeekColor,
+  alexandria: constants.alexandriaColor
 };

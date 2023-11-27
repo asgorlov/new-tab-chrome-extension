@@ -1,5 +1,6 @@
 import { checkForUpdates } from "../constants/update.constants";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
@@ -126,7 +127,7 @@ export const getDeltaChanges = (
     );
   }
   if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
-    searchEngines.push(MOJEEK);
+    searchEngines.push(MOJEEK, ALEXANDRIA);
   }
 
   return { searchEngines };
