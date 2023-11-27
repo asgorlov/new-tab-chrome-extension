@@ -242,6 +242,7 @@
     padding: 0 4px;
     margin-right: 8px;
     font-size: 16px;
+    background-color: $light-color;
 
     &.ant-input-affix-wrapper:focus,
     &.ant-input-affix-wrapper-focused {
@@ -251,8 +252,6 @@
     }
 
     .ant-input {
-      color: var(--text-color);
-
       &::placeholder {
         font-size: 16px;
       }
