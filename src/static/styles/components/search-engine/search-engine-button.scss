@@ -416,12 +416,12 @@
 
     &:hover {
       svg {
-        color: var(--yep-search-icon-hover-color);
+        color: #333;
       }
     }
 
     svg {
-      color: var(--yep-search-icon-color);
+      color: #00000085;
       width: 18px;
     }
   }

@@ -91,8 +91,6 @@ $search-engine-max-width: 560px;
   --menu-border-color: #{$light-border-color};
   --border-color: #d9d9d9;
   --tour-indicator-color: #00000026;
-  --yep-search-icon-hover-color: #333;
-  --yep-search-icon-color: #00000085;
 }
 
 [data-theme="dark"] {
@@ -149,8 +147,6 @@ $search-engine-max-width: 560px;
   --menu-border-color: #{$dark-border-color};
   --border-color: #525252;
   --tour-indicator-color: #ffffff26;
-  --yep-search-icon-hover-color: #ECECEC85;
-  --yep-search-icon-color: #9F9F9F84;
 }
 
 :export {

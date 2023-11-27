@@ -163,7 +163,7 @@
 
     &._focused {
       box-shadow: var(--yep-form-box-shadow);
-      background-color: var(--bg-color);
+      background-color: $light-color;
     }
   }
 }

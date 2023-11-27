@@ -263,7 +263,14 @@
     padding-right: 0;
     @include change-pseudo-input-border-color(transparent);
 
+    &.ant-input-affix-wrapper-focused {
+      .ant-input {
+        color: $light-text-color;
+      }
+    }
+
     .ant-input {
+      transition: $fast-transition;
       color: var(--text-color);
     }
   }
