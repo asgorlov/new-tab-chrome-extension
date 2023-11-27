@@ -233,4 +233,29 @@
     padding: 0 0 0 12px;
     @include change-pseudo-input-border-color(transparent);
   }
+
+  &.alexandria {
+    border: 2px solid var(--alexandria-main-border-color);
+    border-right-color: var(--alexandria-part-border-color);
+    border-bottom-color: var(--alexandria-part-border-color);
+    border-radius: 0;
+    padding: 0 4px;
+    margin-right: 8px;
+    font-size: 16px;
+
+    &.ant-input-affix-wrapper:focus,
+    &.ant-input-affix-wrapper-focused {
+      border-color: var(--alexandria-main-border-color);
+      border-radius: 4px;
+      box-shadow: none;
+    }
+
+    .ant-input {
+      color: var(--text-color);
+
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+  }
 }

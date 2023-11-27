@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useCallback, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
@@ -50,6 +51,7 @@ const SearchEngineContainer: FC = () => {
     switch (searchEngine) {
       case YANDEX:
       case SEARCHCH:
+      case ALEXANDRIA:
         return <span>{t("searchButton")}</span>;
       case DUCK:
         return <span>{"S"}</span>;

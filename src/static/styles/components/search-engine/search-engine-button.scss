@@ -391,4 +391,22 @@
     padding: 0 12px;
     border-radius: 0 4px 4px 0;
   }
+
+  &.alexandria {
+    width: 40px;
+    min-width: max-content;
+    padding: 4px 8px;
+    border-radius: 2px;
+    border: 1px solid #767676;
+    background-color: #f0f0f0;
+
+    &:hover {
+      background-color: darken(#f0f0f0, 5%);
+      border-color: #464646;
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
 }
