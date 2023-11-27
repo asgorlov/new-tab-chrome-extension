@@ -10,6 +10,7 @@ import {
   DUCK,
   ECOSIA,
   GIBIRU,
+  IZITO,
   LYCOS,
   METAGER,
   MOJEEK,
@@ -89,6 +90,7 @@ const SearchEngineContainer: FC = () => {
       case SEARCHCRYPT:
       case BOARDREADER:
       case ZAPMETA:
+      case IZITO:
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;

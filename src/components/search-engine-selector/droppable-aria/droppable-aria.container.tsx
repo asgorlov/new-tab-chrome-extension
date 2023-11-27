@@ -35,6 +35,7 @@ import { ReactComponent as ZapmetaIcon } from "../../../static/svgs/zapmeta/zapm
 import { ReactComponent as MojeekIcon } from "../../../static/svgs/mojeek/mojeek-icon.svg";
 import { ReactComponent as AlexandriaIcon } from "../../../static/svgs/alexandria/alexandria-icon.svg";
 import { ReactComponent as YepIcon } from "../../../static/svgs/yep/yep-icon.svg";
+import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -46,6 +47,7 @@ import {
   ECOSIA,
   GIBIRU,
   GOOGLE,
+  IZITO,
   LYCOS,
   METAGER,
   MOJEEK,
@@ -149,6 +151,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <AlexandriaIcon />;
           case YEP:
             return <YepIcon />;
+          case IZITO:
+            return <IzitoIcon />;
           default:
             return <></>;
         }

@@ -78,6 +78,7 @@
   }
 
   &.zapmeta {
+    transition: all $fast-transition, border-color $slow-transition, background-color $slow-transition;
     opacity: 1;
     background-color: var(--zapmeta-form-bg-color);
     min-height: 92px;
@@ -95,5 +96,16 @@
     top: calc(50% - 54px);
     padding: 0 12px;
     border-radius: 6px;
+  }
+
+  &.izito {
+    transition: all $fast-transition, border-color $slow-transition, background-color $slow-transition;
+    opacity: 1;
+    background-color: var(--izito-form-bg-color);
+    min-height: 92px;
+    max-height: 92px;
+    top: calc(50% - 77px);
+    padding: 0 15px;
+    border: solid 1px var(--izito-form-border-color);
   }
 }

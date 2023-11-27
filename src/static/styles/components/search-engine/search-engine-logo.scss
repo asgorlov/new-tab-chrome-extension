@@ -99,10 +99,14 @@
   }
 
   &.alexandria {
-    @include logo-common(38px, 205px, 12px, var(--alexandria-bg-image))
+    @include logo-common(38px, 205px, 12px, var(--alexandria-bg-image));
   }
 
   &.yep {
-    @include logo-common(98px, 98px, 12px, url("../../../svgs/yep/yep-logo.svg"))
+    @include logo-common(98px, 98px, 12px, url("../../../svgs/yep/yep-logo.svg"));
+  }
+
+  &.izito {
+    @include logo-common(64px, 197px, 40px, url("../../../svgs/izito/izito-logo.svg"));
   }
 }

@@ -166,4 +166,8 @@
       background-color: $light-color;
     }
   }
+
+  &.izito {
+    @include hide-form-border(0);
+  }
 }
