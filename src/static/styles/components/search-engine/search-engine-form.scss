@@ -151,4 +151,19 @@
     background-color: transparent;
     @include hide-form-border(2px);
   }
+
+  &.yep {
+    border-radius: 30px;
+    background-color: var(--yep-form-bg-color);
+    @include hide-form-border(30px);
+
+    &:hover {
+      background-color: var(--yep-form-hover-bg-color);
+    }
+
+    &._focused {
+      box-shadow: var(--yep-form-box-shadow);
+      background-color: var(--bg-color);
+    }
+  }
 }

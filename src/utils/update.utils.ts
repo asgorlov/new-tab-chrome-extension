@@ -16,6 +16,7 @@ import {
   SEARCHCRYPT,
   SWISSCOWS,
   YAHOO,
+  YEP,
   YOUCOM,
   ZAPMETA
 } from "../constants/search-engine.constants";
@@ -127,7 +128,7 @@ export const getDeltaChanges = (
     );
   }
   if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
-    searchEngines.push(MOJEEK, ALEXANDRIA);
+    searchEngines.push(MOJEEK, ALEXANDRIA, YEP);
   }
 
   return { searchEngines };

@@ -47,9 +47,15 @@ export const SEARCH_ENGINE_NAMES = [
   "zapmeta",
   "searchch",
   "mojeek",
-  "alexandria"
+  "alexandria",
+  "yep"
 ];
 
+/**
+ * Поисковая система yep.com
+ * @category Constants - Search Engine
+ */
+export const YEP = SEARCH_ENGINE_NAMES[21];
 /**
  * Поисковая система alexandria
  * @category Constants - Search Engine
@@ -181,7 +187,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   zapmeta: "https://zapmeta.com/",
   searchch: "https://search.ch/",
   mojeek: "https://mojeek.com/",
-  alexandria: "https://alexandria.org/"
+  alexandria: "https://alexandria.org/",
+  yep: "https://yep.com/"
 };
 
 /**
@@ -209,7 +216,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   zapmeta: "https://zapmeta.com/search",
   searchch: "https://search.ch",
   mojeek: "https://mojeek.com/search",
-  alexandria: "https://alexandria.org"
+  alexandria: "https://alexandria.org",
+  yep: "https://yep.com/web"
 };
 
 /**
@@ -237,5 +245,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   zapmeta: constants.zapmetaColor,
   searchch: constants.searchchColor,
   mojeek: constants.mojeekColor,
-  alexandria: constants.alexandriaColor
+  alexandria: constants.alexandriaColor,
+  yep: constants.yepColor
 };

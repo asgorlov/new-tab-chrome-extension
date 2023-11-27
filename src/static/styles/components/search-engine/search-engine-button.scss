@@ -409,4 +409,20 @@
       font-size: 16px;
     }
   }
+
+  &.yep {
+    width: 40px;
+    border-radius: 0 30px 30px 0;
+
+    &:hover {
+      svg {
+        color: var(--yep-search-icon-hover-color);
+      }
+    }
+
+    svg {
+      color: var(--yep-search-icon-color);
+      width: 18px;
+    }
+  }
 }
