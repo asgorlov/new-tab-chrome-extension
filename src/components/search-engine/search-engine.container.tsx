@@ -20,6 +20,7 @@ import {
   SWISSCOWS,
   YAHOO,
   YANDEX,
+  YEP,
   YOUCOM,
   ZAPMETA
 } from "../../constants/search-engine.constants";
@@ -35,6 +36,7 @@ import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swissco
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
 import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/mojeek-search-icon.svg";
+import { ReactComponent as YepSearchIcon } from "../../static/svgs/yep/yep-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -94,6 +96,8 @@ const SearchEngineContainer: FC = () => {
         return <AskSearchIcon />;
       case MOJEEK:
         return <MojeekSearchIcon />;
+      case YEP:
+        return <YepSearchIcon />;
       default:
         return <></>;
     }

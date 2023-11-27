@@ -64,6 +64,8 @@
         &.searchch,
         &.swisscows,
         &.boardreader,
+        &.alexandria,
+        &.yep,
         &._selected {
             filter: grayscale(0);
         }
@@ -79,8 +81,7 @@
 
             &.ask,
             &.yahoo,
-            &.gibiru,
-            &.alexandria {
+            &.gibiru {
                 svg path.svg-grey {
                     fill: #64646b;
                 }
@@ -91,6 +92,30 @@
                     fill: #343434;
 
                     &:last-child {
+                        fill: #545454;
+                    }
+                }
+            }
+
+            &.alexandria {
+                svg path {
+                    &.svg-grey {
+                        fill: #64646b;
+                    }
+
+                    &:last-child {
+                        fill: #a4a4a4;
+                    }
+                }
+            }
+
+            &.yep {
+                svg path {
+                    &:first-child {
+                        fill: #a4a4a4;
+                    }
+
+                    &.svg-grey {
                         fill: #545454;
                     }
                 }
