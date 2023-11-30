@@ -201,4 +201,8 @@
     box-shadow: var(--entireweb-form-box-shadow);
     @include hide-form-border(40px);
   }
+
+  &.exactseek {
+    @include hide-form-border(3px);
+  }
 }

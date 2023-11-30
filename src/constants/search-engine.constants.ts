@@ -53,9 +53,15 @@ export const SEARCH_ENGINE_NAMES = [
   "presearch",
   "hotbot",
   "rambler",
-  "entireweb"
+  "entireweb",
+  "exactseek"
 ];
 
+/**
+ * Поисковая система exact seek
+ * @category Constants - Search Engine
+ */
+export const EXACTSEEK = SEARCH_ENGINE_NAMES[27];
 /**
  * Поисковая система entireweb
  * @category Constants - Search Engine
@@ -223,7 +229,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   presearch: "https://presearch.com/",
   hotbot: "https://hotbot.com/",
   rambler: "https://www.rambler.ru/",
-  entireweb: "https://www.entireweb.com/"
+  entireweb: "https://www.entireweb.com/",
+  exactseek: "https://exactseek.com/"
 };
 
 /**
@@ -257,7 +264,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   presearch: "https://presearch.com/search",
   hotbot: "https://hotbot.com/web",
   rambler: "https://nova.rambler.ru/search",
-  entireweb: "https://search.entireweb.com/search"
+  entireweb: "https://search.entireweb.com/search",
+  exactseek: "https://exactseek.com/cgi-bin/search.cgi"
 };
 
 /**
@@ -291,5 +299,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   presearch: constants.presearchColor,
   hotbot: constants.hotbotColor,
   rambler: constants.ramblerColor,
-  entireweb: constants.entirewebColor
+  entireweb: constants.entirewebColor,
+  exactseek: constants.exactseekColor
 };

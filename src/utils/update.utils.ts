@@ -8,6 +8,7 @@ import {
   BRAVE,
   ECOSIA,
   ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
   HOTBOT,
   IZITO,
@@ -141,7 +142,8 @@ export const getDeltaChanges = (
       PRESEARCH,
       HOTBOT,
       RAMBLER,
-      ENTIREWEB
+      ENTIREWEB,
+      EXACTSEEK
     );
   }
 

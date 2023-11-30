@@ -510,4 +510,15 @@
       }
     }
   }
+
+  &.exactseek {
+    width: 80px;
+    border-radius: 0 3px 3px 0;
+    background-color: #428fdf;
+
+    span {
+      color: $light-color;
+      font-size: 16px;
+    }
+  }
 }

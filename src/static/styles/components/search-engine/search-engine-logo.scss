@@ -129,4 +129,8 @@
   &.entireweb {
     @include logo-common(32px, 180px, 12px, var(--entireweb-bg-image));
   }
+
+  &.exactseek {
+    @include logo-common(69px, 200px, 12px, url("../../../svgs/exactseek/exactseek-logo.svg"));
+  }
 }

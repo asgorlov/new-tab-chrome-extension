@@ -40,6 +40,7 @@ import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/
 import { ReactComponent as HotBotIcon } from "../../../static/svgs/hotbot/hotbot-icon.svg";
 import { ReactComponent as RamblerIcon } from "../../../static/svgs/rambler/rambler-icon.svg";
 import { ReactComponent as EntirewebIcon } from "../../../static/svgs/entireweb/entireweb-icon.svg";
+import { ReactComponent as ExactSeekIcon } from "../../../static/svgs/exactseek/exactseek-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -50,6 +51,7 @@ import {
   DUCK,
   ECOSIA,
   ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
   GOOGLE,
   HOTBOT,
@@ -169,6 +171,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <RamblerIcon />;
           case ENTIREWEB:
             return <EntirewebIcon />;
+          case EXACTSEEK:
+            return <ExactSeekIcon />;
           default:
             return <></>;
         }

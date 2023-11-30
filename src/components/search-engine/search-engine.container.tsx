@@ -10,6 +10,7 @@ import {
   DUCK,
   ECOSIA,
   ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
   HOTBOT,
   IZITO,
@@ -62,6 +63,7 @@ const SearchEngineContainer: FC = () => {
       case YANDEX:
       case SEARCHCH:
       case ALEXANDRIA:
+      case EXACTSEEK:
         return <span>{t("searchButton")}</span>;
       case DUCK:
         return <span>{"S"}</span>;
