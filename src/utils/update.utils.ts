@@ -15,6 +15,7 @@ import {
   MOJEEK,
   NIGMA,
   PRESEARCH,
+  RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -131,7 +132,15 @@ export const getDeltaChanges = (
     );
   }
   if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
-    searchEngines.push(MOJEEK, ALEXANDRIA, YEP, IZITO, PRESEARCH, HOTBOT);
+    searchEngines.push(
+      MOJEEK,
+      ALEXANDRIA,
+      YEP,
+      IZITO,
+      PRESEARCH,
+      HOTBOT,
+      RAMBLER
+    );
   }
 
   return { searchEngines };

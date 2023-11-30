@@ -117,4 +117,12 @@
   &.hotbot {
     @include logo-common(96px, 112px, 30px, var(--hotbot-bg-image));
   }
+
+  &.rambler {
+    @include logo-common(44px, 205px, 8px, url("../../../svgs/rambler/rambler-logo-ru.svg"));
+
+    &.en {
+      background-image: url("../../../svgs/rambler/rambler-logo-en.svg");
+    }
+  }
 }

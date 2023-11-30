@@ -17,6 +17,7 @@ import {
   MOJEEK,
   NIGMA,
   PRESEARCH,
+  RAMBLER,
   SEARCH_INPUT_NAMES,
   SEARCHCH,
   SEARCHCRYPT,
@@ -42,6 +43,7 @@ import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/moj
 import { ReactComponent as YepSearchIcon } from "../../static/svgs/yep/yep-search-icon.svg";
 import { ReactComponent as PresearchSearchIcon } from "../../static/svgs/presearch/presearch-search-icon.svg";
 import { ReactComponent as HotBotSearchIcon } from "../../static/svgs/hotbot/hotbot-search-icon.svg";
+import { ReactComponent as RamblerSearchIcon } from "../../static/svgs/rambler/rambler-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -108,6 +110,8 @@ const SearchEngineContainer: FC = () => {
         return <PresearchSearchIcon />;
       case HOTBOT:
         return <HotBotSearchIcon />;
+      case RAMBLER:
+        return <RamblerSearchIcon />;
       default:
         return <></>;
     }

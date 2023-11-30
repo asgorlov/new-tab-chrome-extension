@@ -186,4 +186,13 @@
       border-color: var(--hotbot-form-hover-border-color);
     }
   }
+
+  &.rambler {
+    background-color: #e0ebff;
+    @include hide-form-border(5px);
+
+    &:hover {
+      background-color: #d1e2ff;
+    }
+  }
 }

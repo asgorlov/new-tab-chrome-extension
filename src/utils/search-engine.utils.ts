@@ -2,6 +2,7 @@ import {
   BOARDREADER,
   METAGER,
   NIGMA,
+  RAMBLER,
   SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
   SWISSCOWS,
@@ -22,6 +23,7 @@ export const getInputName = (searchEngine: string): string => {
     case SWISSCOWS:
     case NIGMA:
     case BOARDREADER:
+    case RAMBLER:
       return SEARCH_INPUT_NAMES[1];
     case METAGER:
       return SEARCH_INPUT_NAMES[2];

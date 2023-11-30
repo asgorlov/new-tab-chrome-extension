@@ -51,9 +51,15 @@ export const SEARCH_ENGINE_NAMES = [
   "yep",
   "izito",
   "presearch",
-  "hotbot"
+  "hotbot",
+  "rambler"
 ];
 
+/**
+ * Поисковая система rambler
+ * @category Constants - Search Engine
+ */
+export const RAMBLER = SEARCH_ENGINE_NAMES[25];
 /**
  * Поисковая система hotBot
  * @category Constants - Search Engine
@@ -209,7 +215,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   yep: "https://yep.com/",
   izito: "https://izito.com/",
   presearch: "https://presearch.com/",
-  hotbot: "https://hotbot.com/"
+  hotbot: "https://hotbot.com/",
+  rambler: "https://www.rambler.ru/"
 };
 
 /**
@@ -241,7 +248,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   yep: "https://yep.com/web",
   izito: "https://izito.com/search",
   presearch: "https://presearch.com/search",
-  hotbot: "https://hotbot.com/web"
+  hotbot: "https://hotbot.com/web",
+  rambler: "https://nova.rambler.ru/search"
 };
 
 /**
@@ -273,5 +281,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   yep: constants.yepColor,
   izito: constants.izitoColor,
   presearch: constants.presearchColor,
-  hotbot: constants.hotbotColor
+  hotbot: constants.hotbotColor,
+  rambler: constants.ramblerColor
 };

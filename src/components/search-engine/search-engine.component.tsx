@@ -4,6 +4,7 @@ import {
   ECOSIA,
   GOOGLE,
   METAGER,
+  RAMBLER,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
   YANDEX
@@ -61,10 +62,13 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
         />
       );
 
-    const getSearchEngineLogoClass = (): string =>
-      clsx("new-tab__search-engine_logo", searchEngine, {
-        en: searchEngine === YANDEX && currentLanguage !== "ru"
-      });
+    const getSearchEngineLogoClass = (): string => {
+      const isEn =
+        currentLanguage !== "ru" &&
+        (searchEngine === YANDEX || searchEngine === RAMBLER);
+
+      return clsx("new-tab__search-engine_logo", searchEngine, { en: isEn });
+    };
 
     const getSearchEngineFormClass = (): string =>
       clsx("new-tab__search-engine_form", searchEngine, {

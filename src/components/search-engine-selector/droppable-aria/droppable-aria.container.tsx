@@ -38,6 +38,7 @@ import { ReactComponent as YepIcon } from "../../../static/svgs/yep/yep-icon.svg
 import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-icon.svg";
 import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/presearch-icon.svg";
 import { ReactComponent as HotBotIcon } from "../../../static/svgs/hotbot/hotbot-icon.svg";
+import { ReactComponent as RamblerIcon } from "../../../static/svgs/rambler/rambler-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -56,6 +57,7 @@ import {
   MOJEEK,
   NIGMA,
   PRESEARCH,
+  RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -161,6 +163,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <PresearchIcon />;
           case HOTBOT:
             return <HotBotIcon />;
+          case RAMBLER:
+            return <RamblerIcon />;
           default:
             return <></>;
         }
