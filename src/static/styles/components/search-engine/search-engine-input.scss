@@ -21,6 +21,14 @@
 
   .ant-input-prefix {
     margin-inline-end: 0;
+
+    &:after {
+      transition: all, height $fast-transition, margin-right $fast-transition;
+      content: "";
+      border-right: 1px solid var(--presearch-input-separator-color);
+      height: 0;
+      margin-right: 0;
+    }
   }
 
   .ant-input {
@@ -75,6 +83,7 @@
       opacity: 0;
       margin-right: 0;
       background-image: url("../../../svgs/google/google-search-icon.svg");
+      background-size: cover;
     }
 
     &.google span {
@@ -92,6 +101,15 @@
       height: 20px;
       opacity: 1;
       background-image: url("../../../svgs/metager/metager-key-icon.svg");
+    }
+
+    &.presearch span {
+      cursor: default;
+      margin-right: 10px;
+      width: 24px;
+      height: 24px;
+      opacity: 1;
+      background-image: url("../../../svgs/presearch/presearch-icon.svg");
     }
   }
 
@@ -279,5 +297,22 @@
     border: 1px solid #dddddd;
     border-right-color: transparent;
     @include change-pseudo-input-border-color(#dddddd);
+  }
+
+  &.presearch {
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+
+    .ant-input {
+      transition: $fast-transition;
+      color: var(--text-color);
+    }
+
+    .ant-input-prefix {
+      &:after {
+        height: 21px;
+        margin-right: 10px;
+      }
+    }
   }
 }

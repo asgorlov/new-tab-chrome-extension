@@ -36,6 +36,7 @@ import { ReactComponent as MojeekIcon } from "../../../static/svgs/mojeek/mojeek
 import { ReactComponent as AlexandriaIcon } from "../../../static/svgs/alexandria/alexandria-icon.svg";
 import { ReactComponent as YepIcon } from "../../../static/svgs/yep/yep-icon.svg";
 import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-icon.svg";
+import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/presearch-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -52,6 +53,7 @@ import {
   METAGER,
   MOJEEK,
   NIGMA,
+  PRESEARCH,
   SEARCHCH,
   SEARCHCRYPT,
   SWISSCOWS,
@@ -153,6 +155,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <YepIcon />;
           case IZITO:
             return <IzitoIcon />;
+          case PRESEARCH:
+            return <PresearchIcon />;
           default:
             return <></>;
         }

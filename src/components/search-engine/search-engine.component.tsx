@@ -2,6 +2,7 @@ import React, { FC, FormEvent, memo, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ECOSIA,
+  GOOGLE,
   METAGER,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
@@ -54,6 +55,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
         />
       ) : (
         <button
+          type={searchEngine === GOOGLE ? "submit" : "button"}
           className={clsx("new-tab__search-engine_input-prefix", searchEngine)}
           children={<span />}
         />

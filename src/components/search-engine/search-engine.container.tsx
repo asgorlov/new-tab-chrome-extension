@@ -15,6 +15,7 @@ import {
   METAGER,
   MOJEEK,
   NIGMA,
+  PRESEARCH,
   SEARCH_INPUT_NAMES,
   SEARCHCH,
   SEARCHCRYPT,
@@ -38,6 +39,7 @@ import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/m
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
 import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/mojeek-search-icon.svg";
 import { ReactComponent as YepSearchIcon } from "../../static/svgs/yep/yep-search-icon.svg";
+import { ReactComponent as PresearchSearchIcon } from "../../static/svgs/presearch/presearch-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -100,6 +102,8 @@ const SearchEngineContainer: FC = () => {
         return <MojeekSearchIcon />;
       case YEP:
         return <YepSearchIcon />;
+      case PRESEARCH:
+        return <PresearchSearchIcon />;
       default:
         return <></>;
     }

@@ -109,4 +109,8 @@
   &.izito {
     @include logo-common(64px, 197px, 40px, url("../../../svgs/izito/izito-logo.svg"));
   }
+
+  &.presearch {
+    @include logo-common(32px, 197px, 20px, var(--presearchch-bg-image));
+  }
 }

@@ -49,9 +49,15 @@ export const SEARCH_ENGINE_NAMES = [
   "mojeek",
   "alexandria",
   "yep",
-  "izito"
+  "izito",
+  "presearch"
 ];
 
+/**
+ * Поисковая система presearch
+ * @category Constants - Search Engine
+ */
+export const PRESEARCH = SEARCH_ENGINE_NAMES[23];
 /**
  * Поисковая система izito
  * @category Constants - Search Engine
@@ -195,7 +201,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   mojeek: "https://mojeek.com/",
   alexandria: "https://alexandria.org/",
   yep: "https://yep.com/",
-  izito: "https://izito.com/"
+  izito: "https://izito.com/",
+  presearch: "https://presearch.com/"
 };
 
 /**
@@ -225,7 +232,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   mojeek: "https://mojeek.com/search",
   alexandria: "https://alexandria.org",
   yep: "https://yep.com/web",
-  izito: "https://izito.com/search"
+  izito: "https://izito.com/search",
+  presearch: "https://presearch.com/search"
 };
 
 /**
@@ -255,5 +263,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   mojeek: constants.mojeekColor,
   alexandria: constants.alexandriaColor,
   yep: constants.yepColor,
-  izito: constants.izitoColor
+  izito: constants.izitoColor,
+  presearch: constants.presearchColor
 };
