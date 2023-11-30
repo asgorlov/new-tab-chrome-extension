@@ -487,4 +487,27 @@
       background-color: #274bc8;
     }
   }
+
+  &.entireweb {
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    border-radius: 27px;
+    margin-right: 5px;
+    background-color: $entireweb-color;
+
+    &:hover {
+      background-color: #1b84b6;
+    }
+
+    span {
+      color: $light-color;
+      font-size: 12px;
+      font-family: Entireweb, sans-serif;
+
+      &:before {
+        content: "\f002";
+      }
+    }
+  }
 }

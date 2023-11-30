@@ -39,6 +39,7 @@ import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-ic
 import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/presearch-icon.svg";
 import { ReactComponent as HotBotIcon } from "../../../static/svgs/hotbot/hotbot-icon.svg";
 import { ReactComponent as RamblerIcon } from "../../../static/svgs/rambler/rambler-icon.svg";
+import { ReactComponent as EntirewebIcon } from "../../../static/svgs/entireweb/entireweb-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -48,6 +49,7 @@ import {
   BRAVE,
   DUCK,
   ECOSIA,
+  ENTIREWEB,
   GIBIRU,
   GOOGLE,
   HOTBOT,
@@ -165,6 +167,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <HotBotIcon />;
           case RAMBLER:
             return <RamblerIcon />;
+          case ENTIREWEB:
+            return <EntirewebIcon />;
           default:
             return <></>;
         }

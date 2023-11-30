@@ -9,6 +9,7 @@ import {
   BRAVE,
   DUCK,
   ECOSIA,
+  ENTIREWEB,
   GIBIRU,
   HOTBOT,
   IZITO,
@@ -97,6 +98,7 @@ const SearchEngineContainer: FC = () => {
       case BOARDREADER:
       case ZAPMETA:
       case IZITO:
+      case ENTIREWEB:
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;

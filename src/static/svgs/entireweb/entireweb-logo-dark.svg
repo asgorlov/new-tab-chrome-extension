@@ -1,0 +1,10 @@
+<svg width="180" height="32" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .entire-text {
+        letter-spacing: -1px;
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+    <text class="entire-text" fill="#fff" font-weight="bold" font-size="40" y="30" x="0">entire</text>
+    <text class="entire-text" fill="#1d93ca" font-weight="bold" font-size="40" y="30" x="104">web</text>
+</svg>

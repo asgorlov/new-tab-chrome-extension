@@ -195,4 +195,10 @@
       background-color: #d1e2ff;
     }
   }
+
+  &.entireweb {
+    background-color: #e6f0f9;
+    box-shadow: var(--entireweb-form-box-shadow);
+    @include hide-form-border(40px);
+  }
 }

@@ -125,4 +125,8 @@
       background-image: url("../../../svgs/rambler/rambler-logo-en.svg");
     }
   }
+
+  &.entireweb {
+    @include logo-common(32px, 180px, 12px, var(--entireweb-bg-image));
+  }
 }

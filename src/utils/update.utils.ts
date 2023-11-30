@@ -7,6 +7,7 @@ import {
   BOARDREADER,
   BRAVE,
   ECOSIA,
+  ENTIREWEB,
   GIBIRU,
   HOTBOT,
   IZITO,
@@ -139,7 +140,8 @@ export const getDeltaChanges = (
       IZITO,
       PRESEARCH,
       HOTBOT,
-      RAMBLER
+      RAMBLER,
+      ENTIREWEB
     );
   }
 

@@ -52,9 +52,15 @@ export const SEARCH_ENGINE_NAMES = [
   "izito",
   "presearch",
   "hotbot",
-  "rambler"
+  "rambler",
+  "entireweb"
 ];
 
+/**
+ * Поисковая система entireweb
+ * @category Constants - Search Engine
+ */
+export const ENTIREWEB = SEARCH_ENGINE_NAMES[26];
 /**
  * Поисковая система rambler
  * @category Constants - Search Engine
@@ -216,7 +222,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   izito: "https://izito.com/",
   presearch: "https://presearch.com/",
   hotbot: "https://hotbot.com/",
-  rambler: "https://www.rambler.ru/"
+  rambler: "https://www.rambler.ru/",
+  entireweb: "https://www.entireweb.com/"
 };
 
 /**
@@ -249,7 +256,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   izito: "https://izito.com/search",
   presearch: "https://presearch.com/search",
   hotbot: "https://hotbot.com/web",
-  rambler: "https://nova.rambler.ru/search"
+  rambler: "https://nova.rambler.ru/search",
+  entireweb: "https://search.entireweb.com/search"
 };
 
 /**
@@ -282,5 +290,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   izito: constants.izitoColor,
   presearch: constants.presearchColor,
   hotbot: constants.hotbotColor,
-  rambler: constants.ramblerColor
+  rambler: constants.ramblerColor,
+  entireweb: constants.entirewebColor
 };
