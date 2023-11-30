@@ -10,6 +10,7 @@ import {
   DUCK,
   ECOSIA,
   GIBIRU,
+  HOTBOT,
   IZITO,
   LYCOS,
   METAGER,
@@ -40,6 +41,7 @@ import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-searc
 import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/mojeek-search-icon.svg";
 import { ReactComponent as YepSearchIcon } from "../../static/svgs/yep/yep-search-icon.svg";
 import { ReactComponent as PresearchSearchIcon } from "../../static/svgs/presearch/presearch-search-icon.svg";
+import { ReactComponent as HotBotSearchIcon } from "../../static/svgs/hotbot/hotbot-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -104,6 +106,8 @@ const SearchEngineContainer: FC = () => {
         return <YepSearchIcon />;
       case PRESEARCH:
         return <PresearchSearchIcon />;
+      case HOTBOT:
+        return <HotBotSearchIcon />;
       default:
         return <></>;
     }

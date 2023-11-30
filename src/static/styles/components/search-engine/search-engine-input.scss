@@ -315,4 +315,9 @@
       }
     }
   }
+
+  &.hotbot {
+    border-radius: 24px 0 0 24px;
+    @include change-pseudo-input-border-color(transparent);
+  }
 }

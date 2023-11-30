@@ -50,9 +50,15 @@ export const SEARCH_ENGINE_NAMES = [
   "alexandria",
   "yep",
   "izito",
-  "presearch"
+  "presearch",
+  "hotbot"
 ];
 
+/**
+ * Поисковая система hotBot
+ * @category Constants - Search Engine
+ */
+export const HOTBOT = SEARCH_ENGINE_NAMES[24];
 /**
  * Поисковая система presearch
  * @category Constants - Search Engine
@@ -202,7 +208,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   alexandria: "https://alexandria.org/",
   yep: "https://yep.com/",
   izito: "https://izito.com/",
-  presearch: "https://presearch.com/"
+  presearch: "https://presearch.com/",
+  hotbot: "https://hotbot.com/"
 };
 
 /**
@@ -233,7 +240,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   alexandria: "https://alexandria.org",
   yep: "https://yep.com/web",
   izito: "https://izito.com/search",
-  presearch: "https://presearch.com/search"
+  presearch: "https://presearch.com/search",
+  hotbot: "https://hotbot.com/web"
 };
 
 /**
@@ -264,5 +272,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   alexandria: constants.alexandriaColor,
   yep: constants.yepColor,
   izito: constants.izitoColor,
-  presearch: constants.presearchColor
+  presearch: constants.presearchColor,
+  hotbot: constants.hotbotColor
 };

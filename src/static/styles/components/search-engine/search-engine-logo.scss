@@ -111,6 +111,10 @@
   }
 
   &.presearch {
-    @include logo-common(32px, 197px, 20px, var(--presearchch-bg-image));
+    @include logo-common(32px, 197px, 20px, var(--presearch-bg-image));
+  }
+
+  &.hotbot {
+    @include logo-common(96px, 112px, 30px, var(--hotbot-bg-image));
   }
 }

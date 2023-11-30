@@ -8,6 +8,7 @@ import {
   BRAVE,
   ECOSIA,
   GIBIRU,
+  HOTBOT,
   IZITO,
   LYCOS,
   METAGER,
@@ -130,7 +131,7 @@ export const getDeltaChanges = (
     );
   }
   if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
-    searchEngines.push(MOJEEK, ALEXANDRIA, YEP, IZITO, PRESEARCH);
+    searchEngines.push(MOJEEK, ALEXANDRIA, YEP, IZITO, PRESEARCH, HOTBOT);
   }
 
   return { searchEngines };

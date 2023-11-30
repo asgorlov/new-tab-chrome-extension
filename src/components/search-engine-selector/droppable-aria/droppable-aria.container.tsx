@@ -37,6 +37,7 @@ import { ReactComponent as AlexandriaIcon } from "../../../static/svgs/alexandri
 import { ReactComponent as YepIcon } from "../../../static/svgs/yep/yep-icon.svg";
 import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-icon.svg";
 import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/presearch-icon.svg";
+import { ReactComponent as HotBotIcon } from "../../../static/svgs/hotbot/hotbot-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -48,6 +49,7 @@ import {
   ECOSIA,
   GIBIRU,
   GOOGLE,
+  HOTBOT,
   IZITO,
   LYCOS,
   METAGER,
@@ -157,6 +159,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <IzitoIcon />;
           case PRESEARCH:
             return <PresearchIcon />;
+          case HOTBOT:
+            return <HotBotIcon />;
           default:
             return <></>;
         }
