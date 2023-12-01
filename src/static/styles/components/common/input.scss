@@ -1,0 +1,20 @@
+@import "../../modules/constants.module";
+
+.new-tab__input {
+  transition: all, background-color $slow-transition, border-color $slow-transition, color $fast-transition;
+  color: var(--text-color);
+  border-color: var(--border-color);
+  background-color: var(--bg-color);
+
+  .ant-input {
+    transition: all, background-color $slow-transition, color $fast-transition;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+  }
+
+  .ant-input-group-addon {
+    transition: all, color $fast-transition;
+    color: var(--text-color);
+    background-color: var(--overlay-bg-color);
+  }
+}
