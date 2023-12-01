@@ -54,9 +54,15 @@ export const SEARCH_ENGINE_NAMES = [
   "hotbot",
   "rambler",
   "entireweb",
-  "exactseek"
+  "exactseek",
+  "startpage"
 ];
 
+/**
+ * Поисковая система startpage
+ * @category Constants - Search Engine
+ */
+export const STARTPAGE = SEARCH_ENGINE_NAMES[28];
 /**
  * Поисковая система exact seek
  * @category Constants - Search Engine
@@ -230,7 +236,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   hotbot: "https://hotbot.com/",
   rambler: "https://www.rambler.ru/",
   entireweb: "https://www.entireweb.com/",
-  exactseek: "https://exactseek.com/"
+  exactseek: "https://exactseek.com/",
+  startpage: "https://startpage.com/"
 };
 
 /**
@@ -265,7 +272,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   hotbot: "https://hotbot.com/web",
   rambler: "https://nova.rambler.ru/search",
   entireweb: "https://search.entireweb.com/search",
-  exactseek: "https://exactseek.com/cgi-bin/search.cgi"
+  exactseek: "https://exactseek.com/cgi-bin/search.cgi",
+  startpage: "https://www.startpage.com/sp/search"
 };
 
 /**
@@ -300,5 +308,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   hotbot: constants.hotbotColor,
   rambler: constants.ramblerColor,
   entireweb: constants.entirewebColor,
-  exactseek: constants.exactseekColor
+  exactseek: constants.exactseekColor,
+  startpage: constants.startpageColor
 };

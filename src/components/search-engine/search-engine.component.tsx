@@ -7,6 +7,7 @@ import {
   RAMBLER,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
+  STARTPAGE,
   YANDEX
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
@@ -107,6 +108,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
           <form
             className={getSearchEngineFormClass()}
             action={SEARCH_QUERY_LINKS[searchEngine]}
+            method={searchEngine === STARTPAGE ? "POST" : "GET"}
             onSubmit={onSubmitForm}
             name="search-engine-form"
           >

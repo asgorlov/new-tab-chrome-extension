@@ -133,4 +133,8 @@
   &.exactseek {
     @include logo-common(69px, 200px, 12px, url("../../../svgs/exactseek/exactseek-logo.svg"));
   }
+
+  &.startpage {
+    @include logo-common(49px, 205px, 8px, var(--startpage-bg-image));
+  }
 }

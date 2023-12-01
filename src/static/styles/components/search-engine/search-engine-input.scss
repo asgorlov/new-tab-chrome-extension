@@ -354,4 +354,10 @@
       cursor: pointer;
     }
   }
+
+  &.startpage {
+    border-radius: 32px 0 0 32px;
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+  }
 }

@@ -153,7 +153,6 @@
   }
 
   &.yep {
-    border-radius: 30px;
     background-color: var(--yep-form-bg-color);
     @include hide-form-border(30px);
 
@@ -204,5 +203,14 @@
 
   &.exactseek {
     @include hide-form-border(3px);
+  }
+
+  &.startpage {
+    border-radius: 32px;
+    border: 1px solid #DEE0F7FF;
+
+    &:focus-within {
+      border-color: $startpage-color;
+    }
   }
 }

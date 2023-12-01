@@ -521,4 +521,14 @@
       font-size: 16px;
     }
   }
+
+  &.startpage {
+    width: 37px;
+    padding-right: 10px;
+    border-radius: 0 32px 32px 0;
+
+    &:hover svg {
+      color: $startpage-color;
+    }
+  }
 }

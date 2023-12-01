@@ -5,6 +5,7 @@ import {
   RAMBLER,
   SEARCH_INPUT_NAMES,
   SEARCH_THEMES,
+  STARTPAGE,
   SWISSCOWS,
   YANDEX
 } from "../constants/search-engine.constants";
@@ -24,11 +25,12 @@ export const getInputName = (searchEngine: string): string => {
     case NIGMA:
     case BOARDREADER:
     case RAMBLER:
+    case STARTPAGE:
       return SEARCH_INPUT_NAMES[1];
     case METAGER:
       return SEARCH_INPUT_NAMES[2];
     default:
-      return SEARCH_INPUT_NAMES[3];
+      return SEARCH_INPUT_NAMES[4];
   }
 };
 

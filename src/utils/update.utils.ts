@@ -20,6 +20,7 @@ import {
   RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
+  STARTPAGE,
   SWISSCOWS,
   YAHOO,
   YEP,
@@ -143,7 +144,8 @@ export const getDeltaChanges = (
       HOTBOT,
       RAMBLER,
       ENTIREWEB,
-      EXACTSEEK
+      EXACTSEEK,
+      STARTPAGE
     );
   }
 
