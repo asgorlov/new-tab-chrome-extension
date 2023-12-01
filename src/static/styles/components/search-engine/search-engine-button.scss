@@ -515,6 +515,7 @@
     width: 80px;
     border-radius: 0 3px 3px 0;
     background-color: #428fdf;
+    cursor: default;
 
     span {
       color: $light-color;
@@ -529,6 +530,25 @@
 
     &:hover svg {
       color: $startpage-color;
+    }
+  }
+
+  &.searxng {
+    width: 45px;
+    padding: 0 12px;
+    border-radius: 0 12px 12px 0;
+    color: var(--searxng-bt-text-color);
+
+    &:hover {
+      background-color: $searxng-color;
+
+      svg {
+        color: var(--invert-text-color);
+      }
+    }
+
+    svg {
+      transition: $fast-transition;
     }
   }
 }

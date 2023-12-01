@@ -137,4 +137,8 @@
   &.startpage {
     @include logo-common(49px, 205px, 8px, var(--startpage-bg-image));
   }
+
+  &.searxng {
+    @include logo-common(36px, 205px, 16px, url("../../../svgs/searxng/searxng-logo.svg"));
+  }
 }

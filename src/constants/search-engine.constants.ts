@@ -55,9 +55,15 @@ export const SEARCH_ENGINE_NAMES = [
   "rambler",
   "entireweb",
   "exactseek",
-  "startpage"
+  "startpage",
+  "searxng"
 ];
 
+/**
+ * Поисковая система Sear XNG
+ * @category Constants - Search Engine
+ */
+export const SEARXNG = SEARCH_ENGINE_NAMES[29];
 /**
  * Поисковая система startpage
  * @category Constants - Search Engine
@@ -237,7 +243,8 @@ export const SEARCH_ENGINE_LINKS: Record<string, string> = {
   rambler: "https://www.rambler.ru/",
   entireweb: "https://www.entireweb.com/",
   exactseek: "https://exactseek.com/",
-  startpage: "https://startpage.com/"
+  startpage: "https://startpage.com/",
+  searxng: "https://search.demoniak.ch/"
 };
 
 /**
@@ -273,7 +280,8 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   rambler: "https://nova.rambler.ru/search",
   entireweb: "https://search.entireweb.com/search",
   exactseek: "https://exactseek.com/cgi-bin/search.cgi",
-  startpage: "https://www.startpage.com/sp/search"
+  startpage: "https://www.startpage.com/sp/search",
+  searxng: "https://search.demoniak.ch/search"
 };
 
 /**
@@ -309,5 +317,6 @@ export const SEARCH_THEMES: Record<string, string> = {
   rambler: constants.ramblerColor,
   entireweb: constants.entirewebColor,
   exactseek: constants.exactseekColor,
-  startpage: constants.startpageColor
+  startpage: constants.startpageColor,
+  searxng: constants.searxngColor
 };

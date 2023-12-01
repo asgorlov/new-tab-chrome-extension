@@ -6,7 +6,7 @@
 }
 
 .new-tab__search-engine_form {
-  transition: $fast-transition;
+  transition: all $fast-transition, background-color $slow-transition;
   width: 100%;
   min-width: 100px;
   height: 42px;
@@ -212,5 +212,11 @@
     &:focus-within {
       border-color: $startpage-color;
     }
+  }
+
+  &.searxng {
+    background-color: var(--searxng-form-bg-color);
+    box-shadow: var(--searxng-form-box-shadow);
+    @include hide-form-border(12px);
   }
 }

@@ -30,7 +30,7 @@ export const getInputName = (searchEngine: string): string => {
     case METAGER:
       return SEARCH_INPUT_NAMES[2];
     default:
-      return SEARCH_INPUT_NAMES[4];
+      return SEARCH_INPUT_NAMES[3];
   }
 };
 

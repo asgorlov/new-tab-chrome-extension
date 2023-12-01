@@ -42,6 +42,7 @@ import { ReactComponent as RamblerIcon } from "../../../static/svgs/rambler/ramb
 import { ReactComponent as EntirewebIcon } from "../../../static/svgs/entireweb/entireweb-icon.svg";
 import { ReactComponent as ExactSeekIcon } from "../../../static/svgs/exactseek/exactseek-icon.svg";
 import { ReactComponent as StartpageIcon } from "../../../static/svgs/startpage/startpage-icon.svg";
+import { ReactComponent as SearXNGIcon } from "../../../static/svgs/searxng/searxng-icon.svg";
 import {
   ALEXANDRIA,
   AOL,
@@ -65,6 +66,7 @@ import {
   RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
+  SEARXNG,
   STARTPAGE,
   SWISSCOWS,
   YAHOO,
@@ -177,6 +179,8 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <ExactSeekIcon />;
           case STARTPAGE:
             return <StartpageIcon />;
+          case SEARXNG:
+            return <SearXNGIcon />;
           default:
             return <></>;
         }

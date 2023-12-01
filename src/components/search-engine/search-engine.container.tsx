@@ -23,6 +23,7 @@ import {
   SEARCH_INPUT_NAMES,
   SEARCHCH,
   SEARCHCRYPT,
+  SEARXNG,
   STARTPAGE,
   SWISSCOWS,
   YAHOO,
@@ -48,6 +49,7 @@ import { ReactComponent as PresearchSearchIcon } from "../../static/svgs/presear
 import { ReactComponent as HotBotSearchIcon } from "../../static/svgs/hotbot/hotbot-search-icon.svg";
 import { ReactComponent as RamblerSearchIcon } from "../../static/svgs/rambler/rambler-search-icon.svg";
 import { ReactComponent as StartpageSearchIcon } from "../../static/svgs/startpage/startpage-search-icon.svg";
+import { ReactComponent as SearXNGSearchIcon } from "../../static/svgs/searxng/searxng-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -120,6 +122,8 @@ const SearchEngineContainer: FC = () => {
         return <RamblerSearchIcon />;
       case STARTPAGE:
         return <StartpageSearchIcon />;
+      case SEARXNG:
+        return <SearXNGSearchIcon />;
       default:
         return <></>;
     }

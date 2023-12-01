@@ -360,4 +360,19 @@
     padding-right: 0;
     @include change-pseudo-input-border-color(transparent);
   }
+
+  &.searxng {
+    border-radius: 12px 0 0 12px;
+    padding: 0 0 0 12px;
+    @include change-pseudo-input-border-color(transparent);
+
+    .ant-input {
+      color: var(--text-color);
+
+      &::placeholder {
+        font-size: 16px;
+        color: #757575;
+      }
+    }
+  }
 }
