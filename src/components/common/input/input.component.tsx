@@ -33,7 +33,7 @@ const InputComponent: FC<InputComponentProps> = memo(
     label,
     ...rest
   }) => {
-    const [isFocused, setIsFocused] = useState(false);
+    const [isLabelOnTop, setIsLabelOnTop] = useState(false);
     const [inputValue, setInputValue] = useState<ValueType>(defaultValue);
     const inputRef = useRef<InputRef>(null);
     const labelRef = useRef<HTMLLabelElement>(null);
@@ -41,7 +41,7 @@ const InputComponent: FC<InputComponentProps> = memo(
     const handleFocus = useCallback(
       (e: FocusEvent<HTMLInputElement>) => {
         if (label && !inputValue) {
-          setIsFocused(true);
+          setIsLabelOnTop(true);
         }
 
         if (onFocus) {
@@ -53,33 +53,41 @@ const InputComponent: FC<InputComponentProps> = memo(
 
     const handleBlur = useCallback(
       (e: FocusEvent<HTMLInputElement>) => {
-        if (label) {
-          setIsFocused(false);
+        if (label && !inputValue) {
+          setIsLabelOnTop(false);
         }
 
         if (onBlur) {
           onBlur(e);
         }
       },
-      [onBlur, label]
+      [onBlur, label, inputValue]
     );
 
     const handleChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);
 
+        if (label && e.currentTarget.value) {
+          setIsLabelOnTop(true);
+        }
+
         if (onChange) {
           onChange(e);
         }
       },
-      [onChange]
+      [onChange, label]
     );
 
     useEffect(() => {
       if (value !== undefined) {
         setInputValue(value);
+
+        if (label && value) {
+          setIsLabelOnTop(true);
+        }
       }
-    }, [value]);
+    }, [value, label]);
 
     useEffect(() => {
       if (label) {
@@ -101,7 +109,7 @@ const InputComponent: FC<InputComponentProps> = memo(
           let scale;
           let translateY;
           let translateX;
-          if (isFocused || inputValue) {
+          if (isLabelOnTop) {
             const inputBorderWidth = Number(
               inputStyles.borderWidth.replace(regExp, "")
             );
@@ -125,15 +133,13 @@ const InputComponent: FC<InputComponentProps> = memo(
           labelElement.style.transform = `translate(${translateY}px, ${translateX}px) scale(${scale})`;
         }
       }
-    }, [label, isFocused, inputValue]);
+    }, [label, isLabelOnTop]);
 
     return (
       <div className="new-tab__input">
         {label && (
           <label
-            className={clsx("new-tab__input_label", {
-              _focused: isFocused || inputValue
-            })}
+            className={clsx("new-tab__input_label", { _focused: isLabelOnTop })}
             children={label}
             ref={labelRef}
           />
