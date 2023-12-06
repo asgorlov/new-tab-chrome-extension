@@ -101,7 +101,8 @@
     "startpage": "Startpage",
     "searxng": "Sear XNG",
     "selectAll": "Select all",
-    "removeAll": "Remove all"
+    "removeAll": "Remove all",
+    "searXNGURL": "SearXNG URL"
   },
   "tour": {
     "button": {

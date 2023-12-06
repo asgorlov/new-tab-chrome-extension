@@ -11,6 +11,7 @@ import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import SelectComponent from "../../common/select/select.component";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
+import InputComponent from "../../common/input/input.component";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -74,6 +75,10 @@ const SearchEngineSettingComponent: FC = () => {
         value={searchEngines}
         onChange={v => dispatch(setSearchEngines(v))}
         options={options}
+      />
+      <InputComponent
+        inputClassName="new-tab__settings-menu_search-engine-content-searxng-url-input"
+        label={t("searchEngine.searXNGURL")}
       />
     </CollapseComponent>
   );

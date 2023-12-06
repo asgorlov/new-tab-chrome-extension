@@ -101,7 +101,8 @@
     "startpage": "Startpage",
     "searxng": "Sear XNG",
     "selectAll": "Выбрать все",
-    "removeAll": "Убрать все"
+    "removeAll": "Убрать все",
+    "searXNGURL": "Ссылка на SearXNG"
   },
   "tour": {
     "button": {
