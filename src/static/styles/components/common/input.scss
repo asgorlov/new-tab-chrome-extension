@@ -1,10 +1,6 @@
 @import "../../modules/constants.module";
 
 .new-tab__input {
-  $input-height: 32px;
-  $input-border-width: 1px;
-  $input-padding-left: 11px;
-
   position: relative;
   transition: background-color $slow-transition;
   background-color: var(--bg-color);
@@ -33,37 +29,19 @@
   }
 
   &_label {
-    $horizontal-padding: 4px;
-    $vertical-padding: 2px;
-    $text-height: 12px;
-    $translateX: calc(($input-height - ($text-height + 2 * $vertical-padding)) / 2);
-    $translateY: calc($input-padding-left - $horizontal-padding);
-
-    transition: all $fast-transition, color $slow-transition;
+    transition: color $slow-transition, transform 0.25s, background-color 0.25s;
     position: absolute;
     z-index: 0;
     color: $input-placeholder-color;
-    padding: $vertical-padding $horizontal-padding;
-    font-size: $text-height;
-    line-height: $text-height;
-    transform: translate($translateY, $translateX) scale(1);
+    padding: 2px 4px;
+    font-size: 12px;
+    line-height: 12px;
     user-select: none;
+    background-color: transparent;
 
     &._focused {
-      $text-scale: 0.8;
-      $translateX: calc(0px - ($text-scale / 2 * ($text-height + 2 * $vertical-padding)) - 2 * $input-border-width);
-      $translateY: calc($translateY - $text-scale * $input-padding-left);
-
       z-index: 1;
       background-color: var(--bg-color);
-      transform: translate($translateY, $translateX) scale($text-scale);
     }
-  }
-
-
-  &_field {
-    height: $input-height;
-    border-width: $input-border-width;
-    padding-left: $input-padding-left;
   }
 }
