@@ -16,8 +16,13 @@
       margin-bottom: 12px;
     }
 
-    &-searxng-url-input {
+    &-searxng-url {
+      &_label {
+        transition: $fast-transition;
+        color: var(--text-color);
+      }
 
+      &_input {}
     }
   }
 }

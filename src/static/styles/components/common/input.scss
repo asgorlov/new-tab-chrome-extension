@@ -1,46 +1,24 @@
 @import "../../modules/constants.module";
 
 .new-tab__input {
-  position: relative;
-  transition: background-color $slow-transition;
+  transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+  color: var(--text-color);
   background-color: var(--bg-color);
 
-  &>.new-tab__input_field {
-    transition: all, border-color $slow-transition, color $fast-transition;
-    color: var(--text-color);
-    background-color: transparent;
-
-    &:not(&:focus),
-    &:not(&:focus-within) {
-      border-color: var(--border-color);
-    }
-
-    .ant-input {
-      transition: all, color $fast-transition;
-      color: var(--text-color);
-      background-color: transparent;
-    }
-
-    .ant-input-group-addon {
-      transition: all, color $fast-transition;
-      color: var(--text-color);
-      background-color: var(--overlay-bg-color);
-    }
+  &:not(&:focus),
+  &:not(&:focus-within) {
+    border-color: var(--border-color);
   }
 
-  &_label {
-    transition: color $slow-transition, transform 0.25s, background-color 0.25s;
-    position: absolute;
-    z-index: 0;
-    color: $input-placeholder-color;
-    padding: 2px 4px;
-    font-size: 12px;
-    line-height: 12px;
-    user-select: none;
+  .ant-input {
+    transition: all, color $fast-transition;
+    color: var(--text-color);
+    background-color: transparent;
+  }
 
-    &._focused {
-      z-index: 1;
-      background-color: var(--bg-color);
-    }
+  .ant-input-group-addon {
+    transition: all, color $fast-transition;
+    color: inherit;
+    background-color: var(--overlay-bg-color);
   }
 }

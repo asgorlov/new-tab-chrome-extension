@@ -55,6 +55,10 @@ export {
   type DrawerComponentProps
 } from "../components/common/drawer/drawer.component";
 export {
+  default as InputComponent,
+  type InputComponentProps
+} from "../components/common/input/input.component";
+export {
   default as CheckboxComponent,
   type CheckboxComponentProps
 } from "../components/common/checkbox/checkbox.component";

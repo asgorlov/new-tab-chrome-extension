@@ -1,10 +1,16 @@
 import React, { FC, useMemo } from "react";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
-import { SEARCH_ENGINE_NAMES } from "../../../constants/search-engine.constants";
+import {
+  SEARCH_ENGINE_NAMES,
+  SEARXNG
+} from "../../../constants/search-engine.constants";
 import { useTranslation } from "react-i18next";
 import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSearchEngines } from "../../../store/new-tab/new-tab.selectors";
+import {
+  selectSearchEngine,
+  selectSearchEngines
+} from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
 import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
@@ -21,6 +27,7 @@ const SearchEngineSettingComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
+  const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
   const options = useMemo(() => {
@@ -76,10 +83,15 @@ const SearchEngineSettingComponent: FC = () => {
         onChange={v => dispatch(setSearchEngines(v))}
         options={options}
       />
-      <InputComponent
-        inputClassName="new-tab__settings-menu_search-engine-content-searxng-url-input"
-        label={t("searchEngine.searXNGURL")}
-      />
+      <div className="new-tab__settings-menu_search-engine-content-searxng-url">
+        <label className="new-tab__settings-menu_search-engine-content-searxng-url_label">
+          {t("searchEngine.searXNGURL")}
+        </label>
+        <InputComponent
+          className="new-tab__settings-menu_search-engine-content-searxng-url_input"
+          disabled={searchEngine !== SEARXNG}
+        />
+      </div>
     </CollapseComponent>
   );
 };
