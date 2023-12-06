@@ -17,12 +17,44 @@
     }
 
     &-searxng-url {
+      $input-height: 32px;
+      $input-border-width: 1px;
+      $input-padding-left: 11px;
+
       &_label {
+        $horizontal-padding: 4px;
+        $vertical-padding: 2px;
+        $text-height: 12px;
+        $translateX: calc(($input-height - ($text-height + 2 * $vertical-padding)) / 2);
+        $translateY: calc($input-padding-left - $horizontal-padding);
+
         transition: $fast-transition;
-        color: var(--text-color);
+        position: absolute;
+        z-index: 0;
+        color: $input-placeholder-color;
+        padding: $vertical-padding $horizontal-padding;
+        font-size: $text-height;
+        line-height: $text-height;
+        transform: translate($translateY, $translateX) scale(1);
+        user-select: none;
+
+        &._focused {
+          $text-scale: 0.8;
+          $translateX: calc(0px - ($text-scale / 2 * ($text-height + 2 * $vertical-padding)) - 2 * $input-border-width);
+          $translateY: calc($translateY - $text-scale * $input-padding-left);
+
+          z-index: 1;
+          background-color: var(--bg-color);
+          transform: translate($translateY, $translateX) scale($text-scale);
+        }
       }
 
-      &_input {}
+      &_input {
+        height: $input-height;
+        border-width: $input-border-width;
+        padding-left: $input-padding-left;
+        background-color: transparent;
+      }
     }
   }
 }

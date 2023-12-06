@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
 import {
   SEARCH_ENGINE_NAMES,
@@ -18,6 +18,7 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import SelectComponent from "../../common/select/select.component";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 import InputComponent from "../../common/input/input.component";
+import clsx from "clsx";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -30,6 +31,9 @@ const SearchEngineSettingComponent: FC = () => {
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
+  const [isLabelOnTop, setIsLabelOnTop] = useState(false);
+  const [searXngUrl, setSearXngUrl] = useState("");
+
   const options = useMemo(() => {
     return SEARCH_ENGINE_NAMES.map(name => {
       return {
@@ -40,19 +44,46 @@ const SearchEngineSettingComponent: FC = () => {
     });
   }, [t]);
 
-  const handleChangeAddAll = (event: CheckboxChangeEvent) => {
-    if (event.target.checked) {
-      const allSearchEngines = searchEngines.concat(
-        SEARCH_ENGINE_NAMES.filter(name => !searchEngines.includes(name))
-      );
-      dispatch(setSearchEngines(allSearchEngines));
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value) {
+      setIsLabelOnTop(true);
     }
-  };
-  const handleChangeRemoveAll = (event: CheckboxChangeEvent) => {
-    if (event.target.checked) {
-      dispatch(setSearchEngines([]));
+
+    setSearXngUrl(e.currentTarget.value);
+  }, []);
+
+  const handleFocus = useCallback(() => {
+    if (!searXngUrl) {
+      setIsLabelOnTop(true);
     }
-  };
+  }, [searXngUrl]);
+
+  const handleBlur = useCallback(() => {
+    if (!searXngUrl) {
+      setIsLabelOnTop(false);
+    }
+  }, [searXngUrl]);
+
+  const handleChangeAddAll = useCallback(
+    (event: CheckboxChangeEvent) => {
+      if (event.target.checked) {
+        const allSearchEngines = searchEngines.concat(
+          SEARCH_ENGINE_NAMES.filter(name => !searchEngines.includes(name))
+        );
+        dispatch(setSearchEngines(allSearchEngines));
+      }
+    },
+    [searchEngines]
+  );
+
+  const handleChangeRemoveAll = useCallback(
+    (event: CheckboxChangeEvent) => {
+      if (event.target.checked) {
+        dispatch(setSearchEngines([]));
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <CollapseComponent
@@ -84,12 +115,21 @@ const SearchEngineSettingComponent: FC = () => {
         options={options}
       />
       <div className="new-tab__settings-menu_search-engine-content-searxng-url">
-        <label className="new-tab__settings-menu_search-engine-content-searxng-url_label">
+        <label
+          className={clsx(
+            "new-tab__settings-menu_search-engine-content-searxng-url_label",
+            { _focused: isLabelOnTop }
+          )}
+        >
           {t("searchEngine.searXNGURL")}
         </label>
         <InputComponent
           className="new-tab__settings-menu_search-engine-content-searxng-url_input"
           disabled={searchEngine !== SEARXNG}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          value={searXngUrl}
         />
       </div>
     </CollapseComponent>
