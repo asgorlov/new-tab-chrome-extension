@@ -2,7 +2,8 @@ import {
   CollapsedMenuSetting,
   SETTINGS_WITH_SELECTOR,
   SETTINGS_MENU_CURRENT_CLASS,
-  SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
+  SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS,
+  SPEC_CHARS_REG_EXP
 } from "../constants/settings-menu.constants";
 import {
   HighlightedTextModel,
@@ -161,7 +162,7 @@ const getHighlightedTextModel = (
   text: string
 ): HighlightedTextModel => {
   let content = text;
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const escapedQuery = query.replace(SPEC_CHARS_REG_EXP, "\\$&");
   const regExp = new RegExp(escapedQuery, "i");
   let startingIndex = content.search(regExp);
   const containsSearchQuery = startingIndex !== -1;

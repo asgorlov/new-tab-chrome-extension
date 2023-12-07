@@ -21,6 +21,8 @@
       $input-border-width: 1px;
       $input-padding-left: 11px;
 
+      position: relative;
+
       &_tooltip {
         font-size: 12px;
         line-height: 16px;
