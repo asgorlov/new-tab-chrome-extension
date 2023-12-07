@@ -17,6 +17,7 @@ const defaultStore: Readonly<NewTabStateBase> = {
   showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
+  searXngUrl: "",
   nightPeriod: {
     sunset: null,
     sunrise: null

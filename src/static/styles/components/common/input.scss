@@ -10,15 +10,29 @@
     border-color: var(--border-color);
   }
 
-  .ant-input {
-    transition: all, color $fast-transition;
-    color: var(--text-color);
-    background-color: transparent;
+  &.ant-input-affix-wrapper-disabled,
+  &[disabled],
+  .ant-input[disabled] {
+    transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+    color: var(--disabled-text-color);
+    background-color: var(--disabled-bg-color);
+    border-color: var(--border-color);
   }
 
-  .ant-input-group-addon {
-    transition: all, color $fast-transition;
-    color: inherit;
-    background-color: var(--overlay-bg-color);
+  &.ant-input-group-wrapper-disabled {
+    .ant-input-group-addon {
+      transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+      color: var(--disabled-text-color);
+      background-color: var(--disabled-bg-color);
+      border-color: var(--border-color);
+    }
+  }
+
+  &:not(&.ant-input-group-wrapper-disabled) {
+    .ant-input-group-addon {
+      transition: all, background-color $slow-transition, color $fast-transition;
+      color: var(--text-color);
+      background-color: var(--overlay-bg-color);
+    }
   }
 }

@@ -3,6 +3,7 @@
 .new-tab__tooltip {
   .ant-tooltip-arrow:before,
   .ant-tooltip-inner {
+    transition: all, color $fast-transition, background-color $slow-transition, box-shadow $slow-transition;
     color: var(--tooltip-text-color);
     background-color: var(--bg-color);
     box-shadow: var(--tooltip-box-shadow);

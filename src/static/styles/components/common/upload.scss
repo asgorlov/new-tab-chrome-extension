@@ -33,7 +33,7 @@
 
     &.ant-upload-list-item-error>.ant-upload-list-item-actions:hover {
       .anticon-delete {
-        color: #ff4d4f;
+        color: $error-color;
       }
     }
   }

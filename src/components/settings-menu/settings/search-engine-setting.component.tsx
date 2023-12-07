@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
 import { ReactComponent as SearchEngineIcon } from "../../../static/svgs/menu-settings/search-engine-icon.svg";
 import {
+  SEARCH_ENGINE_LINKS,
   SEARCH_ENGINE_NAMES,
   SEARXNG
 } from "../../../constants/search-engine.constants";
@@ -9,16 +10,29 @@ import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSearchEngine,
-  selectSearchEngines
+  selectSearchEngines,
+  selectSearXngUrl
 } from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
-import { setSearchEngines } from "../../../store/new-tab/new-tab.slice";
+import {
+  setSearchEngines,
+  setSearXngUrl
+} from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import SelectComponent from "../../common/select/select.component";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 import InputComponent from "../../common/input/input.component";
 import clsx from "clsx";
+import { useDebounceEffect } from "ahooks";
+import { InputStatus } from "antd/es/_util/statusUtils";
+import {
+  ERROR_INPUT_STATUS,
+  LAST_SPEC_CHAR_REG_EXP,
+  PROTOCOL_REG_EXP,
+  URL_REG_EXP
+} from "../../../constants/search-engine-setting.constants";
+import TooltipComponent from "../../common/tooltip/tooltip.component";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -28,11 +42,14 @@ const SearchEngineSettingComponent: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
+  const searXngUrl = useSelector(selectSearXngUrl);
   const searchEngine = useSelector(selectSearchEngine);
   const searchEngines = useSelector(selectSearchEngines);
 
-  const [isLabelOnTop, setIsLabelOnTop] = useState(false);
-  const [searXngUrl, setSearXngUrl] = useState("");
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [inputStatus, setInputStatus] = useState<InputStatus>("");
+  const [inputValue, setInputValue] = useState(searXngUrl);
 
   const options = useMemo(() => {
     return SEARCH_ENGINE_NAMES.map(name => {
@@ -44,25 +61,14 @@ const SearchEngineSettingComponent: FC = () => {
     });
   }, [t]);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value) {
-      setIsLabelOnTop(true);
-    }
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value),
+    []
+  );
 
-    setSearXngUrl(e.currentTarget.value);
-  }, []);
+  const handleFocus = useCallback(() => setIsInputFocused(true), []);
 
-  const handleFocus = useCallback(() => {
-    if (!searXngUrl) {
-      setIsLabelOnTop(true);
-    }
-  }, [searXngUrl]);
-
-  const handleBlur = useCallback(() => {
-    if (!searXngUrl) {
-      setIsLabelOnTop(false);
-    }
-  }, [searXngUrl]);
+  const handleBlur = useCallback(() => setIsInputFocused(false), []);
 
   const handleChangeAddAll = useCallback(
     (event: CheckboxChangeEvent) => {
@@ -73,7 +79,7 @@ const SearchEngineSettingComponent: FC = () => {
         dispatch(setSearchEngines(allSearchEngines));
       }
     },
-    [searchEngines]
+    [dispatch, searchEngines]
   );
 
   const handleChangeRemoveAll = useCallback(
@@ -83,6 +89,36 @@ const SearchEngineSettingComponent: FC = () => {
       }
     },
     [dispatch]
+  );
+
+  useDebounceEffect(
+    () => {
+      const isValidUrl = !inputValue || URL_REG_EXP.test(inputValue);
+
+      if (isValidUrl) {
+        const value = inputValue
+          .replaceAll("\\", "/")
+          .replace(LAST_SPEC_CHAR_REG_EXP, "");
+        let url = "";
+
+        if (value) {
+          const isDefaultSearXNG =
+            value.replace(PROTOCOL_REG_EXP, "") ===
+            SEARCH_ENGINE_LINKS.searxng.replace(PROTOCOL_REG_EXP, "");
+          if (!isDefaultSearXNG) {
+            url = value;
+          }
+        }
+
+        setInputValue(value);
+        setInputStatus("");
+        dispatch(setSearXngUrl(url));
+      } else {
+        setInputStatus(ERROR_INPUT_STATUS);
+      }
+    },
+    [dispatch, inputValue],
+    { wait: 400 }
   );
 
   return (
@@ -114,23 +150,46 @@ const SearchEngineSettingComponent: FC = () => {
         onChange={v => dispatch(setSearchEngines(v))}
         options={options}
       />
-      <div className="new-tab__settings-menu_search-engine-content-searxng-url">
-        <label
-          className={clsx(
-            "new-tab__settings-menu_search-engine-content-searxng-url_label",
-            { _focused: isLabelOnTop }
+      <div
+        className="new-tab__settings-menu_search-engine-content-searxng-url"
+        onMouseEnter={() => setTooltipOpen(true)}
+        onMouseLeave={() => setTooltipOpen(false)}
+      >
+        <TooltipComponent
+          overlayClassName="new-tab__settings-menu_search-engine-content-searxng-url_tooltip"
+          open={tooltipOpen && !isInputFocused}
+          title={t(
+            `searchEngine.searXNGInput.${
+              searchEngine === SEARXNG ? "tooltip" : "disabledTooltip"
+            }`
           )}
+          placement="bottomLeft"
         >
-          {t("searchEngine.searXNGURL")}
-        </label>
-        <InputComponent
-          className="new-tab__settings-menu_search-engine-content-searxng-url_input"
-          disabled={searchEngine !== SEARXNG}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          value={searXngUrl}
-        />
+          <label
+            className={clsx(
+              "new-tab__settings-menu_search-engine-content-searxng-url_label",
+              { _focused: inputValue || isInputFocused }
+            )}
+            children={t("searchEngine.searXNGInput.url")}
+          />
+          <InputComponent
+            placeholder={SEARCH_ENGINE_LINKS.searxng}
+            className="new-tab__settings-menu_search-engine-content-searxng-url_input"
+            disabled={searchEngine !== SEARXNG}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            status={inputStatus}
+            value={inputValue}
+          />
+          <div
+            className={clsx(
+              "new-tab__settings-menu_search-engine-content-searxng-url_error",
+              { _visible: inputStatus === ERROR_INPUT_STATUS }
+            )}
+            children={t("searchEngine.searXNGInput.invalidURL")}
+          />
+        </TooltipComponent>
       </div>
     </CollapseComponent>
   );

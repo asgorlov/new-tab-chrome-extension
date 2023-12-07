@@ -102,7 +102,12 @@
     "searxng": "Sear XNG",
     "selectAll": "Select all",
     "removeAll": "Remove all",
-    "searXNGURL": "SearXNG URL"
+    "searXNGInput": {
+      "url": "SearXNG URL",
+      "invalidURL": "Invalid link format",
+      "tooltip": "Here you can change the SearXNG URL to another. You need to click in the input field and enter data in a format similar to that of a placeholder",
+      "disabledTooltip": "You need to select the SearXNG search engine for the input field to become available"
+    }
   },
   "tour": {
     "button": {

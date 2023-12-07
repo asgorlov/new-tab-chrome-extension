@@ -1,7 +1,7 @@
 import React, { FC, memo, ReactNode } from "react";
 import { Input } from "antd";
-import { InputProps } from "rc-input";
 import clsx from "clsx";
+import { InputProps } from "antd/es/input/Input";
 
 /**
  * Передаваемые параметры для компонента меню

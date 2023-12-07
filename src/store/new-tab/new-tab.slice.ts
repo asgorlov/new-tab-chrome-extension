@@ -64,6 +64,15 @@ export const newTabSlice = createSlice({
       setDataToChromeSyncStorage({ wallpaper: action.payload });
     },
     /**
+     * Функция изменения ссылки на страницу поисковика SearXNG
+     * @param state - стор
+     * @param action - экшн
+     */
+    setSearXngUrl(state: NewTabState, action: PayloadAction<string>) {
+      state.searXngUrl = action.payload;
+      setDataToChromeSyncStorage({ searXngUrl: action.payload });
+    },
+    /**
      * Функция изменения флага открытия меню настроек
      * @param state - стор
      * @param action - экшн
@@ -212,6 +221,7 @@ export const {
   setShowTour,
   setDarkMode,
   setWallpaper,
+  setSearXngUrl,
   setIsOpenMenu,
   setSearchEngine,
   setSearchEngines,

@@ -14,9 +14,9 @@
       transition: background-color $slow-transition, border-color $slow-transition, color $fast-transition;
 
       &:disabled {
-        color: var(--btn-disabled-text-color);
+        color: var(--disabled-text-color);
         border-color: var(--border-color);
-        background-color: var(--btn-disabled-bg-color);
+        background-color: var(--disabled-bg-color);
       }
     }
   }

@@ -21,6 +21,11 @@
       $input-border-width: 1px;
       $input-padding-left: 11px;
 
+      &_tooltip {
+        font-size: 12px;
+        line-height: 16px;
+      }
+
       &_label {
         $horizontal-padding: 4px;
         $vertical-padding: 2px;
@@ -28,7 +33,7 @@
         $translateX: calc(($input-height - ($text-height + 2 * $vertical-padding)) / 2);
         $translateY: calc($input-padding-left - $horizontal-padding);
 
-        transition: $fast-transition;
+        transition: $fast-transition, background-color $slow-transition;
         position: absolute;
         z-index: 0;
         color: $input-placeholder-color;
@@ -37,6 +42,7 @@
         line-height: $text-height;
         transform: translate($translateY, $translateX) scale(1);
         user-select: none;
+        border-radius: 4px;
 
         &._focused {
           $text-scale: 0.8;
@@ -54,6 +60,35 @@
         border-width: $input-border-width;
         padding-left: $input-padding-left;
         background-color: transparent;
+
+        &:focus,
+        &:focus-within {
+          &::placeholder {
+            opacity: 1;
+          }
+        }
+
+        &::placeholder {
+          transition: color $slow-transition, opacity $fast-transition;
+          color: var(--input-placeholder-color);
+          opacity: 0;
+        }
+      }
+
+      &_error {
+        transition: $fast-transition;
+        overflow: hidden;
+        font-size: 10px;
+        font-weight: 500;
+        color: $error-color;
+        padding: 0 11px;
+        opacity: 0;
+        height: 0;
+
+        &._visible {
+          opacity: 1;
+          height: 16px;
+        }
       }
     }
   }

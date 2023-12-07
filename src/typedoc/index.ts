@@ -1,4 +1,4 @@
-// Utils
+// ================= Utils =================
 export * from "../utils/chrome.utils";
 export * from "../utils/common-setting.utils";
 export * from "../utils/dark-mode.utils";
@@ -7,11 +7,11 @@ export * from "../utils/settings-header.utils";
 export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
-// Store
+// ================= Store =================
 export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
-// Models
+// ================= Models =================
 export * from "../models/chrome-storage.model";
 export * from "../models/coordinate.model";
 export * from "../models/custom-wallpaper.model";
@@ -19,9 +19,9 @@ export * from "../models/new-tab-state.model";
 export * from "../models/night-period.model";
 export * from "../models/settings-search.model";
 export * from "../models/update.model";
-// Hooks
+// ================= Hooks =================
 export * from "../hooks/use-active-keys.hook";
-// Contexts
+// ================= Contexts =================
 export {
   useTourStepOneContext,
   useTourStepTwoContext,
@@ -44,8 +44,9 @@ export * from "../constants/settings-menu.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
 export * from "../constants/common-setting.constants";
+export * from "../constants/search-engine-setting.constants";
 export * from "../constants/notification.constants";
-// Components
+// ================= Components =================
 export {
   default as SelectComponent,
   type SelectComponentProps

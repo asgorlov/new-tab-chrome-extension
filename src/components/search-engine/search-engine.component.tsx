@@ -7,6 +7,7 @@ import {
   RAMBLER,
   SEARCH_ENGINE_LINKS,
   SEARCH_QUERY_LINKS,
+  SEARXNG,
   STARTPAGE,
   YANDEX
 } from "../../constants/search-engine.constants";
@@ -18,6 +19,8 @@ import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swi
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
 import { getInputName } from "../../utils/search-engine.utils";
 import { useTourStepOneContext } from "../../contexts/tour.context";
+import { useSelector } from "react-redux";
+import { selectSearXngUrl } from "../../store/new-tab/new-tab.selectors";
 
 /**
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
@@ -44,6 +47,16 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
     const tourCtx = useTourStepOneContext();
     const [formFocused, setFormFocused] = React.useState(false);
 
+    const searXngUrl = useSelector(selectSearXngUrl);
+
+    const linkHref =
+      searchEngine === SEARXNG && searXngUrl
+        ? searXngUrl
+        : SEARCH_ENGINE_LINKS[searchEngine];
+    const formAction =
+      searchEngine === SEARXNG && searXngUrl
+        ? searXngUrl + "/search"
+        : SEARCH_QUERY_LINKS[searchEngine];
     const inputPrefix =
       searchEngine === METAGER ? (
         <button
@@ -85,10 +98,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
     return (
       <div className="new-tab__search-engine">
         <div className="new-tab__search-engine-container" ref={tourCtx}>
-          <Link
-            className={getSearchEngineLogoClass()}
-            href={SEARCH_ENGINE_LINKS[searchEngine]}
-          />
+          <Link className={getSearchEngineLogoClass()} href={linkHref} />
           <div className={getSearchEngineFormBackgroundClass()}>
             <div className="new-tab__search-engine_form-background-text-group">
               <div className="new-tab__search-engine_form-background-text-item">
@@ -107,7 +117,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
           </div>
           <form
             className={getSearchEngineFormClass()}
-            action={SEARCH_QUERY_LINKS[searchEngine]}
+            action={formAction}
             method={searchEngine === STARTPAGE ? "POST" : "GET"}
             onSubmit={onSubmitForm}
             name="search-engine-form"

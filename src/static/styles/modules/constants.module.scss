@@ -7,6 +7,7 @@ $light-border-color: #d9d9d9;
 $input-placeholder-color: #9aa0a6;
 $highlighted-text-color: #ffff00;
 $current-highlighted-text-color: #ff9632;
+$error-color: #ff4d4f;
 
 $ya-color: #fc0;
 $aol-color: #524dfe;
@@ -74,12 +75,12 @@ $search-engine-max-width: 560px;
   --bg-hover-color: #0000000f;
   --bg-scrollable-color: #ffffff80;
   --bing-label-bg-color: #666;
-  --btn-disabled-bg-color: #0000000a;
+  --disabled-bg-color: #0000000a;
   --selector-dropdown-hover-bg-color: #0000000a;
   --selector-dropdown-overflow-item-bg-color: #0000000f;
   --invert-text-color: #{$dark-text-color};
   --modal-close-color: #00000073;
-  --btn-disabled-text-color: #00000040;
+  --disabled-text-color: #00000040;
   --text-color: #{$light-text-color};
   --searxng-bt-text-color: #{$light-text-color};
   --yahoo-tooltip-bg-color: #232a31cc;
@@ -116,6 +117,7 @@ $search-engine-max-width: 560px;
   --border-color: #d9d9d9;
   --tour-indicator-color: #00000026;
   --presearch-input-separator-color: #{$light-border-color};
+  --input-placeholder-color: #bfbfbf;
 }
 
 [data-theme="dark"] {
@@ -147,12 +149,12 @@ $search-engine-max-width: 560px;
   --bg-hover-color: #ffffff0f;
   --bg-scrollable-color: #292c3580;
   --bing-label-bg-color: #d6d6d6;
-  --btn-disabled-bg-color: #FFFFFF0A;
+  --disabled-bg-color: #FFFFFF0A;
   --selector-dropdown-hover-bg-color: #{mix($light-color, $dark-color, 20%)};
   --selector-dropdown-overflow-item-bg-color: #ffffff0f;
   --invert-text-color: #{$light-text-color};
   --modal-close-color: #{mix($light-color, $dark-color, 55%)};
-  --btn-disabled-text-color: #{mix($light-color, $dark-color, 25%)};
+  --disabled-text-color: #{mix($light-color, $dark-color, 25%)};
   --text-color: #{$dark-text-color};
   --searxng-bt-text-color: #cad3f5;
   --yahoo-tooltip-bg-color: #b7d2eda8;
@@ -189,6 +191,7 @@ $search-engine-max-width: 560px;
   --border-color: #525252;
   --tour-indicator-color: #ffffff26;
   --presearch-input-separator-color: #{$dark-text-color};
+  --input-placeholder-color: #4F4F4F;
 }
 
 :export {
