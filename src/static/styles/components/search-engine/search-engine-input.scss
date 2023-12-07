@@ -2,6 +2,7 @@
 
 @mixin change-pseudo-input-border-color($color) {
   &.ant-input-affix-wrapper:focus,
+  &.ant-input-affix-wrapper:focus-within,
   &.ant-input-affix-wrapper:hover,
   &.ant-input-affix-wrapper-focused {
     border-color: $color;

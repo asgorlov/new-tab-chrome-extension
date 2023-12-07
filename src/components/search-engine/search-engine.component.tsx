@@ -13,7 +13,6 @@ import {
 } from "../../constants/search-engine.constants";
 import clsx from "clsx";
 import Link from "antd/lib/typography/Link";
-import { Input } from "antd";
 import { ReactComponent as NoTrackingIcon } from "../../static/svgs/swisscows/swisscows-no-tracking.svg";
 import { ReactComponent as AnonymousIcon } from "../../static/svgs/swisscows/swisscows-anonym-icon.svg";
 import { ReactComponent as ForFamilyIcon } from "../../static/svgs/swisscows/swisscows-for-family-icon.svg";
@@ -21,6 +20,7 @@ import { getInputName } from "../../utils/search-engine.utils";
 import { useTourStepOneContext } from "../../contexts/tour.context";
 import { useSelector } from "react-redux";
 import { selectSearXngUrl } from "../../store/new-tab/new-tab.selectors";
+import { InputComponent } from "../../typedoc";
 
 /**
  * Передаваемые параметры для компонента поисковой системы с полем ввода с логотипом
@@ -122,7 +122,7 @@ const SearchEngineComponent: FC<SearchEngineProps> = memo(
             onSubmit={onSubmitForm}
             name="search-engine-form"
           >
-            <Input
+            <InputComponent
               onFocus={() => setFormFocused(true)}
               onBlur={() => setFormFocused(false)}
               prefix={inputPrefix}
