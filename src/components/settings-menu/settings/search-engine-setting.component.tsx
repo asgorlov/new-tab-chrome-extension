@@ -33,6 +33,7 @@ import {
   URL_REG_EXP
 } from "../../../constants/search-engine-setting.constants";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
+import { useTourStepFourContext } from "../../../contexts/tour.context";
 
 /**
  * Компонент настройки выбора поисковых систем
@@ -40,6 +41,7 @@ import TooltipComponent from "../../common/tooltip/tooltip.component";
  */
 const SearchEngineSettingComponent: FC = () => {
   const { t } = useTranslation();
+  const tourCtx = useTourStepFourContext();
   const dispatch = useDispatch<AppDispatch>();
 
   const searXngUrl = useSelector(selectSearXngUrl);
@@ -181,6 +183,7 @@ const SearchEngineSettingComponent: FC = () => {
             onBlur={handleBlur}
             status={inputStatus}
             value={inputValue}
+            ref={tourCtx}
           />
           <div
             className={clsx(

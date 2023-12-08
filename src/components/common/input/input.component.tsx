@@ -1,5 +1,5 @@
-import React, { FC, memo, ReactNode } from "react";
-import { Input } from "antd";
+import React, { forwardRef, memo, ReactNode } from "react";
+import { Input, InputRef } from "antd";
 import clsx from "clsx";
 import { InputProps } from "antd/es/input/Input";
 
@@ -16,16 +16,19 @@ export interface InputComponentProps extends InputProps {
  * Компонент поля ввода
  * @category Components
  */
-const InputComponent: FC<InputComponentProps> = memo(
-  ({ children, className, ...rest }) => {
-    return (
-      <Input
-        className={clsx("new-tab__input", className)}
-        children={children}
-        {...rest}
-      />
-    );
-  }
+const InputComponent = memo(
+  forwardRef<InputRef, InputComponentProps>(
+    ({ children, className, ...rest }, ref) => {
+      return (
+        <Input
+          className={clsx("new-tab__input", className)}
+          children={children}
+          ref={ref}
+          {...rest}
+        />
+      );
+    }
+  )
 );
 
 export default InputComponent;

@@ -84,6 +84,10 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
       data.update.previousVersion
     );
 
+    if (features.forceShowTour) {
+      data.showTour = features.forceShowTour;
+    }
+
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
@@ -108,6 +112,7 @@ export const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {
+  let forceShowTour = false;
   const searchEngines = [];
 
   if (previousVersion < "2.3.0" && lastVersion >= "2.3.0") {
@@ -136,6 +141,7 @@ export const getDeltaChanges = (
     );
   }
   if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
+    forceShowTour = true;
     searchEngines.push(
       MOJEEK,
       ALEXANDRIA,
@@ -151,5 +157,5 @@ export const getDeltaChanges = (
     );
   }
 
-  return { searchEngines };
+  return { searchEngines, forceShowTour };
 };

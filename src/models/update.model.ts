@@ -23,8 +23,10 @@ export interface UpdateResponseModel {
 /**
  * Интерфейс модели нового функционала относительно предыдущей версии приложения
  * @property searchEngines - Массив новых поисковых систем
+ * @property forceShowTour - Флаг принудительного показа ознакомительного тура
  * @interface
  */
 export interface Features {
   searchEngines: string[];
+  forceShowTour: boolean;
 }

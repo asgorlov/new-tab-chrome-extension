@@ -5,6 +5,10 @@
   max-width: 450px;
   color: var(--text-color);
 
+  &-description {
+    white-space: pre-line;
+  }
+
   &>.new-tab__tour-arrow:before {
     transition: background-color $slow-transition;
     background-color: var(--bg-color);
