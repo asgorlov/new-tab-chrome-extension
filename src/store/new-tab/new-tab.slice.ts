@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  setDataToChromeLocalStorage,
-  setDataToChromeSyncStorage
-} from "../../utils/chrome.utils";
+import { setAppData } from "../../utils/vlcn.utils";
 import { NewTabState } from "../../models/new-tab-state.model";
 import {
   changeLanguage,
@@ -34,7 +31,7 @@ export const newTabSlice = createSlice({
      */
     setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
-      setDataToChromeSyncStorage({ isDark: action.payload });
+      setAppData({ isDark: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
@@ -43,7 +40,7 @@ export const newTabSlice = createSlice({
      * */
     setShowTour(state: NewTabState, action: PayloadAction<boolean>) {
       state.showTour = action.payload;
-      setDataToChromeLocalStorage({ showTour: action.payload });
+      setAppData({ showTour: action.payload });
     },
     /**
      * Функция изменения флага режима включения темного режима
@@ -52,7 +49,7 @@ export const newTabSlice = createSlice({
      */
     setDarkMode(state: NewTabState, action: PayloadAction<string>) {
       state.darkMode = action.payload;
-      setDataToChromeSyncStorage({ darkMode: action.payload });
+      setAppData({ darkMode: action.payload });
     },
     /**
      * Функция изменения флага открытия меню настроек
@@ -61,7 +58,7 @@ export const newTabSlice = createSlice({
      */
     setWallpaper(state: NewTabState, action: PayloadAction<string>) {
       state.wallpaper = action.payload;
-      setDataToChromeSyncStorage({ wallpaper: action.payload });
+      setAppData({ wallpaper: action.payload });
     },
     /**
      * Функция изменения ссылки на страницу поисковика SearXNG
@@ -70,7 +67,7 @@ export const newTabSlice = createSlice({
      */
     setSearXngUrl(state: NewTabState, action: PayloadAction<string>) {
       state.searXngUrl = action.payload;
-      setDataToChromeSyncStorage({ searXngUrl: action.payload });
+      setAppData({ searXngUrl: action.payload });
     },
     /**
      * Функция изменения флага открытия меню настроек
@@ -87,7 +84,7 @@ export const newTabSlice = createSlice({
      */
     setSearchEngine(state: NewTabState, action: PayloadAction<string>) {
       state.searchEngine = action.payload;
-      setDataToChromeSyncStorage({ searchEngine: action.payload });
+      setAppData({ searchEngine: action.payload });
     },
     /**
      * Функция изменения списка доступный для выбора поисковых систем
@@ -96,7 +93,7 @@ export const newTabSlice = createSlice({
      */
     setSearchEngines(state: NewTabState, action: PayloadAction<string[]>) {
       state.searchEngines = action.payload;
-      setDataToChromeSyncStorage({ searchEngines: action.payload });
+      setAppData({ searchEngines: action.payload });
     },
     /**
      * Функция сброса массива нотификаций
@@ -115,7 +112,7 @@ export const newTabSlice = createSlice({
       action: PayloadAction<CustomWallpaper | null>
     ) {
       state.customWallpaper = action.payload;
-      setDataToChromeLocalStorage({ customWallpaper: action.payload });
+      setAppData({ customWallpaper: action.payload });
     },
     /**
      * Функция изменения режима запросов обновлений
@@ -124,7 +121,7 @@ export const newTabSlice = createSlice({
      */
     setCheckForUpdates(state: NewTabState, action: PayloadAction<string>) {
       state.checkForUpdates = action.payload;
-      setDataToChromeSyncStorage({ checkForUpdates: action.payload });
+      setAppData({ checkForUpdates: action.payload });
     },
     /**
      * Функция изменения списка развернутых настроек
@@ -170,7 +167,7 @@ export const newTabSlice = createSlice({
       state.checkLoading = false;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
-      setDataToChromeSyncStorage({ update: state.update });
+      setAppData({ update: state.update });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
@@ -211,7 +208,7 @@ export const newTabSlice = createSlice({
 
     builder.addCase(getNightPeriodByLocation.fulfilled, (state, action) => {
       state.nightPeriod = action.payload;
-      setDataToChromeSyncStorage({ nightPeriod: action.payload });
+      setAppData({ nightPeriod: action.payload });
     });
   }
 });

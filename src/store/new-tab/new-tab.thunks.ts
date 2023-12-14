@@ -3,10 +3,7 @@ import { Coordinate } from "../../models/coordinate.model";
 import { NightPeriod } from "../../models/night-period.model";
 import axios from "axios";
 import { UpdateModel, UpdateResponseModel } from "../../models/update.model";
-import {
-  setDataToChromeLocalStorage,
-  setDataToChromeSyncStorage
-} from "../../utils/chrome.utils";
+import { setAppData } from "../../utils/vlcn.utils";
 import i18n from "../../localizations/i18n";
 import defaultStore from "../../constants/default-store.constants";
 import { NewTabState, NewTabStateBase } from "../../models/new-tab-state.model";
@@ -59,7 +56,7 @@ export const checkUpdates = createAsyncThunk(
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
   async (language: string): Promise<string> => {
-    setDataToChromeSyncStorage({ currentLanguage: language });
+    setAppData({ currentLanguage: language });
     await i18n.changeLanguage(language);
 
     return language;
@@ -87,8 +84,8 @@ export const applySettings = createAsyncThunk(
       }
     }
 
-    setDataToChromeSyncStorage(data);
-    setDataToChromeLocalStorage({ customWallpaper: data.customWallpaper });
+    setAppData(data);
+    setAppData({ customWallpaper: data.customWallpaper });
     await i18n.changeLanguage(data.currentLanguage);
 
     return data;

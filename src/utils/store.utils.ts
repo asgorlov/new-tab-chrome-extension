@@ -1,6 +1,6 @@
 import { NewTabState } from "../models/new-tab-state.model";
-import { getInitStateFromChrome } from "./chrome.utils";
 import { CollapsedMenuSetting } from "../constants/settings-menu.constants";
+import { getInitStateFromDB } from "./vlcn.utils";
 
 /**
  * Асинхронная функция для получения начальных данных стейта
@@ -8,7 +8,7 @@ import { CollapsedMenuSetting } from "../constants/settings-menu.constants";
  * @returns - Начальные данные {@link NewTabState}
  */
 export const getInitState = async (): Promise<NewTabState> => {
-  const data = await getInitStateFromChrome();
+  const data = await getInitStateFromDB();
   const settingsActiveKeys = {};
 
   Object.values(CollapsedMenuSetting).forEach(s => {

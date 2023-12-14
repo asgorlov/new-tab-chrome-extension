@@ -28,7 +28,7 @@ import {
   YOUCOM,
   ZAPMETA
 } from "../constants/search-engine.constants";
-import { setDataToChromeSyncStorage } from "./chrome.utils";
+import { setAppData } from "./vlcn.utils";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
@@ -75,7 +75,7 @@ export const getDownloadLink = (version: string) => {
 export const updateStateWithFeatures = (data: NewTabStateBase) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChromeSyncStorage({ update: data.update });
+    setAppData({ update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -94,7 +94,7 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
 
     data.update.previousVersion = data.update.lastVersion;
 
-    setDataToChromeSyncStorage({
+    setAppData({
       searchEngines: data.searchEngines,
       update: data.update
     });
