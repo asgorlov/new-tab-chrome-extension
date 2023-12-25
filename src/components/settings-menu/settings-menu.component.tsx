@@ -18,6 +18,7 @@ import {
   selectIsOpenMenu
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Компонент меню настроек
