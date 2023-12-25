@@ -1,5 +1,3 @@
-import constants from "../static/styles/modules/constants.module.scss";
-
 /**
  * Значение режима автоматического включения темной темы
  * @category Constants - Search Engine
@@ -282,41 +280,4 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   exactseek: "https://exactseek.com/cgi-bin/search.cgi",
   startpage: "https://www.startpage.com/sp/search",
   searxng: "https://search.demoniak.ch/search"
-};
-
-/**
- * Список цветовых схем поисковых систем
- * @category Constants - Search Engine
- */
-export const SEARCH_THEMES: Record<string, string> = {
-  aol: constants.aolColor,
-  bing: constants.bingColor,
-  brave: constants.braveColor,
-  nigma: constants.nigmaColor,
-  lycos: constants.lycosColor,
-  yahoo: constants.yahooColor,
-  ecosia: constants.ecosiaColor,
-  yandex: constants.yaColor,
-  youcom: constants.youcomColor,
-  gibiru: constants.gibiruColor,
-  google: constants.gooColor,
-  swisscows: constants.cowsColor,
-  duckduckgo: constants.duckColor,
-  searchcrypt: constants.searchcryptColor,
-  metager: constants.metagerColor,
-  ask: constants.askColor,
-  boardreader: constants.boardreaderColor,
-  zapmeta: constants.zapmetaColor,
-  searchch: constants.searchchColor,
-  mojeek: constants.mojeekColor,
-  alexandria: constants.alexandriaColor,
-  yep: constants.yepColor,
-  izito: constants.izitoColor,
-  presearch: constants.presearchColor,
-  hotbot: constants.hotbotColor,
-  rambler: constants.ramblerColor,
-  entireweb: constants.entirewebColor,
-  exactseek: constants.exactseekColor,
-  startpage: constants.startpageColor,
-  searxng: constants.searxngColor
 };

@@ -15,8 +15,8 @@ import UploadComponent from "../../../common/upload/upload.component";
 import { getUploadingErrorKey } from "../../../../utils/wallpaper.utils";
 import ModalComponent from "../../../common/modal/modal.component";
 import CheckboxComponent from "../../../common/checkbox/checkbox.component";
-import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
 import { CollapsedMenuSetting } from "../../../../constants/settings-menu.constants";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Передаваемые параметры для компонента настройки фонового изображения
@@ -75,6 +75,7 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
     onClickWallpaper
   }) => {
     const { t } = useTranslation();
+    const token = useToken();
     const getImage = (name: string): ReactNode => {
       return (
         <img
@@ -83,7 +84,7 @@ const WallpaperSettingComponent: FC<WallpaperSettingProps> = memo(
             { selected: wallpaper === name },
             searchEngine
           )}
-          style={{ borderColor: SEARCH_THEMES[searchEngine] }}
+          style={{ borderColor: token[1].colorPrimary }}
           title={t(`wallpaper.${name}`)}
           key={name}
           src={require(`../../../../static/imgs/${name}.png`)}
