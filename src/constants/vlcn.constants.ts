@@ -18,7 +18,7 @@ export const VALUE_COLUMN = "value";
  * Запрос создания таблицы, если ее нет
  * @category Constants - Vlcn
  */
-export const INIT_QUERY = `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${KEY_COLUMN} primary key,${VALUE_COLUMN})`;
+export const INIT_QUERY = `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${KEY_COLUMN} primary key NOT NULL,${VALUE_COLUMN})`;
 /**
  * Запрос на получение всех параметров из таблицы
  * @category Constants - Vlcn

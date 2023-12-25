@@ -127,7 +127,7 @@ const getInsertQuery = (numberOfRows: number = 1): string => {
 const getUpsetQuery = (numberOfRows: number = 1): string => {
   const values = getQueryKeyValueListString(numberOfRows);
 
-  return `INSERT INTO newtab VALUES ${values} ON CONFLICT(${KEY_COLUMN}) DO UPDATE SET ${VALUE_COLUMN}=excluded.${VALUE_COLUMN}`;
+  return `INSERT INTO ${TABLE_NAME} VALUES ${values} ON CONFLICT(${KEY_COLUMN}) DO UPDATE SET ${VALUE_COLUMN}=excluded.${VALUE_COLUMN}`;
 };
 
 /**
