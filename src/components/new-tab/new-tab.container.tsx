@@ -4,12 +4,7 @@ import { setDarkMode, setIsDark } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
 import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
-import {
-  AUTO,
-  MANUAL,
-  SEARCH_THEMES,
-  SYSTEM
-} from "../../constants/search-engine.constants";
+import { AUTO, MANUAL, SYSTEM } from "../../constants/search-engine.constants";
 import { isBrowserDarkModeEnabled } from "../../utils/dark-mode.utils";
 import {
   selectCheckForUpdates,
@@ -23,6 +18,7 @@ import {
   getNightPeriodByLocation
 } from "../../store/new-tab/new-tab.thunks";
 import { shouldBeCheck } from "../../utils/update.utils";
+import { createTheme } from "../../utils/search-engine.utils";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,12 +27,6 @@ const NewTabContainer: FC = () => {
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const lastUpdateDate = useSelector(selectLastUpdateDate);
-
-  const theme = {
-    token: {
-      colorPrimary: SEARCH_THEMES[searchEngine]
-    }
-  };
 
   useEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {
@@ -85,7 +75,7 @@ const NewTabContainer: FC = () => {
   }, [nightPeriod, darkMode, dispatch]);
 
   return (
-    <ConfigProvider theme={theme}>
+    <ConfigProvider theme={createTheme(searchEngine)}>
       <NewTabComponent />
     </ConfigProvider>
   );

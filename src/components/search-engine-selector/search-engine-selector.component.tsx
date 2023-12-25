@@ -16,6 +16,7 @@ import {
   selectSearchEngines
 } from "../../store/new-tab/new-tab.selectors";
 import { setSearchEngines } from "../../store/new-tab/new-tab.slice";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Компонент выбора поисковой системы
@@ -23,6 +24,7 @@ import { setSearchEngines } from "../../store/new-tab/new-tab.slice";
  */
 const SearchEngineSelectorComponent = () => {
   const dispatch = useDispatch();
+  const token = useToken();
   const tourCtx = useTourStepTwoContext();
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -116,7 +118,10 @@ const SearchEngineSelectorComponent = () => {
     <div
       ref={tourCtx}
       className="new-tab__search-engine-selector"
-      style={getSearchEngineSelectorStyle(searchEngine, !searchEngines.length)}
+      style={getSearchEngineSelectorStyle(
+        token[1].colorPrimary,
+        !searchEngines.length
+      )}
     >
       <button
         className="new-tab__search-engine-selector-left-button"
@@ -126,7 +131,7 @@ const SearchEngineSelectorComponent = () => {
         onMouseMove={() => setIsLeftButtonActive(false)}
         onMouseDown={() => setIsLeftButtonActive(true)}
         style={getScrollSearchEngineButtonStyle(
-          searchEngine,
+          token[1].colorPrimary,
           searchEngines.length <= MAX_ELEMENTS_LENGTH,
           isLeftButtonActive
         )}
@@ -149,7 +154,7 @@ const SearchEngineSelectorComponent = () => {
         onMouseMove={() => setIsRightButtonActive(false)}
         onMouseDown={() => setIsRightButtonActive(true)}
         style={getScrollSearchEngineButtonStyle(
-          searchEngine,
+          token[1].colorPrimary,
           searchEngines.length <= MAX_ELEMENTS_LENGTH,
           isRightButtonActive
         )}
