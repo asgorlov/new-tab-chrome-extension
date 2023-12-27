@@ -27,7 +27,7 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
 import { useTranslation } from "react-i18next";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { NewTabStateBase } from "../../../../models/new-tab-state.model";
-import { getInitStateFromDB } from "../../../../utils/vlcn.utils";
+import db from "../../../../db/db";
 
 const CommonSettingContainer: FC = () => {
   const { t } = useTranslation();
@@ -112,7 +112,7 @@ const CommonSettingContainer: FC = () => {
           dispatch(applySettings(null));
           break;
         case BUTTON_NAMES.export:
-          const settings = await getInitStateFromDB();
+          const settings = await db.getAll();
           downloadFile(
             JSON.stringify(settings),
             SETTINGS_FILE_NAME,

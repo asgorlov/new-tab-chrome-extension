@@ -3,7 +3,7 @@ import { Coordinate } from "../../models/coordinate.model";
 import { NightPeriod } from "../../models/night-period.model";
 import axios from "axios";
 import { UpdateModel, UpdateResponseModel } from "../../models/update.model";
-import { setAppData } from "../../utils/vlcn.utils";
+import db from "../../db/db";
 import i18n from "../../localizations/i18n";
 import defaultStore from "../../constants/default-store.constants";
 import { NewTabState, NewTabStateBase } from "../../models/new-tab-state.model";
@@ -56,7 +56,7 @@ export const checkUpdates = createAsyncThunk(
 export const changeLanguage = createAsyncThunk(
   "i18n/changeLanguage",
   async (language: string): Promise<string> => {
-    setAppData({ currentLanguage: language });
+    db.set({ currentLanguage: language });
     await i18n.changeLanguage(language);
 
     return language;
@@ -74,7 +74,10 @@ export const applySettings = createAsyncThunk(
     { getState }
   ): Promise<NewTabState> => {
     const state = getState() as NewTabState;
-    const data: NewTabState = Object.assign(state, settings ?? defaultStore);
+    const data: NewTabState = Object.assign(
+      { ...state },
+      settings ?? defaultStore
+    );
 
     if (!settings) {
       data.update.previousVersion = data.update.lastVersion;
@@ -84,8 +87,7 @@ export const applySettings = createAsyncThunk(
       }
     }
 
-    setAppData(data);
-    setAppData({ customWallpaper: data.customWallpaper });
+    db.set(data);
     await i18n.changeLanguage(data.currentLanguage);
 
     return data;

@@ -4,6 +4,10 @@
  */
 import { DARK_THEME_NAME, LIGHT_THEME_NAME } from "./common.constants";
 
+/**
+ * Пресеты пользовательских фоновых картинок
+ * @category Constants - Wallpaper
+ */
 export const WALLPAPER_PRESETS = [
   "default",
   "mountains",

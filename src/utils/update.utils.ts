@@ -28,7 +28,7 @@ import {
   YOUCOM,
   ZAPMETA
 } from "../constants/search-engine.constants";
-import { setAppData } from "./vlcn.utils";
+import db from "../db/db";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
@@ -75,7 +75,7 @@ export const getDownloadLink = (version: string) => {
 export const updateStateWithFeatures = (data: NewTabStateBase) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    setAppData({ update: data.update });
+    db.set({ update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -94,7 +94,7 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
 
     data.update.previousVersion = data.update.lastVersion;
 
-    setAppData({
+    db.set({
       searchEngines: data.searchEngines,
       update: data.update
     });
