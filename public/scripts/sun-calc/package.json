@@ -1,0 +1,18 @@
+{
+  "name": "sun-calc",
+  "version": "1.0.0",
+  "description": "Sunsets and sunrises calculation",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Triggertrap/sun-js"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "keywords": [
+    "sun"
+  ],
+  "author": "",
+  "license": "ISC"
+}

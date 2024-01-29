@@ -48,7 +48,6 @@ export * from "../constants/wallpaper.constants";
 export * from "../constants/common-setting.constants";
 export * from "../constants/search-engine-setting.constants";
 export * from "../constants/notification.constants";
-export * from "../constants/db.constants";
 // ================= Components ===============
 export {
   default as SelectComponent,

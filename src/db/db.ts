@@ -1,30 +1,9 @@
 import { NewTabStateBase } from "../models/new-tab-state.model";
-import { KEY_PATH_NAME, STORE_NAME } from "../constants/db.constants";
+import { initDB, RW_MODE, STORE_NAME } from "init-db";
 import defaultStore from "../constants/default-store.constants";
 import { DBItem, DBModel } from "../models/db.model";
 import { updateStateWithFeatures } from "../utils/update.utils";
 import i18n from "i18next";
-
-/**
- * Асинхронная функция для инициализации хранилища.
- * @returns - Полученные хранилища {@link IDBDatabase}
- * @category IndexedDB
- */
-const initDB = async (): Promise<IDBDatabase> => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(STORE_NAME, 1);
-
-    request.onupgradeneeded = () => {
-      const db = request.result;
-
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, { keyPath: KEY_PATH_NAME });
-      }
-    };
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = (event: Event) => reject(event);
-  });
-};
 
 /**
  * Объект хранилища
@@ -38,7 +17,7 @@ const database = await initDB();
  * @category IndexedDB
  */
 const setAppData = (fields: Record<string, any>) => {
-  const transaction = database.transaction(STORE_NAME, "readwrite");
+  const transaction = database.transaction(STORE_NAME, RW_MODE);
   const store = transaction.objectStore(STORE_NAME);
 
   Object.entries(fields)
@@ -59,7 +38,7 @@ const setAppData = (fields: Record<string, any>) => {
  */
 const getOrAddAllDBData = (): Promise<NewTabStateBase> => {
   return new Promise(resolve => {
-    const transaction = database.transaction(STORE_NAME, "readwrite");
+    const transaction = database.transaction(STORE_NAME, RW_MODE);
     const store = transaction.objectStore(STORE_NAME);
 
     store.getAll().onsuccess = (event: Event) => {

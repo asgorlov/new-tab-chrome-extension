@@ -1,35 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Coordinate } from "../../models/coordinate.model";
-import { NightPeriod } from "../../models/night-period.model";
 import axios from "axios";
 import { UpdateModel, UpdateResponseModel } from "../../models/update.model";
 import db from "../../db/db";
 import i18n from "../../localizations/i18n";
 import defaultStore from "../../constants/default-store.constants";
 import { NewTabState, NewTabStateBase } from "../../models/new-tab-state.model";
-
-/**
- * Асинхронный запрос для получения периода ночи указанной локации
- * @category Thunks - New Tab
- */
-export const getNightPeriodByLocation = createAsyncThunk(
-  "api/sunsetAndSunriseTimes/get",
-  async (coordinate: Coordinate): Promise<NightPeriod> => {
-    const { data } = await axios.get("https://api.sunrise-sunset.org/json", {
-      params: {
-        lat: coordinate.lat,
-        lng: coordinate.lng,
-        date: "today",
-        formatted: 0
-      }
-    });
-
-    return {
-      sunset: new Date(data.results.sunset).toString(),
-      sunrise: new Date(data.results.sunrise).toString()
-    };
-  }
-);
 
 /**
  * Асинхронный запрос для получения обновлений

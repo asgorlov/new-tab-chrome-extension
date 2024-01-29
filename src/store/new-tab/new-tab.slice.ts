@@ -1,18 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
-import {
-  changeLanguage,
-  checkUpdates,
-  getNightPeriodByLocation,
-  applySettings
-} from "./new-tab.thunks";
+import { changeLanguage, checkUpdates, applySettings } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
 import { Notification } from "../../constants/notification.constants";
 import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
+import { NightPeriod } from "../../models/night-period.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -78,6 +74,15 @@ export const newTabSlice = createSlice({
       state.isOpenMenu = action.payload;
     },
     /**
+     * Функция изменения периода ночи
+     * @param state - стор
+     * @param action - экшн
+     */
+    setNightPeriod(state: NewTabState, action: PayloadAction<NightPeriod>) {
+      state.nightPeriod = action.payload;
+      db.set({ nightPeriod: action.payload });
+    },
+    /**
      * Функция изменения текущей поисковой системы
      * @param state - стор
      * @param action - экшн
@@ -85,6 +90,17 @@ export const newTabSlice = createSlice({
     setSearchEngine(state: NewTabState, action: PayloadAction<string>) {
       state.searchEngine = action.payload;
       db.set({ searchEngine: action.payload });
+    },
+    /**
+     * Функция добавления нотификации из компонентов
+     * @param state - стор
+     * @param action - экшн
+     */
+    addNotifications(
+      state: NewTabState,
+      action: PayloadAction<Notification | Notification[]>
+    ) {
+      state.notifications = state.notifications.concat(action.payload);
     },
     /**
      * Функция изменения списка доступный для выбора поисковых систем
@@ -199,17 +215,6 @@ export const newTabSlice = createSlice({
       state.checkForUpdates = checkForUpdates;
       state.customWallpaper = customWallpaper;
     });
-
-    builder.addCase(getNightPeriodByLocation.rejected, state => {
-      state.notifications = state.notifications.concat(
-        Notification.CanNotGetNightPeriod
-      );
-    });
-
-    builder.addCase(getNightPeriodByLocation.fulfilled, (state, action) => {
-      state.nightPeriod = action.payload;
-      db.set({ nightPeriod: action.payload });
-    });
   }
 });
 
@@ -220,7 +225,9 @@ export const {
   setWallpaper,
   setSearXngUrl,
   setIsOpenMenu,
+  setNightPeriod,
   setSearchEngine,
+  addNotifications,
   setSearchEngines,
   resetNotifications,
   setCustomWallpaper,
