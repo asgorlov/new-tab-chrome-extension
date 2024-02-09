@@ -1,88 +1,48 @@
 import { NewTabStateBase } from "../models/new-tab-state.model";
-import { initDB, RW_MODE, STORE_NAME } from "init-db";
-import defaultStore from "../constants/default-store.constants";
-import { DBItem, DBModel } from "../models/db.model";
+import { STORE_NAME, getDBAdapter } from "new-tab-db-adapter";
+import { DBModel } from "../models/db.model";
 import { updateStateWithFeatures } from "../utils/update.utils";
+import defaultStore from "../constants/default-store.constants";
 import i18n from "i18next";
 
 /**
- * Объект хранилища
- * @category IndexedDB
+ * Адаптер базы данных приложения
+ * @category IndexedDB - New Tab
  */
-const database = await initDB();
+const dbAdapter = getDBAdapter(STORE_NAME);
 
 /**
- * Асинхронная функция для добавления/изменения параметров в хранилище
- * @param fields - Параметры, которые будут добавляться/обновляться в хранилище
- * @category IndexedDB
- */
-const setAppData = (fields: Record<string, any>) => {
-  const transaction = database.transaction(STORE_NAME, RW_MODE);
-  const store = transaction.objectStore(STORE_NAME);
-
-  Object.entries(fields)
-    .map(entry => ({
-      key: entry[0],
-      value: entry[1]
-    }))
-    .forEach(item => {
-      store.put(item);
-    });
-};
-
-/**
- * Асинхронная функция для получения всех данных хранилища.
+ * Асинхронная функция для получения всех данных из базы приложения.
  * Недостающие параметры будут заполняться значениями по умолчанию {@link defaultStore}
- * @returns - Полученные из хранилища данные {@link NewTabStateBase}
- * @category IndexedDB
+ * @returns - Данные из базы приложения {@link NewTabStateBase}
+ * @category IndexedDB - New Tab
  */
-const getOrAddAllDBData = (): Promise<NewTabStateBase> => {
-  return new Promise(resolve => {
-    const transaction = database.transaction(STORE_NAME, RW_MODE);
-    const store = transaction.objectStore(STORE_NAME);
+const getOrAddAllDBData = async (): Promise<NewTabStateBase> => {
+  const dbItems = await dbAdapter.getAll();
+  let result = defaultStore;
 
-    store.getAll().onsuccess = (event: Event) => {
-      const defaultStoreEntries = Object.entries(defaultStore);
-      const database = event.target as IDBRequest<DBItem[]>;
-      const rawData = database.result;
+  if (dbItems.length) {
+    const dataFromDb = dbItems.reduce(
+      (acc, data) => Object.assign(acc, { [data.key]: data.value }),
+      {}
+    );
+    const dataToAdd = Object.entries(defaultStore)
+      .filter(entry => !dbItems.some(item => item.key === entry[0]))
+      .reduce((acc, entry) => Object.assign(acc, { [entry[0]]: entry[1] }), {});
+    await dbAdapter.put(dataToAdd);
 
-      if (rawData.length) {
-        const rawDataKeys = rawData.map(item => item.key);
+    result = Object.assign(dataFromDb, dataToAdd) as NewTabStateBase;
+  }
 
-        defaultStoreEntries
-          .filter(entry => rawDataKeys.findIndex(key => key === entry[0]) < 0)
-          .map(entry => ({
-            key: entry[0],
-            value: entry[1]
-          }))
-          .forEach(item => {
-            rawData.push(item);
-            store.put(item);
-          });
+  await dbAdapter.put(result);
 
-        resolve(
-          rawData.reduce(
-            (acc, data) => Object.assign(acc, { [data.key]: data.value }),
-            {}
-          ) as NewTabStateBase
-        );
-      } else {
-        const rawDataToAdd = defaultStoreEntries.map(entry => ({
-          key: entry[0],
-          value: entry[1]
-        }));
-        rawDataToAdd.forEach(item => store.put(item));
-
-        resolve(defaultStore);
-      }
-    };
-  });
+  return result;
 };
 
 /**
- * Асинхронная функция для получения всех данных из хранилища
+ * Асинхронная функция для получения всех данных из базы приложения
  * @returns - Начальные данные {@link NewTabStateBase}
- * @category IndexedDB
+ * @category IndexedDB - New Tab
  */
 const getAllAppData = async (): Promise<NewTabStateBase> => {
   const data = await getOrAddAllDBData();
@@ -99,11 +59,11 @@ const getAllAppData = async (): Promise<NewTabStateBase> => {
 };
 
 /**
- * Объект для работы с хранилищем приложения
- * @category IndexedDB
+ * Объект для работы с базой данных приложения
+ * @category IndexedDB - New Tab
  */
-const db: DBModel = {
-  set: setAppData,
+const db: DBModel<NewTabStateBase> = {
+  set: dbAdapter.put,
   getAll: getAllAppData
 };
 

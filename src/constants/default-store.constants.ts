@@ -3,6 +3,7 @@ import { MANUAL, SEARCH_ENGINE_NAMES, YANDEX } from "./search-engine.constants";
 import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
 import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
+import { getCurrentLocation } from "../utils/dark-mode.utils";
 
 /**
  * Значения стейта по умолчанию
@@ -27,7 +28,9 @@ const defaultStore: Readonly<NewTabStateBase> = {
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,
   checkForUpdates: checkForUpdates.WEEK,
-  customWallpaper: null
+  customWallpaper: null,
+  location: await getCurrentLocation(),
+  darkThemeCheckTimeout: null
 };
 
 export default defaultStore;

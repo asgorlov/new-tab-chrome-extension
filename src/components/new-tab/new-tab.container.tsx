@@ -4,6 +4,7 @@ import {
   addNotifications,
   setDarkMode,
   setIsDark,
+  setLocation,
   setNightPeriod
 } from "../../store/new-tab/new-tab.slice";
 import { AppDispatch } from "../../store/store";
@@ -11,14 +12,14 @@ import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
 import { AUTO, MANUAL, SYSTEM } from "../../constants/search-engine.constants";
 import {
-  getNightPeriod,
-  isBrowserDarkModeEnabled,
-  isRelevant
+  getCurrentLocation,
+  isBrowserDarkModeEnabled
 } from "../../utils/dark-mode.utils";
 import {
   selectCheckForUpdates,
   selectDarkMode,
   selectLastUpdateDate,
+  selectLocation,
   selectNightPeriod,
   selectSearchEngine
 } from "../../store/new-tab/new-tab.selectors";
@@ -26,6 +27,7 @@ import { checkUpdates } from "../../store/new-tab/new-tab.thunks";
 import { shouldBeCheck } from "../../utils/update.utils";
 import { createTheme } from "../../utils/search-engine.utils";
 import { Notification } from "../../constants/notification.constants";
+import { createNightPeriod } from "dark-theme-util";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,6 +36,20 @@ const NewTabContainer: FC = () => {
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const lastUpdateDate = useSelector(selectLastUpdateDate);
+  const currentLocation = useSelector(selectLocation);
+
+  useEffect(() => {
+    getCurrentLocation().then(location => {
+      const needToSetLocation =
+        location &&
+        (!currentLocation ||
+          currentLocation.latitude !== location.latitude ||
+          currentLocation.longitude !== location.longitude);
+      if (needToSetLocation) {
+        dispatch(setLocation(location));
+      }
+    });
+  }, [currentLocation, dispatch]);
 
   useEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {
@@ -44,33 +60,29 @@ const NewTabContainer: FC = () => {
   useEffect(() => {
     switch (darkMode) {
       case AUTO:
-        if (isRelevant(nightPeriod)) {
-          const now = new Date();
+        const now = new Date();
+        const isToday = nightPeriod.sunrise?.isSameWithoutTime(now);
+
+        if (isToday) {
           const isNightPeriod =
-            nightPeriod.sunrise!.getTime() >= now.getTime() ||
-            nightPeriod.sunset!.getTime() <= now.getTime();
+            nightPeriod.sunrise!.isSameOrAfter(now) ||
+            nightPeriod.sunset!.isSameOrBefore(now);
           dispatch(setIsDark(isNightPeriod));
         } else {
-          const errorHandler = () => {
+          if (currentLocation) {
+            const nightPeriod = createNightPeriod(currentLocation, now);
+            dispatch(setNightPeriod(nightPeriod));
+          } else {
             dispatch(addNotifications(Notification.CanNotGetNightPeriod));
             dispatch(setDarkMode(MANUAL));
-          };
-
-          navigator.geolocation.getCurrentPosition(location => {
-            const nightPeriod = getNightPeriod(location);
-            if (nightPeriod) {
-              dispatch(setNightPeriod(nightPeriod));
-            } else {
-              errorHandler();
-            }
-          }, errorHandler);
+          }
         }
         break;
       case SYSTEM:
         dispatch(setIsDark(isBrowserDarkModeEnabled()));
         break;
     }
-  }, [nightPeriod, darkMode, dispatch]);
+  }, [nightPeriod, darkMode, currentLocation, dispatch]);
 
   return (
     <ConfigProvider theme={createTheme(searchEngine)}>

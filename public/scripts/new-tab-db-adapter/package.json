@@ -1,0 +1,12 @@
+{
+  "name": "new-tab-db-adapter",
+  "version": "1.0.0",
+  "description": "IndexedDB Adapter for New Tab",
+  "main": "index.js",
+  "scripts": {
+    "test": "new-tab-db-adapter"
+  },
+  "author": "asgorlov",
+  "license": "ISC",
+  "types": "./index.d.ts"
+}

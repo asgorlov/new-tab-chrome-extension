@@ -1,4 +1,4 @@
-import { NightPeriod } from "../models/night-period.model";
+import { Location } from "dark-theme-util";
 
 /**
  * Функция, позволяющая узнать включена ли темная тема в браузере
@@ -12,43 +12,26 @@ export const isBrowserDarkModeEnabled = (): boolean => {
 };
 
 /**
- * Функция, позволяющая узнать актуален ли ночной период
+ * Функция получения текущей локации
  * @category Utilities - Dark Mode
- * @param nightPeriod - Ночной период
- * @returns - <b>True</b>, если ночной период актуален
+ * @returns - Текущая локация {@link Location} или null, если координаты отсутствуют
  */
-export const isRelevant = (nightPeriod: NightPeriod): boolean => {
-  if (!nightPeriod.sunrise) {
-    return false;
-  }
+export const getCurrentLocation = async (): Promise<Location | null> => {
+  return new Promise(resolve => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const coords = position?.coords;
 
-  const sunriseDate = nightPeriod.sunrise.toISOString().split("T")[0];
-  const today = new Date().toISOString().split("T")[0];
-
-  return sunriseDate === today;
-};
-
-/**
- * Функция получения ночного периода в зависимости от локации
- * @param location - Локация
- * @returns - Ночной период {@link NightPeriod} или null, если координаты отсутствуют
- */
-export const getNightPeriod = (
-  location?: GeolocationPosition
-): NightPeriod | null => {
-  const coords = location?.coords;
-
-  if (coords && coords.latitude && coords.longitude) {
-    const coordinate = {
-      lat: coords.latitude,
-      lng: coords.longitude
-    };
-
-    return {
-      sunrise: new Date().sunrise(coordinate.lat, coordinate.lng),
-      sunset: new Date().sunset(coordinate.lat, coordinate.lng)
-    };
-  }
-
-  return null;
+        if (coords && coords.latitude && coords.longitude) {
+          resolve({
+            latitude: coords.latitude,
+            longitude: coords.longitude
+          });
+        } else {
+          resolve(null);
+        }
+      },
+      () => resolve(null)
+    );
+  });
 };
