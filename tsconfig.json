@@ -2,9 +2,6 @@
   "compilerOptions": {
     "target": "es2017",
     "lib": [
-      "webworker",
-      "es2017",
-      "es6",
       "dom",
       "dom.iterable",
       "esnext"
