@@ -93,4 +93,52 @@
   &.searchch {
     @include logo-common(40px, 205px, 24px, var(--searchch-bg-image));
   }
+
+  &.mojeek {
+    @include logo-common(62px, 205px, 12px, url("../../../svgs/mojeek/mojeek-logo.svg"));
+  }
+
+  &.alexandria {
+    @include logo-common(38px, 205px, 12px, var(--alexandria-bg-image));
+  }
+
+  &.yep {
+    @include logo-common(98px, 98px, 12px, url("../../../svgs/yep/yep-logo.svg"));
+  }
+
+  &.izito {
+    @include logo-common(64px, 197px, 40px, url("../../../svgs/izito/izito-logo.svg"));
+  }
+
+  &.presearch {
+    @include logo-common(32px, 197px, 20px, var(--presearch-bg-image));
+  }
+
+  &.hotbot {
+    @include logo-common(96px, 112px, 30px, var(--hotbot-bg-image));
+  }
+
+  &.rambler {
+    @include logo-common(44px, 205px, 8px, url("../../../svgs/rambler/rambler-logo-ru.svg"));
+
+    &.en {
+      background-image: url("../../../svgs/rambler/rambler-logo-en.svg");
+    }
+  }
+
+  &.entireweb {
+    @include logo-common(32px, 180px, 12px, var(--entireweb-bg-image));
+  }
+
+  &.exactseek {
+    @include logo-common(69px, 200px, 12px, url("../../../svgs/exactseek/exactseek-logo.svg"));
+  }
+
+  &.startpage {
+    @include logo-common(49px, 205px, 8px, var(--startpage-bg-image));
+  }
+
+  &.searxng {
+    @include logo-common(36px, 205px, 16px, url("../../../svgs/searxng/searxng-logo.svg"));
+  }
 }

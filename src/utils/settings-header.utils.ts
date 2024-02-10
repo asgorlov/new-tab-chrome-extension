@@ -2,7 +2,8 @@ import {
   CollapsedMenuSetting,
   SETTINGS_WITH_SELECTOR,
   SETTINGS_MENU_CURRENT_CLASS,
-  SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS
+  SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS,
+  SPEC_CHARS_REG_EXP
 } from "../constants/settings-menu.constants";
 import {
   HighlightedTextModel,
@@ -123,15 +124,13 @@ export const matchElements = (
 
           if (highlightedText.containsSearchQuery) {
             element.innerHTML = highlightedText.content;
-            const elements = [
-              ...element.querySelectorAll(
-                `.${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}`
-              )
-            ].map(e => ({
-              item: e,
-              type,
-              textContentBackup: textContent
-            }));
+            const elements = [...element.getElementsByTagName("mark")].map(
+              e => ({
+                item: e,
+                type,
+                textContentBackup: textContent
+              })
+            );
 
             matchedElements.push(...elements);
           }
@@ -161,7 +160,7 @@ const getHighlightedTextModel = (
   text: string
 ): HighlightedTextModel => {
   let content = text;
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const escapedQuery = query.replace(SPEC_CHARS_REG_EXP, "\\$&");
   const regExp = new RegExp(escapedQuery, "i");
   let startingIndex = content.search(regExp);
   const containsSearchQuery = startingIndex !== -1;
@@ -180,7 +179,7 @@ const getHighlightedTextModel = (
 
       result.push(
         firstTextPart,
-        `<span class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</span>`
+        `<mark class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</mark>`
       );
 
       verifiableText = verifiableText.substring(

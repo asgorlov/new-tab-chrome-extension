@@ -4,7 +4,15 @@ import NewTabReducer from "./new-tab/new-tab.slice";
 const store = configureStore({
   reducer: {
     newTab: NewTabReducer
-  }
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      // игнорируем несериализуемые данные nightPeriod
+      serializableCheck: {
+        ignoredActions: ["newTab/setNightPeriod"],
+        ignoredPaths: ["newTab.nightPeriod"]
+      }
+    })
 });
 
 export type RootState = ReturnType<typeof store.getState>;

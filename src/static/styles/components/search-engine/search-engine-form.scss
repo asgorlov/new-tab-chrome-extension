@@ -6,7 +6,7 @@
 }
 
 .new-tab__search-engine_form {
-  transition: $fast-transition;
+  transition: all $fast-transition, background-color $slow-transition;
   width: 100%;
   min-width: 100px;
   height: 42px;
@@ -117,8 +117,8 @@
     border-radius: 24px;
 
     &:hover {
-      border-color: #a0a0a0;
-      box-shadow: 0 4px 6px 0 #a0a0a0;
+      border-color: var(--ask-form-hover-border-color);
+      box-shadow: 0 4px 6px 0 var(--ask-form-hover-border-color);
     }
   }
 
@@ -133,5 +133,90 @@
   &.searchch {
     background-color: transparent;
     @include hide-form-border(8px);
+  }
+
+  &.mojeek {
+    border: 1px solid #c7c7c7;
+    border-radius: 4px;
+    box-shadow: var(--mojeek-form-box-shadow);
+
+    &:hover {
+      box-shadow: var(--mojeek-form-hover-box-shadow);
+    }
+  }
+
+  &.alexandria {
+    height: 30px;
+    min-height: max-content;
+    background-color: transparent;
+    @include hide-form-border(2px);
+  }
+
+  &.yep {
+    background-color: var(--yep-form-bg-color);
+    @include hide-form-border(30px);
+
+    &:hover {
+      background-color: var(--yep-form-hover-bg-color);
+    }
+
+    &._focused {
+      box-shadow: var(--yep-form-box-shadow);
+      background-color: $light-color;
+    }
+  }
+
+  &.izito {
+    @include hide-form-border(0);
+  }
+
+  &.presearch {
+    box-shadow: 0 0 transparent, 0 0 transparent, 0 1px 3px 0 #00000019, 0 1px 2px 0 #0000000F;
+    background-color: var(--presearch-form-bg-color);
+    @include hide-form-border(0);
+  }
+
+  &.hotbot {
+    border-radius: 24px;
+    border: 1px solid var(--hotbot-form-border-color);
+
+    &:hover {
+      box-shadow: var(--hotbot-form-box-shadow);
+      border-color: var(--hotbot-form-hover-border-color);
+    }
+  }
+
+  &.rambler {
+    background-color: #e0ebff;
+    @include hide-form-border(5px);
+
+    &:hover {
+      background-color: #d1e2ff;
+    }
+  }
+
+  &.entireweb {
+    background-color: #e6f0f9;
+    box-shadow: var(--entireweb-form-box-shadow);
+    @include hide-form-border(40px);
+  }
+
+  &.exactseek {
+    @include hide-form-border(3px);
+  }
+
+  &.startpage {
+    border-radius: 32px;
+    border: 1px solid #DEE0F7FF;
+
+    &:focus-within {
+      border-color: $startpage-color;
+    }
+  }
+
+  &.searxng {
+    background-color: var(--searxng-form-bg-color);
+    box-shadow: var(--searxng-form-box-shadow);
+    @include hide-form-border(12px);
   }
 }

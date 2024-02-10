@@ -32,7 +32,19 @@ import { ReactComponent as YandexIcon } from "../../../static/svgs/yandex/ya-ico
 import { ReactComponent as YandexEnIcon } from "../../../static/svgs/yandex/ya-icon-en.svg";
 import { ReactComponent as YoucomIcon } from "../../../static/svgs/youcom/youcom-icon.svg";
 import { ReactComponent as ZapmetaIcon } from "../../../static/svgs/zapmeta/zapmeta-icon.svg";
+import { ReactComponent as MojeekIcon } from "../../../static/svgs/mojeek/mojeek-icon.svg";
+import { ReactComponent as AlexandriaIcon } from "../../../static/svgs/alexandria/alexandria-icon.svg";
+import { ReactComponent as YepIcon } from "../../../static/svgs/yep/yep-icon.svg";
+import { ReactComponent as IzitoIcon } from "../../../static/svgs/izito/izito-icon.svg";
+import { ReactComponent as PresearchIcon } from "../../../static/svgs/presearch/presearch-icon.svg";
+import { ReactComponent as HotBotIcon } from "../../../static/svgs/hotbot/hotbot-icon.svg";
+import { ReactComponent as RamblerIcon } from "../../../static/svgs/rambler/rambler-icon.svg";
+import { ReactComponent as EntirewebIcon } from "../../../static/svgs/entireweb/entireweb-icon.svg";
+import { ReactComponent as ExactSeekIcon } from "../../../static/svgs/exactseek/exactseek-icon.svg";
+import { ReactComponent as StartpageIcon } from "../../../static/svgs/startpage/startpage-icon.svg";
+import { ReactComponent as SearXNGIcon } from "../../../static/svgs/searxng/searxng-icon.svg";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
@@ -40,16 +52,26 @@ import {
   BRAVE,
   DUCK,
   ECOSIA,
+  ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
   GOOGLE,
+  HOTBOT,
+  IZITO,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
+  PRESEARCH,
+  RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
+  SEARXNG,
+  STARTPAGE,
   SWISSCOWS,
   YAHOO,
   YANDEX,
+  YEP,
   YOUCOM,
   ZAPMETA
 } from "../../../constants/search-engine.constants";
@@ -137,6 +159,28 @@ const DroppableAriaContainer: FC<DroppableAriaContainerProps> = ({
             return <BoardreaderIcon />;
           case SEARCHCH:
             return <SearchchIcon />;
+          case MOJEEK:
+            return <MojeekIcon />;
+          case ALEXANDRIA:
+            return <AlexandriaIcon />;
+          case YEP:
+            return <YepIcon />;
+          case IZITO:
+            return <IzitoIcon />;
+          case PRESEARCH:
+            return <PresearchIcon />;
+          case HOTBOT:
+            return <HotBotIcon />;
+          case RAMBLER:
+            return <RamblerIcon />;
+          case ENTIREWEB:
+            return <EntirewebIcon />;
+          case EXACTSEEK:
+            return <ExactSeekIcon />;
+          case STARTPAGE:
+            return <StartpageIcon />;
+          case SEARXNG:
+            return <SearXNGIcon />;
           default:
             return <></>;
         }

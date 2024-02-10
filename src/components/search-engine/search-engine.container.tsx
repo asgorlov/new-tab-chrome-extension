@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useCallback, useMemo } from "react";
 import SearchEngineComponent from "./search-engine.component";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
@@ -8,16 +9,26 @@ import {
   BRAVE,
   DUCK,
   ECOSIA,
+  ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
+  HOTBOT,
+  IZITO,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
+  PRESEARCH,
+  RAMBLER,
   SEARCH_INPUT_NAMES,
   SEARCHCH,
   SEARCHCRYPT,
+  SEARXNG,
+  STARTPAGE,
   SWISSCOWS,
   YAHOO,
   YANDEX,
+  YEP,
   YOUCOM,
   ZAPMETA
 } from "../../constants/search-engine.constants";
@@ -32,6 +43,13 @@ import { ReactComponent as BingSearchIcon } from "../../static/svgs/bing/bing-se
 import { ReactComponent as SwisscowsSearchIcon } from "../../static/svgs/swisscows/swisscows-search-icon.svg";
 import { ReactComponent as MetagerSearchIcon } from "../../static/svgs/metager/metager-search-icon.svg";
 import { ReactComponent as AskSearchIcon } from "../../static/svgs/ask/ask-search-icon.svg";
+import { ReactComponent as MojeekSearchIcon } from "../../static/svgs/mojeek/mojeek-search-icon.svg";
+import { ReactComponent as YepSearchIcon } from "../../static/svgs/yep/yep-search-icon.svg";
+import { ReactComponent as PresearchSearchIcon } from "../../static/svgs/presearch/presearch-search-icon.svg";
+import { ReactComponent as HotBotSearchIcon } from "../../static/svgs/hotbot/hotbot-search-icon.svg";
+import { ReactComponent as RamblerSearchIcon } from "../../static/svgs/rambler/rambler-search-icon.svg";
+import { ReactComponent as StartpageSearchIcon } from "../../static/svgs/startpage/startpage-search-icon.svg";
+import { ReactComponent as SearXNGSearchIcon } from "../../static/svgs/searxng/searxng-search-icon.svg";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLanguage,
@@ -48,6 +66,8 @@ const SearchEngineContainer: FC = () => {
     switch (searchEngine) {
       case YANDEX:
       case SEARCHCH:
+      case ALEXANDRIA:
+      case EXACTSEEK:
         return <span>{t("searchButton")}</span>;
       case DUCK:
         return <span>{"S"}</span>;
@@ -83,11 +103,27 @@ const SearchEngineContainer: FC = () => {
       case SEARCHCRYPT:
       case BOARDREADER:
       case ZAPMETA:
+      case IZITO:
+      case ENTIREWEB:
         return <span />;
       case METAGER:
         return <MetagerSearchIcon />;
       case ASK:
         return <AskSearchIcon />;
+      case MOJEEK:
+        return <MojeekSearchIcon />;
+      case YEP:
+        return <YepSearchIcon />;
+      case PRESEARCH:
+        return <PresearchSearchIcon />;
+      case HOTBOT:
+        return <HotBotSearchIcon />;
+      case RAMBLER:
+        return <RamblerSearchIcon />;
+      case STARTPAGE:
+        return <StartpageSearchIcon />;
+      case SEARXNG:
+        return <SearXNGSearchIcon />;
       default:
         return <></>;
     }

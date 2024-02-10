@@ -1,0 +1,38 @@
+@import "../../modules/constants.module";
+
+.new-tab__input {
+  transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+
+  &:not(&:focus),
+  &:not(&:focus-within) {
+    border-color: var(--border-color);
+  }
+
+  &.ant-input-affix-wrapper-disabled,
+  &[disabled],
+  .ant-input[disabled] {
+    transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+    color: var(--disabled-text-color);
+    background-color: var(--disabled-bg-color);
+    border-color: var(--border-color);
+  }
+
+  &.ant-input-group-wrapper-disabled {
+    .ant-input-group-addon {
+      transition: all, border-color $slow-transition, background-color $slow-transition, color $fast-transition;
+      color: var(--disabled-text-color);
+      background-color: var(--disabled-bg-color);
+      border-color: var(--border-color);
+    }
+  }
+
+  &:not(&.ant-input-group-wrapper-disabled) {
+    .ant-input-group-addon {
+      transition: all, background-color $slow-transition, color $fast-transition;
+      color: var(--text-color);
+      background-color: var(--overlay-bg-color);
+    }
+  }
+}

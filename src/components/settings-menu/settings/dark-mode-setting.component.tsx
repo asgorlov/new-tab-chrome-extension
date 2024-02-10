@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { ReactComponent as DarkModeIcon } from "../../../static/svgs/menu-settings/dark-mode-icon.svg";
 import { Switch } from "antd";
 import {
@@ -11,13 +11,10 @@ import CollapseComponent from "../../common/collapse/collapse.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectDarkMode,
-  selectIsDark,
-  selectNightPeriod
+  selectIsDark
 } from "../../../store/new-tab/new-tab.selectors";
 import { AppDispatch } from "../../../store/store";
 import { setDarkMode, setIsDark } from "../../../store/new-tab/new-tab.slice";
-import { isSunsetTimeCached } from "../../../utils/dark-mode.utils";
-import { getNightPeriodByLocation } from "../../../store/new-tab/new-tab.thunks";
 import SelectComponent from "../../common/select/select.component";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 
@@ -31,7 +28,6 @@ const DarkModeSettingComponent: FC = () => {
 
   const isDark = useSelector(selectIsDark);
   const darkMode = useSelector(selectDarkMode);
-  const nightPeriod = useSelector(selectNightPeriod);
 
   const options = useMemo(() => {
     return [AUTO, MANUAL, SYSTEM].map(name => {
@@ -43,30 +39,11 @@ const DarkModeSettingComponent: FC = () => {
     });
   }, [t]);
 
-  const onChangeDarkModeCollapse = useCallback(
-    (key: string | string[]) => {
-      if (key.length && !isSunsetTimeCached(nightPeriod)) {
-        navigator.geolocation.getCurrentPosition(location => {
-          const coords = location?.coords;
-          if (coords && coords.latitude && coords.longitude) {
-            const coordinate = {
-              lat: coords.latitude,
-              lng: coords.longitude
-            };
-            dispatch(getNightPeriodByLocation(coordinate));
-          }
-        });
-      }
-    },
-    [nightPeriod, dispatch]
-  );
-
   return (
     <CollapseComponent
       icon={<DarkModeIcon />}
       type={CollapsedMenuSetting.DARK_MODE}
       title={t("darkModeTitle")}
-      onChange={onChangeDarkModeCollapse}
       className="new-tab__settings-menu_dark-mode"
     >
       <div className="new-tab__settings-menu_dark-mode-content">

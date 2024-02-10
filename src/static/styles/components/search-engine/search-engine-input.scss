@@ -2,6 +2,7 @@
 
 @mixin change-pseudo-input-border-color($color) {
   &.ant-input-affix-wrapper:focus,
+  &.ant-input-affix-wrapper:focus-within,
   &.ant-input-affix-wrapper:hover,
   &.ant-input-affix-wrapper-focused {
     border-color: $color;
@@ -21,6 +22,14 @@
 
   .ant-input-prefix {
     margin-inline-end: 0;
+
+    &:after {
+      transition: all, height $fast-transition, margin-right $fast-transition;
+      content: "";
+      border-right: 1px solid var(--presearch-input-separator-color);
+      height: 0;
+      margin-right: 0;
+    }
   }
 
   .ant-input {
@@ -75,6 +84,7 @@
       opacity: 0;
       margin-right: 0;
       background-image: url("../../../svgs/google/google-search-icon.svg");
+      background-size: cover;
     }
 
     &.google span {
@@ -92,6 +102,15 @@
       height: 20px;
       opacity: 1;
       background-image: url("../../../svgs/metager/metager-key-icon.svg");
+    }
+
+    &.presearch span {
+      cursor: default;
+      margin-right: 10px;
+      width: 24px;
+      height: 24px;
+      opacity: 1;
+      background-image: url("../../../svgs/presearch/presearch-icon.svg");
     }
   }
 
@@ -227,5 +246,134 @@
     border-radius: 6px;
     margin-right: 12px;
     @include change-pseudo-input-border-color(transparent);
+  }
+
+  &.mojeek {
+    padding: 0 0 0 12px;
+    @include change-pseudo-input-border-color(transparent);
+  }
+
+  &.alexandria {
+    border: 2px solid var(--alexandria-main-border-color);
+    border-right-color: var(--alexandria-part-border-color);
+    border-bottom-color: var(--alexandria-part-border-color);
+    border-radius: 0;
+    padding: 0 4px;
+    margin-right: 8px;
+    font-size: 16px;
+    background-color: $light-color;
+
+    &.ant-input-affix-wrapper-focused {
+      border-color: var(--alexandria-main-border-color);
+      border-radius: 4px;
+      box-shadow: none;
+    }
+
+    .ant-input {
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &.yep {
+    border-radius: 30px 0 0 30px;
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+
+    &.ant-input-affix-wrapper-focused {
+      .ant-input {
+        color: $light-text-color;
+      }
+    }
+
+    .ant-input {
+      transition: $fast-transition;
+      color: var(--text-color);
+    }
+  }
+
+  &.izito {
+    border: 1px solid #dddddd;
+    border-right-color: transparent;
+    @include change-pseudo-input-border-color(#dddddd);
+  }
+
+  &.presearch {
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+
+    .ant-input {
+      transition: $fast-transition;
+      color: var(--text-color);
+    }
+
+    .ant-input-prefix {
+      &:after {
+        height: 21px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &.hotbot {
+    border-radius: 24px 0 0 24px;
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+  }
+
+  &.rambler {
+    border-radius: 5px 0 0 5px;
+    @include change-pseudo-input-border-color(transparent);
+
+    .ant-input {
+      &::placeholder {
+        font-size: 16px;
+        color: $rambler-color;
+      }
+    }
+  }
+
+  &.entireweb {
+    border-radius: 30px 0 0 30px;
+    @include change-pseudo-input-border-color(transparent);
+  }
+
+  &.exactseek {
+    border: 1px solid var(--exactseek-form-border-color);
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+    cursor: pointer;
+
+    &.ant-input-affix-wrapper-focused {
+      border-color: black;
+      border-width: 2px;
+      box-shadow: none;
+    }
+
+    .ant-input {
+      cursor: pointer;
+    }
+  }
+
+  &.startpage {
+    border-radius: 32px 0 0 32px;
+    padding-right: 0;
+    @include change-pseudo-input-border-color(transparent);
+  }
+
+  &.searxng {
+    border-radius: 12px 0 0 12px;
+    padding: 0 0 0 12px;
+    @include change-pseudo-input-border-color(transparent);
+
+    .ant-input {
+      color: var(--text-color);
+
+      &::placeholder {
+        font-size: 16px;
+        color: #757575;
+      }
+    }
   }
 }

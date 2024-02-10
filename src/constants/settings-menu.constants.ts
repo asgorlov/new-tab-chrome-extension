@@ -54,3 +54,9 @@ export const SETTINGS_WITH_SELECTOR = [
   CollapsedMenuSetting.DARK_MODE,
   CollapsedMenuSetting.UPDATE
 ];
+
+/**
+ * Регулярное выражение для нахождения спецсимволов
+ * @category Constants - Settings menu
+ */
+export const SPEC_CHARS_REG_EXP = /[.*+?^${}()|[\]\\]/g;

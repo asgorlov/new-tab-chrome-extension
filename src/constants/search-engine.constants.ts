@@ -1,5 +1,3 @@
-import constants from "../static/styles/modules/constants.module.scss";
-
 /**
  * Значение режима автоматического включения темной темы
  * @category Constants - Search Engine
@@ -45,9 +43,75 @@ export const SEARCH_ENGINE_NAMES = [
   "ask",
   "boardreader",
   "zapmeta",
-  "searchch"
+  "searchch",
+  "mojeek",
+  "alexandria",
+  "yep",
+  "izito",
+  "presearch",
+  "hotbot",
+  "rambler",
+  "entireweb",
+  "exactseek",
+  "startpage",
+  "searxng"
 ];
 
+/**
+ * Поисковая система Sear XNG
+ * @category Constants - Search Engine
+ */
+export const SEARXNG = SEARCH_ENGINE_NAMES[29];
+/**
+ * Поисковая система startpage
+ * @category Constants - Search Engine
+ */
+export const STARTPAGE = SEARCH_ENGINE_NAMES[28];
+/**
+ * Поисковая система exact seek
+ * @category Constants - Search Engine
+ */
+export const EXACTSEEK = SEARCH_ENGINE_NAMES[27];
+/**
+ * Поисковая система entireweb
+ * @category Constants - Search Engine
+ */
+export const ENTIREWEB = SEARCH_ENGINE_NAMES[26];
+/**
+ * Поисковая система rambler
+ * @category Constants - Search Engine
+ */
+export const RAMBLER = SEARCH_ENGINE_NAMES[25];
+/**
+ * Поисковая система hotBot
+ * @category Constants - Search Engine
+ */
+export const HOTBOT = SEARCH_ENGINE_NAMES[24];
+/**
+ * Поисковая система presearch
+ * @category Constants - Search Engine
+ */
+export const PRESEARCH = SEARCH_ENGINE_NAMES[23];
+/**
+ * Поисковая система izito
+ * @category Constants - Search Engine
+ */
+export const IZITO = SEARCH_ENGINE_NAMES[22];
+/**
+ * Поисковая система yep.com
+ * @category Constants - Search Engine
+ */
+export const YEP = SEARCH_ENGINE_NAMES[21];
+/**
+ * Поисковая система alexandria
+ * @category Constants - Search Engine
+ */
+export const ALEXANDRIA = SEARCH_ENGINE_NAMES[20];
+/**
+ * Поисковая система mojeek
+ * @category Constants - Search Engine
+ */
+export const MOJEEK = SEARCH_ENGINE_NAMES[19];
 /**
  * Поисковая система Search.ch
  * @category Constants - Search Engine
@@ -149,25 +213,36 @@ export const YANDEX = SEARCH_ENGINE_NAMES[0];
  * @category Constants - Search Engine
  */
 export const SEARCH_ENGINE_LINKS: Record<string, string> = {
-  aol: "https://aolsearch.com/",
-  bing: "https://bing.com/",
-  brave: "https://search.brave.com/",
-  nigma: "https://nigma.net.ru/",
-  lycos: "https://lycos.com/",
-  yahoo: "https://yahoo.com/",
-  ecosia: "https://ecosia.org/",
-  yandex: "https://ya.ru/",
-  youcom: "https://you.com/",
-  gibiru: "https://gibiru.com/",
-  google: "https://google.com/",
-  swisscows: "https://swisscows.com/",
-  duckduckgo: "https://duckduckgo.com/",
+  aol: "https://aolsearch.com",
+  bing: "https://bing.com",
+  brave: "https://search.brave.com",
+  nigma: "https://nigma.net.ru",
+  lycos: "https://lycos.com",
+  yahoo: "https://yahoo.com",
+  ecosia: "https://ecosia.org",
+  yandex: "https://ya.ru",
+  youcom: "https://you.com",
+  gibiru: "https://gibiru.com",
+  google: "https://google.com",
+  swisscows: "https://swisscows.com",
+  duckduckgo: "https://duckduckgo.com",
   searchcrypt: "https://searchencrypt.com/home",
-  metager: "https://metager.org/",
-  ask: "https://ask.com/",
-  boardreader: "https://boardreader.com/",
-  zapmeta: "https://zapmeta.com/",
-  searchch: "https://search.ch/"
+  metager: "https://metager.org",
+  ask: "https://ask.com",
+  boardreader: "https://boardreader.com",
+  zapmeta: "https://zapmeta.com",
+  searchch: "https://search.ch",
+  mojeek: "https://mojeek.com",
+  alexandria: "https://alexandria.org",
+  yep: "https://yep.com",
+  izito: "https://izito.com",
+  presearch: "https://presearch.com",
+  hotbot: "https://hotbot.com/",
+  rambler: "https://www.rambler.ru",
+  entireweb: "https://www.entireweb.com",
+  exactseek: "https://exactseek.com",
+  startpage: "https://startpage.com",
+  searxng: "https://search.demoniak.ch"
 };
 
 /**
@@ -193,31 +268,16 @@ export const SEARCH_QUERY_LINKS: Record<string, string> = {
   ask: "https://ask.com/web",
   boardreader: "https://boardreader.com/s",
   zapmeta: "https://zapmeta.com/search",
-  searchch: "https://search.ch"
-};
-
-/**
- * Список цветовых схем поисковых систем
- * @category Constants - Search Engine
- */
-export const SEARCH_THEMES: Record<string, string> = {
-  aol: constants.aolColor,
-  bing: constants.bingColor,
-  brave: constants.braveColor,
-  nigma: constants.nigmaColor,
-  lycos: constants.lycosColor,
-  yahoo: constants.yahooColor,
-  ecosia: constants.ecosiaColor,
-  yandex: constants.yaColor,
-  youcom: constants.youcomColor,
-  gibiru: constants.gibiruColor,
-  google: constants.gooColor,
-  swisscows: constants.cowsColor,
-  duckduckgo: constants.duckColor,
-  searchcrypt: constants.searchcryptColor,
-  metager: constants.metagerColor,
-  ask: constants.askColor,
-  boardreader: constants.boardreaderColor,
-  zapmeta: constants.zapmetaColor,
-  searchch: constants.searchchColor
+  searchch: "https://search.ch",
+  mojeek: "https://mojeek.com/search",
+  alexandria: "https://alexandria.org",
+  yep: "https://yep.com/web",
+  izito: "https://izito.com/search",
+  presearch: "https://presearch.com/search",
+  hotbot: "https://hotbot.com/web",
+  rambler: "https://nova.rambler.ru/search",
+  entireweb: "https://search.entireweb.com/search",
+  exactseek: "https://exactseek.com/cgi-bin/search.cgi",
+  startpage: "https://www.startpage.com/sp/search",
+  searxng: "https://search.demoniak.ch/search"
 };

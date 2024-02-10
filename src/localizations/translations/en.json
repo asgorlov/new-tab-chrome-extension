@@ -89,8 +89,25 @@
     "boardreader": "Board Reader",
     "zapmeta": "Zapmeta",
     "searchch": "Search.ch",
+    "mojeek": "Mojeek",
+    "alexandria": "Alexandria",
+    "yep": "Yep.com",
+    "izito": "Izito",
+    "presearch": "Presearch",
+    "hotbot": "HotBot",
+    "rambler": "Rambler",
+    "entireweb": "Entireweb",
+    "exactseek": "Exact Seek",
+    "startpage": "Startpage",
+    "searxng": "Sear XNG",
     "selectAll": "Select all",
-    "removeAll": "Remove all"
+    "removeAll": "Remove all",
+    "searXNGInput": {
+      "url": "SearXNG URL",
+      "invalidURL": "Invalid link format",
+      "tooltip": "Here you can change the SearXNG URL to another. You need to click in the input field and enter data in a format similar to that of a placeholder",
+      "disabledTooltip": "You need to select the SearXNG search engine for the input field to become available"
+    }
   },
   "tour": {
     "button": {
@@ -109,6 +126,10 @@
     "step3": {
       "title": "Settings menu",
       "description": "Change the main settings of the page: language, dark mode, background and others."
+    },
+    "step4": {
+      "title": "SearXNG url",
+      "description": "Change the SearXNG search engine url.\nBy default, the link that is specified in the input placeholder is used."
     }
   },
   "notification": {

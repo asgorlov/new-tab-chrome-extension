@@ -1,23 +1,34 @@
 import { checkForUpdates } from "../constants/update.constants";
 import {
+  ALEXANDRIA,
   AOL,
   ASK,
   BING,
   BOARDREADER,
   BRAVE,
   ECOSIA,
+  ENTIREWEB,
+  EXACTSEEK,
   GIBIRU,
+  HOTBOT,
+  IZITO,
   LYCOS,
   METAGER,
+  MOJEEK,
   NIGMA,
+  PRESEARCH,
+  RAMBLER,
   SEARCHCH,
   SEARCHCRYPT,
+  SEARXNG,
+  STARTPAGE,
   SWISSCOWS,
   YAHOO,
+  YEP,
   YOUCOM,
   ZAPMETA
 } from "../constants/search-engine.constants";
-import { setDataToChromeSyncStorage } from "./chrome.utils";
+import db from "../db/db";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 
@@ -64,7 +75,7 @@ export const getDownloadLink = (version: string) => {
 export const updateStateWithFeatures = (data: NewTabStateBase) => {
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    setDataToChromeSyncStorage({ update: data.update });
+    db.set({ update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -73,13 +84,17 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
       data.update.previousVersion
     );
 
+    if (features.forceShowTour) {
+      data.showTour = features.forceShowTour;
+    }
+
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
 
     data.update.previousVersion = data.update.lastVersion;
 
-    setDataToChromeSyncStorage({
+    db.set({
       searchEngines: data.searchEngines,
       update: data.update
     });
@@ -97,6 +112,7 @@ export const getDeltaChanges = (
   lastVersion: string,
   previousVersion: string
 ): Features => {
+  let forceShowTour = false;
   const searchEngines = [];
 
   if (previousVersion < "2.3.0" && lastVersion >= "2.3.0") {
@@ -124,6 +140,22 @@ export const getDeltaChanges = (
       SEARCHCH
     );
   }
+  if (previousVersion < "3.5.0" && lastVersion >= "3.5.0") {
+    forceShowTour = true;
+    searchEngines.push(
+      MOJEEK,
+      ALEXANDRIA,
+      YEP,
+      IZITO,
+      PRESEARCH,
+      HOTBOT,
+      RAMBLER,
+      ENTIREWEB,
+      EXACTSEEK,
+      STARTPAGE,
+      SEARXNG
+    );
+  }
 
-  return { searchEngines };
+  return { searchEngines, forceShowTour };
 };

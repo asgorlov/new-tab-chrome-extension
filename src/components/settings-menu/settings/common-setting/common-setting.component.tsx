@@ -3,10 +3,7 @@ import { ReactComponent as CommonIcon } from "../../../../static/svgs/menu-setti
 import CollapseComponent from "../../../common/collapse/collapse.component";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import {
-  selectIsDark,
-  selectSearchEngine
-} from "../../../../store/new-tab/new-tab.selectors";
+import { selectIsDark } from "../../../../store/new-tab/new-tab.selectors";
 import { Radio } from "antd";
 import {
   BUTTON_NAMES,
@@ -18,13 +15,13 @@ import { RadioChangeEvent } from "antd/es/radio/interface";
 import UploadComponent from "../../../common/upload/upload.component";
 import ModalComponent from "../../../common/modal/modal.component";
 import RadioComponent from "../../../common/radio/radio.component";
-import { SEARCH_THEMES } from "../../../../constants/search-engine.constants";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { CollapsedMenuSetting } from "../../../../constants/settings-menu.constants";
 import {
   DARK_TEXT_COLOR,
   LIGHT_TEXT_COLOR
 } from "../../../../constants/common.constants";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Передаваемые параметры для компонента общих настроек
@@ -77,9 +74,9 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     onChangeRadioOption
   }) => {
     const { t } = useTranslation();
+    const token = useToken();
 
     const isDark = useSelector(selectIsDark);
-    const searchEngine = useSelector(selectSearchEngine);
 
     const borderColor = isDark ? DARK_TEXT_COLOR : LIGHT_TEXT_COLOR;
     const showUpload =
@@ -87,7 +84,7 @@ const CommonSettingComponent: FC<CommonSettingComponentProps> = memo(
     const onMouseLeave = (e: MouseEvent<HTMLButtonElement>) =>
       (e.currentTarget.style.color = borderColor);
     const onMouseOver = (e: MouseEvent<HTMLButtonElement>) =>
-      (e.currentTarget.style.color = SEARCH_THEMES[searchEngine]);
+      (e.currentTarget.style.color = token[1].colorPrimary);
 
     return (
       <CollapseComponent

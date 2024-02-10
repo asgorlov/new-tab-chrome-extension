@@ -13,7 +13,17 @@
   src: local("Boardreader"), url("../../fonts/material-icons.woff2") format("woff2");
 }
 
-@font-face{
+@font-face {
   font-family: "Zapmeta";
   src: local("Zapmeta"), url("../../fonts/visymo.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Izito";
+  src: local("Izito"), url("../../fonts/visymo.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Entireweb";
+  src: local("Entireweb"), url("../../fonts/fontawesome-webfont.woff2") format("woff2");
 }

@@ -30,6 +30,14 @@ export const selectShowTour = (state: RootState): boolean =>
 export const selectDarkMode = (state: RootState): string =>
   state.newTab.darkMode;
 /**
+ * Селектор получения ссылки на поисковую систему SearXNG
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Ссылка на поисковую систему SearXNG
+ */
+export const selectSearXngUrl = (state: RootState): string =>
+  state.newTab.searXngUrl;
+/**
  * Селектор получения названия фона приложения
  * @category Selectors - New Tab
  * @param state - Стор

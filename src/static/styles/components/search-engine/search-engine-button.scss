@@ -44,6 +44,14 @@
   cursor: pointer;
   opacity: 1;
 
+  &:before {
+    transition: all, height $fast-transition, margin-right $fast-transition;
+    content: "";
+    height: 0;
+    border-right: 1px solid var(--presearch-input-separator-color);
+    margin-right: 0;
+  }
+
   &.yandex {
     width: 80px;
     border-radius: 9px;
@@ -383,6 +391,164 @@
     span {
       color: $light-color;
       font-size: 18px;
+    }
+  }
+
+  &.mojeek {
+    width: 44px;
+    padding: 0 12px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  &.alexandria {
+    width: 40px;
+    min-width: max-content;
+    padding: 4px 8px;
+    border-radius: 2px;
+    border: 1px solid #767676;
+    background-color: #f0f0f0;
+
+    &:hover {
+      background-color: darken(#f0f0f0, 5%);
+      border-color: #464646;
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  &.yep {
+    width: 40px;
+    border-radius: 0 30px 30px 0;
+
+    &:hover {
+      svg {
+        color: #333;
+      }
+    }
+
+    svg {
+      color: #00000085;
+      width: 18px;
+    }
+  }
+
+  &.izito {
+    width: 50px;
+    background-color: $izito-color;
+
+    span {
+      font-family: Izito, sans-serif;
+      font-size: 16px;
+      padding-top: 2px;
+      color: $light-color;
+
+      &::before {
+        content: "\e901";
+      }
+    }
+  }
+
+  &.presearch {
+    padding: 0;
+    margin: 0 11px;
+    width: 28px;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:before {
+      height: 18px;
+      margin-right: 10px;
+    }
+  }
+
+  &.hotbot {
+    width: 45px;
+    border-radius: 0 24px 24px 0;
+    padding: 0 14px 0 11px;
+  }
+
+  &.rambler {
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    border-radius: 5px;
+    margin-right: 5px;
+    background-color: $rambler-color;
+
+    &:hover {
+      background-color: #2c54e2;
+    }
+
+    &:active {
+      background-color: #274bc8;
+    }
+  }
+
+  &.entireweb {
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    border-radius: 27px;
+    margin-right: 5px;
+    background-color: $entireweb-color;
+
+    &:hover {
+      background-color: #1b84b6;
+    }
+
+    span {
+      color: $light-color;
+      font-size: 12px;
+      font-family: Entireweb, sans-serif;
+
+      &:before {
+        content: "\f002";
+      }
+    }
+  }
+
+  &.exactseek {
+    width: 80px;
+    border-radius: 0 3px 3px 0;
+    background-color: #428fdf;
+    cursor: default;
+
+    span {
+      color: $light-color;
+      font-size: 16px;
+    }
+  }
+
+  &.startpage {
+    width: 37px;
+    padding-right: 10px;
+    border-radius: 0 32px 32px 0;
+
+    &:hover svg {
+      color: $startpage-color;
+    }
+  }
+
+  &.searxng {
+    width: 45px;
+    padding: 0 12px;
+    border-radius: 0 12px 12px 0;
+    color: var(--searxng-bt-text-color);
+
+    &:hover {
+      background-color: $searxng-color;
+
+      svg {
+        color: var(--invert-text-color);
+      }
+    }
+
+    svg {
+      transition: $fast-transition;
     }
   }
 }

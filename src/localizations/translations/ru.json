@@ -89,8 +89,25 @@
     "boardreader": "Board Reader",
     "zapmeta": "Zapmeta",
     "searchch": "Search.ch",
+    "mojeek": "Mojeek",
+    "alexandria": "Alexandria",
+    "yep": "Yep.com",
+    "izito": "Izito",
+    "presearch": "Presearch",
+    "hotbot": "HotBot",
+    "rambler": "Рамблер",
+    "entireweb": "Entireweb",
+    "exactseek": "Exact Seek",
+    "startpage": "Startpage",
+    "searxng": "Sear XNG",
     "selectAll": "Выбрать все",
-    "removeAll": "Убрать все"
+    "removeAll": "Убрать все",
+    "searXNGInput": {
+      "url": "Ссылка на SearXNG",
+      "invalidURL": "Неверный формат ссылки",
+      "tooltip": "Здесь Вы можете поменять ссылку на другую поисковую систему SearXNG. Для этого Вам необходимо кликнуть в поле ввода и ввести данные в формате, как у плейсхолдера",
+      "disabledTooltip": "Для того, чтобы поле ввода стало доступным, Вам необходимо выбрать поисковую систему SearXNG"
+    }
   },
   "tour": {
     "button": {
@@ -109,6 +126,10 @@
     "step3": {
       "title": "Меню настроек",
       "description": "Меняйте основные настройки страницы: язык, темный режим, фон и другие."
+    },
+    "step4": {
+      "title": "Ссылка на SearXNG",
+      "description": "Меняйте ссылку поисковой системы SearXNG.\nПо умолчанию используется та, которая указана в плейсхолдере поля ввода."
     }
   },
   "notification": {

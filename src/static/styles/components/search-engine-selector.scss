@@ -27,11 +27,11 @@
     }
 
     &-left-button {
-        border-radius: 6px 0 0 6px;
+        border-radius: 8px 0 0 8px;
     }
 
     &-right-button {
-        border-radius: 0 6px 6px 0;
+        border-radius: 0 8px 8px 0;
     }
 
     &-droppable-aria {
@@ -64,6 +64,8 @@
         &.searchch,
         &.swisscows,
         &.boardreader,
+        &.alexandria,
+        &.yep,
         &._selected {
             filter: grayscale(0);
         }
@@ -90,6 +92,30 @@
                     fill: #343434;
 
                     &:last-child {
+                        fill: #545454;
+                    }
+                }
+            }
+
+            &.alexandria {
+                svg path {
+                    &.svg-grey {
+                        fill: #64646b;
+                    }
+
+                    &:last-child {
+                        fill: #a4a4a4;
+                    }
+                }
+            }
+
+            &.yep {
+                svg path {
+                    &:first-child {
+                        fill: #a4a4a4;
+                    }
+
+                    &.svg-grey {
                         fill: #545454;
                     }
                 }

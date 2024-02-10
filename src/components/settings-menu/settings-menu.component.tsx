@@ -7,7 +7,6 @@ import LanguageSettingComponent from "./settings/language-setting.component";
 import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
 import CommonSettingContainer from "./settings/common-setting/common-setting.container";
 import DrawerComponent from "../common/drawer/drawer.component";
-import { SEARCH_THEMES } from "../../constants/search-engine.constants";
 import UpdateSettingComponent from "./settings/update-setting.component";
 import SettingsHeaderContainer from "./settings-header/settings-header.container";
 import SettingRefsContextProvider from "../../contexts/setting-refs.context";
@@ -16,10 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import {
   selectIsDark,
-  selectIsOpenMenu,
-  selectSearchEngine
+  selectIsOpenMenu
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Компонент меню настроек
@@ -28,10 +27,10 @@ import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 const SettingsMenuComponent: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const tourCtx = useTourStepThreeContext();
+  const token = useToken();
 
   const isDark = useSelector(selectIsDark);
   const isOpenMenu = useSelector(selectIsOpenMenu);
-  const searchEngine = useSelector(selectSearchEngine);
 
   const menuClass = "new-tab__settings-menu";
 
@@ -44,7 +43,7 @@ const SettingsMenuComponent: FC = () => {
       >
         <MenuIcon
           className="new-tab__settings-menu-icon"
-          style={{ fill: SEARCH_THEMES[searchEngine] }}
+          style={{ fill: token[1].colorPrimary }}
         />
       </Button>
       <SettingRefsContextProvider>

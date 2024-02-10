@@ -24,6 +24,7 @@ export interface NewTabState extends NewTabStateBase {
  * @property showTour - Флаг ознакомительного тура
  * @property darkMode - Режимы включения темной темы
  * @property wallpaper - Название фона приложения. Используется для разграничения стандартных и пользовательских фонов
+ * @property searXngUrl - Ссылка на поисковую систему SearXNG
  * @property nightPeriod - Ночной период
  * @property checkLoading - Флаг запуска проверки обновлений
  * @property searchEngine - Выбранная поисковая система
@@ -39,6 +40,7 @@ export interface NewTabStateBase {
   showTour: boolean;
   darkMode: string;
   wallpaper: string;
+  searXngUrl: string;
   nightPeriod: NightPeriod;
   checkLoading: boolean;
   searchEngine: string;
