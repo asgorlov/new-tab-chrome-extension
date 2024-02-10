@@ -1,12 +1,4 @@
 /**
- * Путь к свойству объекта, которое будет использоваться в качестве ключа
- */
-const KEY_PATH_NAME: "key";
-/**
- * Режим транзакции на чтение\запись данных
- */
-const RW_MODE: "readwrite";
-/**
  * Название хранилища с данными приложения
  */
 const STORE_NAME: "new-tab-db";
@@ -37,12 +29,4 @@ interface DBAdapter {
  */
 const getDBAdapter: (dbName: string) => DBAdapter;
 
-export {
-  STORE_NAME,
-  KEY_PATH_NAME,
-  RW_MODE,
-  IS_DARK_KEY,
-  getDBAdapter,
-  DBAdapter,
-  DBItem
-};
+export { STORE_NAME, IS_DARK_KEY, getDBAdapter, DBAdapter, DBItem };
