@@ -124,15 +124,13 @@ export const matchElements = (
 
           if (highlightedText.containsSearchQuery) {
             element.innerHTML = highlightedText.content;
-            const elements = [
-              ...element.querySelectorAll(
-                `.${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}`
-              )
-            ].map(e => ({
-              item: e,
-              type,
-              textContentBackup: textContent
-            }));
+            const elements = [...element.getElementsByTagName("mark")].map(
+              e => ({
+                item: e,
+                type,
+                textContentBackup: textContent
+              })
+            );
 
             matchedElements.push(...elements);
           }
@@ -181,7 +179,7 @@ const getHighlightedTextModel = (
 
       result.push(
         firstTextPart,
-        `<span class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</span>`
+        `<mark class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</mark>`
       );
 
       verifiableText = verifiableText.substring(
