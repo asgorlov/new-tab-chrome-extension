@@ -32,7 +32,7 @@ const getAllValues = async dbName => {
         .objectStore(dbName)
         .getAll();
 
-      request.onsuccess = event => resolve(event.target.result);
+      request.onsuccess = event => resolve(event.target?.result ?? []);
     } catch (e) {
       console.error(e);
       resolve([]);
@@ -52,7 +52,7 @@ const getValue = async (name, dbName) => {
         .objectStore(dbName)
         .get(name);
 
-      request.onsuccess = event => resolve(event.target.result.value);
+      request.onsuccess = event => resolve(event.target?.result?.value);
     } catch (e) {
       console.error(e);
       resolve(undefined);
