@@ -9,7 +9,10 @@ const store = configureStore({
     getDefaultMiddleware({
       // игнорируем несериализуемые данные nightPeriod
       serializableCheck: {
-        ignoredActions: ["newTab/setNightPeriod"],
+        ignoredActions: [
+          "newTab/setNightPeriod",
+          "newTab/applySettings/fulfilled"
+        ],
         ignoredPaths: ["newTab.nightPeriod"]
       }
     })
