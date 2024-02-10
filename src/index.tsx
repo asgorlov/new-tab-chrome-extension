@@ -4,7 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import "./static/styles/styles.scss";
-import "dark-theme-util";
+import "date-util";
 import NewTabContainer from "./components/new-tab/new-tab.container";
 
 const main = ReactDOM.createRoot(

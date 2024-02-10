@@ -13,7 +13,7 @@ export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
 // ================= Models ===================
-export * from "../models/coordinate.model";
+export * from "../models/location.model";
 export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
 export * from "../models/night-period.model";

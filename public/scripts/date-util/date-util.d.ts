@@ -11,16 +11,4 @@ declare global {
   }
 }
 
-interface Location {
-  latitude: number;
-  longitude: number;
-}
-
-interface NightPeriod {
-  sunset: Date | null;
-  sunrise: Date | null;
-}
-
-const createNightPeriod = (location: Location, date?: Date) => NightPeriod;
-
-export { Location, NightPeriod, createNightPeriod };
+export {};

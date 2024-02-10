@@ -3,7 +3,6 @@ import { CustomWallpaper } from "./custom-wallpaper.model";
 import { NightPeriod } from "./night-period.model";
 import { Notification } from "../constants/notification.constants";
 import { SettingsStorage } from "./settings-search.model";
-import { Location } from "dark-theme-util";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
@@ -49,6 +48,4 @@ export interface NewTabStateBase {
   currentLanguage: string;
   checkForUpdates: string;
   customWallpaper: CustomWallpaper | null;
-  location: Location | null;
-  darkThemeCheckTimeout: NodeJS.Timeout | number | null;
 }

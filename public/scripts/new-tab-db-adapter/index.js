@@ -1,12 +1,8 @@
-const STORE_NAME = "new-tab-db";
 const KEY_PATH_NAME = "key";
 const RW_MODE = "readwrite";
+const STORE_NAME = "new-tab-db";
 
 const IS_DARK_KEY = "isDark";
-const DARK_MODE_KEY = "darkMode";
-const NIGHT_PERIOD_KEY = "nightPeriod";
-const LOCATION_KEY = "location";
-const CHECK_DARK_THEME_TIMEOUT_KEY = "darkThemeCheckTimeout";
 
 const initDB = async dbName => {
   return new Promise((resolve, reject) => {
@@ -36,7 +32,7 @@ const getAllValues = async dbName => {
         .objectStore(dbName)
         .getAll();
 
-      request.onsuccess = event => resolve(event.currentTarget.result);
+      request.onsuccess = event => resolve(event.target.result);
     } catch (e) {
       console.error(e);
       resolve([]);
@@ -56,7 +52,7 @@ const getValue = async (name, dbName) => {
         .objectStore(dbName)
         .get(name);
 
-      request.onsuccess = event => resolve(event.currentTarget.result.value);
+      request.onsuccess = event => resolve(event.target.result.value);
     } catch (e) {
       console.error(e);
       resolve(undefined);
@@ -101,14 +97,4 @@ const getDBAdapter = dbName => {
   };
 };
 
-export {
-  STORE_NAME,
-  KEY_PATH_NAME,
-  RW_MODE,
-  IS_DARK_KEY,
-  DARK_MODE_KEY,
-  NIGHT_PERIOD_KEY,
-  LOCATION_KEY,
-  CHECK_DARK_THEME_TIMEOUT_KEY,
-  getDBAdapter
-};
+export { STORE_NAME, IS_DARK_KEY, getDBAdapter };

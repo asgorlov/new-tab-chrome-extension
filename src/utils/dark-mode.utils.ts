@@ -1,4 +1,40 @@
-import { Location } from "dark-theme-util";
+import { Location } from "../models/location.model";
+import { NightPeriod } from "../models/night-period.model";
+
+/**
+ * Функция создания объекта ночного периода
+ * @category Utilities - Dark Mode
+ * @param location - Текущая локация
+ * @param date - Дата, для которой будет рассчитываться ночной период
+ * @returns - Ночной период {@link NightPeriod}
+ */
+export const createNightPeriod = (
+  location: Location,
+  date: Date = new Date()
+): NightPeriod => {
+  const latitude = location.latitude;
+  const longitude = location.longitude;
+
+  return {
+    sunrise: date.sunrise(latitude, longitude),
+    sunset: date.sunset(latitude, longitude)
+  };
+};
+
+/**
+ * Функция, позволяющая узнать на данный момент ночь или нет
+ * @category Utilities - Dark Mode
+ * @param nightPeriod - Ночной период текущего дня
+ * @returns - <b>True</b>, если сейчас ночь
+ */
+export const isNightPeriodNow = (nightPeriod: NightPeriod): boolean => {
+  const now = new Date();
+
+  return (
+    (!!nightPeriod.sunrise && nightPeriod.sunrise.isSameOrAfter(now)) ||
+    (!!nightPeriod.sunset && nightPeriod.sunset.isSameOrBefore(now))
+  );
+};
 
 /**
  * Функция, позволяющая узнать включена ли темная тема в браузере

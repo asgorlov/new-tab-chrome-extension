@@ -9,7 +9,6 @@ import { Notification } from "../../constants/notification.constants";
 import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
-import { Location } from "dark-theme-util";
 
 const initialState: NewTabState = await getInitState();
 
@@ -47,15 +46,6 @@ export const newTabSlice = createSlice({
     setDarkMode(state: NewTabState, action: PayloadAction<string>) {
       state.darkMode = action.payload;
       db.set({ darkMode: action.payload });
-    },
-    /**
-     * Функция изменения текущей локации
-     * @param state - стор
-     * @param action - экшн
-     */
-    setLocation(state: NewTabState, action: PayloadAction<Location | null>) {
-      state.location = action.payload;
-      db.set({ location: action.payload });
     },
     /**
      * Функция изменения флага открытия меню настроек
@@ -232,7 +222,6 @@ export const {
   setIsDark,
   setShowTour,
   setDarkMode,
-  setLocation,
   setWallpaper,
   setSearXngUrl,
   setIsOpenMenu,

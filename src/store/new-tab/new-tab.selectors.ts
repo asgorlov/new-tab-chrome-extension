@@ -5,7 +5,6 @@ import { Notification } from "../../constants/notification.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
-import { Location } from "dark-theme-util";
 
 /**
  * Селектор получения флага темной темы
@@ -30,14 +29,6 @@ export const selectShowTour = (state: RootState): boolean =>
  */
 export const selectDarkMode = (state: RootState): string =>
   state.newTab.darkMode;
-/**
- * Селектор получения текущей локации
- * @category Selectors - New Tab
- * @param state - Стор
- * @returns - Текущая локация {@link Location} или null
- */
-export const selectLocation = (state: RootState): Location | null =>
-  state.newTab.location;
 /**
  * Селектор получения ссылки на поисковую систему SearXNG
  * @category Selectors - New Tab

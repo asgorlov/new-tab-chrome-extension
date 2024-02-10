@@ -1,0 +1,12 @@
+{
+  "name": "date-util",
+  "version": "0.0.1",
+  "description": "Date utility",
+  "main": "date-util.js",
+  "scripts": {
+    "test": "date-util"
+  },
+  "author": "",
+  "license": "ISC",
+  "types": "date-util"
+}
