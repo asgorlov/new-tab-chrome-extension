@@ -1,5 +1,4 @@
-// ================= Utils =================
-export * from "../utils/chrome.utils";
+// ================= Utils ====================
 export * from "../utils/common-setting.utils";
 export * from "../utils/dark-mode.utils";
 export * from "../utils/search-engine.utils";
@@ -7,25 +6,28 @@ export * from "../utils/settings-header.utils";
 export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
-// ================= Store =================
+// ================= Database =================
+export { default as db } from "../db/db";
+// ================= Store ====================
 export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
-// ================= Models =================
-export * from "../models/chrome-storage.model";
-export * from "../models/coordinate.model";
+// ================= Models ===================
+export * from "../models/location.model";
 export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
 export * from "../models/night-period.model";
 export * from "../models/settings-search.model";
 export * from "../models/update.model";
-// ================= Hooks =================
+export * from "../models/db.model";
+// ================= Hooks ====================
 export * from "../hooks/use-active-keys.hook";
 // ================= Contexts =================
 export {
   useTourStepOneContext,
   useTourStepTwoContext,
   useTourStepThreeContext,
+  useTourStepFourContext,
   default as TourContextProvider,
   type TourContextProviderProps,
   type TourStepContext
@@ -35,18 +37,18 @@ export {
   default as SettingRefsContextProvider,
   type SettingRefsContextProviderProps
 } from "../contexts/setting-refs.context";
-// Constants
+// ================= Constants ================
 export * from "../constants/common.constants";
-export * from "../constants/update.constants";
+export * from "../constants/common-setting.constants";
+export { default as defaultStore } from "../constants/default-store.constants";
+export * from "../constants/notification.constants";
 export * from "../constants/search-engine.constants";
 export * from "../constants/search-engine-selector.constants";
+export * from "../constants/search-engine-setting.constants";
 export * from "../constants/settings-menu.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
-export * from "../constants/common-setting.constants";
-export * from "../constants/search-engine-setting.constants";
-export * from "../constants/notification.constants";
-// ================= Components =================
+// ================= Components ===============
 export {
   default as SelectComponent,
   type SelectComponentProps

@@ -1,4 +1,40 @@
+import { Location } from "../models/location.model";
 import { NightPeriod } from "../models/night-period.model";
+
+/**
+ * Функция создания объекта ночного периода
+ * @category Utilities - Dark Mode
+ * @param location - Текущая локация
+ * @param date - Дата, для которой будет рассчитываться ночной период
+ * @returns - Ночной период {@link NightPeriod}
+ */
+export const createNightPeriod = (
+  location: Location,
+  date: Date = new Date()
+): NightPeriod => {
+  const latitude = location.latitude;
+  const longitude = location.longitude;
+
+  return {
+    sunrise: date.sunrise(latitude, longitude),
+    sunset: date.sunset(latitude, longitude)
+  };
+};
+
+/**
+ * Функция, позволяющая узнать на данный момент ночь или нет
+ * @category Utilities - Dark Mode
+ * @param nightPeriod - Ночной период текущего дня
+ * @returns - <b>True</b>, если сейчас ночь
+ */
+export const isNightPeriodNow = (nightPeriod: NightPeriod): boolean => {
+  const now = new Date();
+
+  return (
+    (!!nightPeriod.sunrise && nightPeriod.sunrise.isSameOrAfter(now)) ||
+    (!!nightPeriod.sunset && nightPeriod.sunset.isSameOrBefore(now))
+  );
+};
 
 /**
  * Функция, позволяющая узнать включена ли темная тема в браузере
@@ -12,17 +48,26 @@ export const isBrowserDarkModeEnabled = (): boolean => {
 };
 
 /**
- * Функция, позволяющая узнать закэширован ли ночной период
+ * Функция получения текущей локации
  * @category Utilities - Dark Mode
- * @param nightPeriod - Ночной период
- * @returns - <b>True</b>, если ночной период закэширован
+ * @returns - Текущая локация {@link Location} или null, если координаты отсутствуют
  */
-export const isSunsetTimeCached = (nightPeriod: NightPeriod): boolean => {
-  const now = new Date();
-  const sunset = nightPeriod.sunset ? new Date(nightPeriod.sunset) : null;
-  const sunrise = nightPeriod.sunrise ? new Date(nightPeriod.sunrise) : null;
+export const getCurrentLocation = async (): Promise<Location | null> => {
+  return new Promise(resolve => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const coords = position?.coords;
 
-  return Boolean(
-    sunset && sunrise && sunrise.toDateString() === now.toDateString()
-  );
+        if (coords && coords.latitude && coords.longitude) {
+          resolve({
+            latitude: coords.latitude,
+            longitude: coords.longitude
+          });
+        } else {
+          resolve(null);
+        }
+      },
+      () => resolve(null)
+    );
+  });
 };

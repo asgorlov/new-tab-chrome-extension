@@ -5,6 +5,6 @@
  * @interface
  */
 export interface NightPeriod {
-  sunset: string | null;
-  sunrise: string | null;
+  sunset: Date | null;
+  sunrise: Date | null;
 }

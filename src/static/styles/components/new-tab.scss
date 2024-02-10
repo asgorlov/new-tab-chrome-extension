@@ -20,14 +20,6 @@
         height: 100vh;
         background-size: cover;
         background-image: url("../../imgs/empty.png");
-        opacity: 0;
         z-index: -10;
-
-        &.ocean,
-        &.field,
-        &.custom,
-        &.mountains {
-            opacity: 1;
-        }
     }
 }
