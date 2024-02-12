@@ -1,14 +1,23 @@
 import type { Configuration as WebpackConfig } from "webpack";
 
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 export default module.exports = {
   webpack: {
     configure: (webpackConfig: WebpackConfig, params: any) => {
-      // Removing dev server startup freeze
       if (params.env === "development") {
+        // Removing dev server startup freeze
         webpackConfig.output = {
           ...webpackConfig.output,
           filename: "static/js/[name].bundle.js"
         };
+      } else {
+        // Analyzing the webpack output files (main.js)
+        const analyzerMode = process.env.REACT_APP_INTERACTIVE_ANALYZE
+          ? "server"
+          : "json";
+        webpackConfig.plugins?.push(new BundleAnalyzerPlugin({ analyzerMode }));
       }
 
       // Adding the ability to insert "await" into a top-level script
