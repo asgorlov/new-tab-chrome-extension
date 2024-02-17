@@ -45,6 +45,10 @@ export default module.exports = {
       }
 
       return webpackConfig;
+    },
+    alias: {
+      react: "preact/compat",
+      "react-dom": "preact/compat"
     }
   }
 };
