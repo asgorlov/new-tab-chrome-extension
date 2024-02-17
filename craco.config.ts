@@ -20,6 +20,14 @@ export default module.exports = {
         webpackConfig.plugins?.push(new BundleAnalyzerPlugin({ analyzerMode }));
       }
 
+      // Split bundle into some parts
+      webpackConfig.optimization = {
+        ...webpackConfig.optimization,
+        splitChunks: {
+          chunks: "all"
+        }
+      };
+
       // Adding the ability to insert "await" into a top-level script
       webpackConfig.experiments = {
         ...webpackConfig.experiments,
