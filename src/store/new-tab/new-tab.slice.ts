@@ -190,7 +190,7 @@ export const newTabSlice = createSlice({
       state.checkLoading = false;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
-      db.set({ update: state.update });
+      db.set({ update: action.payload });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
