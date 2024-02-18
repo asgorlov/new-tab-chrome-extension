@@ -6,7 +6,10 @@ import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
 import { Notification } from "../../constants/notification.constants";
-import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
+import {
+  checkForUpdates,
+  CURRENT_EXT_VERSION
+} from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
 
@@ -171,9 +174,13 @@ export const newTabSlice = createSlice({
       const { lastUpdateDate, lastVersion } = action.payload;
 
       if (lastVersion === CURRENT_EXT_VERSION) {
-        state.notifications = state.notifications.concat(
-          Notification.NoNewVersion
-        );
+        const isManualUpdateRequest =
+          state.checkForUpdates === checkForUpdates.MANUAL;
+        if (isManualUpdateRequest) {
+          state.notifications = state.notifications.concat(
+            Notification.NoNewVersion
+          );
+        }
       } else if (lastVersion > CURRENT_EXT_VERSION) {
         state.notifications = state.notifications.concat(
           Notification.HasNewVersion
@@ -183,7 +190,7 @@ export const newTabSlice = createSlice({
       state.checkLoading = false;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
-      db.set({ update: state.update });
+      db.set({ update: action.payload });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
