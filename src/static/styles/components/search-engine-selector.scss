@@ -49,7 +49,7 @@
         transition: filter $slow-transition;
         filter: grayscale(100%);
 
-        &[data-rbd-drag-handle-context-id="1"] {
+        &[data-rbd-drag-handle-context-id] {
             cursor: pointer;
 
             &._dragging {
