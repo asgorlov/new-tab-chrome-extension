@@ -3,6 +3,7 @@ import { CustomWallpaper } from "./custom-wallpaper.model";
 import { NightPeriod } from "./night-period.model";
 import { Notification } from "../constants/notification.constants";
 import { SettingsStorage } from "./settings-search.model";
+import { Location } from "./location.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
@@ -32,6 +33,7 @@ export interface NewTabState extends NewTabStateBase {
  * @property searchEngines - Список выбранных поисковых систем для переключения
  * @property checkForUpdates - Режим запросов обновлений
  * @property customWallpaper - Пользовательские фоны
+ * @property currentLocation - Текущая геолокация пользователя
  * @interface
  */
 export interface NewTabStateBase {
@@ -48,4 +50,5 @@ export interface NewTabStateBase {
   currentLanguage: string;
   checkForUpdates: string;
   customWallpaper: CustomWallpaper | null;
+  currentLocation: Location | null;
 }

@@ -5,6 +5,7 @@ import { Notification } from "../../constants/notification.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
+import { Location } from "../../models/location.model";
 
 /**
  * Селектор получения флага темной темы
@@ -129,11 +130,19 @@ export const selectCurrentLanguage = (state: RootState): string =>
  * Селектор получения пользовательских фоновых картинок
  * @category Selectors - New Tab
  * @param state - Стор
- * @returns - Фоновые картинки, загруженные пользователем {@link CustomWallpaper}
+ * @returns - Фоновые картинки, загруженные пользователем {@link CustomWallpaper} или null
  */
 export const selectCustomWallpaper = (
   state: RootState
 ): CustomWallpaper | null => state.newTab.customWallpaper;
+/**
+ * Селектор получения текущей геолокации пользователя
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Текущая геолокация пользователя {@link Location} или null
+ */
+export const selectCurrentLocation = (state: RootState): Location | null =>
+  state.newTab.currentLocation;
 /**
  * Селектор получения списка всех настроек меню
  * @category Selectors - New Tab

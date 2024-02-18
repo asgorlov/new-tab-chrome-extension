@@ -27,7 +27,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,
   checkForUpdates: checkForUpdates.WEEK,
-  customWallpaper: null
+  customWallpaper: null,
+  currentLocation: null
 };
 
 export default defaultStore;

@@ -12,6 +12,7 @@ import {
 } from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
+import { Location } from "../../models/location.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -134,6 +135,18 @@ export const newTabSlice = createSlice({
       db.set({ customWallpaper: action.payload });
     },
     /**
+     * Функция изменения текущей геолокации пользователя
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrentLocation(
+      state: NewTabState,
+      action: PayloadAction<Location | null>
+    ) {
+      state.currentLocation = action.payload;
+      db.set({ currentLocation: action.payload });
+    },
+    /**
      * Функция изменения режима запросов обновлений
      * @param state - стор
      * @param action - экшн
@@ -238,6 +251,7 @@ export const {
   setSearchEngines,
   resetNotifications,
   setCustomWallpaper,
+  setCurrentLocation,
   setCheckForUpdates,
   setSettingsActiveKeys
 } = newTabSlice.actions;
