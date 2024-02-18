@@ -20,11 +20,23 @@ export default module.exports = {
         webpackConfig.plugins?.push(new BundleAnalyzerPlugin({ analyzerMode }));
       }
 
-      // Split bundle into some parts
+      // Split bundle into vendor parts
       webpackConfig.optimization = {
         ...webpackConfig.optimization,
         splitChunks: {
-          chunks: "all"
+          chunks: "all",
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: (module: any) => {
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )[1];
+
+                return `npm.${packageName.replace("@", "")}`;
+              }
+            }
+          }
         }
       };
 
