@@ -33,10 +33,11 @@ export default module.exports = {
                   /[\\/]node_modules[\\/](.*?)([\\/]|$)/
                 )[1];
 
-                return `npm.${packageName.replace("@", "")}`;
+                return `${packageName.replace("@", "")}`;
               }
             }
-          }
+          },
+          filename: "vendor.[name].js"
         }
       };
 
@@ -57,10 +58,6 @@ export default module.exports = {
       }
 
       return webpackConfig;
-    },
-    alias: {
-      react: "preact/compat",
-      "react-dom": "preact/compat"
     }
   }
 };

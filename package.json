@@ -22,8 +22,6 @@
     "i18next-resources-to-backend": "^1.1.4",
     "new-tab-db-adapter": "file:public/scripts/new-tab-db-adapter",
     "nth-check": "^2.0.1",
-    "preact": "^10.19.5",
-    "preact-compat": "^3.19.0",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
