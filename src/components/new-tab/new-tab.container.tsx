@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNotifications,
+  setCurrentLocation,
   setIsDark,
   setNightPeriod
 } from "../../store/new-tab/new-tab.slice";
@@ -17,6 +18,7 @@ import {
 } from "../../utils/dark-mode.utils";
 import {
   selectCheckForUpdates,
+  selectCurrentLocation,
   selectDarkMode,
   selectLastUpdateDate,
   selectNightPeriod,
@@ -34,6 +36,7 @@ const NewTabContainer: FC = () => {
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const lastUpdateDate = useSelector(selectLastUpdateDate);
+  const currentLocation = useSelector(selectCurrentLocation);
 
   useEffect(() => {
     if (shouldBeCheck(lastUpdateDate, checkMode)) {
@@ -50,7 +53,14 @@ const NewTabContainer: FC = () => {
         if (isToday) {
           dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
         } else {
-          getCurrentLocation().then(location => {
+          getCurrentLocation().then(l => {
+            const location = l || currentLocation;
+            const areEqualLocations =
+              JSON.stringify(location) === JSON.stringify(currentLocation);
+            if (!areEqualLocations) {
+              dispatch(setCurrentLocation(location));
+            }
+
             if (location) {
               const nightPeriod = createNightPeriod(location, now);
               dispatch(setNightPeriod(nightPeriod));
@@ -65,7 +75,7 @@ const NewTabContainer: FC = () => {
         dispatch(setIsDark(isBrowserDarkModeEnabled()));
         break;
     }
-  }, [nightPeriod, darkMode, dispatch]);
+  }, [nightPeriod, darkMode, dispatch, currentLocation]);
 
   return (
     <ConfigProvider theme={createTheme(searchEngine)}>
