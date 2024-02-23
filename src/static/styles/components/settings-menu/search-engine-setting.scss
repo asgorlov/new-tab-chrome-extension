@@ -1,3 +1,4 @@
+@import "../../modules/mixins.module";
 @import "../../modules/constants.module";
 
 .new-tab__settings-menu_search-engine {
@@ -6,9 +7,7 @@
     flex-direction: column;
 
     &-checkbox-group {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
+      @include setting-checkbox-group;
     }
 
     &-selector {

@@ -19,6 +19,7 @@ import {
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useToken } from "antd/es/theme/internal";
+import WidgetsSettingComponent from "./settings/widgets-setting.component";
 
 /**
  * Компонент меню настроек
@@ -61,6 +62,7 @@ const SettingsMenuComponent: FC = () => {
             <DarkModeSettingComponent />
             <WallpaperSettingContainer />
             <UpdateSettingComponent />
+            <WidgetsSettingComponent />
             <LanguageSettingComponent />
           </div>
         </DrawerComponent>
