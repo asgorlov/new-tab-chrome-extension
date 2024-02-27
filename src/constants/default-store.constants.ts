@@ -15,7 +15,7 @@ const defaultStore: Readonly<NewTabStateBase> = {
     lastUpdateDate: Date.now()
   },
   widgets: [],
-  widgetsOnRight: false,
+  isWidgetsOnRight: false,
   showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
 import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
@@ -15,11 +15,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import {
   selectIsDark,
-  selectIsOpenMenu
+  selectIsOpenMenu,
+  selectIsWidgetsOnRight
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useToken } from "antd/es/theme/internal";
 import WidgetsSettingComponent from "./settings/widgets-setting.component";
+import clsx from "clsx";
+import { Placement } from "rc-drawer/es/DrawerPopup";
 
 /**
  * Компонент меню настроек
@@ -32,15 +35,25 @@ const SettingsMenuComponent: FC = () => {
 
   const isDark = useSelector(selectIsDark);
   const isOpenMenu = useSelector(selectIsOpenMenu);
+  const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
+
+  const [placement, setPlacement] = useState<Placement>(
+    isWidgetsOnRight ? "left" : "right"
+  );
 
   const menuClass = "new-tab__settings-menu";
 
+  const openMenu = () => {
+    dispatch(setIsOpenMenu(true));
+    setPlacement(isWidgetsOnRight ? "left" : "right");
+  };
+
   return (
-    <div className={menuClass}>
+    <div className={clsx(menuClass, { _right: !isWidgetsOnRight })}>
       <Button
         className="new-tab__settings-menu-button"
         type="text"
-        onClick={() => dispatch(setIsOpenMenu(true))}
+        onClick={openMenu}
       >
         <MenuIcon
           className="new-tab__settings-menu-icon"
@@ -55,6 +68,7 @@ const SettingsMenuComponent: FC = () => {
           menuClassName={menuClass}
           open={isOpenMenu}
           onClose={() => dispatch(setIsOpenMenu(false))}
+          placement={placement}
         >
           <div ref={tourCtx} className="new-tab__settings-menu-content">
             <CommonSettingContainer />

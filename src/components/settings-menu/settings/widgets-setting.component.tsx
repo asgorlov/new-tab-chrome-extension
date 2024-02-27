@@ -3,7 +3,7 @@ import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants
 import {
   CollapseComponent,
   selectWidgets,
-  selectWidgetsOnRight
+  selectIsWidgetsOnRight
 } from "../../../typedoc";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as WidgetIcon } from "../../../static/svgs/menu-settings/widget-icon.svg";
@@ -11,8 +11,8 @@ import SelectComponent from "../../common/select/select.component";
 import { WidgetName } from "../../../constants/widget.constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setWidgets,
-  setWidgetsOnRight
+  setIsWidgetsOnRight,
+  setWidgets
 } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
@@ -27,7 +27,7 @@ const WidgetsSettingComponent: FC = () => {
   const id = useId();
   const dispatch = useDispatch();
   const widgets = useSelector(selectWidgets);
-  const widgetsOnRight = useSelector(selectWidgetsOnRight);
+  const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
 
   const options = useMemo(() => {
     return Object.values(WidgetName).map(name => {
@@ -53,6 +53,7 @@ const WidgetsSettingComponent: FC = () => {
     (event: CheckboxChangeEvent) => {
       if (event.target.checked) {
         dispatch(setWidgets([]));
+        dispatch(setIsWidgetsOnRight(false));
       }
     },
     [dispatch]
@@ -92,9 +93,9 @@ const WidgetsSettingComponent: FC = () => {
             id={id}
             checkedChildren={t("widgets.right")}
             unCheckedChildren={t("widgets.left")}
-            checked={widgetsOnRight}
+            checked={isWidgetsOnRight}
             disabled={widgets.length === 0}
-            onClick={() => dispatch(setWidgetsOnRight(!widgetsOnRight))}
+            onClick={() => dispatch(setIsWidgetsOnRight(!isWidgetsOnRight))}
           />
         </div>
       </div>

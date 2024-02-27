@@ -29,8 +29,8 @@ export const selectWidgets = (state: RootState): WidgetName[] =>
  * @param state - Стор
  * @returns - <b>True</b>, если виджеты располагаются справа на экране
  */
-export const selectWidgetsOnRight = (state: RootState): boolean =>
-  state.newTab.widgetsOnRight;
+export const selectIsWidgetsOnRight = (state: RootState): boolean =>
+  state.newTab.isWidgetsOnRight;
 /**
  * Селектор получения флага показа ознакомительного тура
  * @category Selectors - New Tab

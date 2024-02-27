@@ -48,9 +48,9 @@ export const newTabSlice = createSlice({
      * @param state - стор
      * @param action - экшн
      */
-    setWidgetsOnRight(state: NewTabState, action: PayloadAction<boolean>) {
-      state.widgetsOnRight = action.payload;
-      db.set({ widgetsOnRight: action.payload });
+    setIsWidgetsOnRight(state: NewTabState, action: PayloadAction<boolean>) {
+      state.isWidgetsOnRight = action.payload;
+      db.set({ isWidgetsOnRight: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
@@ -260,7 +260,7 @@ export const newTabSlice = createSlice({
 export const {
   setIsDark,
   setWidgets,
-  setWidgetsOnRight,
+  setIsWidgetsOnRight,
   setShowTour,
   setDarkMode,
   setWallpaper,
