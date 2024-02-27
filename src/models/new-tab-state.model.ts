@@ -4,6 +4,7 @@ import { NightPeriod } from "./night-period.model";
 import { Notification } from "../constants/notification.constants";
 import { SettingsStorage } from "./settings-search.model";
 import { Location } from "./location.model";
+import { WidgetName } from "../constants/widget.constants";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
@@ -22,6 +23,8 @@ export interface NewTabState extends NewTabStateBase {
  * Интерфейс стейта страницы <tt>New-tab</tt>, сохраняемого в браузере
  * @property isDark - Флаг темной темы
  * @property update - Модель обновлений
+ * @property widgets - Массив виджетов
+ * @property isWidgetsOnRight - Флаг, отвечающий за расположение виджетов справа или слева на экране
  * @property showTour - Флаг ознакомительного тура
  * @property darkMode - Режимы включения темной темы
  * @property wallpaper - Название фона приложения. Используется для разграничения стандартных и пользовательских фонов
@@ -39,6 +42,8 @@ export interface NewTabState extends NewTabStateBase {
 export interface NewTabStateBase {
   isDark: boolean;
   update: UpdateModel;
+  widgets: WidgetName[];
+  isWidgetsOnRight: boolean;
   showTour: boolean;
   darkMode: string;
   wallpaper: string;

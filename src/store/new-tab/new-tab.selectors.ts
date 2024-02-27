@@ -6,6 +6,7 @@ import { SettingsStorage } from "../../models/settings-search.model";
 import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
 import { Location } from "../../models/location.model";
+import { WidgetName } from "../../constants/widget.constants";
 
 /**
  * Селектор получения флага темной темы
@@ -14,6 +15,22 @@ import { Location } from "../../models/location.model";
  * @returns - <b>True</b>, если включен темный режим
  */
 export const selectIsDark = (state: RootState): boolean => state.newTab.isDark;
+/**
+ * Селектор получения виджетов
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Массив выбранных виджетов {@link WidgetName}
+ */
+export const selectWidgets = (state: RootState): WidgetName[] =>
+  state.newTab.widgets;
+/**
+ * Селектор получения флага расположения виджетов на экране
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если виджеты располагаются справа на экране
+ */
+export const selectIsWidgetsOnRight = (state: RootState): boolean =>
+  state.newTab.isWidgetsOnRight;
 /**
  * Селектор получения флага показа ознакомительного тура
  * @category Selectors - New Tab

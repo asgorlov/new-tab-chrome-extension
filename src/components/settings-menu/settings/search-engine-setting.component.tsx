@@ -75,10 +75,7 @@ const SearchEngineSettingComponent: FC = () => {
   const handleChangeAddAll = useCallback(
     (event: CheckboxChangeEvent) => {
       if (event.target.checked) {
-        const allSearchEngines = searchEngines.concat(
-          SEARCH_ENGINE_NAMES.filter(name => !searchEngines.includes(name))
-        );
-        dispatch(setSearchEngines(allSearchEngines));
+        dispatch(setSearchEngines(SEARCH_ENGINE_NAMES));
       }
     },
     [dispatch, searchEngines]

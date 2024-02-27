@@ -68,6 +68,15 @@
     "onceWeek": "Раз в неделю",
     "onceMonth": "Раз в месяц"
   },
+  "widgets": {
+    "title": "Виджеты",
+    "selectAll": "Выбрать все",
+    "removeAll": "Убрать все",
+    "left": "Слева",
+    "right": "Справа",
+    "switcherTitle": "Расположение виджетов",
+    "weather": "Погода"
+  },
   "searchEngine": {
     "title": "Поисковая система",
     "swisscows": "Swisscows",

@@ -13,6 +13,7 @@ import {
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
 import { Location } from "../../models/location.model";
+import { WidgetName } from "../../constants/widget.constants";
 
 const initialState: NewTabState = await getInitState();
 
@@ -32,6 +33,24 @@ export const newTabSlice = createSlice({
     setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
       db.set({ isDark: action.payload });
+    },
+    /**
+     * Функция изменения виджетов
+     * @param state - стор
+     * @param action - экшн
+     */
+    setWidgets(state: NewTabState, action: PayloadAction<WidgetName[]>) {
+      state.widgets = action.payload;
+      db.set({ widgets: action.payload });
+    },
+    /**
+     * Функция изменения флага расположения виджетов на экране
+     * @param state - стор
+     * @param action - экшн
+     */
+    setIsWidgetsOnRight(state: NewTabState, action: PayloadAction<boolean>) {
+      state.isWidgetsOnRight = action.payload;
+      db.set({ isWidgetsOnRight: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
@@ -240,6 +259,8 @@ export const newTabSlice = createSlice({
 
 export const {
   setIsDark,
+  setWidgets,
+  setIsWidgetsOnRight,
   setShowTour,
   setDarkMode,
   setWallpaper,

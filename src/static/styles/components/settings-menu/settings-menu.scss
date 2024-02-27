@@ -2,8 +2,11 @@
 
 .new-tab__settings-menu {
     position: absolute;
-    right: 0;
     z-index: 10;
+
+    &._right {
+        right: 0;
+    }
 
     &-container {
         .ant-drawer-header {
