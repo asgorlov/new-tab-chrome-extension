@@ -1,6 +1,8 @@
 @import "../modules/constants.module";
 
 .new-tab__notification {
+  position: absolute;
+
   .ant-notification-notice {
     transition: all, background-color $slow-transition;
     background-color: var(--bg-color);

@@ -1,0 +1,25 @@
+@import "../../modules/mixins.module";
+@import "../../modules/constants.module";
+
+.new-tab__settings-menu_widgets {
+  &-content {
+    &-checkbox-group {
+      @include setting-checkbox-group;
+    }
+
+    &-selector {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    &-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      label {
+        color: var(--text-color);
+      }
+    }
+  }
+}

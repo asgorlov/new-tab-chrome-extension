@@ -6,9 +6,14 @@ import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
 import { Notification } from "../../constants/notification.constants";
-import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
+import {
+  checkForUpdates,
+  CURRENT_EXT_VERSION
+} from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
+import { Location } from "../../models/location.model";
+import { WidgetName } from "../../constants/widget.constants";
 
 const initialState: NewTabState = await getInitState();
 
@@ -28,6 +33,24 @@ export const newTabSlice = createSlice({
     setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
       db.set({ isDark: action.payload });
+    },
+    /**
+     * Функция изменения виджетов
+     * @param state - стор
+     * @param action - экшн
+     */
+    setWidgets(state: NewTabState, action: PayloadAction<WidgetName[]>) {
+      state.widgets = action.payload;
+      db.set({ widgets: action.payload });
+    },
+    /**
+     * Функция изменения флага расположения виджетов на экране
+     * @param state - стор
+     * @param action - экшн
+     */
+    setIsWidgetsOnRight(state: NewTabState, action: PayloadAction<boolean>) {
+      state.isWidgetsOnRight = action.payload;
+      db.set({ isWidgetsOnRight: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
@@ -131,6 +154,18 @@ export const newTabSlice = createSlice({
       db.set({ customWallpaper: action.payload });
     },
     /**
+     * Функция изменения текущей геолокации пользователя
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrentLocation(
+      state: NewTabState,
+      action: PayloadAction<Location | null>
+    ) {
+      state.currentLocation = action.payload;
+      db.set({ currentLocation: action.payload });
+    },
+    /**
      * Функция изменения режима запросов обновлений
      * @param state - стор
      * @param action - экшн
@@ -171,9 +206,13 @@ export const newTabSlice = createSlice({
       const { lastUpdateDate, lastVersion } = action.payload;
 
       if (lastVersion === CURRENT_EXT_VERSION) {
-        state.notifications = state.notifications.concat(
-          Notification.NoNewVersion
-        );
+        const isManualUpdateRequest =
+          state.checkForUpdates === checkForUpdates.MANUAL;
+        if (isManualUpdateRequest) {
+          state.notifications = state.notifications.concat(
+            Notification.NoNewVersion
+          );
+        }
       } else if (lastVersion > CURRENT_EXT_VERSION) {
         state.notifications = state.notifications.concat(
           Notification.HasNewVersion
@@ -183,7 +222,7 @@ export const newTabSlice = createSlice({
       state.checkLoading = false;
       state.update.lastVersion = lastVersion;
       state.update.lastUpdateDate = lastUpdateDate;
-      db.set({ update: state.update });
+      db.set({ update: action.payload });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
@@ -220,6 +259,8 @@ export const newTabSlice = createSlice({
 
 export const {
   setIsDark,
+  setWidgets,
+  setIsWidgetsOnRight,
   setShowTour,
   setDarkMode,
   setWallpaper,
@@ -231,6 +272,7 @@ export const {
   setSearchEngines,
   resetNotifications,
   setCustomWallpaper,
+  setCurrentLocation,
   setCheckForUpdates,
   setSettingsActiveKeys
 } = newTabSlice.actions;

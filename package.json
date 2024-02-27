@@ -37,6 +37,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
+    "analyze": "cross-env REACT_APP_INTERACTIVE_ANALYZE=1 npm run build",
     "precommit": "lint-staged",
     "typedoc": "typedoc --logLevel Verbose"
   },
@@ -62,13 +63,15 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.10",
     "@types/chrome": "^0.0.193",
     "@types/react-beautiful-dnd": "^13.1.4",
+    "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
-    "typedoc": "^0.24.8"
+    "typedoc": "^0.24.8",
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "lint-staged": {
     "*.{ts, tsx}": [

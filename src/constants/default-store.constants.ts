@@ -14,6 +14,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
     lastVersion: CURRENT_EXT_VERSION,
     lastUpdateDate: Date.now()
   },
+  widgets: [],
+  isWidgetsOnRight: false,
   showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
@@ -27,7 +29,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,
   checkForUpdates: checkForUpdates.WEEK,
-  customWallpaper: null
+  customWallpaper: null,
+  currentLocation: null
 };
 
 export default defaultStore;

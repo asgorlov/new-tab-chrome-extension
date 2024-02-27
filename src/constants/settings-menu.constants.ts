@@ -33,7 +33,11 @@ export enum CollapsedMenuSetting {
   /**
    * Настройка обновлений
    */
-  UPDATE = "update"
+  UPDATE = "update",
+  /**
+   * Настройка виджетов
+   */
+  WIDGETS = "widgets"
 }
 /**
  * Алиасы настроек меню
@@ -52,7 +56,8 @@ export enum MenuSetting {
 export const SETTINGS_WITH_SELECTOR = [
   CollapsedMenuSetting.SEARCH_ENGINE,
   CollapsedMenuSetting.DARK_MODE,
-  CollapsedMenuSetting.UPDATE
+  CollapsedMenuSetting.UPDATE,
+  CollapsedMenuSetting.WIDGETS
 ];
 
 /**

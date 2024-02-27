@@ -18,6 +18,7 @@ import {
 import { useTranslation } from "react-i18next";
 import SearchEngineSelectorComponent from "../search-engine-selector/search-engine-selector.component";
 import SettingsMenuComponent from "../settings-menu/settings-menu.component";
+import WidgetListComponent from "../widgets/widget-list.component";
 
 /**
  * Компонент страницы новой вкладки
@@ -53,9 +54,13 @@ const NewTabComponent: FC = () => {
       />
       <NotificationComponent />
       <TourContextProvider>
+        <WidgetListComponent />
+        <div className="new-tab__search-engine-wrapper">
+          <SearchEngineContainer />
+          <SearchEngineSelectorComponent />
+        </div>
+        <WidgetListComponent isRightPlacement />
         <SettingsMenuComponent />
-        <SearchEngineContainer />
-        <SearchEngineSelectorComponent />
         <TourComponent />
       </TourContextProvider>
     </div>

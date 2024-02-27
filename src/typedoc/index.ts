@@ -48,6 +48,7 @@ export * from "../constants/search-engine-setting.constants";
 export * from "../constants/settings-menu.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
+export * from "../constants/widget.constants";
 // ================= Components ===============
 export {
   default as SelectComponent,
@@ -104,6 +105,7 @@ export {
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
+export { default as WidgetsSettingComponent } from "../components/settings-menu/settings/widgets-setting.component";
 export {
   default as SettingsHeaderComponent,
   type SettingsHeaderComponentProps
@@ -111,3 +113,11 @@ export {
 export { default as TourComponent } from "../components/tour/tour.component";
 export { default as NotificationComponent } from "../components/notification/notification.component";
 export { default as HasNewVersionComponent } from "../components/notification/info/has-new-version.component";
+export {
+  default as WidgetListComponent,
+  type WidgetListComponentProps
+} from "../components/widgets/widget-list.component";
+export {
+  default as WeatherComponent,
+  type WeatherComponentProps
+} from "../components/widgets/weather/weather.component";

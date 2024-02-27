@@ -68,6 +68,15 @@
     "onceWeek": "Once a week",
     "onceMonth": "Once a month"
   },
+  "widgets": {
+    "title": "Widgets",
+    "selectAll": "Select all",
+    "removeAll": "Remove all",
+    "left": "Left",
+    "right": "Right",
+    "switcherTitle": "Widget layout",
+    "weather": "Weather"
+  },
   "searchEngine": {
     "title": "Search system",
     "swisscows": "Swisscows",
