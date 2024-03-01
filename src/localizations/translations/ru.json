@@ -77,6 +77,49 @@
     "switcherTitle": "Расположение виджетов",
     "weather": "Погода"
   },
+  "weather": {
+    "timesOfDay": {
+      "morning": "Утро",
+      "day": "День",
+      "evening": "Вечер",
+      "night": "Ночь"
+    },
+    "params": {
+      "wind": "Ветер",
+      "humidity": "Влажность",
+      "pressure": "Давление"
+    },
+    "types": {
+      "clearSky": "Ясно",
+      "mainlyClear": "Небольшая облачность",
+      "partlyCloudy": "Переменная облачность",
+      "overcast": "Облачно",
+      "fog": "Туман",
+      "depositingRimeFog": "Туман",
+      "lightDrizzle": "Мелкий моросящий дождь",
+      "moderateDrizzle": "Моросящий дождь",
+      "denseDrizzle": "Сильный моросящий дождь",
+      "lightFreezingDrizzle": "Небольшой ледяной дождь",
+      "denseFreezingDrizzle": "Сильный ледяной дождь",
+      "slightRain": "Небольшой дождь",
+      "moderateRain": "Дождь",
+      "heavyRain": "Ливень",
+      "lightFreezingRain": "Небольшой ледяной дождь",
+      "heavyFreezingRain": "Сильный ледяной дождь",
+      "slightSnowFall": "Небольшой снег",
+      "moderateSnowFall": "Снег",
+      "heavySnowFall": "Сильный снегопад",
+      "snowGrains": "Небольшой снег",
+      "slightRainShowers": "Небольшой кратковременный дождь",
+      "moderateRainShowers": "Кратковременный дождь",
+      "violentRainShowers": "Кратковременный ливень",
+      "slightSnowShowers": "Небольшой кратковременный снегопад",
+      "heavySnowShowers": "Кратковременный снегопад",
+      "thunderstorm": "Гроза",
+      "thunderstormWithSlightHail": "Гроза с небольшим градом",
+      "thunderstormWithHeavyHail": "Гроза с градом"
+    }
+  },
   "searchEngine": {
     "title": "Поисковая система",
     "swisscows": "Swisscows",
