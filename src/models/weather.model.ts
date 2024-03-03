@@ -7,32 +7,14 @@ import { ReactNode } from "react";
 export type TimeOfDayType = "morning" | "day" | "evening" | "night";
 
 /**
- * Интерфейс температуры в определенное время суток
- * @property timeOfDay - Время суток
- * @property icon - Иконка
- * @property temp - Значение температуры
- * @interface
- */
-export interface TempByTimeOfDay {
-  timeOfDay: TimeOfDayType;
-  icon: ReactNode;
-  temp: string;
-}
-
-/**
- * Тип возможных параметров погоды
- * @interface
- */
-export type WeatherParamNameType = "wind" | "humidity" | "pressure";
-
-/**
  * Интерфейс параметров погоды
  * @property name - Название параметра
  * @property value - Значение параметра
  * @interface
  */
-export interface WeatherParam {
-  name: WeatherParamNameType;
+export interface WeatherParamViewModel {
+  name: string;
+  icon: ReactNode;
   value: string;
 }
 
@@ -41,6 +23,7 @@ export interface WeatherParam {
  * @interface
  */
 export type WMOCodeType =
+  | -1
   | 0
   | 1
   | 2

@@ -21,21 +21,27 @@
   font-size: 12px;
   color: var(--text-color);
   transition: color $fast-transition;
+  overflow: hidden;
 
   &-temp {
+    min-width: 134px;
     display: flex;
     flex-direction: column;
+    gap: 4px;
 
     &__now {
       height: 100%;
       display: flex;
+      align-items: center;
+      gap: 8px;
 
       &_icon {
-        min-height: 72px;
-        min-width: 72px;
+        min-height: 48px;
+        min-width: 48px;
         background-size: cover;
         filter: var(--img-inversion);
         transition: $fast-transition;
+        background-image: url("../../../svgs/widgets/weather/-1_no-data.svg");
 
         &.clearSky {
           background-image: var(--weather-clear-sky-bg-url);
@@ -152,11 +158,17 @@
 
       &_value {
         width: 100%;
-
-        &-num {}
-
-        &-description {}
+        font-size: 36px;
+        line-height: 40px;
+        text-align: center
       }
+    }
+
+    &__description {
+      font-size: 8px;
+      line-height: 10px;
+      white-space: nowrap;
+      text-align: center;
     }
 
     &__times-of-day {
@@ -168,15 +180,20 @@
 
       &_item {
         width: 100%;
+        height: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
         list-style-type: none;
         border-right: 1px solid var(--text-color);
         transition: border-color $fast-transition;
+        font-size: 10px;
+        line-height: 10px;
 
         svg {
-          padding: 2px 4px 4px;
+          padding: 2px 4px;
+          width: 14px;
+          height: 14px;
 
           &:first-child {
             border-bottom: 1px solid var(--text-color);
@@ -185,18 +202,23 @@
         }
 
         span {
-          padding: 2px 4px;
+          padding: 2px 4px 0;
         }
 
         &:last-child {
           border-right: none;
         }
+
+        &__popup {
+          font-size: 12px;
+        }
+
       }
     }
   }
 
   &-delimiter {
-    width: 100%;
+    width: 1px;
     margin: 0 8px;
     border: none;
     border-right: 1px solid var(--text-color);
@@ -206,16 +228,24 @@
   &-params {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    justify-content: center;
+    gap: 12px;
     margin: 0;
     padding: 8px 0;
 
     &_item {
+      display: flex;
       list-style-type: none;
+      height: 14px;
 
-      &-name {}
+      svg {
+        height: 100%;
+        margin-right: 2px;
+      }
 
-      &-value {}
+      &-value {
+        white-space: nowrap;
+      }
     }
   }
 }

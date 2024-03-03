@@ -6,10 +6,12 @@ import { ReactComponent as MorningIcon } from "../../../static/svgs/widgets/weat
 import { ReactComponent as DayIcon } from "../../../static/svgs/widgets/weather/tod-day.svg";
 import { ReactComponent as EveningIcon } from "../../../static/svgs/widgets/weather/tod-evening.svg";
 import { ReactComponent as NightIcon } from "../../../static/svgs/widgets/weather/tod-night.svg";
+import { ReactComponent as WindIcon } from "../../../static/svgs/widgets/weather/wp_wind.svg";
+import { ReactComponent as PressureIcon } from "../../../static/svgs/widgets/weather/wp_pressure.svg";
+import { ReactComponent as HumidityIcon } from "../../../static/svgs/widgets/weather/wp_humidity.svg";
 import {
-  TempByTimeOfDay,
   TimeOfDayType,
-  WeatherParam
+  WeatherParamViewModel
 } from "../../../models/weather.model";
 
 const WeatherContainer: FC = () => {
@@ -29,43 +31,46 @@ const WeatherContainer: FC = () => {
     return isDay ? "day" : "night";
   }, [nightPeriod]);
 
-  const tempByTimesOfDay = useMemo((): TempByTimeOfDay[] => {
+  const tempByTimesOfDay = useMemo((): WeatherParamViewModel[] => {
     return [
       {
-        timeOfDay: "morning",
+        name: "morning",
         icon: <MorningIcon />,
-        temp: "-10"
+        value: "-10"
       },
       {
-        timeOfDay: "day",
+        name: "day",
         icon: <DayIcon />,
-        temp: "0"
+        value: "0"
       },
       {
-        timeOfDay: "evening",
+        name: "evening",
         icon: <EveningIcon />,
-        temp: "+10"
+        value: "+10"
       },
       {
-        timeOfDay: "night",
+        name: "night",
         icon: <NightIcon />,
-        temp: "-25"
+        value: "-25"
       }
     ];
   }, []);
 
-  const weatherParams = useMemo((): WeatherParam[] => {
+  const weatherParams = useMemo((): WeatherParamViewModel[] => {
     return [
       {
         name: "wind",
+        icon: <WindIcon />,
         value: "10 м/с ЮЗ"
       },
       {
         name: "humidity",
+        icon: <HumidityIcon />,
         value: "80%"
       },
       {
         name: "pressure",
+        icon: <PressureIcon />,
         value: "760 мм.рт.ст"
       }
     ];

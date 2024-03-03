@@ -90,6 +90,7 @@
       "pressure": "Pressure"
     },
     "types": {
+      "noData": "No data",
       "clearSky": "Clear sky",
       "mainlyClear": "Mainly clear",
       "partlyCloudy": "Partly cloudy",

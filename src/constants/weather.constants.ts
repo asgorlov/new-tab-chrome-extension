@@ -5,6 +5,7 @@ import { WMOCodeType } from "../models/weather.model";
  * @category Constants - Widget - Weather
  */
 export const WMOCodes: Readonly<Record<WMOCodeType, string>> = {
+  [-1]: "noData",
   [0]: "clearSky",
   [1]: "mainlyClear",
   [2]: "partlyCloudy",

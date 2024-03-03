@@ -90,6 +90,7 @@
       "pressure": "Давление"
     },
     "types": {
+      "noData": "Нет данных",
       "clearSky": "Ясно",
       "mainlyClear": "Небольшая облачность",
       "partlyCloudy": "Переменная облачность",

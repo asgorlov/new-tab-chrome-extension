@@ -4,9 +4,8 @@ import { useTranslation } from "react-i18next";
 import { WMOCodes } from "../../../constants/weather.constants";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
 import {
-  TempByTimeOfDay,
   TimeOfDayType,
-  WeatherParam,
+  WeatherParamViewModel,
   WMOCodeType
 } from "../../../models/weather.model";
 
@@ -21,8 +20,8 @@ import {
  */
 export interface WeatherComponentProps {
   timeOfDay: TimeOfDayType;
-  tempByTimeOfDay: TempByTimeOfDay[];
-  weatherParams: WeatherParam[];
+  tempByTimeOfDay: WeatherParamViewModel[];
+  weatherParams: WeatherParamViewModel[];
   weatherCode: WMOCodeType;
   currentTemp: string;
 }
@@ -43,26 +42,26 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
           <div className="new-tab__weather-temp__now">
             <div className={clsx("new-tab__weather-temp__now_icon", wmoName)} />
             <div className="new-tab__weather-temp__now_value">
-              <div className="new-tab__weather-temp__now_value-num">
-                {currentTemp}
-              </div>
-              <div className="new-tab__weather-temp__now_value-description">
-                {t(`weather.types.${wmoName}`)}
-              </div>
+              {currentTemp}
             </div>
           </div>
+          <span className="new-tab__weather-temp__description">
+            {t(`weather.types.${wmoName}`)}
+          </span>
           <ul className="new-tab__weather-temp__times-of-day">
             {tempByTimeOfDay.map(item => {
               return (
                 <TooltipComponent
                   mouseEnterDelay={0.5}
+                  align={{ offset: [0, "-18%"] }}
                   className="new-tab__weather-temp__times-of-day_item"
-                  title={t(`weather.timesOfDay.${item.timeOfDay}`)}
-                  key={item.timeOfDay}
+                  overlayClassName="new-tab__weather-temp__times-of-day_item__popup"
+                  title={t(`weather.timesOfDay.${item.name}`)}
+                  key={item.name}
                 >
                   <li>
                     <>{item.icon}</>
-                    <span>{item.temp}</span>
+                    <span>{item.value}</span>
                   </li>
                 </TooltipComponent>
               );
@@ -74,10 +73,9 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
           {weatherParams.map(item => {
             return (
               <li key={item.name} className="new-tab__weather-params_item">
-                <span className="new-tab__weather-params_item-name">
-                  {t(`weather.params.${item.name}`) + ":"}
-                </span>
+                {item.icon}
                 <span className="new-tab__weather-params_item-value">
+                  {": "}
                   {item.value}
                 </span>
               </li>
