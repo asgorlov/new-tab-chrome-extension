@@ -119,7 +119,19 @@
       "thunderstorm": "Гроза",
       "thunderstormWithSlightHail": "Гроза с небольшим градом",
       "thunderstormWithHeavyHail": "Гроза с градом"
-    }
+    },
+    "windDirection": {
+      "north": "С",
+      "northEast": "СВ",
+      "east": "В",
+      "southEast": "ЮВ",
+      "south": "Ю",
+      "southWest": "ЮЗ",
+      "west": "З",
+      "northWest": "СЗ"
+    },
+    "windSpeedUnit": "м/с",
+    "pressureUnit": "мм.рт.ст"
   },
   "searchEngine": {
     "title": "Поисковая система",
@@ -189,6 +201,7 @@
     "error": {
       "title": "Что-то пошло не так...",
       "canNotGetNightPeriod": "Не удалось получить информацию о времени восхода и заката для текущей локации.",
+      "canNotGetWeatherData": "Не удалось получить информацию о погоде.",
       "canNotGetUpdateManifest": "Не удалось получить информацию о доступном обновлении."
     },
     "info": {

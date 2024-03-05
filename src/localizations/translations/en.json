@@ -119,7 +119,19 @@
       "thunderstorm": "Thunderstorm",
       "thunderstormWithSlightHail": "Thunderstorm with slight hail",
       "thunderstormWithHeavyHail": "Thunderstorm with heavy hail"
-    }
+    },
+    "windDirection": {
+      "north": "N",
+      "northEast": "NE",
+      "east": "E",
+      "southEast": "SE",
+      "south": "S",
+      "southWest": "SW",
+      "west": "W",
+      "northWest": "NW"
+    },
+    "windSpeedUnit": "m/s",
+    "pressureUnit": "mmHg"
   },
   "searchEngine": {
     "title": "Search system",
@@ -189,6 +201,7 @@
     "error": {
       "title": "Something went wrong...",
       "canNotGetNightPeriod": "Failed to obtain information about sunrise and sunset times for the current location.",
+      "canNotGetWeatherData": "Failed to obtain information about weather.",
       "canNotGetUpdateManifest": "Failed to obtain information about available update."
     },
     "info": {

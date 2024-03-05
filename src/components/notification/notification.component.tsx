@@ -54,6 +54,7 @@ const NotificationComponent: FC = () => {
             );
             break;
           case Notification.CanNotGetNightPeriod:
+          case Notification.CanNotGetWeatherData:
           case Notification.CanNotGetUpdateManifest:
             showError(n);
         }

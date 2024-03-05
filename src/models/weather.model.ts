@@ -1,22 +1,8 @@
-import { ReactNode } from "react";
-
 /**
  * Тип возможного времени суток
  * @interface
  */
 export type TimeOfDayType = "morning" | "day" | "evening" | "night";
-
-/**
- * Интерфейс параметров погоды
- * @property name - Название параметра
- * @property value - Значение параметра
- * @interface
- */
-export interface WeatherParamViewModel {
-  name: string;
-  icon: ReactNode;
-  value: string;
-}
 
 /**
  * Тип возможных WMO-кодов погоды
@@ -52,3 +38,49 @@ export type WMOCodeType =
   | 95
   | 96
   | 99;
+
+/**
+ * Интерфейс данных за один час дня, которые были получены с сервера
+ * @interface
+ */
+export interface HourlyWeatherDataForDay {
+  time: Date;
+  temp: number;
+  humidity: number;
+  weatherCode: WMOCodeType;
+  pressure: number;
+  windSpeed: number;
+  windDirection: number;
+}
+
+/**
+ * Интерфейс данных погоды
+ * @interface
+ */
+export interface WeatherData {
+  data: HourlyWeatherDataForDay[];
+  lastApiCall: Date | null;
+}
+
+/**
+ * Интерфейс с параметрами погоды за час для отображения
+ * @interface
+ */
+export interface HourlyWeatherParamsViewModel {
+  wind: string;
+  humidity: string;
+  pressure: string;
+  temp: string;
+  code: WMOCodeType;
+}
+
+/**
+ * Интерфейс с усредненной температурой для 6-часового отрезка времени суток
+ * @interface
+ */
+export interface AverageTempTextByTimeOfDay {
+  night: string;
+  morning: string;
+  day: string;
+  evening: string;
+}
