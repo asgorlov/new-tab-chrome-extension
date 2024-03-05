@@ -1,8 +1,40 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import WeatherComponent from "./weather.component";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrentLocation,
+  selectNightPeriod,
+  selectWeather
+} from "../../../store/new-tab/new-tab.selectors";
+import { getWeatherData } from "../../../store/new-tab/new-tab.thunks";
+import { AppDispatch } from "../../../store/store";
+import {
+  getAverageTempTextByTimeOfDay,
+  getCurrentHourWeatherParams,
+  isDayNow,
+  shouldBeWeatherDataLoaded
+} from "../../../utils/weather.utils";
 
 const WeatherContainer: FC = () => {
-  return <WeatherComponent />;
+  const dispatch = useDispatch<AppDispatch>();
+
+  const currentLocation = useSelector(selectCurrentLocation);
+  const nightPeriod = useSelector(selectNightPeriod);
+  const weather = useSelector(selectWeather);
+
+  useEffect(() => {
+    if (currentLocation && shouldBeWeatherDataLoaded(weather)) {
+      dispatch(getWeatherData(currentLocation));
+    }
+  }, [weather, currentLocation, dispatch]);
+
+  return (
+    <WeatherComponent
+      timeOfDay={isDayNow(nightPeriod) ? "day" : "night"}
+      tempByTimeOfDay={getAverageTempTextByTimeOfDay(weather.data)}
+      weatherParams={getCurrentHourWeatherParams(weather.data)}
+    />
+  );
 };
 
 export default WeatherContainer;

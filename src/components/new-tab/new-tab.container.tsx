@@ -11,10 +11,10 @@ import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
 import { AUTO, SYSTEM } from "../../constants/search-engine.constants";
 import {
+  createNightPeriod,
   getCurrentLocation,
   isBrowserDarkModeEnabled,
-  isNightPeriodNow,
-  createNightPeriod
+  isNightPeriodNow
 } from "../../utils/dark-mode.utils";
 import {
   selectCheckForUpdates,
@@ -22,12 +22,14 @@ import {
   selectDarkMode,
   selectLastUpdateDate,
   selectNightPeriod,
-  selectSearchEngine
+  selectSearchEngine,
+  selectWidgets
 } from "../../store/new-tab/new-tab.selectors";
 import { checkUpdates } from "../../store/new-tab/new-tab.thunks";
-import { shouldBeCheck } from "../../utils/update.utils";
+import { shouldBeCheckedUpdates } from "../../utils/update.utils";
 import { createTheme } from "../../utils/search-engine.utils";
 import { Notification } from "../../constants/notification.constants";
+import { WidgetName } from "../../constants/widget.constants";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,43 +39,41 @@ const NewTabContainer: FC = () => {
   const searchEngine = useSelector(selectSearchEngine);
   const lastUpdateDate = useSelector(selectLastUpdateDate);
   const currentLocation = useSelector(selectCurrentLocation);
+  const widgets = useSelector(selectWidgets);
 
   useEffect(() => {
-    if (shouldBeCheck(lastUpdateDate, checkMode)) {
+    if (shouldBeCheckedUpdates(lastUpdateDate, checkMode)) {
       dispatch(checkUpdates());
     }
   }, [checkMode, lastUpdateDate, dispatch]);
 
   useEffect(() => {
-    switch (darkMode) {
-      case AUTO:
-        const now = new Date();
-        const isToday = nightPeriod.sunrise?.isSameWithoutTime(now);
-
-        if (isToday) {
-          dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
-        } else {
-          getCurrentLocation().then(l => {
-            const location = l || currentLocation;
-            const areEqualLocations =
-              JSON.stringify(location) === JSON.stringify(currentLocation);
-            if (!areEqualLocations) {
-              dispatch(setCurrentLocation(location));
-            }
-
-            if (location) {
-              const nightPeriod = createNightPeriod(location, now);
-              dispatch(setNightPeriod(nightPeriod));
-              dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
-            } else {
-              dispatch(addNotifications(Notification.CanNotGetNightPeriod));
-            }
-          });
+    if (darkMode === AUTO || widgets.includes(WidgetName.WEATHER)) {
+      getCurrentLocation().then(l => {
+        const location = l || currentLocation;
+        const areEqualLocations =
+          JSON.stringify(location) === JSON.stringify(currentLocation);
+        if (!areEqualLocations) {
+          dispatch(setCurrentLocation(location));
         }
-        break;
-      case SYSTEM:
-        dispatch(setIsDark(isBrowserDarkModeEnabled()));
-        break;
+
+        const now = new Date();
+        const isNotToday = !nightPeriod.sunrise?.isSameWithoutTime(now);
+        if (isNotToday) {
+          const action = location
+            ? setNightPeriod(createNightPeriod(location, now))
+            : addNotifications(Notification.CanNotGetNightPeriod);
+          dispatch(action);
+        }
+      });
+    }
+  }, [darkMode, widgets, dispatch, currentLocation, nightPeriod]);
+
+  useEffect(() => {
+    if (darkMode === AUTO) {
+      dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
+    } else if (darkMode === SYSTEM) {
+      dispatch(setIsDark(isBrowserDarkModeEnabled()));
     }
   }, [nightPeriod, darkMode, dispatch, currentLocation]);
 

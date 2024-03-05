@@ -29,4 +29,38 @@ Date.prototype.isAfter = function (date) {
   return this.getTime() > date.getTime();
 };
 
+Date.prototype.add = function (value, unit) {
+  if (value === 0) {
+    return this;
+  }
+
+  switch (unit) {
+    case "ms":
+      this.setUTCMilliseconds(this.getUTCMilliseconds() + value);
+      break;
+    case "s":
+      this.setUTCSeconds(this.getUTCSeconds() + value);
+      break;
+    case "min":
+      this.setUTCMinutes(this.getUTCMinutes() + value);
+      break;
+    case "h":
+      this.setUTCHours(this.getUTCHours() + value);
+      break;
+    case "d":
+      this.setUTCDate(this.getUTCDate() + value);
+      break;
+    case "w":
+      this.setUTCDate(this.getUTCDate() + value * 7);
+      break;
+    case "m":
+      this.setUTCMonth(this.getUTCMonth() + value);
+      break;
+    case "y":
+      this.setUTCFullYear(this.getUTCFullYear() + value);
+  }
+
+  return this;
+};
+
 export {};

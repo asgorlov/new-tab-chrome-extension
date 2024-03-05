@@ -30,7 +30,11 @@ const defaultStore: Readonly<NewTabStateBase> = {
   currentLanguage: i18n.language,
   checkForUpdates: checkForUpdates.WEEK,
   customWallpaper: null,
-  currentLocation: null
+  currentLocation: null,
+  weather: {
+    data: [],
+    lastApiCall: null
+  }
 };
 
 export default defaultStore;

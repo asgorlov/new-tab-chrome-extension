@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
-import { changeLanguage, checkUpdates, applySettings } from "./new-tab.thunks";
+import {
+  changeLanguage,
+  checkUpdates,
+  applySettings,
+  getWeatherData
+} from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
@@ -191,6 +196,34 @@ export const newTabSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    builder.addCase(getWeatherData.pending, state => {
+      state.weatherLoading = true;
+    });
+
+    builder.addCase(getWeatherData.rejected, state => {
+      const weather = {
+        data: [],
+        lastApiCall: new Date().add(30, "min")
+      };
+      state.weatherLoading = false;
+      state.weather = weather;
+      db.set({ weather });
+
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetWeatherData
+      );
+    });
+
+    builder.addCase(getWeatherData.fulfilled, (state, action) => {
+      const weather = {
+        data: action.payload,
+        lastApiCall: new Date()
+      };
+      state.weatherLoading = false;
+      state.weather = weather;
+      db.set({ weather });
+    });
+
     builder.addCase(checkUpdates.pending, state => {
       state.checkLoading = true;
     });
@@ -230,29 +263,7 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(applySettings.fulfilled, (state, action) => {
-      const {
-        isDark,
-        update,
-        darkMode,
-        wallpaper,
-        nightPeriod,
-        searchEngine,
-        searchEngines,
-        currentLanguage,
-        checkForUpdates,
-        customWallpaper
-      } = action.payload;
-
-      state.isDark = isDark;
-      state.update = update;
-      state.darkMode = darkMode;
-      state.wallpaper = wallpaper;
-      state.nightPeriod = nightPeriod;
-      state.searchEngine = searchEngine;
-      state.searchEngines = searchEngines;
-      state.currentLanguage = currentLanguage;
-      state.checkForUpdates = checkForUpdates;
-      state.customWallpaper = customWallpaper;
+      Object.assign(state, action.payload);
     });
   }
 });

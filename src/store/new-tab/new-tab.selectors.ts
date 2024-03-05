@@ -7,6 +7,7 @@ import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
+import { WeatherData } from "../../models/weather.model";
 
 /**
  * Селектор получения флага темной темы
@@ -186,3 +187,21 @@ export const selectSettingActiveKeysByName = createSelector(
     name: CollapsedMenuSetting
   ): string[] => allActiveKeys[name]
 );
+
+/**
+ * Селектор получения данных виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией о погоде {@link WeatherData}
+ */
+export const selectWeather = (state: RootState): WeatherData =>
+  state.newTab.weather;
+
+/**
+ * Селектор загрузки данных виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если производится загрузка данных
+ */
+export const selectWeatherLoading = (state: RootState): boolean =>
+  state.newTab.weatherLoading;

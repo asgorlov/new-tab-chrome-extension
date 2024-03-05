@@ -5,18 +5,21 @@ import { Notification } from "../constants/notification.constants";
 import { SettingsStorage } from "./settings-search.model";
 import { Location } from "./location.model";
 import { WidgetName } from "../constants/widget.constants";
+import { WeatherData } from "./weather.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
  * @property isOpenMenu - Флаг открытия меню настроек
  * @property notifications - Список нотификаций
  * @property settingsActiveKeys - Хранилище с информацией о настройках меню
+ * @property weatherLoading - Флаг загрузки данных виджета погоды
  * @interface
  */
 export interface NewTabState extends NewTabStateBase {
   isOpenMenu: boolean;
   notifications: Notification[];
   settingsActiveKeys: SettingsStorage<string[]>;
+  weatherLoading: boolean;
 }
 
 /**
@@ -37,6 +40,7 @@ export interface NewTabState extends NewTabStateBase {
  * @property checkForUpdates - Режим запросов обновлений
  * @property customWallpaper - Пользовательские фоны
  * @property currentLocation - Текущая геолокация пользователя
+ * @property currentLocation - Данные виджета погоды
  * @interface
  */
 export interface NewTabStateBase {
@@ -56,4 +60,5 @@ export interface NewTabStateBase {
   checkForUpdates: string;
   customWallpaper: CustomWallpaper | null;
   currentLocation: Location | null;
+  weather: WeatherData;
 }

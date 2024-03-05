@@ -77,6 +77,62 @@
     "switcherTitle": "Расположение виджетов",
     "weather": "Погода"
   },
+  "weather": {
+    "timesOfDay": {
+      "morning": "Утро",
+      "day": "День",
+      "evening": "Вечер",
+      "night": "Ночь"
+    },
+    "params": {
+      "wind": "Ветер",
+      "humidity": "Влажность",
+      "pressure": "Давление"
+    },
+    "types": {
+      "noData": "Нет данных",
+      "clearSky": "Ясно",
+      "mainlyClear": "Небольшая облачность",
+      "partlyCloudy": "Переменная облачность",
+      "overcast": "Облачно",
+      "fog": "Туман",
+      "depositingRimeFog": "Туман",
+      "lightDrizzle": "Мелкий моросящий дождь",
+      "moderateDrizzle": "Моросящий дождь",
+      "denseDrizzle": "Сильный моросящий дождь",
+      "lightFreezingDrizzle": "Небольшой ледяной дождь",
+      "denseFreezingDrizzle": "Сильный ледяной дождь",
+      "slightRain": "Небольшой дождь",
+      "moderateRain": "Дождь",
+      "heavyRain": "Ливень",
+      "lightFreezingRain": "Небольшой ледяной дождь",
+      "heavyFreezingRain": "Сильный ледяной дождь",
+      "slightSnowFall": "Небольшой снег",
+      "moderateSnowFall": "Снег",
+      "heavySnowFall": "Сильный снегопад",
+      "snowGrains": "Небольшой снег",
+      "slightRainShowers": "Небольшой кратковременный дождь",
+      "moderateRainShowers": "Кратковременный дождь",
+      "violentRainShowers": "Кратковременный ливень",
+      "slightSnowShowers": "Небольшой кратковременный снегопад",
+      "heavySnowShowers": "Кратковременный снегопад",
+      "thunderstorm": "Гроза",
+      "thunderstormWithSlightHail": "Гроза с небольшим градом",
+      "thunderstormWithHeavyHail": "Гроза с градом"
+    },
+    "windDirection": {
+      "north": "С",
+      "northEast": "СВ",
+      "east": "В",
+      "southEast": "ЮВ",
+      "south": "Ю",
+      "southWest": "ЮЗ",
+      "west": "З",
+      "northWest": "СЗ"
+    },
+    "windSpeedUnit": "м/с",
+    "pressureUnit": "мм.рт.ст"
+  },
   "searchEngine": {
     "title": "Поисковая система",
     "swisscows": "Swisscows",
@@ -145,6 +201,7 @@
     "error": {
       "title": "Что-то пошло не так...",
       "canNotGetNightPeriod": "Не удалось получить информацию о времени восхода и заката для текущей локации.",
+      "canNotGetWeatherData": "Не удалось получить информацию о погоде.",
       "canNotGetUpdateManifest": "Не удалось получить информацию о доступном обновлении."
     },
     "info": {

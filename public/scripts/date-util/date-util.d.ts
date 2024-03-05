@@ -8,7 +8,10 @@ declare global {
     isSameOrAfter(date: Date): boolean;
     isBefore(date: Date): boolean;
     isAfter(date: Date): boolean;
+    add(value: number, unit: DateUnit): Date;
   }
 }
 
-export {};
+type DateUnit = "ms" | "s" | "min" | "h" | "d" | "w" | "m" | "y";
+
+export { DateUnit };
