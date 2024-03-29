@@ -4,7 +4,7 @@ import {
   selectIsWidgetsOnRight,
   selectWidgets
 } from "../../store/new-tab/new-tab.selectors";
-import { MAX_WIDGET_NUM, WidgetName } from "../../constants/widget.constants";
+import { WidgetName } from "../../constants/widget.constants";
 import clsx from "clsx";
 import {
   DragDropContext,
@@ -39,20 +39,6 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
 
     const showWidgets =
       selectedWidgets.length > 0 && isWidgetsOnRight === isRightPlacement;
-
-    const handleWidgetListRef = (
-      ref: HTMLElement | null,
-      handleRef: (element: HTMLElement | null) => void
-    ) => {
-      handleRef(ref);
-
-      if (ref) {
-        const itemHeightInPercentages = `${100 / MAX_WIDGET_NUM}%`;
-        ref.style.gridTemplateRows = selectedWidgets
-          .map(() => itemHeightInPercentages)
-          .join(" ");
-      }
-    };
 
     const handleDragEnd = useCallback(
       (result: DropResult) => {
@@ -106,7 +92,7 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
           {(dropProvided: DroppableProvided) => (
             <div
               className="new-tab__widget-list"
-              ref={ref => handleWidgetListRef(ref, dropProvided.innerRef)}
+              ref={dropProvided.innerRef}
               {...dropProvided.droppableProps}
             >
               {showWidgets &&

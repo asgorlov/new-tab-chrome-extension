@@ -9,6 +9,8 @@ declare global {
     isBefore(date: Date): boolean;
     isAfter(date: Date): boolean;
     add(value: number, unit: DateUnit): Date;
+    startOf(unit: Omit<DateUnit, "ms">): Date;
+    endOf(unit: Omit<DateUnit, "ms">): Date;
   }
 }
 

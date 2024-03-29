@@ -74,10 +74,10 @@ export const getAverageTempTextByTimeOfDay = (
     eveningTemp /= 6;
 
     return {
-      night: getRoundedValue(nightTemp),
-      morning: getRoundedValue(morningTemp),
-      day: getRoundedValue(dayTemp),
-      evening: getRoundedValue(eveningTemp)
+      night: getTempText(nightTemp),
+      morning: getTempText(morningTemp),
+      day: getTempText(dayTemp),
+      evening: getTempText(eveningTemp)
     };
   }
 
@@ -110,7 +110,7 @@ export const getCurrentHourWeatherParams = (
     const humidity = `${currentHourParams.humidity}%`;
     const pressure = getLocalizedPressureText(currentHourParams.pressure);
     const code = currentHourParams.weatherCode;
-    const temp = getTempText(currentHourParams.temp);
+    const temp = `${getTempText(currentHourParams.temp)}°`;
 
     return { wind, humidity, pressure, code, temp };
   }

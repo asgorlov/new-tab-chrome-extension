@@ -1,21 +1,18 @@
 @import "../../modules/constants.module";
 
 .new-tab__widget-list {
-  $max-width-list: 300px;
-
   display: grid;
+  max-width: 264px;
+  width: 100vw;
   gap: 12px;
   margin: 12px;
-  max-width: $max-width-list;
-  width: 100vw;
 
   &_item {
-    $padding-item: 12px;
-
-    max-width: $max-width-list - $padding-item;
-    padding: $padding-item;
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    padding: 12px;
     border-radius: 24px;
-    cursor: default;
     transition: background-color $slow-transition;
     background-color: var(--widgets-bg-color);
 

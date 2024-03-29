@@ -1,5 +1,5 @@
 /**
- * Тип возможного времени суток
+ * Тип времени суток
  * @interface
  */
 export type TimeOfDayType = "morning" | "day" | "evening" | "night";

@@ -63,4 +63,66 @@ Date.prototype.add = function (value, unit) {
   return this;
 };
 
+Date.prototype.startOf = function (unit) {
+  switch (unit) {
+    case "s":
+      this.setUTCMilliseconds(0);
+      break;
+    case "min":
+      this.setUTCSeconds(0, 0);
+      break;
+    case "h":
+      this.setUTCMinutes(0, 0, 0);
+      break;
+    case "d":
+      this.setUTCHours(0, 0, 0, 0);
+      break;
+    case "w":
+      const monday = this.getUTCDate() - (this.getUTCDay() - 1);
+      this.setUTCDate(monday);
+      this.setUTCHours(0, 0, 0, 0);
+      break;
+    case "m":
+      this.setUTCMonth(this.getUTCMonth(), 1);
+      this.setUTCHours(0, 0, 0, 0);
+      break;
+    case "y":
+      this.setUTCFullYear(this.getUTCFullYear(), 0, 1);
+      this.setUTCHours(0, 0, 0, 0);
+  }
+
+  return this;
+};
+
+Date.prototype.endOf = function (unit) {
+  switch (unit) {
+    case "s":
+      this.setUTCMilliseconds(999);
+      break;
+    case "min":
+      this.setUTCSeconds(59, 999);
+      break;
+    case "h":
+      this.setUTCMinutes(59, 59, 999);
+      break;
+    case "d":
+      this.setUTCHours(23, 59, 59, 999);
+      break;
+    case "w":
+      const sunday = this.getUTCDate() + (7 - this.getUTCDay());
+      this.setUTCDate(sunday);
+      this.setUTCHours(23, 59, 59, 999);
+      break;
+    case "m":
+      this.setUTCMonth(this.getUTCMonth() + 1, 0);
+      this.setUTCHours(23, 59, 59, 999);
+      break;
+    case "y":
+      this.setUTCFullYear(this.getUTCFullYear(), 11, 31);
+      this.setUTCHours(23, 59, 59, 999);
+  }
+
+  return this;
+};
+
 export {};

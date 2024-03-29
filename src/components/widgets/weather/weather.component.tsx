@@ -10,10 +10,6 @@ import {
 } from "../../../models/weather.model";
 import { selectWeatherLoading } from "../../../store/new-tab/new-tab.selectors";
 import { useSelector } from "react-redux";
-import { ReactComponent as MorningIcon } from "../../../static/svgs/widgets/weather/tod-morning.svg";
-import { ReactComponent as DayIcon } from "../../../static/svgs/widgets/weather/tod-day.svg";
-import { ReactComponent as EveningIcon } from "../../../static/svgs/widgets/weather/tod-evening.svg";
-import { ReactComponent as NightIcon } from "../../../static/svgs/widgets/weather/tod-night.svg";
 import { ReactComponent as WindIcon } from "../../../static/svgs/widgets/weather/wp_wind.svg";
 import { ReactComponent as PressureIcon } from "../../../static/svgs/widgets/weather/wp_pressure.svg";
 import { ReactComponent as HumidityIcon } from "../../../static/svgs/widgets/weather/wp_humidity.svg";
@@ -39,13 +35,13 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
   ({ timeOfDay, tempByTimeOfDay, weatherParams }) => {
     const { t } = useTranslation();
     const loading = useSelector(selectWeatherLoading);
-
+    // toDo: сделать загрузку данных в виде скелетона.
     const wmoName = WMOCodes[weatherParams.code];
     const paramViewModels = [
       {
-        name: "wind",
-        icon: <WindIcon />,
-        value: weatherParams.wind
+        name: "pressure",
+        icon: <PressureIcon />,
+        value: weatherParams.pressure
       },
       {
         name: "humidity",
@@ -53,62 +49,58 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
         value: weatherParams.humidity
       },
       {
-        name: "pressure",
-        icon: <PressureIcon />,
-        value: weatherParams.pressure
+        name: "wind",
+        icon: <WindIcon />,
+        value: weatherParams.wind
       }
     ];
     const tempByTimeOfDayViewModels = [
       {
         name: "night",
-        icon: <NightIcon />,
-        value: tempByTimeOfDay.night
+        value: `${tempByTimeOfDay.night}°`
       },
       {
         name: "morning",
-        icon: <MorningIcon />,
-        value: tempByTimeOfDay.morning
+        value: `${tempByTimeOfDay.morning}°`
       },
       {
         name: "day",
-        icon: <DayIcon />,
-        value: tempByTimeOfDay.day
+        value: `${tempByTimeOfDay.day}°`
       },
       {
         name: "evening",
-        icon: <EveningIcon />,
-        value: tempByTimeOfDay.evening
+        value: `${tempByTimeOfDay.evening}°`
       }
     ];
 
     return (
       <div className="new-tab__weather" data-time-of-day={timeOfDay}>
         <div className="new-tab__weather-temp">
-          <div className="new-tab__weather-temp__now">
-            <div className={clsx("new-tab__weather-temp__now_icon", wmoName)} />
-            <div className="new-tab__weather-temp__now_value">
-              {weatherParams.temp}
+          <TooltipComponent
+            open={loading ? true : undefined}
+            mouseEnterDelay={0.5}
+            overlayClassName="new-tab__weather-temp__now__popup"
+            title={t(`weather.types.${wmoName}`)}
+          >
+            <div className="new-tab__weather-temp__now">
+              <div
+                className={clsx("new-tab__weather-temp__now_icon", wmoName)}
+              />
+              <div className="new-tab__weather-temp__now_value">
+                {weatherParams.temp}
+              </div>
             </div>
-          </div>
-          <span className="new-tab__weather-temp__description">
-            {t(`weather.types.${wmoName}`)}
-          </span>
+          </TooltipComponent>
           <ul className="new-tab__weather-temp__times-of-day">
             {tempByTimeOfDayViewModels.map(item => {
               return (
-                <TooltipComponent
-                  mouseEnterDelay={0.5}
-                  align={{ offset: [0, "-18%"] }}
-                  className="new-tab__weather-temp__times-of-day_item"
-                  overlayClassName="new-tab__weather-temp__times-of-day_item__popup"
-                  title={t(`weather.timesOfDay.${item.name}`)}
+                <li
                   key={item.name}
+                  className="new-tab__weather-temp__times-of-day_item"
                 >
-                  <li>
-                    <>{item.icon}</>
-                    <span>{item.value}</span>
-                  </li>
-                </TooltipComponent>
+                  <span>{t(`weather.timesOfDay.${item.name}`)}</span>
+                  <span>{item.value}</span>
+                </li>
               );
             })}
           </ul>

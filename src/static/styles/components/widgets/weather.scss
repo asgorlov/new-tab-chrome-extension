@@ -15,25 +15,26 @@
 }
 
 .new-tab__weather {
-  width: 100%;
-  height: 100%;
   display: flex;
   font-size: 12px;
   color: var(--text-color);
   transition: color $fast-transition;
-  overflow: hidden;
 
   &-temp {
     min-width: 134px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
 
     &__now {
-      height: 100%;
+      height: 48px;
       display: flex;
       align-items: center;
       gap: 8px;
+
+      &__popup {
+        font-size: 12px;
+      }
 
       &_icon {
         min-height: 48px;
@@ -164,13 +165,6 @@
       }
     }
 
-    &__description {
-      font-size: 8px;
-      line-height: 10px;
-      white-space: nowrap;
-      text-align: center;
-    }
-
     &__times-of-day {
       display: flex;
       margin: 0;
@@ -180,39 +174,31 @@
 
       &_item {
         width: 100%;
-        height: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         list-style-type: none;
         border-right: 1px solid var(--text-color);
         transition: border-color $fast-transition;
-        font-size: 10px;
-        line-height: 10px;
+        font-size: 9px;
+        line-height: 11px;
 
-        svg {
+        span {
           padding: 2px 4px;
-          width: 14px;
-          height: 14px;
 
           &:first-child {
             border-bottom: 1px solid var(--text-color);
-            transition: border-color $fast-transition;
           }
-        }
 
-        span {
-          padding: 2px 4px 0;
+          &:last-child {
+            font-size: 11px;
+          }
         }
 
         &:last-child {
           border-right: none;
         }
-
-        &__popup {
-          font-size: 12px;
-        }
-
       }
     }
   }
@@ -229,7 +215,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     margin: 0;
     padding: 8px 0;
 
