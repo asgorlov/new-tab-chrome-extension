@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import React, { FC, memo, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { WMOCodes } from "../../../constants/weather.constants";
@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { ReactComponent as WindIcon } from "../../../static/svgs/widgets/weather/wp_wind.svg";
 import { ReactComponent as PressureIcon } from "../../../static/svgs/widgets/weather/wp_pressure.svg";
 import { ReactComponent as HumidityIcon } from "../../../static/svgs/widgets/weather/wp_humidity.svg";
+import { ReactComponent as UpdateIcon } from "../../../static/svgs/widgets/weather/update-weather.svg";
 import SkeletonNode from "antd/es/skeleton/Node";
 
 /**
@@ -23,6 +24,7 @@ import SkeletonNode from "antd/es/skeleton/Node";
  * @interface
  */
 export interface WeatherComponentProps {
+  onClickUpdate: () => void;
   timeOfDay: TimeOfDayType;
   tempByTimeOfDay: AverageTempTextByTimeOfDay;
   weatherParams: HourlyWeatherParamsViewModel;
@@ -33,9 +35,11 @@ export interface WeatherComponentProps {
  * @category Components
  */
 const WeatherComponent: FC<WeatherComponentProps> = memo(
-  ({ timeOfDay, tempByTimeOfDay, weatherParams }) => {
+  ({ onClickUpdate, timeOfDay, tempByTimeOfDay, weatherParams }) => {
     const { t } = useTranslation();
+    const updateBtnRef = useRef<HTMLButtonElement>(null);
     const loading = useSelector(selectWeatherLoading);
+    const [isClickedAnimationOn, setIsClickedAnimationOn] = useState(false);
 
     const wmoName = WMOCodes[weatherParams.code];
     const paramViewModels = [
@@ -73,6 +77,23 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
         value: `${tempByTimeOfDay.evening}°`
       }
     ];
+
+    const handleClickUpdate = () => {
+      if (!loading) {
+        setIsClickedAnimationOn(true);
+        onClickUpdate();
+      }
+    };
+
+    useEffect(() => {
+      const button = updateBtnRef.current;
+      if (button) {
+        const callback = () => setIsClickedAnimationOn(false);
+        button.addEventListener("animationend", callback);
+
+        return () => button.removeEventListener("animationend", callback);
+      }
+    }, []);
 
     return (
       <div className="new-tab__weather" data-time-of-day={timeOfDay}>
@@ -151,6 +172,16 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
             );
           })}
         </ul>
+        <button
+          className={clsx("new-tab__weather-update-btn", {
+            clicked: isClickedAnimationOn
+          })}
+          disabled={loading && !isClickedAnimationOn}
+          onClick={handleClickUpdate}
+          ref={updateBtnRef}
+        >
+          <UpdateIcon />
+        </button>
       </div>
     );
   }

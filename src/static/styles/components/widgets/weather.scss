@@ -1,6 +1,15 @@
 @import "../../modules/constants.module";
 @import "../../modules/mixins.module";
 
+@keyframes turn-180 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
 .new-tab__weather {
   &[data-time-of-day="day"] {
     --weather-clear-sky-bg-url: url("../../../svgs/widgets/weather/0_clear-sky_day.svg");
@@ -17,6 +26,7 @@
 
 .new-tab__weather {
   display: flex;
+  position: relative;
   font-size: 12px;
   font-weight: 600;
   color: $light-text-color;
@@ -250,8 +260,35 @@
         white-space: nowrap;
 
         &__skeleton {
-          @include skeleton-dimensions(74px);
+          @include skeleton-dimensions(66px);
         }
+      }
+    }
+  }
+
+  &-update-btn {
+    display: flex;
+    position: absolute;
+    right: 0;
+    height: 14px;
+    width: 14px;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #00000025;
+    }
+
+    &.clicked {
+      animation: 0.5s linear turn-180;
+
+      &:hover {
+        background-color: transparent;
       }
     }
   }

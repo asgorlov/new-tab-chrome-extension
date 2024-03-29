@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import WeatherComponent from "./weather.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,14 +22,21 @@ const WeatherContainer: FC = () => {
   const nightPeriod = useSelector(selectNightPeriod);
   const weather = useSelector(selectWeather);
 
-  useEffect(() => {
-    if (currentLocation && shouldBeWeatherDataLoaded(weather)) {
+  const updateWeather = useCallback(() => {
+    if (currentLocation) {
       dispatch(getWeatherData(currentLocation));
     }
-  }, [weather, currentLocation, dispatch]);
+  }, [currentLocation, dispatch]);
+
+  useEffect(() => {
+    if (shouldBeWeatherDataLoaded(weather)) {
+      updateWeather();
+    }
+  }, [weather, updateWeather]);
 
   return (
     <WeatherComponent
+      onClickUpdate={updateWeather}
       timeOfDay={isDayNow(nightPeriod) ? "day" : "night"}
       tempByTimeOfDay={getAverageTempTextByTimeOfDay(weather.data)}
       weatherParams={getCurrentHourWeatherParams(weather.data)}
