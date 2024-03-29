@@ -19,7 +19,7 @@
   display: flex;
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-color);
+  color: $light-text-color;
   transition: color $fast-transition;
 
   &-temp {
@@ -50,7 +50,6 @@
         min-height: 48px;
         min-width: 48px;
         background-size: cover;
-        filter: var(--img-inversion);
         transition: $fast-transition;
         background-image: url("../../../svgs/widgets/weather/-1_no-data.svg");
 
@@ -180,7 +179,7 @@
       display: flex;
       margin: 0;
       padding: 0;
-      border-top: 1px solid var(--text-color);
+      border-top: 1px solid $light-text-color;
       transition: border-color $fast-transition;
 
       &_item {
@@ -190,7 +189,7 @@
         align-items: center;
         justify-content: center;
         list-style-type: none;
-        border-right: 1px solid var(--text-color);
+        border-right: 1px solid $light-text-color;
         transition: border-color $fast-transition;
         font-size: 9px;
         line-height: 11px;
@@ -204,7 +203,7 @@
           padding: 2px 4px;
 
           &:first-child {
-            border-bottom: 1px solid var(--text-color);
+            border-bottom: 1px solid $light-text-color;
           }
 
           &:last-child {
@@ -224,7 +223,7 @@
     width: 1px;
     margin: 0 8px;
     border: none;
-    border-right: 1px solid var(--text-color);
+    border-right: 1px solid $light-text-color;
     transition: border-color $fast-transition;
   }
 
