@@ -1,4 +1,5 @@
 @import "../../modules/constants.module";
+@import "../../modules/mixins.module";
 
 .new-tab__weather {
   &[data-time-of-day="day"] {
@@ -17,6 +18,7 @@
 .new-tab__weather {
   display: flex;
   font-size: 12px;
+  font-weight: 600;
   color: var(--text-color);
   transition: color $fast-transition;
 
@@ -31,6 +33,14 @@
       display: flex;
       align-items: center;
       gap: 8px;
+
+      &__skeleton {
+        @include skeleton-dimensions(48px);
+
+        &:last-child {
+          @include skeleton-dimensions(78px);
+        }
+      }
 
       &__popup {
         font-size: 12px;
@@ -160,6 +170,7 @@
       &_value {
         width: 100%;
         font-size: 36px;
+        font-weight: 400;
         line-height: 40px;
         text-align: center
       }
@@ -184,6 +195,11 @@
         font-size: 9px;
         line-height: 11px;
 
+        &__skeleton {
+          padding: 2px 4px;
+          @include skeleton-dimensions(24px, 17px);
+        }
+
         span {
           padding: 2px 4px;
 
@@ -193,6 +209,7 @@
 
           &:last-child {
             font-size: 11px;
+            line-height: 13px;
           }
         }
 
@@ -230,7 +247,12 @@
       }
 
       &-value {
+        display: inline-flex;
         white-space: nowrap;
+
+        &__skeleton {
+          @include skeleton-dimensions(74px);
+        }
       }
     }
   }

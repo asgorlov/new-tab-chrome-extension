@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { ReactComponent as WindIcon } from "../../../static/svgs/widgets/weather/wp_wind.svg";
 import { ReactComponent as PressureIcon } from "../../../static/svgs/widgets/weather/wp_pressure.svg";
 import { ReactComponent as HumidityIcon } from "../../../static/svgs/widgets/weather/wp_humidity.svg";
+import SkeletonNode from "antd/es/skeleton/Node";
 
 /**
  * Передаваемые параметры компонента виджета погоды
@@ -35,7 +36,7 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
   ({ timeOfDay, tempByTimeOfDay, weatherParams }) => {
     const { t } = useTranslation();
     const loading = useSelector(selectWeatherLoading);
-    // toDo: сделать загрузку данных в виде скелетона.
+
     const wmoName = WMOCodes[weatherParams.code];
     const paramViewModels = [
       {
@@ -77,19 +78,34 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
       <div className="new-tab__weather" data-time-of-day={timeOfDay}>
         <div className="new-tab__weather-temp">
           <TooltipComponent
-            open={loading ? true : undefined}
+            open={loading ? false : undefined}
             mouseEnterDelay={0.5}
             overlayClassName="new-tab__weather-temp__now__popup"
             title={t(`weather.types.${wmoName}`)}
           >
-            <div className="new-tab__weather-temp__now">
-              <div
-                className={clsx("new-tab__weather-temp__now_icon", wmoName)}
-              />
-              <div className="new-tab__weather-temp__now_value">
-                {weatherParams.temp}
+            {loading ? (
+              <div className="new-tab__weather-temp__now">
+                <SkeletonNode
+                  className="new-tab__weather-temp__now__skeleton"
+                  children={<div />}
+                  active
+                />
+                <SkeletonNode
+                  className="new-tab__weather-temp__now__skeleton"
+                  children={<div />}
+                  active
+                />
               </div>
-            </div>
+            ) : (
+              <div className="new-tab__weather-temp__now">
+                <div
+                  className={clsx("new-tab__weather-temp__now_icon", wmoName)}
+                />
+                <div className="new-tab__weather-temp__now_value">
+                  {weatherParams.temp}
+                </div>
+              </div>
+            )}
           </TooltipComponent>
           <ul className="new-tab__weather-temp__times-of-day">
             {tempByTimeOfDayViewModels.map(item => {
@@ -99,7 +115,15 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
                   className="new-tab__weather-temp__times-of-day_item"
                 >
                   <span>{t(`weather.timesOfDay.${item.name}`)}</span>
-                  <span>{item.value}</span>
+                  {loading ? (
+                    <SkeletonNode
+                      className="new-tab__weather-temp__times-of-day_item__skeleton"
+                      children={<div />}
+                      active
+                    />
+                  ) : (
+                    <span>{item.value}</span>
+                  )}
                 </li>
               );
             })}
@@ -113,7 +137,15 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
                 {item.icon}
                 <span className="new-tab__weather-params_item-value">
                   {": "}
-                  {item.value}
+                  {loading ? (
+                    <SkeletonNode
+                      className="new-tab__weather-params_item-value__skeleton"
+                      children={<div />}
+                      active
+                    />
+                  ) : (
+                    <>{item.value}</>
+                  )}
                 </span>
               </li>
             );
