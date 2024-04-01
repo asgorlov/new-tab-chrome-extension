@@ -1,4 +1,7 @@
-import { CustomWallpaper } from "../models/custom-wallpaper.model";
+import {
+  CustomWallpaper,
+  CustomWallpaperInBase64
+} from "../models/custom-wallpaper.model";
 import { RcFile, UploadFile } from "antd/es/upload/interface";
 import {
   ACCEPT_IMG_FORMAT,
@@ -12,18 +15,35 @@ import {
 } from "../constants/common.constants";
 
 /**
- * Функция, конвертирующая файл картинки в base64
+ * Функция, меняющая содержимое объекта фоновой картинки для темной и светлой темы из формата base64 в файл
  * @category Utilities - Wallpaper
- * @param file - Файл картинки
- * @returns - Строку в формате base64 {@link File}
+ * @param customWallpaper - Объект фоновой картинки для темной и светлой темы
+ * @returns <b>True</b>, если объект был изменен
  */
-export const convertImgToBase64 = async (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(String(reader.result));
-    reader.onerror = () => reject("Can't convert file to base64");
-    reader.readAsDataURL(file);
-  });
+export const changeCustomWallpaperFormBase64ToFile = (
+  customWallpaper?: CustomWallpaper | CustomWallpaperInBase64 | null
+): boolean => {
+  let isChanged = false;
+
+  if (customWallpaper) {
+    if (typeof customWallpaper.lightTheme === "string") {
+      isChanged = true;
+      customWallpaper.lightTheme = convertBase64ToFile(
+        customWallpaper.lightTheme,
+        LIGHT_THEME_NAME
+      );
+    }
+
+    if (typeof customWallpaper.darkTheme === "string") {
+      isChanged = true;
+      customWallpaper.darkTheme = convertBase64ToFile(
+        customWallpaper.darkTheme,
+        DARK_THEME_NAME
+      );
+    }
+  }
+
+  return isChanged;
 };
 
 /**
@@ -33,14 +53,14 @@ export const convertImgToBase64 = async (file: File): Promise<string> => {
  * @param name - Имя файла
  * @returns - Файл картинки {@link File}
  */
-export const convertBase64ToImg = (base64: string, name: string): File => {
+const convertBase64ToFile = (base64: string, name: string): File => {
   return new File([new Blob([base64])], name);
 };
 
 /**
  * Функция для получения url картинки в зависимости от темы
  * @category Utilities - Wallpaper
- * @param customWallpaper - Объекта фоновой картинки для темной и светлой темы
+ * @param customWallpaper - Объект фоновой картинки для темной и светлой темы
  * @param wallpaper - Название кейса фоновой картинки
  * @param isDark - Флаг темной темы
  * @returns - Url картинки в формате base64
@@ -55,15 +75,15 @@ export const getImgUrl = (
   }
 
   if (wallpaper === CUSTOM_WALLPAPER) {
-    let url;
-    if (customWallpaper) {
-      url =
-        isDark && customWallpaper.darkTheme
-          ? customWallpaper.darkTheme
-          : customWallpaper.lightTheme;
+    if (isDark) {
+      if (customWallpaper?.darkTheme) {
+        return URL.createObjectURL(customWallpaper.darkTheme);
+      }
+    } else if (customWallpaper?.lightTheme) {
+      return URL.createObjectURL(customWallpaper.lightTheme);
     }
 
-    return url ?? "";
+    return "";
   }
 
   const theme = isDark ? DARK_THEME_NAME : LIGHT_THEME_NAME;
@@ -73,16 +93,11 @@ export const getImgUrl = (
 /**
  * Функция, получающая файл загруженной картинки для компонента <tt>Upload</tt>
  * @category Utilities - Wallpaper
- * @param imgUrl - Строка картинки в формате base64
- * @param theme - Тема приложения
+ * @param file - Файл фоновой картинки
  * @returns - Массив с загруженным файлом или пустой список {@link UploadFile}[]
  */
-export const getInitialFileList = (
-  imgUrl: string | undefined,
-  theme: string
-): UploadFile[] => {
-  if (imgUrl) {
-    const file = convertBase64ToImg(imgUrl, `custom-${theme}`);
+export const getInitialFileList = (file: File | null = null): UploadFile[] => {
+  if (file) {
     const rcFile = {
       size: file.size,
       name: file.name,
@@ -100,7 +115,7 @@ export const getInitialFileList = (
       lastModifiedDate: rcFile.lastModifiedDate,
       status: "done",
       percent: 100,
-      thumbUrl: imgUrl,
+      thumbUrl: URL.createObjectURL(file),
       originFileObj: rcFile,
       response: file
     };

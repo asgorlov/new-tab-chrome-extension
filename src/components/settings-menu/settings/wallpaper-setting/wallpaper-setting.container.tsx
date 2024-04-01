@@ -10,7 +10,6 @@ import {
 } from "../../../../constants/wallpaper.constants";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import {
-  convertImgToBase64,
   getInitialFileList,
   getInitialOneToBoth
 } from "../../../../utils/wallpaper.utils";
@@ -38,10 +37,10 @@ const WallpaperSettingContainer: FC = () => {
     getInitialOneToBoth(customWallpaper)
   );
   const [darkFileList, setDarkFileList] = useState(
-    getInitialFileList(customWallpaper?.darkTheme, DARK_INPUT_NAME)
+    getInitialFileList(customWallpaper?.darkTheme)
   );
   const [lightFileList, setLightFileList] = useState(
-    getInitialFileList(customWallpaper?.lightTheme, LIGHT_INPUT_NAME)
+    getInitialFileList(customWallpaper?.lightTheme)
   );
   const [uploadingErrors, setUploadingErrors] = useState(Array(2));
   const [uploadedWallpaper, setUploadedWallpaper] = useState(customWallpaper);
@@ -104,8 +103,6 @@ const WallpaperSettingContainer: FC = () => {
       const file = info.file as UploadFile;
 
       if (file.status === DONE_STATUS) {
-        const thumbUrl =
-          file.thumbUrl ?? (await convertImgToBase64(info.file.response));
         const errorIndex = inputName === DARK_INPUT_NAME ? 1 : 0;
 
         if (uploadingErrors[errorIndex]) {
@@ -116,23 +113,21 @@ const WallpaperSettingContainer: FC = () => {
         switch (inputName) {
           case BOTH_INPUT_NAME:
             setUploadedWallpaper({
-              lightTheme: thumbUrl
+              lightTheme: file.response
             });
-
             break;
           case LIGHT_INPUT_NAME:
             setUploadedWallpaper(
               uploadedWallpaper?.darkTheme
-                ? { ...uploadedWallpaper, lightTheme: thumbUrl }
-                : { lightTheme: thumbUrl }
+                ? { ...uploadedWallpaper, lightTheme: file.response }
+                : { lightTheme: file.response }
             );
-
             break;
           case DARK_INPUT_NAME:
             setUploadedWallpaper(
               uploadedWallpaper?.lightTheme
-                ? { ...uploadedWallpaper, darkTheme: thumbUrl }
-                : { darkTheme: thumbUrl }
+                ? { ...uploadedWallpaper, darkTheme: file.response }
+                : { darkTheme: file.response }
             );
         }
       } else if (file.status === ERROR_STATUS) {

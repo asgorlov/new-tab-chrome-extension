@@ -4,6 +4,7 @@ import defaultStore from "../constants/default-store.constants";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { CURRENT_EXT_VERSION } from "../constants/update.constants";
 import { getDeltaChanges } from "./update.utils";
+import { changeCustomWallpaperFormBase64ToFile } from "./wallpaper.utils";
 
 /**
  * Функция для скачивания файла
@@ -85,6 +86,8 @@ export const getSettingsAdaptedToCurrentVersion = (
       version
     ).searchEngines.filter(engine => !searchEngines.includes(engine));
     searchEngines.push(...deltaSearchEngines);
+
+    changeCustomWallpaperFormBase64ToFile(settings.customWallpaper);
   }
 
   Object.keys(settings).forEach(name => {
