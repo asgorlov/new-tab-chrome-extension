@@ -3,6 +3,7 @@ import { MANUAL, SEARCH_ENGINE_NAMES, YANDEX } from "./search-engine.constants";
 import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
 import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
+import { WidgetName } from "./widget.constants";
 
 /**
  * Значения стейта по умолчанию
@@ -14,7 +15,7 @@ const defaultStore: Readonly<NewTabStateBase> = {
     lastVersion: CURRENT_EXT_VERSION,
     lastUpdateDate: Date.now()
   },
-  widgets: [],
+  widgets: Object.values(WidgetName),
   isWidgetsOnRight: false,
   showTour: true,
   darkMode: MANUAL,
