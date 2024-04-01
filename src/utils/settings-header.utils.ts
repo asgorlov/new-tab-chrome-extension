@@ -6,7 +6,6 @@ import {
   SPEC_CHARS_REG_EXP
 } from "../constants/settings-menu.constants";
 import {
-  HighlightedTextModel,
   MatchedElement,
   SettingsStorage
 } from "../models/settings-search.model";
@@ -117,23 +116,20 @@ export const matchElements = (
           findByQuery(child, type);
         }
       } else {
-        const textContent = element.textContent;
+        const textContentBackup = element.textContent ?? "";
+        const hasHighlightedText = insertHighlightedTextToElement(
+          element,
+          query
+        );
 
-        if (textContent) {
-          const highlightedText = getHighlightedTextModel(query, textContent);
+        if (hasHighlightedText) {
+          const elements = [...element.getElementsByTagName("mark")].map(e => ({
+            item: e,
+            type,
+            textContentBackup
+          }));
 
-          if (highlightedText.containsSearchQuery) {
-            element.innerHTML = highlightedText.content;
-            const elements = [...element.getElementsByTagName("mark")].map(
-              e => ({
-                item: e,
-                type,
-                textContentBackup: textContent
-              })
-            );
-
-            matchedElements.push(...elements);
-          }
+          matchedElements.push(...elements);
         }
       }
     };
@@ -149,48 +145,50 @@ export const matchElements = (
 };
 
 /**
- * Функция для получения подсвеченного текста, который удовлетворяет поисковому запросу
- * @category Utilities - Settings Header
+ * Функция, которая подсвечивает текст, удовлетворяющий поисковому запросу
+ * @param element - Элемент, который содержит текст для поиска
  * @param query - Поисковый запрос
- * @param text - Текст для поиска
- * @returns - Объект подсвечиваемого текста, удовлетворяющему поиску {@link HighlightedTextModel}
+ * @returns <b>True</b>, если элемент содержит подсвеченный текст
  */
-const getHighlightedTextModel = (
-  query: string,
-  text: string
-): HighlightedTextModel => {
-  let content = text;
-  const escapedQuery = query.replace(SPEC_CHARS_REG_EXP, "\\$&");
-  const regExp = new RegExp(escapedQuery, "i");
-  let startingIndex = content.search(regExp);
-  const containsSearchQuery = startingIndex !== -1;
+const insertHighlightedTextToElement = (
+  element: Element,
+  query: string
+): boolean => {
+  const text = element.textContent;
+  if (text) {
+    const escapedQuery = query.replace(SPEC_CHARS_REG_EXP, "\\$&");
+    const regExp = new RegExp(escapedQuery, "i");
+    let startingIndex = text.search(regExp);
+    if (startingIndex >= 0) {
+      element.replaceChildren("");
 
-  if (containsSearchQuery) {
-    let verifiableText = content;
-    let result: string[] = [];
+      let verifiableText = text;
+      while (startingIndex > -1) {
+        const firstTextPart = verifiableText.substring(0, startingIndex);
+        element.appendChild(document.createTextNode(firstTextPart));
 
-    while (startingIndex > -1) {
-      let endingIndex = startingIndex + query.length;
-      const firstTextPart = verifiableText.substring(0, startingIndex);
-      const secondTextPart = verifiableText.substring(
-        startingIndex,
-        endingIndex
-      );
+        const endingIndex = startingIndex + query.length;
+        const secondTextPart = verifiableText.substring(
+          startingIndex,
+          endingIndex
+        );
+        const markedElement = document.createElement("mark");
+        markedElement.className = SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS;
+        markedElement.appendChild(document.createTextNode(secondTextPart));
+        element.appendChild(markedElement);
 
-      result.push(
-        firstTextPart,
-        `<mark class=${SETTINGS_MENU_HIGHLIGHTED_TEXT_CLASS}>${secondTextPart}</mark>`
-      );
+        verifiableText = verifiableText.substring(
+          endingIndex,
+          verifiableText.length
+        );
+        startingIndex = verifiableText.search(regExp);
+      }
 
-      verifiableText = verifiableText.substring(
-        endingIndex,
-        verifiableText.length
-      );
-      startingIndex = verifiableText.search(regExp);
+      element.appendChild(document.createTextNode(verifiableText));
+
+      return true;
     }
-
-    content = result.join("") + verifiableText;
   }
 
-  return { content: content ?? "", containsSearchQuery };
+  return false;
 };
