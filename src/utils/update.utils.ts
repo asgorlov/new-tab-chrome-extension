@@ -31,6 +31,7 @@ import {
 import db from "../db/db";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
+import { changeCustomWallpaperFormBase64ToFile } from "./wallpaper.utils";
 
 /**
  * Функция, позволяющая узнать необходимо ли отправлять запрос за последними обновлениями
@@ -76,9 +77,11 @@ export const getDownloadLink = (version: string) => {
  * @param data - Данные из браузера
  */
 export const updateStateWithFeatures = (data: NewTabStateBase) => {
+  const dataToUpdate = {};
+
   if (!data.update.previousVersion) {
     data.update.previousVersion = data.update.lastVersion;
-    db.set({ update: data.update });
+    Object.assign(dataToUpdate, { update: data.update });
   }
 
   if (data.update.previousVersion < data.update.lastVersion) {
@@ -94,13 +97,21 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
     features.searchEngines
       .filter(searchEngine => !data.searchEngines.includes(searchEngine))
       .forEach(searchEngine => data.searchEngines.push(searchEngine));
+    Object.assign({ searchEngines: data.searchEngines });
 
     data.update.previousVersion = data.update.lastVersion;
+    Object.assign(dataToUpdate, { update: data.update });
 
-    db.set({
-      searchEngines: data.searchEngines,
-      update: data.update
-    });
+    const isChanged = changeCustomWallpaperFormBase64ToFile(
+      data.customWallpaper
+    );
+    if (isChanged) {
+      Object.assign(dataToUpdate, { customWallpaper: data.customWallpaper });
+    }
+  }
+
+  if (Object.keys(dataToUpdate).length) {
+    db.set(dataToUpdate);
   }
 };
 
@@ -158,6 +169,8 @@ export const getDeltaChanges = (
       STARTPAGE,
       SEARXNG
     );
+  }
+  if (lastVersion >= "3.6.0") {
   }
 
   return { searchEngines, forceShowTour };

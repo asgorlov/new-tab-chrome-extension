@@ -10,12 +10,18 @@ const store = configureStore({
       // игнорируем несериализуемые данные
       serializableCheck: {
         ignoredActions: [
-          "newTab/setNightPeriod",
           "newTab/applySettings/fulfilled",
+          "newTab/setCustomWallpaper",
+          "newTab/setNightPeriod",
           "api/weather/get/rejected",
           "api/weather/get/fulfilled"
         ],
-        ignoredPaths: ["newTab.nightPeriod", "newTab.weather"]
+        ignoredPaths: [
+          "newTab.customWallpaper.lightTheme",
+          "newTab.customWallpaper.darkTheme",
+          "newTab.nightPeriod",
+          "newTab.weather"
+        ]
       }
     })
 });
