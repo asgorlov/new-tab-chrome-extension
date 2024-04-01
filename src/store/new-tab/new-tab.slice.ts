@@ -236,9 +236,9 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
-      const { lastUpdateDate, lastVersion } = action.payload;
+      const update = action.payload;
 
-      if (lastVersion === CURRENT_EXT_VERSION) {
+      if (update.lastVersion === CURRENT_EXT_VERSION) {
         const isManualUpdateRequest =
           state.checkForUpdates === checkForUpdates.MANUAL;
         if (isManualUpdateRequest) {
@@ -246,16 +246,16 @@ export const newTabSlice = createSlice({
             Notification.NoNewVersion
           );
         }
-      } else if (lastVersion > CURRENT_EXT_VERSION) {
+      } else if (update.lastVersion > CURRENT_EXT_VERSION) {
         state.notifications = state.notifications.concat(
           Notification.HasNewVersion
         );
       }
 
       state.checkLoading = false;
-      state.update.lastVersion = lastVersion;
-      state.update.lastUpdateDate = lastUpdateDate;
-      db.set({ update: action.payload });
+      state.update.lastVersion = update.lastVersion;
+      state.update.lastUpdateDate = update.lastUpdateDate;
+      db.set({ update });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
