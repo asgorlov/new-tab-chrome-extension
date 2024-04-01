@@ -4,7 +4,7 @@ import {
   selectIsWidgetsOnRight,
   selectWidgets
 } from "../../store/new-tab/new-tab.selectors";
-import { MAX_WIDGET_NUM, WidgetName } from "../../constants/widget.constants";
+import { WidgetName } from "../../constants/widget.constants";
 import clsx from "clsx";
 import {
   DragDropContext,
@@ -17,6 +17,7 @@ import {
 import StrictModeDroppable from "../search-engine-selector/droppable-aria/strict-mode-droppable";
 import { setWidgets } from "../../store/new-tab/new-tab.slice";
 import WeatherContainer from "./weather/weather.container";
+import { useToken } from "antd/es/theme/internal";
 
 /**
  * Передаваемые параметры компонента виджетов на экране
@@ -36,23 +37,10 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
     const dispatch = useDispatch();
     const selectedWidgets = useSelector(selectWidgets);
     const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
+    const token = useToken();
 
     const showWidgets =
       selectedWidgets.length > 0 && isWidgetsOnRight === isRightPlacement;
-
-    const handleWidgetListRef = (
-      ref: HTMLElement | null,
-      handleRef: (element: HTMLElement | null) => void
-    ) => {
-      handleRef(ref);
-
-      if (ref) {
-        const itemHeightInPercentages = `${100 / MAX_WIDGET_NUM}%`;
-        ref.style.gridTemplateRows = selectedWidgets
-          .map(() => itemHeightInPercentages)
-          .join(" ");
-      }
-    };
 
     const handleDragEnd = useCallback(
       (result: DropResult) => {
@@ -74,6 +62,12 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
           _dragging: snapshot.isDragging
         });
         const widgetName = provided.draggableProps["data-rbd-draggable-id"];
+        const widgetStyle = Object.assign(
+          {
+            backgroundColor: `color-mix(in srgb, ${token[1].colorPrimary} 80%, transparent)`
+          },
+          provided.draggableProps.style
+        );
 
         let widgetComponent;
         switch (widgetName) {
@@ -86,15 +80,16 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
 
         return (
           <div
-            ref={provided.innerRef}
-            className={itemClassName}
-            children={widgetComponent}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            style={widgetStyle}
+            className={itemClassName}
+            children={widgetComponent}
           />
         );
       },
-      []
+      [token]
     );
 
     return (
@@ -106,7 +101,7 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
           {(dropProvided: DroppableProvided) => (
             <div
               className="new-tab__widget-list"
-              ref={ref => handleWidgetListRef(ref, dropProvided.innerRef)}
+              ref={dropProvided.innerRef}
               {...dropProvided.droppableProps}
             >
               {showWidgets &&

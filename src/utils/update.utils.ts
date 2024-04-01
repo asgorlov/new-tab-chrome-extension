@@ -39,7 +39,10 @@ import { Features } from "../models/update.model";
  * @param checkMode - Параметр, определяющий режим проверки
  * @returns - <b>True</b>, если необходима проверка обновлений
  */
-export const shouldBeCheck = (dateInMs: number, checkMode: string): boolean => {
+export const shouldBeCheckedUpdates = (
+  dateInMs: number,
+  checkMode: string
+): boolean => {
   const delta = (Date.now() - dateInMs) / 86400000;
 
   switch (checkMode) {

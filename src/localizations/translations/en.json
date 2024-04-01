@@ -77,6 +77,62 @@
     "switcherTitle": "Widget layout",
     "weather": "Weather"
   },
+  "weather": {
+    "timesOfDay": {
+      "morning": "Morning",
+      "day": "Day",
+      "evening": "Evening",
+      "night": "Night"
+    },
+    "params": {
+      "wind": "Wind",
+      "humidity": "Humidity",
+      "pressure": "Pressure"
+    },
+    "types": {
+      "noData": "No data",
+      "clearSky": "Clear sky",
+      "mainlyClear": "Mainly clear",
+      "partlyCloudy": "Partly cloudy",
+      "overcast": "Overcast",
+      "fog": "Fog",
+      "depositingRimeFog": "Depositing rime fog",
+      "lightDrizzle": "Light drizzle",
+      "moderateDrizzle": "Moderated drizzle",
+      "denseDrizzle": "Dense drizzle",
+      "lightFreezingDrizzle": "Light freezing drizzle",
+      "denseFreezingDrizzle": "Dense freezing drizzle",
+      "slightRain": "Slight rain",
+      "moderateRain": "Moderate rain",
+      "heavyRain": "Heavy rain",
+      "lightFreezingRain": "Light freezing rain",
+      "heavyFreezingRain": "Heavy freezing rain",
+      "slightSnowFall": "Slight snow fall",
+      "moderateSnowFall": "Moderate snow fall",
+      "heavySnowFall": "Heavy snow fall",
+      "snowGrains": "Snow grains",
+      "slightRainShowers": "Slight rain showers",
+      "moderateRainShowers": "Moderate rain showers",
+      "violentRainShowers": "Violent rain showers",
+      "slightSnowShowers": "Slight snow showers",
+      "heavySnowShowers": "Heavy snow showers",
+      "thunderstorm": "Thunderstorm",
+      "thunderstormWithSlightHail": "Thunderstorm with slight hail",
+      "thunderstormWithHeavyHail": "Thunderstorm with heavy hail"
+    },
+    "windDirection": {
+      "north": "N",
+      "northEast": "NE",
+      "east": "E",
+      "southEast": "SE",
+      "south": "S",
+      "southWest": "SW",
+      "west": "W",
+      "northWest": "NW"
+    },
+    "windSpeedUnit": "m/s",
+    "pressureUnit": "mmHg"
+  },
   "searchEngine": {
     "title": "Search system",
     "swisscows": "Swisscows",
@@ -145,6 +201,7 @@
     "error": {
       "title": "Something went wrong...",
       "canNotGetNightPeriod": "Failed to obtain information about sunrise and sunset times for the current location.",
+      "canNotGetWeatherData": "Failed to obtain information about weather.",
       "canNotGetUpdateManifest": "Failed to obtain information about available update."
     },
     "info": {

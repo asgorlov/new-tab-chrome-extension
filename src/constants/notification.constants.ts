@@ -4,6 +4,10 @@
  */
 export enum Notification {
   /**
+   * Ошибка при получении информации о погоде
+   */
+  CanNotGetWeatherData = "canNotGetWeatherData",
+  /**
    * Ошибка при получении информации об обновлении
    */
   CanNotGetUpdateManifest = "canNotGetUpdateManifest",

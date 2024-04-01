@@ -6,6 +6,7 @@ export * from "../utils/settings-header.utils";
 export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
+export * from "../utils/weather.utils";
 // ================= Database =================
 export { default as db } from "../db/db";
 // ================= Store ====================
