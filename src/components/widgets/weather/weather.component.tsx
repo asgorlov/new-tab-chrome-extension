@@ -98,36 +98,36 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
     return (
       <div className="new-tab__weather" data-time-of-day={timeOfDay}>
         <div className="new-tab__weather-temp">
-          <TooltipComponent
-            open={loading ? false : undefined}
-            mouseEnterDelay={0.5}
-            overlayClassName="new-tab__weather-temp__now__popup"
-            title={t(`weather.types.${wmoName}`)}
-          >
-            {loading ? (
-              <div className="new-tab__weather-temp__now">
-                <SkeletonNode
-                  className="new-tab__weather-temp__now__skeleton"
-                  children={<div />}
-                  active
-                />
-                <SkeletonNode
-                  className="new-tab__weather-temp__now__skeleton"
-                  children={<div />}
-                  active
-                />
-              </div>
-            ) : (
-              <div className="new-tab__weather-temp__now">
+          {loading ? (
+            <div className="new-tab__weather-temp__now">
+              <SkeletonNode
+                className="new-tab__weather-temp__now__skeleton"
+                children={<div />}
+                active
+              />
+              <SkeletonNode
+                className="new-tab__weather-temp__now__skeleton"
+                children={<div />}
+                active
+              />
+            </div>
+          ) : (
+            <div className="new-tab__weather-temp__now">
+              <TooltipComponent
+                mouseEnterDelay={0.5}
+                placement="bottomLeft"
+                overlayClassName="new-tab__weather-temp__now__popup"
+                title={t(`weather.types.${wmoName}`)}
+              >
                 <div
                   className={clsx("new-tab__weather-temp__now_icon", wmoName)}
                 />
-                <div className="new-tab__weather-temp__now_value">
-                  {weatherParams.temp}
-                </div>
+              </TooltipComponent>
+              <div className="new-tab__weather-temp__now_value">
+                {weatherParams.temp}
               </div>
-            )}
-          </TooltipComponent>
+            </div>
+          )}
           <ul className="new-tab__weather-temp__times-of-day">
             {tempByTimeOfDayViewModels.map(item => {
               return (
