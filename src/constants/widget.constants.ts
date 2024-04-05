@@ -3,5 +3,6 @@
  * @category Constants - Widgets
  */
 export enum WidgetName {
-  WEATHER = "weather"
+  WEATHER = "weather",
+  CURRENCY = "currency"
 }

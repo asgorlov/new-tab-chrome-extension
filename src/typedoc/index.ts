@@ -7,6 +7,7 @@ export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
 export * from "../utils/weather.utils";
+export * from "../utils/currency.utils";
 // ================= Database =================
 export { default as db } from "../db/db";
 // ================= Store ====================
@@ -21,6 +22,7 @@ export * from "../models/night-period.model";
 export * from "../models/settings-search.model";
 export * from "../models/update.model";
 export * from "../models/db.model";
+export * from "../models/currency.model";
 // ================= Hooks ====================
 export * from "../hooks/use-active-keys.hook";
 // ================= Contexts =================
@@ -50,6 +52,7 @@ export * from "../constants/settings-menu.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
 export * from "../constants/widget.constants";
+export * from "../constants/currency.constants";
 // ================= Components ===============
 export {
   default as SelectComponent,

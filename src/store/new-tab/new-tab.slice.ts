@@ -1,11 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, isPending } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
 import {
   changeLanguage,
   checkUpdates,
   applySettings,
-  getWeatherData
+  getWeatherData,
+  getAvailableConvertibleCurrencies,
+  getExchangeRate
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
@@ -189,10 +191,35 @@ export const newTabSlice = createSlice({
       action: PayloadAction<SettingsStorage<string | string[]>>
     ) {
       state.settingsActiveKeys = Object.assign(
-        {},
-        state.settingsActiveKeys,
+        { ...state.settingsActiveKeys },
         action.payload
       );
+    },
+    /**
+     * Функция изменения основной валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setMainCurrency(state: NewTabState, action: PayloadAction<string | null>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        selected: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения основной валюты по умолчанию
+     * @param state - стор
+     * @param action - экшн
+     */
+    setDefaultMainCurrency(state: NewTabState, action: PayloadAction<string>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        default: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
     }
   },
   extraReducers: builder => {
@@ -265,6 +292,50 @@ export const newTabSlice = createSlice({
     builder.addCase(applySettings.fulfilled, (state, action) => {
       Object.assign(state, action.payload);
     });
+
+    builder.addCase(getAvailableConvertibleCurrencies.rejected, state => {
+      state.currencyLoading = false;
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetAvailableConvertibleCurrencies
+      );
+    });
+
+    builder.addCase(
+      getAvailableConvertibleCurrencies.fulfilled,
+      (state, action) => {
+        state.currencyLoading = false;
+        const convertibleCurrencies = {
+          ...state.convertibleCurrencies,
+          available: action.payload
+        };
+        state.convertibleCurrencies = convertibleCurrencies;
+        db.set({ convertibleCurrencies });
+      }
+    );
+
+    builder.addCase(getExchangeRate.rejected, state => {
+      state.currencyLoading = false;
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetExchangeRate
+      );
+    });
+
+    builder.addCase(getExchangeRate.fulfilled, (state, action) => {
+      state.currencyLoading = false;
+      const convertibleCurrencies = {
+        ...state.convertibleCurrencies,
+        selected: action.payload
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
+    });
+
+    builder.addMatcher(
+      isAnyOf(isPending(getAvailableConvertibleCurrencies, getExchangeRate)),
+      state => {
+        state.currencyLoading = true;
+      }
+    );
   }
 });
 
@@ -285,7 +356,9 @@ export const {
   setCustomWallpaper,
   setCurrentLocation,
   setCheckForUpdates,
-  setSettingsActiveKeys
+  setSettingsActiveKeys,
+  setMainCurrency,
+  setDefaultMainCurrency
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

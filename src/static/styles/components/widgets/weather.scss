@@ -1,15 +1,6 @@
 @import "../../modules/constants.module";
 @import "../../modules/mixins.module";
 
-@keyframes turn-180 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-
 .new-tab__weather {
   &[data-time-of-day="day"] {
     --weather-clear-sky-bg-url: url("../../../svgs/widgets/weather/0_clear-sky_day.svg");

@@ -56,6 +56,8 @@ const NotificationComponent: FC = () => {
           case Notification.CanNotGetNightPeriod:
           case Notification.CanNotGetWeatherData:
           case Notification.CanNotGetUpdateManifest:
+          case Notification.CanNotGetExchangeRate:
+          case Notification.CanNotGetAvailableConvertibleCurrencies:
             showError(n);
         }
       });

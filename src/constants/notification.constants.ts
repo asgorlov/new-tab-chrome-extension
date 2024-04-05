@@ -16,6 +16,14 @@ export enum Notification {
    */
   CanNotGetNightPeriod = "canNotGetNightPeriod",
   /**
+   * Ошибка при получении доступных валют для конвертации
+   */
+  CanNotGetAvailableConvertibleCurrencies = "canNotGetAvailableConvertibleCurrencies",
+  /**
+   * Ошибка при получении курса валют
+   */
+  CanNotGetExchangeRate = "canNotGetExchangeRate",
+  /**
    * Информация о новой версии приложения
    */
   HasNewVersion = "hasNewVersion",

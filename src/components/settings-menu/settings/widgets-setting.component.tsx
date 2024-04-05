@@ -46,7 +46,7 @@ const WidgetsSettingComponent: FC = () => {
         dispatch(setWidgets(allWidgets));
       }
     },
-    [widgets, dispatch]
+    [dispatch]
   );
 
   const handleChangeRemoveAll = useCallback(

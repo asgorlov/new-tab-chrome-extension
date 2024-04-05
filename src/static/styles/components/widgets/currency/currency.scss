@@ -1,0 +1,165 @@
+@import "../../../modules/constants.module";
+@import "../../../modules/mixins.module";
+
+.new-tab__currency {
+  width: 100%;
+  position: relative;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    height: 16px;
+    padding: 0 4px;
+    border-bottom: 1px solid $light-text-color;
+
+    &__currency {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      img {
+        height: 13px;
+      }
+
+      span {
+        @include currency-name;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+
+    &__btn-group {
+      display: flex;
+    }
+
+    &__update-btn,
+    &__settings-btn {
+      height: 100%;
+      width: 16px;
+      outline: none;
+      border: none;
+      border-radius: 50%;
+      padding: 2px;
+      cursor: pointer;
+      background-color: transparent;
+      transition: 0.3s;
+    }
+
+    &__update-btn {
+      &.clicked {
+        animation: 0.5s linear turn-180;
+      }
+    }
+
+    &__settings-btn {
+      transition: all, transform 0.8s;
+      &.opened {
+        transform: rotate(180deg);
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &-content {
+    position: relative;
+
+    &__settings {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      max-height: 0;
+      overflow: hidden;
+      border-radius: 0 0 5px 5px;
+      transition: all $fast-transition, background-color $slow-transition;
+
+      &.opened {
+        max-height: 300px;
+      }
+
+      &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        height: 100%;
+        overflow: auto;
+
+        /* полоса прокрутки */
+        &::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* ползунок прокрутки */
+        &::-webkit-scrollbar-thumb {
+          border-radius: 5px;
+          border: 1px solid $light-text-color;
+        }
+      }
+
+      &__option-label {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        img {
+          height: 12px;
+        }
+      }
+
+      &__selector {
+        &-popup {}
+      }
+
+      &__btn-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 4px;
+        position: sticky;
+        bottom: 0;
+        right: 0;
+        z-index: 15;
+      }
+    }
+
+    &__table {
+      display: grid;
+      align-items: center;
+      grid-template-columns: max-content 1fr max-content minmax(20px, max-content);
+      grid-template-rows: repeat(3, 16px);
+      gap: 4px;
+      padding: 4px;
+
+      &__flag {
+        height: 13px;
+      }
+
+      &__name {
+        @include currency-name;
+
+        &__popup {
+          font-size: 12px;
+        }
+      }
+
+      &__code {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      &__rate {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    &__date {
+      font-size: 12px;
+      padding: 0 4px;
+    }
+  }
+}

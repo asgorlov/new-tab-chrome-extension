@@ -78,7 +78,7 @@ const SearchEngineSettingComponent: FC = () => {
         dispatch(setSearchEngines(SEARCH_ENGINE_NAMES));
       }
     },
-    [dispatch, searchEngines]
+    [dispatch]
   );
 
   const handleChangeRemoveAll = useCallback(
