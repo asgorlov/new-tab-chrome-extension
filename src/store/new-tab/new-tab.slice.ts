@@ -21,6 +21,7 @@ import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
+import { Currency } from "../../models/currency.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -220,6 +221,22 @@ export const newTabSlice = createSlice({
       };
       state.mainCurrency = mainCurrency;
       db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения выбранных валют для конвертации
+     * @param state - стор
+     * @param action - экшн
+     */
+    setSelectedCurrencies(
+      state: NewTabState,
+      action: PayloadAction<Currency[]>
+    ) {
+      const convertibleCurrencies = {
+        ...state.convertibleCurrencies,
+        selected: action.payload
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
     }
   },
   extraReducers: builder => {
@@ -358,7 +375,8 @@ export const {
   setCheckForUpdates,
   setSettingsActiveKeys,
   setMainCurrency,
-  setDefaultMainCurrency
+  setDefaultMainCurrency,
+  setSelectedCurrencies
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

@@ -76,10 +76,15 @@
     "right": "Справа",
     "switcherTitle": "Расположение виджетов",
     "weather": "Погода",
-    "currency": "Валюты"
+    "currency": "Валюты",
+    "saveButton": "Сохранить настройки виджетов"
   },
   "currency": {
     "lastCallDate": "Курсы указаны на {{lastCallApi}}",
+    "selectors": {
+      "main": "Основная валюта:",
+      "converted": "Конвертируемые валюты:"
+    },
     "codes": {
       "AWG": "Флорин",
       "AFN": "Афгани",

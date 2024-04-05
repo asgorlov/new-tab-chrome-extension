@@ -1,22 +1,30 @@
-import React, { FC, useCallback, useId, useMemo } from "react";
+import React, { FC, useCallback, useId, useMemo, useState } from "react";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
 import {
   CollapseComponent,
-  selectWidgets,
-  selectIsWidgetsOnRight
+  Currency,
+  getCountryFlagSvgUrl,
+  selectConvertibleCurrencies,
+  selectIsWidgetsOnRight,
+  selectMainCurrency,
+  selectWidgets
 } from "../../../typedoc";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as WidgetIcon } from "../../../static/svgs/menu-settings/widget-icon.svg";
+import { ReactComponent as CurrencyIcon } from "../../../static/svgs/menu-settings/currency-icon.svg";
 import SelectComponent from "../../common/select/select.component";
 import { WidgetName } from "../../../constants/widget.constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setIsWidgetsOnRight,
+  setMainCurrency,
+  setSelectedCurrencies,
   setWidgets
 } from "../../../store/new-tab/new-tab.slice";
 import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { Switch } from "antd";
+import { Button, Switch } from "antd";
+import TooltipComponent from "../../common/tooltip/tooltip.component";
 
 /**
  * Компонент настройки виджетов
@@ -28,8 +36,53 @@ const WidgetsSettingComponent: FC = () => {
   const dispatch = useDispatch();
   const widgets = useSelector(selectWidgets);
   const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
+  const mainCurrency = useSelector(selectMainCurrency);
+  const convertibleCurrencies = useSelector(selectConvertibleCurrencies);
 
-  const options = useMemo(() => {
+  const initialMainCurrency = mainCurrency.selected ?? mainCurrency.default;
+  const [main, setMain] = useState(initialMainCurrency);
+
+  const availableCurrencies = convertibleCurrencies.available;
+  const [selected, setSelected] = useState(convertibleCurrencies.selected);
+
+  const disabledSaveBtn =
+    (main === mainCurrency.selected || main === mainCurrency.default) &&
+    convertibleCurrencies.selected.every(
+      (c: Currency, i: number) => selected[i].code === c.code
+    );
+
+  const currencyOptions = useMemo(() => {
+    const fullAvailableCurrencies = availableCurrencies.includes(main)
+      ? availableCurrencies
+      : [...availableCurrencies, main];
+
+    return fullAvailableCurrencies.map(code => {
+      const src = getCountryFlagSvgUrl(code);
+      const title = t(`currency.codes.${code}`);
+      const description = `${title} [${code}]`;
+
+      return {
+        value: code,
+        label: (
+          <div
+            key={code}
+            className="new-tab__settings-menu_widgets-content__item_select-option"
+          >
+            <img alt={code} src={src} />
+            <TooltipComponent
+              title={description}
+              placement="bottomLeft"
+              mouseEnterDelay={0.8}
+            >
+              <span>{description}</span>
+            </TooltipComponent>
+          </div>
+        )
+      };
+    });
+  }, [availableCurrencies, main, t]);
+
+  const widgetOptions = useMemo(() => {
     return Object.values(WidgetName).map(name => {
       return {
         value: name,
@@ -59,6 +112,24 @@ const WidgetsSettingComponent: FC = () => {
     [dispatch]
   );
 
+  const onSaveSettings = useCallback(() => {
+    dispatch(setMainCurrency(main));
+    dispatch(setSelectedCurrencies(selected));
+  }, [dispatch, main, selected]);
+
+  const handleSelect = useCallback(
+    (value: string, index?: number) => {
+      if (index === undefined) {
+        setMain(value);
+      } else {
+        const newSelected = [...selected];
+        newSelected[index] = { code: value };
+        setSelected(newSelected);
+      }
+    },
+    [selected]
+  );
+
   return (
     <CollapseComponent
       icon={<WidgetIcon />}
@@ -69,7 +140,7 @@ const WidgetsSettingComponent: FC = () => {
       <div className="new-tab__settings-menu_widgets-content">
         <div className="new-tab__settings-menu_widgets-content-checkbox-group">
           <CheckboxComponent
-            checked={widgets.length === options.length}
+            checked={widgets.length === widgetOptions.length}
             onChange={handleChangeAddAll}
             children={t("widgets.selectAll")}
           />
@@ -85,7 +156,7 @@ const WidgetsSettingComponent: FC = () => {
           maxTagCount="responsive"
           value={widgets}
           onChange={v => dispatch(setWidgets(v))}
-          options={options}
+          options={widgetOptions}
         />
         <div className="new-tab__settings-menu_widgets-content-switcher">
           <label htmlFor={id}>{t("widgets.switcherTitle")}</label>
@@ -98,6 +169,57 @@ const WidgetsSettingComponent: FC = () => {
             onClick={() => dispatch(setIsWidgetsOnRight(!isWidgetsOnRight))}
           />
         </div>
+        {widgets
+          .filter(w => w === WidgetName.CURRENCY)
+          .map(w => {
+            return (
+              <div
+                key={w}
+                className="new-tab__settings-menu_widgets-content__item"
+              >
+                <div className="new-tab__settings-menu_widgets-content__item-title">
+                  <CurrencyIcon />
+                  {t(`widgets.${WidgetName.CURRENCY}`)}
+                </div>
+                <label>{t("currency.selectors.main")}</label>
+                <SelectComponent
+                  value={main}
+                  size="small"
+                  options={currencyOptions}
+                  onSelect={v => handleSelect(v)}
+                  className="new-tab__settings-menu_widgets-content__item-select"
+                />
+                {selected.length > 0 && (
+                  <>
+                    <label>{t(`currency.selectors.converted`)}</label>
+                    {selected.map((c: Currency, i: number) => {
+                      return (
+                        <SelectComponent
+                          key={i}
+                          value={c.code}
+                          size="small"
+                          options={currencyOptions}
+                          onSelect={v => handleSelect(v, i)}
+                          className="new-tab__settings-menu_widgets-content__item-select"
+                        />
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            );
+          })}
+        {widgets.length > 0 && (
+          <div className="new-tab__settings-menu_widgets-content__save-btn-wrapper">
+            <Button
+              className="new-tab__settings-menu_widgets-content__save-btn"
+              size="small"
+              disabled={disabledSaveBtn}
+              onClick={onSaveSettings}
+              children={t("widgets.saveButton")}
+            />
+          </div>
+        )}
       </div>
     </CollapseComponent>
   );

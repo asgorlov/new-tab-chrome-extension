@@ -76,10 +76,15 @@
     "right": "Right",
     "switcherTitle": "Widget layout",
     "weather": "Weather",
-    "currency": "Currencies"
+    "currency": "Currencies",
+    "saveButton": "Save widget settings"
   },
   "currency": {
     "lastCallDate": "Exchange rates are as of {{lastCallApi}}",
+    "selectors": {
+      "main": "Main currency: ",
+      "converted": "Convertible currencies:"
+    },
     "codes": {
       "AWG": "Aruban Florin",
       "AFN": "Afghani",
