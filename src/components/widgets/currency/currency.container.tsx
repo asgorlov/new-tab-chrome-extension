@@ -14,7 +14,6 @@ const CurrencyContainer: FC = () => {
     <CurrencyComponent
       lastCallApi={convertibleCurrencies.lastCallApi}
       selectedCurrencies={convertibleCurrencies.selected}
-      allCurrenciesCodes={convertibleCurrencies.available}
       mainCurrency={mainCurrency.selected ?? mainCurrency.default}
     />
   );
