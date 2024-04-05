@@ -64,7 +64,9 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
         });
         const widgetName = provided.draggableProps["data-rbd-draggable-id"];
         const widgetStyle = Object.assign(
-          { backgroundColor: token[1].colorPrimary },
+          {
+            backgroundColor: `color-mix(in srgb, ${token[1].colorPrimary} 90%, transparent)`
+          },
           provided.draggableProps.style
         );
 

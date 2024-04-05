@@ -48,6 +48,7 @@ const CurrencySelectComponent: FC<CurrencySelectComponentProps> = ({
     return options.map((o, i) => {
       return (
         <div
+          key={o.code}
           style={getOptionStyle(i)}
           onClick={() => handleOptionClick(i)}
           className="new-tab__currency-select__option-wrapper"
