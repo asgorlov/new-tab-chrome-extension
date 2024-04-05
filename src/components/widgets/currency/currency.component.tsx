@@ -11,12 +11,23 @@ import {
 } from "../../../utils/currency.utils";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
 
+/**
+ * Передаваемые параметры компонента виджета валют
+ * @property lastCallApi - Дата последнего обновления
+ * @property selectedCurrencies - Список выбранных для конвертации валют
+ * @property mainCurrency - Выбранная основная валюта
+ * @interface
+ */
 export interface CurrencyComponentProps {
   lastCallApi?: Date;
   selectedCurrencies: Currency[];
   mainCurrency: string;
 }
 
+/**
+ * Компонент виджета валют
+ * @category Components
+ */
 const CurrencyComponent: FC<CurrencyComponentProps> = memo(
   ({ lastCallApi, selectedCurrencies, mainCurrency }) => {
     const { t } = useTranslation();

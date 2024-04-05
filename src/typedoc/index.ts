@@ -125,3 +125,7 @@ export {
   default as WeatherComponent,
   type WeatherComponentProps
 } from "../components/widgets/weather/weather.component";
+export {
+  default as CurrencyComponent,
+  type CurrencyComponentProps
+} from "../components/widgets/currency/currency.component";
