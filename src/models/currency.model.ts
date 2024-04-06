@@ -30,6 +30,7 @@ export interface ConvertibleCurrencies {
 export interface MainCurrency {
   selected: string | null;
   default: string;
+  ratio: number;
 }
 
 /**

@@ -39,6 +39,7 @@ const CurrencyContainer: FC = () => {
       lastCallApi={convertibleCurrencies.lastCallApi}
       selectedCurrencies={convertibleCurrencies.selected}
       mainCurrency={mainCurrency.selected ?? mainCurrency.default}
+      ratio={mainCurrency.ratio}
       onClickUpdate={handleClickUpdate}
     />
   );

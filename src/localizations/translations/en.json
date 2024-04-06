@@ -82,8 +82,9 @@
   "currency": {
     "lastCallDate": "Exchange rates are as of {{lastCallApi}}",
     "selectors": {
-      "main": "Main currency: ",
-      "converted": "Convertible currencies:"
+      "main": "Main currency",
+      "ratio": "Ratio",
+      "converted": "Convertible currencies"
     },
     "codes": {
       "AWG": "Aruban Florin",

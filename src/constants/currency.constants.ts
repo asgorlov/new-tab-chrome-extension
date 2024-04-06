@@ -1,10 +1,59 @@
 import { Currency } from "../models/currency.model";
+import { DefaultOptionType } from "rc-select/lib/Select";
 
 /**
  * Период обновления доступных для конвертации валют
  * @category Constants - Currency
  */
 export const CURRENCY_UPDATING_PERIOD_IN_HOURS = 12;
+
+/**
+ * Соотношение основной валюты к конвертируемой по умолчанию
+ * @category Constants - Currency
+ */
+export const DEFAULT_CURRENCY_RATIO = 1;
+/**
+ * Опции выбора соотношения основной валюты к конвертируемой
+ * @category Constants - Currency
+ */
+export const CURRENCY_RATIO_OPTIONS: DefaultOptionType[] = [
+  {
+    label: "10000:1",
+    value: 10000
+  },
+  {
+    label: "1000:1",
+    value: 1000
+  },
+  {
+    label: "100:1",
+    value: 100
+  },
+  {
+    label: "10:1",
+    value: 10
+  },
+  {
+    label: "1:1",
+    value: 1
+  },
+  {
+    label: "1:10",
+    value: 1 / 10
+  },
+  {
+    label: "1:100",
+    value: 1 / 100
+  },
+  {
+    label: "1:1000",
+    value: 1 / 1000
+  },
+  {
+    label: "1:10000",
+    value: 1 / 10000
+  }
+];
 
 /**
  * Основная валюта по умолчанию

@@ -82,8 +82,9 @@
   "currency": {
     "lastCallDate": "Курсы указаны на {{lastCallApi}}",
     "selectors": {
-      "main": "Основная валюта:",
-      "converted": "Конвертируемые валюты:"
+      "main": "Основная валюта",
+      "ratio": "Соотношение",
+      "converted": "Конвертируемые валюты"
     },
     "codes": {
       "AWG": "Флорин",

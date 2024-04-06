@@ -6,6 +6,7 @@ import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
 import { WidgetName } from "./widget.constants";
 import {
   DEFAULT_CURRENCY,
+  DEFAULT_CURRENCY_RATIO,
   DEFAULT_SELECTABLE_CURRENCIES
 } from "./currency.constants";
 
@@ -46,7 +47,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
   },
   mainCurrency: {
     selected: null,
-    default: DEFAULT_CURRENCY
+    default: DEFAULT_CURRENCY,
+    ratio: DEFAULT_CURRENCY_RATIO
   }
 };
 

@@ -7,6 +7,7 @@ import SelectComponent from "../../common/select/select.component";
 import { WidgetName } from "../../../constants/widget.constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setCurrencyRatio,
   setIsWidgetsOnRight,
   setMainCurrency,
   setSelectedCurrencies,
@@ -27,6 +28,7 @@ import { getCountryFlagSvgUrl } from "../../../utils/currency.utils";
 import CollapseComponent from "../../common/collapse/collapse.component";
 import { getExchangeRate } from "../../../store/new-tab/new-tab.thunks";
 import { AppDispatch } from "../../../store/store";
+import { CURRENCY_RATIO_OPTIONS } from "../../../constants/currency.constants";
 
 /**
  * Компонент настройки виджетов
@@ -44,11 +46,14 @@ const WidgetsSettingComponent: FC = () => {
   const initialMainCurrency = mainCurrency.selected ?? mainCurrency.default;
   const [main, setMain] = useState(initialMainCurrency);
 
+  const [ratio, setRatio] = useState(mainCurrency.ratio);
+
   const availableCurrencies = convertibleCurrencies.available;
   const [selected, setSelected] = useState(convertibleCurrencies.selected);
 
   const disabledSaveBtn =
     (main === mainCurrency.selected || main === mainCurrency.default) &&
+    ratio === mainCurrency.ratio &&
     convertibleCurrencies.selected.every(
       (c: Currency, i: number) => selected[i].code === c.code
     );
@@ -122,14 +127,23 @@ const WidgetsSettingComponent: FC = () => {
 
   const onSaveSettings = useCallback(() => {
     dispatch(setMainCurrency(main));
+    dispatch(setCurrencyRatio(ratio));
     dispatch(setSelectedCurrencies(selected));
-    dispatch(
-      getExchangeRate({
-        mainCurrency: { code: main },
-        selectedCurrencies: selected
-      })
-    );
-  }, [dispatch, main, selected]);
+    const shouldBeLoaded =
+      ![mainCurrency.selected, mainCurrency.default].includes(main) ||
+      convertibleCurrencies.selected.some(
+        (c: Currency, i: number) => selected[i].code === c.code
+      );
+
+    if (shouldBeLoaded) {
+      dispatch(
+        getExchangeRate({
+          mainCurrency: { code: main },
+          selectedCurrencies: selected
+        })
+      );
+    }
+  }, [dispatch, main, selected, ratio]);
 
   const handleSelectCurrency = useCallback(
     (value: string, index?: number) => {
@@ -200,6 +214,15 @@ const WidgetsSettingComponent: FC = () => {
                   value={main}
                   options={currencyOptions}
                   onSelect={v => handleSelectCurrency(v)}
+                  className="new-tab__settings-menu_widgets-content__item-select"
+                />
+                <label>{t("currency.selectors.ratio")}</label>
+                <SelectComponent
+                  value={ratio}
+                  options={CURRENCY_RATIO_OPTIONS}
+                  onSelect={v => {
+                    setRatio(v);
+                  }}
                   className="new-tab__settings-menu_widgets-content__item-select"
                 />
                 {selected.length > 0 && (

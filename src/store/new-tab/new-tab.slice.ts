@@ -196,6 +196,19 @@ export const newTabSlice = createSlice({
       );
     },
     /**
+     * Функция изменения соотношения валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrencyRatio(state: NewTabState, action: PayloadAction<number>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        ratio: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
      * Функция изменения основной валюты
      * @param state - стор
      * @param action - экшн
@@ -353,6 +366,7 @@ export const {
   setCurrentLocation,
   setCheckForUpdates,
   setSettingsActiveKeys,
+  setCurrencyRatio,
   setMainCurrency,
   setDefaultMainCurrency,
   setSelectedCurrencies

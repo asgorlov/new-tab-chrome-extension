@@ -10,6 +10,7 @@ import {
   getCountryFlagSvgUrl
 } from "../../../utils/currency.utils";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
+import { CURRENCY_RATIO_OPTIONS } from "../../../constants/currency.constants";
 
 /**
  * Передаваемые параметры компонента виджета валют
@@ -22,6 +23,7 @@ export interface CurrencyComponentProps {
   lastCallApi?: Date;
   selectedCurrencies: Currency[];
   mainCurrency: string;
+  ratio: number;
   onClickUpdate: () => void;
 }
 
@@ -30,10 +32,13 @@ export interface CurrencyComponentProps {
  * @category Components
  */
 const CurrencyComponent: FC<CurrencyComponentProps> = memo(
-  ({ lastCallApi, selectedCurrencies, mainCurrency, onClickUpdate }) => {
+  ({ lastCallApi, selectedCurrencies, mainCurrency, ratio, onClickUpdate }) => {
     const { t } = useTranslation();
     const updateBtnRef = useRef<HTMLButtonElement>(null);
     const loading = useSelector(selectCurrencyLoading);
+    const ratioTitle = CURRENCY_RATIO_OPTIONS.find(
+      o => o.value === ratio
+    )?.label;
 
     const [isClickedAnimationOn, setIsClickedAnimationOn] = useState(false);
 
@@ -60,6 +65,7 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
           <div className="new-tab__currency-header__currency">
             <img alt={mainCurrency} src={getCountryFlagSvgUrl(mainCurrency)} />
             <span>{t(`currency.codes.${mainCurrency}`)}</span>
+            {ratioTitle && <span>{ratioTitle}</span>}
           </div>
           <div className="new-tab__currency-header__btn-group">
             <button
@@ -101,7 +107,7 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
                     {c.code}
                   </span>
                   <span className="new-tab__currency-content__table__rate">
-                    {calculateExchangeRate(isMain ? 1 : c.rate)}
+                    {calculateExchangeRate(isMain ? 1 : c.rate, ratio)}
                   </span>
                 </Fragment>
               );
