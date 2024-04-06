@@ -56,30 +56,36 @@ const WidgetsSettingComponent: FC = () => {
       ? availableCurrencies
       : [...availableCurrencies, main];
 
-    return fullAvailableCurrencies.map(code => {
-      const src = getCountryFlagSvgUrl(code);
-      const title = t(`currency.codes.${code}`);
-      const description = `${title} [${code}]`;
+    return fullAvailableCurrencies
+      .map(code => {
+        const src = getCountryFlagSvgUrl(code);
+        const title = t(`currency.codes.${code}`);
+        return { code, src, title };
+      })
+      .sort((c1, c2) => c1.title.localeCompare(c2.title))
+      .map(c => {
+        const { code, src, title } = c;
+        const description = `${title} [${code}]`;
 
-      return {
-        value: code,
-        label: (
-          <div
-            key={code}
-            className="new-tab__settings-menu_widgets-content__item_select-option"
-          >
-            <img alt={code} src={src} />
-            <TooltipComponent
-              title={description}
-              placement="bottomLeft"
-              mouseEnterDelay={0.8}
+        return {
+          value: code,
+          label: (
+            <div
+              key={code}
+              className="new-tab__settings-menu_widgets-content__item_select-option"
             >
-              <span>{description}</span>
-            </TooltipComponent>
-          </div>
-        )
-      };
-    });
+              <img alt={code} src={src} />
+              <TooltipComponent
+                title={description}
+                placement="bottomLeft"
+                mouseEnterDelay={0.8}
+              >
+                <span>{description}</span>
+              </TooltipComponent>
+            </div>
+          )
+        };
+      });
   }, [availableCurrencies, main, t]);
 
   const widgetOptions = useMemo(() => {

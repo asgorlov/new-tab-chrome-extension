@@ -1,5 +1,9 @@
 import { Currency } from "../models/currency.model";
 
+/**
+ * Период обновления доступных для конвертации валют
+ * @category Constants - Currency
+ */
 export const CURRENCY_UPDATING_PERIOD_IN_HOURS = 12;
 
 /**
