@@ -22,6 +22,7 @@ export interface CurrencyComponentProps {
   lastCallApi?: Date;
   selectedCurrencies: Currency[];
   mainCurrency: string;
+  onClickUpdate: () => void;
 }
 
 /**
@@ -29,7 +30,7 @@ export interface CurrencyComponentProps {
  * @category Components
  */
 const CurrencyComponent: FC<CurrencyComponentProps> = memo(
-  ({ lastCallApi, selectedCurrencies, mainCurrency }) => {
+  ({ lastCallApi, selectedCurrencies, mainCurrency, onClickUpdate }) => {
     const { t } = useTranslation();
     const updateBtnRef = useRef<HTMLButtonElement>(null);
     const loading = useSelector(selectCurrencyLoading);
@@ -38,8 +39,8 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
 
     const handleClickUpdate = () => {
       if (!loading) {
+        onClickUpdate();
         setIsClickedAnimationOn(true);
-        // onClickUpdate();
       }
     };
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import CurrencyComponent from "./currency.component";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,25 +16,30 @@ const CurrencyContainer: FC = () => {
   const mainCurrency = useSelector(selectMainCurrency);
   const convertibleCurrencies = useSelector(selectConvertibleCurrencies);
 
+  const handleClickUpdate = useCallback(() => {
+    const params = {
+      mainCurrency: { code: mainCurrency.selected ?? mainCurrency.default },
+      selectedCurrencies: convertibleCurrencies.selected
+    };
+    dispatch(getExchangeRate(params));
+  }, [mainCurrency, convertibleCurrencies, dispatch]);
+
   useEffect(() => {
     const shouldBeLoaded = shouldCurrenciesBeLoaded(
       widgets,
       convertibleCurrencies.lastCallApi
     );
     if (shouldBeLoaded) {
-      const params = {
-        mainCurrency: { code: mainCurrency.selected ?? mainCurrency.default },
-        selectedCurrencies: convertibleCurrencies.selected
-      };
-      dispatch(getExchangeRate(params));
+      handleClickUpdate();
     }
-  }, [widgets, mainCurrency, convertibleCurrencies, dispatch]);
+  }, [widgets, convertibleCurrencies, handleClickUpdate]);
 
   return (
     <CurrencyComponent
       lastCallApi={convertibleCurrencies.lastCallApi}
       selectedCurrencies={convertibleCurrencies.selected}
       mainCurrency={mainCurrency.selected ?? mainCurrency.default}
+      onClickUpdate={handleClickUpdate}
     />
   );
 };
