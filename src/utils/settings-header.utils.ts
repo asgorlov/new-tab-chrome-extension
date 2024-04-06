@@ -148,7 +148,7 @@ export const matchElements = (
  * Функция, которая подсвечивает текст, удовлетворяющий поисковому запросу
  * @param element - Элемент, который содержит текст для поиска
  * @param query - Поисковый запрос
- * @returns <b>True</b>, если элемент содержит подсвеченный текст
+ * @returns - <b>True</b>, если элемент содержит подсвеченный текст
  */
 const insertHighlightedTextToElement = (
   element: Element,

@@ -17,6 +17,7 @@ const store = configureStore({
           "api/weather/get/fulfilled"
         ],
         ignoredPaths: [
+          "newTab.convertibleCurrencies.lastCallApi",
           "newTab.customWallpaper.lightTheme",
           "newTab.customWallpaper.darkTheme",
           "newTab.nightPeriod",

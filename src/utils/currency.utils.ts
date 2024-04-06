@@ -3,8 +3,10 @@ import coordinateToCountry from "coordinate_to_country";
 import {
   COUNTRIES_OF_CURRENCIES,
   CURRENCIES_OF_COUNTRIES,
+  CURRENCY_UPDATING_PERIOD_IN_HOURS,
   DEFAULT_CURRENCY
 } from "../constants/currency.constants";
+import { WidgetName } from "../constants/widget.constants";
 
 /**
  * Функция получения информации о валюте, в зависимости от местоположения
@@ -62,4 +64,27 @@ const getFlagSvgName = (currencyCode?: string): string => {
   }
 
   return "_generic";
+};
+
+/**
+ * Функция, проверяющая нужно ли обновлять список валют для конвертации
+ * @category Utilities - Currency
+ * @param widgets - Включенные виджеты
+ * @param lastCallApi - Дата последнего обновления
+ * @returns - <b>True</b>, если необходимо обновить список разрешенных для конвертации валют
+ */
+export const shouldCurrenciesBeLoaded = (
+  widgets: WidgetName[],
+  lastCallApi?: Date
+): boolean => {
+  if (!widgets.includes(WidgetName.CURRENCY)) {
+    return false;
+  }
+
+  if (!lastCallApi) {
+    return true;
+  }
+
+  const deltaInHours = (Date.now() - lastCallApi.getTime()) / 3600000;
+  return deltaInHours > CURRENCY_UPDATING_PERIOD_IN_HOURS;
 };

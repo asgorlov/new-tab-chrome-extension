@@ -1,5 +1,7 @@
 import { Currency } from "../models/currency.model";
 
+export const CURRENCY_UPDATING_PERIOD_IN_HOURS = 12;
+
 /**
  * Основная валюта по умолчанию
  * @category Constants - Currency

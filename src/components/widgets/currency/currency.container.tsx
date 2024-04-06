@@ -1,14 +1,30 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import CurrencyComponent from "./currency.component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectConvertibleCurrencies,
-  selectMainCurrency
+  selectMainCurrency,
+  selectWidgets
 } from "../../../store/new-tab/new-tab.selectors";
+import { shouldCurrenciesBeLoaded } from "../../../utils/currency.utils";
+import { getAvailableConvertibleCurrencies } from "../../../store/new-tab/new-tab.thunks";
+import { AppDispatch } from "../../../store/store";
 
 const CurrencyContainer: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const widgets = useSelector(selectWidgets);
   const mainCurrency = useSelector(selectMainCurrency);
   const convertibleCurrencies = useSelector(selectConvertibleCurrencies);
+
+  useEffect(() => {
+    const shouldBeLoaded = shouldCurrenciesBeLoaded(
+      widgets,
+      convertibleCurrencies.lastCallApi
+    );
+    if (shouldBeLoaded) {
+      dispatch(getAvailableConvertibleCurrencies());
+    }
+  }, [widgets, convertibleCurrencies, dispatch]);
 
   return (
     <CurrencyComponent

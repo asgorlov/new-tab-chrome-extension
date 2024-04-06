@@ -315,6 +315,12 @@ export const newTabSlice = createSlice({
       state.notifications = state.notifications.concat(
         Notification.CanNotGetAvailableConvertibleCurrencies
       );
+      const convertibleCurrencies = {
+        ...state.convertibleCurrencies,
+        lastCallApi: new Date()
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
     });
 
     builder.addCase(
@@ -323,7 +329,8 @@ export const newTabSlice = createSlice({
         state.currencyLoading = false;
         const convertibleCurrencies = {
           ...state.convertibleCurrencies,
-          available: action.payload
+          available: action.payload,
+          lastCallApi: new Date()
         };
         state.convertibleCurrencies = convertibleCurrencies;
         db.set({ convertibleCurrencies });

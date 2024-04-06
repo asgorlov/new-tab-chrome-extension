@@ -108,7 +108,9 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
           </div>
           {lastCallApi && (
             <div className="new-tab__currency-content__date">
-              {t(`currency.lastCallDate`, { lastCallApi })}
+              {t(`currency.lastCallDate`, {
+                lastCallApi: lastCallApi.toLocaleDateString()
+              })}
             </div>
           )}
         </div>

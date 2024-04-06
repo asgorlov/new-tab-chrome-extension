@@ -1,14 +1,5 @@
 import React, { FC, useCallback, useId, useMemo, useState } from "react";
 import { CollapsedMenuSetting } from "../../../constants/settings-menu.constants";
-import {
-  CollapseComponent,
-  Currency,
-  getCountryFlagSvgUrl,
-  selectConvertibleCurrencies,
-  selectIsWidgetsOnRight,
-  selectMainCurrency,
-  selectWidgets
-} from "../../../typedoc";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as WidgetIcon } from "../../../static/svgs/menu-settings/widget-icon.svg";
 import { ReactComponent as CurrencyIcon } from "../../../static/svgs/menu-settings/currency-icon.svg";
@@ -25,6 +16,15 @@ import CheckboxComponent from "../../common/checkbox/checkbox.component";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Button, Switch } from "antd";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
+import {
+  selectConvertibleCurrencies,
+  selectIsWidgetsOnRight,
+  selectMainCurrency,
+  selectWidgets
+} from "../../../store/new-tab/new-tab.selectors";
+import { Currency } from "../../../models/currency.model";
+import { getCountryFlagSvgUrl } from "../../../utils/currency.utils";
+import CollapseComponent from "../../common/collapse/collapse.component";
 
 /**
  * Компонент настройки виджетов
@@ -117,7 +117,7 @@ const WidgetsSettingComponent: FC = () => {
     dispatch(setSelectedCurrencies(selected));
   }, [dispatch, main, selected]);
 
-  const handleSelect = useCallback(
+  const handleSelectCurrency = useCallback(
     (value: string, index?: number) => {
       if (index === undefined) {
         setMain(value);
@@ -184,9 +184,8 @@ const WidgetsSettingComponent: FC = () => {
                 <label>{t("currency.selectors.main")}</label>
                 <SelectComponent
                   value={main}
-                  size="small"
                   options={currencyOptions}
-                  onSelect={v => handleSelect(v)}
+                  onSelect={v => handleSelectCurrency(v)}
                   className="new-tab__settings-menu_widgets-content__item-select"
                 />
                 {selected.length > 0 && (
@@ -197,9 +196,8 @@ const WidgetsSettingComponent: FC = () => {
                         <SelectComponent
                           key={i}
                           value={c.code}
-                          size="small"
                           options={currencyOptions}
-                          onSelect={v => handleSelect(v, i)}
+                          onSelect={v => handleSelectCurrency(v, i)}
                           className="new-tab__settings-menu_widgets-content__item-select"
                         />
                       );
@@ -209,7 +207,7 @@ const WidgetsSettingComponent: FC = () => {
               </div>
             );
           })}
-        {widgets.length > 0 && (
+        {widgets.includes(WidgetName.CURRENCY) && (
           <div className="new-tab__settings-menu_widgets-content__save-btn-wrapper">
             <Button
               className="new-tab__settings-menu_widgets-content__save-btn"
