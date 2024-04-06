@@ -14,7 +14,7 @@ import {
 import { CURRENCIES_OF_COUNTRIES } from "../../constants/currency.constants";
 import {
   GettingExchangeRateParams,
-  Currency
+  ConvertibleCurrencies
 } from "../../models/currency.model";
 
 /**
@@ -144,39 +144,33 @@ export const getWeatherData = createAsyncThunk(
 );
 
 /**
- * Асинхронный запрос получения валют для конвертации
- * @category Thunks - New Tab
- */
-export const getAvailableConvertibleCurrencies = createAsyncThunk(
-  "api/available-convertible-currencies/get",
-  async (): Promise<string[]> => {
-    const { data } = await axios.get<Record<string, string>>(
-      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json"
-    );
-    const uniqueCurrencyCodes = new Set(Object.values(CURRENCIES_OF_COUNTRIES));
-
-    return Object.entries(data)
-      .map(e => e[0].toUpperCase())
-      .filter(code => uniqueCurrencyCodes.has(code));
-  }
-);
-
-/**
  * Асинхронный запрос получения курса валют
  * @category Thunks - New Tab
  */
 export const getExchangeRate = createAsyncThunk(
   "api/exchange-rate/get",
-  async (params: GettingExchangeRateParams): Promise<Currency[]> => {
+  async (params: GettingExchangeRateParams): Promise<ConvertibleCurrencies> => {
     const { mainCurrency, selectedCurrencies } = params;
-    const { data } = await axios.get(
-      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${mainCurrency.code}.json`
-    );
-    const exchangeRates = data[mainCurrency.code.toLowerCase()];
+    const lowerCurrencyCode = mainCurrency.code.toLowerCase();
 
-    return selectedCurrencies.map(c => ({
+    const { data } = await axios.get(
+      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${lowerCurrencyCode}.json`
+    );
+
+    const exchangeRates = data[lowerCurrencyCode];
+    const uniqueCurrencyCodes = new Set(Object.values(CURRENCIES_OF_COUNTRIES));
+    const available = Object.entries(exchangeRates)
+      .map(e => e[0].toUpperCase())
+      .filter(code => uniqueCurrencyCodes.has(code));
+    const selected = selectedCurrencies.map(c => ({
       code: c.code,
       rate: exchangeRates[c.code.toLowerCase()]
     }));
+
+    return {
+      selected,
+      available,
+      lastCallApi: new Date()
+    };
   }
 );

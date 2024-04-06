@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf, isPending } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
 import {
@@ -6,7 +6,6 @@ import {
   checkUpdates,
   applySettings,
   getWeatherData,
-  getAvailableConvertibleCurrencies,
   getExchangeRate
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
@@ -310,10 +309,14 @@ export const newTabSlice = createSlice({
       Object.assign(state, action.payload);
     });
 
-    builder.addCase(getAvailableConvertibleCurrencies.rejected, state => {
+    builder.addCase(getExchangeRate.pending, state => {
+      state.currencyLoading = true;
+    });
+
+    builder.addCase(getExchangeRate.rejected, state => {
       state.currencyLoading = false;
       state.notifications = state.notifications.concat(
-        Notification.CanNotGetAvailableConvertibleCurrencies
+        Notification.CanNotGetExchangeRate
       );
       const convertibleCurrencies = {
         ...state.convertibleCurrencies,
@@ -323,43 +326,12 @@ export const newTabSlice = createSlice({
       db.set({ convertibleCurrencies });
     });
 
-    builder.addCase(
-      getAvailableConvertibleCurrencies.fulfilled,
-      (state, action) => {
-        state.currencyLoading = false;
-        const convertibleCurrencies = {
-          ...state.convertibleCurrencies,
-          available: action.payload,
-          lastCallApi: new Date()
-        };
-        state.convertibleCurrencies = convertibleCurrencies;
-        db.set({ convertibleCurrencies });
-      }
-    );
-
-    builder.addCase(getExchangeRate.rejected, state => {
-      state.currencyLoading = false;
-      state.notifications = state.notifications.concat(
-        Notification.CanNotGetExchangeRate
-      );
-    });
-
     builder.addCase(getExchangeRate.fulfilled, (state, action) => {
       state.currencyLoading = false;
-      const convertibleCurrencies = {
-        ...state.convertibleCurrencies,
-        selected: action.payload
-      };
+      const convertibleCurrencies = action.payload;
       state.convertibleCurrencies = convertibleCurrencies;
       db.set({ convertibleCurrencies });
     });
-
-    builder.addMatcher(
-      isAnyOf(isPending(getAvailableConvertibleCurrencies, getExchangeRate)),
-      state => {
-        state.currencyLoading = true;
-      }
-    );
   }
 });
 

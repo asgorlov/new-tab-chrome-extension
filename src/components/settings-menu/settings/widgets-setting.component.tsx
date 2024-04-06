@@ -25,6 +25,8 @@ import {
 import { Currency } from "../../../models/currency.model";
 import { getCountryFlagSvgUrl } from "../../../utils/currency.utils";
 import CollapseComponent from "../../common/collapse/collapse.component";
+import { getExchangeRate } from "../../../store/new-tab/new-tab.thunks";
+import { AppDispatch } from "../../../store/store";
 
 /**
  * Компонент настройки виджетов
@@ -33,7 +35,7 @@ import CollapseComponent from "../../common/collapse/collapse.component";
 const WidgetsSettingComponent: FC = () => {
   const { t } = useTranslation();
   const id = useId();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const widgets = useSelector(selectWidgets);
   const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
   const mainCurrency = useSelector(selectMainCurrency);
@@ -121,6 +123,12 @@ const WidgetsSettingComponent: FC = () => {
   const onSaveSettings = useCallback(() => {
     dispatch(setMainCurrency(main));
     dispatch(setSelectedCurrencies(selected));
+    dispatch(
+      getExchangeRate({
+        mainCurrency: { code: main },
+        selectedCurrencies: selected
+      })
+    );
   }, [dispatch, main, selected]);
 
   const handleSelectCurrency = useCallback(

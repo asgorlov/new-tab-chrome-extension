@@ -7,7 +7,7 @@ import {
   selectWidgets
 } from "../../../store/new-tab/new-tab.selectors";
 import { shouldCurrenciesBeLoaded } from "../../../utils/currency.utils";
-import { getAvailableConvertibleCurrencies } from "../../../store/new-tab/new-tab.thunks";
+import { getExchangeRate } from "../../../store/new-tab/new-tab.thunks";
 import { AppDispatch } from "../../../store/store";
 
 const CurrencyContainer: FC = () => {
@@ -22,9 +22,13 @@ const CurrencyContainer: FC = () => {
       convertibleCurrencies.lastCallApi
     );
     if (shouldBeLoaded) {
-      dispatch(getAvailableConvertibleCurrencies());
+      const params = {
+        mainCurrency: { code: mainCurrency.selected ?? mainCurrency.default },
+        selectedCurrencies: convertibleCurrencies.selected
+      };
+      dispatch(getExchangeRate(params));
     }
-  }, [widgets, convertibleCurrencies, dispatch]);
+  }, [widgets, mainCurrency, convertibleCurrencies, dispatch]);
 
   return (
     <CurrencyComponent
