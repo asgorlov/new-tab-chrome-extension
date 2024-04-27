@@ -40,6 +40,7 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
     const ratioTitle = CURRENCY_RATIO_OPTIONS.find(
       o => o.value === ratio
     )?.label;
+    const rowElementNames = ["flag", "name", "code", "rate"];
 
     const [isClickedAnimationOn, setIsClickedAnimationOn] = useState(false);
 
@@ -89,50 +90,44 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
 
               return loading ? (
                 <Fragment key={c.code}>
-                  <SkeletonNode
-                    className="new-tab__currency-content__skeleton-flag"
-                    children={<div />}
-                    active
-                  />
-                  <SkeletonNode
-                    className="new-tab__currency-content__skeleton-name"
-                    children={<div />}
-                    active
-                  />
-                  <SkeletonNode
-                    className="new-tab__currency-content__skeleton-code"
-                    children={<div />}
-                    active
-                  />
-                  <SkeletonNode
-                    className="new-tab__currency-content__skeleton-rate"
-                    children={<div />}
-                    active
-                  />
+                  {rowElementNames.map(n => {
+                    return (
+                      <SkeletonNode
+                        className={`new-tab__currency-content__skeleton-${n}`}
+                        children={<div />}
+                        active
+                        key={n}
+                      />
+                    );
+                  })}
                 </Fragment>
               ) : (
                 <Fragment key={c.code}>
                   <img
-                    className="new-tab__currency-content__table__flag"
+                    className={`new-tab__currency-content__table__${rowElementNames[0]}`}
                     alt={c.code}
                     src={getCountryFlagSvgUrl(c.code)}
                   />
                   <TooltipComponent
                     title={name}
+                    align={{ offset: [0, "15%"] }}
                     placement="bottomLeft"
                     mouseEnterDelay={0.5}
-                    overlayClassName="new-tab__currency-content__table__name__popup"
+                    overlayClassName={`new-tab__currency-content__table__${rowElementNames[1]}__popup`}
                   >
-                    <span className="new-tab__currency-content__table__name">
-                      {name}
-                    </span>
+                    <span
+                      className={`new-tab__currency-content__table__${rowElementNames[1]}`}
+                      children={name}
+                    />
                   </TooltipComponent>
-                  <span className="new-tab__currency-content__table__code">
-                    {c.code}
-                  </span>
-                  <span className="new-tab__currency-content__table__rate">
-                    {calculateExchangeRate(isMain ? 1 : c.rate, ratio)}
-                  </span>
+                  <span
+                    className={`new-tab__currency-content__table__${rowElementNames[2]}`}
+                    children={c.code}
+                  />
+                  <span
+                    className={`new-tab__currency-content__table__${rowElementNames[3]}`}
+                    children={calculateExchangeRate(isMain ? 1 : c.rate, ratio)}
+                  />
                 </Fragment>
               );
             })}
