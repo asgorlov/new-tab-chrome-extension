@@ -21,5 +21,53 @@
         color: var(--text-color);
       }
     }
+
+    &__item {
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-left: 12px;
+      margin-top: 4px;
+      border-top: 1px solid var(--menu-border-color);
+
+      &-title {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 600;
+        margin-bottom: -4px;
+      }
+
+      label {
+        margin-bottom: -4px;
+      }
+
+      &-select {
+        width: 100%;
+      }
+
+      &_select-option {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        img {
+          height: 12px;
+        }
+      }
+    }
+
+    &__save-btn {
+      @include button-component-colors;
+      margin-top: 4px;
+
+      &-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 4px;
+        border-top: 1px solid var(--menu-border-color);
+      }
+    }
   }
 }

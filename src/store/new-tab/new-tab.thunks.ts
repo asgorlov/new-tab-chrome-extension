@@ -11,6 +11,11 @@ import {
   HourlyWeatherDataForDay,
   WMOCodeType
 } from "../../models/weather.model";
+import { CURRENCIES_OF_COUNTRIES } from "../../constants/currency.constants";
+import {
+  GettingExchangeRateParams,
+  ConvertibleCurrencies
+} from "../../models/currency.model";
 
 /**
  * Асинхронный запрос для получения обновлений
@@ -135,5 +140,37 @@ export const getWeatherData = createAsyncThunk(
     }
 
     return result;
+  }
+);
+
+/**
+ * Асинхронный запрос получения курса валют
+ * @category Thunks - New Tab
+ */
+export const getExchangeRate = createAsyncThunk(
+  "api/exchange-rate/get",
+  async (params: GettingExchangeRateParams): Promise<ConvertibleCurrencies> => {
+    const { mainCurrency, selectedCurrencies } = params;
+    const lowerCurrencyCode = mainCurrency.code.toLowerCase();
+
+    const { data } = await axios.get(
+      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${lowerCurrencyCode}.json`
+    );
+
+    const exchangeRates = data[lowerCurrencyCode];
+    const uniqueCurrencyCodes = new Set(Object.values(CURRENCIES_OF_COUNTRIES));
+    const available = Object.entries(exchangeRates)
+      .map(e => e[0].toUpperCase())
+      .filter(code => uniqueCurrencyCodes.has(code));
+    const selected = selectedCurrencies.map(c => ({
+      code: c.code,
+      rate: exchangeRates[c.code.toLowerCase()]
+    }));
+
+    return {
+      selected,
+      available,
+      lastCallApi: new Date()
+    };
   }
 );

@@ -1,3 +1,5 @@
+@import "./constants.module";
+
 @mixin setting-checkbox-group {
   display: flex;
   justify-content: space-between;
@@ -13,5 +15,59 @@
       height: 100%;
       width: 100%;
     }
+  }
+}
+
+@mixin currency-name {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin button-component-colors {
+  color: var(--text-color);
+  border-color: var(--border-color);
+  background: transparent;
+  transition: background-color $slow-transition, border-color $slow-transition, color $fast-transition;
+
+  &:disabled {
+    color: var(--disabled-text-color);
+    border-color: var(--border-color);
+    background-color: var(--disabled-bg-color);
+  }
+}
+
+@mixin widget-update-btn-common {
+  display: flex;
+  height: 14px;
+  width: 14px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #00000025;
+  }
+
+  &.clicked {
+    animation: 0.5s linear turn-180;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+@keyframes turn-180 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
   }
 }

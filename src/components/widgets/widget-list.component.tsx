@@ -18,6 +18,7 @@ import StrictModeDroppable from "../search-engine-selector/droppable-aria/strict
 import { setWidgets } from "../../store/new-tab/new-tab.slice";
 import WeatherContainer from "./weather/weather.container";
 import { useToken } from "antd/es/theme/internal";
+import CurrencyContainer from "./currency/currency.container";
 
 /**
  * Передаваемые параметры компонента виджетов на экране
@@ -64,7 +65,7 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
         const widgetName = provided.draggableProps["data-rbd-draggable-id"];
         const widgetStyle = Object.assign(
           {
-            backgroundColor: `color-mix(in srgb, ${token[1].colorPrimary} 80%, transparent)`
+            backgroundColor: `color-mix(in srgb, ${token[1].colorPrimary} 90%, transparent)`
           },
           provided.draggableProps.style
         );
@@ -73,6 +74,9 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
         switch (widgetName) {
           case WidgetName.WEATHER:
             widgetComponent = <WeatherContainer />;
+            break;
+          case WidgetName.CURRENCY:
+            widgetComponent = <CurrencyContainer />;
             break;
           default:
             widgetComponent = <></>;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addNotifications,
   setCurrentLocation,
+  setDefaultMainCurrency,
   setIsDark,
   setNightPeriod
 } from "../../store/new-tab/new-tab.slice";
@@ -30,6 +31,7 @@ import { shouldBeCheckedUpdates } from "../../utils/update.utils";
 import { createTheme } from "../../utils/search-engine.utils";
 import { Notification } from "../../constants/notification.constants";
 import { WidgetName } from "../../constants/widget.constants";
+import { getCurrencyInfoByLocation } from "../../utils/currency.utils";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -48,13 +50,23 @@ const NewTabContainer: FC = () => {
   }, [checkMode, lastUpdateDate, dispatch]);
 
   useEffect(() => {
-    if (darkMode === AUTO || widgets.includes(WidgetName.WEATHER)) {
+    const getLocation =
+      darkMode === AUTO ||
+      widgets.includes(WidgetName.WEATHER) ||
+      widgets.includes(WidgetName.CURRENCY);
+
+    if (getLocation) {
       getCurrentLocation().then(l => {
         const location = l || currentLocation;
         const areEqualLocations =
           JSON.stringify(location) === JSON.stringify(currentLocation);
         if (!areEqualLocations) {
           dispatch(setCurrentLocation(location));
+
+          if (location && widgets.includes(WidgetName.CURRENCY)) {
+            const defaultCurrencies = getCurrencyInfoByLocation(location);
+            dispatch(setDefaultMainCurrency(defaultCurrencies));
+          }
         }
 
         const now = new Date();

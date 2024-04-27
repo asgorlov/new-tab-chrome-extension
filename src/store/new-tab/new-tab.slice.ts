@@ -5,7 +5,8 @@ import {
   changeLanguage,
   checkUpdates,
   applySettings,
-  getWeatherData
+  getWeatherData,
+  getExchangeRate
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
@@ -19,6 +20,7 @@ import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
+import { Currency } from "../../models/currency.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -189,10 +191,64 @@ export const newTabSlice = createSlice({
       action: PayloadAction<SettingsStorage<string | string[]>>
     ) {
       state.settingsActiveKeys = Object.assign(
-        {},
-        state.settingsActiveKeys,
+        { ...state.settingsActiveKeys },
         action.payload
       );
+    },
+    /**
+     * Функция изменения соотношения валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrencyRatio(state: NewTabState, action: PayloadAction<number>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        ratio: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения основной валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setMainCurrency(state: NewTabState, action: PayloadAction<string | null>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        selected: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения основной валюты по умолчанию
+     * @param state - стор
+     * @param action - экшн
+     */
+    setDefaultMainCurrency(state: NewTabState, action: PayloadAction<string>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        default: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения выбранных валют для конвертации
+     * @param state - стор
+     * @param action - экшн
+     */
+    setSelectedCurrencies(
+      state: NewTabState,
+      action: PayloadAction<Currency[]>
+    ) {
+      const convertibleCurrencies = {
+        ...state.convertibleCurrencies,
+        selected: action.payload
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
     }
   },
   extraReducers: builder => {
@@ -265,6 +321,33 @@ export const newTabSlice = createSlice({
     builder.addCase(applySettings.fulfilled, (state, action) => {
       Object.assign(state, action.payload);
     });
+
+    builder.addCase(getExchangeRate.pending, state => {
+      state.currencyLoading = true;
+    });
+
+    builder.addCase(getExchangeRate.rejected, state => {
+      state.currencyLoading = false;
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetExchangeRate
+      );
+      const convertibleCurrencies = {
+        selected: state.convertibleCurrencies.selected.map(c => ({
+          code: c.code
+        })),
+        available: state.convertibleCurrencies.available,
+        lastCallApi: new Date()
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
+    });
+
+    builder.addCase(getExchangeRate.fulfilled, (state, action) => {
+      state.currencyLoading = false;
+      const convertibleCurrencies = action.payload;
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
+    });
   }
 });
 
@@ -285,7 +368,11 @@ export const {
   setCustomWallpaper,
   setCurrentLocation,
   setCheckForUpdates,
-  setSettingsActiveKeys
+  setSettingsActiveKeys,
+  setCurrencyRatio,
+  setMainCurrency,
+  setDefaultMainCurrency,
+  setSelectedCurrencies
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

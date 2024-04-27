@@ -10,6 +10,8 @@ const store = configureStore({
       // игнорируем несериализуемые данные
       serializableCheck: {
         ignoredActions: [
+          "api/exchange-rate/get/fulfilled",
+          "api/exchange-rate/get/rejected",
           "newTab/applySettings/fulfilled",
           "newTab/setCustomWallpaper",
           "newTab/setNightPeriod",
@@ -17,6 +19,7 @@ const store = configureStore({
           "api/weather/get/fulfilled"
         ],
         ignoredPaths: [
+          "newTab.convertibleCurrencies.lastCallApi",
           "newTab.customWallpaper.lightTheme",
           "newTab.customWallpaper.darkTheme",
           "newTab.nightPeriod",

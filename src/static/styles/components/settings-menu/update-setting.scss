@@ -1,4 +1,5 @@
 @import "../../modules/constants.module";
+@import "../../modules/mixins.module";
 
 .new-tab__settings-menu_update {
   border-radius: 0;
@@ -8,16 +9,7 @@
     justify-content: space-between;
 
     &-check-button {
-      color: var(--text-color);
-      border-color: var(--border-color);
-      background: transparent;
-      transition: background-color $slow-transition, border-color $slow-transition, color $fast-transition;
-
-      &:disabled {
-        color: var(--disabled-text-color);
-        border-color: var(--border-color);
-        background-color: var(--disabled-bg-color);
-      }
+      @include button-component-colors;
     }
   }
 }

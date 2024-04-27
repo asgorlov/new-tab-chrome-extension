@@ -6,6 +6,7 @@ import { SettingsStorage } from "./settings-search.model";
 import { Location } from "./location.model";
 import { WidgetName } from "../constants/widget.constants";
 import { WeatherData } from "./weather.model";
+import { ConvertibleCurrencies, MainCurrency } from "./currency.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
@@ -20,6 +21,7 @@ export interface NewTabState extends NewTabStateBase {
   notifications: Notification[];
   settingsActiveKeys: SettingsStorage<string[]>;
   weatherLoading: boolean;
+  currencyLoading: boolean;
 }
 
 /**
@@ -40,7 +42,9 @@ export interface NewTabState extends NewTabStateBase {
  * @property checkForUpdates - Режим запросов обновлений
  * @property customWallpaper - Пользовательские фоны
  * @property currentLocation - Текущая геолокация пользователя
- * @property currentLocation - Данные виджета погоды
+ * @property weather - Данные виджета погоды
+ * @property convertibleCurrencies - Объект с информацией о валюте для конвертации
+ * @property mainCurrency - Объект с информацией об основной валюте
  * @interface
  */
 export interface NewTabStateBase {
@@ -61,4 +65,6 @@ export interface NewTabStateBase {
   customWallpaper: CustomWallpaper | null;
   currentLocation: Location | null;
   weather: WeatherData;
+  convertibleCurrencies: ConvertibleCurrencies;
+  mainCurrency: MainCurrency;
 }

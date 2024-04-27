@@ -18,7 +18,7 @@ import {
  * Функция, меняющая содержимое объекта фоновой картинки для темной и светлой темы из формата base64 в файл
  * @category Utilities - Wallpaper
  * @param customWallpaper - Объект фоновой картинки для темной и светлой темы
- * @returns <b>True</b>, если объект был изменен
+ * @returns - <b>True</b>, если объект был изменен
  */
 export const changeCustomWallpaperFormBase64ToFile = (
   customWallpaper?: CustomWallpaper | CustomWallpaperInBase64 | null

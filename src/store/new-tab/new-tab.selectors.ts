@@ -8,6 +8,10 @@ import { createSelector } from "@reduxjs/toolkit";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
 import { WeatherData } from "../../models/weather.model";
+import {
+  ConvertibleCurrencies,
+  MainCurrency
+} from "../../models/currency.model";
 
 /**
  * Селектор получения флага темной темы
@@ -187,7 +191,6 @@ export const selectSettingActiveKeysByName = createSelector(
     name: CollapsedMenuSetting
   ): string[] => allActiveKeys[name]
 );
-
 /**
  * Селектор получения данных виджета погоды
  * @category Selectors - New Tab
@@ -196,7 +199,6 @@ export const selectSettingActiveKeysByName = createSelector(
  */
 export const selectWeather = (state: RootState): WeatherData =>
   state.newTab.weather;
-
 /**
  * Селектор загрузки данных виджета погоды
  * @category Selectors - New Tab
@@ -205,3 +207,28 @@ export const selectWeather = (state: RootState): WeatherData =>
  */
 export const selectWeatherLoading = (state: RootState): boolean =>
   state.newTab.weatherLoading;
+/**
+ * Селектор получения данных о валюте для конвертации
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией о валюте для конвертации {@link ConvertibleCurrencies}
+ */
+export const selectConvertibleCurrencies = (
+  state: RootState
+): ConvertibleCurrencies => state.newTab.convertibleCurrencies;
+/**
+ * Селектор получения данных об основной валюте
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией об основной валюте {@link MainCurrency}
+ */
+export const selectMainCurrency = (state: RootState): MainCurrency =>
+  state.newTab.mainCurrency;
+/**
+ * Селектор получения загрузки данных о валюте для конвертации
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если производится загрузка данных
+ */
+export const selectCurrencyLoading = (state: RootState): boolean =>
+  state.newTab.currencyLoading;

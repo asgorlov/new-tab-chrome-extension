@@ -4,6 +4,11 @@ import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
 import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
 import { WidgetName } from "./widget.constants";
+import {
+  DEFAULT_CURRENCY,
+  DEFAULT_CURRENCY_RATIO,
+  DEFAULT_SELECTABLE_CURRENCIES
+} from "./currency.constants";
 
 /**
  * Значения стейта по умолчанию
@@ -35,6 +40,15 @@ const defaultStore: Readonly<NewTabStateBase> = {
   weather: {
     data: [],
     lastApiCall: null
+  },
+  convertibleCurrencies: {
+    selected: DEFAULT_SELECTABLE_CURRENCIES,
+    available: DEFAULT_SELECTABLE_CURRENCIES.map(c => c.code)
+  },
+  mainCurrency: {
+    selected: null,
+    default: DEFAULT_CURRENCY,
+    ratio: DEFAULT_CURRENCY_RATIO
   }
 };
 

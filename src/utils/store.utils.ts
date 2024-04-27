@@ -20,6 +20,7 @@ export const getInitState = async (): Promise<NewTabState> => {
     isOpenMenu: false,
     notifications: [],
     settingsActiveKeys,
-    weatherLoading: false
+    weatherLoading: false,
+    currencyLoading: false
   };
 };
