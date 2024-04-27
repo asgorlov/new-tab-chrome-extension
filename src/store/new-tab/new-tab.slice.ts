@@ -332,7 +332,10 @@ export const newTabSlice = createSlice({
         Notification.CanNotGetExchangeRate
       );
       const convertibleCurrencies = {
-        ...state.convertibleCurrencies,
+        selected: state.convertibleCurrencies.selected.map(c => ({
+          code: c.code
+        })),
+        available: state.convertibleCurrencies.available,
         lastCallApi: new Date()
       };
       state.convertibleCurrencies = convertibleCurrencies;
