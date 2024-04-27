@@ -40,6 +40,28 @@
   &-content {
     position: relative;
 
+    &__skeleton {
+      &-flag {
+        @include skeleton-dimensions(18px, 13px);
+      }
+
+      &-name {
+        @include skeleton-dimensions(100%, 13px);
+      }
+
+      &-code {
+        @include skeleton-dimensions(26px, 13px);
+      }
+
+      &-rate {
+        @include skeleton-dimensions(26px, 13px);
+      }
+
+      &-date {
+        @include skeleton-dimensions(132px, 10px);
+      }
+    }
+
     &__table {
       display: grid;
       align-items: center;

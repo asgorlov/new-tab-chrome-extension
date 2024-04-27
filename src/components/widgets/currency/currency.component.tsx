@@ -11,6 +11,7 @@ import {
 } from "../../../utils/currency.utils";
 import TooltipComponent from "../../common/tooltip/tooltip.component";
 import { CURRENCY_RATIO_OPTIONS } from "../../../constants/currency.constants";
+import SkeletonNode from "antd/es/skeleton/Node";
 
 /**
  * Передаваемые параметры компонента виджета валют
@@ -86,7 +87,30 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
               const name = t(`currency.codes.${c.code}`);
               const isMain = mainCurrency === c.code;
 
-              return (
+              return loading ? (
+                <Fragment key={c.code}>
+                  <SkeletonNode
+                    className="new-tab__currency-content__skeleton-flag"
+                    children={<div />}
+                    active
+                  />
+                  <SkeletonNode
+                    className="new-tab__currency-content__skeleton-name"
+                    children={<div />}
+                    active
+                  />
+                  <SkeletonNode
+                    className="new-tab__currency-content__skeleton-code"
+                    children={<div />}
+                    active
+                  />
+                  <SkeletonNode
+                    className="new-tab__currency-content__skeleton-rate"
+                    children={<div />}
+                    active
+                  />
+                </Fragment>
+              ) : (
                 <Fragment key={c.code}>
                   <img
                     className="new-tab__currency-content__table__flag"
@@ -115,9 +139,19 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
           </div>
           {lastCallApi && (
             <div className="new-tab__currency-content__date">
-              {t(`currency.lastCallDate`, {
-                lastCallApi: lastCallApi.toLocaleDateString()
-              })}
+              {loading ? (
+                <SkeletonNode
+                  className="new-tab__currency-content__skeleton-date"
+                  children={<div />}
+                  active
+                />
+              ) : (
+                <>
+                  {t(`currency.lastCallDate`, {
+                    lastCallApi: lastCallApi.toLocaleDateString()
+                  })}
+                </>
+              )}
             </div>
           )}
         </div>
