@@ -19,6 +19,7 @@ import { setWidgets } from "../../store/new-tab/new-tab.slice";
 import WeatherContainer from "./weather/weather.container";
 import { useToken } from "antd/es/theme/internal";
 import CurrencyContainer from "./currency/currency.container";
+import TimeContainer from "./time/time.container";
 
 /**
  * Передаваемые параметры компонента виджетов на экране
@@ -77,6 +78,9 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
             break;
           case WidgetName.CURRENCY:
             widgetComponent = <CurrencyContainer />;
+            break;
+          case WidgetName.TIME:
+            widgetComponent = <TimeContainer />;
             break;
           default:
             widgetComponent = <></>;

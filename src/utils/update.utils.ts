@@ -32,6 +32,7 @@ import db from "../db/db";
 import { NewTabStateBase } from "../models/new-tab-state.model";
 import { Features } from "../models/update.model";
 import { changeCustomWallpaperFormBase64ToFile } from "./wallpaper.utils";
+import { WidgetName } from "../constants/widget.constants";
 
 /**
  * Функция, позволяющая узнать необходимо ли отправлять запрос за последними обновлениями
@@ -94,10 +95,19 @@ export const updateStateWithFeatures = (data: NewTabStateBase) => {
       data.showTour = features.forceShowTour;
     }
 
-    features.searchEngines
-      .filter(searchEngine => !data.searchEngines.includes(searchEngine))
-      .forEach(searchEngine => data.searchEngines.push(searchEngine));
-    Object.assign({ searchEngines: data.searchEngines });
+    if (features.searchEngines.length) {
+      features.searchEngines
+        .filter(searchEngine => !data.searchEngines.includes(searchEngine))
+        .forEach(searchEngine => data.searchEngines.push(searchEngine));
+      Object.assign(dataToUpdate, { searchEngines: data.searchEngines });
+    }
+
+    if (features.widgets.length) {
+      features.widgets
+        .filter(widget => !data.widgets.includes(widget))
+        .forEach(widget => data.widgets.push(widget));
+      Object.assign(dataToUpdate, { widgets: data.widgets });
+    }
 
     data.update.previousVersion = data.update.lastVersion;
     Object.assign(dataToUpdate, { update: data.update });
@@ -128,6 +138,7 @@ export const getDeltaChanges = (
 ): Features => {
   let forceShowTour = false;
   const searchEngines = [];
+  const widgets = [];
 
   if (previousVersion < "2.3.0" && lastVersion >= "2.3.0") {
     searchEngines.push(BING);
@@ -170,8 +181,9 @@ export const getDeltaChanges = (
       SEARXNG
     );
   }
-  if (lastVersion >= "3.6.0") {
+  if (previousVersion < "3.6.0" && lastVersion >= "3.6.0") {
+    widgets.push(WidgetName.WEATHER, WidgetName.CURRENCY, WidgetName.TIME);
   }
 
-  return { searchEngines, forceShowTour };
+  return { searchEngines, forceShowTour, widgets };
 };

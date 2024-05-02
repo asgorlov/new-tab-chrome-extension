@@ -8,6 +8,7 @@ export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
 export * from "../utils/weather.utils";
 export * from "../utils/currency.utils";
+export * from "../utils/time.utils";
 // ================= Database =================
 export { default as db } from "../db/db";
 // ================= Store ====================
@@ -129,3 +130,7 @@ export {
   default as CurrencyComponent,
   type CurrencyComponentProps
 } from "../components/widgets/currency/currency.component";
+export {
+  default as TimeComponent,
+  type TimeComponentProps
+} from "../components/widgets/time/time.component";

@@ -4,5 +4,6 @@
  */
 export enum WidgetName {
   WEATHER = "weather",
-  CURRENCY = "currency"
+  CURRENCY = "currency",
+  TIME = "time"
 }
