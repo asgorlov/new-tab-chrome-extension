@@ -33,11 +33,11 @@ import { VoidFunc } from "../../../../models/common.model";
 
 /**
  * Передаваемые параметры компонента настройки виджета валют
- * @property setSaveChanges - Функция для установки флага сохранения настроек
+ * @property setIsSavedChanges - Функция для установки флага сохранения настроек
  * @interface
  */
 export interface CurrencyWidgetSettingComponentProps {
-  setSaveChanges: (value: boolean) => void;
+  setIsSavedChanges: (value: boolean) => void;
 }
 
 /**
@@ -47,7 +47,7 @@ export interface CurrencyWidgetSettingComponentProps {
 const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
   PropsWithoutRef<CurrencyWidgetSettingComponentProps> & RefAttributes<VoidFunc>
 > = forwardRef<VoidFunc, CurrencyWidgetSettingComponentProps>(
-  ({ setSaveChanges }, ref) => {
+  ({ setIsSavedChanges }, ref) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
 
@@ -141,14 +141,14 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
         (c: Currency, i: number) => selected[i].code !== c.code
       );
 
-      setSaveChanges(isMainChanged || isRatioChanged || isSelectedChanged);
+      setIsSavedChanges(isMainChanged || isRatioChanged || isSelectedChanged);
     }, [
       main,
       mainCurrency,
       ratio,
       selected,
       convertibleCurrencies.selected,
-      setSaveChanges
+      setIsSavedChanges
     ]);
 
     return (

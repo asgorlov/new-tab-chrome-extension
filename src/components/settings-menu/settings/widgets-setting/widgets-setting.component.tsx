@@ -42,7 +42,10 @@ const WidgetsSettingComponent: FC = () => {
   const widgets = useSelector(selectWidgets);
   const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
 
-  const [saveChanges, setSaveChanges] = useState(false);
+  const initialWidgetChanges = widgets
+    .map(w => ({ [w]: false }))
+    .reduce((acc, entry) => Object.assign(acc, entry), {});
+  const [widgetChanges, setWidgetChanges] = useState(initialWidgetChanges);
 
   const widgetOptions = useMemo(() => {
     return Object.values(WidgetName).map(name => {
@@ -56,6 +59,14 @@ const WidgetsSettingComponent: FC = () => {
   const showSaveBtn = widgets.some(
     w => w === WidgetName.CURRENCY || w === WidgetName.TIME
   );
+
+  const setIsSavedChanges = (name: WidgetName, isChanged: boolean) => {
+    setWidgetChanges(prevState => {
+      return prevState[name] !== isChanged
+        ? { ...prevState, [name]: isChanged }
+        : prevState;
+    });
+  };
 
   const onSaveSettings = useCallback(() => {
     saveCurrencySettingRef.current();
@@ -127,7 +138,7 @@ const WidgetsSettingComponent: FC = () => {
                 <CurrencyWidgetSettingComponent
                   key={w}
                   ref={saveCurrencySettingRef}
-                  setSaveChanges={setSaveChanges}
+                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
                 />
               );
             default:
@@ -139,7 +150,7 @@ const WidgetsSettingComponent: FC = () => {
             <Button
               className="new-tab__settings-menu_widgets-content__save-btn"
               size="small"
-              disabled={!saveChanges}
+              disabled={!widgetChanges}
               onClick={onSaveSettings}
               children={t("widgets.saveButton")}
             />
