@@ -20,7 +20,7 @@ import {
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useToken } from "antd/es/theme/internal";
-import WidgetsSettingComponent from "./settings/widgets-setting.component";
+import WidgetsSettingComponent from "./settings/widgets-setting/widgets-setting.component";
 import clsx from "clsx";
 import { Placement } from "rc-drawer/es/DrawerPopup";
 

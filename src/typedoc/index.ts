@@ -16,6 +16,7 @@ export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
 // ================= Models ===================
+export * from "../models/common.model";
 export * from "../models/location.model";
 export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
@@ -110,7 +111,11 @@ export {
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
-export { default as WidgetsSettingComponent } from "../components/settings-menu/settings/widgets-setting.component";
+export { default as WidgetsSettingComponent } from "../components/settings-menu/settings/widgets-setting/widgets-setting.component";
+export {
+  default as CurrencyWidgetSettingComponent,
+  type CurrencyWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/currency-widget-setting.component";
 export {
   default as SettingsHeaderComponent,
   type SettingsHeaderComponentProps
