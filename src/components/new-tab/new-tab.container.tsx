@@ -52,8 +52,7 @@ const NewTabContainer: FC = () => {
   useEffect(() => {
     const getLocation =
       darkMode === AUTO ||
-      widgets.includes(WidgetName.WEATHER) ||
-      widgets.includes(WidgetName.CURRENCY);
+      widgets.some(w => w === WidgetName.WEATHER || w === WidgetName.CURRENCY);
 
     if (getLocation) {
       getCurrentLocation().then(l => {

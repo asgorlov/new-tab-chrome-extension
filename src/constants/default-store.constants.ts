@@ -49,6 +49,11 @@ const defaultStore: Readonly<NewTabStateBase> = {
     selected: null,
     default: DEFAULT_CURRENCY,
     ratio: DEFAULT_CURRENCY_RATIO
+  },
+  timeSettings: {
+    showFlashing: true,
+    showSeconds: true,
+    isCompact: false
   }
 };
 

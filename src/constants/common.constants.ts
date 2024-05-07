@@ -31,3 +31,9 @@ export const DARK_TEXT_COLOR = constants.darkTextColor;
  * @category Constants - Common
  */
 export const LIGHT_TEXT_COLOR = constants.lightTextColor;
+
+/**
+ * Пустая функция-заглушка
+ * @category Constants - Common
+ */
+export const NOOP = () => {};
