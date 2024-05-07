@@ -28,6 +28,7 @@ import { AppDispatch } from "../../../../store/store";
 import CurrencyWidgetSettingComponent from "./currency-widget-setting.component";
 import { VoidFunc } from "../../../../models/common.model";
 import { NOOP } from "../../../../constants/common.constants";
+import TimeWidgetSettingComponent from "./time-widget-setting.component";
 
 /**
  * Компонент настройки виджетов
@@ -38,6 +39,7 @@ const WidgetsSettingComponent: FC = () => {
   const id = useId();
   const dispatch = useDispatch<AppDispatch>();
   const saveCurrencySettingRef = useRef<VoidFunc>(NOOP);
+  const saveTimeSettingRef = useRef<VoidFunc>(NOOP);
 
   const widgets = useSelector(selectWidgets);
   const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
@@ -59,6 +61,9 @@ const WidgetsSettingComponent: FC = () => {
   const showSaveBtn = widgets.some(
     w => w === WidgetName.CURRENCY || w === WidgetName.TIME
   );
+  const disableSaveBtn = Object.values(widgetChanges).every(
+    isChanged => !isChanged
+  );
 
   const setIsSavedChanges = (name: WidgetName, isChanged: boolean) => {
     setWidgetChanges(prevState => {
@@ -70,7 +75,8 @@ const WidgetsSettingComponent: FC = () => {
 
   const onSaveSettings = useCallback(() => {
     saveCurrencySettingRef.current();
-  }, [saveCurrencySettingRef]);
+    saveTimeSettingRef.current();
+  }, [saveCurrencySettingRef, saveTimeSettingRef]);
 
   const handleChangeAddAll = useCallback(
     (event: CheckboxChangeEvent) => {
@@ -141,6 +147,14 @@ const WidgetsSettingComponent: FC = () => {
                   setIsSavedChanges={v => setIsSavedChanges(w, v)}
                 />
               );
+            case WidgetName.TIME:
+              return (
+                <TimeWidgetSettingComponent
+                  key={w}
+                  ref={saveTimeSettingRef}
+                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                />
+              );
             default:
               return null;
           }
@@ -150,7 +164,7 @@ const WidgetsSettingComponent: FC = () => {
             <Button
               className="new-tab__settings-menu_widgets-content__save-btn"
               size="small"
-              disabled={!widgetChanges}
+              disabled={disableSaveBtn}
               onClick={onSaveSettings}
               children={t("widgets.saveButton")}
             />

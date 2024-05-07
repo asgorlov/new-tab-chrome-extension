@@ -302,6 +302,11 @@
     "pressureUnit": "mmHg"
   },
   "time": {
+    "settings": {
+      "showSeconds": "Show seconds",
+      "showFlashing": "Show seconds countdown",
+      "isCompact": "Compact size"
+    },
     "dayOfWeek": {
       "0": "Sunday",
       "1": "Monday",

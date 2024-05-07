@@ -7,6 +7,7 @@ import { Location } from "./location.model";
 import { WidgetName } from "../constants/widget.constants";
 import { WeatherData } from "./weather.model";
 import { ConvertibleCurrencies, MainCurrency } from "./currency.model";
+import { TimeSettings } from "./time.model";
 
 /**
  * Интерфейс стейта страницы <tt>New-tab</tt>
@@ -45,6 +46,7 @@ export interface NewTabState extends NewTabStateBase {
  * @property weather - Данные виджета погоды
  * @property convertibleCurrencies - Объект с информацией о валюте для конвертации
  * @property mainCurrency - Объект с информацией об основной валюте
+ * @property timeSettings - Объект с настройками виджета часов
  * @interface
  */
 export interface NewTabStateBase {
@@ -67,4 +69,5 @@ export interface NewTabStateBase {
   weather: WeatherData;
   convertibleCurrencies: ConvertibleCurrencies;
   mainCurrency: MainCurrency;
+  timeSettings: TimeSettings;
 }

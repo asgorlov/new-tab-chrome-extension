@@ -25,6 +25,7 @@ export * from "../models/settings-search.model";
 export * from "../models/update.model";
 export * from "../models/db.model";
 export * from "../models/currency.model";
+export * from "../models/time.model";
 // ================= Hooks ====================
 export * from "../hooks/use-active-keys.hook";
 // ================= Contexts =================
@@ -116,6 +117,10 @@ export {
   default as CurrencyWidgetSettingComponent,
   type CurrencyWidgetSettingComponentProps
 } from "../components/settings-menu/settings/widgets-setting/currency-widget-setting.component";
+export {
+  default as TimeWidgetSettingComponent,
+  type TimeWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/time-widget-setting.component";
 export {
   default as SettingsHeaderComponent,
   type SettingsHeaderComponentProps

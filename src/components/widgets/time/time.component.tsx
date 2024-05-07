@@ -1,8 +1,11 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, JSX, ReactNode } from "react";
 import {
   convertToFixedString,
   getFormattedDateStringForTimeWidget
 } from "../../../utils/time.utils";
+import { useSelector } from "react-redux";
+import { selectTimeSettings } from "../../../store/new-tab/new-tab.selectors";
+import clsx from "clsx";
 
 /**
  * Передаваемые параметры компонента виджета времени
@@ -18,6 +21,8 @@ export interface TimeComponentProps {
  * @category Components
  */
 const TimeComponent: FC<TimeComponentProps> = ({ date }) => {
+  const timeSettings = useSelector(selectTimeSettings);
+
   const renderClockNumberValue = (value: number): ReactNode =>
     convertToFixedString(value).map((n: string, i: number) => {
       return (
@@ -26,18 +31,38 @@ const TimeComponent: FC<TimeComponentProps> = ({ date }) => {
         </span>
       );
     });
+  const Colon = (): JSX.Element => (
+    <span
+      className={clsx("new-tab__time_clock-colon", {
+        _animation: timeSettings.showFlashing
+      })}
+      children=":"
+    />
+  );
 
   return (
     <div className="new-tab__time">
-      <div className="new-tab__time_clock">
+      <div
+        className={clsx("new-tab__time_clock", {
+          _compact: timeSettings.isCompact
+        })}
+      >
         {renderClockNumberValue(date.getHours())}
-        <span className="new-tab__time_clock-colon">:</span>
+        <Colon />
         {renderClockNumberValue(date.getMinutes())}
-        <span className="new-tab__time_clock-colon">:</span>
-        {renderClockNumberValue(date.getSeconds())}
+        {timeSettings.showSeconds && (
+          <>
+            <Colon />
+            {renderClockNumberValue(date.getSeconds())}
+          </>
+        )}
       </div>
       <hr />
-      <div className="new-tab__time_day">
+      <div
+        className={clsx("new-tab__time_day", {
+          _compact: timeSettings.isCompact
+        })}
+      >
         {getFormattedDateStringForTimeWidget(date)}
       </div>
     </div>

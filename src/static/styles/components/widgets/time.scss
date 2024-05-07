@@ -15,6 +15,11 @@
     font-size: 38px;
     line-height: 40px;
 
+    &._compact {
+      font-size: 32px;
+      line-height: 34px;
+    }
+
     &-value {
       display: flex;
       justify-content: center;
@@ -24,7 +29,10 @@
     &-colon {
       height: 100%;
       line-height: 30px;
-      animation: 1s linear infinite flash;
+
+      &._animation {
+        animation: 1s linear infinite flash;
+      }
     }
   }
 
@@ -39,5 +47,9 @@
     font-family: monospace;
     font-size: 12px;
     font-weight: 600;
+
+    &._compact {
+      font-size: 10px;
+    }
   }
 }

@@ -12,6 +12,7 @@ import {
   ConvertibleCurrencies,
   MainCurrency
 } from "../../models/currency.model";
+import { TimeSettings } from "../../models/time.model";
 
 /**
  * Селектор получения флага темной темы
@@ -232,3 +233,11 @@ export const selectMainCurrency = (state: RootState): MainCurrency =>
  */
 export const selectCurrencyLoading = (state: RootState): boolean =>
   state.newTab.currencyLoading;
+/**
+ * Селектор получения настроек виджета времени
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с настройками виджета часов {@link TimeSettings}
+ */
+export const selectTimeSettings = (state: RootState): TimeSettings =>
+  state.newTab.timeSettings;

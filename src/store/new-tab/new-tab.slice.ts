@@ -21,6 +21,7 @@ import { NightPeriod } from "../../models/night-period.model";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
 import { Currency } from "../../models/currency.model";
+import { TimeSettings } from "../../models/time.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -249,6 +250,16 @@ export const newTabSlice = createSlice({
       };
       state.convertibleCurrencies = convertibleCurrencies;
       db.set({ convertibleCurrencies });
+    },
+    /**
+     * Функция изменения настроек лоя виджета часов
+     * @param state - стор
+     * @param action - экшн
+     */
+    setTimeSettings(state: NewTabState, action: PayloadAction<TimeSettings>) {
+      const timeSettings = action.payload;
+      state.timeSettings = timeSettings;
+      db.set({ timeSettings });
     }
   },
   extraReducers: builder => {
@@ -372,7 +383,8 @@ export const {
   setCurrencyRatio,
   setMainCurrency,
   setDefaultMainCurrency,
-  setSelectedCurrencies
+  setSelectedCurrencies,
+  setTimeSettings
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;
