@@ -74,9 +74,19 @@ const WidgetsSettingComponent: FC = () => {
   };
 
   const onSaveSettings = useCallback(() => {
-    saveCurrencySettingRef.current();
-    saveTimeSettingRef.current();
-  }, [saveCurrencySettingRef, saveTimeSettingRef]);
+    Object.entries(widgetChanges)
+      .filter(e => e[1])
+      .map(e => e[0])
+      .forEach(w => {
+        switch (w) {
+          case WidgetName.CURRENCY:
+            saveCurrencySettingRef.current();
+            break;
+          case WidgetName.TIME:
+            saveTimeSettingRef.current();
+        }
+      });
+  }, [widgetChanges, saveCurrencySettingRef, saveTimeSettingRef]);
 
   const handleChangeAddAll = useCallback(
     (event: CheckboxChangeEvent) => {
