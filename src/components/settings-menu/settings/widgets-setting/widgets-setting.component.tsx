@@ -38,8 +38,7 @@ const WidgetsSettingComponent: FC = () => {
   const { t } = useTranslation();
   const id = useId();
   const dispatch = useDispatch<AppDispatch>();
-  const saveCurrencySettingRef = useRef<VoidFunc>(NOOP);
-  const saveTimeSettingRef = useRef<VoidFunc>(NOOP);
+  const widgetSettingRefs = useRef(new Map<string, VoidFunc>());
 
   const widgets = useSelector(selectWidgets);
   const isWidgetsOnRight = useSelector(selectIsWidgetsOnRight);
@@ -77,16 +76,8 @@ const WidgetsSettingComponent: FC = () => {
     Object.entries(widgetChanges)
       .filter(e => e[1])
       .map(e => e[0])
-      .forEach(w => {
-        switch (w) {
-          case WidgetName.CURRENCY:
-            saveCurrencySettingRef.current();
-            break;
-          case WidgetName.TIME:
-            saveTimeSettingRef.current();
-        }
-      });
-  }, [widgetChanges, saveCurrencySettingRef, saveTimeSettingRef]);
+      .forEach(w => widgetSettingRefs.current.get(w)?.());
+  }, [widgetChanges, widgetSettingRefs]);
 
   const handleChangeAddAll = useCallback(
     (event: CheckboxChangeEvent) => {
@@ -153,7 +144,7 @@ const WidgetsSettingComponent: FC = () => {
               return (
                 <CurrencyWidgetSettingComponent
                   key={w}
-                  ref={saveCurrencySettingRef}
+                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
                   setIsSavedChanges={v => setIsSavedChanges(w, v)}
                 />
               );
@@ -161,7 +152,7 @@ const WidgetsSettingComponent: FC = () => {
               return (
                 <TimeWidgetSettingComponent
                   key={w}
-                  ref={saveTimeSettingRef}
+                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
                   setIsSavedChanges={v => setIsSavedChanges(w, v)}
                 />
               );
