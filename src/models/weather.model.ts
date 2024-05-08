@@ -1,3 +1,5 @@
+import { Location } from "./location.model";
+
 /**
  * Тип времени суток
  * @interface
@@ -41,6 +43,13 @@ export type WMOCodeType =
 
 /**
  * Интерфейс данных за один час дня, которые были получены с сервера
+ * @property time - Время
+ * @property temp - Температура
+ * @property humidity - Влажность
+ * @property weatherCode - Код погоды для иконок
+ * @property pressure - Давление
+ * @property windSpeed - Скорость ветра
+ * @property windDirection - Направление ветра
  * @interface
  */
 export interface HourlyWeatherDataForDay {
@@ -55,15 +64,24 @@ export interface HourlyWeatherDataForDay {
 
 /**
  * Интерфейс данных погоды
+ * @property data - Данные погоды
+ * @property lastApiCallDate - Дата последнего запроса погоды
+ * @property lastApiCallLocation - Местоположение, для которого был последний запрос погоды
  * @interface
  */
 export interface WeatherData {
   data: HourlyWeatherDataForDay[];
-  lastApiCall: Date | null;
+  lastApiCallDate: Date | null;
+  lastApiCallLocation: Location | null;
 }
 
 /**
  * Интерфейс с параметрами погоды за час для отображения
+ * @property wind - Ветер
+ * @property humidity - Влажность
+ * @property pressure - Давление
+ * @property temp - Температра
+ * @property code - Код погоды для иконки
  * @interface
  */
 export interface HourlyWeatherParamsViewModel {
@@ -76,6 +94,10 @@ export interface HourlyWeatherParamsViewModel {
 
 /**
  * Интерфейс с усредненной температурой для 6-часового отрезка времени суток
+ * @property night - Ночь
+ * @property morning - Утро
+ * @property day - День
+ * @property evening - Вечер
  * @interface
  */
 export interface AverageTempTextByTimeOfDay {
@@ -83,4 +105,13 @@ export interface AverageTempTextByTimeOfDay {
   morning: string;
   day: string;
   evening: string;
+}
+
+/**
+ * Интерфейс настроек виджета погоды
+ * @property location - Выбранное или текущее местоположение для запроса погоды
+ * @interface
+ */
+export interface WeatherSettings {
+  location: Location | null;
 }

@@ -114,6 +114,10 @@ export { default as LanguageSettingComponent } from "../components/settings-menu
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
 export { default as WidgetsSettingComponent } from "../components/settings-menu/settings/widgets-setting/widgets-setting.component";
 export {
+  default as WeatherWidgetSettingComponent,
+  type WeatherWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/weather-widget-setting.component";
+export {
   default as CurrencyWidgetSettingComponent,
   type CurrencyWidgetSettingComponentProps
 } from "../components/settings-menu/settings/widgets-setting/currency-widget-setting.component";

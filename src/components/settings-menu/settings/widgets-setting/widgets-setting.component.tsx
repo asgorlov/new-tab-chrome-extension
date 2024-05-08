@@ -29,6 +29,7 @@ import CurrencyWidgetSettingComponent from "./currency-widget-setting.component"
 import { VoidFunc } from "../../../../models/common.model";
 import { NOOP } from "../../../../constants/common.constants";
 import TimeWidgetSettingComponent from "./time-widget-setting.component";
+import WeatherWidgetSettingComponent from "./weather-widget-setting.component";
 
 /**
  * Компонент настройки виджетов
@@ -57,9 +58,6 @@ const WidgetsSettingComponent: FC = () => {
       };
     });
   }, [t]);
-  const showSaveBtn = widgets.some(
-    w => w === WidgetName.CURRENCY || w === WidgetName.TIME
-  );
   const disableSaveBtn = Object.values(widgetChanges).every(
     isChanged => !isChanged
   );
@@ -140,6 +138,14 @@ const WidgetsSettingComponent: FC = () => {
         </div>
         {widgets.map(w => {
           switch (w) {
+            case WidgetName.WEATHER:
+              return (
+                <WeatherWidgetSettingComponent
+                  key={w}
+                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
+                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                />
+              );
             case WidgetName.CURRENCY:
               return (
                 <CurrencyWidgetSettingComponent
@@ -160,7 +166,7 @@ const WidgetsSettingComponent: FC = () => {
               return null;
           }
         })}
-        {showSaveBtn && (
+        {widgets.length > 0 && (
           <div className="new-tab__settings-menu_widgets-content__save-btn-wrapper">
             <Button
               className="new-tab__settings-menu_widgets-content__save-btn"

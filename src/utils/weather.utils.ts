@@ -1,26 +1,36 @@
 import {
   AverageTempTextByTimeOfDay,
-  HourlyWeatherParamsViewModel,
   HourlyWeatherDataForDay,
+  HourlyWeatherParamsViewModel,
   WeatherData
 } from "../models/weather.model";
 import i18n from "../localizations/i18n";
 import { NightPeriod } from "../models/night-period.model";
+import { Location } from "../models/location.model";
 
 /**
  * Функция проверки загрузки данных для виджета погоды
  * @category Utilities - Weather
  * @param weather - Объект с данными погоды
+ * @param location - Местоположение, для которого будет производиться запрос погоды
  * @returns - <b>True</b>, если необходима загрузка данных
  */
-export const shouldBeWeatherDataLoaded = (weather: WeatherData): boolean => {
-  if (!weather.lastApiCall) {
+export const shouldBeWeatherDataLoaded = (
+  weather: WeatherData,
+  location: Location | null
+): boolean => {
+  if (!weather.lastApiCallDate || !weather.lastApiCallLocation) {
     return true;
   }
 
-  return weather.data.length
-    ? !weather.lastApiCall.isSameWithoutTime(new Date())
-    : weather.lastApiCall.isBefore(new Date());
+  return (
+    (location &&
+      JSON.stringify(weather.lastApiCallLocation) !==
+        JSON.stringify(location)) ||
+    (weather.data.length
+      ? !weather.lastApiCallDate.isSameWithoutTime(new Date())
+      : weather.lastApiCallDate.isBefore(new Date()))
+  );
 };
 
 /**
@@ -175,3 +185,71 @@ const getTempText = (temp: number): string => {
 };
 
 const getRoundedValue = (temp: number): string => Math.round(temp).toString();
+
+/**
+ * Функция убирает лишние нули и добавляет нуль перед точкой
+ * @category Utilities - Weather
+ * @param rawValue - Данные из поля ввода
+ * @returns - Значение без лишних нулей вначале
+ */
+export const removeExtraZeros = (rawValue?: string | null): string => {
+  if (rawValue) {
+    const allZerosAtBeginning = /^0+/g;
+    const startsWithDot = /^\./;
+    return rawValue
+      .replace(allZerosAtBeginning, "")
+      .replace(startsWithDot, "0.");
+  }
+
+  return "";
+};
+
+/**
+ * Функция получения корректного значения широты
+ * @category Utilities - Weather
+ * @param rawValue - Данные из поля ввода
+ * @returns - Строковое значение широты
+ */
+export const getCorrectLatitudeValue = (rawValue: string): string => {
+  return getCorrectCoordinateValue(rawValue, -90, 90);
+};
+
+/**
+ * Функция получения корректного значения долготы
+ * @category Utilities - Weather
+ * @param rawValue - Данные из поля ввода
+ * @returns - Строковое значение долготы
+ */
+export const getCorrectLongitudeValue = (rawValue: string): string => {
+  return getCorrectCoordinateValue(rawValue, -180, 180);
+};
+
+const getCorrectCoordinateValue = (
+  rawValue: string,
+  minValue: number,
+  maxValue: number
+): string => {
+  const allExceptNumbersAndDots = /[^0-9.-]/g;
+  const allDotsExceptFirst = /^([^.]*\.)|\./g;
+  const startsWithZeros = /^0*\./g;
+  const clearedValue = rawValue
+    .replaceAll(",", ".")
+    .replace(allExceptNumbersAndDots, "")
+    .replace(allDotsExceptFirst, "$1")
+    .replace(startsWithZeros, "0.");
+  const value = Number(clearedValue);
+
+  if (!Number.isFinite(value)) {
+    return "";
+  }
+
+  if (value > maxValue) {
+    return maxValue.toString();
+  }
+
+  if (value < minValue) {
+    return minValue.toString();
+  }
+
+  return clearedValue;
+};

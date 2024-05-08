@@ -246,6 +246,11 @@
     }
   },
   "weather": {
+    "settings": {
+      "currentLocation": "Current location",
+      "lng": "Longitude",
+      "ltd": "Latitude"
+    },
     "timesOfDay": {
       "morning": "Morning",
       "day": "Day",
