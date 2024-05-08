@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
 import {
+  applySettings,
   changeLanguage,
   checkUpdates,
-  applySettings,
-  getWeatherData,
-  getExchangeRate
+  getExchangeRate,
+  getWeatherData
 } from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
@@ -22,6 +22,7 @@ import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
 import { Currency } from "../../models/currency.model";
 import { TimeSettings } from "../../models/time.model";
+import { WeatherData, WeatherSettings } from "../../models/weather.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -260,6 +261,19 @@ export const newTabSlice = createSlice({
       const timeSettings = action.payload;
       state.timeSettings = timeSettings;
       db.set({ timeSettings });
+    },
+    /**
+     * Функция изменения настроек лоя виджета погоды
+     * @param state - стор
+     * @param action - экшн
+     */
+    setWeatherSettings(
+      state: NewTabState,
+      action: PayloadAction<WeatherSettings>
+    ) {
+      const weatherSettings = action.payload;
+      state.weatherSettings = weatherSettings;
+      db.set({ weatherSettings });
     }
   },
   extraReducers: builder => {
@@ -268,9 +282,10 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(getWeatherData.rejected, state => {
-      const weather = {
+      const weather: WeatherData = {
         data: [],
-        lastApiCall: new Date().add(30, "min")
+        lastApiCallDate: new Date().add(30, "min"),
+        lastApiCallLocation: state.weatherSettings.location
       };
       state.weatherLoading = false;
       state.weather = weather;
@@ -282,9 +297,10 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(getWeatherData.fulfilled, (state, action) => {
-      const weather = {
+      const weather: WeatherData = {
         data: action.payload,
-        lastApiCall: new Date()
+        lastApiCallDate: new Date(),
+        lastApiCallLocation: state.weatherSettings.location
       };
       state.weatherLoading = false;
       state.weather = weather;
@@ -384,7 +400,8 @@ export const {
   setMainCurrency,
   setDefaultMainCurrency,
   setSelectedCurrencies,
-  setTimeSettings
+  setTimeSettings,
+  setWeatherSettings
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

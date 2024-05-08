@@ -39,7 +39,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
   currentLocation: null,
   weather: {
     data: [],
-    lastApiCall: null
+    lastApiCallDate: null,
+    lastApiCallLocation: null
   },
   convertibleCurrencies: {
     selected: DEFAULT_SELECTABLE_CURRENCIES,
@@ -54,6 +55,9 @@ const defaultStore: Readonly<NewTabStateBase> = {
     showFlashing: true,
     showSeconds: true,
     isCompact: false
+  },
+  weatherSettings: {
+    location: null
   }
 };
 

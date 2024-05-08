@@ -61,7 +61,7 @@ const DrawerComponent: FC<DrawerComponentProps> = memo(
       <Drawer
         className={clsx("new-tab__drawer", className)}
         contentWrapperStyle={Object.assign(
-          { width: "300px" },
+          { width: "330px" },
           contentWrapperStyle
         )}
         drawerStyle={style}

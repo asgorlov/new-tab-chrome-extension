@@ -7,7 +7,7 @@ import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
 import { Location } from "../../models/location.model";
 import { WidgetName } from "../../constants/widget.constants";
-import { WeatherData } from "../../models/weather.model";
+import { WeatherData, WeatherSettings } from "../../models/weather.model";
 import {
   ConvertibleCurrencies,
   MainCurrency
@@ -241,3 +241,12 @@ export const selectCurrencyLoading = (state: RootState): boolean =>
  */
 export const selectTimeSettings = (state: RootState): TimeSettings =>
   state.newTab.timeSettings;
+
+/**
+ * Селектор получения настроек виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с настройками виджета погоды {@link WeatherSettings}
+ */
+export const selectWeatherSettings = (state: RootState): WeatherSettings =>
+  state.newTab.weatherSettings;

@@ -246,6 +246,11 @@
     }
   },
   "weather": {
+    "settings": {
+      "currentLocation": "Текущее местоположение",
+      "lng": "Долгота",
+      "ltd": "Широта"
+    },
     "timesOfDay": {
       "morning": "Утро",
       "day": "День",

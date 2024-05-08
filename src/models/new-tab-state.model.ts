@@ -5,7 +5,7 @@ import { Notification } from "../constants/notification.constants";
 import { SettingsStorage } from "./settings-search.model";
 import { Location } from "./location.model";
 import { WidgetName } from "../constants/widget.constants";
-import { WeatherData } from "./weather.model";
+import { WeatherData, WeatherSettings } from "./weather.model";
 import { ConvertibleCurrencies, MainCurrency } from "./currency.model";
 import { TimeSettings } from "./time.model";
 
@@ -47,6 +47,7 @@ export interface NewTabState extends NewTabStateBase {
  * @property convertibleCurrencies - Объект с информацией о валюте для конвертации
  * @property mainCurrency - Объект с информацией об основной валюте
  * @property timeSettings - Объект с настройками виджета часов
+ * @property weatherSettings - Объект с настройками виджета погоды
  * @interface
  */
 export interface NewTabStateBase {
@@ -70,4 +71,5 @@ export interface NewTabStateBase {
   convertibleCurrencies: ConvertibleCurrencies;
   mainCurrency: MainCurrency;
   timeSettings: TimeSettings;
+  weatherSettings: WeatherSettings;
 }

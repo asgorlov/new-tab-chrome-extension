@@ -29,6 +29,7 @@ import CurrencyWidgetSettingComponent from "./currency-widget-setting.component"
 import { VoidFunc } from "../../../../models/common.model";
 import { NOOP } from "../../../../constants/common.constants";
 import TimeWidgetSettingComponent from "./time-widget-setting.component";
+import WeatherWidgetSettingComponent from "./weather-widget-setting.component";
 
 /**
  * Компонент настройки виджетов
@@ -140,6 +141,14 @@ const WidgetsSettingComponent: FC = () => {
         </div>
         {widgets.map(w => {
           switch (w) {
+            case WidgetName.WEATHER:
+              return (
+                <WeatherWidgetSettingComponent
+                  key={w}
+                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
+                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                />
+              );
             case WidgetName.CURRENCY:
               return (
                 <CurrencyWidgetSettingComponent
