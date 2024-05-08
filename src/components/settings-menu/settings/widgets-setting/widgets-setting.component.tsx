@@ -58,9 +58,6 @@ const WidgetsSettingComponent: FC = () => {
       };
     });
   }, [t]);
-  const showSaveBtn = widgets.some(
-    w => w === WidgetName.CURRENCY || w === WidgetName.TIME
-  );
   const disableSaveBtn = Object.values(widgetChanges).every(
     isChanged => !isChanged
   );
@@ -169,7 +166,7 @@ const WidgetsSettingComponent: FC = () => {
               return null;
           }
         })}
-        {showSaveBtn && (
+        {widgets.length > 0 && (
           <div className="new-tab__settings-menu_widgets-content__save-btn-wrapper">
             <Button
               className="new-tab__settings-menu_widgets-content__save-btn"
