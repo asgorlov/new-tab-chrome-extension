@@ -1,14 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import db from "../../db/db";
 import { NewTabState } from "../../models/new-tab-state.model";
-import { changeLanguage, checkUpdates, applySettings } from "./new-tab.thunks";
+import {
+  applySettings,
+  changeLanguage,
+  checkUpdates,
+  getExchangeRate,
+  getWeatherData
+} from "./new-tab.thunks";
 import { CustomWallpaper } from "../../models/custom-wallpaper.model";
 import { PayloadAction } from "@reduxjs/toolkit/src/createAction";
 import { getInitState } from "../../utils/store.utils";
 import { Notification } from "../../constants/notification.constants";
-import { CURRENT_EXT_VERSION } from "../../constants/update.constants";
+import {
+  checkForUpdates,
+  CURRENT_EXT_VERSION
+} from "../../constants/update.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { NightPeriod } from "../../models/night-period.model";
+import { Location } from "../../models/location.model";
+import { WidgetName } from "../../constants/widget.constants";
+import { Currency } from "../../models/currency.model";
+import { TimeSettings } from "../../models/time.model";
+import { WeatherData, WeatherSettings } from "../../models/weather.model";
 
 const initialState: NewTabState = await getInitState();
 
@@ -28,6 +42,24 @@ export const newTabSlice = createSlice({
     setIsDark(state: NewTabState, action: PayloadAction<boolean>) {
       state.isDark = action.payload;
       db.set({ isDark: action.payload });
+    },
+    /**
+     * Функция изменения виджетов
+     * @param state - стор
+     * @param action - экшн
+     */
+    setWidgets(state: NewTabState, action: PayloadAction<WidgetName[]>) {
+      state.widgets = action.payload;
+      db.set({ widgets: action.payload });
+    },
+    /**
+     * Функция изменения флага расположения виджетов на экране
+     * @param state - стор
+     * @param action - экшн
+     */
+    setIsWidgetsOnRight(state: NewTabState, action: PayloadAction<boolean>) {
+      state.isWidgetsOnRight = action.payload;
+      db.set({ isWidgetsOnRight: action.payload });
     },
     /**
      * Функция изменения флага показать ознакомительный тур
@@ -131,6 +163,18 @@ export const newTabSlice = createSlice({
       db.set({ customWallpaper: action.payload });
     },
     /**
+     * Функция изменения текущей геолокации пользователя
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrentLocation(
+      state: NewTabState,
+      action: PayloadAction<Location | null>
+    ) {
+      state.currentLocation = action.payload;
+      db.set({ currentLocation: action.payload });
+    },
+    /**
      * Функция изменения режима запросов обновлений
      * @param state - стор
      * @param action - экшн
@@ -149,13 +193,120 @@ export const newTabSlice = createSlice({
       action: PayloadAction<SettingsStorage<string | string[]>>
     ) {
       state.settingsActiveKeys = Object.assign(
-        {},
-        state.settingsActiveKeys,
+        { ...state.settingsActiveKeys },
         action.payload
       );
+    },
+    /**
+     * Функция изменения соотношения валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setCurrencyRatio(state: NewTabState, action: PayloadAction<number>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        ratio: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения основной валюты
+     * @param state - стор
+     * @param action - экшн
+     */
+    setMainCurrency(state: NewTabState, action: PayloadAction<string | null>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        selected: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения основной валюты по умолчанию
+     * @param state - стор
+     * @param action - экшн
+     */
+    setDefaultMainCurrency(state: NewTabState, action: PayloadAction<string>) {
+      const mainCurrency = {
+        ...state.mainCurrency,
+        default: action.payload
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    },
+    /**
+     * Функция изменения выбранных валют для конвертации
+     * @param state - стор
+     * @param action - экшн
+     */
+    setSelectedCurrencies(
+      state: NewTabState,
+      action: PayloadAction<Currency[]>
+    ) {
+      const convertibleCurrencies = {
+        ...state.convertibleCurrencies,
+        selected: action.payload
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
+    },
+    /**
+     * Функция изменения настроек лоя виджета часов
+     * @param state - стор
+     * @param action - экшн
+     */
+    setTimeSettings(state: NewTabState, action: PayloadAction<TimeSettings>) {
+      const timeSettings = action.payload;
+      state.timeSettings = timeSettings;
+      db.set({ timeSettings });
+    },
+    /**
+     * Функция изменения настроек лоя виджета погоды
+     * @param state - стор
+     * @param action - экшн
+     */
+    setWeatherSettings(
+      state: NewTabState,
+      action: PayloadAction<WeatherSettings>
+    ) {
+      const weatherSettings = action.payload;
+      state.weatherSettings = weatherSettings;
+      db.set({ weatherSettings });
     }
   },
   extraReducers: builder => {
+    builder.addCase(getWeatherData.pending, state => {
+      state.weatherLoading = true;
+    });
+
+    builder.addCase(getWeatherData.rejected, state => {
+      const weather: WeatherData = {
+        data: [],
+        lastApiCallDate: new Date().add(30, "min"),
+        lastApiCallLocation: state.weatherSettings.location
+      };
+      state.weatherLoading = false;
+      state.weather = weather;
+      db.set({ weather });
+
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetWeatherData
+      );
+    });
+
+    builder.addCase(getWeatherData.fulfilled, (state, action) => {
+      const weather: WeatherData = {
+        data: action.payload,
+        lastApiCallDate: new Date(),
+        lastApiCallLocation: state.weatherSettings.location
+      };
+      state.weatherLoading = false;
+      state.weather = weather;
+      db.set({ weather });
+    });
+
     builder.addCase(checkUpdates.pending, state => {
       state.checkLoading = true;
     });
@@ -168,22 +319,26 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(checkUpdates.fulfilled, (state, action) => {
-      const { lastUpdateDate, lastVersion } = action.payload;
+      const update = action.payload;
 
-      if (lastVersion === CURRENT_EXT_VERSION) {
-        state.notifications = state.notifications.concat(
-          Notification.NoNewVersion
-        );
-      } else if (lastVersion > CURRENT_EXT_VERSION) {
+      if (update.lastVersion === CURRENT_EXT_VERSION) {
+        const isManualUpdateRequest =
+          state.checkForUpdates === checkForUpdates.MANUAL;
+        if (isManualUpdateRequest) {
+          state.notifications = state.notifications.concat(
+            Notification.NoNewVersion
+          );
+        }
+      } else if (update.lastVersion > CURRENT_EXT_VERSION) {
         state.notifications = state.notifications.concat(
           Notification.HasNewVersion
         );
       }
 
       state.checkLoading = false;
-      state.update.lastVersion = lastVersion;
-      state.update.lastUpdateDate = lastUpdateDate;
-      db.set({ update: state.update });
+      state.update.lastVersion = update.lastVersion;
+      state.update.lastUpdateDate = update.lastUpdateDate;
+      db.set({ update });
     });
 
     builder.addCase(changeLanguage.fulfilled, (state, action) => {
@@ -191,35 +346,42 @@ export const newTabSlice = createSlice({
     });
 
     builder.addCase(applySettings.fulfilled, (state, action) => {
-      const {
-        isDark,
-        update,
-        darkMode,
-        wallpaper,
-        nightPeriod,
-        searchEngine,
-        searchEngines,
-        currentLanguage,
-        checkForUpdates,
-        customWallpaper
-      } = action.payload;
+      Object.assign(state, action.payload);
+    });
 
-      state.isDark = isDark;
-      state.update = update;
-      state.darkMode = darkMode;
-      state.wallpaper = wallpaper;
-      state.nightPeriod = nightPeriod;
-      state.searchEngine = searchEngine;
-      state.searchEngines = searchEngines;
-      state.currentLanguage = currentLanguage;
-      state.checkForUpdates = checkForUpdates;
-      state.customWallpaper = customWallpaper;
+    builder.addCase(getExchangeRate.pending, state => {
+      state.currencyLoading = true;
+    });
+
+    builder.addCase(getExchangeRate.rejected, state => {
+      state.currencyLoading = false;
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetExchangeRate
+      );
+      const convertibleCurrencies = {
+        selected: state.convertibleCurrencies.selected.map(c => ({
+          code: c.code
+        })),
+        available: state.convertibleCurrencies.available,
+        lastCallApi: new Date()
+      };
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
+    });
+
+    builder.addCase(getExchangeRate.fulfilled, (state, action) => {
+      state.currencyLoading = false;
+      const convertibleCurrencies = action.payload;
+      state.convertibleCurrencies = convertibleCurrencies;
+      db.set({ convertibleCurrencies });
     });
   }
 });
 
 export const {
   setIsDark,
+  setWidgets,
+  setIsWidgetsOnRight,
   setShowTour,
   setDarkMode,
   setWallpaper,
@@ -231,8 +393,15 @@ export const {
   setSearchEngines,
   resetNotifications,
   setCustomWallpaper,
+  setCurrentLocation,
   setCheckForUpdates,
-  setSettingsActiveKeys
+  setSettingsActiveKeys,
+  setCurrencyRatio,
+  setMainCurrency,
+  setDefaultMainCurrency,
+  setSelectedCurrencies,
+  setTimeSettings,
+  setWeatherSettings
 } = newTabSlice.actions;
 
 export default newTabSlice.reducer;

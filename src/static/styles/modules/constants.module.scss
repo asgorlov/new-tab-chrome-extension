@@ -118,6 +118,7 @@ $search-engine-max-width: 560px;
   --tour-indicator-color: #00000026;
   --presearch-input-separator-color: #{$light-border-color};
   --input-placeholder-color: #bfbfbf;
+  --img-inversion: invert(0);
 }
 
 [data-theme="dark"] {
@@ -192,6 +193,7 @@ $search-engine-max-width: 560px;
   --tour-indicator-color: #ffffff26;
   --presearch-input-separator-color: #{$dark-text-color};
   --input-placeholder-color: #4F4F4F;
+  --img-inversion: invert(1);
 }
 
 :export {

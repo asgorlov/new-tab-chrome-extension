@@ -4,6 +4,10 @@
  */
 export enum Notification {
   /**
+   * Ошибка при получении информации о погоде
+   */
+  CanNotGetWeatherData = "canNotGetWeatherData",
+  /**
    * Ошибка при получении информации об обновлении
    */
   CanNotGetUpdateManifest = "canNotGetUpdateManifest",
@@ -11,6 +15,14 @@ export enum Notification {
    * Ошибка при получении информации времени восхода\заката для текущей геолокации
    */
   CanNotGetNightPeriod = "canNotGetNightPeriod",
+  /**
+   * Ошибка при получении доступных валют для конвертации
+   */
+  CanNotGetAvailableConvertibleCurrencies = "canNotGetAvailableConvertibleCurrencies",
+  /**
+   * Ошибка при получении курса валют
+   */
+  CanNotGetExchangeRate = "canNotGetExchangeRate",
   /**
    * Информация о новой версии приложения
    */

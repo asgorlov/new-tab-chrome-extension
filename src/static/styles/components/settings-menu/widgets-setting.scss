@@ -1,0 +1,83 @@
+@import "../../modules/mixins.module";
+@import "../../modules/constants.module";
+
+.new-tab__settings-menu_widgets {
+  &-content {
+    &-checkbox-group {
+      @include setting-checkbox-group;
+    }
+
+    &-selector {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    &-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      label {
+        color: var(--text-color);
+        transition: all, color $slow-transition;
+      }
+    }
+
+    &__item {
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 12px 10px;
+      margin-top: 4px;
+      border: 1px solid var(--menu-border-color);
+      border-radius: 10px;
+      transition: all, border-color $slow-transition;
+
+      &-title {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 600;
+        border-bottom: 1px solid var(--menu-border-color);
+        padding: 4px 0;
+        transition: all, color $slow-transition, border-color $slow-transition;
+      }
+
+      label {
+        margin-bottom: -4px;
+        transition: all, color $slow-transition;
+      }
+
+      &-select {
+        width: 100%;
+      }
+
+      &_select-option {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        img {
+          height: 12px;
+        }
+      }
+
+      &_input-group {
+        display: flex;
+        gap: 4px;
+      }
+    }
+
+    &__save-btn {
+      @include button-component-colors;
+      margin-top: 4px;
+
+      &-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 4px;
+      }
+    }
+  }
+}

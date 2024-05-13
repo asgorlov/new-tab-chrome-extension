@@ -1,0 +1,103 @@
+@import "../../modules/constants.module";
+@import "../../modules/mixins.module";
+
+.new-tab__currency {
+  width: 100%;
+  position: relative;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    height: 16px;
+    padding: 0 4px;
+    border-bottom: 1px solid $light-text-color;
+
+    &__currency {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      img {
+        height: 13px;
+      }
+
+      span {
+        @include currency-name;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+
+    &__btn-group {
+      display: flex;
+    }
+
+    &__update-btn {
+      @include widget-update-btn-common;
+    }
+  }
+
+  &-content {
+    position: relative;
+
+    &__skeleton {
+      &-flag {
+        @include skeleton-dimensions(18px, 13px);
+      }
+
+      &-name {
+        @include skeleton-dimensions(100%, 13px);
+      }
+
+      &-code {
+        @include skeleton-dimensions(26px, 13px);
+      }
+
+      &-rate {
+        @include skeleton-dimensions(26px, 13px);
+      }
+
+      &-date {
+        @include skeleton-dimensions(132px, 10px);
+      }
+    }
+
+    &__table {
+      display: grid;
+      align-items: center;
+      grid-template-columns: max-content 1fr max-content minmax(20px, max-content);
+      grid-template-rows: repeat(3, 16px);
+      gap: 4px;
+      padding: 4px;
+
+      &__flag {
+        height: 13px;
+      }
+
+      &__name {
+        @include currency-name;
+
+        &__popup {
+          font-size: 12px;
+        }
+      }
+
+      &__code {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      &__rate {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    &__date {
+      font-size: 10px;
+      padding: 0 4px;
+    }
+  }
+}

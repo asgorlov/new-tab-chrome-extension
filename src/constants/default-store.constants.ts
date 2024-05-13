@@ -3,6 +3,12 @@ import { MANUAL, SEARCH_ENGINE_NAMES, YANDEX } from "./search-engine.constants";
 import { DEFAULT_WALLPAPER } from "./wallpaper.constants";
 import i18n from "../localizations/i18n";
 import { checkForUpdates, CURRENT_EXT_VERSION } from "./update.constants";
+import { WidgetName } from "./widget.constants";
+import {
+  DEFAULT_CURRENCY,
+  DEFAULT_CURRENCY_RATIO,
+  DEFAULT_SELECTABLE_CURRENCIES
+} from "./currency.constants";
 
 /**
  * Значения стейта по умолчанию
@@ -14,6 +20,8 @@ const defaultStore: Readonly<NewTabStateBase> = {
     lastVersion: CURRENT_EXT_VERSION,
     lastUpdateDate: Date.now()
   },
+  widgets: Object.values(WidgetName),
+  isWidgetsOnRight: false,
   showTour: true,
   darkMode: MANUAL,
   wallpaper: DEFAULT_WALLPAPER,
@@ -27,7 +35,30 @@ const defaultStore: Readonly<NewTabStateBase> = {
   searchEngines: SEARCH_ENGINE_NAMES,
   currentLanguage: i18n.language,
   checkForUpdates: checkForUpdates.WEEK,
-  customWallpaper: null
+  customWallpaper: null,
+  currentLocation: null,
+  weather: {
+    data: [],
+    lastApiCallDate: null,
+    lastApiCallLocation: null
+  },
+  convertibleCurrencies: {
+    selected: DEFAULT_SELECTABLE_CURRENCIES,
+    available: DEFAULT_SELECTABLE_CURRENCIES.map(c => c.code)
+  },
+  mainCurrency: {
+    selected: null,
+    default: DEFAULT_CURRENCY,
+    ratio: DEFAULT_CURRENCY_RATIO
+  },
+  timeSettings: {
+    showFlashing: true,
+    showSeconds: true,
+    isCompact: false
+  },
+  weatherSettings: {
+    location: null
+  }
 };
 
 export default defaultStore;

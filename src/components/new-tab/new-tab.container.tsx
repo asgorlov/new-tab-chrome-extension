@@ -2,6 +2,8 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNotifications,
+  setCurrentLocation,
+  setDefaultMainCurrency,
   setIsDark,
   setNightPeriod
 } from "../../store/new-tab/new-tab.slice";
@@ -10,22 +12,26 @@ import NewTabComponent from "./new-tab.component";
 import { ConfigProvider } from "antd";
 import { AUTO, SYSTEM } from "../../constants/search-engine.constants";
 import {
+  createNightPeriod,
   getCurrentLocation,
   isBrowserDarkModeEnabled,
-  isNightPeriodNow,
-  createNightPeriod
+  isNightPeriodNow
 } from "../../utils/dark-mode.utils";
 import {
   selectCheckForUpdates,
+  selectCurrentLocation,
   selectDarkMode,
   selectLastUpdateDate,
   selectNightPeriod,
-  selectSearchEngine
+  selectSearchEngine,
+  selectWidgets
 } from "../../store/new-tab/new-tab.selectors";
 import { checkUpdates } from "../../store/new-tab/new-tab.thunks";
-import { shouldBeCheck } from "../../utils/update.utils";
+import { shouldBeCheckedUpdates } from "../../utils/update.utils";
 import { createTheme } from "../../utils/search-engine.utils";
 import { Notification } from "../../constants/notification.constants";
+import { WidgetName } from "../../constants/widget.constants";
+import { getCurrencyInfoByLocation } from "../../utils/currency.utils";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,38 +40,53 @@ const NewTabContainer: FC = () => {
   const nightPeriod = useSelector(selectNightPeriod);
   const searchEngine = useSelector(selectSearchEngine);
   const lastUpdateDate = useSelector(selectLastUpdateDate);
+  const currentLocation = useSelector(selectCurrentLocation);
+  const widgets = useSelector(selectWidgets);
 
   useEffect(() => {
-    if (shouldBeCheck(lastUpdateDate, checkMode)) {
+    if (shouldBeCheckedUpdates(lastUpdateDate, checkMode)) {
       dispatch(checkUpdates());
     }
   }, [checkMode, lastUpdateDate, dispatch]);
 
   useEffect(() => {
-    switch (darkMode) {
-      case AUTO:
-        const now = new Date();
-        const isToday = nightPeriod.sunrise?.isSameWithoutTime(now);
+    const getLocation =
+      darkMode === AUTO ||
+      widgets.some(w => w === WidgetName.WEATHER || w === WidgetName.CURRENCY);
 
-        if (isToday) {
-          dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
-        } else {
-          getCurrentLocation().then(location => {
-            if (location) {
-              const nightPeriod = createNightPeriod(location, now);
-              dispatch(setNightPeriod(nightPeriod));
-              dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
-            } else {
-              dispatch(addNotifications(Notification.CanNotGetNightPeriod));
-            }
-          });
+    if (getLocation) {
+      getCurrentLocation().then(l => {
+        const location = l || currentLocation;
+        const areEqualLocations =
+          JSON.stringify(location) === JSON.stringify(currentLocation);
+        if (!areEqualLocations) {
+          dispatch(setCurrentLocation(location));
+
+          if (location && widgets.includes(WidgetName.CURRENCY)) {
+            const defaultCurrencies = getCurrencyInfoByLocation(location);
+            dispatch(setDefaultMainCurrency(defaultCurrencies));
+          }
         }
-        break;
-      case SYSTEM:
-        dispatch(setIsDark(isBrowserDarkModeEnabled()));
-        break;
+
+        const now = new Date();
+        const isNotToday = !nightPeriod.sunrise?.isSameWithoutTime(now);
+        if (isNotToday) {
+          const action = location
+            ? setNightPeriod(createNightPeriod(location, now))
+            : addNotifications(Notification.CanNotGetNightPeriod);
+          dispatch(action);
+        }
+      });
     }
-  }, [nightPeriod, darkMode, dispatch]);
+  }, [darkMode, widgets, dispatch, currentLocation, nightPeriod]);
+
+  useEffect(() => {
+    if (darkMode === AUTO) {
+      dispatch(setIsDark(isNightPeriodNow(nightPeriod)));
+    } else if (darkMode === SYSTEM) {
+      dispatch(setIsDark(isBrowserDarkModeEnabled()));
+    }
+  }, [nightPeriod, darkMode, dispatch, currentLocation]);
 
   return (
     <ConfigProvider theme={createTheme(searchEngine)}>

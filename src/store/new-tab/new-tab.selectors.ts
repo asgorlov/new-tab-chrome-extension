@@ -5,6 +5,14 @@ import { Notification } from "../../constants/notification.constants";
 import { SettingsStorage } from "../../models/settings-search.model";
 import { CollapsedMenuSetting } from "../../constants/settings-menu.constants";
 import { createSelector } from "@reduxjs/toolkit";
+import { Location } from "../../models/location.model";
+import { WidgetName } from "../../constants/widget.constants";
+import { WeatherData, WeatherSettings } from "../../models/weather.model";
+import {
+  ConvertibleCurrencies,
+  MainCurrency
+} from "../../models/currency.model";
+import { TimeSettings } from "../../models/time.model";
 
 /**
  * Селектор получения флага темной темы
@@ -13,6 +21,22 @@ import { createSelector } from "@reduxjs/toolkit";
  * @returns - <b>True</b>, если включен темный режим
  */
 export const selectIsDark = (state: RootState): boolean => state.newTab.isDark;
+/**
+ * Селектор получения виджетов
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Массив выбранных виджетов {@link WidgetName}
+ */
+export const selectWidgets = (state: RootState): WidgetName[] =>
+  state.newTab.widgets;
+/**
+ * Селектор получения флага расположения виджетов на экране
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если виджеты располагаются справа на экране
+ */
+export const selectIsWidgetsOnRight = (state: RootState): boolean =>
+  state.newTab.isWidgetsOnRight;
 /**
  * Селектор получения флага показа ознакомительного тура
  * @category Selectors - New Tab
@@ -129,11 +153,19 @@ export const selectCurrentLanguage = (state: RootState): string =>
  * Селектор получения пользовательских фоновых картинок
  * @category Selectors - New Tab
  * @param state - Стор
- * @returns - Фоновые картинки, загруженные пользователем {@link CustomWallpaper}
+ * @returns - Фоновые картинки, загруженные пользователем {@link CustomWallpaper} или null
  */
 export const selectCustomWallpaper = (
   state: RootState
 ): CustomWallpaper | null => state.newTab.customWallpaper;
+/**
+ * Селектор получения текущей геолокации пользователя
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Текущая геолокация пользователя {@link Location} или null
+ */
+export const selectCurrentLocation = (state: RootState): Location | null =>
+  state.newTab.currentLocation;
 /**
  * Селектор получения списка всех настроек меню
  * @category Selectors - New Tab
@@ -160,3 +192,61 @@ export const selectSettingActiveKeysByName = createSelector(
     name: CollapsedMenuSetting
   ): string[] => allActiveKeys[name]
 );
+/**
+ * Селектор получения данных виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией о погоде {@link WeatherData}
+ */
+export const selectWeather = (state: RootState): WeatherData =>
+  state.newTab.weather;
+/**
+ * Селектор загрузки данных виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если производится загрузка данных
+ */
+export const selectWeatherLoading = (state: RootState): boolean =>
+  state.newTab.weatherLoading;
+/**
+ * Селектор получения данных о валюте для конвертации
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией о валюте для конвертации {@link ConvertibleCurrencies}
+ */
+export const selectConvertibleCurrencies = (
+  state: RootState
+): ConvertibleCurrencies => state.newTab.convertibleCurrencies;
+/**
+ * Селектор получения данных об основной валюте
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с информацией об основной валюте {@link MainCurrency}
+ */
+export const selectMainCurrency = (state: RootState): MainCurrency =>
+  state.newTab.mainCurrency;
+/**
+ * Селектор получения загрузки данных о валюте для конвертации
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - <b>True</b>, если производится загрузка данных
+ */
+export const selectCurrencyLoading = (state: RootState): boolean =>
+  state.newTab.currencyLoading;
+/**
+ * Селектор получения настроек виджета времени
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с настройками виджета часов {@link TimeSettings}
+ */
+export const selectTimeSettings = (state: RootState): TimeSettings =>
+  state.newTab.timeSettings;
+
+/**
+ * Селектор получения настроек виджета погоды
+ * @category Selectors - New Tab
+ * @param state - Стор
+ * @returns - Объект с настройками виджета погоды {@link WeatherSettings}
+ */
+export const selectWeatherSettings = (state: RootState): WeatherSettings =>
+  state.newTab.weatherSettings;

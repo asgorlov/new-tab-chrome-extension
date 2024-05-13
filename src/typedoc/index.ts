@@ -6,6 +6,9 @@ export * from "../utils/settings-header.utils";
 export * from "../utils/update.utils";
 export * from "../utils/wallpaper.utils";
 export * from "../utils/store.utils";
+export * from "../utils/weather.utils";
+export * from "../utils/currency.utils";
+export * from "../utils/time.utils";
 // ================= Database =================
 export { default as db } from "../db/db";
 // ================= Store ====================
@@ -13,6 +16,7 @@ export * from "../store/new-tab/new-tab.selectors";
 export { newTabSlice } from "../store/new-tab/new-tab.slice";
 export * from "../store/new-tab/new-tab.thunks";
 // ================= Models ===================
+export * from "../models/common.model";
 export * from "../models/location.model";
 export * from "../models/custom-wallpaper.model";
 export * from "../models/new-tab-state.model";
@@ -20,6 +24,8 @@ export * from "../models/night-period.model";
 export * from "../models/settings-search.model";
 export * from "../models/update.model";
 export * from "../models/db.model";
+export * from "../models/currency.model";
+export * from "../models/time.model";
 // ================= Hooks ====================
 export * from "../hooks/use-active-keys.hook";
 // ================= Contexts =================
@@ -48,6 +54,8 @@ export * from "../constants/search-engine-setting.constants";
 export * from "../constants/settings-menu.constants";
 export * from "../constants/update.constants";
 export * from "../constants/wallpaper.constants";
+export * from "../constants/widget.constants";
+export * from "../constants/currency.constants";
 // ================= Components ===============
 export {
   default as SelectComponent,
@@ -104,6 +112,19 @@ export {
 export { default as DarkModeSettingComponent } from "../components/settings-menu/settings/dark-mode-setting.component";
 export { default as LanguageSettingComponent } from "../components/settings-menu/settings/language-setting.component";
 export { default as SearchEngineSettingComponent } from "../components/settings-menu/settings/search-engine-setting.component";
+export { default as WidgetsSettingComponent } from "../components/settings-menu/settings/widgets-setting/widgets-setting.component";
+export {
+  default as WeatherWidgetSettingComponent,
+  type WeatherWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/weather-widget-setting.component";
+export {
+  default as CurrencyWidgetSettingComponent,
+  type CurrencyWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/currency-widget-setting.component";
+export {
+  default as TimeWidgetSettingComponent,
+  type TimeWidgetSettingComponentProps
+} from "../components/settings-menu/settings/widgets-setting/time-widget-setting.component";
 export {
   default as SettingsHeaderComponent,
   type SettingsHeaderComponentProps
@@ -111,3 +132,19 @@ export {
 export { default as TourComponent } from "../components/tour/tour.component";
 export { default as NotificationComponent } from "../components/notification/notification.component";
 export { default as HasNewVersionComponent } from "../components/notification/info/has-new-version.component";
+export {
+  default as WidgetListComponent,
+  type WidgetListComponentProps
+} from "../components/widgets/widget-list.component";
+export {
+  default as WeatherComponent,
+  type WeatherComponentProps
+} from "../components/widgets/weather/weather.component";
+export {
+  default as CurrencyComponent,
+  type CurrencyComponentProps
+} from "../components/widgets/currency/currency.component";
+export {
+  default as TimeComponent,
+  type TimeComponentProps
+} from "../components/widgets/time/time.component";

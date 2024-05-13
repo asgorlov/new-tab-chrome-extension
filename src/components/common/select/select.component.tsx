@@ -7,10 +7,8 @@ import {
   useMemo,
   useRef
 } from "react";
-import { Select } from "antd";
-import { SelectProps } from "antd/es/select";
 import clsx from "clsx";
-import { DefaultOptionType } from "rc-select/lib/Select";
+import { Select, SelectProps } from "antd";
 import { BaseSelectRef } from "rc-select";
 
 /**
@@ -20,7 +18,6 @@ import { BaseSelectRef } from "rc-select";
  * @interface
  */
 export interface SelectComponentProps extends SelectProps {
-  options?: DefaultOptionType[];
   children?: ReactNode;
 }
 

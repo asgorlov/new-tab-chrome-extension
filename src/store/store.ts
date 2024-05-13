@@ -7,13 +7,24 @@ const store = configureStore({
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      // игнорируем несериализуемые данные nightPeriod
+      // игнорируем несериализуемые данные
       serializableCheck: {
         ignoredActions: [
+          "api/exchange-rate/get/fulfilled",
+          "api/exchange-rate/get/rejected",
+          "newTab/applySettings/fulfilled",
+          "newTab/setCustomWallpaper",
           "newTab/setNightPeriod",
-          "newTab/applySettings/fulfilled"
+          "api/weather/get/rejected",
+          "api/weather/get/fulfilled"
         ],
-        ignoredPaths: ["newTab.nightPeriod"]
+        ignoredPaths: [
+          "newTab.convertibleCurrencies.lastCallApi",
+          "newTab.customWallpaper.lightTheme",
+          "newTab.customWallpaper.darkTheme",
+          "newTab.nightPeriod",
+          "newTab.weather"
+        ]
       }
     })
 });
