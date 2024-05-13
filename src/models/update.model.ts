@@ -1,5 +1,3 @@
-import { WidgetName } from "../constants/widget.constants";
-
 /**
  * Интерфейс модели обновлений
  * @property lastVersion - Последняя версия приложения
@@ -31,5 +29,4 @@ export interface UpdateResponseModel {
 export interface Features {
   searchEngines: string[];
   forceShowTour: boolean;
-  widgets: WidgetName[];
 }
