@@ -407,7 +407,8 @@
       "canNotGetWeatherData": "Failed to obtain information about weather.",
       "canNotGetUpdateManifest": "Failed to obtain information about available update.",
       "canNotGetExchangeRate": "Failed to obtain information about exchange rate.",
-      "canNotGetAvailableConvertibleCurrencies": "Failed to obtain information about available convertible currencies."
+      "canNotGetAvailableConvertibleCurrencies": "Failed to obtain information about available convertible currencies.",
+      "canNotGetMainCurrencyByLocation": "Failed to obtain information about the main currency by current location. The default currency was applied."
     },
     "info": {
       "hasNewVersion": {
