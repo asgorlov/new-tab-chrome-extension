@@ -24,6 +24,10 @@ export enum Notification {
    */
   CanNotGetExchangeRate = "canNotGetExchangeRate",
   /**
+   * Ошибка при получении основной валюты по координатам
+   */
+  CanNotGetMainCurrencyByLocation = "canNotGetMainCurrencyByLocation",
+  /**
    * Информация о новой версии приложения
    */
   HasNewVersion = "hasNewVersion",

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addNotifications,
   setCurrentLocation,
-  setDefaultMainCurrency,
   setIsDark,
   setNightPeriod
 } from "../../store/new-tab/new-tab.slice";
@@ -26,12 +25,14 @@ import {
   selectSearchEngine,
   selectWidgets
 } from "../../store/new-tab/new-tab.selectors";
-import { checkUpdates } from "../../store/new-tab/new-tab.thunks";
+import {
+  checkUpdates,
+  getDefaultMainCurrencyByLocation
+} from "../../store/new-tab/new-tab.thunks";
 import { shouldBeCheckedUpdates } from "../../utils/update.utils";
 import { createTheme } from "../../utils/search-engine.utils";
 import { Notification } from "../../constants/notification.constants";
 import { WidgetName } from "../../constants/widget.constants";
-import { getCurrencyInfoByLocation } from "../../utils/currency.utils";
 
 const NewTabContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -63,8 +64,7 @@ const NewTabContainer: FC = () => {
           dispatch(setCurrentLocation(location));
 
           if (location && widgets.includes(WidgetName.CURRENCY)) {
-            const defaultCurrencies = getCurrencyInfoByLocation(location);
-            dispatch(setDefaultMainCurrency(defaultCurrencies));
+            dispatch(getDefaultMainCurrencyByLocation(location));
           }
         }
 

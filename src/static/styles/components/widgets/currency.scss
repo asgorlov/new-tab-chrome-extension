@@ -26,6 +26,20 @@
         font-size: 12px;
         font-weight: 600;
       }
+
+      &__skeleton {
+        &-flag {
+          @include skeleton-dimensions(18px, 13px);
+        }
+
+        &-name {
+          @include skeleton-dimensions(100px, 13px);
+        }
+
+        &-rate {
+          @include skeleton-dimensions(26px, 13px);
+        }
+      }
     }
 
     &__btn-group {

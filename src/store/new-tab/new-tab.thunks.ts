@@ -174,3 +174,26 @@ export const getExchangeRate = createAsyncThunk(
     };
   }
 );
+
+/**
+ * Асинхронный запрос для получения информации о валюте по умолчанию в зависимости от местоположения
+ * @category Thunks - New Tab
+ */
+export const getDefaultMainCurrencyByLocation = createAsyncThunk(
+  "api/country/get",
+  async (location: Location): Promise<string> => {
+    const { data } = await axios.get(
+      "https://mapsearch.gosurmaps.com/reverse",
+      {
+        params: { lat: location.latitude, lon: location.longitude }
+      }
+    );
+    const code = data.features[0].properties.countrycode;
+    const mainCurrency = code && CURRENCIES_OF_COUNTRIES[code];
+    if (!mainCurrency) {
+      throw new Error();
+    }
+
+    return mainCurrency;
+  }
+);

@@ -5,6 +5,7 @@ import {
   applySettings,
   changeLanguage,
   checkUpdates,
+  getDefaultMainCurrencyByLocation,
   getExchangeRate,
   getWeatherData
 } from "./new-tab.thunks";
@@ -23,6 +24,7 @@ import { WidgetName } from "../../constants/widget.constants";
 import { Currency } from "../../models/currency.model";
 import { TimeSettings } from "../../models/time.model";
 import { WeatherData, WeatherSettings } from "../../models/weather.model";
+import { DEFAULT_CURRENCY } from "../../constants/currency.constants";
 
 const initialState: NewTabState = await getInitState();
 
@@ -215,23 +217,13 @@ export const newTabSlice = createSlice({
      * @param state - стор
      * @param action - экшн
      */
-    setMainCurrency(state: NewTabState, action: PayloadAction<string | null>) {
+    setSelectedMainCurrency(
+      state: NewTabState,
+      action: PayloadAction<string | null>
+    ) {
       const mainCurrency = {
         ...state.mainCurrency,
         selected: action.payload
-      };
-      state.mainCurrency = mainCurrency;
-      db.set({ mainCurrency });
-    },
-    /**
-     * Функция изменения основной валюты по умолчанию
-     * @param state - стор
-     * @param action - экшн
-     */
-    setDefaultMainCurrency(state: NewTabState, action: PayloadAction<string>) {
-      const mainCurrency = {
-        ...state.mainCurrency,
-        default: action.payload
       };
       state.mainCurrency = mainCurrency;
       db.set({ mainCurrency });
@@ -375,6 +367,36 @@ export const newTabSlice = createSlice({
       state.convertibleCurrencies = convertibleCurrencies;
       db.set({ convertibleCurrencies });
     });
+
+    builder.addCase(getDefaultMainCurrencyByLocation.pending, state => {
+      state.currencyLoading = true;
+    });
+
+    builder.addCase(getDefaultMainCurrencyByLocation.rejected, state => {
+      state.currencyLoading = false;
+      state.notifications = state.notifications.concat(
+        Notification.CanNotGetMainCurrencyByLocation
+      );
+      const mainCurrency = {
+        ...state.mainCurrency,
+        default: DEFAULT_CURRENCY
+      };
+      state.mainCurrency = mainCurrency;
+      db.set({ mainCurrency });
+    });
+
+    builder.addCase(
+      getDefaultMainCurrencyByLocation.fulfilled,
+      (state, action) => {
+        state.currencyLoading = false;
+        const mainCurrency = {
+          ...state.mainCurrency,
+          default: action.payload
+        };
+        state.mainCurrency = mainCurrency;
+        db.set({ mainCurrency });
+      }
+    );
   }
 });
 
@@ -397,8 +419,7 @@ export const {
   setCheckForUpdates,
   setSettingsActiveKeys,
   setCurrencyRatio,
-  setMainCurrency,
-  setDefaultMainCurrency,
+  setSelectedMainCurrency,
   setSelectedCurrencies,
   setTimeSettings,
   setWeatherSettings

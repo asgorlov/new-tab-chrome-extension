@@ -407,7 +407,8 @@
       "canNotGetWeatherData": "Не удалось получить информацию о погоде.",
       "canNotGetUpdateManifest": "Не удалось получить информацию о доступном обновлении.",
       "canNotGetExchangeRate": "Не удалось получить информацию о курсе валют.",
-      "canNotGetAvailableConvertibleCurrencies": "Не удалось получить информацию о доступных валютах для конвертации."
+      "canNotGetAvailableConvertibleCurrencies": "Не удалось получить информацию о доступных валютах для конвертации.",
+      "canNotGetMainCurrencyByLocation": "Не удалось получить информацию об основной валюте по текущему местоположению. Применена валюта по умолчанию."
     },
     "info": {
       "hasNewVersion": {
