@@ -62,7 +62,7 @@ const TimeWidgetSettingComponent: ForwardRefExoticComponent<
       <div className="new-tab__settings-menu_widgets-content__item">
         <div className="new-tab__settings-menu_widgets-content__item-title">
           <TimeIcon />
-          {t(`widgets.${WidgetName.TIME}`)}
+          <span>{t(`widgets.${WidgetName.TIME}`)}</span>
         </div>
         <CheckboxComponent
           checked={showSeconds}
