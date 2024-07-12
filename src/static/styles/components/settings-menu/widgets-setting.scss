@@ -44,7 +44,7 @@
         transition: all, color $slow-transition, border-color $slow-transition;
       }
 
-      label {
+      &_label {
         margin-bottom: -4px;
         transition: all, color $slow-transition;
       }
