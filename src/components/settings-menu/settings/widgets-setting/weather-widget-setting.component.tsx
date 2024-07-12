@@ -139,7 +139,7 @@ const WeatherWidgetSettingComponent: ForwardRefExoticComponent<
       <div className="new-tab__settings-menu_widgets-content__item">
         <div className="new-tab__settings-menu_widgets-content__item-title">
           <WeatherIcon />
-          {t(`widgets.${WidgetName.WEATHER}`)}
+          <span>{t(`widgets.${WidgetName.WEATHER}`)}</span>
         </div>
         <CheckboxComponent
           checked={currentLocationChecked}
@@ -149,7 +149,7 @@ const WeatherWidgetSettingComponent: ForwardRefExoticComponent<
         </CheckboxComponent>
         {!currentLocationChecked && (
           <div className="new-tab__settings-menu_widgets-content__item_input-group">
-            <label>
+            <label className="new-tab__settings-menu_widgets-content__item_label">
               <span>{t("weather.settings.lng")}</span>
               <InputComponent
                 value={longitude}
@@ -157,7 +157,7 @@ const WeatherWidgetSettingComponent: ForwardRefExoticComponent<
                 onBlur={onLngBlur}
               />
             </label>
-            <label>
+            <label className="new-tab__settings-menu_widgets-content__item_label">
               <span>{t("weather.settings.ltd")}</span>
               <InputComponent
                 value={latitude}

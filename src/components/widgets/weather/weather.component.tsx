@@ -1,8 +1,15 @@
-import React, { FC, memo, useEffect, useRef, useState } from "react";
+import React, {
+  FC,
+  lazy,
+  memo,
+  Suspense,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { WMOCodes } from "../../../constants/weather.constants";
-import TooltipComponent from "../../common/tooltip/tooltip.component";
 import {
   TimeOfDayType,
   HourlyWeatherParamsViewModel,
@@ -14,7 +21,11 @@ import { ReactComponent as WindIcon } from "../../../static/svgs/widgets/weather
 import { ReactComponent as PressureIcon } from "../../../static/svgs/widgets/weather/wp_pressure.svg";
 import { ReactComponent as HumidityIcon } from "../../../static/svgs/widgets/weather/wp_humidity.svg";
 import { ReactComponent as UpdateIcon } from "../../../static/svgs/widgets/weather/update-weather.svg";
-import SkeletonNode from "antd/es/skeleton/Node";
+
+const SkeletonNodeLazy = lazy(() => import("antd/es/skeleton/Node"));
+const TooltipComponentLazy = lazy(
+  () => import("../../common/tooltip/tooltip.component")
+);
 
 /**
  * Передаваемые параметры компонента виджета погоды
@@ -100,29 +111,33 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
         <div className="new-tab__weather-temp">
           {loading ? (
             <div className="new-tab__weather-temp__now">
-              <SkeletonNode
-                className="new-tab__weather-temp__now__skeleton"
-                children={<div />}
-                active
-              />
-              <SkeletonNode
-                className="new-tab__weather-temp__now__skeleton"
-                children={<div />}
-                active
-              />
+              <Suspense>
+                <SkeletonNodeLazy
+                  className="new-tab__weather-temp__now__skeleton"
+                  children={<div />}
+                  active
+                />
+                <SkeletonNodeLazy
+                  className="new-tab__weather-temp__now__skeleton"
+                  children={<div />}
+                  active
+                />
+              </Suspense>
             </div>
           ) : (
             <div className="new-tab__weather-temp__now">
-              <TooltipComponent
-                mouseEnterDelay={0.5}
-                placement="bottomLeft"
-                overlayClassName="new-tab__weather-temp__now__popup"
-                title={t(`weather.types.${wmoName}`)}
-              >
-                <div
-                  className={clsx("new-tab__weather-temp__now_icon", wmoName)}
-                />
-              </TooltipComponent>
+              <Suspense>
+                <TooltipComponentLazy
+                  mouseEnterDelay={0.5}
+                  placement="bottomLeft"
+                  overlayClassName="new-tab__weather-temp__now__popup"
+                  title={t(`weather.types.${wmoName}`)}
+                >
+                  <div
+                    className={clsx("new-tab__weather-temp__now_icon", wmoName)}
+                  />
+                </TooltipComponentLazy>
+              </Suspense>
               <div className="new-tab__weather-temp__now_value">
                 {weatherParams.temp}
               </div>
@@ -137,11 +152,13 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
                 >
                   <span>{t(`weather.timesOfDay.${item.name}`)}</span>
                   {loading ? (
-                    <SkeletonNode
-                      className="new-tab__weather-temp__times-of-day_item__skeleton"
-                      children={<div />}
-                      active
-                    />
+                    <Suspense>
+                      <SkeletonNodeLazy
+                        className="new-tab__weather-temp__times-of-day_item__skeleton"
+                        children={<div />}
+                        active
+                      />
+                    </Suspense>
                   ) : (
                     <span>{item.value}</span>
                   )}
@@ -159,11 +176,13 @@ const WeatherComponent: FC<WeatherComponentProps> = memo(
                 <span className="new-tab__weather-params_item-value">
                   {": "}
                   {loading ? (
-                    <SkeletonNode
-                      className="new-tab__weather-params_item-value__skeleton"
-                      children={<div />}
-                      active
-                    />
+                    <Suspense>
+                      <SkeletonNodeLazy
+                        className="new-tab__weather-params_item-value__skeleton"
+                        children={<div />}
+                        active
+                      />
+                    </Suspense>
                   ) : (
                     <>{item.value}</>
                   )}

@@ -57,6 +57,7 @@ const NotificationComponent: FC = () => {
           case Notification.CanNotGetWeatherData:
           case Notification.CanNotGetUpdateManifest:
           case Notification.CanNotGetExchangeRate:
+          case Notification.CanNotGetMainCurrencyByLocation:
           case Notification.CanNotGetAvailableConvertibleCurrencies:
             showError(n);
         }

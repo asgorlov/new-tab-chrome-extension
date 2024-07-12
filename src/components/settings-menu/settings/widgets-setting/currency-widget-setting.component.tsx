@@ -24,7 +24,7 @@ import {
 } from "../../../../store/new-tab/new-tab.selectors";
 import {
   setCurrencyRatio,
-  setMainCurrency,
+  setSelectedMainCurrency,
   setSelectedCurrencies
 } from "../../../../store/new-tab/new-tab.slice";
 import { getExchangeRate } from "../../../../store/new-tab/new-tab.thunks";
@@ -111,7 +111,9 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
     );
 
     const onSave = () => {
-      dispatch(setMainCurrency(main));
+      dispatch(
+        setSelectedMainCurrency(main !== mainCurrency.default ? main : null)
+      );
       dispatch(setCurrencyRatio(ratio));
       dispatch(setSelectedCurrencies(selected));
       const shouldBeLoaded =
@@ -155,16 +157,20 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
       <div className="new-tab__settings-menu_widgets-content__item">
         <div className="new-tab__settings-menu_widgets-content__item-title">
           <CurrencyIcon />
-          {t(`widgets.${WidgetName.CURRENCY}`)}
+          <span>{t(`widgets.${WidgetName.CURRENCY}`)}</span>
         </div>
-        <label>{t("currency.selectors.main")}</label>
+        <label className="new-tab__settings-menu_widgets-content__item_label">
+          {t("currency.selectors.main")}
+        </label>
         <SelectComponent
           value={main}
           options={currencyOptions}
           onSelect={v => handleSelectCurrency(v)}
           className="new-tab__settings-menu_widgets-content__item-select"
         />
-        <label>{t("currency.selectors.ratio")}</label>
+        <label className="new-tab__settings-menu_widgets-content__item_label">
+          {t("currency.selectors.ratio")}
+        </label>
         <SelectComponent
           value={ratio}
           options={CURRENCY_RATIO_OPTIONS}
@@ -175,7 +181,9 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
         />
         {selected.length > 0 && (
           <>
-            <label>{t(`currency.selectors.converted`)}</label>
+            <label className="new-tab__settings-menu_widgets-content__item_label">
+              {t(`currency.selectors.converted`)}
+            </label>
             {selected.map((c: Currency, i: number) => {
               return (
                 <SelectComponent

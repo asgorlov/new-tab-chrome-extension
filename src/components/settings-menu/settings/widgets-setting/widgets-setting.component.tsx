@@ -1,5 +1,7 @@
 import React, {
   FC,
+  lazy,
+  Suspense,
   useCallback,
   useId,
   useMemo,
@@ -25,11 +27,18 @@ import {
 } from "../../../../store/new-tab/new-tab.selectors";
 import CollapseComponent from "../../../common/collapse/collapse.component";
 import { AppDispatch } from "../../../../store/store";
-import CurrencyWidgetSettingComponent from "./currency-widget-setting.component";
 import { VoidFunc } from "../../../../models/common.model";
 import { NOOP } from "../../../../constants/common.constants";
-import TimeWidgetSettingComponent from "./time-widget-setting.component";
-import WeatherWidgetSettingComponent from "./weather-widget-setting.component";
+
+const TimeWidgetSettingComponentLazy = lazy(
+  () => import("./time-widget-setting.component")
+);
+const WeatherWidgetSettingComponentLazy = lazy(
+  () => import("./weather-widget-setting.component")
+);
+const CurrencyWidgetSettingComponentLazy = lazy(
+  () => import("./currency-widget-setting.component")
+);
 
 /**
  * Компонент настройки виджетов
@@ -136,36 +145,38 @@ const WidgetsSettingComponent: FC = () => {
             onClick={() => dispatch(setIsWidgetsOnRight(!isWidgetsOnRight))}
           />
         </div>
-        {widgets.map(w => {
-          switch (w) {
-            case WidgetName.WEATHER:
-              return (
-                <WeatherWidgetSettingComponent
-                  key={w}
-                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
-                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
-                />
-              );
-            case WidgetName.CURRENCY:
-              return (
-                <CurrencyWidgetSettingComponent
-                  key={w}
-                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
-                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
-                />
-              );
-            case WidgetName.TIME:
-              return (
-                <TimeWidgetSettingComponent
-                  key={w}
-                  ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
-                  setIsSavedChanges={v => setIsSavedChanges(w, v)}
-                />
-              );
-            default:
-              return null;
-          }
-        })}
+        <Suspense>
+          {widgets.map(w => {
+            switch (w) {
+              case WidgetName.WEATHER:
+                return (
+                  <WeatherWidgetSettingComponentLazy
+                    key={w}
+                    ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
+                    setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                  />
+                );
+              case WidgetName.CURRENCY:
+                return (
+                  <CurrencyWidgetSettingComponentLazy
+                    key={w}
+                    ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
+                    setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                  />
+                );
+              case WidgetName.TIME:
+                return (
+                  <TimeWidgetSettingComponentLazy
+                    key={w}
+                    ref={ref => widgetSettingRefs.current.set(w, ref ?? NOOP)}
+                    setIsSavedChanges={v => setIsSavedChanges(w, v)}
+                  />
+                );
+              default:
+                return null;
+            }
+          })}
+        </Suspense>
         {widgets.length > 0 && (
           <div className="new-tab__settings-menu_widgets-content__save-btn-wrapper">
             <Button

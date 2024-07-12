@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { FC, lazy, memo, Suspense, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsWidgetsOnRight,
@@ -16,10 +16,13 @@ import {
 } from "react-beautiful-dnd";
 import StrictModeDroppable from "../search-engine-selector/droppable-aria/strict-mode-droppable";
 import { setWidgets } from "../../store/new-tab/new-tab.slice";
-import WeatherContainer from "./weather/weather.container";
 import { useToken } from "antd/es/theme/internal";
-import CurrencyContainer from "./currency/currency.container";
-import TimeContainer from "./time/time.container";
+
+const TimeContainerLazy = lazy(() => import("./time/time.container"));
+const WeatherContainerLazy = lazy(() => import("./weather/weather.container"));
+const CurrencyContainerLazy = lazy(
+  () => import("./currency/currency.container")
+);
 
 /**
  * Передаваемые параметры компонента виджетов на экране
@@ -74,13 +77,13 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
         let widgetComponent;
         switch (widgetName) {
           case WidgetName.WEATHER:
-            widgetComponent = <WeatherContainer />;
+            widgetComponent = <WeatherContainerLazy />;
             break;
           case WidgetName.CURRENCY:
-            widgetComponent = <CurrencyContainer />;
+            widgetComponent = <CurrencyContainerLazy />;
             break;
           case WidgetName.TIME:
-            widgetComponent = <TimeContainer />;
+            widgetComponent = <TimeContainerLazy />;
             break;
           default:
             widgetComponent = <></>;
@@ -93,8 +96,9 @@ const WidgetListComponent: FC<WidgetListComponentProps> = memo(
             ref={provided.innerRef}
             style={widgetStyle}
             className={itemClassName}
-            children={widgetComponent}
-          />
+          >
+            <Suspense>{widgetComponent}</Suspense>
+          </div>
         );
       },
       [token]

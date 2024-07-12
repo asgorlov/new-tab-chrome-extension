@@ -1,28 +1,8 @@
-import { Location } from "../models/location.model";
-import coordinateToCountry from "coordinate_to_country";
 import {
   COUNTRIES_OF_CURRENCIES,
-  CURRENCIES_OF_COUNTRIES,
-  CURRENCY_UPDATING_PERIOD_IN_HOURS,
-  DEFAULT_CURRENCY
+  CURRENCY_UPDATING_PERIOD_IN_HOURS
 } from "../constants/currency.constants";
 import { WidgetName } from "../constants/widget.constants";
-
-/**
- * Функция получения информации о валюте, в зависимости от местоположения
- * @category Utilities - Currency
- * @param location - Текущая локация
- * @returns - Код валюты
- */
-export const getCurrencyInfoByLocation = (location: Location): string => {
-  const code: string = coordinateToCountry(
-    location.latitude,
-    location.longitude,
-    true
-  )[0];
-
-  return code ? CURRENCIES_OF_COUNTRIES[code] : DEFAULT_CURRENCY;
-};
 
 /**
  * Функция для расчета стоимости валюты к количеству
