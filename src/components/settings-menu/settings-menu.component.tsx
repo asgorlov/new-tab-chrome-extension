@@ -1,14 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC, lazy, Suspense, useState } from "react";
 import { Button } from "antd";
 import { ReactComponent as MenuIcon } from "../../static/svgs/menu-settings/menu-icon.svg";
-import SearchEngineSettingComponent from "./settings/search-engine-setting.component";
-import DarkModeSettingComponent from "./settings/dark-mode-setting.component";
-import LanguageSettingComponent from "./settings/language-setting.component";
-import WallpaperSettingContainer from "./settings/wallpaper-setting/wallpaper-setting.container";
-import CommonSettingContainer from "./settings/common-setting/common-setting.container";
-import DrawerComponent from "../common/drawer/drawer.component";
-import UpdateSettingComponent from "./settings/update-setting.component";
-import SettingsHeaderContainer from "./settings-header/settings-header.container";
 import SettingRefsContextProvider from "../../contexts/setting-refs.context";
 import { useTourStepThreeContext } from "../../contexts/tour.context";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,9 +12,36 @@ import {
 } from "../../store/new-tab/new-tab.selectors";
 import { setIsOpenMenu } from "../../store/new-tab/new-tab.slice";
 import { useToken } from "antd/es/theme/internal";
-import WidgetsSettingComponent from "./settings/widgets-setting/widgets-setting.component";
 import clsx from "clsx";
 import { Placement } from "rc-drawer/es/DrawerPopup";
+
+const DrawerComponentLazy = lazy(
+  () => import("../common/drawer/drawer.component")
+);
+const SearchEngineSettingComponentLazy = lazy(
+  () => import("./settings/search-engine-setting.component")
+);
+const DarkModeSettingComponentLazy = lazy(
+  () => import("./settings/dark-mode-setting.component")
+);
+const LanguageSettingComponentLazy = lazy(
+  () => import("./settings/language-setting.component")
+);
+const WallpaperSettingContainerLazy = lazy(
+  () => import("./settings/wallpaper-setting/wallpaper-setting.container")
+);
+const CommonSettingContainerLazy = lazy(
+  () => import("./settings/common-setting/common-setting.container")
+);
+const UpdateSettingComponentLazy = lazy(
+  () => import("./settings/update-setting.component")
+);
+const SettingsHeaderContainerLazy = lazy(
+  () => import("./settings-header/settings-header.container")
+);
+const WidgetsSettingComponentLazy = lazy(
+  () => import("./settings/widgets-setting/widgets-setting.component")
+);
 
 /**
  * Компонент меню настроек
@@ -61,25 +80,27 @@ const SettingsMenuComponent: FC = () => {
         />
       </Button>
       <SettingRefsContextProvider>
-        <DrawerComponent
-          title={<SettingsHeaderContainer />}
-          isDark={isDark}
-          className="new-tab__settings-menu-container"
-          menuClassName={menuClass}
-          open={isOpenMenu}
-          onClose={() => dispatch(setIsOpenMenu(false))}
-          placement={placement}
-        >
-          <div ref={tourCtx} className="new-tab__settings-menu-content">
-            <CommonSettingContainer />
-            <SearchEngineSettingComponent />
-            <DarkModeSettingComponent />
-            <WallpaperSettingContainer />
-            <UpdateSettingComponent />
-            <WidgetsSettingComponent />
-            <LanguageSettingComponent />
-          </div>
-        </DrawerComponent>
+        <Suspense>
+          <DrawerComponentLazy
+            title={<SettingsHeaderContainerLazy />}
+            isDark={isDark}
+            className="new-tab__settings-menu-container"
+            menuClassName={menuClass}
+            open={isOpenMenu}
+            onClose={() => dispatch(setIsOpenMenu(false))}
+            placement={placement}
+          >
+            <div ref={tourCtx} className="new-tab__settings-menu-content">
+              <CommonSettingContainerLazy />
+              <SearchEngineSettingComponentLazy />
+              <DarkModeSettingComponentLazy />
+              <WallpaperSettingContainerLazy />
+              <UpdateSettingComponentLazy />
+              <WidgetsSettingComponentLazy />
+              <LanguageSettingComponentLazy />
+            </div>
+          </DrawerComponentLazy>
+        </Suspense>
       </SettingRefsContextProvider>
     </div>
   );

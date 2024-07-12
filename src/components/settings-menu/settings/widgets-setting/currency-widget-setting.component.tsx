@@ -24,7 +24,7 @@ import {
 } from "../../../../store/new-tab/new-tab.selectors";
 import {
   setCurrencyRatio,
-  setMainCurrency,
+  setSelectedMainCurrency,
   setSelectedCurrencies
 } from "../../../../store/new-tab/new-tab.slice";
 import { getExchangeRate } from "../../../../store/new-tab/new-tab.thunks";
@@ -111,7 +111,9 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
     );
 
     const onSave = () => {
-      dispatch(setMainCurrency(main));
+      dispatch(
+        setSelectedMainCurrency(main !== mainCurrency.default ? main : null)
+      );
       dispatch(setCurrencyRatio(ratio));
       dispatch(setSelectedCurrencies(selected));
       const shouldBeLoaded =

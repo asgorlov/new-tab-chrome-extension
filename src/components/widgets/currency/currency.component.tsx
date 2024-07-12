@@ -65,9 +65,31 @@ const CurrencyComponent: FC<CurrencyComponentProps> = memo(
       <div className="new-tab__currency">
         <div className="new-tab__currency-header">
           <div className="new-tab__currency-header__currency">
-            <img alt={mainCurrency} src={getCountryFlagSvgUrl(mainCurrency)} />
-            <span>{t(`currency.codes.${mainCurrency}`)}</span>
-            {ratioTitle && <span>{ratioTitle}</span>}
+            {loading ? (
+              <>
+                {rowElementNames
+                  .filter(n => n !== "code")
+                  .map(n => {
+                    return (
+                      <SkeletonNode
+                        className={`new-tab__currency-header__currency__skeleton-${n}`}
+                        children={<div />}
+                        active
+                        key={n}
+                      />
+                    );
+                  })}
+              </>
+            ) : (
+              <>
+                <img
+                  alt={mainCurrency}
+                  src={getCountryFlagSvgUrl(mainCurrency)}
+                />
+                <span>{t(`currency.codes.${mainCurrency}`)}</span>
+                {ratioTitle && <span>{ratioTitle}</span>}
+              </>
+            )}
           </div>
           <div className="new-tab__currency-header__btn-group">
             <button
