@@ -157,7 +157,7 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
       <div className="new-tab__settings-menu_widgets-content__item">
         <div className="new-tab__settings-menu_widgets-content__item-title">
           <CurrencyIcon />
-          {t(`widgets.${WidgetName.CURRENCY}`)}
+          <span>{t(`widgets.${WidgetName.CURRENCY}`)}</span>
         </div>
         <label className="new-tab__settings-menu_widgets-content__item_label">
           {t("currency.selectors.main")}

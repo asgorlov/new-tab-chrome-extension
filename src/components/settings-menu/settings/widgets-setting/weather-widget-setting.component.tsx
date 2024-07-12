@@ -139,7 +139,7 @@ const WeatherWidgetSettingComponent: ForwardRefExoticComponent<
       <div className="new-tab__settings-menu_widgets-content__item">
         <div className="new-tab__settings-menu_widgets-content__item-title">
           <WeatherIcon />
-          {t(`widgets.${WidgetName.WEATHER}`)}
+          <span>{t(`widgets.${WidgetName.WEATHER}`)}</span>
         </div>
         <CheckboxComponent
           checked={currentLocationChecked}
