@@ -159,14 +159,18 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
           <CurrencyIcon />
           {t(`widgets.${WidgetName.CURRENCY}`)}
         </div>
-        <label>{t("currency.selectors.main")}</label>
+        <label className="new-tab__settings-menu_widgets-content__item_label">
+          {t("currency.selectors.main")}
+        </label>
         <SelectComponent
           value={main}
           options={currencyOptions}
           onSelect={v => handleSelectCurrency(v)}
           className="new-tab__settings-menu_widgets-content__item-select"
         />
-        <label>{t("currency.selectors.ratio")}</label>
+        <label className="new-tab__settings-menu_widgets-content__item_label">
+          {t("currency.selectors.ratio")}
+        </label>
         <SelectComponent
           value={ratio}
           options={CURRENCY_RATIO_OPTIONS}
@@ -177,7 +181,9 @@ const CurrencyWidgetSettingComponent: ForwardRefExoticComponent<
         />
         {selected.length > 0 && (
           <>
-            <label>{t(`currency.selectors.converted`)}</label>
+            <label className="new-tab__settings-menu_widgets-content__item_label">
+              {t(`currency.selectors.converted`)}
+            </label>
             {selected.map((c: Currency, i: number) => {
               return (
                 <SelectComponent
